@@ -1,0 +1,24 @@
+{
+  "name": "@vinicunca/docs",
+  "type": "module",
+  "version": "0.0.1",
+  "packageManager": "pnpm@8.15.4",
+  "author": "praburangki<https://github.com/praburangki>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vitepress dev --open"
+  },
+  "devDependencies": {
+    "@eslint-stylistic/metadata": "^1.6.3",
+    "@iconify/json": "^2.2.190",
+    "@shikijs/vitepress-twoslash": "^1.1.7",
+    "@types/node": "^20.11.25",
+    "@vinicunca/eslint-config": "^2.1.5",
+    "@vinicunca/eslint-metadata": "^0.0.1",
+    "postcss-nested": "^6.0.1",
+    "unocss": "^0.58.5",
+    "unplugin-vue-components": "^0.26.0",
+    "vitepress": "1.0.0-rc.45",
+    "vue": "^3.4.21"
+  }
+}
