@@ -1,19 +1,14 @@
----
-navigation:
-  icon: i-logos:react
----
-
 # React
 
 List of rules that are related to React.
 
 ## Setup
 
-:docs-configs{ :configs="configs" }
+<EslintList package="react:setup" />
 
-## Basic
+## Base Rules
 
-:docs-configs{ :configs="configs" :index="1" }
+<EslintList package="react:rules" />
 
 ## Custom Overrides
 
@@ -23,13 +18,13 @@ For example:
 ```js [eslint.config.js]
 import { vinicuncaESLint } from '@vinicunca/eslint-config';
 
-export default vinicuncaESLint({
-  options: {
-    overrides: {
-      react: {
+export default vinicuncaESLint(
+  {
+    react: {
+      overrides: {
         'react/jsx-key': 'error',
       }
     }
-  },
-});
+  }
+);
 ```

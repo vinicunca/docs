@@ -1,19 +1,14 @@
----
-navigation:
-  icon: i-simple-icons:markdown
----
-
 # Markdown
 
 List of rules that are related to markdown files.
 
 ## Setup
 
-:docs-configs{ :configs="configs" }
+<EslintList package="markdown:setup" />
 
-## Basic
+## Base Rules
 
-:docs-configs{ :configs="configs" :index="2" }
+<EslintList package="markdown:disables" />
 
 ## Custom Overrides
 
@@ -23,13 +18,13 @@ For example:
 ```js [eslint.config.js]
 import { vinicuncaESLint } from '@vinicunca/eslint-config';
 
-export default vinicuncaESLint({
-  options: {
-    overrides: {
-      markdown: {
+export default vinicuncaESLint(
+  {
+    markdown: {
+      overrides: {
         'no-undef': 'error',
       }
-    }
-  },
-});
+    },
+  }
+);
 ```

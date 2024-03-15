@@ -1,8 +1,3 @@
----
-navigation:
-  icon: i-logos:typescript-icon
----
-
 # Typescript
 
 List of rules that are related to Typescript.
@@ -11,63 +6,63 @@ List of rules that are related to Typescript.
 
 You can add additional options to the `typescript` property in the `options` object.
 
-::docs-alert{type="tip"}
+<div class="tip custom-block pt-2">
 
-By default `typescript` is enabled if you have it installed within your `package.json` file. You can disable all typescript functionality by setting `enabled` to `false`.
+By default `typescript` is enabled if you have it installed within your `package.json` file. You can disable all typescript functionality by setting it to `false`.
 
-::
-
+</div>
 
 ```js [eslint.config.js]
 import { vinicuncaESLint } from '@vinicunca/eslint-config';
 
-export default vinicuncaESLint({
-  options: {
-    typescript: {
-      enabled: false, // if you want to turn off typescript
-    }
-  },
-});
+export default vinicuncaESLint(
+  {
+    typescript: false, // if you want to turn off typescript
+  }
+);
 ```
 
-::docs-alert{type="tip" title="Type Aware"}
+::: tip Type Aware
 
-You can optionally enable the [type aware rules](https://typescript-eslint.io/linting/typed-linting/) by passing `tsconfigPath` to the options object.
+You can optionally enable the [type aware rules](https://typescript-eslint.io/linting/typed-linting/) by passing the options object to the `typescript` config.
 
-::
+:::
 
 ```js [eslint.config.js]
 import { vinicuncaESLint } from '@vinicunca/eslint-config';
 
-export default vinicuncaESLint({
-  options: {
+export default vinicuncaESLint(
+  {
     typescript: {
-      tsconfigPath: ['tsconfig.eslint.json'],
-    }
-  },
-});
+      tsconfigPath: 'tsconfig.json',
+    },
+  }
+);
 ```
 
 ## Setup Plugins
 
-:docs-configs{ :configs="configs" }
+<EslintList package="typescript:setup" />
 
-## Basic
+## Base Rules
 
-:docs-configs{ :configs="configs" :index="1" }
+<EslintList package="typescript:rules" is-filterable />
+
+## Type Aware Rules
+
+<EslintList package="typescript:rules-type-aware" />
 
 ## Overrides `d.ts`
 
-:docs-configs{ :configs="configs" :index="2" }
+<EslintList package="typescript:dts-overrides" />
 
 ## Overrides Test Files
 
-:docs-configs{ :configs="configs" :index="3" }
+<EslintList package="typescript:tests-overrides" />
 
 ## Overrides Javascript Files
 
-:docs-configs{ :configs="configs" :index="4" }
-
+<EslintList package="typescript:javascript-overrides" />
 
 ## Custom Overrides
 
@@ -77,13 +72,13 @@ For example:
 ```js [eslint.config.js]
 import { vinicuncaESLint } from '@vinicunca/eslint-config';
 
-export default vinicuncaESLint({
-  options: {
-    overrides: {
-      typescript: {
+export default vinicuncaESLint(
+  {
+    typescript: {
+      overrides: {
         'ts/consistent-type-definitions': 'off',
       }
     }
-  },
-});
+  }
+);
 ```

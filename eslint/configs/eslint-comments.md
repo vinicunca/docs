@@ -1,12 +1,7 @@
----
-navigation:
-  icon: i-fa-regular:comments
----
-
 # ESLint Comments
 
 List of rules that are related to ESLint Comments.
 
-## Basic
+## Base Rules
 
-<docs-configs :configs="configs" />
+<EslintList package="eslint-comments" />

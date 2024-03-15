@@ -1,20 +1,14 @@
----
-navigation:
-  icon: i-logos:javascript
----
-
 # Javascript
 
 List of rules that are related to JavaScript.
 
-## Basic
+## Base Rules
 
-:docs-configs{ :configs="configs" } 
+<EslintList package="javascript" is-filterable />
 
 ## Script Overrides
 
-:docs-configs{ :configs="configs" :index="1" }
-
+<EslintList package="javascript:overrides" />
 
 ## Custom Overrides
 
@@ -24,13 +18,13 @@ For example:
 ```js [eslint.config.js]
 import { vinicuncaESLint } from '@vinicunca/eslint-config';
 
-export default vinicuncaESLint({
-  options: {
-    overrides: {
-      javascript: {
+export default vinicuncaESLint(
+  {
+    javascript: {
+      overrides: {
         eqeqeq: 'off',
       }
     }
-  },
-});
+  }
+);
 ```

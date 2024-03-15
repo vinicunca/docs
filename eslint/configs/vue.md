@@ -1,25 +1,20 @@
----
-navigation:
-  icon: i-logos:vue
----
-
 # Vue
 
 List of rules that are related to Vue files.
 
 ## Setup
 
-::docs-alert{type="tip" title="Typescript Support"}
+::: tip Typescript Support
 
 Please visit the [Typescript configuration](/configs/typescript#configuration) page for more information.
 
-::
+:::
 
-:docs-configs{ :configs="configs" }
+<EslintList package="vue:setup" />
 
-## Basic
+## Base Rules
 
-:docs-configs{ :configs="configs" :index="1" }
+<EslintList package="vue:rules" is-filterable />
 
 ## Custom Overrides
 
@@ -29,13 +24,13 @@ For example:
 ```js [eslint.config.js]
 import { vinicuncaESLint } from '@vinicunca/eslint-config';
 
-export default vinicuncaESLint({
-  options: {
-    overrides: {
-      vue: {
+export default vinicuncaESLint(
+  {
+    vue: {
+      overrides: {
         'vue/arrow-spacing': 'off',
       }
     }
-  },
-});
+  }
+);
 ```

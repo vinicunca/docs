@@ -1,19 +1,14 @@
----
-navigation:
-  icon: i-file-icons:test-generic
----
-
 # Test
 
 List of rules that are related to test / spec files.
 
 ## Setup
 
-:docs-configs{ :configs="configs" }
+<EslintList package="test:setup" />
 
-## Basic
+## Base Rules
 
-:docs-configs{ :configs="configs" :index="1" }
+<EslintList package="test:rules" />
 
 ## Custom Overrides
 
@@ -23,13 +18,13 @@ For example:
 ```js [eslint.config.js]
 import { vinicuncaESLint } from '@vinicunca/eslint-config';
 
-export default vinicuncaESLint({
-  options: {
-    overrides: {
-      test: {
+export default vinicuncaESLint(
+  {
+    test: {
+      overrides: {
         'test/consistent-test-it': 'off',
       }
     }
-  },
-});
+  }
+);
 ```

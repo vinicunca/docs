@@ -1,19 +1,14 @@
----
-navigation:
-  icon: i-vin:yaml
----
-
 # YAML
 
 List of rules that are related to `yaml` files.
 
 ## Setup
 
-:docs-configs{ :configs="configs" }
+<EslintList package="yaml:setup" />
 
-## Basic
+## Base Rules
 
-:docs-configs{ :configs="configs" :index="1" }
+<EslintList package="yaml:rules" />
 
 ## Custom Overrides
 
@@ -23,13 +18,13 @@ For example:
 ```js [eslint.config.js]
 import { vinicuncaESLint } from '@vinicunca/eslint-config';
 
-export default vinicuncaESLint({
-  options: {
-    overrides: {
-      yaml: {
+export default vinicuncaESLint(
+  {
+    yaml: {
+      overrides: {
         'yaml/block-mapping': 'off',
       }
     }
-  },
-});
+  }
+);
 ```

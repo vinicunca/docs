@@ -1,12 +1,7 @@
----
-navigation:
-  icon: i-vscode-icons:file-type-tsconfig
----
-
 # Sort `tsconfig`
 
 Sort `tsconfig.json` keys.
 
-## Basic
+## Base Rules
 
-:docs-configs{ :configs="configs" }
+<EslintList package="sort-tsconfig" />

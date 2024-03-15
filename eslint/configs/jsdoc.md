@@ -1,12 +1,7 @@
----
-navigation:
-  icon: i-simple-line-icons:docs
----
-
 # JSDoc
 
 List of rules that are related to JSDoc.
 
-## Basic
+## Base Rules
 
-:docs-configs{ :configs="configs" } 
+<EslintList package="jsdoc" />

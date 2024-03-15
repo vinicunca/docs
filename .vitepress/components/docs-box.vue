@@ -1,5 +1,5 @@
 <template>
-  <div class="rounded-1 p-4 border border-$vp-c-gray-1">
+  <div class="rounded p-4 border border-base">
     <slot />
   </div>
 </template>

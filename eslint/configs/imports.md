@@ -1,12 +1,7 @@
----
-navigation:
-  icon: i-carbon:document-import
----
-
 # Imports
 
 List of rules that are related to import/export.
 
-## Basic
+## Base Rules
 
-:docs-configs{ :configs="configs" } 
+<EslintList package="imports" />

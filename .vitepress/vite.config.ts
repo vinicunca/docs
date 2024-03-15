@@ -14,6 +14,7 @@ export default defineConfig({
       ],
     },
   },
+
   plugins: [
     Components({
       dirs: [

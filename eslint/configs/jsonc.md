@@ -1,19 +1,14 @@
----
-navigation:
-  icon: i-carbon:json
----
-
 # JSONC
 
 List of rules that are related to [JSON](https://json.org/), [JSONC](https://github.com/microsoft/node-jsonc-parser) and [JSON5](https://json5.org/) files.
 
 ## Setup
 
-:docs-configs{ :configs="configs" }
+<EslintList package="jsonc:setup" />
 
-## Basic
+## Base Rules
 
-:docs-configs{ :configs="configs" :index="1" }
+<EslintList package="jsonc:rules" />
 
 ## Custom Overrides
 
@@ -23,13 +18,13 @@ For example:
 ```js [eslint.config.js]
 import { vinicuncaESLint } from '@vinicunca/eslint-config';
 
-export default vinicuncaESLint({
-  options: {
-    overrides: {
-      jsonc: {
+export default vinicuncaESLint(
+  {
+    jsonc: {
+      overrides: {
         'jsonc/array-bracket-spacing': 'off',
       }
-    }
-  },
-});
+    },
+  }
+);
 ```

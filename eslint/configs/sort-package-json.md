@@ -1,12 +1,7 @@
----
-navigation:
-  icon: i-logos:nodejs-icon
----
-
 # Sort `package.json`
 
 Sort `package.json` keys.
 
-## Basic
+## Base Rules
 
-:docs-configs{ :configs="configs" }
+<EslintList package="sort-package-json" />

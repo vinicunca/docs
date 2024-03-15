@@ -27,6 +27,8 @@ export default defineConfig({
 
   lang: 'en-US',
 
+  lastUpdated: true,
+
   markdown: {
     codeTransformers: [
       transformerTwoslash(),
@@ -54,7 +56,6 @@ export default defineConfig({
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/vinicunca' },
-      { icon: 'twitter', link: 'https://twitter.com/praburangki' },
     ],
   },
 

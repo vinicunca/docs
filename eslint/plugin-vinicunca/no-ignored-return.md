@@ -6,8 +6,8 @@ To prevent generating any false-positives, this rule triggers an issues only on 
 
 ::docs-alert{type="danger" title="Type Aware"}
 
-You need to enable type aware configuration to use this rule.
-Please visit the [Typescript configuration](/configs/typescript#configuration) page for more information.
+<!-- You need to enable type aware configuration to use this rule.
+Please visit the [Typescript configuration](/configs/typescript#configuration) page for more information. -->
 
 ::
 
