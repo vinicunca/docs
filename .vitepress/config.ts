@@ -2,15 +2,17 @@ import { transformerTwoslash } from '@shikijs/vitepress-twoslash';
 import { defineConfig } from 'vitepress';
 
 import { eslintSidebar } from './theme/sidebar.eslint';
+import { perkakasSidebar } from './theme/sidebar.perkakas';
 import viteConfig from './vite.config';
 
 export default defineConfig({
+  cleanUrls: true,
+
   description: 'Utilities to enhance developer experience',
 
   head: [
     ['meta', { content: '#ffffff', name: 'theme-color' }],
     ['link', { href: '/favicon.ico', rel: 'icon', sizes: '48x48' }],
-    ['link', { href: '/favicon.svg', rel: 'icon', sizes: 'any', type: 'image/svg+xml' }],
     ['meta', { content: 'praburangki', name: 'author' }],
     ['meta', { content: 'Vinicunca', property: 'og:title' }],
     ['meta', { content: 'Utilities to enhance developer experience', property: 'og:description' }],
@@ -50,8 +52,73 @@ export default defineConfig({
 
     logo: '/favicon.svg',
 
+    nav: [
+      {
+        activeMatch: '/eslint/',
+        link: '/eslint/user-guide/installation',
+        text: 'ESLint',
+      },
+      {
+        activeMatch: '/perkakas/',
+        items: [
+          { link: '/perkakas/', text: 'Installation' },
+          { link: '/perkakas/docs', text: 'Docs' },
+        ],
+        text: 'Perkakas',
+      },
+      {
+        activeMatch: '/dev-setup/',
+        items: [
+          { link: '/dev-setup/wsl', text: 'WSL' },
+          { link: '/dev-setup/terminal', text: 'Terminal' },
+          { link: '/dev-setup/git-config', text: 'Git Config' },
+          { link: '/dev-setup/chocolatey', text: 'Chocolatey' },
+          { link: '/dev-setup/zsh', text: 'ZSH' },
+          { link: '/dev-setup/pnpm', text: 'PNPM' },
+          { link: '/dev-setup/vscode', text: 'VSCode' },
+          { link: '/dev-setup/git-commits', text: 'Git Commits' },
+        ],
+        text: 'Dev Setup',
+      },
+    ],
+
     sidebar: {
+      '/dev-setup': [
+        {
+          link: '/dev-setup/wsl',
+          text: 'WSL',
+        },
+        {
+          link: '/dev-setup/terminal',
+          text: 'Terminal',
+        },
+        {
+          link: '/dev-setup/git-config',
+          text: 'Git Config',
+        },
+        {
+          link: '/dev-setup/chocolatey',
+          text: 'Chocolatey',
+        },
+        {
+          link: '/dev-setup/zsh',
+          text: 'ZSH',
+        },
+        {
+          link: '/dev-setup/pnpm',
+          text: 'PNPM',
+        },
+        {
+          link: '/dev-setup/vscode',
+          text: 'VSCode',
+        },
+        {
+          link: '/dev-setup/git-commits',
+          text: 'Git Commits',
+        },
+      ],
       '/eslint': eslintSidebar,
+      '/perkakas': perkakasSidebar,
     },
 
     socialLinks: [

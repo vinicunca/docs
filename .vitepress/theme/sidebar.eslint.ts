@@ -1,5 +1,3 @@
-// @unocss-include
-
 export const eslintSidebar = [
   {
     collapsed: true,

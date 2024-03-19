@@ -6,7 +6,7 @@ List of rules that are related to Vue files.
 
 ::: tip Typescript Support
 
-Please visit the [Typescript configuration](/configs/typescript#configuration) page for more information.
+Please visit the [Typescript configuration](/eslint/configs/typescript#configuration) page for more information.
 
 :::
 

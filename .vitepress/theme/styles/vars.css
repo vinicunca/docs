@@ -20,6 +20,8 @@
   --vp-c-text-dark-2: rgba(56 56 56 / 70%);
 
   --vp-code-color: #729772;
+
+  --vp-c-badge-primary: hsl(221.2 83.2% 53.3%);
 }
 
 .dark {
@@ -27,6 +29,8 @@
   --vp-c-text-code: #c0cec0;
   /* fix contrast on gray cards: check the same above (this is the default) */
   --vp-c-text-dark-2: rgba(235, 235, 235, 0.6);
+
+  --vp-c-badge-primary: hsl(217.2 91.2% 59.8%);
 }
 
 /**
