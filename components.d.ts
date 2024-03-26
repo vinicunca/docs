@@ -16,6 +16,7 @@ declare module 'vue' {
     EslintRuleName: typeof import('./.vitepress/components/eslint-rule-name.vue')['default']
     PerkakasBadge: typeof import('./.vitepress/components/perkakas-badge.vue')['default']
     PerkakasDocs: typeof import('./.vitepress/components/perkakas-docs.vue')['default']
+    PerkakasItem: typeof import('./.vitepress/components/perkakas-item.vue')['default']
     PerkakasParameters: typeof import('./.vitepress/components/perkakas-parameters.vue')['default']
     PerkakasTags: typeof import('./.vitepress/components/perkakas-tags.vue')['default']
   }

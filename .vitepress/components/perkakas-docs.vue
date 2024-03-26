@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { flatten, pipe, values } from '@vinicunca/perkakas';
 
-import { data } from '../perkakas.data';
 import { getTags } from '../utils/get-tags';
+import { data } from './perkakas.data';
 
 const functions = pipe(
   data,
@@ -82,3 +82,4 @@ const functions = pipe(
     </div>
   </div>
 </template>
+./perkakas.data

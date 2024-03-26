@@ -3,22 +3,10 @@
 import type { Options } from 'prettier';
 import type { SiteConfig } from 'vitepress';
 
-import { flatten, pipe, values } from '@vinicunca/perkakas';
 import { format } from 'prettier';
-import { createMarkdownRenderer, defineLoader } from 'vitepress';
+import { createMarkdownRenderer } from 'vitepress';
 
-import { CATEGORIZED } from './utils/categorized.typedoc';
-
-declare const data: typeof CATEGORIZED;
-export { data };
-
-const config: SiteConfig = (globalThis as any).VITEPRESS_CONFIG;
-
-export default defineLoader({
-  async load() {
-    return await mapFunctions();
-  },
-});
+import { PERKAKAS_METHODS } from './perkakas.metadata';
 
 const prettierOptions: Options = {
   parser: 'typescript',
@@ -28,18 +16,12 @@ const prettierOptions: Options = {
   trailingComma: 'all',
 };
 
-async function mapFunctions() {
-  const flattenFunctions = pipe(
-    CATEGORIZED,
-    values,
-    flatten(),
-  );
-
-  const md = await createMarkdownRenderer(config.srcDir, config.markdown, config.site.base, config.logger);
+export async function mapPerkakasFunctions(siteConfig: SiteConfig) {
+  const md = await createMarkdownRenderer(siteConfig.srcDir, siteConfig.markdown, siteConfig.site.base, siteConfig.logger);
 
   const result = [];
 
-  for (const func of flattenFunctions) {
+  for (const func of PERKAKAS_METHODS) {
     const methods = [];
 
     for (const method of func.methods) {
@@ -63,7 +45,6 @@ async function mapFunctions() {
 
     result.push({
       ...func,
-      description: md.render(func.description ?? ''),
       methods,
     });
   }

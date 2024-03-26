@@ -1,5 +1,7 @@
-import type { JSONOutput } from 'typedoc';
+import type { DocumentedFunction } from './perkakas/perkakas.transform';
 
-declare const DATA: JSONOutput.ProjectReflection;
-
-export default DATA;
+declare module 'vitepress' {
+  interface PageData {
+    func: DocumentedFunction;
+  }
+}

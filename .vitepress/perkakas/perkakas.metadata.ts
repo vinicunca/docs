@@ -3,7 +3,7 @@ import type { JSONOutput } from 'typedoc';
 import { groupBy, pipe } from '@vinicunca/perkakas';
 import DATA from '@vinicunca/perkakas/dist/metadata.json' assert { type: 'json' };
 
-import { transformProject } from './transform.typedoc';
+import { transformProject } from './perkakas.transform';
 
 export const CATEGORIZED = pipe(
   DATA as JSONOutput.ProjectReflection,
@@ -14,3 +14,5 @@ export const CATEGORIZED = pipe(
       ?? 'Other',
   ),
 );
+
+export const PERKAKAS_METHODS = transformProject(DATA as JSONOutput.ProjectReflection);

@@ -1,4 +1,4 @@
-import type { DocumentedFunction } from '../utils/transform.typedoc';
+import type { DocumentedFunction } from './perkakas.transform';
 
 export function getTags({
   methods: [method],
