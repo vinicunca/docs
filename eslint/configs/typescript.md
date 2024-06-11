@@ -42,27 +42,27 @@ export default vinicuncaESLint(
 
 ## Setup Plugins
 
-<EslintList package="typescript:setup" />
+<EslintList package="typescript/setup" />
 
 ## Base Rules
 
-<EslintList package="typescript:rules" is-filterable />
+<EslintList package="typescript/rules" is-filterable />
 
 ## Type Aware Rules
 
-<EslintList package="typescript:rules-type-aware" />
+<EslintList package="typescript/rules-type-aware" />
 
 ## Overrides `d.ts`
 
-<EslintList package="typescript:dts-overrides" />
+<EslintList package="typescript/disables/dts" />
 
 ## Overrides Test Files
 
-<EslintList package="typescript:tests-overrides" />
+<EslintList package="typescript/disables/tests" />
 
 ## Overrides Javascript Files
 
-<EslintList package="typescript:javascript-overrides" />
+<EslintList package="typescript/disables/javascript" />
 
 ## Custom Overrides
 

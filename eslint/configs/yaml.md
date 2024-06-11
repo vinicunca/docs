@@ -4,11 +4,11 @@ List of rules that are related to `yaml` files.
 
 ## Setup
 
-<EslintList package="yaml:setup" />
+<EslintList package="yaml/setup" />
 
 ## Base Rules
 
-<EslintList package="yaml:rules" />
+<EslintList package="yaml/rules" />
 
 ## Custom Overrides
 

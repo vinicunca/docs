@@ -1,10 +1,9 @@
 /* eslint-disable no-await-in-loop */
 
 import type { Options } from 'prettier';
-import type { SiteConfig } from 'vitepress';
+import type { MarkdownRenderer } from 'vitepress';
 
 import { format } from 'prettier';
-import { createMarkdownRenderer } from 'vitepress';
 
 import { PERKAKAS_METHODS } from './perkakas.metadata';
 
@@ -16,9 +15,7 @@ const prettierOptions: Options = {
   trailingComma: 'all',
 };
 
-export async function mapPerkakasFunctions(siteConfig: SiteConfig) {
-  const md = await createMarkdownRenderer(siteConfig.srcDir, siteConfig.markdown, siteConfig.site.base, siteConfig.logger);
-
+export async function mapPerkakasFunctions(md: MarkdownRenderer) {
   const result = [];
 
   for (const func of PERKAKAS_METHODS) {

@@ -4,11 +4,11 @@ List of rules that are related to markdown files.
 
 ## Setup
 
-<EslintList package="markdown:setup" />
+<EslintList package="markdown/setup" />
 
 ## Base Rules
 
-<EslintList package="markdown:disables" />
+<EslintList package="markdown/disables" />
 
 ## Custom Overrides
 

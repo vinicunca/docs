@@ -2,4 +2,4 @@
 
 Additional set of powerful rules.
 
-<EslintList package="unicorn" />
+<EslintList package="unicorn/rules" />

@@ -4,4 +4,4 @@ List of rules that are related to JSDoc.
 
 ## Base Rules
 
-<EslintList package="jsdoc" />
+<EslintList package="jsdoc/rules" />

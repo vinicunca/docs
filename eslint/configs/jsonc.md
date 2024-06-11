@@ -4,11 +4,11 @@ List of rules that are related to [JSON](https://json.org/), [JSONC](https://git
 
 ## Setup
 
-<EslintList package="jsonc:setup" />
+<EslintList package="jsonc/setup" />
 
 ## Base Rules
 
-<EslintList package="jsonc:rules" />
+<EslintList package="jsonc/rules" />
 
 ## Custom Overrides
 

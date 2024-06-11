@@ -6,7 +6,6 @@ import { computed, markRaw, ref } from 'vue';
 
 import { pluginUrlMap, usePluginColor } from '../utils/plugin-colors';
 import { renderMarkdown } from '../utils/render-markdown';
-
 const props = defineProps<{
   isFilterable?: boolean;
   package: string;
@@ -15,7 +14,7 @@ const props = defineProps<{
 const pkg = markRaw(
   configs.find(
     (config) => {
-      const name = config.name?.split('vinicunca:')[1];
+      const name = config.name?.split('vinicunca/')[1];
 
       return name === props.package;
     },
@@ -42,7 +41,7 @@ const fuse = computed(() => new Fuse(pkg.rules, {
 const search = ref('');
 const filter = ref();
 
-function match(regexes: RegExp[]) {
+function match(regexes: Array<RegExp>) {
   return pkg.rules.filter((i) => regexes.some((r) => r.test(i.name)));
 }
 

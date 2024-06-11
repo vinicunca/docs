@@ -4,4 +4,4 @@ Sort `tsconfig.json` keys.
 
 ## Base Rules
 
-<EslintList package="sort-tsconfig" />
+<EslintList package="sort/tsconfig" />

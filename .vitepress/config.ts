@@ -1,5 +1,5 @@
 import { transformerTwoslash } from '@shikijs/vitepress-twoslash';
-import { defineConfig } from 'vitepress';
+import { createMarkdownRenderer, defineConfig } from 'vitepress';
 
 import { mapPerkakasFunctions } from './perkakas/perkakas.mapping';
 import { devSetupSidebar } from './theme/sidebar.dev-setup';
@@ -126,10 +126,7 @@ export default defineConfig({
       },
       {
         activeMatch: '/perkakas/',
-        items: [
-          { link: '/perkakas/', text: 'Installation' },
-          { activeMatch: '/perkakas/docs/', link: '/perkakas/docs', text: 'Docs' },
-        ],
+        link: '/perkakas',
         text: 'Perkakas',
       },
       {
@@ -163,12 +160,15 @@ export default defineConfig({
 
   async transformPageData(pageData, { siteConfig }) {
     if (pageData.params?.id) {
-      const functions = await mapPerkakasFunctions(siteConfig);
+      const md = await createMarkdownRenderer(siteConfig.srcDir, siteConfig.markdown, siteConfig.site.base, siteConfig.logger);
+      const functions = await mapPerkakasFunctions(md);
       const data = functions.find((item) => item.name === pageData.params?.id);
 
       if (data) {
         pageData.title = data.name;
+        pageData.description = pageData.params.description;
         pageData.func = data;
+        pageData.rawDesc = md.render(pageData.params.description);
       }
     }
 

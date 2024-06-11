@@ -4,11 +4,11 @@ List of rules that are related to JavaScript.
 
 ## Base Rules
 
-<EslintList package="javascript" is-filterable />
+<EslintList package="javascript/rules" is-filterable />
 
-## Script Overrides
+## Script Disables
 
-<EslintList package="javascript:overrides" />
+<EslintList package="javascript/disables" />
 
 ## Custom Overrides
 

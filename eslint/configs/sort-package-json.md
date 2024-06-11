@@ -4,4 +4,4 @@ Sort `package.json` keys.
 
 ## Base Rules
 
-<EslintList package="sort-package-json" />
+<EslintList package="sort/package-json" />

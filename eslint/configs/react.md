@@ -4,11 +4,11 @@ List of rules that are related to React.
 
 ## Setup
 
-<EslintList package="react:setup" />
+<EslintList package="react/setup" />
 
 ## Base Rules
 
-<EslintList package="react:rules" />
+<EslintList package="react/rules" />
 
 ## Custom Overrides
 

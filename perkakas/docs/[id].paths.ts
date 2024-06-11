@@ -4,6 +4,8 @@ export default {
   paths() {
     return PERKAKAS_METHODS.map((item) => ({
       content: `
+<PerkakasDesc />
+
 <PerkakasItem name="${item.name}" />
       `,
       params: {

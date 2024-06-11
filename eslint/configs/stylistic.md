@@ -6,4 +6,4 @@ List of rules that are related to formatting and styling. For more details pleas
 
 This config is used due to ESLint and `typescript-eslint` teams [decided to deprecate formatting/stylistic-related rules](https://github.com/eslint/eslint/issues/17522) from their core due to the **maintenance cost**.
 
-<EslintList package="stylistic" is-filterable />
+<EslintList package="stylistic/rules" is-filterable />

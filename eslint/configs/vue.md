@@ -10,11 +10,11 @@ Please visit the [Typescript configuration](/eslint/configs/typescript#configura
 
 :::
 
-<EslintList package="vue:setup" />
+<EslintList package="vue/setup" />
 
 ## Base Rules
 
-<EslintList package="vue:rules" is-filterable />
+<EslintList package="vue/rules" is-filterable />
 
 ## Custom Overrides
 

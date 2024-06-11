@@ -2,7 +2,7 @@
 import { CollapsibleContent, CollapsibleRoot, CollapsibleTrigger } from 'radix-vue';
 import { computed, ref } from 'vue';
 
-import type { DocumentedFunction } from '../utils/transform.typedoc';
+import type { DocumentedFunction } from '../perkakas/perkakas.transform';
 
 type Method = DocumentedFunction['methods'][number];
 

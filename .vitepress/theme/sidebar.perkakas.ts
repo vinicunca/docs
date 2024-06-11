@@ -12,7 +12,7 @@ const grouped = pipe(
   ),
 );
 
-const groupedEntries = entries.strict(grouped);
+const groupedEntries = entries(grouped);
 
 const NAVBAR_ENTRIES = map(
   groupedEntries,

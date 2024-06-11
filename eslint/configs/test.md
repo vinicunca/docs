@@ -4,11 +4,11 @@ List of rules that are related to test / spec files.
 
 ## Setup
 
-<EslintList package="test:setup" />
+<EslintList package="test/setup" />
 
 ## Base Rules
 
-<EslintList package="test:rules" />
+<EslintList package="test/rules" />
 
 ## Custom Overrides
 

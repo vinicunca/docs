@@ -10,6 +10,7 @@
     "resolveJsonModule": true,
     "verbatimModuleSyntax": true,
     "jsx": "preserve",
+    "allowArbitraryExtensions": true,
     "lib": ["esnext", "dom", "dom.iterable"]
   },
   "include": [
