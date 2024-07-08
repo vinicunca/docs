@@ -1,12 +1,9 @@
 <script lang="ts" setup>
-import { NButton, NCheckbox, NConfigProvider, NDivider, NForm, NFormItem, NInputNumber, NSelect, darkTheme } from 'naive-ui';
+import { CheckboxIndicator, CheckboxRoot, RadioGroupIndicator, RadioGroupItem, RadioGroupRoot } from 'radix-vue';
 import { codeToHtml } from 'shiki';
-import { useData } from 'vitepress';
 import { computed, nextTick, onMounted, ref, watch } from 'vue';
 
 import { animationNames } from '../unocss-preset/animate';
-
-const { isDark } = useData();
 
 const timeUnitOptions = [
   { label: 'Second', value: 's' },
@@ -46,23 +43,19 @@ watch(
 );
 
 const codeStr = computed(() => {
-  let animateRepeat = '';
+  const animateStr = [animationName.value];
 
   if (repeatInfinite.value) {
-    animateRepeat = 'animate-count-infinite';
+    animateStr.push('animate-count-infinite');
   } else if (repeat.value && repeat.value !== 1) {
-    animateRepeat = `animated-count-${repeat.value}`;
+    animateStr.push(`animated-count-${repeat.value}`);
   }
-
-  let animateDuration = '';
 
   if (duration.value && duration.value !== 0 && duration.value !== 1) {
-    animateDuration = `animate-duration-${duration.value}${durationUnit.value}`;
+    animateStr.push(`animate-duration-${duration.value}${durationUnit.value}`);
   }
 
-  const classStr = `${animationName.value} ${animateRepeat} ${animateDuration}`.trim();
-
-  return `<div class="${classStr}" />`;
+  return `<div class="${animateStr.join(' ')}" />`;
 });
 
 onMounted(() => {
@@ -100,140 +93,153 @@ const styleAnimation = computed(() => {
 </script>
 
 <template>
-  <NConfigProvider
-    :theme="isDark ? darkTheme : undefined"
-  >
-    <div class="animate-container grid grid-cols-2 border border-$vp-c-border rounded">
-      <div class="col-span-2 md:col-span-1 flex flex-col">
-        <div
-          :class="headerClasses"
-          class="justify-between"
+  <div class="overflow-hidden grid grid-cols-2 border border-$vp-c-border rounded">
+    <div class="col-span-2 md:col-span-1 flex flex-col">
+      <div
+        :class="headerClasses"
+        class="justify-between"
+      >
+        <button
+          class="bg-$vp-c-brand-1 px-6px h-22px rounded inline-flex items-center"
+          @click="isAnimating ? setAnimatedStop() : setAnimated()"
         >
-          <NButton
-            size="tiny"
-            color="#44bd87"
-            @click="isAnimating ? setAnimatedStop() : setAnimated()"
-          >
-            <i
-              v-if="isAnimating"
-              class="i-material-symbols:stop"
-            />
-            <i
-              v-else
-              class="i-material-symbols:play-arrow"
-            />
-          </NButton>
-        </div>
+          <i
+            class="text-14px"
+            :class="[
+              isAnimating
+                ? 'i-material-symbols:stop'
+                : 'i-material-symbols:play-arrow',
+            ]"
+          />
+        </button>
+      </div>
 
-        <div class="flex-1 py-8 md:py-36 flex items-center justify-center">
-          <div
-            class="flex items-center size-100px bg-#FC2983 justify-center rounded-2 animated-box"
-            :class="{
-              [animationName]: isAnimating,
-            }"
-            :style="styleAnimation"
-            @animationend="setAnimatedStop"
-          >
-            <i class="i-ion:rocket color-white" />
-          </div>
-        </div>
-
-        <!-- <div
-          class="border-t border-$vp-c-border px-6 py-3"
-          v-html="renderedCode"
-        /> -->
-
-        <div class="language-html m-0!">
-          <!-- <button
-            title="Copy"
-            class="copy"
-          /> -->
-          <div v-html="renderedCode" />
+      <div class="flex-1 py-8 md:py-36 flex items-center justify-center">
+        <div
+          class="flex items-center size-100px bg-#FC2983 justify-center rounded-2 animated-box"
+          :class="{
+            [animationName]: isAnimating,
+          }"
+          :style="styleAnimation"
+          @animationend="setAnimatedStop"
+        >
+          <i class="i-ion:rocket color-white" />
         </div>
       </div>
 
-      <div class="col-span-2 md:col-span-1 border-t border-$vp-c-border grid grid-cols-2">
-        <div class="flex flex-col md:border-l border-$vp-c-border">
-          <div
-            :class="headerClasses"
-            class="justify-center font-bold"
-          >
-            Animation
-          </div>
+      <div class="language-html m-0! rounded-none!">
+        <div v-html="renderedCode" />
+      </div>
+    </div>
 
-          <div class="relative flex-1">
-            <div class="absolute inset-0 overflow-auto">
-              <NButton
-                v-for="animName in animationNames"
-                :key="animName"
-                v-bind="animName === animationName ? { type: 'primary', secondary: true } : { quaternary: true }"
-                block
-                class="text-13px color-$vp-c-text-1"
-                @click="setAnimated(animName)"
-              >
-                {{ animName.replace('animate-', '') }}
-              </NButton>
-            </div>
-          </div>
+    <div class="col-span-2 md:(col-span-1 border-t-0) border-t border-$vp-c-border grid grid-cols-2">
+      <div class="flex flex-col md:border-l border-$vp-c-border">
+        <div
+          :class="headerClasses"
+          class="justify-center font-bold"
+        >
+          Animation
         </div>
 
-        <div class="border-l border-$vp-c-border flex flex-col">
-          <div
-            :class="headerClasses"
-            class="justify-center font-bold"
-          >
-            Options
+        <div class="relative flex-1">
+          <div class="absolute inset-0 overflow-auto">
+            <button
+              v-for="animName in animationNames"
+              :key="animName"
+              class="text-13px color-$vp-c-text-1 inline-flex items-center justify-center w-full h-34px px-14px transition-colors-280 hover:bg-white/12"
+              :class="{
+                'active-button': animName === animationName,
+              }"
+              @click="setAnimated(animName)"
+            >
+              {{ animName.replace('animate-', '') }}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-l border-$vp-c-border flex flex-col">
+        <div
+          :class="headerClasses"
+          class="justify-center font-bold"
+        >
+          Options
+        </div>
+
+        <div class="p-2 flex flex-col gap-6">
+          <div class="flex flex-col gap-2">
+            <CoreInputNumber
+              v-model="repeat"
+              label="Iteration count"
+              :disabled="repeatInfinite"
+            />
+
+            <label class="flex gap-4 items-center">
+              <CheckboxRoot
+                v-model:checked="repeatInfinite"
+                class="flex size-25px appearance-none items-center justify-center rounded border border-solid border-base"
+              >
+                <CheckboxIndicator
+                  class="size-full rounded flex items-center justify-center"
+                >
+                  <i
+                    class="i-radix-icons:check size-6"
+                  />
+                </CheckboxIndicator>
+              </CheckboxRoot>
+
+              <span class="select-none">
+                Infinite
+              </span>
+            </label>
           </div>
 
-          <NForm
-            label-placement="top"
-            label-width="5.5em"
-            :show-feedback="false"
-            class="color-$vp-c-text-1 p-2"
-            style="--n-label-text-color: var(--vp-c-text-1);"
-          >
-            <NFormItem label="Iteration count">
-              <div class="flex flex-col gap-2">
-                <NInputNumber
-                  v-if="!repeatInfinite"
-                  v-model:value="repeat"
-                  :min="1"
-                />
+          <div class="flex flex-col gap-2">
+            <CoreInputNumber
+              v-model="duration"
+              label="Speed"
+            />
 
-                <NCheckbox v-model:checked="repeatInfinite">
-                  Infinite
-                </NCheckbox>
+            <RadioGroupRoot
+              v-model="durationUnit"
+              class="flex flex-col gap-2.5"
+            >
+              <div
+                v-for="unit in timeUnitOptions"
+                :key="unit.value"
+                class="flex items-center"
+              >
+                <RadioGroupItem
+                  :id="unit.value"
+                  class="border border-solid border-base size-[25px] rounded-full cursor-default"
+                  :value="unit.value"
+                >
+                  <RadioGroupIndicator
+                    class="flex items-center justify-center size-full relative after:content-[''] after:block after:size-[11px] after:rounded-[50%] after:bg-$vp-c-brand-1"
+                  />
+                </RadioGroupItem>
+
+                <label
+                  class="text-white text-[15px] leading-none pl-[15px]"
+                  :for="unit.value"
+                >
+                  {{ unit.label }}
+                </label>
               </div>
-            </NFormItem>
-
-            <NDivider class="my-3!" />
-
-            <NDivider class="my-3!" />
-
-            <NFormItem label="Speed">
-              <div class="flex flex-col gap-2">
-                <NInputNumber
-                  v-model:value="duration"
-                  :min="0"
-                />
-
-                <NSelect
-                  v-model:value="durationUnit"
-                  :options="timeUnitOptions"
-                />
-              </div>
-            </NFormItem>
-          </NForm>
+            </RadioGroupRoot>
+          </div>
         </div>
       </div>
     </div>
-  </NConfigProvider>
+  </div>
 </template>
 
 <style lang="postcss" scoped>
-.animate-container {}
-
 .animated-box {
   box-shadow: 0 0 20px -6px #fc297f;
+}
+
+.active-button {
+  background-color: rgba(68, 189, 135, 0.50);
 }
 </style>

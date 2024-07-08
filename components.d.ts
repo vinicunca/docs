@@ -7,6 +7,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    CoreInputNumber: typeof import('./.vitepress/components/core-input-number.vue')['default']
     DocsBox: typeof import('./.vitepress/components/docs-box.vue')['default']
     DocsTooltip: typeof import('./.vitepress/components/docs-tooltip.vue')['default']
     EslintConfigHeading: typeof import('./.vitepress/components/eslint-config-heading.vue')['default']

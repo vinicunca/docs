@@ -11,8 +11,6 @@
     "preview": "vitepress preview"
   },
   "dependencies": {
-    "@vueuse/core": "^10.11.0",
-    "naive-ui": "^2.38.2"
   },
   "devDependencies": {
     "@eslint-stylistic/metadata": "^2.3.0",
