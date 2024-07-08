@@ -1,4 +1,4 @@
-import { type JSONOutput } from "typedoc";
+import type { JSONOutput } from 'typedoc';
 
 declare const PERKAKAS_METADATA: JSONOutput.ProjectReflection;
 

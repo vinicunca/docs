@@ -1,29 +1,41 @@
+import { presetVinicunca } from '@vinicunca/unocss-preset-vinicunca';
 import {
   defineConfig,
-  presetIcons,
   presetUno,
   transformerDirectives,
   transformerVariantGroup,
 } from 'unocss';
 
-const CUBIC_BEZIER = 'cubic-bezier(0.16, 1, 0.3, 1)';
-
 export default defineConfig({
   presets: [
     presetUno(),
-    presetIcons({
-      collections: {
-        vin: async (iconName) => {
-          if (iconName === 'eslint-style') {
-            return await fetch('https://eslint.style/logo.svg').then((res) => res.text());
-          } else if (iconName === 'yaml') {
-            return await fetch('https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/yaml.svg').then((res) => res.text());
-          }
+    presetVinicunca({
+      icons: {
+        collections: {
+          vin: async (iconName) => {
+            if (iconName === 'eslint-style') {
+              return await fetch('https://eslint.style/logo.svg').then((res) => res.text());
+            } else if (iconName === 'yaml') {
+              return await fetch('https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/main/icons/yaml.svg').then((res) => res.text());
+            }
+          },
+        },
+        scale: 1.5,
+        warn: true,
+      },
+
+      fluidOptions: {
+        ranges: {
+          'xs': [5, 15],
+          'sm': [10, 30],
+          'md': [15, 40],
+          'lg': [20, 50],
+          'xl': [25, 60],
+          '2xl': [30, 70],
+          '3xl': [35, 80],
+          '4xl': [40, 90],
         },
       },
-      scale: 1.5,
-
-      warn: true,
     }),
   ],
 
@@ -57,52 +69,22 @@ export default defineConfig({
       durations: {
         'collapsible-slide-down': '0.3s',
         'collapsible-slide-up': '0.3s',
-        'enter-from-left': '0.25s',
-        'enter-from-right': '0.25s',
-        'exit-to-left': '0.25s',
-        'exit-to-right': '0.25s',
-        'fade-in': '0.2s',
-        'fade-out': '0.2s',
         'scale-in': '0.2s',
         'scale-out': '0.2s',
-        'slide-down-and-fade': '0.4s',
-        'slide-left-and-fade': '0.4s',
-        'slide-right-and-fade': '0.4s',
-        'slide-up-and-fade': '0.4s',
       },
 
       keyframes: {
         'collapsible-slide-down': '{from {height: 0} to {height: var(--radix-collapsible-content-height)}}',
         'collapsible-slide-up': '{from {height: var(--radix-collapsible-content-height)} to {height: 0}}',
-        'enter-from-left': '{from{opacity:0;transform:translateX(-200px)}to{opacity:1;transform:translateX(0)}}',
-        'enter-from-right': '{from{opacity:0;transform:translateX(200px)}to{opacity:1;transform:translateX(0)}}',
-        'exit-to-left': '{from{opacity:1;transform:translateX(0)}to{opacity:0;transform:translateX(-200px)}}',
-        'exit-to-right': '{from{opacity:1;transform:translateX(0)}to{opacity:0;transform:translateX(200px)}}',
-        'fade-in': '{from{opacity:0}to{opacity:1}}',
-        'fade-out': '{from{opacity:1}to{opacity:0}}',
         'scale-in': '{from{opacity:0;transform:rotateX(-10deg) scale(0.9)}to{opacity:1;transform:rotateX(0deg) scale(1)}}',
         'scale-out': '{from{opacity:1;transform:rotateX(0deg) scale(1)}to{opacity:0;transform:rotateX(-10deg) scale(0.95)}}',
-        'slide-down-and-fade': '{from {opacity: 0;transform:translateY(-2px)} to {opacity: 1;transform: translateY(0)}}',
-        'slide-left-and-fade': '{from {opacity: 0;transform:translateX(2px)} to {opacity: 1;transform: translateX(0)}}',
-        'slide-right-and-fade': '{from {opacity: 0;transform:translateX(-2px)} to {opacity: 1;transform: translateX(0)}}',
-        'slide-up-and-fade': '{from {opacity: 0;transform:translateY(2px)} to {opacity: 1;transform: translateY(0)}}',
       },
 
       timingFns: {
         'collapsible-slide-down': 'ease-out',
         'collapsible-slide-up': 'ease-out',
-        'enter-from-left': 'ease',
-        'enter-from-right': 'ease',
-        'exit-to-left': 'ease',
-        'exit-to-right': 'ease',
-        'fade-in': 'ease',
-        'fade-out': 'ease',
         'scale-in': 'ease',
         'scale-out': 'ease',
-        'slide-down-and-fade': CUBIC_BEZIER,
-        'slide-left-and-fade': CUBIC_BEZIER,
-        'slide-right-and-fade': CUBIC_BEZIER,
-        'slide-up-and-fade': CUBIC_BEZIER,
       },
     },
 

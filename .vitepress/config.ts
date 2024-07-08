@@ -5,6 +5,7 @@ import { mapPerkakasFunctions } from './perkakas/perkakas.mapping';
 import { devSetupSidebar } from './theme/sidebar.dev-setup';
 import { eslintSidebar } from './theme/sidebar.eslint';
 import { perkakasSidebar } from './theme/sidebar.perkakas';
+import { unoSidebar } from './theme/sidebar.uno';
 
 export default defineConfig({
   cleanUrls: true,
@@ -130,6 +131,11 @@ export default defineConfig({
         text: 'Perkakas',
       },
       {
+        activeMatch: '/unocss/',
+        link: '/unocss-preset/installation',
+        text: 'UnoCSS Preset',
+      },
+      {
         activeMatch: '/dev-setup/',
         items: [
           { link: '/dev-setup/wsl', text: 'WSL' },
@@ -149,6 +155,7 @@ export default defineConfig({
       '/dev-setup': devSetupSidebar,
       '/eslint': eslintSidebar,
       '/perkakas': perkakasSidebar,
+      '/unocss-preset': unoSidebar,
     },
 
     socialLinks: [

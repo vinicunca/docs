@@ -7,4 +7,12 @@ export default vinicuncaESLint(
       'jsonc/sort-keys': 'off',
     },
   },
+  {
+    rules: {
+      'perfectionist/sort-interfaces': 'off',
+      'perfectionist/sort-object-types': 'off',
+      'perfectionist/sort-objects': 'off',
+      'ts/consistent-type-definitions': 'off',
+    },
+  },
 );
