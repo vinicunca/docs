@@ -30,7 +30,7 @@ const model = defineModel();
       </NumberFieldDecrement>
 
       <NumberFieldInput
-        class="text-center w-20 tabular-nums focus:outline-2 p-1"
+        class="text-center w-10 tabular-nums focus:outline-2 p-1"
       />
 
       <NumberFieldIncrement class="p-2 flex disabled:opacity-20">

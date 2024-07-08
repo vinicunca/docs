@@ -93,8 +93,8 @@ const styleAnimation = computed(() => {
 </script>
 
 <template>
-  <div class="overflow-hidden grid grid-cols-2 border border-$vp-c-border rounded">
-    <div class="col-span-2 md:col-span-1 flex flex-col">
+  <div class="overflow-hidden grid grid-cols-2 lg:flex border border-$vp-c-border rounded">
+    <div class="col-span-2 md:col-span-1 lg:flex-1 flex flex-col">
       <div
         :class="headerClasses"
         class="justify-between"
@@ -146,7 +146,7 @@ const styleAnimation = computed(() => {
             <button
               v-for="animName in animationNames"
               :key="animName"
-              class="text-13px color-$vp-c-text-1 inline-flex items-center justify-center w-full h-34px px-14px transition-colors-280 hover:bg-white/12"
+              class="text-13px color-$vp-c-text-1 inline-flex items-center justify-center w-full h-34px px-4 transition-colors-280 hover:bg-white/12"
               :class="{
                 'active-button': animName === animationName,
               }"
@@ -166,7 +166,7 @@ const styleAnimation = computed(() => {
           Options
         </div>
 
-        <div class="p-2 flex flex-col gap-6">
+        <div class="p-4 flex flex-col gap-6">
           <div class="flex flex-col gap-2">
             <CoreInputNumber
               v-model="repeat"
