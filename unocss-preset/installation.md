@@ -72,4 +72,4 @@ type VinicuncaOptions = {
 };
 ```
 
-For `fluidOptions` please refer to the [fluid rules](/unocss-preset/fluid) page.
+For `fluidOptions` please refer to the [fluid usage](/unocss-preset/fluid/usage) page.
