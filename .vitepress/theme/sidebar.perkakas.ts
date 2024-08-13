@@ -19,7 +19,7 @@ const NAVBAR_ENTRIES = map(
   ([category, funcs]) => {
     return {
       items: funcs.map((func) => ({
-        link: `/perkakas/docs/${func.name}`,
+        link: `/perkakas/docs#${func.name.toLowerCase()}`,
         tags: getTags(func),
         text: func.name,
       })),
@@ -28,4 +28,10 @@ const NAVBAR_ENTRIES = map(
   },
 );
 
-export const perkakasSidebar = NAVBAR_ENTRIES;
+export const perkakasSidebar = [
+  {
+    link: '/perkakas/installation',
+    text: 'Installation',
+  },
+  ...NAVBAR_ENTRIES,
+];

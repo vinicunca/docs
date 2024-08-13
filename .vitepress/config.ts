@@ -190,7 +190,7 @@ export default defineConfig({
       },
       {
         activeMatch: '/perkakas/',
-        link: '/perkakas',
+        link: '/perkakas/installation',
         text: 'Perkakas',
       },
       {
@@ -229,17 +229,11 @@ export default defineConfig({
   title: 'Vinicunca',
 
   async transformPageData(pageData, { siteConfig }) {
-    if (pageData.params?.id) {
+    if (pageData.filePath === 'perkakas/docs.md') {
       const md = await createMarkdownRenderer(siteConfig.srcDir, siteConfig.markdown, siteConfig.site.base, siteConfig.logger);
       const functions = await mapPerkakasFunctions(md);
-      const data = functions.find((item) => item.name === pageData.params?.id);
 
-      if (data) {
-        pageData.title = data.name;
-        pageData.description = pageData.params.description;
-        pageData.func = data;
-        pageData.rawDesc = md.render(pageData.params.description);
-      }
+      pageData.functions = functions;
     }
 
     pageData.lastUpdated = Date.now();

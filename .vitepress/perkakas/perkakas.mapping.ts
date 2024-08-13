@@ -19,6 +19,10 @@ export async function mapPerkakasFunctions(md: MarkdownRenderer) {
   const result = [];
 
   for (const func of PERKAKAS_METHODS) {
+    if (func.description) {
+      func.description = md.render(func.description);
+    }
+
     const methods = [];
 
     for (const method of func.methods) {

@@ -3,31 +3,40 @@ import { useData } from 'vitepress';
 
 import { getTags } from '../perkakas/perkakas.utils';
 
+const props = defineProps<{
+  name: string;
+}>();
+
 /**
  * The page data has been modified in `.vitepress/perkakas/perkakas.mapping.ts` file.
  */
 const { page } = useData();
+
+const data = page.value.functions.find((fun) => fun.name === props.name);
 </script>
 
 <template>
-  <div class="flex flex-col gap-y-1.5">
+  <div
+    v-if="data"
+    class="flex flex-col gap-y-1.5"
+  >
     <!-- Header -->
     <div class="flex items-center gap-2 mb-4">
       <!-- Badge -->
       <PerkakasBadge class="bg-$vp-c-badge-primary text-white ">
-        {{ page.func.category }}
+        {{ data.category }}
       </PerkakasBadge>
 
       <!-- Tags -->
       <PerkakasTags
-        v-for="tag in getTags(page.func)"
+        v-for="tag in getTags(data)"
         :key="tag"
         :tag="tag"
       />
 
       <!-- Github -->
       <a
-        :href="page.func.sourceUrl"
+        :href="data.sourceUrl"
         target="_blank"
         class="inline-flex items-center justify-center vpi-social-github"
         title="View source on Github"
@@ -38,8 +47,8 @@ const { page } = useData();
 
     <!-- Methods -->
     <div
-      v-for="(method, idx) in page.func.methods"
-      :key="`method-${page.func.name}-${idx}`"
+      v-for="(method, idx) in data.methods"
+      :key="`method-${data.name}-${idx}`"
       class="flex flex-col gap-2"
     >
       <p class="m-0! font-bold">
