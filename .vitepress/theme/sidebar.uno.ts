@@ -4,7 +4,16 @@ export const unoSidebar = [
     text: 'Installation',
   },
   {
-    link: '/unocss-preset/animations',
+    collapsed: false,
+    items: [
+      { link: '/unocss-preset/animations/usage', text: 'Usage' },
+      { link: '/unocss-preset/animations/fade', text: 'Fade' },
+      { link: '/unocss-preset/animations/zoom', text: 'Zoom' },
+      { link: '/unocss-preset/animations/spin', text: 'Spin' },
+      { link: '/unocss-preset/animations/slide', text: 'Slide' },
+      { link: '/unocss-preset/animations/animation-properties', text: 'Animation Properties' },
+      { link: '/unocss-preset/animations/interactive-documentation', text: 'Interactive Documentation' },
+    ],
     text: 'Animations',
   },
   {

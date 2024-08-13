@@ -1,4 +1,3 @@
-import { transformerTwoslash } from '@shikijs/vitepress-twoslash';
 import { createMarkdownRenderer, defineConfig } from 'vitepress';
 
 import { mapPerkakasFunctions } from './perkakas/perkakas.mapping';
@@ -159,10 +158,6 @@ export default defineConfig({
   lastUpdated: true,
 
   markdown: {
-    codeTransformers: [
-      transformerTwoslash(),
-    ],
-
     theme: 'one-dark-pro',
   },
 

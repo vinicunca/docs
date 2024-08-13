@@ -1,6 +1,6 @@
 # UnoCSS Preset
 
-Opinionated UnoCSS preset that includes built-in preset from [UnoCSS](https://unocss.dev/).
+Opinionated UnoCSS preset that adds animation classes and fluid utilities.
 
 ## Installation
 
@@ -22,16 +22,16 @@ $ bun add -D @vinicunca/unocss-preset-vinicunca
 
 ## Usage
 
-You can import the preset in your `uno.config.ts` file.
+In your UnoCSS config, add this preset to the `presets` option:
 
 ```ts
-import { presetVinicunca } from '@vinicunca/unocss-preset-vinicunca';
+import { presetVinicunca } from '@vinicunca/unocss-preset-vinicunca'; // [!code ++]
 import { defineConfig, presetUno } from 'unocss';
 
 export default defineConfig({
   presets: [
     presetUno(),
-    presetVinicunca(),
+    presetVinicunca(), // [!code ++]
   ],
 });
 ```
@@ -60,10 +60,19 @@ type VinicuncaOptions = {
   icons: IconsOptions | boolean;
 
   /**
+   * Options for animations
+   */
+  animationOptions: AnimationOptions;
+
+  /**
    * Options for fluid rules
    */
   fluidOptions: FluidOptions;
 };
 ```
 
-For `fluidOptions` please refer to the [fluid usage](/unocss-preset/fluid/usage) page.
+Please refer to these pages for more information regarding the options:
+
+- [IconsOptions](https://unocss.dev/presets/icons#options)
+- [FluidOptions](/unocss-preset/fluid/usage)
+- [AnimationOptions](/unocss-preset/animations/usage)
