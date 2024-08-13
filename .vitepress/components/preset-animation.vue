@@ -94,6 +94,10 @@ const styleAnimation = computed(() => {
 
 <template>
   <div class="overflow-hidden grid grid-cols-2 lg:flex border border-$vp-c-border rounded">
+    <iframe
+      src="https://unocss.dev/play/?html=DwEwlgbgBAxgNgQwM5ILwCIAWBaJMBOApoQHZQDm%2BYIUADojIdmAC6EC2S2jJb%2B6APgBQUKKEixEKDAhJh2CNszJI41JmBLYW2AGYBXOHCi6EIDVoAMUWfMVMQ%2B-IrAB7LQEZL3m3IVLzRABPbABWHzYADx0ADki4QRFRKAAZV1cAaxsWKHZCJOAAenAIYSKS4SA&config=JYWwDg9gTgLgBAbwFBzgEwKYDNgDsMDCEuOA5gDQpxhQYDOGMAgjDFMAEYCuMwWAnpVQ16jAJIBjYnSHVaDGAFVcESgF84WKBBBwA5FxUS6dPUlCRYiOaOa5QAQ17S4GrTv2GIxugFoRCr4O9iBOwNJmSEgYAB6W8JhYDlwANgnYeITEZAAUyMLyjHQAXHAA2lQFtsoQOQCUslUKTCFh0nmawCkpALIQmKV6HBAwABZ6rg1UALrqdUhAA&css=PQKgBA6gTglgLgUzAYwK4Gc4HsC2YDCAyoWABYJQIA0YAhgHYAmYcUD6AZllDhWOqgAOg7nAB0YAGLcwCAB60cggDYIAXGBDAAUKDBi0mXGADe2sGC704AWgDuCGAHNScDQFYADJ4Dc5sAACtMLKAJ5gggCMLPK2ABR2pPBIcsoAlH4WAEa0yADWTlBYqEw2yFjK3Bpw5LxxAOTllVDoYpSMYgAs3vUZ2gC%2BmsBAA&options=N4IgLgTghgdgzgMwPYQLYAkyoDYgFwJTZwCmAvkA"
+      frameborder="0"
+    />
     <div class="col-span-2 md:col-span-1 lg:flex-1 flex flex-col">
       <div
         :class="headerClasses"
@@ -118,7 +122,8 @@ const styleAnimation = computed(() => {
         <div
           class="flex items-center size-100px bg-#FC2983 justify-center rounded-2 animated-box"
           :class="{
-            [animationName]: isAnimating,
+            // [animationName]: isAnimating,
+            'animate-in fade-in-50 zoom-in-80 slide-in-from-top-50': isAnimating,
           }"
           :style="styleAnimation"
           @animationend="setAnimatedStop"

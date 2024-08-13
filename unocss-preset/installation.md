@@ -38,7 +38,7 @@ export default defineConfig({
 
 By default this preset already includes the following:
 
-- [Tailwind Compat](https://unocss.dev/guide/style-reset#tailwind-compat). Reset browser's styles
+- [Tailwind reset style](https://unocss.dev/guide/style-reset#tailwind). Reset browser's styles
 - [Icon preset](https://unocss.dev/presets/icons)
 
 ### Options
@@ -58,12 +58,6 @@ type VinicuncaOptions = {
    * @default true
    */
   icons: IconsOptions | boolean;
-
-  /**
-   * Enable animations rules
-   * @default true
-   */
-  enableAnimations: boolean;
 
   /**
    * Options for fluid rules
