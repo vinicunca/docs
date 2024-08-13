@@ -138,6 +138,20 @@ export default defineConfig({
         property: 'og:image',
       },
     ],
+
+    // Google Analytics
+    [
+      'script',
+      {
+        async: 'true',
+        src: 'https://www.googletagmanager.com/gtag/js?id=G-7H5VDKTB5C',
+      },
+    ],
+    [
+      'script',
+      {},
+      'window.dataLayer = window.dataLayer || [];\nfunction gtag(){dataLayer.push(arguments);}\ngtag(\'js\', new Date());\ngtag(\'config\', \'G-7H5VDKTB5C\');',
+    ],
   ],
 
   lang: 'en-US',
