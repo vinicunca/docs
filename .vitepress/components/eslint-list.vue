@@ -6,6 +6,7 @@ import { computed, markRaw, ref } from 'vue';
 
 import { pluginUrlMap, usePluginColor } from '../utils/plugin-colors';
 import { renderMarkdown } from '../utils/render-markdown';
+
 const props = defineProps<{
   isFilterable?: boolean;
   package: string;

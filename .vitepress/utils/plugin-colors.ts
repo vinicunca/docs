@@ -24,10 +24,6 @@ const pluginColorMap: Record<string, {
     dark: '#2b7489',
     light: '#2b7489',
   },
-  vinicunca: {
-    dark: '#66BB6A',
-    light: '#66BB6A',
-  },
   vue: {
     dark: '#41b883',
     light: '#41b883',
@@ -44,18 +40,26 @@ function getHashColorFromString(name: string, saturation = 65, lightness = 40, o
 }
 
 export const pluginUrlMap: Record<string, string> = {
-  'eslint-comments': 'https://mysticatea.github.io/eslint-plugin-eslint-comments/',
+  'eslint-comments': 'https://mysticatea.github.io/eslint-plugin-eslint-comments',
   'import': 'https://github.com/un-es/eslint-plugin-i',
   'jsdoc': 'https://github.com/gajus/eslint-plugin-jsdoc',
-  'jsonc': 'https://ota-meshi.github.io/eslint-plugin-jsonc/',
+  'jsonc': 'https://ota-meshi.github.io/eslint-plugin-jsonc',
   'node': 'https://github.com/eslint-community/eslint-plugin-n',
-  'perfectionist': 'https://eslint-plugin-perfectionist.azat.io/',
-  'style': 'https://eslint.style/',
-  'ts': 'https://typescript-eslint.io/',
+  'perfectionist': 'https://eslint-plugin-perfectionist.azat.io',
+  'style': 'https://eslint.style',
+  'ts': 'https://typescript-eslint.io',
   'unicorn': 'https://github.com/sindresorhus/eslint-plugin-unicorn',
   'unused-imports': 'https://github.com/sweepline/eslint-plugin-unused-imports',
-  'vinicunca': '/plugin-vinicunca',
-  'vue': 'https://eslint.vuejs.org/',
+  'vue': 'https://eslint.vuejs.org',
+  'antfu': 'https://github.com/antfu/eslint-plugin-antfu',
+  'astro': 'https://ota-meshi.github.io/eslint-plugin-astro',
+  'command': 'https://eslint-plugin-command.antfu.me',
+  'format': 'https://github.com/antfu/eslint-plugin-format',
+  'regexp': 'https://github.com/ota-meshi/eslint-plugin-regexp',
+  'solid': 'https://github.com/solidjs-community/eslint-plugin-solid',
+  'sonar': 'https://github.com/SonarSource/SonarJS#readme',
+  'svelte': 'https://sveltejs.github.io/eslint-plugin-svelte',
+  'toml': 'https://ota-meshi.github.io/eslint-plugin-toml',
 };
 
 export function usePluginColor() {

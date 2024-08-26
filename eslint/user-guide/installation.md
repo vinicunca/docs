@@ -69,9 +69,6 @@ Add the following settings to your `.vscode/settings.json`:
 
 ```jsonc
 {
-  // Enable the ESlint flat config support
-  "eslint.experimental.useFlatConfig": true,
-
   // Disable the default formatter, use eslint instead
   "prettier.enable": false,
   "editor.formatOnSave": false,
@@ -93,7 +90,18 @@ Add the following settings to your `.vscode/settings.json`:
     "markdown",
     "json",
     "jsonc",
-    "yaml"
+    "yaml",
+    "toml",
+    "xml",
+    "gql",
+    "graphql",
+    "astro",
+    "svelte",
+    "css",
+    "less",
+    "scss",
+    "pcss",
+    "postcss"
   ]
 }
 ```
@@ -102,23 +110,34 @@ Add the following settings to your `.vscode/settings.json`:
 
 This plugin provides a bunch of predefined configs. For more details you can view them in their respective pages:
 
+- [astro](/eslint/configs/astro)
+- [comments](/eslint/configs/comments)
+- [command](/eslint/configs/command)
+- [formatters](/eslint/configs/formatters)
 - [ignores](/eslint/configs/ignores)
-- [javascript](/eslint/configs/javascript)
-- [eslint-comments](/eslint/configs/eslint-comments)
-- [node](/eslint/configs/node)
-- [jsdoc](/eslint/configs/jsdoc)
 - [imports](/eslint/configs/imports)
-- [unicorn](/eslint/configs/unicorn)
-- [typescript](/eslint/configs/typescript)
-- [stylistic](/eslint/configs/stylistic)
-- [test](/eslint/configs/test)
-- [vue](/eslint/configs/vue)
+- [javascript](/eslint/configs/javascript)
+- [jsdoc](/eslint/configs/jsdoc)
 - [jsonc](/eslint/configs/jsonc)
+- [markdown](/eslint/configs/markdown)
+- [node](/eslint/configs/node)
+- [perfectionist](/eslint/configs/perfectionist)
+- [react](/eslint/configs/react)
+- [regexp](/eslint/configs/regexp)
+- [solid](/eslint/configs/solid)
+- [sonar](/eslint/configs/sonar)
 - [sort-package-json](/eslint/configs/sort-package-json)
 - [sort-tsconfig](/eslint/configs/sort-tsconfig)
+- [stylistic](/eslint/configs/stylistic)
+- [svelte](/eslint/configs/svelte)
+- [test](/eslint/configs/test)
+- [toml](/eslint/configs/toml)
+- [typescript](/eslint/configs/typescript)
+- [unicorn](/eslint/configs/unicorn)
+- [vue](/eslint/configs/vue)
 - [yaml](/eslint/configs/yaml)
-- [markdown](/eslint/configs/markdown)
-- [react](/eslint/configs/react) (disabled by default)
+
+## Customization
 
 You can also disable/enable each rule individually.
 
@@ -126,14 +145,9 @@ You can also disable/enable each rule individually.
 import { vinicuncaESLint } from '@vinicunca/eslint-config';
 
 export default vinicuncaESLint({
-  // `.eslintignore` is no longer supported in Flat config, use `ignores` instead
-  ignores: [
-    './fixtures',
-    // ...globs
-  ],
-
   // Disable jsonc and yaml support
   jsonc: false,
+  yaml: false,
 
   // Enable stylistic formatting rules
   // stylistic: true,
@@ -148,7 +162,11 @@ export default vinicuncaESLint({
   typescript: true,
   vue: true,
 
-  yaml: false
+  // `.eslintignore` is no longer supported in Flat config, use `ignores` instead
+  ignores: [
+    './fixtures',
+    // ...globs
+  ],
 });
 ```
 
@@ -186,11 +204,10 @@ export default vinicuncaESLint(
 
 We also provided a `overrides` options in each integration to make it easier:
 
-```js
-// eslint.config.js
-import antfu from '@antfu/eslint-config';
+```js [eslint.config.js]
+import { vinicuncaESLint } from '@vinicunca/eslint-config';
 
-export default antfu({
+export default vinicuncaESLint({
   typescript: {
     overrides: {
       'ts/consistent-type-definitions': ['error', 'interface'],
@@ -207,46 +224,6 @@ export default antfu({
     },
   },
 });
-```
-
-More advanced usage also is available since the flat config is composables:
-
-```js [eslint.config.js]
-import {
-  combineConfigs,
-  comments,
-  ignores,
-  imports,
-  javascript,
-  jsdoc,
-  jsonc,
-  markdown,
-  node,
-  sortPackageJson,
-  sortTsconfig,
-  stylistic,
-  typescript,
-  unicorn,
-  vue,
-  yaml,
-} from '@vinicunca/eslint-config';
-
-export default combineConfigs(
-  ignores(),
-  javascript(/* Options */),
-  comments(),
-  node(),
-  jsdoc(),
-  imports(),
-  unicorn(),
-  typescript(/* Options */),
-  stylistic(),
-  vue(),
-  jsonc(),
-  yaml(),
-  toml(),
-  markdown(),
-);
 ```
 
 ## Plugins Renaming
@@ -269,21 +246,6 @@ When you want to override rules, or disable them inline, you need to update to t
 -// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 +// eslint-disable-next-line ts/consistent-type-definitions
 type foo = { bar: 2 }
-```
-
-## Type Aware Rules
-
-You can optionally enable the [type aware rules](https://typescript-eslint.io/linting/typed-linting/) by passing the options object to the `typescript` config:
-
-```js
-// eslint.config.js
-import { vinicuncaESLint } from '@vinicunca/eslint-config';
-
-export default vinicuncaESLint({
-  typescript: {
-    tsconfigPath: 'tsconfig.json',
-  },
-});
 ```
 
 ## Lint Staged

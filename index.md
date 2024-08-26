@@ -16,6 +16,9 @@ hero:
     - theme: alt
       text: Perkakas
       link: /perkakas
+    - theme: alt
+      text: UnoCSS
+      link: /unocss-preset/installation
 
 features:
   - title: Standardization

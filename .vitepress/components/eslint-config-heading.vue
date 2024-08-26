@@ -10,7 +10,9 @@ defineProps<{
     <div class="flex gap-2 items-center font-600">
       <i :class="icon" />
 
-      <h4>{{ label }}</h4>
+      <h4 class="m-0!">
+        {{ label }}
+      </h4>
     </div>
 
     <div
