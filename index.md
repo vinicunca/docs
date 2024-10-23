@@ -15,7 +15,7 @@ hero:
       link: /eslint/user-guide/installation
     - theme: alt
       text: Perkakas
-      link: /perkakas
+      link: /perkakas/installation
     - theme: alt
       text: UnoCSS
       link: /unocss-preset/installation
