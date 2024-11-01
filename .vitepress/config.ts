@@ -1,10 +1,6 @@
-import { createMarkdownRenderer, defineConfig } from 'vitepress';
+import { defineConfig } from 'vitepress';
 
-import { mapPerkakasFunctions } from './perkakas/perkakas.mapping';
 import { devSetupSidebar } from './theme/sidebar.dev-setup';
-import { eslintSidebar } from './theme/sidebar.eslint';
-import { perkakasSidebar } from './theme/sidebar.perkakas';
-import { unoSidebar } from './theme/sidebar.uno';
 
 export default defineConfig({
   cleanUrls: true,
@@ -184,21 +180,6 @@ export default defineConfig({
 
     nav: [
       {
-        activeMatch: '/eslint/',
-        link: '/eslint/user-guide/installation',
-        text: 'ESLint',
-      },
-      {
-        activeMatch: '/perkakas/',
-        link: '/perkakas/installation',
-        text: 'Perkakas',
-      },
-      {
-        activeMatch: '/unocss/',
-        link: '/unocss-preset/installation',
-        text: 'UnoCSS Preset',
-      },
-      {
         activeMatch: '/dev-setup/',
         items: [
           { link: '/dev-setup/wsl', text: 'WSL' },
@@ -216,9 +197,6 @@ export default defineConfig({
 
     sidebar: {
       '/dev-setup': devSetupSidebar,
-      '/eslint': eslintSidebar,
-      '/perkakas': perkakasSidebar,
-      '/unocss-preset': unoSidebar,
     },
 
     socialLinks: [
@@ -228,14 +206,7 @@ export default defineConfig({
 
   title: 'Vinicunca',
 
-  async transformPageData(pageData, { siteConfig }) {
-    if (pageData.filePath === 'perkakas/docs.md') {
-      const md = await createMarkdownRenderer(siteConfig.srcDir, siteConfig.markdown, siteConfig.site.base, siteConfig.logger);
-      const functions = await mapPerkakasFunctions(md);
-
-      pageData.functions = functions;
-    }
-
+  async transformPageData(pageData) {
     pageData.lastUpdated = Date.now();
   },
 });

@@ -12,13 +12,13 @@ hero:
   actions:
     - theme: alt
       text: ESLint
-      link: /eslint/user-guide/installation
+      link: https://eslint.vinicunca.dev/
     - theme: alt
       text: Perkakas
-      link: /perkakas
+      link: https://perkakas.vinicunca.dev/
     - theme: alt
       text: UnoCSS
-      link: /unocss-preset/installation
+      link: https://unocss.vinicunca.dev/
 
 features:
   - title: Standardization
