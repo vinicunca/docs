@@ -1,0 +1,189 @@
+// @unocss-include
+
+import type { PThemeFileUpload } from 'pohon-ui';
+import { BRANDS } from './constant';
+
+export const fileUploadTheme = {
+  slots: {
+    root: 'relative flex flex-col',
+    base: 'w-full flex-1 bg-background border border-border flex flex-col gap-2 items-stretch justify-center rounded-lg focus-visible:outline-2 transition-colors-280',
+    wrapper: 'flex flex-col items-center justify-center text-center',
+    icon: 'shrink-0',
+    avatar: 'shrink-0',
+    label: 'font-medium color-text mt-2',
+    description: 'color-text-muted mt-1',
+    actions: 'flex flex-wrap gap-1.5 shrink-0 mt-4',
+    file: 'relative',
+    fileLeadingAvatar: 'shrink-0',
+    fileWrapper: 'flex flex-col min-w-0',
+    fileName: 'color-text truncate',
+    fileSize: 'color-text-muted truncate',
+  },
+  variants: {
+    variant: {
+      area: {
+        wrapper: 'px-4 py-3',
+        base: 'p-4',
+      },
+    },
+    size: {
+      xs: {
+        base: 'text-xs',
+        icon: 'size-4',
+        file: 'text-xs px-2 py-1 gap-1',
+        fileWrapper: 'flex-row gap-1',
+      },
+      sm: {
+        base: 'text-xs',
+        icon: 'size-4',
+        file: 'text-xs px-2.5 py-1.5 gap-1.5',
+        fileWrapper: 'flex-row gap-1',
+      },
+      md: {
+        base: 'text-sm',
+        icon: 'size-5',
+        file: 'text-xs px-2.5 py-1.5 gap-1.5',
+      },
+      lg: {
+        base: 'text-sm',
+        icon: 'size-5',
+        file: 'text-sm px-3 py-2 gap-2',
+        fileSize: 'text-xs',
+      },
+      xl: {
+        base: 'text-base',
+        icon: 'size-6',
+        file: 'text-sm px-3 py-2 gap-2',
+      },
+    },
+    layout: {
+      list: {
+        root: 'gap-2 items-start',
+        files: 'flex flex-col w-full gap-2',
+        file: 'min-w-0 flex items-center border border-border rounded-md w-full',
+        fileTrailingButton: 'ms-auto',
+      },
+      grid: {
+        fileWrapper: 'hidden',
+        fileLeadingAvatar: 'size-full rounded-lg',
+        fileTrailingButton: 'absolute -top-1.5 -end-1.5 p-0 rounded-full border-2 border-border-bg',
+      },
+    },
+    dropzone: {
+      true: 'border-dashed data-[dragging=true]:bg-background-elevated/25',
+    },
+    disabled: {
+      true: 'cursor-not-allowed opacity-75',
+    },
+  },
+  compoundVariants: [
+    ...BRANDS.map((color) => ({
+      color,
+      class: `focus-visible:outline-${color}`,
+    })),
+    ...BRANDS.map((color) => ({
+      color,
+      highlight: true,
+      class: `border-${color}`,
+    })),
+    {
+      color: 'neutral',
+      class: 'focus-visible:outline-outline-inverted',
+    },
+    {
+      color: 'neutral',
+      highlight: true,
+      class: 'border-border-inverted',
+    },
+    {
+      size: 'xs',
+      layout: 'list',
+      class: {
+        fileTrailingButton: '-me-1',
+      },
+    },
+    {
+      size: 'sm',
+      layout: 'list',
+      class: {
+        fileTrailingButton: '-me-1.5',
+      },
+    },
+    {
+      size: 'md',
+      layout: 'list',
+      class: {
+        fileTrailingButton: '-me-1.5',
+      },
+    },
+    {
+      size: 'lg',
+      layout: 'list',
+      class: {
+        fileTrailingButton: '-me-2',
+      },
+    },
+    {
+      size: 'xl',
+      layout: 'list',
+      class: {
+        fileTrailingButton: '-me-2',
+      },
+    },
+    {
+      variant: 'button',
+      size: 'xs',
+      class: {
+        base: 'p-1',
+      },
+    },
+    {
+      variant: 'button',
+      size: 'sm',
+      class: {
+        base: 'p-1.5',
+      },
+    },
+    {
+      variant: 'button',
+      size: 'md',
+      class: {
+        base: 'p-1.5',
+      },
+    },
+    {
+      variant: 'button',
+      size: 'lg',
+      class: {
+        base: 'p-2',
+      },
+    },
+    {
+      variant: 'button',
+      size: 'xl',
+      class: {
+        base: 'p-2',
+      },
+    },
+    {
+      layout: 'grid',
+      multiple: true,
+      class: {
+        files: 'grid grid-cols-2 md:grid-cols-3 gap-4 w-full',
+        file: 'p-0 aspect-square',
+      },
+    },
+    {
+      layout: 'grid',
+      multiple: false,
+      class: {
+        file: 'absolute inset-0 p-0',
+      },
+    },
+    {
+      interactive: true,
+      disabled: false,
+      class: 'hover:bg-background-elevated/25',
+    },
+  ],
+} satisfies PThemeFileUpload;

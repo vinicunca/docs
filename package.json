@@ -2,26 +2,29 @@
   "name": "@vinicunca/docs",
   "type": "module",
   "version": "0.0.1",
-  "packageManager": "pnpm@9.12.3",
   "author": "praburangki<https://github.com/praburangki>",
   "license": "MIT",
   "scripts": {
-    "dev": "vitepress dev --open",
-    "build": "vitepress build",
-    "preview": "vitepress preview"
-  },
-  "dependencies": {
+    "dev": "nuxt dev",
+    "build": "NODE_OPTIONS='--max-old-space-size=8192' nuxt build",
+    "prepare": "nuxt prepare",
+    "generate": "nuxt generate",
+    "typecheck": "nuxt typecheck"
   },
   "devDependencies": {
-    "@iconify/json": "^2.2.266",
-    "@shikijs/vitepress-twoslash": "^1.22.2",
-    "@types/node": "^22.8.6",
-    "@vinicunca/eslint-config": "^2.12.0",
-    "@vinicunca/unocss-preset-vinicunca": "^0.2.8",
-    "eslint": "^9.13.0",
-    "postcss-nested": "^7.0.1",
-    "unocss": "^0.63.6",
-    "vitepress": "^1.4.3",
-    "vue": "^3.5.12"
+    "@iconify/json": "catalog:",
+    "@nuxt/content": "catalog:",
+    "@types/node": "catalog:",
+    "@unocss/nuxt": "catalog:",
+    "@vinicunca/eslint-config": "catalog:",
+    "@vinicunca/perkakas": "catalog:",
+    "@vinicunca/unocss-preset": "catalog:",
+    "better-sqlite3": "catalog:",
+    "eslint": "catalog:",
+    "eslint-plugin-format": "catalog:",
+    "nuxt": "catalog:",
+    "nuxt-og-image": "catalog:",
+    "pohon-ui": "catalog:",
+    "unocss": "catalog:"
   }
 }

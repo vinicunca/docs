@@ -148,3 +148,19 @@ temp/
 .firebase
 
 .vitepress/cache
+
+# Nuxt dev/build outputs
+.output
+.data
+.nuxt
+.nitro
+.cache
+dist
+
+.component-meta/
+component-meta.*
+
+# Local env files
+.env
+.env.*
+!.env.example

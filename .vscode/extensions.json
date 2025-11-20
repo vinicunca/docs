@@ -1,0 +1,15 @@
+{
+  "recommendations": [
+    "chakrounanas.turbo-console-log",
+    "antfu.unocss",
+    "aaron-bond.better-comments",
+    "naumovs.color-highlight",
+    "dbaeumer.vscode-eslint",
+    "sleistner.vscode-fileutils",
+    "eamodio.gitlens",
+    "zhuangtongfa.material-theme",
+    "nuxt.mdc",
+    "yoavbls.pretty-ts-errors",
+    "praburangki.nuxt-snippets"
+  ]
+}

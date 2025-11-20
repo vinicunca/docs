@@ -1,0 +1,8 @@
+:root {
+  --pohon-header-height: calc(var(--spacing) * 16);
+  --pohon-container: var(--container-8xl);
+}
+
+body {
+  @apply antialiased bg-background color-text scheme-light dark:scheme-dark font-sans;
+}

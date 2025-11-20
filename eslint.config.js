@@ -2,20 +2,34 @@ import { vinicuncaESLint } from '@vinicunca/eslint-config';
 
 export default vinicuncaESLint(
   {
-    react: false,
+    formatters: {
+      css: true,
+    },
+    vue: true,
+    pnpm: true,
   },
+
   {
-    files: ['**/tsconfig.json'],
+    files: [
+      'packages/pohon/layer/app/themes/*.ts',
+    ],
     rules: {
-      'jsonc/sort-keys': 'off',
+      'unocss/order': ['warn', {
+        unoVariables: ['Theme?$'],
+      }],
     },
   },
+
+  {
+    files: ['nuxt.config.ts', 'unocss.config.ts'],
+    rules: {
+      'perfectionist/sort-objects': 'error',
+    },
+  },
+
   {
     rules: {
-      'perfectionist/sort-interfaces': 'off',
-      'perfectionist/sort-object-types': 'off',
-      'perfectionist/sort-objects': 'off',
-      'ts/consistent-type-definitions': 'off',
+      'vue/no-extra-parens': 'off',
     },
   },
 );
