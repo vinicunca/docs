@@ -20,7 +20,7 @@ const { navigationByCategory } = useNavigation(navigation!);
     class="-mx-2.5"
   />
 
-  <template v-if="route.path.startsWith('/docs/')">
+  <template v-if="route.path !== '/'">
     <PSeparator
       type="dashed"
       class="mb-6 mt-4"

@@ -12,6 +12,9 @@ catalog:
   nuxt: ^4.2.1
   nuxt-og-image: ^5.1.12
   pohon-ui: ^1.0.16
+  prettier: ^3.6.2
+  type-fest: ^5.2.0
+  typedoc: ^0.28.14
   unocss: ^66.5.6
 ignoredBuiltDependencies:
   - '@parcel/watcher'
