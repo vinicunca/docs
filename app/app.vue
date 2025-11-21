@@ -65,6 +65,11 @@ const { data: navigation } = useAsyncData(
   ),
 );
 
+useAsyncData(
+  'perkakas-methods',
+  () => $fetch('/api/perkakas.json'),
+);
+
 const { rootNavigation } = useNavigation(navigation);
 
 provide('navigation', rootNavigation);

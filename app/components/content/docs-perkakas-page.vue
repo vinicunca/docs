@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { useFetch } from '#app';
+import { useNuxtData } from '#app';
 
-const { data } = await useFetch('/api/perkakas.json');
+const { data } = useNuxtData('perkakas-methods');
 </script>
 
 <template>

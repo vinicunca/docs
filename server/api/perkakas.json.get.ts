@@ -31,20 +31,6 @@ export default defineEventHandler(async () => {
         example,
         signature,
       });
-
-      //     methods.push({
-      //       ...method,
-      //       example: `
-      // \`\`\`ts
-      // ${examples}
-      // \`\`\`
-      // `,
-      //       signature: `
-      // \`\`\`ts
-      // ${signatures}
-      // \`\`\`
-      // `,
-      //     });
     }
 
     results.push({

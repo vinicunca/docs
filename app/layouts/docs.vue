@@ -24,6 +24,7 @@ const filteredNavigation = computed(() => {
   if (!searchTerm.value) {
     return navigationByCategory.value;
   }
+
   return navigationByCategory.value.map((item) => ({
     ...item,
     children: item.children?.filter((child) => contains({ string: child.title as string, substring: searchTerm.value }) || contains({ string: child.description as string, substring: searchTerm.value })),
@@ -79,6 +80,8 @@ defineShortcuts({
 onMounted(() => {
   scrollToActiveItem();
 });
+
+const slug = computed(() => route.params.slug?.[0] as string);
 </script>
 
 <template>
@@ -121,6 +124,9 @@ onMounted(() => {
             <PContentNavigation
               :key="route.path"
               data-akar="content-nav"
+              :variant="slug === 'perkakas' ? 'link' : 'pill'"
+              :highlight="slug !== 'perkakas'"
+              :color="slug === 'perkakas' ? 'neutral' : 'primary'"
               :navigation="filteredNavigation"
               :pohon="{
                 linkTrailingBadge: 'font-semibold uppercase',

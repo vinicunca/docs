@@ -1,6 +1,6 @@
 import type { Ref } from '#imports';
 import type { ContentNavigationItem, DocsCollectionItem } from '@nuxt/content';
-import { computed, useRoute } from '#imports';
+import { computed, useNuxtData, useRoute } from '#imports';
 import { findPageBreadcrumb, findPageChildren } from '@nuxt/content/utils';
 import { mapContentNavigation } from 'pohon-ui/utils/content';
 
@@ -14,6 +14,40 @@ const githubMapper = new Map<any, any>(
 );
 
 const categories = {
+  perkakas: [
+    {
+      id: 'Number',
+      title: 'Number',
+    },
+    {
+      id: 'Object',
+      title: 'Object',
+    },
+    {
+      id: 'Array',
+      title: 'Array',
+    },
+    {
+      id: 'Function',
+      title: 'Function',
+    },
+    {
+      id: 'Guard',
+      title: 'Guard',
+    },
+    {
+      id: 'String',
+      title: 'String',
+    },
+    {
+      id: 'Utility',
+      title: 'Utility',
+    },
+    {
+      id: 'Other',
+      title: 'Other',
+    },
+  ],
 };
 
 export function useNavigation(
@@ -50,6 +84,20 @@ export function useNavigation(
 
     if (!children.length) {
       return navigation.value ?? [];
+    }
+
+    if (slug === 'perkakas') {
+      const { data } = useNuxtData<any>('perkakas-methods');
+
+      if (data.value) {
+        children.push(
+          ...data.value.map((item: any) => ({
+            ...item,
+            path: `/perkakas/functions#${item.name}`,
+            title: item.name,
+          })),
+        );
+      }
     }
 
     return groupChildrenByCategory(children, slug);
