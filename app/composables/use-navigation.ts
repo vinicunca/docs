@@ -9,7 +9,7 @@ const githubMapper = new Map<any, any>(
     ['eslint', { slug: 'eslint-config', label: 'ESLint' }],
     ['perkakas', { slug: 'perkakas', label: 'Perkakas' }],
     ['unocss-preset', { slug: 'unocss-preset', label: 'UnoCSS Preset' }],
-    ['windows-dev', { slug: 'windows-dev', label: 'Windows Dev' }],
+    ['windows-dev', { slug: '', label: 'Windows Dev' }],
   ],
 );
 

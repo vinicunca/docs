@@ -22,7 +22,7 @@ export function useHeader() {
     },
     {
       label: 'Windows Dev',
-      to: '/windows-dev',
+      to: '/windows-dev/wsl',
       active: route.path.startsWith('/windows-dev'),
     },
   ]);
