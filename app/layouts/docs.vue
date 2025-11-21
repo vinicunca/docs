@@ -15,7 +15,7 @@ const { navigationByCategory } = useNavigation(navigation!);
 const { contains } = useFilter({ sensitivity: 'base' });
 
 const isActiveSearch = computed(() =>
-  route.path !== '/',
+  route.path !== '/' && navigationByCategory.value.length > 1,
 );
 const searchTerm = ref('');
 const input = useTemplateRef('input');
@@ -24,7 +24,6 @@ const filteredNavigation = computed(() => {
   if (!searchTerm.value) {
     return navigationByCategory.value;
   }
-
   return navigationByCategory.value.map((item) => ({
     ...item,
     children: item.children?.filter((child) => contains({ string: child.title as string, substring: searchTerm.value }) || contains({ string: child.description as string, substring: searchTerm.value })),

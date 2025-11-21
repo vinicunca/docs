@@ -14,12 +14,6 @@ const githubMapper = new Map<any, any>(
 );
 
 const categories = {
-  eslint: [
-    {
-      id: 'configs',
-      title: 'Configs',
-    },
-  ],
 };
 
 export function useNavigation(
@@ -48,12 +42,21 @@ export function useNavigation(
     });
   }
 
+  const navigationByCategory = computed(() => {
+    const route = useRoute();
+
+    const slug = route.params.slug?.[0] as string;
+    const children = findPageChildren(navigation?.value, `/${slug}`, { indexAsChild: true });
+
+    if (!children.length) {
+      return navigation.value ?? [];
+    }
+
+    return groupChildrenByCategory(children, slug);
+  });
+
   function findSurround(path: string) {
-    const flattenNavigation = findPageChildren(
-      navigation?.value,
-      path,
-      { indexAsChild: true },
-    );
+    const flattenNavigation = navigationByCategory.value.flatMap((item) => item.children);
 
     const index = flattenNavigation.findIndex((item) => item?.path === path);
     if (index === -1) {
@@ -62,15 +65,6 @@ export function useNavigation(
 
     return [flattenNavigation[index - 1], flattenNavigation[index + 1]];
   }
-
-  const navigationByCategory = computed(() => {
-    const route = useRoute();
-
-    const slug = route.params.slug?.[0] as string;
-    const children = findPageChildren(navigation?.value, `/${slug}`, { indexAsChild: true });
-
-    return groupChildrenByCategory(children, slug);
-  });
 
   return {
     rootNavigation,

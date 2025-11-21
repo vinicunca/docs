@@ -1,3 +1,7 @@
+import { createResolver } from '@nuxt/kit';
+
+const { resolve } = createResolver(import.meta.url);
+
 export default defineNuxtConfig({
   app: {
     rootAttrs: {
@@ -36,6 +40,18 @@ export default defineNuxtConfig({
     families: [
       { name: 'Inter', provider: 'fontsource', weights: ['100 900'] },
     ],
+  },
+
+  icon: {
+    clientBundle: {
+      includeCustomCollections: true,
+      scan: true,
+    },
+    customCollections: [{
+      dir: resolve('./app/assets/icons'),
+      prefix: 'custom',
+    }],
+    provider: 'iconify',
   },
 
   imports: {

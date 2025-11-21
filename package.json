@@ -25,6 +25,9 @@
     "nuxt": "catalog:",
     "nuxt-og-image": "catalog:",
     "pohon-ui": "catalog:",
+    "prettier": "^3.6.2",
+    "type-fest": "^5.2.0",
+    "typedoc": "^0.28.14",
     "unocss": "catalog:"
   }
 }

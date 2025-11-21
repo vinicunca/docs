@@ -1,5 +1,5 @@
 ---
-title: Getting Started
+title: @vinicunca/eslint-config
 description: Maintain consistent code quality and formatting.
 package: eslint
 ---
