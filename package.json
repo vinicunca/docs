@@ -19,6 +19,7 @@
     "@vinicunca/eslint-config": "catalog:",
     "@vinicunca/perkakas": "catalog:",
     "@vinicunca/unocss-preset": "catalog:",
+    "@vueuse/core": "^14.0.0",
     "better-sqlite3": "catalog:",
     "eslint": "catalog:",
     "eslint-plugin-format": "catalog:",
