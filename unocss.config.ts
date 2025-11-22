@@ -138,6 +138,8 @@ export default defineConfig({
         warn: true,
       },
 
+      magicCss: true,
+
       typography: {
         cssExtend: {
           kbd: {
