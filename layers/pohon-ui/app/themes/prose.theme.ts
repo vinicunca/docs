@@ -323,7 +323,7 @@ export const proseTheme = {
     base: '*:my-1.5 *:first:mt-0 *:last:mb-0',
   },
   td: {
-    base: 'text-sm px-4 py-3 text-left align-top border-b border-e border-border-muted [&_code]:text-xs/5 [&_li]:leading-6 [&_p]:leading-6 [&_li]:my-0.5 [&_ol]:my-0 [&_p]:my-0 [&_ul]:my-0 [&_ol]:ps-4.5 [&_ul]:ps-4.5 first:border-s',
+    base: 'text-sm px-4 py-3 text-left border-b border-e border-border-muted [&_code]:text-xs/5 [&_li]:leading-6 [&_p]:leading-6 [&_li]:my-0.5 [&_ol]:my-0 [&_p]:my-0 [&_ul]:my-0 [&_ol]:ps-4.5 [&_ul]:ps-4.5 first:border-s',
   },
   th: {
     base: 'text-sm font-semibold px-4 py-3 text-left border-b border-e border-t border-border-muted first:border-s',

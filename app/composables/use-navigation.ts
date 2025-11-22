@@ -71,7 +71,7 @@ export function useNavigation(
     ).map(({ icon, ...link }) => {
       return {
         ...link,
-        label: githubMapper.get(link.package)?.label,
+        label: githubMapper.get(link.package)?.label ?? link.label,
       };
     });
   }

@@ -21,6 +21,11 @@ export function useHeader() {
       active: route.path.startsWith('/unocss-preset'),
     },
     {
+      label: 'UnoCSS Variants',
+      to: '/unocss-variants',
+      active: route.path.startsWith('/unocss-variants'),
+    },
+    {
       label: 'Windows Dev',
       to: '/windows-dev/wsl',
       active: route.path.startsWith('/windows-dev'),
@@ -30,25 +35,31 @@ export function useHeader() {
   const mobileLinks = computed(() => [
     {
       label: 'ESLint',
-      icon: 'i-lucide:square-play',
+      icon: 'i-logos:eslint',
       to: '/eslint',
       active: route.path.startsWith('/eslint'),
     },
     {
       label: 'Perkakas',
-      icon: 'i-lucide:book-open',
+      icon: 'i-logos:typescript-icon',
       to: '/perkakas',
       active: route.path.startsWith('/perkakas'),
     },
     {
       label: 'UnoCSS Preset',
-      icon: 'i-lucide:box',
+      icon: 'i-logos:unocss',
       to: '/unocss-preset',
       active: route.path.startsWith('/unocss-preset'),
     },
     {
+      label: 'UnoCSS Variants',
+      icon: 'i-logos:unocss',
+      to: '/unocss-variants',
+      active: route.path.startsWith('/unocss-variants'),
+    },
+    {
       label: 'Windows Dev',
-      icon: 'i-lucide:window-maximize',
+      icon: 'i-logos:microsoft-windows-icon',
       to: '/windows-dev',
       active: route.path.startsWith('/windows-dev'),
     },
