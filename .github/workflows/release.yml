@@ -9,18 +9,25 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout Repo
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
-      - name: Set node
-        uses: actions/setup-node@v3
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v6
         with:
-          node-version: 22.0.0
+          node-version: 20.19.4
           registry-url: 'https://registry.npmjs.org'
-      - name: Setup
-        run: npm i -g pnpm
-      - name: Install Dependencies
-        run: pnpm install && pnpm build
+          cache: pnpm
+      - name: Install dependencies
+        shell: bash
+        run: pnpm i --frozen-lockfile
+
+      - name: Build
+        shell: bash
+        run: pnpm run generate
 
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:

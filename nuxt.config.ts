@@ -58,62 +58,55 @@ export default defineNuxtConfig({
     autoImport: false,
   },
 
-  // llms: {
-  //   description: 'A comprehensive, Nuxt-integrated UI library providing a rich set of fully-styled, accessible and highly customizable components for building modern web applications.',
-  //   domain: 'https://akar.vinicunca.dev',
-  //   full: {
-  //     description: 'This is the full documentation for Pohon UI. It includes all the Markdown files written with the MDC syntax.',
-  //     title: 'Pohon UI Full Documentation',
-  //   },
-  //   notes: [
-  //     'The content is automatically generated from the same source as the official documentation.',
-  //   ],
-  //   sections: [
-  //     {
-  //       contentCollection: 'docs',
-  //       contentFilters: [
-  //         { field: 'path', operator: 'LIKE', value: 'docs/akar/getting-started%' },
-  //       ],
-  //       title: 'Akar Getting Started',
-  //     },
-  //     {
-  //       contentCollection: 'docs',
-  //       contentFilters: [
-  //         { field: 'path', operator: 'LIKE', value: '/docs/akar/components/%' },
-  //       ],
-  //       title: 'Akar Components',
-  //     },
-  //     {
-  //       contentCollection: 'docs',
-  //       contentFilters: [
-  //         { field: 'path', operator: 'LIKE', value: '/docs/akar/utilities/%' },
-  //       ],
-  //       title: 'Akar Utilities',
-  //     },
-  //     {
-  //       contentCollection: 'docs',
-  //       contentFilters: [
-  //         { field: 'path', operator: 'LIKE', value: 'docs/pohon/getting-started%' },
-  //       ],
-  //       title: 'Pohon Getting Started',
-  //     },
-  //     {
-  //       contentCollection: 'docs',
-  //       contentFilters: [
-  //         { field: 'path', operator: 'LIKE', value: '/docs/pohon/components/%' },
-  //       ],
-  //       title: 'Pohon Components',
-  //     },
-  //     {
-  //       contentCollection: 'docs',
-  //       contentFilters: [
-  //         { field: 'path', operator: 'LIKE', value: '/docs/pohon/composables/%' },
-  //       ],
-  //       title: 'Pohon Composables',
-  //     },
-  //   ],
-  //   title: 'Pohon UI',
-  // },
+  llms: {
+    description: 'A curated collection of essential utilities, robust configurations, and design presets for modern web development.',
+    domain: 'https://vinicunca.dev',
+    full: {
+      description: 'This is the full documentation for Vinicunca. It includes all the Markdown files written with the MDC syntax.',
+      title: 'Vinicunca Full Documentation',
+    },
+    notes: [
+      'The content is automatically generated from the same source as the official documentation.',
+    ],
+    sections: [
+      {
+        contentCollection: 'docs',
+        contentFilters: [
+          { field: 'path', operator: 'LIKE', value: '/eslint%' },
+        ],
+        title: 'ESLint',
+      },
+      {
+        contentCollection: 'docs',
+        contentFilters: [
+          { field: 'path', operator: 'LIKE', value: '/perkakas/%' },
+        ],
+        title: 'Perkakas',
+      },
+      {
+        contentCollection: 'docs',
+        contentFilters: [
+          { field: 'path', operator: 'LIKE', value: '/unocss-preset/%' },
+        ],
+        title: 'UnoCSS Preset',
+      },
+      {
+        contentCollection: 'docs',
+        contentFilters: [
+          { field: 'path', operator: 'LIKE', value: '/unocss-variants%' },
+        ],
+        title: 'UnoCSS Variants',
+      },
+      {
+        contentCollection: 'docs',
+        contentFilters: [
+          { field: 'path', operator: 'LIKE', value: '/windows-dev/%' },
+        ],
+        title: 'Windows Dev',
+      },
+    ],
+    title: 'Vinicunca',
+  },
 
   mdc: {
     highlight: {
@@ -128,8 +121,35 @@ export default defineNuxtConfig({
     'nuxt-og-image',
     '@unocss/nuxt',
     'motion-v/nuxt',
-    // 'nuxt-llms',
+    'nuxt-llms',
   ],
+
+  routeRules: {
+    '/unocss-preset/akar': {
+      prerender: false,
+      redirect: { statusCode: 301, to: '/unocss-preset/akar/usage' },
+    },
+    '/unocss-preset/animations': {
+      prerender: false,
+      redirect: { statusCode: 301, to: '/unocss-preset/animations/usage' },
+    },
+    '/unocss-preset/fluid': {
+      prerender: false,
+      redirect: { statusCode: 301, to: '/unocss-preset/fluid/usage' },
+    },
+    '/unocss-preset/magic-css': {
+      prerender: false,
+      redirect: { statusCode: 301, to: '/unocss-preset/magic-css/usage' },
+    },
+    '/unocss-preset/scrollbar': {
+      prerender: false,
+      redirect: { statusCode: 301, to: '/unocss-preset/scrollbar/usage' },
+    },
+    '/windows-dev': {
+      prerender: false,
+      redirect: { statusCode: 301, to: '/windows-dev/wsl' },
+    },
+  },
 
   vite: {
     optimizeDeps: {

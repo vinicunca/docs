@@ -54,7 +54,8 @@ useSeoMeta({
   author: 'praburangki',
   title: 'Vinicunca',
   ogTitle: 'Vinicunca',
-  ogDescription: 'Utilities to enhance developer experience',
+  description: 'A curated collection of essential utilities, robust configurations, and design presets for modern web development.',
+  ogDescription: 'A curated collection of essential utilities, robust configurations, and design presets for modern web development.',
   twitterCard: 'summary_large_image',
   twitterCreator: '@praburangki',
 });
