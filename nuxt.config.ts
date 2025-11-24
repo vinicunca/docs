@@ -42,6 +42,10 @@ export default defineNuxtConfig({
     ],
   },
 
+  gtag: {
+    id: 'G-7H5VDKTB5C',
+  },
+
   icon: {
     clientBundle: {
       includeCustomCollections: true,
@@ -122,6 +126,7 @@ export default defineNuxtConfig({
     '@unocss/nuxt',
     'motion-v/nuxt',
     'nuxt-llms',
+    'nuxt-gtag',
   ],
 
   routeRules: {

@@ -26,6 +26,7 @@
     "eslint-plugin-format": "catalog:",
     "motion-v": "catalog:",
     "nuxt": "catalog:",
+    "nuxt-gtag": "4.1.0",
     "nuxt-llms": "catalog:",
     "nuxt-og-image": "catalog:",
     "pohon-ui": "catalog:",
