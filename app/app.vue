@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { PApp } from '#components';
-import { provide, queryCollectionNavigation, useAppConfig, useAsyncData, useHead, useNavigation, useRoute, useSeoMeta } from '#imports';
+import { provide, queryCollectionNavigation, queryCollectionSearchSections, useAppConfig, useAsyncData, useHead, useLazyAsyncData, useNavigation, useRoute, useSeoMeta } from '#imports';
 
 const appConfig = useAppConfig();
 const route = useRoute();
@@ -67,6 +67,16 @@ const { data: navigation } = useAsyncData(
   ),
 );
 
+const { data: files } = useLazyAsyncData(
+  'search',
+  () => queryCollectionSearchSections('docs', {
+    ignoredTags: ['style'],
+  }),
+  {
+    server: false,
+  },
+);
+
 useAsyncData(
   'perkakas-methods',
   () => $fetch('/api/perkakas.json'),
@@ -96,14 +106,14 @@ provide('navigation', rootNavigation);
         <NuxtPage />
       </NuxtLayout>
 
-      <!-- <LayoutFooter /> -->
+      <FooterBase />
 
-      <!-- <ClientOnly>
-          <LayoutHeaderSearch
-            :files="files"
-            :navigation="navigationByFramework"
-          />
-        </ClientOnly> -->
+      <ClientOnly>
+        <HeaderSearch
+          :files="files"
+          :navigation="navigation"
+        />
+      </ClientOnly>
     </div>
   </PApp>
 </template>
