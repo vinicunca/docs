@@ -52,6 +52,7 @@ useHead({
 
 useSeoMeta({
   author: 'praburangki',
+  title: 'Vinicunca',
   ogTitle: 'Vinicunca',
   ogDescription: 'Utilities to enhance developer experience',
   twitterCard: 'summary_large_image',
