@@ -7,6 +7,7 @@ export default vinicuncaESLint(
     },
     vue: true,
     pnpm: true,
+    unocss: true,
   },
 
   {

@@ -46,6 +46,7 @@ export default defineConfig({
 
   layers: {
     pohon: 20,
+    uv: 30,
   },
 
   outputToCssLayers: true,

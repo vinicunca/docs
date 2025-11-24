@@ -127,6 +127,7 @@ export default defineNuxtConfig({
     '@nuxt/fonts',
     'nuxt-og-image',
     '@unocss/nuxt',
+    'motion-v/nuxt',
     // 'nuxt-llms',
   ],
 

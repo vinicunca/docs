@@ -19,16 +19,18 @@
     "@vinicunca/eslint-config": "catalog:",
     "@vinicunca/perkakas": "catalog:",
     "@vinicunca/unocss-preset": "catalog:",
-    "@vueuse/core": "^14.0.0",
+    "@vueuse/core": "catalog:",
     "better-sqlite3": "catalog:",
     "eslint": "catalog:",
     "eslint-plugin-format": "catalog:",
+    "motion-v": "catalog:",
     "nuxt": "catalog:",
     "nuxt-og-image": "catalog:",
     "pohon-ui": "catalog:",
     "prettier": "catalog:",
     "type-fest": "catalog:",
     "typedoc": "catalog:",
-    "unocss": "catalog:"
+    "unocss": "catalog:",
+    "unocss-variants": "catalog:"
   }
 }

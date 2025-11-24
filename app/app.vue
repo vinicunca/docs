@@ -1,8 +1,9 @@
 <script lang="ts" setup>
 import { PApp } from '#components';
-import { provide, queryCollectionNavigation, useAppConfig, useAsyncData, useHead, useNavigation, useSeoMeta } from '#imports';
+import { provide, queryCollectionNavigation, useAppConfig, useAsyncData, useHead, useNavigation, useRoute, useSeoMeta } from '#imports';
 
 const appConfig = useAppConfig();
+const route = useRoute();
 
 useHead({
   link: [
@@ -88,7 +89,7 @@ provide('navigation', rootNavigation);
     />
 
     <div>
-      <HeaderBase />
+      <HeaderBase v-if="!route.path.startsWith('/examples')" />
 
       <NuxtLayout>
         <NuxtPage />
