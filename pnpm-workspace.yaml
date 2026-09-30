@@ -1,26 +1,18 @@
-catalog:
-  '@iconify/json': ^2.2.408
-  '@nuxt/content': ^3.8.2
-  '@types/node': ^24.3.3
-  '@unocss/nuxt': ^66.5.9
-  '@vinicunca/eslint-config': ^3.29.0
-  '@vinicunca/perkakas': ^1.9.0
-  '@vinicunca/unocss-preset': 1.36.0
-  '@vueuse/core': ^14.0.0
-  better-sqlite3: ^12.4.1
-  eslint: ^9.39.1
-  eslint-plugin-format: ^1.0.2
-  motion-v: ^1.7.4
-  nuxt: ^4.2.1
-  nuxt-gtag: 4.1.0
-  nuxt-llms: ^0.1.3
-  nuxt-og-image: ^5.1.12
-  pohon-ui: ^1.0.16
-  prettier: ^3.6.2
-  type-fest: ^5.2.0
-  typedoc: ^0.28.14
-  unocss: ^66.5.9
-  unocss-variants: ^1.0.0
+minimumReleaseAge: 0
+minimumReleaseAgeExcludePrune: true
+
+trustPolicy: no-downgrade
+trustPolicyExclude:
+  - synckit@0.9.3
+  - semver@6.3.1
+  - chokidar@4.0.3
+
+shellEmulator: true
+
+allowBuilds:
+  esbuild: true
+  vue-demi: true
+
 ignoredBuiltDependencies:
   - '@parcel/watcher'
   - esbuild
@@ -29,3 +21,36 @@ ignoredBuiltDependencies:
 
 onlyBuiltDependencies:
   - better-sqlite3
+
+catalog:
+  '@iconify/json': ^2.2.535
+  '@nuxt/content': ^3.16.1
+  '@nuxt/fonts': ^0.14.0
+  '@nuxt/kit': ^4.5.2
+  '@types/node': ^26.6.3
+  '@unocss/nuxt': ^66.10.5
+  '@vinicunca/eslint-config': ^5.7.1
+  '@vinicunca/perkakas': ^1.17.1
+  '@vinicunca/unocss-preset': 2.4.0
+  '@vueuse/core': ^15.0.0
+  akar: 2.0.20
+  better-sqlite3: ^13.0.3
+  eslint: ^10.11.0
+  eslint-plugin-format: ^1.0.2
+  eslint-plugin-sonarjs: ^4.2.2
+  h3: ^1.15.11
+  minimark: ^0.2.0
+  motion-v: ^2.5.1
+  nuxt: ^4.5.2
+  nuxt-gtag: 5.0.0
+  nuxt-llms: ^0.2.0
+  nuxt-og-image: ^6.9.1
+  pohon-ui: 2.0.1
+  prettier: ^3.9.9
+  tiny-invariant: ^1.3.3
+  type-fest: ^5.10.0
+  typedoc: ^0.28.20
+  ufo: ^1.6.4
+  unocss: ^66.10.5
+  unocss-variants: ^1.5.0
+  vue-tsc: ^3.3.11

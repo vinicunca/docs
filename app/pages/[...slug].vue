@@ -40,14 +40,14 @@ const communityLinks = computed(() => {
   return [
     {
       icon: 'i-lucide:file-pen',
-      label: 'Edit this page',
-      to: `https://github.com/vinicunca/docs/edit/main/content/${page.value?.stem}.md`,
+      label: page.value?.sourceUrl ? 'View source' : 'Edit this page',
+      to: page.value?.sourceUrl ?? `https://github.com/vinicunca/docs/edit/main/content/${page.value?.stem}.md`,
       target: '_blank',
     },
     {
       icon: 'i-lucide:star',
       label: 'Star on GitHub',
-      to: githubLink,
+      to: githubLink.value,
       target: '_blank',
     },
   ];
@@ -81,6 +81,11 @@ useSeoMeta({
             <h1 class="text-3xl color-text-highlighted font-bold text-pretty sm:text-4xl">
               {{ title }}
             </h1>
+
+            <span
+              v-if="page.sourceTag"
+              class="text-sm color-text-muted"
+            >{{ page.sourceTag }}</span>
 
             <div class="flex flex-wrap gap-1.5 items-center">
               <PButton
@@ -124,7 +129,7 @@ useSeoMeta({
     <PContentToc
       v-if="page?.body?.toc?.links?.length"
       :links="page.body.toc.links"
-      class="order-first z-2 lg:col-span-2 lg:order-last"
+      class="docs-toc-order z-2 lg:col-span-2"
     >
       <template #bottom>
         <PSeparator

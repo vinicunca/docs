@@ -1,0 +1,23 @@
+# Tagged documentation sources
+
+[`sources.json`](sources.json) lists the allowed source files and destination paths for each Vinicunca package. [`sources.lock.json`](sources.lock.json) records the exact commit and content hash after a tagged import. The existing pages in `content/` remain in place until a package release contains its migrated guides.
+
+The first mapped Markdown packages are ESLint Config, UnoCSS Preset, and UnoCSS Variants. The tags inspected when this contract was introduced did not contain their migrated guides. Import a new release tag only after it contains the mapped paths; older tags fail on missing source files.
+
+Perkakas is mapped to `server/data/metadata.json`. Its tagged source is installed and converted with TypeDoc only when Perkakas is dispatched; other package releases reuse the committed JSON. The TypeDoc conversion skips TypeScript error checking because the package source currently has type errors under the docs site's TypeScript version. The lock records the tag, commit, and generated JSON hash. Its source links point to that exact commit.
+
+Akar owns its Markdown in `docs/` and generates `vue-component-meta` JSON with `pnpm docs:meta`. An Akar tag import runs that command for the checked-out tag, imports the authored guides, writes `server/data/akar-components.json`, and generates one component reference page per public component group. The hub also exposes a compact component list at `/api/akar/components.json` and a single-component record at `/api/akar/components/<name>.json`. The current hub pages are a seed from Akar `v2.0.20`; the next Akar tag containing `docs/` will establish the first lock entry.
+
+Pohon uses its own Nuxt docs build to expand examples into Markdown. A Pohon tag import installs only that checkout, runs its metadata export and docs generation, maps the generated `raw/docs/**` pages to `/pohon/**`, creates landing pages for nested navigation groups, and appends props, slots, and events from the same tagged Vue source. The current hub has 181 seeded source pages, eight generated section pages, and 124 main component metadata records from `v2.0.1`; a new tag containing the export script is required for the first locked import. Its per-component JSON is available at `/api/pohon/components/<name>.json`.
+
+Pohon page links to the old docs routes and existing Akar component routes are rewritten to this hub during import. Its `/mcp` endpoint remains on Pohon's own deployment; the generated pages keep that URL. The Pohon docs dispatch now follows a matching tag independently of its npm publish job.
+
+To import one published release, dispatch the `Release` workflow with `package` and `tag`, or send a `docs-package-release` repository dispatch with the same fields in `client_payload`. The workflow runs `node scripts/sync-docs.mjs --package <id> --tag <tag> --write`, commits the changed content and lock, then builds and deploys the Nuxt site. A normal push to `main` continues to build without fetching package sources.
+
+The mapped source repositories can send that dispatch after a tag release succeeds. Each source repository needs a `DOCS_DISPATCH_TOKEN` secret whose token can create repository dispatches in `vinicunca/docs`. Without the secret, the source release remains successful and the docs dispatch step is skipped; a manual workflow dispatch remains available.
+
+The sync command accepts only tags matching the package selector. It resolves the tag to a commit, imports only mapped Markdown and navigation YAML, adds source provenance to Markdown frontmatter, and rejects missing files, duplicate destinations, removed routes, or local edits to previously imported files. Run it without `--write` to inspect the resolved release without changing this repo.
+
+The static build also prerenders `/api/perkakas.json`, `/api/akar/components.json`, `/api/pohon/components.json`, and every per-component `.json` route. These files live in `.output/public` alongside the raw Markdown and agent indexes, so a static host can serve all documented API URLs. The proposed Cloudflare migration is in [`cloudflare-migration.md`](cloudflare-migration.md).
+
+Taman imports only `docs/public/**` plus the public `taman-core`, `taman-ui`, and `request` READMEs. The README importer adds the hub's frontmatter and source revision while keeping the READMEs in their packages. Taman's internal plans, private package READMEs, and application files are outside the allowlist. Its docs use `docs-v<major>.<minor>.<patch>` tags because Taman's npm packages have separate scoped tags. Pushing a docs tag dispatches this site when `DOCS_DISPATCH_TOKEN` is configured. The current four Taman pages are a seed; the first `docs-v*` tag will establish their lock entry.

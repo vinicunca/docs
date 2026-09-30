@@ -1,51 +1,16 @@
 <script setup lang="ts">
-const features = [
-  {
-    title: 'Perkakas',
-    description: 'Essential JavaScript/TypeScript utility functions to speed up your development workflow.',
-    icon: 'i-lucide:wrench',
-    to: '/perkakas',
-    color: 'text-blue-500',
-    bg: 'bg-blue-500/10',
-    border: 'group-hover:border-blue-500/50',
-  },
-  {
-    title: 'UnoCSS Preset',
-    description: 'A powerful, opinionated preset with fluid typography, custom animations, and theme management.',
-    icon: 'i-lucide:palette',
-    to: '/unocss-preset',
-    color: 'text-purple-500',
-    bg: 'bg-purple-500/10',
-    border: 'group-hover:border-purple-500/50',
-  },
-  {
-    title: 'UnoCSS Variants',
-    description: 'Advanced variant configurations for complex styling needs and responsive design patterns.',
-    icon: 'i-lucide:sliders',
-    to: '/unocss-variants',
-    color: 'text-pink-500',
-    bg: 'bg-pink-500/10',
-    border: 'group-hover:border-pink-500/50',
-  },
-  {
-    title: 'ESLint Config',
-    description: 'Strict yet flexible linting rules to ensure code quality and consistency across projects.',
-    icon: 'i-lucide:code',
-    to: '/eslint',
-    color: 'text-green-500',
-    bg: 'bg-green-500/10',
-    border: 'group-hover:border-green-500/50',
-  },
-  {
-    title: 'Windows Dev',
-    description: 'A comprehensive guide to setting up a perfect development environment on Windows.',
-    icon: 'i-logos:microsoft-windows-icon',
-    to: '/windows-dev',
-    color: 'text-cyan-500',
-    bg: 'bg-cyan-500/10',
-    border: 'group-hover:border-cyan-500/50',
-  },
-];
+import { packages } from '~/utils/package-registry';
+
+const features = packages.map(item => ({
+  title: item.label,
+  description: item.description,
+  icon: item.icon,
+  to: item.path,
+  status: item.status,
+  color: 'text-primary',
+  bg: 'bg-primary/10',
+  border: 'group-hover:border-primary/50',
+}));
 </script>
 
 <template>
@@ -108,6 +73,12 @@ const features = [
               <h3 class="text-xl text-gray-900 font-bold mb-3 transition-colors dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400">
                 {{ feature.title }}
               </h3>
+              <p
+                v-if="feature.status === 'work-in-progress'"
+                class="text-xs color-text-muted font-semibold mb-2"
+              >
+                Work in progress
+              </p>
               <p class="text-gray-600 leading-relaxed dark:text-gray-400">
                 {{ feature.description }}
               </p>
@@ -119,6 +90,14 @@ const features = [
           </div>
         </NuxtLink>
       </div>
+
+      <NuxtLink
+        to="/windows-dev/wsl"
+        class="text-sm color-text-muted mt-8 inline-flex items-center gap-2 hover:color-text"
+      >
+        Windows Dev guide
+        <i class="i-lucide:arrow-up-right" />
+      </NuxtLink>
     </div>
   </div>
 </template>

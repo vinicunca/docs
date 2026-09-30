@@ -10,12 +10,30 @@ const route = useRoute();
 
 const navigation = inject<Ref<Array<ContentNavigationItem>>>('navigation');
 
-const { navigationByCategory } = useNavigation(navigation!);
+const { activePackage, activeSection, contextLabel, navigationByCategory } = useNavigation(navigation!);
 
 const { contains } = useFilter({ sensitivity: 'base' });
 
+function countPages(items: Array<ContentNavigationItem>): number {
+  return items.reduce((count, item) => count + (item.children?.length ? countPages(item.children) : 1), 0);
+}
+
+function filterItems(items: Array<ContentNavigationItem>, term: string): Array<ContentNavigationItem> {
+  return items.flatMap((item) => {
+    const children = item.children ? filterItems(item.children, term) : [];
+    const matches = contains(item.title ?? '', term)
+      || contains(String(item.description ?? ''), term);
+
+    if (!matches && !children.length) {
+      return [];
+    }
+
+    return [{ ...item, children: matches ? item.children : children }];
+  });
+}
+
 const isActiveSearch = computed(() =>
-  route.path !== '/' && navigationByCategory.value.length > 1,
+  countPages(navigationByCategory.value) > 1,
 );
 const searchTerm = ref('');
 const input = useTemplateRef('input');
@@ -25,10 +43,7 @@ const filteredNavigation = computed(() => {
     return navigationByCategory.value;
   }
 
-  return navigationByCategory.value.map((item) => ({
-    ...item,
-    children: item.children?.filter((child) => contains({ string: child.title as string, substring: searchTerm.value }) || contains({ string: child.description as string, substring: searchTerm.value })),
-  })).filter((item) => item.children && item.children.length > 0);
+  return filterItems(navigationByCategory.value, searchTerm.value);
 });
 
 const refNav = useTemplateRef('refNav');
@@ -91,9 +106,22 @@ const slug = computed(() => route.params.slug?.[0] as string);
         <!-- Left Aside -->
         <aside
           ref="refNav"
-          class="py-8 hidden overflow-y-auto lg:(pe-6.5 ps-4 col-span-2 max-h-[calc(100vh-var(--pohon-header-height))] block sticky -ms-4 lg:top-$pohon-header-height)"
+          class="docs-sidebar py-8 hidden overflow-y-auto lg:(pe-6.5 ps-4 col-span-2 block sticky -ms-4)"
         >
           <div class="relative">
+            <div class="mb-6">
+              <p class="font-semibold color-text-highlighted">
+                {{ contextLabel }}
+                <span
+                  v-if="activePackage?.status === 'work-in-progress'"
+                  class="text-xs color-text-muted ms-2"
+                >WIP</span>
+              </p>
+              <p class="text-sm color-text-muted">
+                {{ activeSection?.label }}
+              </p>
+            </div>
+
             <div
               v-if="isActiveSearch"
               class="pointer-events-none sticky z-1 -mt-8 -top-8"

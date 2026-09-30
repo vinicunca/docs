@@ -1,173 +1,149 @@
-import type { Ref } from '#imports';
-import type { ContentNavigationItem, DocsCollectionItem } from '@nuxt/content';
-import { computed, useNuxtData, useRoute } from '#imports';
-import { findPageBreadcrumb, findPageChildren } from '@nuxt/content/utils';
+import type { Ref } from 'vue';
+import type { ContentNavigationItem } from '@nuxt/content';
+import { useNuxtData, useRoute } from '#app';
+import { findPageBreadcrumb } from '@nuxt/content/utils';
+import { computed } from 'vue';
 import { mapContentNavigation } from 'pohon-ui/utils/content';
+import { isWithinPath, packageForPath } from '~/utils/package-registry';
 
-const githubMapper = new Map<any, any>(
-  [
-    ['eslint', { slug: 'eslint-config', label: 'ESLint' }],
-    ['perkakas', { slug: 'perkakas', label: 'Perkakas' }],
-    ['unocss-preset', { slug: 'unocss-preset', label: 'UnoCSS Preset' }],
-    ['unocss-variants', { slug: 'unocss-variants', label: 'UnoCSS Variants' }],
-    ['windows-dev', { slug: '', label: 'Windows Dev' }],
-  ],
-);
+interface NavigationSection {
+  label: string;
+  path: string;
+  navigation: Array<ContentNavigationItem>;
+}
 
-const categories = {
-  perkakas: [
-    {
-      id: 'Number',
-      title: 'Number',
-    },
-    {
-      id: 'Object',
-      title: 'Object',
-    },
-    {
-      id: 'Array',
-      title: 'Array',
-    },
-    {
-      id: 'Function',
-      title: 'Function',
-    },
-    {
-      id: 'Guard',
-      title: 'Guard',
-    },
-    {
-      id: 'String',
-      title: 'String',
-    },
-    {
-      id: 'Utility',
-      title: 'Utility',
-    },
-    {
-      id: 'Other',
-      title: 'Other',
-    },
-  ],
-};
+function findNode(items: Array<ContentNavigationItem>, path: string): ContentNavigationItem | undefined {
+  for (const item of items) {
+    if (item.path === path) {
+      return item;
+    }
 
-export function useNavigation(
-  navigation: Ref<Array<ContentNavigationItem> | undefined>,
-) {
+    const nested = findNode(item.children ?? [], path);
+    if (nested) {
+      return nested;
+    }
+  }
+}
+
+function withoutChildren(item: ContentNavigationItem): ContentNavigationItem {
+  return { ...item, children: undefined };
+}
+
+function leafPages(items: Array<ContentNavigationItem>): Array<ContentNavigationItem> {
+  return items.flatMap(item => item.children?.length ? leafPages(item.children) : [item]);
+}
+
+export function useNavigation(navigation: Ref<Array<ContentNavigationItem> | undefined>) {
   const route = useRoute();
+  const activePackage = computed(() => packageForPath(route.path));
+  const isGuide = computed(() => isWithinPath(route.path, '/windows-dev'));
+  const contextLabel = computed(() => activePackage.value?.label ?? (isGuide.value ? 'Windows Dev' : undefined));
+  const { data: perkakasMethods } = useNuxtData<Array<{ name: string; category?: string }>>('perkakas-methods');
 
-  const pageModule = computed(() => {
-    return route.path.split('/')[1] as DocsCollectionItem['package'];
+  const sections = computed<Array<NavigationSection>>(() => {
+    const current = activePackage.value ?? (isGuide.value
+      ? { id: 'windows-dev', path: '/windows-dev' }
+      : undefined);
+    if (!current) {
+      return [];
+    }
+
+    const root = findNode(navigation.value ?? [], current.path);
+    const children = root?.children ?? [];
+    const groups = children.filter(item => item.children?.length);
+    const direct = children.filter(item => !item.children?.length);
+
+    const functionPage = current.id === 'perkakas'
+      ? direct.find(item => item.path === '/perkakas/functions')
+      : undefined;
+    const overviewPages = direct.filter(item => item !== functionPage);
+    const overview: NavigationSection = {
+      label: 'Overview',
+      path: current.path,
+      navigation: [
+        ...(root ? [withoutChildren(root)] : []),
+        ...overviewPages,
+      ],
+    };
+
+    const result = [overview];
+
+    if (functionPage) {
+      const categories = new Map<string, Array<ContentNavigationItem>>();
+      for (const method of perkakasMethods.value ?? []) {
+        const category = method.category ?? 'Other';
+        const children = categories.get(category) ?? [];
+        children.push({
+          title: method.name,
+          path: `/perkakas/functions#${method.name}`,
+        });
+        categories.set(category, children);
+      }
+
+      result.push({
+        label: 'Functions',
+        path: functionPage.path,
+        navigation: [functionPage, ...[...categories].map(([title, children]) => ({
+          title,
+          path: functionPage.path,
+          children,
+        }))],
+      });
+    }
+
+    for (const group of groups) {
+      result.push({
+        label: group.title ?? group.path.split('/').pop() ?? 'Docs',
+        path: group.path,
+        navigation: [group],
+      });
+    }
+
+    return result;
   });
 
-  const rootNavigation = computed(() => {
-    return navigation.value?.filter((item) => item.package === pageModule.value);
+  const activeSection = computed(() => {
+    return [...sections.value]
+      .reverse()
+      .find(section => isWithinPath(route.path, section.path)) ?? sections.value[0];
+  });
+
+  const sectionTabs = computed(() => sections.value.map(section => ({
+    label: section.label,
+    to: leafPages(section.navigation)[0]?.path ?? section.path,
+    active: activeSection.value?.path === section.path,
+  })));
+
+  const navigationByCategory = computed(() => activeSection.value?.navigation ?? []);
+  const githubLink = computed(() => {
+    const current = activePackage.value;
+    return current ? `https://github.com/${current.repo}` : 'https://github.com/vinicunca';
   });
 
   function findBreadcrumb(path: string) {
-    const breadcrumb = findPageBreadcrumb(navigation?.value, path, { indexAsChild: true });
-
-    return mapContentNavigation(
-      breadcrumb.slice(0),
-    ).map(({ icon, ...link }) => {
-      return {
-        ...link,
-        label: githubMapper.get(link.package)?.label ?? link.label,
-      };
-    });
+    const current = activePackage.value;
+    const breadcrumb = findPageBreadcrumb(navigation.value, path, { indexAsChild: true });
+    return mapContentNavigation(breadcrumb).map(link => ({
+      ...link,
+      label: current && link.to === current.path ? current.label : link.label,
+    }));
   }
 
-  const navigationByCategory = computed(() => {
-    const route = useRoute();
-
-    const slug = route.params.slug?.[0] as string;
-    const children = findPageChildren(navigation?.value, `/${slug}`, { indexAsChild: true });
-
-    if (!children.length) {
-      return navigation.value ?? [];
-    }
-
-    if (slug === 'perkakas') {
-      const { data } = useNuxtData<any>('perkakas-methods');
-
-      if (data.value) {
-        children.push(
-          ...data.value.map((item: any) => ({
-            ...item,
-            path: `/perkakas/functions#${item.name}`,
-            title: item.name,
-          })),
-        );
-      }
-    }
-
-    return groupChildrenByCategory(children, slug);
-  });
-
   function findSurround(path: string) {
-    const flattenNavigation = navigationByCategory.value.flatMap((item) => item.children);
-
-    const index = flattenNavigation.findIndex((item) => item?.path === path);
-    if (index === -1) {
-      return [undefined, undefined];
-    }
-
-    return [flattenNavigation[index - 1], flattenNavigation[index + 1]];
+    const pages = leafPages(navigationByCategory.value).filter(item => !item.path.includes('#'));
+    const index = pages.findIndex(item => item.path === path);
+    return index < 0 ? [undefined, undefined] : [pages[index - 1], pages[index + 1]];
   }
 
   return {
-    rootNavigation,
+    activePackage,
+    activeSection,
+    contextLabel,
+    sections,
+    sectionTabs,
+    navigationByCategory,
     findBreadcrumb,
     findSurround,
-    navigationByCategory,
-    githubLink: `https://github.com/vinicunca/${githubMapper.get(pageModule.value!)?.slug}`,
+    githubLink,
   };
-}
-
-function groupChildrenByCategory(items: Array<ContentNavigationItem>, slug: string): Array<ContentNavigationItem> {
-  if (!items.length) {
-    return [];
-  }
-
-  const groups: Array<ContentNavigationItem> = [];
-
-  const categorized: Record<string, Array<ContentNavigationItem>> = {};
-  const uncategorized: Array<ContentNavigationItem> = [];
-
-  for (const item of items) {
-    if (item.category) {
-      categorized[item.category as string] = categorized[item.category as string] || [];
-      categorized[item.category as string]?.push(item);
-    } else {
-      uncategorized.push(item);
-    }
-  }
-
-  if (uncategorized.length) {
-    const withChildren = uncategorized.filter((item) => item.children?.length)
-      ?.map((item) => ({ ...item, children: item.children?.map((child) => ({ ...child, icon: undefined })) }));
-    const withoutChildren = uncategorized.filter((item) => !item.children?.length);
-
-    if (withoutChildren.length) {
-      groups.push({
-        title: 'Overview',
-        path: `/${slug}`,
-        children: withoutChildren,
-      });
-    }
-
-    groups.push(...withChildren);
-  }
-
-  for (const category of categories[slug as keyof typeof categories] || []) {
-    if (categorized[category.id]?.length) {
-      groups.push({
-        title: category.title,
-        path: `/${slug}`,
-        children: categorized[category.id],
-      });
-    }
-  }
-
-  return groups;
 }

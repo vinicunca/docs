@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { PApp } from '#components';
-import { provide, queryCollectionNavigation, queryCollectionSearchSections, useAppConfig, useAsyncData, useHead, useLazyAsyncData, useNavigation, useRoute, useSeoMeta } from '#imports';
+import { provide, queryCollectionNavigation, queryCollectionSearchSections, useAppConfig, useAsyncData, useHead, useLazyAsyncData, useRoute, useSeoMeta } from '#imports';
 
 const appConfig = useAppConfig();
 const route = useRoute();
@@ -83,9 +83,7 @@ useAsyncData(
   () => $fetch('/api/perkakas.json'),
 );
 
-const { rootNavigation } = useNavigation(navigation);
-
-provide('navigation', rootNavigation);
+provide('navigation', navigation);
 </script>
 
 <template>

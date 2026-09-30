@@ -21,7 +21,7 @@ This is a fork from [anftu's ESLint config](https://github.com/antfu/eslint-conf
   - Single quotes, no semi
   - Using [ESLint Stylistic](https://github.com/eslint-stylistic/eslint-stylistic)
 - Respects `.gitignore` by default
-- Requires ESLint v9.5.0+
+- Requires ESLint v9.39.1+ or v10
 
 ## Usage
 
@@ -433,7 +433,7 @@ export default vinicuncaESLint()
   )
   // overrides any named configs
   .override(
-    'antfu/stylistic/rules',
+    'vinicunca/stylistic/rules',
     {
       rules: {
         'style/generator-star-spacing': ['error', { after: true, before: false }],

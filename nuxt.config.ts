@@ -1,6 +1,14 @@
 import { createResolver } from '@nuxt/kit';
+import { readFileSync } from 'node:fs';
 
 const { resolve } = createResolver(import.meta.url);
+const componentApiRoutes = (packageId: 'akar' | 'pohon') => {
+  const metadata = JSON.parse(readFileSync(resolve(`./server/data/${packageId}-components.json`), 'utf8'));
+  return [
+    `/api/${packageId}/components.json`,
+    ...Object.keys(metadata.components).map(name => `/api/${packageId}/components/${name}.json`),
+  ];
+};
 
 export default defineNuxtConfig({
   app: {
@@ -19,6 +27,9 @@ export default defineNuxtConfig({
           langs: ['bash', 'ts', 'typescript', 'diff', 'vue', 'json', 'yml', 'css', 'mdc', 'blade', 'edge', 'jsonc', 'js', 'lua'],
         },
       },
+    },
+    experimental: {
+      sqliteConnector: 'native',
     },
   },
 
@@ -55,7 +66,10 @@ export default defineNuxtConfig({
       dir: resolve('./app/assets/icons'),
       prefix: 'custom',
     }],
-    provider: 'iconify',
+    provider: 'server',
+    serverBundle: {
+      collections: ['fa-regular', 'fa-solid', 'ic', 'logos', 'lucide', 'simple-icons', 'vscode-icons'],
+    },
   },
 
   imports: {
@@ -76,21 +90,42 @@ export default defineNuxtConfig({
       {
         contentCollection: 'docs',
         contentFilters: [
-          { field: 'path', operator: 'LIKE', value: '/eslint%' },
+          { field: 'path', operator: 'LIKE', value: '/akar%' },
         ],
-        title: 'ESLint',
+        title: 'Akar',
       },
       {
         contentCollection: 'docs',
         contentFilters: [
-          { field: 'path', operator: 'LIKE', value: '/perkakas/%' },
+          { field: 'path', operator: 'LIKE', value: '/eslint%' },
+        ],
+        title: 'ESLint Config',
+      },
+      {
+        contentCollection: 'docs',
+        contentFilters: [
+          { field: 'path', operator: 'LIKE', value: '/perkakas%' },
         ],
         title: 'Perkakas',
       },
       {
         contentCollection: 'docs',
         contentFilters: [
-          { field: 'path', operator: 'LIKE', value: '/unocss-preset/%' },
+          { field: 'path', operator: 'LIKE', value: '/pohon%' },
+        ],
+        title: 'Pohon UI',
+      },
+      {
+        contentCollection: 'docs',
+        contentFilters: [
+          { field: 'path', operator: 'LIKE', value: '/taman%' },
+        ],
+        title: 'Taman',
+      },
+      {
+        contentCollection: 'docs',
+        contentFilters: [
+          { field: 'path', operator: 'LIKE', value: '/unocss-preset%' },
         ],
         title: 'UnoCSS Preset',
       },
@@ -123,11 +158,20 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@nuxt/fonts',
     'nuxt-og-image',
-    '@unocss/nuxt',
     'motion-v/nuxt',
     'nuxt-llms',
     'nuxt-gtag',
   ],
+
+  nitro: {
+    prerender: {
+      routes: [
+        '/api/perkakas.json',
+        ...componentApiRoutes('akar'),
+        ...componentApiRoutes('pohon'),
+      ],
+    },
+  },
 
   routeRules: {
     '/unocss-preset/akar': {

@@ -1,6 +1,6 @@
 // @unocss-include
 
-import type { PThemeDialog } from 'pohon-ui';
+import type { PThemeModal } from 'pohon-ui';
 
 export const dialogTheme = {
   slots: {
@@ -23,4 +23,4 @@ export const dialogTheme = {
       },
     },
   },
-} satisfies PThemeDialog;
+} satisfies PThemeModal;

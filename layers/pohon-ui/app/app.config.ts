@@ -101,7 +101,7 @@ export default defineAppConfig({
       },
     },
     ...dashboardThemes,
-    dialog: dialogTheme,
+    modal: dialogTheme,
     drawer: drawerTheme,
     dropdownMenu: dropdownMenuTheme,
     empty: emptyTheme,

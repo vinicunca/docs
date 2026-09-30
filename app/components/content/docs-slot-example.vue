@@ -2,7 +2,7 @@
 import { uv } from 'unocss-variants';
 
 const props = defineProps<{
-  styles: {
+  styles?: {
     base?: string;
     avatar?: string;
     wrapper?: string;

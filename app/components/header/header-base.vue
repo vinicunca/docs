@@ -7,8 +7,8 @@ const { desktopLinks } = useHeader();
 
 <template>
   <PHeader
-    :pohon="{ left: 'min-w-0' }"
-    class="flex flex-col"
+    :pohon="{ left: 'min-w-0', root: 'h-auto flex flex-col', container: 'min-h-$pohon-header-height' }"
+    class="docs-site-header"
   >
     <template #left>
       <NuxtLink
@@ -57,6 +57,10 @@ const { desktopLinks } = useHeader();
 
     <template #body>
       <HeaderBody />
+    </template>
+
+    <template #bottom>
+      <HeaderSections />
     </template>
   </PHeader>
 </template>

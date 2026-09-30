@@ -203,7 +203,6 @@ export const checkboxGroupTheme = {
     },
     {
       variant: 'table',
-      // @ts-expect-error this is valid
       disabled: true,
       class: {
         item: 'cursor-not-allowed opacity-75',

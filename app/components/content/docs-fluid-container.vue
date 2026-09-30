@@ -6,13 +6,13 @@ const props = defineProps<{
   styleProperty: string;
 }>();
 
-const fluidRef = ref(null);
+const fluidRef = ref<HTMLElement | null>(null);
 const elementValue = ref('');
 
 function updateValue() {
   if (fluidRef.value) {
     const style = window.getComputedStyle(fluidRef.value);
-    elementValue.value = style[props.styleProperty];
+    elementValue.value = style.getPropertyValue(props.styleProperty);
   }
 }
 

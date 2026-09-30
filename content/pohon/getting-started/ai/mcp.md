@@ -1,0 +1,400 @@
+---
+title: "MCP Server"
+description: "Use Pohon UI components in your AI assistants with Model Context Protocol support."
+package: pohon
+sourceTag: "v2.0.1"
+sourceCommit: "ee987babf834bae617d75a9c6b9347bba1a494df"
+sourceUrl: "https://github.com/vinicunca/pohon/blob/ee987babf834bae617d75a9c6b9347bba1a494df/docs/content/docs/1.getting-started/7.ai/1.mcp.md"
+---
+## What is MCP?
+
+MCP (Model Context Protocol) is a standardized protocol that enables AI assistants to access external data sources and tools. Pohon UI provides an MCP server that allows AI assistants like Claude Code, Cursor, and Windsurf to access component information, source code, and usage examples directly.
+
+The MCP server provides structured access to our component library, making it easy for AI tools to understand and assist with Pohon UI development.
+
+## Available Resources
+
+The Pohon UI MCP server provides the following resources for discovery:
+
+- **resource://pohon-ui/components**: Browse all available components with categories
+- **resource://pohon-ui/composables**: Browse all available composables with categories
+- **resource://pohon-ui/examples**: Browse all available code examples
+- **resource://pohon-ui/templates**: Browse all available project templates
+- **resource://pohon-ui/documentation-pages**: Browse all available documentation pages
+
+You're able to access these resources with tools like Claude Code by using `@`.
+
+## Available Tools
+
+The Pohon UI MCP server provides the following tools organized by category:
+
+### Search Tools
+
+- **search-components**: Search components by name, category, or intent. Alternate names like `"segmented control"` or `"combobox"` are matched and results are ranked by relevance. With no params, lists all components
+- **search-composables**: Search composables by name or description. With no params, lists all composables
+- **search-icons**: Search for icons across Iconify collections (defaults to `lucide`). Returns icon names in the `i-{prefix}-{name}` format used by Pohon UI
+
+### Component Tools
+
+- **get-component**: Retrieves component documentation and details. Supports a `sections` parameter (`usage`, `examples`, `api`, `theme`, `changelog`) to fetch only specific parts and reduce response size
+- **get-component-metadata**: Retrieves metadata for a component including props, slots, and events (lightweight, no documentation content). Props are compact by default, pass `full: true` for the raw recursive prop schemas
+
+### Documentation Tools
+
+- **search-documentation**: Search documentation pages by title, description, or section. With no params, lists all pages. Use `section` to filter (e.g. `"getting-started"`, `"components"`)
+- **get-documentation-page**: Retrieves documentation page content by URL path. Supports a `headings` parameter to fetch only specific h2 sections (e.g. `["Usage", "API"]`) and reduce response size
+
+### Template Tools
+
+- **list-templates**: Lists all available Pohon UI templates with optional framework filtering
+- **get-template**: Retrieves a template's description, features and links
+
+### Example Tools
+
+- **list-examples**: Lists the names of all available UI examples
+- **get-example**: Retrieves the source code of a UI example
+
+### Migration Tools
+
+## Limit available tools
+
+Set the optional `X-MCP-Tools` HTTP header to a comma-separated list of tool names to expose only the tools your assistant needs. This helps to reduce the context defined in your assistant.
+
+Use the exact kebab-case MCP tool names, for example:
+
+```json
+{
+  "X-MCP-Tools": "search-components,get-component"
+}
+```
+
+No header exposes all tools, an empty header exposes no tools, and an unknown tool name returns a configuration error.
+
+## Available Prompts
+
+The Pohon UI MCP server provides guided prompts for common workflows:
+
+- **find-component-for-usecase**: Find the best component for your specific use case
+- **implement-component-with-props**: Generate complete component implementation with proper props
+- **setup-project-with-template**: Get guided setup instructions for project templates
+
+You're able to access these resources with tools like Claude Code by using `/`.
+
+## Configuration
+
+The Pohon UI MCP server uses HTTP transport and can be configured in different AI assistants.
+
+### ChatGPT
+
+> [!NOTE]
+> 
+> **Custom connectors using MCP are available on ChatGPT for Pro and Plus accounts.** Accessible on the web.
+
+Follow these steps to set up Pohon UI as a connector within ChatGPT:
+
+1. **Enable Developer mode:**
+  - Go to "Settings" > "Connectors" > "Advanced settings" > "Developer mode"
+2. **Open ChatGPT settings**
+3. **In the Connectors tab, create a new connector:**
+  - Give it a name: `Pohon UI`
+  - MCP server URL: `https://pohon.vinicunca.dev/mcp`
+  - Authentication: `None`
+4. **Click Create**
+
+The Pohon UI connector will appear in the composer's "Developer mode" tool later during conversations.
+
+### Claude Code
+
+> [!NOTE]
+> 
+> **Ensure Claude Code is installed.** Visit [Anthropic's documentation](https://docs.anthropic.com/en/docs/claude-code/quickstart) for installation instructions.
+
+Add the server using the CLI command:
+
+```bash
+claude mcp add --transport http pohon-ui https://pohon.vinicunca.dev/mcp
+```
+
+### Claude Desktop
+
+#### Setup Instructions:
+
+1. Open Claude Desktop and navigate to "Settings" > "Developer".
+2. Click on "Edit Config". This will open the local Claude directory.
+3. Modify the `claude_desktop_config.json` file with your custom MCP server configuration.
+
+```json [claude_desktop_config.json]
+{
+  "mcpServers": {
+    "pohon-ui": {
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "https://pohon.vinicunca.dev/mcp"
+      ]
+    }
+  }
+}
+```
+
+1. Restart Claude Desktop app. The Pohon UI MCP server should now be registered.
+
+### Cursor
+
+#### Quick Install:
+
+Click the button below to install the Pohon UI MCP server directly in Cursor:
+
+:p-button{color="neutral" icon="i-simple-icons-cursor" label="Install MCP Server" to="cursor://anysphere.cursor-deeplink/mcp/install?name=pohon-ui&config=eyJ0eXBlIjoiaHR0cCIsInVybCI6Imh0dHBzOi8vdWkubnV4dC5jb20vbWNwIn0%3D"}#### Manual Setup Instructions:
+
+1. Open Cursor and go to "Settings" > "Tools & MCP"
+2. Add the Pohon UI MCP server configuration
+
+Or manually create/update `.cursor/mcp.json` in your project root:
+
+```json [.cursor/mcp.json]
+{
+  "mcpServers": {
+    "pohon-ui": {
+      "type": "http",
+      "url": "https://pohon.vinicunca.dev/mcp"
+    }
+  }
+}
+```
+
+### Gemini CLI
+
+#### Setup Instructions:
+
+1. Locate your Gemini CLI configuration file (usually ~/.gemini/settings.json or as specified in your environment).
+2. Add the following configuration to your mcpServers object:
+
+```json [~/.gemini/settings.json]
+{
+  "mcpServers": {
+    "pohon-ui": {
+      "httpUrl": "https://pohon.vinicunca.dev/mcp"
+    }
+  }
+}
+```
+
+1. Restart your terminal session or reload the CLI. The Pohon UI MCP server tools will now be available for use.
+
+### GitHub Copilot Agent
+
+> [!NOTE]
+> 
+> **Repository administrator access required.** This is needed to configure MCP servers for GitHub Copilot coding agent.
+
+If you have already configured MCP servers in [Visual Studio Code](#visual-studio-code), replace the `servers` key with `mcpServers` and add a `tools` key specifying which tools are available to Copilot.
+
+#### Setup Instructions:
+
+1. Navigate to your GitHub repository
+2. Go to **Settings** > **Code & automation** > **Copilot** > **Coding agent**
+3. In the **MCP configuration** section, add the following configuration:
+
+```json
+{
+  "mcpServers": {
+    "pohon-ui": {
+      "type": "http",
+      "url": "https://pohon.vinicunca.dev/mcp",
+      "tools": ["*"]
+    }
+  }
+}
+```
+
+1. Click Save
+
+#### Validating the Configuration:
+
+To verify the MCP server is configured correctly:
+
+1. Create an issue in your repository and assign it to Copilot
+2. Wait for Copilot to create a pull request
+3. In the pull request, click View session in the "Copilot started work" timeline event
+4. Click the ellipsis button (...) at the top right, then click Copilot in the sidebar
+5. Expand the Start MCP Servers step to see the configured Nuxt tools
+
+For more information on using MCP with GitHub Copilot coding agent, see [Extend coding agent with MCP](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/extend-coding-agent-with-mcp).
+
+### GitHub Copilot CLI
+
+#### Setup Instructions:
+
+1. Start GitHub Copilot CLI in interactive mode.
+2. Run `/mcp add`.
+3. Fill in the configuration form with:
+
+  - **Server Name**: `pohon-ui`
+  - **Server Type**: `HTTP`
+  - **URL**: `https://pohon.vinicunca.dev/mcp`
+  - **HTTP Headers**: leave empty
+  - **Tools**: `*`
+4. Press `Ctrl`+`S` to save. The MCP server is available immediately without restarting the CLI.
+
+Or add the server directly to `~/.copilot/mcp-config.json`:
+
+```json [~/.copilot/mcp-config.json]
+{
+  "mcpServers": {
+    "pohon-ui": {
+      "type": "http",
+      "url": "https://pohon.vinicunca.dev/mcp",
+      "tools": ["*"]
+    }
+  }
+}
+```
+
+Use `/mcp show` to confirm the server is configured and available.
+
+For more details, see [Adding MCP servers for GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-mcp-servers).
+
+### Google Antigravity
+
+#### Setup Instructions:
+
+1. Open the MCP store via the "..." dropdown at the top of the editor's agent panel.
+2. Click on "Manage MCP Servers"
+3. Click on "View raw config"
+4. Modify the `mcp_config.json` with your custom MCP server configuration:
+
+```json [mcp_config.json]
+{
+  "mcpServers": {
+    "pohon-ui": {
+      "serverUrl": "https://pohon.vinicunca.dev/mcp"
+    }
+  }
+}
+```
+
+1. Return to the "Manage MCP Servers" tab and click "Refresh". The Pohon UI MCP server should now appear.
+
+### Le Chat Mistral
+
+#### Setup Instructions:
+
+1. Navigate to "Intelligence" > "Connectors"
+2. Click on "Add Connector" button, then select "Custom MCP Connector"
+3. Create your Custom MCP Connector:
+
+  - Connector Name: `PohonUI`
+  - Server URL: `https://pohon.vinicunca.dev/mcp`
+
+### OpenCode
+
+#### Setup Instructions:
+
+1. In your project root, create `opencode.json`
+2. Add the following configuration:
+
+```json [opencode.json]
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "pohon-ui": {
+      "type": "remote",
+      "url": "https://pohon.vinicunca.dev/mcp",
+      "enabled": true
+    }
+  }
+}
+```
+
+### Visual Studio Code
+
+> [!NOTE]
+> 
+> **Install required extensions.** Ensure you have [GitHub Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot) and [GitHub Copilot Chat](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat) extensions installed.
+
+#### Setup Instructions:
+
+1. Open VS Code and access the Command Palette (Ctrl/Cmd + Shift + P)
+2. Type "Preferences: Open Workspace Settings (JSON)" and select it
+3. Navigate to your project's `.vscode` folder or create one if it doesn't exist
+4. Create or edit the `mcp.json` file with the following configuration:
+
+```json [.vscode/mcp.json]
+{
+  "servers": {
+    "pohon-ui": {
+      "type": "http",
+      "url": "https://pohon.vinicunca.dev/mcp",
+      "headers": {
+        "X-MCP-Tools": "search-components,get-component"
+      }
+    }
+  }
+}
+```
+
+Remove the `headers` entry to make all Pohon UI MCP tools available.
+
+### Windsurf
+
+#### Setup Instructions:
+
+1. Open Windsurf and navigate to "Settings" > "Windsurf Settings" > "Cascade"
+2. Click the "Manage MCPs" button, then select the "View raw config" option
+3. Add the following configuration to your MCP settings:
+
+```json [.codeium/windsurf/mcp_config.json]
+{
+  "mcpServers": {
+    "pohon-ui": {
+      "serverUrl": "https://pohon.vinicunca.dev/mcp"
+    }
+  }
+}
+```
+
+### Zed
+
+#### Setup Instructions:
+
+1. Open Zed and go to "Settings" > "Open Settings"
+2. Navigate to the JSON settings file
+3. Add the following context server configuration to your settings:
+
+```json [.config/zed/settings.json]
+{
+  "context_servers": {
+    "pohon-ui": {
+      "url": "https://pohon.vinicunca.dev/mcp"
+    }
+  }
+}
+```
+
+## Usage Examples
+
+Once configured, you can ask your AI assistant questions like:
+
+- "List all available Pohon UI components"
+- "Get Button component documentation"
+- "Show me just the Button usage examples"
+- "What props does Input accept?"
+- "Find form-related components"
+- "Search for arrow icons in lucide"
+- "List dashboard templates"
+- "Get template setup instructions"
+- "Show installation guide"
+- "List all examples"
+- "Get ContactForm example code"
+
+The AI assistant will use the MCP server to fetch structured JSON data and provide guided assistance for Pohon UI during development.
+
+> [!TIP]
+> 
+> For component docs, the AI can use the `sections` parameter (`usage`, `examples`, `api`, `theme`, `changelog`) to fetch only relevant parts. For other pages, use the `headings` parameter with h2 titles (e.g. `["Usage", "API"]`).
+
+
+## Sitemap
+
+See the full [sitemap](https://pohon.vinicunca.dev/sitemap.md) for all pages.
