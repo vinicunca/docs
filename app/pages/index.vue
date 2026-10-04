@@ -1,103 +1,113 @@
 <script setup lang="ts">
-import { packages } from '~/utils/package-registry';
+const versions = useRuntimeConfig().public.versions as Record<string, string>
 
-const features = packages.map(item => ({
-  title: item.label,
-  description: item.description,
-  icon: item.icon,
-  to: item.path,
-  status: item.status,
-  color: 'text-primary',
-  bg: 'bg-primary/10',
-  border: 'group-hover:border-primary/50',
-}));
+const title = 'Vinicunca'
+const description = 'Documentation for every @vinicunca package: a Vue component library, its primitives, a typed utility belt, an admin template and the tooling that holds them together.'
+
+useSeoMeta({
+  title,
+  description,
+  ogTitle: title,
+  ogDescription: description
+})
+
+useCanonical('/raw/index.md')
+
+if (import.meta.server) {
+  defineOgImage('Home.takumi', {
+    lead: 'Build with',
+    accent: 'Vinicunca',
+    description: 'Vue components, primitives, utilities and tooling, documented in one place.'
+  })
+}
+
+const packages = DOCS_PACKAGES.filter(pkg => pkg.group === 'packages')
+const guides = DOCS_PACKAGES.filter(pkg => pkg.group === 'guides')
+
+const links = [{
+  label: 'Get started with Pohon UI',
+  to: '/pohon/getting-started',
+  trailingIcon: 'i-lucide-arrow-right'
+}, {
+  label: 'Build a theme',
+  to: '/theme',
+  color: 'neutral' as const,
+  variant: 'outline' as const,
+  icon: 'i-lucide-palette'
+}]
 </script>
 
 <template>
-  <div class="bg-gray-50 min-h-screen relative overflow-hidden dark:bg-gray-950">
-    <!-- Background Effects -->
-    <div class="pointer-events-none inset-0 absolute">
-      <div class="bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] inset-0 absolute from-primary-500/10 to-transparent via-transparent dark:from-primary-400/10" />
-      <div class="bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] h-[600px] w-full left-1/2 top-0 absolute from-purple-500/10 to-transparent via-transparent blur-3xl -translate-x-1/2" />
-      <!-- Grid Pattern -->
-      <div class="bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 inset-0 absolute mix-blend-soft-light" />
-    </div>
+  <PMain>
+    <PageHero
+      lead="Build with"
+      accent="Vinicunca"
+      :description="description"
+      :links="links"
+      orientation="vertical"
+    />
 
-    <!-- Hero Section -->
-    <div class="pb-16 pt-24 relative sm:pb-24 sm:pt-32">
-      <div class="mx-auto px-4 text-center max-w-7xl lg:px-8 sm:px-6">
-        <h1 class="text-5xl tracking-tight font-bold mb-8 sm:text-7xl">
-          <span class="text-transparent from-gray-900 to-gray-900 via-gray-700 bg-gradient-to-r bg-clip-text dark:from-white dark:to-white dark:via-gray-200">
-            Vinicunca
-          </span>
-        </h1>
+    <PContainer>
+      <PPage>
+        <PPageBody class="space-y-12">
+          <section>
+            <h2 class="text-2xl font-semibold color-text-highlighted mb-6">
+              Packages
+            </h2>
 
-        <p class="text-lg text-gray-600 leading-relaxed mx-auto mb-10 max-w-2xl sm:text-xl dark:text-gray-400">
-          A curated collection of essential utilities, robust configurations, and design presets for modern web development.
-        </p>
-
-        <div class="flex flex-col gap-4 justify-center sm:flex-row">
-          <NuxtLink
-            to="https://github.com/vinicunca"
-            target="_blank"
-            class="text-gray-900 font-medium px-8 py-4 border border-gray-200 rounded-xl bg-white flex gap-2 transition-all items-center justify-center dark:text-white dark:border-gray-800 dark:bg-gray-900 hover:bg-gray-50 active:scale-95 hover:scale-105 dark:hover:bg-gray-800"
-          >
-            <i class="i-simple-icons:github text-xl" />
-            GitHub
-          </NuxtLink>
-        </div>
-      </div>
-    </div>
-
-    <!-- Features Grid -->
-    <div class="mx-auto px-4 pb-32 max-w-7xl lg:px-8 sm:px-6">
-      <div class="gap-6 grid grid-cols-1 lg:gap-8 lg:grid-cols-3 md:grid-cols-2">
-        <NuxtLink
-          v-for="feature in features"
-          :key="feature.title"
-          :to="feature.to"
-          class="group p-8 border border-gray-200 rounded-3xl bg-white/50 transition-all duration-300 relative backdrop-blur-sm dark:border-gray-800 dark:bg-gray-900/50 hover:shadow-gray-200/50 hover:shadow-xl dark:hover:shadow-black/50 hover:-translate-y-1"
-          :class="feature.border"
-        >
-          <div class="flex flex-col gap-6">
-            <div
-              class="rounded-2xl flex h-14 w-14 transition-colors duration-300 items-center justify-center"
-              :class="[feature.bg, feature.color]"
-            >
-              <div
-                :class="feature.icon"
-                class="text-3xl"
-              />
-            </div>
-            <div>
-              <h3 class="text-xl text-gray-900 font-bold mb-3 transition-colors dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400">
-                {{ feature.title }}
-              </h3>
-              <p
-                v-if="feature.status === 'work-in-progress'"
-                class="text-xs color-text-muted font-semibold mb-2"
+            <PPageGrid>
+              <PPageCard
+                v-for="pkg in packages"
+                :key="pkg.id"
+                :title="pkg.title"
+                :description="pkg.description"
+                :icon="pkg.icon"
+                :to="pkg.to"
+                spotlight
               >
-                Work in progress
-              </p>
-              <p class="text-gray-600 leading-relaxed dark:text-gray-400">
-                {{ feature.description }}
-              </p>
-            </div>
-            <div class="text-sm text-gray-500 font-medium mt-auto pt-4 flex transition-colors items-center dark:text-gray-500 group-hover:text-primary-600 dark:group-hover:text-primary-400">
-              Learn more
-              <i class="i-lucide:arrow-right ml-2 transition-transform group-hover:translate-x-1" />
-            </div>
-          </div>
-        </NuxtLink>
-      </div>
+                <template #footer>
+                  <div class="flex items-center gap-2 text-xs color-text-muted">
+                    <code v-if="pkg.npm">{{ pkg.npm }}</code>
+                    <PBadge v-if="pkg.npm && versions[pkg.npm]" variant="subtle" size="sm">
+                      v{{ versions[pkg.npm] }}
+                    </PBadge>
+                  </div>
+                </template>
+              </PPageCard>
+            </PPageGrid>
+          </section>
 
-      <NuxtLink
-        to="/windows-dev/wsl"
-        class="text-sm color-text-muted mt-8 inline-flex items-center gap-2 hover:color-text"
-      >
-        Windows Dev guide
-        <i class="i-lucide:arrow-up-right" />
-      </NuxtLink>
-    </div>
-  </div>
+          <section>
+            <h2 class="text-2xl font-semibold color-text-highlighted mb-6">
+              Guides
+            </h2>
+
+            <PPageGrid>
+              <PPageCard
+                v-for="guide in guides"
+                :key="guide.id"
+                :title="guide.title"
+                :description="guide.description"
+                :icon="guide.icon"
+                :to="guide.to"
+                spotlight
+              />
+            </PPageGrid>
+          </section>
+
+          <section>
+            <PPageCTA
+              title="Built for people and agents"
+              description="Every page is also served as Markdown. Append .md to any URL, or point your agent at llms.txt."
+              variant="subtle"
+              :links="[
+                { label: 'llms.txt', to: '/llms.txt', target: '_blank', icon: 'i-lucide-bot' },
+                { label: 'Markdown sitemap', to: '/sitemap.md', target: '_blank', color: 'neutral', variant: 'outline' }
+              ]"
+            />
+          </section>
+        </PPageBody>
+      </PPage>
+    </PContainer>
+  </PMain>
 </template>
