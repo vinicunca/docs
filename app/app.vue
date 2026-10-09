@@ -1,10 +1,10 @@
 <script setup lang="ts">
-const route = useRoute()
+const route = useRoute();
 
-const appConfig = useAppConfig()
-const { style, link, color } = useTheme()
+const appConfig = useAppConfig();
+const { style, link, color } = useTheme();
 
-const colorMode = useColorMode()
+const colorMode = useColorMode();
 
 // Bare `d`, site-wide since the color mode button sits in the header on every
 // page. defineShortcuts disables single-key bindings while an input or a
@@ -13,49 +13,54 @@ const colorMode = useColorMode()
 // the page embedding them.
 defineShortcuts({
   d: () => {
-    if (route.path.startsWith('/examples')) return
-    colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
-  }
-})
+    if (route.path.startsWith('/examples')) {
+      return;
+    }
+    colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark';
+  },
+});
 
-const { data: navigation } = await useFetch('/api/navigation.json')
+const { data: navigation } = await useFetch('/api/navigation.json');
 
 useHead({
   meta: [
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-    { key: 'theme-color', name: 'theme-color', content: color }
+    { key: 'theme-color', name: 'theme-color', content: color },
   ],
   link,
-  style
-})
+  style,
+});
 
 if (import.meta.server) {
   useSeoMeta({
     ogSiteName: 'Vinicunca',
     ogType: 'website',
-    twitterCard: 'summary_large_image'
-  })
+    twitterCard: 'summary_large_image',
+  });
 
   useSchemaOrg([
     defineWebSite({
-      name: useSiteConfig().name
-    })
-  ])
+      name: useSiteConfig().name,
+    }),
+  ]);
 }
 
-useFaviconFromTheme()
+useFaviconFromTheme();
 
-const { rootNavigation, navigationByFramework } = useNavigation(navigation)
+const { rootNavigation, navigationByFramework } = useNavigation(navigation);
 
-provide('navigation', rootNavigation)
+provide('navigation', rootNavigation);
 
-const showLayout = computed(() => !route.path.startsWith('/examples') && !route.path.startsWith('/theme'))
-const hasSections = computed(() => !!findDocsPackage(route.path))
+const showLayout = computed(() => !route.path.startsWith('/examples') && !route.path.startsWith('/theme'));
+const hasSections = computed(() => !!findDocsPackage(route.path));
 </script>
 
 <template>
   <PApp :toaster="appConfig.toaster">
-    <NuxtLoadingIndicator color="var(--ui-primary)" :height="2" />
+    <NuxtLoadingIndicator
+      color="var(--ui-primary)"
+      :height="2"
+    />
 
     <div :class="[hasSections && 'root']">
       <template v-if="showLayout">

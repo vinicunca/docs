@@ -277,6 +277,20 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.cl
 :::
 ::
 
+### Breakpoint
+
+Use the `breakpoint` prop to change the breakpoint below which the sidebar renders as a menu. Defaults to `lg`.
+
+```vue
+<template>
+  <PSidebar breakpoint="xl" />
+</template>
+```
+
+::note
+The values follow the default UnoCSS breakpoints. Custom breakpoint values are not picked up.
+::
+
 ### Mode
 
 Use the `mode` prop to change the mode of the sidebar menu on mobile. Defaults to `slideover`.

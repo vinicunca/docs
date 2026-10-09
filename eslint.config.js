@@ -31,6 +31,7 @@ export default vinicuncaESLint(
   {
     rules: {
       'vue/no-extra-parens': 'off',
+      'pnpm/yaml-enforce-settings': 'off',
     },
   },
 );

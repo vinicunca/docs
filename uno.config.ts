@@ -8,6 +8,17 @@ const TOKEN_PATTERN = /[^\s`]+/g;
 
 // @keep-sorted
 export default defineConfig({
+  content: {
+    pipeline: {
+      include: [
+        // official default — keep this
+        /\.(vue|svelte|[jt]sx|vine.ts|mdx?|astro|elm|php|phtml|marko|html)($|\?)/,
+        // Vite / Nuxt virtual + internal modules
+        /(?:^|\0|\/)(?:virtual:|#build\/|#internal\/)/,
+      ],
+    },
+  },
+
   extractors: [
     /**
      * In the theme files there are bunch of placeholders like ${color} that we need to extract and add to the safelist.
@@ -309,6 +320,12 @@ export default defineConfig({
 
   variants: [
     (matcher) => {
+      if (matcher.startsWith('uv:')) {
+        return {
+          matcher: matcher.replace('uv:', 'uno-layer-uv:'),
+        };
+      }
+
       if (matcher.startsWith('pohon:')) {
         return {
           matcher: matcher.replace('pohon:', 'uno-layer-pohon:'),

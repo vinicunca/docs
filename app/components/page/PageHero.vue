@@ -1,58 +1,80 @@
 <script setup lang="ts">
-import { reactiveOmit } from '@vueuse/core'
-import type { BadgeProps, ButtonProps, PageHeroProps, PageHeroSlots } from 'pohon-ui'
+import type { BadgeProps, ButtonProps, PageHeroProps, PageHeroSlots } from 'pohon-ui';
+import { reactiveOmit } from '@vueuse/core';
 
 // `ui` is left out: the map below is the docs' hero, a caller's would replace it
 const props = withDefaults(defineProps<Omit<PageHeroProps, 'ui'> & {
   /** The pill above the title: its label, or button props (`to` makes it a link). */
-  badge?: string | ButtonProps
+  badge?: string | ButtonProps;
   /** The title's first half. */
-  lead?: string
+  lead?: string;
   /** Its second half, in primary. */
-  accent?: string
+  accent?: string;
   /** Break between the halves rather than running them on one line. */
-  breakLine?: boolean
+  breakLine?: boolean;
 }>(), {
-  orientation: 'horizontal'
-})
+  orientation: 'horizontal',
+});
 
-const slots = defineSlots<PageHeroSlots>()
+const slots = defineSlots<PageHeroSlots>();
 
-const heroProps = reactiveOmit(props, 'badge', 'lead', 'accent', 'breakLine')
+const heroProps = reactiveOmit(props, 'badge', 'lead', 'accent', 'breakLine');
 
 // a bare string is the label
-const badge = computed(() => (typeof props.badge === 'string' ? { label: props.badge } : props.badge))
+const badge = computed(() => (typeof props.badge === 'string' ? { label: props.badge } : props.badge));
 
 // The library hero's slots pass through, only the ones given: forwarding a
 // slot that isn't there would still count as one for PPageHero and render
 // its wrapper. `top` and `bottom` are wrapped below, `headline` and `title`
 // only when the badge or the two-tone title doesn't take them.
-const forwarded = computed(() => Object.keys(slots).filter(name =>
+const forwarded = computed(() => Object.keys(slots).filter((name) =>
   !['top', 'bottom'].includes(name)
   && !(name === 'headline' && badge.value)
-  && !(name === 'title' && (props.lead || props.accent))
-) as (keyof PageHeroSlots)[])
+  && !(name === 'title' && (props.lead || props.accent)),
+) as Array<keyof PageHeroSlots>);
 
 // The space between the halves rides the lead: a whitespace-only node
 // between the two would be condensed away by the template compiler.
-const leadText = computed(() => (props.breakLine ? props.lead : `${props.lead ?? ''} `))
+const leadText = computed(() => (props.breakLine ? props.lead : `${props.lead ?? ''} `));
 
 // The cells of the dot grid that twinkle, as [column, row] on its 28px
 // lattice: a fixed pick rather than a random one, so the server and the
 // client draw the same dots, spread from the left edge so a phone gets its
 // share. Each runs its own cycle, offset so they never pulse together.
 const TWINKLES = [
-  [1, 3], [3, 11], [5, 6], [8, 15], [10, 2], [12, 9], [14, 17], [17, 5], [19, 12], [22, 1], [24, 8], [26, 14],
-  [29, 4], [31, 10], [34, 16], [36, 7], [38, 2], [41, 13], [43, 6], [46, 18], [48, 3], [50, 11], [53, 8], [56, 15]
-]
+  [1, 3],
+  [3, 11],
+  [5, 6],
+  [8, 15],
+  [10, 2],
+  [12, 9],
+  [14, 17],
+  [17, 5],
+  [19, 12],
+  [22, 1],
+  [24, 8],
+  [26, 14],
+  [29, 4],
+  [31, 10],
+  [34, 16],
+  [36, 7],
+  [38, 2],
+  [41, 13],
+  [43, 6],
+  [46, 18],
+  [48, 3],
+  [50, 11],
+  [53, 8],
+  [56, 15],
+];
 const twinkles = TWINKLES.map(([col, row], index) => ({
   // the grid paints its dot in the middle of each 28px cell, so the twinkle's
   // own centre has to land there: 14 less half of its 1px box
   left: `${col! * 28 + 13.5}px`,
   top: `${row! * 28 + 13.5}px`,
   animationDelay: `${(index * 0.9) % 5}s`,
-  animationDuration: `${3 + (index % 4) * 0.5}s`
-}))
+  animationDuration: `${3 + (index % 4) * 0.5}s`,
+}));
 
 // The library hero comes with generous padding; the docs one opens under the
 // header and leaves the bottom to the `bottom` slot. Plain object, not a
@@ -68,33 +90,56 @@ const ui = {
   title: 'text-4xl sm:text-5xl lg:text-6xl font-medium max-w-md',
   description: 'text-[15px] sm:text-base lg:text-lg max-w-154 mt-2 sm:mt-4',
   links: 'gap-x-3',
-  footer: 'mt-8'
-}
+  footer: 'mt-8',
+};
 </script>
 
 <template>
-  <PPageHero v-bind="heroProps" :ui="ui">
+  <PPageHero
+    v-bind="heroProps"
+    :ui="ui"
+  >
     <template #top>
       <!-- A dot grid fading in and out vertically, so the type sits on texture
            rather than on a hard band. -->
-      <div aria-hidden="true" class="absolute inset-0 pointer-events-none bg-[radial-gradient(var(--ui-color-border-accented)_1px,transparent_1px)] bg-size-[28px_28px] opacity-50 mask-[linear-gradient(to_bottom,transparent,black_30%,black_70%,transparent)] -z-10" />
+      <div
+        aria-hidden="true"
+        class="bg-[radial-gradient(var(--ui-color-border-accented)_1px,transparent_1px)] opacity-50 pointer-events-none inset-0 absolute bg-size-[28px_28px] mask-[linear-gradient(to_bottom,transparent,black_30%,black_70%,transparent)] -z-10"
+      />
 
       <!-- The horizon: a glow rising from the bottom edge, under a hairline
            that fades out at both ends. Both take their strength from the
            primary's chroma (the `horizon` rule below), so a mono theme,
            whose primary is black or white, gets a faint line and no wash. -->
-      <div aria-hidden="true" class="horizon absolute inset-x-0 bottom-0 h-45 pointer-events-none bg-linear-to-t from-(--horizon-glow) to-transparent" />
-      <div aria-hidden="true" class="horizon absolute inset-x-0 bottom-0 h-px pointer-events-none bg-[linear-gradient(to_right,transparent,var(--horizon-line)_30%,var(--horizon-line)_70%,transparent)]" />
+      <div
+        aria-hidden="true"
+        class="horizon h-45 pointer-events-none inset-x-0 bottom-0 absolute from-(--horizon-glow) to-transparent bg-linear-to-t"
+      />
+      <div
+        aria-hidden="true"
+        class="horizon bg-[linear-gradient(to_right,transparent,var(--horizon-line)_30%,var(--horizon-line)_70%,transparent)] h-px pointer-events-none inset-x-0 bottom-0 absolute"
+      />
 
       <!-- A few of the grid's dots light up in primary, under the same fade as the grid. -->
-      <div aria-hidden="true" class="absolute inset-0 pointer-events-none mask-[linear-gradient(to_bottom,transparent,black_30%,black_70%,transparent)]">
-        <span v-for="(twinkle, index) in twinkles" :key="index" class="twinkle absolute size-px rounded-full bg-primary opacity-0" :style="twinkle" />
+      <div
+        aria-hidden="true"
+        class="pointer-events-none inset-0 absolute mask-[linear-gradient(to_bottom,transparent,black_30%,black_70%,transparent)]"
+      >
+        <span
+          v-for="(twinkle, index) in twinkles"
+          :key="index"
+          class="twinkle rounded-full bg-primary opacity-0 size-px absolute"
+          :style="twinkle"
+        />
       </div>
 
       <slot name="top" />
     </template>
 
-    <template v-if="badge" #headline>
+    <template
+      v-if="badge"
+      #headline
+    >
       <PButton
         v-if="badge.to"
         color="primary"
@@ -113,12 +158,21 @@ const ui = {
       />
     </template>
 
-    <template v-if="lead || accent" #title>
+    <template
+      v-if="lead || accent"
+      #title
+    >
       {{ leadText }}<br v-if="breakLine"><span class="text-primary font-semibold">{{ accent }}</span>
     </template>
 
-    <template v-for="name in forwarded" #[name]="slotProps">
-      <slot :name="name" v-bind="slotProps ?? {}" />
+    <template
+      v-for="name in forwarded"
+      #[name]="slotProps"
+    >
+      <slot
+        :name="name"
+        v-bind="slotProps ?? {}"
+      />
     </template>
 
     <template #bottom>
@@ -132,11 +186,12 @@ const ui = {
 <style scoped>
 /* A vivid primary has a chroma around 0.2 in oklch, black and white have
    none: both alphas follow it from a floor, so a colored theme keeps about
-   the 15% wash it had and a mono theme gets a hint of one rather than a
-   gray band. */
+   the 15% wash it had and a mono theme gets a hint of one rather than gray band. `min()` rather than `calc()`: an alpha is capped at 1 anyway and
+   cssnano's calc pass can't parse the `c` channel keyword, it warns on each
+   build. */
 .horizon {
-  --horizon-glow: color-mix(in oklab, var(--ui-primary) 18%, transparent);
-  --horizon-line: color-mix(in oklab, var(--ui-primary) 50%, transparent);
+  --horizon-glow: oklch(from var(--ui-primary) l c h / min(0.06 + c * 0.45, 1));
+  --horizon-line: oklch(from var(--ui-primary) l c h / min(0.35 + c * 3, 1));
 }
 
 .twinkle {
@@ -144,7 +199,8 @@ const ui = {
 }
 
 @keyframes twinkle {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0;
     transform: scale(1);
   }
