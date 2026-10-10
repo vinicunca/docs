@@ -1,6 +1,8 @@
 # Overlays
 
-Patterns for modals, slideovers, drawers, and command palettes.
+Patterns for modals, slideovers, drawers, and command palettes. API: [modal](https://vinicunca.dev/raw/pohon/components/modal.md), [slideover](https://vinicunca.dev/raw/pohon/components/slideover.md), [drawer](https://vinicunca.dev/raw/pohon/components/drawer.md), [use-overlay](https://vinicunca.dev/raw/pohon/composables/use-overlay.md).
+
+All overlays share `v-model:open`, `title`, `description`, `close` (button props or `false`), `dismissible`, and the slots `#header`, `#body`, `#footer`, and `#content`. Put a trigger element in the default slot to open the overlay without state.
 
 ## Confirmation dialog
 
@@ -63,11 +65,13 @@ async function deleteItem(item) {
     description: `Are you sure you want to delete "${item.name}"?`
   })
 
-  if (await instance.result) {
+  if (await instance) { // the returned promise resolves with the `close` payload; `instance.result` is the same promise
     // user confirmed
   }
 }
 ```
+
+`create(Component, { props, defaultOpen, destroyOnClose })` sets initial props; `instance.patch(props)` updates an open overlay, and `overlay.closeAll()` closes every one. The overlay renders inside `PApp`, so the component can use app-level providers. In Nuxt, pass a lazy component (`LazyConfirmModal`) to split it out of the main bundle.
 
 ## Form in a slideover
 

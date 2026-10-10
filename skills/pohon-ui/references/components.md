@@ -1,245 +1,228 @@
-# Components
+# Components and composables
 
-Quick-reference index of all 125+ components. For full API docs (props, slots, events, examples), use the MCP `get-component` or `get-component-metadata` tools.
+Index of every Pohon UI component and composable in `pohon-ui@2.0.6`, grouped by the category the docs use. Before you use one, fetch its API page: `https://vinicunca.dev/raw/pohon/components/<kebab-name>.md` (e.g. `PInputMenu` → `input-menu.md`, `PPageCTA` → `page-cta.md`).
 
 ## Layout
 
 | Component | Purpose |
 |---|---|
-| `PApp` | **Required** root wrapper — toasts, tooltips, overlays, i18n |
-| `PHeader` | Responsive header with mobile menu |
-| `PFooter` | Footer with left/right/top/bottom slots |
-| `PFooterColumns` | Multi-column footer with link groups |
-| `PMain` | Main content area |
-| `PContainer` | Centered max-width container |
-| `PSplitter` | Resizable panels separated by draggable handles |
-| `PLink` | Enhanced link — NuxtLink/RouterLink with active states |
+| `PApp` | **Required** root wrapper: toasts, tooltips, programmatic overlays, `locale` |
+| `PHeader` | Responsive site header; `#body` slot is the mobile menu |
+| `PFooter` | Site footer with `#left`, `#default`, `#right`, `#top`, `#bottom` slots |
+| `PMain` | Main element that fills the viewport height between header and footer |
+| `PContainer` | Centered max-width wrapper (`--ui-container`) |
+| `PSidebar` | Standalone collapsible sidebar with variants (`sidebar`, `floating`, `inset`) |
+| `PSplitter` | Resizable panels separated by drag handles |
+| `PError` | Error page with NuxtError support; `clear` button returns to `redirect` (`/`) |
+| `PTheme` | Headless: overrides `ui` classes and prop defaults for all descendants |
 
 ## Element
 
 | Component | Purpose |
 |---|---|
-| `PButton` | Buttons — links, actions, icons, loading states |
-| `PBadge` | Labels, tags, status indicators |
-| `PAvatar` | User photos, initials, icons |
-| `PAvatarGroup` | Stacked avatars with `max` limit |
-| `PIcon` | Iconify icons (`i-{collection}-{name}`) |
-| `PCard` | Bordered container with header/body/footer |
-| `PAlert` | Inline messages — info, warning, error, success |
-| `PBanner` | App-wide sticky announcement bar |
-| `PChip` | Notification dot overlay on children |
-| `PKbd` | Keyboard key display |
-| `PSeparator` | Divider line with optional label |
+| `PButton` | Button or link (`to`), with icons, loading state, `block` |
+| `PBadge` | Status or category label |
+| `PAvatar` / `PAvatarGroup` | Image with initials or icon fallback; stacked group with `max` |
+| `PIcon` | Iconify icon by `name` (`i-lucide-sun`) |
+| `PCard` | Container with `#header`, default, `#footer` slots |
+| `PAlert` | Inline, persistent message with title, description, actions |
+| `PBanner` | Dismissible announcement bar at the top of the site |
+| `PChip` | Dot or count indicator over its child |
+| `PKbd` | Keyboard key |
+| `PSeparator` | Horizontal or vertical divider, optional label |
 | `PSkeleton` | Loading placeholder |
-| `PProgress` | Progress bar |
-| `PProgressGroup` | Segmented progress bar with a list of items |
-| `PToast` | Toast notification (shown via `useToast`) |
-| `PCalendar` | Date calendar (single, range, multiple) |
-| `PCollapsible` | Animated expand/collapse |
-| `PFieldGroup` | Group form inputs horizontally |
-| `PMarquee` | Scrolling content ticker |
-| `PCarousel` | Image/content carousel with autoplay |
-| `PEmpty` | Empty state placeholder with icon, title, actions |
-| `PError` | Error display with retry action |
-| `PScrollArea` | Scrollable area with custom scrollbar |
-| `PTimeline` | Timeline display for events and activity |
-| `PUser` | User display — avatar + name + description |
-| `PTheme` | Scoped `ui` class overrides and prop defaults for a subtree |
+| `PProgress` | Determinate or indeterminate progress bar |
+| `PProgressGroup` | One bar split into segments that add up to a total |
+| `PCalendar` | Single, multiple, or range date selection |
+| `PCollapsible` | Show or hide one block of content |
+| `PFieldGroup` | Attaches buttons and inputs into one control (button group, input + button) |
 
 ## Form
 
 | Component | Purpose |
 |---|---|
-| `PAuthForm` | Pre-built auth form with social providers |
-| `PInput` | Text input — text, email, password, search |
-| `PTextarea` | Multi-line text with autoresize |
-| `PSelect` | Native-like dropdown for small lists |
-| `PSelectMenu` | Rich searchable dropdown, multi-select, groups |
-| `PInputMenu` | Autocomplete / combobox |
-| `PInputNumber` | Numeric input with +/- controls |
-| `PInputDate` | Date picker with calendar |
-| `PInputTime` | Time picker (12/24h) |
-| `PInputTags` | Tag/chip input |
-| `PPinInput` | Verification code input |
-| `PCheckbox` | Single boolean checkbox |
-| `PCheckboxGroup` | Multiple checkboxes |
-| `PRadioGroup` | Radio button group |
-| `PSwitch` | Toggle switch |
-| `PSlider` | Range slider |
-| `PColorPicker` | Color picker (hex/rgb/hsl) |
-| `PFileUpload` | File upload (button or drop area) |
-| `PForm` | Validation wrapper with Standard Schema |
-| `PFormField` | Field wrapper with label, hint, errors |
+| `PForm` | Validation and submit wrapper (Standard Schema, Superstruct, or custom `validate`) |
+| `PFormField` | Label, description, hint, help, and error around one input |
+| `PInput` | Text, email, password, search input |
+| `PTextarea` | Multi-line text, `autoresize` + `maxrows` |
+| `PSelect` | Simple dropdown for short lists |
+| `PSelectMenu` | Searchable dropdown, multiple selection, groups |
+| `PInputMenu` | Autocomplete / combobox (free typing plus suggestions) |
+| `PListbox` | Always-visible selectable list with search and virtualization |
+| `PInputNumber` | Number with increment/decrement buttons |
+| `PInputDate` | Date field (segmented), `range` for date ranges |
+| `PInputTime` | Time field (12/24h) |
+| `PInputTags` | Free-text tags |
+| `PInputRating` | Star rating input or display |
+| `PPinInput` | Fixed-length code (OTP) |
+| `PCheckbox` / `PCheckboxGroup` | One boolean / several choices |
+| `PRadioGroup` | One choice from visible options |
+| `PSwitch` | On/off toggle |
+| `PSlider` | Numeric value or range on a track |
+| `PColorPicker` | Color selection |
+| `PFileUpload` | File input as button or drop area |
 
 ## Overlay
 
 | Component | Purpose |
 |---|---|
-| `PModal` | Centered dialog — confirmations, forms |
-| `PSlideover` | Side panel — details, editing |
-| `PDrawer` | Bottom sheet — mobile actions |
-| `PPopover` | Contextual popup attached to trigger |
-| `PTooltip` | Hover/focus hint (non-interactive) |
-| `PContextMenu` | Right-click menu |
-| `PCommandPalette` | Search + keyboard navigation (Cmd+K) |
+| `PModal` | Centered dialog |
+| `PSlideover` | Panel that slides in from a side |
+| `PDrawer` | Swipeable sheet (bottom by default, `direction` prop) |
+| `PPopover` | Non-modal floating panel on a trigger (or a `reference`) |
+| `PTooltip` | Non-interactive hover/focus hint |
+| `PDropdownMenu` | Action menu on click |
+| `PContextMenu` | Action menu on right-click |
+| `PToast` | Toast notification; create it with `useToast()`, not in templates |
 
 ## Navigation
 
 | Component | Purpose |
 |---|---|
-| `PSidebar` | Standalone sidebar with header/body/footer |
-| `PNavigationMenu` | Primary nav — horizontal or vertical |
-| `PTabs` | Tab switcher within a page |
+| `PNavigationMenu` | Primary navigation, horizontal or vertical, nested items |
+| `PTabs` | Tab panels in one page (`slot` / `content` per item) |
 | `PBreadcrumb` | Location hierarchy |
-| `PDropdownMenu` | Action menu on a trigger |
-| `PPagination` | Page navigation |
-| `PStepper` | Multi-step wizard |
-| `PAccordion` | Collapsible sections |
+| `PPagination` | Page buttons (`total` = item count) |
+| `PStepper` | Multi-step progress / wizard |
+| `PCommandPalette` | Fuse.js search over `groups` of items |
+| `PLink` | NuxtLink/RouterLink wrapper with active state; no `ui` prop |
+| `PFooterColumns` | Columns of links for `PFooter` |
 
 ## Data
 
 | Component | Purpose |
 |---|---|
-| `PTable` | Data table (TanStack Table) with sorting, selection, pinning |
-| `PTree` | Hierarchical tree view |
+| `PTable` | TanStack Table: sorting, selection, pagination, pinning, virtualization |
+| `PTree` | Hierarchical tree with selection and expansion |
+| `PAccordion` | Stacked collapsible panels |
+| `PCarousel` | Embla carousel with autoplay, arrows, dots |
+| `PMarquee` | Infinite scrolling content |
+| `PTimeline` | Sequence of events with dates, icons, or avatars |
+| `PUser` | Avatar + name + description |
+| `PEmpty` | Empty state with icon, title, description, actions |
+| `PScrollArea` | Scroll container with virtualization |
 
 ## Dashboard
 
 | Component | Purpose |
 |---|---|
-| `PDashboardGroup` | Root dashboard wrapper |
-| `PDashboardSidebar` | Resizable, collapsible sidebar |
-| `PDashboardPanel` | Content panel with header/body/footer |
-| `PDashboardNavbar` | Panel header bar |
-| `PDashboardToolbar` | Filter/action bar below navbar |
-| `PDashboardResizeHandle` | Resize handle between panels |
-| `PDashboardSidebarToggle` | Mobile sidebar toggle button |
-| `PDashboardSearchButton` | Search button for sidebar |
-| `PDashboardSearch` | Dashboard-level search overlay |
-| `PDashboardSidebarCollapse` | Collapse button for sidebar |
+| `PDashboardGroup` | Root of a dashboard layout; persists sidebar/panel sizes |
+| `PDashboardSidebar` | Resizable, collapsible sidebar; mobile `mode`: `modal`, `slideover`, `drawer` |
+| `PDashboardPanel` | Resizable content panel with `#header`, `#body`, `#footer` |
+| `PDashboardNavbar` | Panel header bar with built-in mobile toggle |
+| `PDashboardToolbar` | Bar under the navbar for filters and actions |
+| `PDashboardResizeHandle` | Handle to resize a sidebar or panel |
+| `PDashboardSidebarCollapse` | Button that collapses the sidebar on desktop |
+| `PDashboardSidebarToggle` | Button that opens the sidebar on mobile |
+| `PDashboardSearch` | Ready-made CommandPalette modal for dashboards |
+| `PDashboardSearchButton` | Button that opens `PDashboardSearch` |
 
-## Page (marketing)
-
-| Component | Purpose |
-|---|---|
-| `PPage` | Multi-column layout with left/right sidebars |
-| `PPageHero` | Hero section — title, description, links, media |
-| `PPageSection` | Content section with features grid |
-| `PPageCTA` | Call to action block |
-| `PPageHeader` | Page title and description |
-| `PPageBody` | Main content area |
-| `PPageGrid` | Card grid layout |
-| `PPageColumns` | Multi-column layout |
-| `PPageCard` | Content card for grids |
-| `PPageFeature` | Feature item |
-| `PPageLogos` | Logo cloud |
-| `PPageAside` | Sticky sidebar wrapper |
-| `PPageAnchors` | Simple anchor links |
-| `PPageLinks` | Related resource links |
-| `PPageList` | List layout for page items |
-
-## Blog & Changelog
+## Page (marketing and content)
 
 | Component | Purpose |
 |---|---|
-| `PBlogPosts` | Blog post grid |
-| `PBlogPost` | Individual post card |
-| `PChangelogVersions` | Changelog list |
-| `PChangelogVersion` | Individual changelog entry |
+| `PPage` | Grid with `#left`, default, `#right` columns |
+| `PPageHeader` | Page title, description, headline, links |
+| `PPageBody` | Main page content area |
+| `PPageAside` | Sticky side column (shown from `lg`) |
+| `PPageHero` | Hero: title, description, `links`, media in default slot |
+| `PPageSection` | Section with headline, title, `features`, `orientation`, `reverse` |
+| `PPageCTA` | Call-to-action block |
+| `PPageGrid` / `PPageColumns` / `PPageList` | Responsive grid / multi-column layout / stacked list |
+| `PPageCard` | Card with icon, title, description, link, `highlight` |
+| `PPageFeature` | Single feature item |
+| `PPageLogos` | Logo wall |
+| `PPageAnchors` / `PPageLinks` | Anchor list / related links list |
+| `PAuthForm` | Login, register, or reset form with providers |
+| `PBlogPosts` / `PBlogPost` | Blog grid / article card |
+| `PChangelogVersions` / `PChangelogVersion` | Changelog timeline / entry |
+| `PPricingPlans` / `PPricingPlan` | Pricing cards (`plans` prop) / one plan |
+| `PPricingTable` | Tiered plans with a feature comparison |
 
-## Pricing
+## Content (`@nuxt/content`, Nuxt only)
 
-| Component | Purpose |
-|---|---|
-| `PPricingPlans` | Pricing plan cards |
-| `PPricingPlan` | Individual pricing plan card |
-| `PPricingTable` | Feature comparison table |
-
-## Prose — Base Typography
-
-Standard Markdown elements auto-resolved by Comark/Content/MDC. No `::` prefix needed — they map directly from markdown syntax (`# Heading` → `ProseH1`, `**bold**` → `ProseStrong`, etc.). Themed via `appConfig.ui.prose.<name>`.
-
-| Component | Renders | Notable |
-|---|---|---|
-| `H1` `H2` `H3` `H4` | Headings | H1–H3 get anchor links + TOC entries |
-| `P` | Paragraph | |
-| `A` | Link | External links get target/rel handling |
-| `Strong` | Bold | |
-| `Em` | Italic | |
-| `Blockquote` | Blockquote | |
-| `Hr` | Horizontal rule | |
-| `Ul` `Ol` `Li` | Lists | Supports nesting and mixed lists |
-| `Table` `Thead` `Tbody` `Tr` `Th` `Td` | Tables | |
-| `Img` | Image | Zoom on click (`:zoom="false"` to disable), `@nuxt/image` support |
-| `Pre` | Code block | Copy button, filename + icon, line highlighting (`{2,4-6}`), diff |
-| `Code` | Inline code | `color` and `lang` props |
-
-## Prose — Feature Components
-
-Pohon UI-specific Prose components. In markdown files they are used **without the `Prose` prefix** (e.g. `::callout`, `::steps`). In Vue they are referenced as `ProseCallout`, `ProseSteps`, etc. Comark resolves them automatically when `pohon-ui` is installed.
-
-Pohon UI also registers shorthand aliases for `Callout`: `::note`, `::tip`, `::warning`, `::caution` (preset `color` + `icon`).
+Registered when `@nuxt/content` is installed or `ui.content: true`.
 
 | Component | Purpose |
 |---|---|
-| `Callout` | Highlighted note/warning/tip (`color`, `icon`, `to`) |
-| `Badge` | Inline badge/tag |
-| `Kbd` | Keyboard key |
-| `Icon` | Inline Iconify icon |
-| `Prompt` | Terminal prompt block |
-| `Card` `CardGroup` | Content card and card grid |
-| `Steps` | Numbered step list (`level` prop sets heading depth) |
-| `Tabs` `TabsItem` | Tabbed content (`sync` for localStorage, `hash` for scroll-on-change) |
-| `Accordion` `AccordionItem` | Collapsible accordion sections |
-| `Collapsible` | Single collapsible section |
-| `Field` `FieldGroup` | Form field display |
-| `CodeGroup` | Tabbed code blocks |
-| `CodeCollapse` | Collapsible code block |
-| `CodeIcon` | File-type icon in code headers |
-| `CodePreview` | Code + live rendered preview side by side |
-| `CodeTree` | File tree display |
-| `Script` | Script injection |
+| `PContentNavigation` | Accordion navigation from `queryCollectionNavigation` |
+| `PContentToc` | Sticky table of contents with active highlighting |
+| `PContentSurround` | Previous / next links |
+| `PContentSearch` | Ready-made CommandPalette over content (`navigation`, `files`) |
+| `PContentSearchButton` | Button that opens `PContentSearch` |
 
-## Content (Nuxt Content)
+## Chat (AI SDK)
 
 | Component | Purpose |
 |---|---|
-| `PContentNavigation` | Sidebar navigation from content |
-| `PContentToc` | Table of contents |
-| `PContentSurround` | Prev/next navigation |
-| `PContentSearch` | Search command palette |
-| `PContentSearchButton` | Trigger for content search |
+| `PChatMessages` | Message list with auto-scroll, `#content` slot per message |
+| `PChatMessage` | One message (`side`, `variant`, avatar, actions) |
+| `PChatReasoning` | Collapsible reasoning block, opens while streaming |
+| `PChatTool` | Tool call status (`variant`: `inline`, `card`), approval `actions` |
+| `PChatShimmer` | Text shimmer for streaming states |
+| `PChatPrompt` | Prompt textarea with `submitOnEnter`, `#header`, `#footer` |
+| `PChatPromptSubmit` | Submit button that switches to stop/reload by `status` |
+| `PChatPalette` | Chat layout for overlays (default + `#prompt` slots) |
 
-## Chat (AI)
-
-| Component | Purpose |
-|---|---|
-| `PChatMessages` | Scrollable message list |
-| `PChatMessage` | Individual message bubble |
-| `PChatReasoning` | Collapsible AI reasoning block |
-| `PChatTool` | Tool invocation status |
-| `PChatShimmer` | Streaming text animation |
-| `PChatPrompt` | Enhanced textarea for prompts |
-| `PChatPromptSubmit` | Submit button with status |
-| `PChatPalette` | Chat layout for overlays |
-
-## Editor
+## Editor (TipTap)
 
 | Component | Purpose |
 |---|---|
-| `PEditor` | Rich text editor (JSON/HTML/Markdown) |
-| `PEditorToolbar` | Toolbar (fixed/bubble/floating) |
-| `PEditorDragHandle` | Block drag-and-drop |
-| `PEditorSuggestionMenu` | Slash command menu |
-| `PEditorMentionMenu` | @ mention menu |
-| `PEditorEmojiMenu` | Emoji picker |
+| `PEditor` | Rich text editor; `v-model` as JSON, HTML, or Markdown (`content-type`) |
+| `PEditorToolbar` | Toolbar from `items`; `layout`: `fixed`, `bubble`, `floating` |
+| `PEditorDragHandle` | Drag handle to move and select blocks |
+| `PEditorSuggestionMenu` | `/` command menu from `items` |
+| `PEditorMentionMenu` | `@` mention menu from `items` |
+| `PEditorEmojiMenu` | `:` emoji menu from `items` (needs the TipTap `Emoji` extension) |
 
-## Color Mode
+## Color mode and i18n
 
 | Component | Purpose |
 |---|---|
-| `PColorModeButton` | Toggle button (light/dark) |
-| `PColorModeSwitch` | Toggle switch (light/dark) |
-| `PColorModeSelect` | Dropdown (light/dark/system) |
-| `PColorModeAvatar` | Avatar that changes with color mode |
-| `PColorModeImage` | Image that changes with color mode |
+| `PColorModeButton` | Light/dark toggle button |
+| `PColorModeSwitch` | Light/dark switch |
+| `PColorModeSelect` | System / light / dark select |
+| `PColorModeAvatar` / `PColorModeImage` | Different `light` / `dark` source per mode |
+| `PLocaleSelect` | Locale picker (extends `PSelectMenu`), takes `locales` |
+
+## Composables and utilities
+
+All are auto-imported (Nuxt and the Vite plugin). Docs: `https://vinicunca.dev/raw/pohon/composables/<kebab-name>.md`.
+
+| Name | Purpose |
+|---|---|
+| `useToast()` | `add`, `update`, `remove`, `clear`, `toasts` |
+| `useOverlay()` | `create(Component, { props, defaultOpen, destroyOnClose })` → instance with `open(props)` (awaitable), `close`, `patch`; plus `closeAll`, `isOpen` |
+| `defineShortcuts(config, options?)` | Keyboard shortcuts: `meta_k`, chained `g-d`, `{ handler, usingInput }` |
+| `extractShortcuts(items)` | Builds a shortcuts config from items with `kbds` + `onSelect` |
+| `defineLocale(options)` / `extendLocale(locale, overrides)` | Custom or extended locale for `PApp` |
+| `useTour(steps)` | Guided tour that re-anchors one `PPopover`: bind `open` and `reference`, drive with `start`, `next`, `prev`, `goTo`, `finish` |
+| `useScrollShadow()` | Fade masks on the edges of a scrollable element |
+
+Also exported but undocumented: `useFormField`, `useFileUpload`, `useKbd`, `useResizable`, `useScrollspy`, `useContentSearch`. Import paths for non-auto-imported helpers:
+
+- `pohon-ui/locale`: built-in locales (`en`, `fr`, `de`, `ja`, `zh_cn`, … 60+)
+- `pohon-ui/utils/ai`: `isPartStreaming`, `isToolStreaming`, `isReasoningStreaming`, `isToolApprovalPending`, `getTextFromMessage`
+- `pohon-ui/utils/content`: `mapContentNavigation`
+- `pohon-ui/composables`: explicit composable imports when `autoImport: false`
+- Types from `pohon-ui`: `FormSubmitEvent`, `FormError`, `TableColumn`, `NavigationMenuItem`, `DropdownMenuItem`, `CommandPaletteGroup`, `AuthFormField`, `EditorToolbarItem`, `Messages`, …
+
+## Prose components (Markdown)
+
+Registered in Nuxt when `@nuxt/content` or `@nuxtjs/mdc` is installed, or with the `prose: true` option (set it when you only use `@comark/nuxt`). Vue projects set `ui({ prose: true })` and pass them to Comark's `<Markdown :components>` from `pohon-ui/components/prose`. Theme them under `ui.prose.<name>` (e.g. `ui.prose.callout`). Docs: [typography](https://vinicunca.dev/raw/pohon/typography.md).
+
+**Base elements** map from plain Markdown syntax (`# Title` → `ProseH1`): `H1`–`H4` (anchor links), `P`, `A`, `Strong`, `Em`, `Blockquote`, `Hr`, `Ul`, `Ol`, `Li`, `Table`, `Thead`, `Tbody`, `Tr`, `Th`, `Td`, `Img` (zoom on click, `:zoom="false"` to disable), `Pre` (copy button, filename, line highlights), `Code` (inline; `color`, `lang`), `Script`.
+
+**Block components** are written without the `Prose` prefix in Markdown (`::callout`) and with it in Vue (`ProseCallout`):
+
+| Component | Purpose |
+|---|---|
+| `callout` | Highlighted note (`color`, `icon`, `to`); shorthands `note`, `tip`, `warning`, `caution` |
+| `badge`, `kbd`, `icon` | Inline badge, key, icon |
+| `card`, `card-group` | Card and card grid |
+| `steps` | Numbered steps from headings (`level`) |
+| `tabs`, `tabs-item` | Tabbed content (`sync` saves the choice, `hash`) |
+| `accordion`, `accordion-item`, `collapsible` | Collapsible content |
+| `field`, `field-group` | Property documentation |
+| `code-group`, `code-collapse`, `code-preview`, `code-tree`, `code-icon` | Code block layouts |
+| `prompt` | Pre-built AI prompt with one-click copy |

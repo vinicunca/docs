@@ -1,114 +1,145 @@
 ---
 name: pohon-ui
-description: Build UIs with Pohon UI — accessible Vue components with UnoCSS theming. Use when creating interfaces, customizing themes to match a brand, building forms, or composing layouts like dashboards, docs sites, and chat interfaces.
+description: Build Vue and Nuxt interfaces with Pohon UI (the `pohon-ui` package, `P`-prefixed components themed with UnoCSS). Use when installing or configuring pohon-ui in Nuxt, Vue/Vite, Laravel or AdonisJS (Inertia); choosing or wiring a `P*` component or composable (`useToast`, `useOverlay`, `defineShortcuts`); theming colors, CSS variables, or the `ui` prop; or building forms, tables, overlays, and dashboard, docs, landing, chat, or editor layouts.
 ---
 
 # Pohon UI
 
-Vue component library built on [Akar](/akar/overview/introduction) + [UnoCSS](https://unocss.dev/) + [UnoCSS Variants](https://vinicunca.dev/unocss-variants/). Works with Nuxt, Vue (Vite), Laravel (Vite + Inertia), and AdonisJS (Vite + Inertia).
+Vue component library (125+ components, current release `pohon-ui@2.0.6`) built on [Akar](https://vinicunca.dev/raw/akar/overview.md) primitives, [UnoCSS](https://unocss.dev/) with `@vinicunca/unocss-preset`, and [UnoCSS Variants](https://vinicunca.dev/raw/unocss-variants/getting-started.md). Runs in Nuxt (module) and plain Vue through a Vite plugin, which also covers Laravel and AdonisJS with Inertia.
 
-## MCP Server
+This skill tells you **which component to use and how to compose it**. For the exact props, slots, emits, and theme of a component, look it up (next section) before you write code.
 
-For component API details (props, slots, events, full documentation, examples), use the [Pohon UI MCP server](https://vinicunca.dev/pohon/getting-started/ai/mcp). If not already configured, add it:
+## Look up APIs
 
-**Cursor** — `.cursor/mcp.json`:
+Every docs page is served as Markdown with props, slots, emits, and theme tables expanded. Fetch these instead of guessing a prop name:
 
-```json
-{ "mcpServers": { "pohon-ui": { "type": "http", "url": "https://vinicunca.dev/mcp" } } }
-```
+| What | URL |
+|---|---|
+| Component | `https://vinicunca.dev/raw/pohon/components/<kebab-name>.md` (e.g. `select-menu.md`) |
+| Composable | `https://vinicunca.dev/raw/pohon/composables/<kebab-name>.md` (e.g. `use-overlay.md`) |
+| Prose (Markdown) components | `https://vinicunca.dev/raw/pohon/typography.md` |
+| Page index for all packages | `https://vinicunca.dev/llms.txt` |
 
-**Claude Code**:
+In a project, the generated theme files show every slot, variant, and default class of a component:
+
+- Nuxt: `.nuxt/ui/<component>.ts` (prose: `.nuxt/ui/prose/<name>.ts`, content: `.nuxt/ui/content/<name>.ts`)
+- Vue: `node_modules/.pohon-ui/ui/<component>.ts`
+
+### MCP server
+
+The docs describe an HTTP MCP server at `https://vinicunca.dev/mcp` with the tools `search-components`, `search-composables`, `search-icons`, `get-component` (takes `sections`), `get-component-metadata`, `search-documentation`, `get-documentation-page`, `list-examples`, and `get-example`. If the user wants it configured:
 
 ```bash
 claude mcp add --transport http pohon-ui https://vinicunca.dev/mcp
 ```
 
-Key MCP tools:
-- `search-components` — find components by name, category, or intent (no params = list all)
-- `search-composables` — find composables by name or description (no params = list all)
-- `search-icons` — search Iconify icons (defaults to `lucide`), returns `i-{prefix}-{name}` names
-- `get-component` — full component documentation with usage examples
-- `get-component-metadata` — props, slots, events (lightweight, no docs content)
-- `get-example` — real-world code examples
+```json
+// .cursor/mcp.json
+{ "mcpServers": { "pohon-ui": { "type": "http", "url": "https://vinicunca.dev/mcp" } } }
+```
 
-When you need to know **what a component accepts** or **how its API works**, use the MCP. This skill teaches you **when to use which component** and **how to build well**.
+Other clients: [MCP setup](https://vinicunca.dev/raw/pohon/getting-started/ai/mcp.md). If the server doesn't respond, use the raw Markdown URLs above.
 
-## Core rules (always apply)
+## Core rules
 
-1. **Always wrap the app in `PApp`** — required for toasts, tooltips, and programmatic overlays. Accepts a `locale` prop for i18n.
-2. **Always use semantic colors** — `color-text`, `bg-background-elevated`, `border-border-muted`, etc. Never use raw UnoCSS palette colors like `text-gray-500`.
-3. **Read generated theme files for slot names** — Nuxt: `.nuxt/ui/<component>.ts`, Vue: `node_modules/.pohon-ui/ui/<component>.ts`. These show every slot, variant, and default class for any component.
-4. **Override priority** (highest wins): `ui` prop / `class` prop → global config → theme defaults.
-5. **Icons use `i-{collection}-{name}` format** — `lucide` is the default collection. Use the MCP `search-icons` tool to find icons, or browse at [icones.js.org](https://icones.js.org).
+1. **Wrap the app in `PApp`.** Toasts, tooltips, and `useOverlay` need it. It also takes `locale`, `toaster`, `tooltip`, and `portal` props.
+2. **Use semantic color utilities.** Write `color-text-muted`, `bg-background-elevated`, `border-border`, and `text-primary`, not palette classes like `text-gray-500`. Neutral text colors use the `color-text*` form (`color-text`, `color-text-muted`, `color-text-highlighted`).
+3. **Set component colors through the `color` prop:** `primary`, `secondary`, `success`, `info`, `warning`, `error`, `neutral`.
+4. **Override styles in this order (highest wins):** `ui` / `class` prop → `PTheme` → global config (`app.config.ts` in Nuxt, `ui({ ui })` in `vite.config.ts` for Vue) → theme defaults.
+5. **Replace conflicting classes with the function form.** Pohon UI joins your classes onto the defaults without removing conflicts, so `class="font-bold"` next to a default `font-medium` can lose, depending on stylesheet order. Use `:ui="{ base: (defaults) => '...' }"` to replace a slot's classes, or the `!` important prefix when one class must win.
+6. **Write icons as `i-{collection}-{name}`** (`lucide` is the default set). In plain Vue, put a colon after a collection whose name contains a dash: `i-simple-icons:github`. Install collections locally with `@iconify-json/<collection>`.
+7. **Use the `P` prefix** (`PButton`, `PModal`). Projects can change it with the `prefix` option, so check the config if `P*` tags don't resolve.
 
-## How to use this skill
+## Load references for the task
 
-Based on the task, load the relevant reference files **before writing any code**. Don't load everything — only what's needed.
+Read the matching files **before writing code**, and skip the others.
 
-### Reference files
-
-**Guidelines** — design decisions and conventions:
-- [design-system](references/guidelines/design-system.md) — semantic colors, theming, brand customization, variants, the `ui` prop
-- [component-selection](references/guidelines/component-selection.md) — decision matrices: when to use Modal vs Slideover, Select vs SelectMenu, Toast vs Alert, etc.
-- [conventions](references/guidelines/conventions.md) — coding patterns, slot naming, items arrays, composables, keyboard shortcuts
-- [forms](references/guidelines/forms.md) — form validation, field layout, error handling, Standard Schema
-
-**Layouts** — full page structure patterns:
-- [landing](references/layouts/landing.md) — landing pages, blog, changelog, pricing
-- [dashboard](references/layouts/dashboard.md) — admin UI with sidebar and panels
-- [docs](references/layouts/docs.md) — documentation sites with navigation and TOC
-- [chat](references/layouts/chat.md) — AI chat with Vercel AI SDK
-- [editor](references/layouts/editor.md) — rich text editor with toolbars
-
-**Recipes** — complete patterns for common tasks:
-- [data-tables](references/recipes/data-tables.md) — tables with filters, pagination, sorting, selection
-- [auth](references/recipes/auth.md) — login, signup, forgot password forms
-- [overlays](references/recipes/overlays.md) — modals, slideovers, drawers, command palette
-- [navigation](references/recipes/navigation.md) — headers, sidebars, breadcrumbs, tabs
-
-**Quick reference:**
-- [components](references/components.md) — categorized component index for finding the right component name
-
-### Routing table
-
-| Task | Load these references |
+| Task | References |
 |---|---|
-| Build a landing page | design-system, conventions, landing |
-| Build a dashboard / admin UI | conventions, component-selection, dashboard |
-| Add a settings page | conventions, forms |
-| Create a login / signup form | conventions, forms, auth |
-| Display data in a table | conventions, component-selection, data-tables |
-| Customize theme / brand colors | design-system |
-| Add a chat interface | conventions, chat |
-| Add a modal, slideover, or drawer | conventions, component-selection, overlays |
-| Build site navigation | conventions, component-selection, navigation |
-| Build a documentation site | conventions, docs |
-| Render markdown | component-selection, components, docs |
-| Add a rich text editor | conventions, editor |
-| General UI work | conventions, component-selection |
+| Landing page, blog, changelog, pricing | [design-system](references/guidelines/design-system.md), [conventions](references/guidelines/conventions.md), [landing](references/layouts/landing.md) |
+| Dashboard / admin UI | conventions, [component-selection](references/guidelines/component-selection.md), [dashboard](references/layouts/dashboard.md) |
+| Settings page or any form | conventions, [forms](references/guidelines/forms.md) |
+| Login / signup / password reset | conventions, forms, [auth](references/recipes/auth.md) |
+| Data table | conventions, component-selection, [data-tables](references/recipes/data-tables.md) |
+| Theme, brand colors, fonts, radius | design-system |
+| AI chat | conventions, [chat](references/layouts/chat.md) |
+| Modal, slideover, drawer, command palette | conventions, component-selection, [overlays](references/recipes/overlays.md) |
+| Header, sidebar, breadcrumbs, tabs | conventions, component-selection, [navigation](references/recipes/navigation.md) |
+| Documentation site (Nuxt Content) | conventions, [docs](references/layouts/docs.md) |
+| Render Markdown | component-selection, [components](references/components.md) |
+| Rich text editor | conventions, [editor](references/layouts/editor.md) |
+| Find a component or composable name | [components](references/components.md) |
+| Other UI work | conventions, component-selection |
 
 ## Installation
 
-### Nuxt
+All setups install the same packages and UnoCSS preset:
 
-Install `pohon-ui`, `unocss`, and `@vinicunca/unocss-preset`. The Pohon module registers `@unocss/nuxt` and its other Nuxt dependencies. Configure the preset in `uno.config.ts`:
+```bash
+pnpm add pohon-ui unocss @vinicunca/unocss-preset
+```
 
 ```ts
+// uno.config.ts
 import { presetVinicunca } from '@vinicunca/unocss-preset'
 import { defineConfig } from 'unocss'
 
 export default defineConfig({ presets: [presetVinicunca()] })
 ```
 
+### Nuxt (`>=4.1`)
+
 ```ts
 // nuxt.config.ts
 export default defineNuxtConfig({ modules: ['pohon-ui'] })
 ```
 
-Wrap the application in `<PApp><NuxtPage /></PApp>`.
+```vue
+<!-- app.vue -->
+<template>
+  <PApp>
+    <NuxtPage />
+  </PApp>
+</template>
+```
+
+The module registers `@unocss/nuxt`, `@nuxt/icon`, `@nuxt/fonts`, and `@nuxtjs/color-mode`. Leave them out of `modules`, and configure them with the root `icon`, `fonts`, and `colorMode` keys. Module options go under the `ui` key: `prefix`, `fonts`, `colorMode`, `theme.colors`, `theme.transitions`, `theme.unstyled`, `theme.defaultVariants`, `prose`, `content`. See [Nuxt installation](https://vinicunca.dev/raw/pohon/getting-started/installation/nuxt.md).
 
 ### Vue (Vite)
 
-Install `pohon-ui`, `unocss`, and `@vinicunca/unocss-preset`. Add `UnoCSS()` and `ui()` to the Vite plugins, as in `playgrounds/vue/vite.config.ts`. Use the same `uno.config.ts` preset shown above, and import `virtual:uno.css` in `src/main.ts`. Install `pohon-ui/vue-plugin` on the Vue app and wrap its root view in `<PApp>`.
+```ts
+// vite.config.ts
+import vue from '@vitejs/plugin-vue'
+import ui from 'pohon-ui/vite'
+import UnoCSS from 'unocss/vite'
+import { defineConfig } from 'vite'
 
-The repository's [Nuxt playground](../../playgrounds/nuxt/uno.config.ts) and [Vue playground](../../playgrounds/vue/vite.config.ts) show the complete configurations.
+export default defineConfig({
+  plugins: [UnoCSS(), vue(), ui()]
+})
+```
+
+```ts
+// src/main.ts
+import ui from 'pohon-ui/vue-plugin'
+import 'virtual:uno.css'
+
+app.use(router) // vue-router, unless the plugin has `router: false` or `'inertia'`
+app.use(ui)
+```
+
+Then wrap `<RouterView />` in `<PApp>`, and add `class="isolate"` to the mount element (`<div id="app" class="isolate">`).
+
+- The plugin bundles `unplugin-auto-import` and `unplugin-vue-components`. Don't register them a second time (the build throws); configure them through the `autoImport` and `components` options. Add the generated `auto-imports.d.ts` and `components.d.ts` to the `tsconfig` `include`.
+- Theme and app config go in `ui({ ui: { colors: { primary: 'green' }, button: { ... } } })`, which takes the place of Nuxt's `app.config.ts`.
+- Other options: `prefix`, `dts`, `icon`, `colorMode`, `theme.*`, `prose`, `router`, `scanPackages`, `root`. See [Vue installation](https://vinicunca.dev/raw/pohon/getting-started/installation/vue.md).
+
+### Laravel or AdonisJS (Inertia)
+
+Use the Vue setup with `ui({ router: 'inertia' })`, and call `.use(ui)` in the `createInertiaApp` `setup` callback:
+
+- Laravel: add `laravel({ input: ['resources/js/app.ts'], refresh: true })` before `vue()`, and pass `vue({ template: { transformAssetUrls: { base: null, includeAbsolute: false } } })`. Wrap `@inertia` in `<div class="isolate">` in `resources/views/app.blade.php`.
+- AdonisJS: add `adonisjs({ entrypoints: ['inertia/app/app.ts'], reload: ['resources/views/**/*.edge'] })` and `inertia()` before `vue()`. Use `@inertia({ class: 'isolate' })` in `inertia_layout.edge`.
+- Wrap each page's content in `<PApp>`. For SSR, render the head with `@unhead/vue/server` so the color variables reach the HTML ([SSR guide](https://vinicunca.dev/raw/pohon/getting-started/integrations/ssr.md)).
+
+Complete working configs: [Nuxt playground](https://github.com/vinicunca/pohon/tree/main/playgrounds/nuxt) and [Vue playground](https://github.com/vinicunca/pohon/tree/main/playgrounds/vue).

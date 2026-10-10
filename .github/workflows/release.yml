@@ -4,19 +4,7 @@ on:
   push:
     branches:
       - main
-  repository_dispatch:
-    types:
-      - docs-package-release
   workflow_dispatch:
-    inputs:
-      package:
-        description: Package ID from docs/sources.json
-        required: true
-        type: string
-      tag:
-        description: Release tag to import
-        required: true
-        type: string
 
 jobs:
   release:
@@ -40,30 +28,9 @@ jobs:
         shell: bash
         run: pnpm i --frozen-lockfile
 
-      - name: Sync released documentation
-        if: github.event_name != 'push'
-        shell: bash
-        env:
-          RELEASE_PACKAGE: ${{ github.event.client_payload.package || inputs.package }}
-          RELEASE_TAG: ${{ github.event.client_payload.tag || inputs.tag }}
-        run: node scripts/sync-docs.mjs --package "$RELEASE_PACKAGE" --tag "$RELEASE_TAG" --write
-
       - name: Build
         shell: bash
         run: pnpm run generate
-
-      - name: Record resolved docs bundle
-        if: github.event_name != 'push'
-        shell: bash
-        env:
-          RELEASE_PACKAGE: ${{ github.event.client_payload.package || inputs.package }}
-          RELEASE_TAG: ${{ github.event.client_payload.tag || inputs.tag }}
-        run: |
-          git add content server/data/metadata.json server/data/akar-components.json server/data/pohon-components.json docs/sources.lock.json
-          if ! git diff --cached --quiet; then
-            git -c user.name='vinicunca-docs[bot]' -c user.email='actions@users.noreply.github.com' commit -m "docs: sync ${RELEASE_PACKAGE} ${RELEASE_TAG}"
-            git push origin HEAD:main
-          fi
 
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:

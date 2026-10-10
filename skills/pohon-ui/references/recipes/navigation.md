@@ -1,10 +1,10 @@
 # Navigation
 
-Patterns for headers, sidebars, breadcrumbs, and tab navigation.
+Patterns for headers, sidebars, breadcrumbs, and tab navigation. API: [header](https://vinicunca.dev/raw/pohon/components/header.md), [navigation-menu](https://vinicunca.dev/raw/pohon/components/navigation-menu.md), [tabs](https://vinicunca.dev/raw/pohon/components/tabs.md).
 
 ## Header with mobile menu
 
-`PHeader` default slot is desktop nav, `#body` is the mobile menu. Without `#body`, mobile users have no navigation.
+`PHeader` renders its default slot as desktop navigation and `#body` as the mobile menu (opened by the built-in toggle, shown as a modal by default; change it with `mode="slideover"` or `"drawer"`). Without `#body`, mobile users have no navigation. Other slots: `#title` (or the `title` and `to` props), `#left`, `#right`, `#top`, `#bottom`.
 
 ```vue
 <PHeader>

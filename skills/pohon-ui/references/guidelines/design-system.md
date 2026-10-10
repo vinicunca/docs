@@ -1,31 +1,35 @@
 # Design System
 
+Colors, utilities, variants, and the four ways to restyle a component. Sources: [Design system](https://vinicunca.dev/raw/pohon/getting-started/theme/design-system.md), [CSS variables](https://vinicunca.dev/raw/pohon/getting-started/theme/css-variables.md), [Customize components](https://vinicunca.dev/raw/pohon/getting-started/theme/components.md).
+
 ## Semantic colors
 
-Pohon UI uses 7 semantic colors. Never use raw UnoCSS palette colors in components — always use these semantic names.
+Pohon UI has 7 semantic colors. Use these names in `color` props and utility classes, never raw palette names.
 
-| Color | Default | When to use |
+| Color | Default palette | When to use |
 |---|---|---|
 | `primary` | green | CTAs, active states, brand accent, links |
 | `secondary` | blue | Secondary actions, complementary highlights |
 | `success` | green | Success messages, confirmations, positive states |
-| `info` | blue | Informational alerts, tips, neutral highlights |
-| `warning` | yellow | Warnings, caution states, pending actions |
+| `info` | blue | Informational alerts, tips |
+| `warning` | yellow | Warnings, pending states |
 | `error` | red | Errors, destructive actions, validation failures |
 | `neutral` | slate | Text, borders, backgrounds, disabled states, chrome |
 
 ### Choosing colors for components
 
-- **Primary action** on a page (submit, save, confirm) → `color="primary"`
-- **Secondary actions** (cancel, back, alternative) → `color="neutral"` with `variant="outline"` or `"ghost"`
+- **Main action** of a view (submit, save, confirm) → `color="primary"`
+- **Secondary actions** (cancel, back) → `color="neutral"` with `variant="outline"` or `"ghost"`
 - **Destructive actions** (delete, remove) → `color="error"`
-- **Status indicators** → match the semantic meaning: `success`, `warning`, `error`, `info`
+- **Status** → the matching meaning: `success`, `warning`, `error`, `info`
 - **Navigation and chrome** → `color="neutral"`
 
 ### Configuring colors
 
+Colors are runtime config, so no rebuild is needed:
+
 ```ts
-// Nuxt — app.config.ts
+// Nuxt: app/app.config.ts
 export default defineAppConfig({
   ui: {
     colors: {
@@ -40,7 +44,7 @@ export default defineAppConfig({
 ```
 
 ```ts
-// Vue — vite.config.ts
+// Vue: vite.config.ts
 ui({
   ui: {
     colors: { primary: 'indigo', secondary: 'violet', neutral: 'zinc' }
@@ -48,24 +52,23 @@ ui({
 })
 ```
 
-Only colors that exist in your theme work — either UnoCSS's defaults or custom colors defined in `uno.config.ts`.
+A value must be a palette that exists: a UnoCSS default color or one you define with `--color-<name>-<shade>` variables. `black` and `white` have no shades and cannot be used here (see [Black or white as primary](#black-or-white-as-primary)).
 
-Available color palettes:
-- **Standard UnoCSS**: red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, violet, purple, fuchsia, pink, rose
-- **Neutral palettes** (for `neutral` key — pick one that matches the aesthetic):
-  - `slate` — cool blue-gray, professional (default)
-  - `gray` — true neutral, clean
-  - `zinc` — slightly cool, modern, techy
-  - `neutral` — perfectly balanced
-  - `stone` — warm gray, earthy
-  - `taupe` — warm brown-gray, sophisticated
-  - `mauve` — purple-tinted gray, elegant
-  - `mist` — soft blue-gray, airy
-  - `olive` — green-tinted gray, natural
+- **Colors**: red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, violet, purple, fuchsia, pink, rose
+- **Neutral palettes** for the `neutral` key:
+  - `slate`: cool blue-gray (default)
+  - `gray`: true neutral
+  - `zinc`: slightly cool, techy
+  - `neutral`: perfectly balanced
+  - `stone`: warm, earthy
+  - `taupe`: warm brown-gray
+  - `mauve`: purple-tinted
+  - `mist`: soft blue-gray
+  - `olive`: green-tinted
 
-### Adding custom brand colors
+### Adding a custom brand palette
 
-1. Define all 11 shades in CSS:
+1. Define all 11 shades (`50` to `950`) as CSS variables in a global stylesheet (in Nuxt, add it to `css: ['~/assets/css/main.css']` in `nuxt.config.ts`):
 
 ```css
 /* app/assets/css/main.css */
@@ -84,14 +87,16 @@ Available color palettes:
 }
 ```
 
-2. Assign it: `ui: { colors: { primary: 'brand' } }`
+2. Assign it: `ui: { colors: { primary: 'brand' } }`.
 
-### Extending with new semantic color names
+Overriding a default palette works the same way (`--color-green-500: #00C16A;`).
 
-To add a color beyond the 7 defaults (e.g., `tertiary`), register it in `theme.colors`:
+### Adding a semantic color name
+
+To add a color beyond the defaults (e.g. `tertiary`), register it in the module options, then assign a palette:
 
 ```ts
-// nuxt.config.ts
+// nuxt.config.ts (Vue: the same `theme` key in ui({ ... }))
 export default defineNuxtConfig({
   ui: {
     theme: {
@@ -101,93 +106,130 @@ export default defineNuxtConfig({
 })
 ```
 
+```ts
+// app.config.ts
+export default defineAppConfig({ ui: { colors: { tertiary: 'indigo' } } })
+```
+
+Then use `color="tertiary"` or `text-tertiary`. Each alias in `theme.colors` generates variants for every colored component, so trim the list to what you use, and keep `error`: form validation styles depend on it.
+
 ## Semantic utility classes
 
-Use these everywhere instead of raw palette colors:
+Use these everywhere instead of palette classes. They follow light and dark mode automatically.
+
+### Colors
+- `text-primary`, `bg-error`, `border-success`, `ring-info/50`: one utility per semantic color (`--ui-primary`, …)
 
 ### Text
-- `color-text` — primary body text
-- `color-text-muted` — secondary text (descriptions, hints)
-- `color-text-toned` — medium-emphasis text (between muted and default)
-- `color-text-dimmed` — tertiary text (placeholders, disabled)
-- `color-text-highlighted` — emphasized text (headings, important labels)
-- `color-text-inverted` — text on inverted backgrounds (pair with `bg-background-inverted`)
+- `color-text`: body text
+- `color-text-muted`: secondary text (descriptions, hints)
+- `color-text-toned`: between muted and default
+- `color-text-dimmed`: tertiary text (placeholders, disabled)
+- `color-text-highlighted`: headings, emphasized labels
+- `color-text-inverted`: text on `bg-background-inverted`
 
 ### Backgrounds
-- `bg-background` — page background
-- `bg-background-muted` — subtle backgrounds (hover states, alternating rows)
-- `bg-background-elevated` — raised surfaces (cards, dropdowns)
-- `bg-background-accented` — accent backgrounds (active states, selected items)
-- `bg-background-inverted` — inverse background (dark on light, light on dark)
+- `bg-background`: page background
+- `bg-background-muted`: subtle (hover, alternating rows)
+- `bg-background-elevated`: raised surfaces (cards, dropdowns)
+- `bg-background-accented`: active or selected
+- `bg-background-inverted`: inverse surface
 
 ### Borders
-- `border-border` — standard borders
-- `border-border-muted` — subtle borders (dividers, separators)
-- `border-border-accented` — accent borders (active states)
-- `border-border-inverted` — inverse borders
+- `border-border`: standard borders
+- `border-border-muted`: dividers
+- `border-border-accented`: active borders
+- `border-border-inverted`: inverse borders
+
+Rings and outlines use the same names (`ring-ring`, `ring-ring-accented`, `outline-outline-inverted/25`).
 
 ## Variants
 
-Most components accept a `variant` prop. Choose based on visual weight:
+Most components take a `variant` prop. Pick by visual weight:
 
 | Variant | Weight | When to use |
 |---|---|---|
 | `solid` | Highest | Primary actions, main CTAs |
 | `outline` | Medium | Secondary actions, form fields |
 | `soft` | Medium-low | Tags, badges, subtle buttons |
-| `subtle` | Low | Background highlights, less prominent actions |
+| `subtle` | Low | Soft with a border; less prominent actions |
 | `ghost` | Lowest | Inline actions, icon buttons, navigation items |
 | `link` | Lowest | Text-only links inside content |
 
 ### Rules
 
-- **One solid primary button per view** — everything else should be lower weight
-- **Destructive buttons** use `color="error"` but not necessarily `variant="solid"` — use `variant="soft"` or `"outline"` unless it's the primary action on a confirmation dialog
-- **Button groups** should use consistent variants — don't mix `solid` and `outline` siblings
+- **One solid primary button per view**; give everything else less weight.
+- **Destructive buttons** use `color="error"`, usually with `variant="soft"` or `"outline"`. Use `solid` only for the confirm button of a destructive dialog.
+- **Sibling buttons** share a variant, except for the one primary action.
 
 ## Customizing components
 
+Four layers, highest priority first: `ui` / `class` prop → `PTheme` → global config → theme defaults.
+
+### Merging and conflicts
+
+Pohon UI styles components with UnoCSS Variants, which **joins** your classes onto the defaults and never removes conflicting utilities. A non-conflicting class (`shadow-lg`, `gap-4`) always applies. A conflicting one (`font-bold` against a default `font-medium`, `p-2` against `p-4`) depends on stylesheet order and can lose. When a class must replace a default:
+
+- set the slot to a **function**, which replaces the slot's classes (examples below), or
+- add the `!` important prefix to that one class (`!p-2`).
+
 ### `ui` prop
 
-Override theme **slots** on a single instance — wins over global config and variants.
+Overrides the classes of any **slot** on one instance:
 
 ```vue
-<PButton :ui="{ base: 'font-bold', trailingIcon: 'size-3 rotate-90' }" />
+<PButton :ui="{ leadingIcon: 'size-3', label: 'tracking-wide' }" />
 <PCard :ui="{ header: 'bg-background-muted', body: 'p-8' }" />
 ```
 
-Rules for `ui` overrides:
-- **Prefer `defaultVariants`** over slot class overrides when possible (e.g., changing default button variant/size).
-- **Don't duplicate default classes** — check the generated theme file first to see what's already there.
-- Border radius defaults come from `--ui-radius`, but you can override with `rounded-*` classes in `ui` or `class` when you need a specific radius on a component.
+- Read the slot names from the raw component page (Theme section) or the generated theme file: `.nuxt/ui/<component>.ts` (Nuxt) or `node_modules/.pohon-ui/ui/<component>.ts` (Vue).
+- Components without slots expose a single `base` key. `PLink` and `PIcon` have no `ui` prop; use `class`.
+- Prefer a variant prop (`size`, `variant`, `color`) or `defaultVariants` over slot overrides when one exists.
 
 ### `class` prop
 
-Override the **root** (or `base`) slot only — simpler than `ui` for single-slot changes.
+Targets the `root` (or `base`) slot only:
 
 ```vue
-<PButton class="font-bold" />
+<PButton class="rounded-full shadow-lg" />
 ```
 
-### Finding slot names
+### Replace instead of merge
 
-Read the generated theme file for any component:
-- **Nuxt**: `.nuxt/ui/<component>.ts`
-- **Vue**: `node_modules/.pohon-ui/ui/<component>.ts`
+A function receives the slot's default classes and returns the classes to use:
 
-These files show every available slot name, variant combination, and default class.
+```vue
+<PButton :ui="{ label: () => 'text-base font-bold' }" />
+<PButton :ui="{ base: (defaults) => `${defaults} !rounded-full` }" />
+```
+
+In the `ui` and `class` props the function runs after variants, so it replaces the resolved classes. In global config it replaces only the slot's base classes, and `variants` / `compoundVariants` still apply on top. In Nuxt, define a slot function in one `app.config.ts` only: Nuxt layers merge app config with `defuFn`, which calls the function and keeps a plain string.
+
+### Theme component
+
+`PTheme` overrides slot classes (`ui`) and prop defaults (`props`) for everything inside it, without rendering an element:
+
+```vue
+<PTheme :ui="{ button: { base: 'rounded-full' } }" :props="{ button: { color: 'neutral', variant: 'outline' } }">
+  <PButton label="Rounded neutral" />
+  <PButton label="Also rounded" />
+</PTheme>
+```
 
 ### Global config
 
-Override `slots`, `variants`, `compoundVariants`, and `defaultVariants` globally in `app.config.ts` (Nuxt) or `vite.config.ts` (Vue):
+Override `slots`, `variants`, `compoundVariants`, and `defaultVariants` for every instance, in `app.config.ts` (Nuxt) or `ui({ ui: { ... } })` (Vue):
 
 ```ts
-// Nuxt — app.config.ts
+// app/app.config.ts
 export default defineAppConfig({
   ui: {
     button: {
       slots: {
-        base: 'font-bold'
+        base: 'font-semibold'
+      },
+      variants: {
+        size: { md: { leadingIcon: 'size-4' } }
       },
       compoundVariants: [{
         color: 'neutral',
@@ -203,100 +245,27 @@ export default defineAppConfig({
 })
 ```
 
-Use the component `ui` prop to override slot classes; check the generated theme for available slots.
+Prose components sit under `ui.prose.<name>`; content components use their camelCase name (`ui.contentToc`).
 
-### Replace instead of merge
+### Module theme options
 
-Classes from the `ui` prop, the `class` prop, and global config are merged onto the component defaults. To replace them instead, set the slot to a function, which receives the default classes as its argument so you can reuse part of them.
-
-In global config it replaces the slot's own classes, so `variants` and `compoundVariants` still apply on top. In the `ui` and `class` props it runs after the variants, so it replaces the resolved classes, variants included.
-
-```vue
-<PButton :ui="{ label: () => 'text-base font-bold' }" />
-```
+Set in `nuxt.config.ts` under `ui.theme` (Vue: `ui({ theme })`):
 
 ```ts
-// app.config.ts, applies to every instance
-export default defineAppConfig({
-  ui: {
-    button: {
-      slots: {
-        label: () => 'text-base font-bold'
-      }
-    }
-  }
-})
-```
-
-### Theme component
-
-Override theme for a section of the component tree without affecting the rest of the app. Renders no DOM element — uses `provide`/`inject`:
-
-```vue
-<PTheme :ui="{ button: { base: 'rounded-full' } }">
-  <PButton label="Rounded" />
-  <PButton label="Also rounded" />
-</PTheme>
-```
-
-### Global `defaultVariants`
-
-Override default `size` and `color` for **all** components at once:
-
-```ts
-// nuxt.config.ts
 export default defineNuxtConfig({
   ui: {
     theme: {
-      defaultVariants: {
-        size: 'lg',
-        color: 'neutral'
-      }
+      defaultVariants: { size: 'sm', color: 'neutral' }, // replaces defaults that are exactly 'md' / 'primary'
+      transitions: false, // drops `transition-colors` from interactive components
+      unstyled: false // true strips every default class, layout included
     }
   }
 })
 ```
 
-### `theme.transitions`
+## Design tokens
 
-Controls whether interactive components get `transition-colors`. Enabled by default.
-
-```ts
-// nuxt.config.ts — disable transitions
-export default defineNuxtConfig({
-  ui: {
-    theme: {
-      transitions: false
-    }
-  }
-})
-```
-
-
-### Tree-shaking with `experimental.componentDetection`
-
-Enable automatic component detection to only generate CSS for components you actually use:
-
-```ts
-// nuxt.config.ts
-export default defineNuxtConfig({
-  ui: {
-    experimental: {
-      componentDetection: true
-    }
-  }
-})
-```
-
-For dynamic components (e.g., `<component :is="...">`), pass an array of component names to guarantee they're included:
-
-```ts
-componentDetection: ['Modal', 'DropdownMenu', 'Popover']
-```
-
-## UnoCSS theme customization
-
-Customize UnoCSS design tokens in `main.css`:
+Put token overrides in a global stylesheet (`app/assets/css/main.css` in Nuxt, registered in `css`).
 
 ### Fonts
 
@@ -307,31 +276,43 @@ Customize UnoCSS design tokens in `main.css`:
 }
 ```
 
-Load custom fonts through `@nuxt/fonts` or your own font provider, then set the CSS variable.
+In Nuxt, `@nuxt/fonts` loads fonts named here automatically.
 
 ### Breakpoints
 
+Breakpoints live in the UnoCSS theme:
+
+```ts
+// uno.config.ts
+export default defineConfig({
+  presets: [presetVinicunca()],
+  theme: { breakpoints: { '3xl': '1920px' } }
+})
+```
+
+### Motion
+
 ```css
 :root {
-  --breakpoint-3xl: 1920px;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 ```
 
-## CSS variables
+Enter and exit animations use `--ease-out`; indeterminate loaders use `--ease-in-out`. With `prefers-reduced-motion`, overlays fade instead of sliding.
 
-Pohon UI exposes CSS variables you can override in `main.css`:
+### Layout variables
 
 ```css
 :root {
-  --ui-radius: 0.25rem;
-  --ui-container: 80rem;
-  --ui-header-height: 4rem;
+  --ui-radius: 0.25rem; /* base for rounded-xs … rounded-3xl, also affects your own markup */
+  --ui-container: 80rem; /* PContainer max width */
+  --ui-header-height: 4rem; /* PHeader height */
 }
 ```
 
 ### Color shade overrides
 
-Each semantic color defaults to shade 500 in light mode, 400 in dark mode. Override per-mode:
+Each semantic color uses shade 500 in light mode and 400 in dark mode. Override per mode:
 
 ```css
 :root {
@@ -342,11 +323,9 @@ Each semantic color defaults to shade 500 in light mode, 400 in dark mode. Overr
 }
 ```
 
-You can use `var(--ui-color-<name>-<shade>)` to reference shades from the active palette (e.g., `var(--ui-color-neutral-800)` maps to whichever neutral palette is configured).
+`var(--ui-color-<name>-<shade>)` points at the configured palette (e.g. `var(--ui-color-neutral-800)`). Text, background, and border tokens are variables too (`--ui-color-text`, `--ui-color-bg`, `--ui-color-border`, plus their `-muted`, `-elevated`, … forms). To shift them all at once, assign a different `neutral` palette instead.
 
-### Black/white as primary
-
-`black` and `white` have no shades, so they can't be used in config. Set them directly:
+### Black or white as primary
 
 ```css
 :root {
@@ -354,5 +333,17 @@ You can use `var(--ui-color-<name>-<shade>)` to reference shades from the active
 }
 .dark {
   --ui-primary: white;
+}
+```
+
+### Focus color
+
+Interactive components show a `focus-visible` outline tinted with their `color` (`outline-primary/25`). For one outline color everywhere, add this outside any `@layer`:
+
+```css
+*,
+::before,
+::after {
+  @apply outline-primary/25;
 }
 ```

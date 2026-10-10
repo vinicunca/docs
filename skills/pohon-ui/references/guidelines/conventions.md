@@ -1,10 +1,10 @@
 # Conventions
 
-Coding patterns specific to Pohon UI.
+Coding patterns specific to Pohon UI. Examples are Nuxt unless marked; in plain Vue the same components and composables are auto-imported by the Vite plugin, and `NuxtPage` becomes `RouterView`.
 
-## Auto-registered modules
+## Nuxt modules Pohon UI registers
 
-Pohon UI automatically registers `@nuxt/icon`, `@nuxt/fonts`, and `@nuxtjs/color-mode`. Do **not** add them to your `modules` array. Configure them via root-level keys in `nuxt.config.ts`:
+The `pohon-ui` module registers `@unocss/nuxt`, `@nuxt/icon`, `@nuxt/fonts`, and `@nuxtjs/color-mode`. Keep them out of `modules` and configure them with root-level keys:
 
 ```ts
 // nuxt.config.ts
@@ -12,15 +12,14 @@ export default defineNuxtConfig({
   modules: ['pohon-ui'],
   icon: { /* @nuxt/icon options */ },
   fonts: { /* @nuxt/fonts options */ },
-  colorMode: { /* @nuxtjs/color-mode options */ }
+  colorMode: { /* @nuxtjs/color-mode options */ },
+  ui: { fonts: false } // turn off @nuxt/fonts; `colorMode: false` turns off color mode
 })
 ```
 
-Disable any of them: `ui: { fonts: false }`, `ui: { colorMode: false }`.
-
 ## Content module integration
 
-When using `@nuxt/content`, it **must** come after `pohon-ui` in the `modules` array — otherwise prose components won't be available:
+List `@nuxt/content` **after** `pohon-ui`, or the prose and content components are not registered:
 
 ```ts
 // nuxt.config.ts
@@ -29,53 +28,47 @@ export default defineNuxtConfig({
 })
 ```
 
-Add the Markdown files to UnoCSS's filesystem sources in `uno.config.ts`:
+Add the Markdown files to UnoCSS's filesystem sources so classes used in content are generated:
 
 ```ts
+// uno.config.ts
 export default defineConfig({
+  presets: [presetVinicunca()],
   content: { filesystem: ['content/**/*.{md,yml}'] }
 })
 ```
 
-Use `mapContentNavigation` to transform content navigation for components like `PBreadcrumb`:
+Use `mapContentNavigation` to turn content navigation into component items, for example for `PBreadcrumb`:
 
 ```ts
-import { mapContentNavigation } from 'pohon-ui/utils/content'
 import { findPageBreadcrumb } from '@nuxt/content/utils'
+import { mapContentNavigation } from 'pohon-ui/utils/content'
 
 const breadcrumb = computed(() =>
-  mapContentNavigation(findPageBreadcrumb(navigation.value, page.value?.path))
+  mapContentNavigation(findPageBreadcrumb(navigation.value, page.value?.path, { indexAsChild: true }), { deep: 0 })
 )
 ```
 
-## IDE setup
-
-Recommended `.vscode/settings.json` for UnoCSS IntelliSense autocomplete with Pohon UI:
-
-```json
-{
-  "files.associations": { "*.css": "unocss" },
-  "editor.quickSuggestions": { "strings": "on" },
-}
-```
+Details: [Content integration](https://vinicunca.dev/raw/pohon/getting-started/integrations/content.md).
 
 ## PApp wrapper
 
-Always wrap your app in `PApp` — it provides:
-- Toast container (`useToast`)
-- Tooltip provider
-- Programmatic overlay context (`useOverlay`)
-- i18n locale support
+Wrap the whole app in `PApp` once. It provides:
+
+- the toast container (`useToast`), configured with `:toaster="{ position, duration, max, expand }"`
+- the tooltip provider (`:tooltip="{ delayDuration }"`)
+- the programmatic overlay host (`useOverlay`)
+- locale and text direction (`:locale`)
 
 ```vue
-<PApp :locale="fr">
-  <NuxtPage /> <!-- or <RouterView /> for Vue -->
+<PApp :locale="fr" :toaster="{ position: 'top-right' }">
+  <NuxtPage />
 </PApp>
 ```
 
 ## Icons
 
-Pohon UI registers `@nuxt/icon` automatically. Format: `i-{collection}-{name}`. Prefer `lucide` collection.
+Write icons as `i-{collection}-{name}`, preferring `lucide`:
 
 ```vue
 <PIcon name="i-lucide-sun" class="size-5" />
@@ -83,30 +76,20 @@ Pohon UI registers `@nuxt/icon` automatically. Format: `i-{collection}-{name}`. 
 <PAlert icon="i-lucide-info" title="Heads up" />
 ```
 
-Install collections locally for reliable SSR and best performance:
+Install each collection you use so icons render during SSR and offline:
 
 ```bash
-pnpm i @iconify-json/lucide
-pnpm i @iconify-json/simple-icons
+pnpm add -D @iconify-json/lucide @iconify-json/simple-icons
 ```
 
-Custom local collections (Nuxt only):
+- **Nuxt** uses `@nuxt/icon`. Add local SVG folders with `icon.customCollections: [{ prefix: 'custom', dir: './app/assets/icons' }]`, and bundle icons you reference dynamically with `icon.clientBundle.icons` or `icon.clientBundle.scan: true`.
+- **Vue** uses `@iconify/vue`, which cannot split a dashed collection name: write `i-simple-icons:github` (or `simple-icons:github`), not `i-simple-icons-github`. Bundle extra icons with `ui({ icon: { clientBundle: { icons: ['lucide:heart'] } } })`.
 
-```ts
-// nuxt.config.ts
-export default defineNuxtConfig({
-  icon: {
-    customCollections: [{
-      prefix: 'custom',
-      dir: './app/assets/icons'
-    }]
-  }
-})
-```
+Find icon names at [icones.js.org](https://icones.js.org) or with the MCP `search-icons` tool. Docs: [Nuxt icons](https://vinicunca.dev/raw/pohon/getting-started/integrations/icons/nuxt.md), [Vue icons](https://vinicunca.dev/raw/pohon/getting-started/integrations/icons/vue.md).
 
 ### Default icon overrides
 
-Components like `Modal`, `Select`, `Accordion`, etc. use default icons from `appConfig.ui.icons`. Override them globally:
+Components read their built-in icons from `ui.icons`. Override them globally (`app.config.ts` in Nuxt, `ui({ ui: { icons } })` in Vue):
 
 ```ts
 // app.config.ts
@@ -117,59 +100,55 @@ export default defineAppConfig({
       close: 'i-lucide-x',
       check: 'i-lucide-check',
       chevronDown: 'i-lucide-chevron-down',
-      chevronRight: 'i-lucide-chevron-right',
-      arrowLeft: 'i-lucide-arrow-left',
-      arrowRight: 'i-lucide-arrow-right'
+      search: 'i-lucide-search',
+      dark: 'i-lucide-moon',
+      light: 'i-lucide-sun'
     }
   }
 })
 ```
 
+Other keys include `arrowLeft`, `arrowRight`, `chevronLeft`, `chevronRight`, `copy`, `copyCheck`, `ellipsis`, `external`, `eye`, `eyeOff`, `info`, `success`, `warning`, `error`, `menu`, `plus`, `minus`, `upload`, `panelOpen`, `panelClose`, `system`.
+
 ## Slot patterns
 
-Most components follow consistent slot naming:
+Most components follow the same slot names. Check the raw component page for the full list and slot props.
 
 | Slot | Used by | Purpose |
 |---|---|---|
-| `#header` | Card, Modal, Slideover, DashboardPanel | Top section |
-| `#body` | DashboardPanel | Scrollable content area |
-| `#footer` | Card, Modal, Slideover, DashboardPanel | Bottom section |
-| `#left` | Page, DashboardNavbar | Left sidebar or content |
-| `#right` | Page, DashboardNavbar, Header | Right sidebar or content |
-| `#leading` | Input, Button, Alert | Before main content (icon area) |
-| `#trailing` | Input, Button | After main content (icon area) |
-| `#content` | Modal, Slideover, Popover, Tooltip | Full content override |
-| `#default` | Most components | Main content area |
+| `#header` | Card, Modal, Slideover, Drawer, DashboardPanel | Top section |
+| `#body` | Modal, Slideover, Drawer, DashboardPanel, Header (mobile menu) | Main content area |
+| `#footer` | Card, Modal, Slideover, Drawer, DashboardPanel | Bottom section; Modal and Slideover pass `{ close }` |
+| `#default` | Card, most components | Main content (Card has no `#body` slot) |
+| `#left` / `#right` | Page, Header, Footer, DashboardNavbar, DashboardToolbar | Side content |
+| `#leading` / `#trailing` | Input, Button (Alert has `#leading` only) | Icon areas |
+| `#content` | Modal, Slideover, Drawer, Popover, Tooltip | Replaces the whole panel |
+| `#<name>-cell`, `#<name>-header` | Table | Column cell / header |
+| `#<slot>` from `item.slot` | Tabs, Accordion, NavigationMenu, DropdownMenu, CommandPalette | Per-item content |
 
 ## Items arrays
 
-Many components accept an `items` prop. Two patterns:
+Menus and lists take an `items` prop.
 
-**Flat array** — plain list:
-
-```ts
-const items = [
-  { label: 'Edit', icon: 'i-lucide-pencil' },
-  { label: 'Delete', icon: 'i-lucide-trash', color: 'error' }
-]
-```
-
-**Nested array** — groups with automatic separators between them:
+**Flat array**:
 
 ```ts
 const items = [
-  [
-    { label: 'Edit', icon: 'i-lucide-pencil' },
-    { label: 'Duplicate', icon: 'i-lucide-copy' }
-  ],
-  [
-    { label: 'Delete', icon: 'i-lucide-trash', color: 'error' }
-  ]
+  { label: 'Edit', icon: 'i-lucide-pencil', onSelect: () => edit() },
+  { label: 'Delete', icon: 'i-lucide-trash', color: 'error', onSelect: () => remove() }
 ]
 ```
 
-Components supporting nested arrays: `PDropdownMenu`, `PContextMenu`, `PNavigationMenu`.
-`PCommandPalette` uses a `groups` prop instead, with an `items` array on each group.
+**Array of arrays**, which renders a separator between groups:
+
+```ts
+const items = [
+  [{ label: 'Edit', icon: 'i-lucide-pencil' }, { label: 'Duplicate', icon: 'i-lucide-copy' }],
+  [{ label: 'Delete', icon: 'i-lucide-trash', color: 'error' }]
+]
+```
+
+`PDropdownMenu`, `PContextMenu`, `PNavigationMenu`, `PSelect`, `PSelectMenu`, and the editor menus accept both. `PCommandPalette` takes `groups` instead (`[{ id, label, items }]`). Items accept `to` for links, `onSelect` for actions, `kbds` for displayed shortcuts, `slot` for a custom item slot, and `type: 'label' | 'separator'` in menus.
 
 ## Composables
 
@@ -178,48 +157,50 @@ Components supporting nested arrays: `PDropdownMenu`, `PContextMenu`, `PNavigati
 ```ts
 const toast = useToast()
 
-toast.add({
-  title: 'Success',
-  description: 'Item saved',
+const { id } = toast.add({
+  title: 'Saved',
+  description: 'Your changes are live.',
   color: 'success',
-  icon: 'i-lucide-check-circle',
-  duration: 5000,
-  actions: [{ label: 'Undo', onClick: () => {} }]
+  icon: 'i-lucide-circle-check',
+  duration: 5000, // 0 keeps it open
+  actions: [{ label: 'Undo', onClick: () => undo() }]
 })
 
-toast.remove('toast-id')
+toast.update(id, { title: 'Updated' })
+toast.remove(id)
 toast.clear()
 ```
 
 ### useOverlay
 
-Programmatic modals, slideovers, drawers — no template `v-model` needed. See [overlays recipe](../recipes/overlays.md) for full patterns.
+Programmatic modals, slideovers, and drawers without template `v-model`. See the [overlays recipe](../recipes/overlays.md).
 
 ```ts
 const overlay = useOverlay()
-const modal = overlay.create(MyComponent)
-const instance = modal.open({ title: 'Confirm?' })
-if (await instance.result) { /* confirmed */ }
+const modal = overlay.create(ConfirmModal, { props: { title: 'Delete?' } })
+
+const confirmed = await modal.open() // resolves with the value the component emits on `close`
 ```
 
 ### defineShortcuts
 
 ```ts
 defineShortcuts({
-  meta_k: () => openSearch(),
+  meta_k: () => openSearch(), // Cmd+K on macOS, Ctrl+K elsewhere
   escape: () => close(),
-  meta_enter: {
-    handler: () => submit(),
-    whenever: [isFormValid]
+  'g-d': () => navigateTo('/dashboard'), // chained: press g, then d
+  enter: {
+    usingInput: 'search', // fires only while the input named "search" is focused (true = any input)
+    handler: () => submit()
   }
 })
 ```
 
-Keys: `meta` (Cmd/Ctrl), `ctrl`, `alt`, `shift`. Separator: `_`.
+Combine modifiers with `_` (`ctrl_shift_f`); `meta` maps to Ctrl outside macOS. A shortcut doesn't fire while an input is focused unless it sets `usingInput`. Pass a `computed` config to turn shortcuts on or off reactively.
 
 ### extractShortcuts
 
-Wire up keyboard shortcuts from menu items:
+Register the `kbds` of menu items as shortcuts:
 
 ```ts
 const items = [
@@ -232,9 +213,7 @@ defineShortcuts(extractShortcuts(items))
 
 ### Internationalization (i18n)
 
-Pohon UI supports 50+ locales. Set the locale on `PApp` — all components inherit it.
-
-#### Static locale
+Pohon UI ships 60+ locales. Set one on `PApp` and every component inherits it.
 
 ```vue
 <script setup lang="ts">
@@ -248,51 +227,20 @@ import { fr } from 'pohon-ui/locale'
 </template>
 ```
 
-#### Extend a built-in locale
-
-`extendLocale` is auto-imported. Override specific messages or the `code` (affects date/time formatting in Calendar, InputDate, InputTime):
+Extend a built-in locale (`extendLocale` is auto-imported). The `code` sets date and time formatting in Calendar, InputDate, and InputTime:
 
 ```ts
 import { en } from 'pohon-ui/locale'
 
 const locale = extendLocale(en, {
   code: 'en-AU',
-  messages: {
-    commandPalette: { placeholder: 'Search a component...' }
-  }
+  messages: { commandPalette: { placeholder: 'Search a component...' } }
 })
 ```
 
-#### Custom locale from scratch
+Create a locale from scratch with `defineLocale<Messages>({ name, code, dir, messages })` (`import type { Messages } from 'pohon-ui'`).
 
-```ts
-import type { Messages } from 'pohon-ui'
-
-const locale = defineLocale<Messages>({
-  name: 'My locale',
-  code: 'en',
-  dir: 'ltr',
-  messages: {
-    // all component message keys
-  }
-})
-```
-
-#### Dynamic locale with @nuxtjs/i18n
-
-```ts
-// nuxt.config.ts
-export default defineNuxtConfig({
-  modules: ['pohon-ui', '@nuxtjs/i18n'],
-  i18n: {
-    locales: [
-      { code: 'en', name: 'English' },
-      { code: 'fr', name: 'Français' },
-      { code: 'ar', name: 'العربية' }
-    ]
-  }
-})
-```
+With `@nuxtjs/i18n` (or `vue-i18n`), map the active locale and set `lang`/`dir` on `<html>`:
 
 ```vue
 <script setup lang="ts">
@@ -300,11 +248,11 @@ import * as locales from 'pohon-ui/locale'
 
 const { locale } = useI18n()
 
-const lang = computed(() => locales[locale.value]?.code)
-const dir = computed(() => locales[locale.value]?.dir)
-
 useHead({
-  htmlAttrs: { lang, dir }
+  htmlAttrs: {
+    lang: computed(() => locales[locale.value].code),
+    dir: computed(() => locales[locale.value].dir)
+  }
 })
 </script>
 
@@ -315,18 +263,13 @@ useHead({
 </template>
 ```
 
-Each locale has a `dir` property (`'ltr'` or `'rtl'`). `PApp` uses it to set directionality on all components. Use `useHead` to propagate `lang` and `dir` to the `<html>` element.
+`PLocaleSelect` renders a locale picker: `<PLocaleSelect v-model="locale" :locales="Object.values(locales)" />`. Docs: [i18n Nuxt](https://vinicunca.dev/raw/pohon/getting-started/integrations/i18n/nuxt.md), [i18n Vue](https://vinicunca.dev/raw/pohon/getting-started/integrations/i18n/vue.md).
 
 ## Color mode
 
-Pohon UI registers `@nuxtjs/color-mode` automatically. Built-in components for switching:
-- `PColorModeButton` — single button toggle (light/dark)
-- `PColorModeSwitch` — toggle switch
-- `PColorModeSelect` — dropdown with system/light/dark options
-- `PColorModeAvatar` — displays different avatar per mode
-- `PColorModeImage` — displays different image per mode
+Nuxt uses `@nuxtjs/color-mode`; Vue uses VueUse's `useDark`/`useColorMode`, registered by the Vue plugin. Prefer the built-in switchers: `PColorModeButton`, `PColorModeSwitch`, `PColorModeSelect`, and `PColorModeAvatar` / `PColorModeImage` for per-mode images.
 
-For custom color mode UI, use `useColorMode` with `ClientOnly` to avoid hydration mismatch:
+For a custom control in Nuxt, read `useColorMode()` inside `ClientOnly` to avoid a hydration mismatch:
 
 ```vue
 <script setup lang="ts">
@@ -334,7 +277,7 @@ const colorMode = useColorMode()
 
 const isDark = computed({
   get: () => colorMode.value === 'dark',
-  set: (v) => { colorMode.preference = v ? 'dark' : 'light' }
+  set: (dark) => { colorMode.preference = dark ? 'dark' : 'light' }
 })
 </script>
 
@@ -348,13 +291,19 @@ const isDark = computed({
 </template>
 ```
 
-## Working examples
+In plain Vue, `import { useColorMode } from '@vueuse/core'` and set `colorMode.value = 'dark'` instead of `preference`.
 
-The [Nuxt playground](https://github.com/vinicunca/pohon/tree/main/playgrounds/nuxt) and [Vue playground](https://github.com/vinicunca/pohon/tree/main/playgrounds/vue) contain complete Pohon UI configurations. Use them as references when starting a project.
+## Editor tooling
+
+Install the UnoCSS VS Code extension (`antfu.unocss`) for class autocomplete and hover previews. It reads your `uno.config.ts`, so semantic utilities such as `color-text-muted` complete as well.
 
 ## Responsive patterns
 
-- Dashboard sidebar hides on mobile, shows a slideover/drawer via `PDashboardSidebar` `mode` prop
-- `PHeader` body slot is the mobile menu content (shown when hamburger is tapped)
-- Most components handle responsiveness automatically — avoid manual breakpoint classes unless needed
-- Use `PPageAside` for sidebars that should hide below `lg` breakpoint
+- `PDashboardSidebar` turns into a modal, slideover, or drawer below `lg`, chosen with its `mode` prop.
+- `PHeader` renders its `#body` slot as the mobile menu when the toggle is tapped; its own `mode` prop picks modal, slideover, or drawer.
+- `PPageAside` is hidden below `lg`.
+- Most components are already responsive; add breakpoint classes only for your own layout.
+
+## Working examples
+
+The [Nuxt playground](https://github.com/vinicunca/pohon/tree/main/playgrounds/nuxt) and [Vue playground](https://github.com/vinicunca/pohon/tree/main/playgrounds/vue) contain full Pohon UI configurations and a page per component.

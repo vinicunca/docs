@@ -1,6 +1,6 @@
 # Data Tables
 
-Complete patterns for displaying and managing tabular data.
+Patterns for displaying and managing tabular data with `PTable`, which wraps [TanStack Table v8](https://tanstack.com/table/v8). API: [table](https://vinicunca.dev/raw/pohon/components/table.md).
 
 ## Basic table
 
@@ -100,7 +100,7 @@ const filteredRows = computed(() => {
 
 ## With row selection
 
-Row selection uses TanStack Table's `rowSelection` state — a `Record<string, boolean>` keyed by row index.
+Row selection uses TanStack Table's `rowSelection` state: a `Record<string, boolean>` keyed by row id (the row index unless you pass `:get-row-id="(row) => row.id"`).
 
 ```vue
 <script setup lang="ts">
@@ -118,10 +118,10 @@ const rowSelection = ref<Record<string, boolean>>({})
 </template>
 ```
 
-Add a checkbox column using the `h` function. Use tri-state `modelValue` (`true`, `false`, or `'indeterminate'`) for the "select all" header:
+Add a checkbox column with the `h` function. Use the tri-state `modelValue` (`true`, `false`, or `'indeterminate'`) for the "select all" header. In Nuxt, get components with `resolveComponent('PCheckbox')`; in plain Vue, import them (`import PCheckbox from 'pohon-ui/components/Checkbox.vue'`).
 
 ```ts
-import { h } from 'vue'
+import { h, resolveComponent } from 'vue'
 
 const PCheckbox = resolveComponent('PCheckbox')
 
@@ -220,6 +220,9 @@ const { data, status } = await useAsyncData(
 - Use `#<column>-cell` and `#<column>-header` template slots to customize rendering with Vue templates
 - Alternatively, use the `h` function inside `header` and `cell` column properties for inline rendering
 - Row data in slots is accessed via `row.original` (not `row` directly)
-- Use `v-model:row-selection` for selection, `v-model:sorting` for sort state
+- State models: `v-model:sorting`, `v-model:row-selection`, `v-model:pagination`, `v-model:global-filter`, `v-model:column-filters`, `v-model:column-visibility`, `v-model:column-pinning`, `v-model:expanded`, `v-model:grouping`
+- The exposed `tableApi` is the TanStack table instance (`useTemplateRef('table').value?.tableApi`)
+- Search all columns with `v-model:global-filter="search"` instead of filtering `data` yourself
+- Large data: `virtualize`; sticky header: `sticky`
 - Wrap tables in `PDashboardPanel` with `#header` toolbar for the dashboard pattern
-- For empty states, use the `#empty` slot
+- For empty states, set the `empty` prop (text) or use the `#empty` slot; `loading` shows a progress bar

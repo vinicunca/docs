@@ -8,7 +8,7 @@ Build documentation sites with sidebar navigation, table of contents, and surrou
 - Knowledge bases, help centers
 - Any content-heavy site with hierarchical navigation
 
-> Requires `@nuxt/content` — see [conventions](../guidelines/conventions.md#content-module-integration) for setup (module order + UnoCSS content scanning).
+> Requires `@nuxt/content` (Nuxt only). See [conventions](../guidelines/conventions.md#content-module-integration) for setup: module order and UnoCSS content scanning. API: [content-search](https://vinicunca.dev/raw/pohon/components/content-search.md), [content-navigation](https://vinicunca.dev/raw/pohon/components/content-navigation.md), [content-toc](https://vinicunca.dev/raw/pohon/components/content-toc.md).
 
 ## Component tree
 
@@ -35,12 +35,13 @@ import type { NavigationMenuItem } from 'pohon-ui'
 const route = useRoute()
 
 const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('docs'))
+const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('docs'), { server: false })
 
 provide('navigation', navigation)
 
 const items = computed<NavigationMenuItem[]>(() => [{
   label: 'Docs',
-  to: '/pohon/getting-started',
+  to: '/docs/getting-started',
   active: route.path.startsWith('/docs')
 }])
 </script>
@@ -68,7 +69,9 @@ const items = computed<NavigationMenuItem[]>(() => [{
 
     <PFooter />
 
-    <PContentSearch :navigation="navigation" />
+    <ClientOnly>
+      <LazyPContentSearch :navigation="navigation" :files="files" />
+    </ClientOnly>
   </PApp>
 </template>
 ```
@@ -138,7 +141,7 @@ The outer `PPage` in the layout handles the **left sidebar**. The inner `PPage` 
 ### Common mistakes
 
 - Not providing navigation via `provide`/`inject` — the layout needs it from the app shell.
-- Forgetting `PContentSearch` in app.vue — search won't work without it.
+- Forgetting `PContentSearch` in app.vue: search won't work without it. Give it `files` (client-side Fuse.js) or `search` from `useSearchCollection` (server-side FTS5, `@nuxt/content` 3.14+), and wrap it in `ClientOnly`.
 - Using `PContentSearchButton` without `PContentSearch` — the button opens search, but the search component must exist.
 
 ## Key components
@@ -148,5 +151,5 @@ The outer `PPage` in the layout handles the **left sidebar**. The inner `PPage` 
 - `PContentNavigation` — sidebar navigation tree from Nuxt Content
 - `PContentToc` — table of contents from page headings
 - `PContentSurround` — prev/next links
-- `PContentSearch` / `PContentSearchButton` — search command palette
+- `PContentSearch` / `PContentSearchButton` — search command palette, opened with Cmd/Ctrl+K, the button, or `useContentSearch().open`
 - `PPageAnchors` — simpler alternative to full TOC

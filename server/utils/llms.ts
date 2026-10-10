@@ -33,6 +33,7 @@ export const WHEN_TO_USE_SECTION = {
     `- For Perkakas imports, pipe, and data-first versus data-last, load the agent skill at ${SITE_URL}/.well-known/skills/perkakas/SKILL.md.`,
     `- For Akar composition (Root/Trigger/Content, asChild, data attributes), load the agent skill at ${SITE_URL}/.well-known/skills/akar/SKILL.md.`,
     `- For UnoCSS Variants (\`uv\`, slots, compound variants, no class merging), load the agent skill at ${SITE_URL}/.well-known/skills/unocss-variants/SKILL.md.`,
+    `- For setting up or troubleshooting a Windows (WSL) dev machine, load the agent skill at ${SITE_URL}/.well-known/skills/windows-dev/SKILL.md.`,
     '',
     'Entry points:'
   ].join('\n'),

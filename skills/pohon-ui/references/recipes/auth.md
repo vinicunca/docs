@@ -2,7 +2,7 @@
 
 ## PAuthForm (recommended)
 
-`PAuthForm` provides a complete auth form with fields, providers, validation, and submit — no manual `PForm` + `PFormField` wiring needed. Wrap it in `PPageCard` for a polished look.
+`PAuthForm` provides a complete auth form with fields, providers, validation, and submit, so you don't wire `PForm` + `PFormField` yourself. Wrap it in `PPageCard` for a framed look. API: [auth-form](https://vinicunca.dev/raw/pohon/components/auth-form.md).
 
 ```vue [pages/login.vue]
 <script setup lang="ts">
@@ -78,10 +78,11 @@ function onSubmit(payload: FormSubmitEvent<Schema>) {
 | Prop | Purpose |
 |---|---|
 | `title`, `description`, `icon` | Header content |
-| `fields` | `AuthFormField[]` — each has `name`, `type`, `label`, `placeholder`, `required` |
+| `fields` | `AuthFormField[]`: `name`, `type` (any input type, `checkbox`, `select`, `otp`), `label`, `placeholder`, `required`, … |
 | `providers` | `ButtonProps[]` — social login buttons shown above/below the form |
-| `schema` | Zod/Valibot schema for validation |
-| `submit` | Customize submit button: `{ label: 'Sign in', block: true }` |
+| `schema` | Any Standard Schema (Zod, Valibot, …) |
+| `submit` | Submit button props: `{ label: 'Sign in' }` |
+| `loading`, `disabled` | Form state |
 | `separator` | Text between providers and fields (default: `'or'`) |
 
 ### PAuthForm key slots
@@ -92,7 +93,8 @@ function onSubmit(payload: FormSubmitEvent<Schema>) {
 | `#password-hint` | "Forgot password?" link on password field |
 | `#validation` | Custom error display (e.g., `PAlert`) |
 | `#footer` | Terms of service, sign-up link |
-| `#<field>-field` | Override a specific field's rendering |
+| `#<field>-field` | Replace a field's input (receives `{ field, state }`) |
+| `#<field>-label`, `-description`, `-hint`, `-help`, `-error` | Customize parts of a field's `PFormField` |
 
 ## Custom auth layout
 
@@ -133,7 +135,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 
         <PFormField name="password" label="Password">
           <template #hint>
-            <NuxtLink to="/forgot-password" class="text-sm text-primary">Forgot password?</NuxtLink>
+            <PLink to="/forgot-password" class="text-sm text-primary">Forgot password?</PLink>
           </template>
           <PInput v-model="state.password" type="password" />
         </PFormField>
@@ -144,7 +146,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       <template #footer>
         <p class="text-center text-sm color-text-muted">
           Don't have an account?
-          <NuxtLink to="/signup" class="text-primary font-medium">Sign up</NuxtLink>
+          <PLink to="/signup" class="text-primary font-medium">Sign up</PLink>
         </p>
       </template>
     </PCard>
@@ -155,7 +157,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 ## Tips
 
 - Prefer `PAuthForm` with `PPageCard` for standard auth pages — handles layout, providers, validation, and submit
-- Use `import * as z from 'zod'` and `z.email()` (Zod 4 syntax)
+- With Zod 4, use `import * as z from 'zod'` and `z.email()`
 - Type the submit handler: `function onSubmit(event: FormSubmitEvent<Schema>)` — access validated data via `event.data`
 - Center auth forms with `flex min-h-dvh items-center justify-center`
 - Place "Forgot password?" link as `#password-hint` slot on `PAuthForm`, or `#hint` slot on `PFormField`

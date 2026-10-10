@@ -1,6 +1,6 @@
 # Landing Page Layout
 
-Build public-facing pages — landing, blog, changelog, pricing — using the Header + Main + Footer shell with Page components.
+Build public-facing pages (landing, blog, changelog, pricing) with the Header + Main + Footer shell and Page components. API: [page-hero](https://vinicunca.dev/raw/pohon/components/page-hero.md), [page-section](https://vinicunca.dev/raw/pohon/components/page-section.md), [pricing-plans](https://vinicunca.dev/raw/pohon/components/pricing-plans.md).
 
 ## When to use
 

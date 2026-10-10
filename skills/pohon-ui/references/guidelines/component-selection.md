@@ -1,6 +1,6 @@
 # Component Selection
 
-Decision matrices for choosing the right component. When in doubt, use the MCP `search-components` tool.
+Decision matrices for choosing the right component. For the full list, see [components](../components.md); for a component's API, fetch `https://vinicunca.dev/raw/pohon/components/<kebab-name>.md`.
 
 ## Overlays
 
@@ -8,7 +8,7 @@ Decision matrices for choosing the right component. When in doubt, use the MCP `
 |---|---|---|
 | Confirmation dialog, focused task, form | `PModal` | Blocks page interaction, centered, draws focus |
 | Detail panel, settings, secondary content | `PSlideover` | Slides from edge, doesn't feel as interruptive as modal |
-| Mobile-first bottom sheet | `PDrawer` | Natural mobile pattern, swipe to dismiss |
+| Mobile-first bottom sheet | `PDrawer` | Natural mobile pattern, swipe to dismiss, `snap-points` |
 | Contextual info attached to a trigger | `PPopover` | No backdrop, positioned relative to trigger |
 | Simple hover hint | `PTooltip` | Non-interactive, hover/focus only |
 
@@ -16,9 +16,10 @@ Decision matrices for choosing the right component. When in doubt, use the MCP `
 - Use `PModal` for destructive confirmations ("Are you sure you want to delete?")
 - Use `PSlideover` for detail views in dashboards (email preview, user profile)
 - Use `PDrawer` for mobile navigation or action sheets
-- Use `PDashboardSidebar` with `mode="drawer"` for a drawer-based mobile menu; `PModal` and `PSlideover` don't expose a `mode` prop
+- For a drawer-based mobile menu, set `mode="drawer"` on `PDashboardSidebar` or `PHeader`
 - For programmatic overlays, use `useOverlay()` instead of `v-model:open`
-- Never put interactive content (buttons, links) inside `PTooltip`
+- Keep `PTooltip` content non-interactive (text and `kbds` only); put buttons and links in a `PPopover`
+- Guided tours: one `PPopover` driven by `useTour()`
 
 ## Navigation
 
@@ -28,7 +29,9 @@ Decision matrices for choosing the right component. When in doubt, use the MCP `
 | Switch between views on same page | `PTabs` | Content stays on page, no route change needed |
 | Show current location in hierarchy | `PBreadcrumb` | Nested page structures |
 | Search + keyboard-driven navigation | `PCommandPalette` | Power users, global search |
-| Contextual actions on a trigger element | `PDropdownMenu` | Right-click menus, action buttons |
+| Actions on a trigger element | `PDropdownMenu` | Action buttons, "more" menus |
+| Actions on right-click | `PContextMenu` | Rows, canvas items, file trees |
+| Hierarchical data | `PTree` | File trees, nested categories |
 | Step-by-step process | `PStepper` | Multi-step forms, wizards |
 
 ### Rules
@@ -41,22 +44,25 @@ Decision matrices for choosing the right component. When in doubt, use the MCP `
 
 | Need | Component | Why |
 |---|---|---|
-| Small fixed list (< 10 items) | `PSelect` | Native-like, simple, lightweight |
+| Small fixed list (< 10 items) | `PSelect` | Simple dropdown, no search |
 | Searchable list, multiple selection, groups | `PSelectMenu` | Rich dropdown with search, multi-select, grouped items |
+| Always-visible selectable list | `PListbox` | Inline list with search and virtualization, no dropdown |
 | Autocomplete / combobox (type + select) | `PInputMenu` | User can type freely AND pick from suggestions |
 | Free text entry | `PInput` | Plain text, email, password, search |
 | Multi-line text | `PTextarea` | With `autoresize` and `maxrows` |
 | Numeric value with +/- controls | `PInputNumber` | Min/max/step constraints |
-| Date selection | `PInputDate` | Calendar dropdown, supports ranges |
+| Date selection | `PInputDate` | Segmented date field, `range` prop; pair with `PPopover` + `PCalendar` for a picker |
+| Inline calendar | `PCalendar` | Single, multiple, or range selection |
 | Time selection | `PInputTime` | Hour/minute picker, 12/24 hour |
 | Tags / multi-value free text | `PInputTags` | Chip-style input with max limit |
 | Verification code | `PPinInput` | Fixed-length code entry |
+| Rating | `PInputRating` | Stars, read-only display or input |
 | Boolean toggle | `PSwitch` | On/off, enable/disable |
 | Boolean checkbox | `PCheckbox` | Single option with label |
 | Multiple choices from a list | `PCheckboxGroup` | Multiple selection, vertical or horizontal |
 | Single choice from a list (visible) | `PRadioGroup` | All options visible, one selected |
 | Range value | `PSlider` | Min/max with visual track |
-| Color value | `PColorPicker` | Hex/RGB/HSL picker |
+| Color value | `PColorPicker` | `format`: hex, rgb, hsl, cmyk, lab |
 | File upload | `PFileUpload` | Button or drop area variants |
 
 ### Rules
@@ -65,7 +71,7 @@ Decision matrices for choosing the right component. When in doubt, use the MCP `
 - Use `PSelectMenu` when the list is long or needs search
 - Use `PInputMenu` when the user might want to type a value that's not in the list
 - Wrap all form inputs in `PFormField` for labels, descriptions, hints, and validation errors
-- Group related inline inputs with `PFieldGroup`
+- Attach an input to a button, or build a segmented button group, with `PFieldGroup` (it is not a layout for several `PFormField`s; use a grid for that)
 
 ## Feedback
 
@@ -86,7 +92,7 @@ Decision matrices for choosing the right component. When in doubt, use the MCP `
 
 ## Markdown
 
-When rendering Markdown (for instance with Comark), **prefer Prose components** — they are styled and tuned for Markdown contexts. Generic Pohon UI components can also be used. `<ComarkRenderer>` (or `<Comark>`) auto-resolves `ProseX` components when `pohon-ui` is installed. In Markdown, the `Prose` prefix can be omitted (`::callout`, `::steps`, etc.).
+When rendering Markdown, **prefer Prose components**: they are styled for Markdown contexts. Render with Comark's `<Markdown :value="text" />` (`@comark/nuxt` or `@comark/vue`), Nuxt Content's `<ContentRenderer>`, or MDC. In Nuxt, Prose components register automatically with `@nuxt/content` or `@nuxtjs/mdc`; with `@comark/nuxt` alone, also set `ui.prose: true` (the 2.0.6 module only detects the first two). In plain Vue, enable `ui({ prose: true })` and pass the components to Comark: `import * as prose from 'pohon-ui/components/prose'`, then `<Markdown :value="text" :components="prose" />`. In Markdown, omit the `Prose` prefix (`::callout`, `::steps`). Docs: [typography](https://vinicunca.dev/raw/pohon/typography.md).
 
 | Need | Use | Not |
 |---|---|---|
@@ -98,9 +104,9 @@ When rendering Markdown (for instance with Comark), **prefer Prose components** 
 | Tabbed code blocks | `CodeGroup` | manual tabs |
 
 ### Rules
-- Prose components use native Vue slots — Comark maps named `#slot` blocks directly to `<slot name="..." />`
-- Theme via `appConfig.ui.prose.<name>` using the same override pattern as other Pohon UI components
-- `Callout` colors: `neutral` (default), `primary`, `secondary`, `info`, `success`, `warning`, `error`
+- Prose components use native Vue slots: named `#slot` blocks in Markdown map to `<slot name="..." />`
+- Theme them under `ui.prose.<name>` with the same override pattern as other components
+- `Callout` takes any semantic `color` (default `neutral`); `note`, `tip`, `warning`, `caution` are preset shorthands
 
 ## Layout containers
 

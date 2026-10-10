@@ -1,6 +1,6 @@
 # Chat Layout
 
-Build AI chat interfaces with message streams, reasoning, tool calling, and Vercel AI SDK integration.
+Build AI chat interfaces with message streams, reasoning, tool calling, and Vercel AI SDK integration. API: [chat guide](https://vinicunca.dev/raw/pohon/components/chat.md), [chat-messages](https://vinicunca.dev/raw/pohon/components/chat-messages.md), [chat-prompt](https://vinicunca.dev/raw/pohon/components/chat-prompt.md).
 
 ## When to use
 
@@ -39,11 +39,11 @@ export default defineNuxtConfig({
 
 **Vue (Vite):** No module registration needed, import directly from `@comark/vue`.
 
-> `@comark/nuxt` (or `@comark/vue` for Vue projects) provides the `Comark` component used to render AI responses as streaming Markdown, it incrementally renders tokens as they arrive and automatically enables Pohon UI's prose components.
+> `@comark/nuxt` (or `@comark/vue`) provides the `Markdown` component that renders AI responses as streaming Markdown: it renders tokens incrementally as they arrive. Enable Pohon UI's prose components so the output is themed: `ui: { prose: true }` in `nuxt.config.ts`, or `ui({ prose: true })` in Vue, where you also import `Markdown` from `@comark/vue`.
 
 ### Dark mode for syntax highlighting
 
-When using the `highlight` plugin, add the following CSS to your stylesheet:
+When using Comark's `shiki` plugin, add this CSS to a global stylesheet:
 
 ```css [main.css]
 html.dark .shiki span {
@@ -105,7 +105,7 @@ export default defineEventHandler(async (event) => {
 PDashboardPanel
 ├── #header → PDashboardNavbar
 ├── #body → PContainer → PChatMessages
-│                         ├── #content → PChatReasoning, PChatTool, Comark
+│                         ├── #content → PChatReasoning, PChatTool, Markdown (Comark)
 │                         └── #indicator (loading)
 └── #footer → PContainer → PChatPrompt
                             └── PChatPromptSubmit
@@ -118,10 +118,11 @@ PDashboardPanel
 import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName } from 'ai'
 import { useChat } from '@ai-sdk/vue'
 import { isPartStreaming, isToolStreaming } from 'pohon-ui/utils/ai'
-import highlight from '@comark/nuxt/plugins/highlight'
+import shiki from '@comark/nuxt/plugins/shiki' // Vue: '@comark/vue/plugins/shiki', plus `import { Markdown } from '@comark/vue'`
 
 definePageMeta({ layout: 'dashboard' })
 
+const plugins = [shiki()]
 const input = ref('')
 
 const { messages, status, error, sendMessage, stop, regenerate } = useChat({
@@ -153,10 +154,10 @@ function onSubmit() {
                 :text="part.text"
                 :streaming="isPartStreaming(part)"
               >
-                <Comark
-                  :markdown="part.text"
+                <Markdown
+                  :value="part.text"
                   :streaming="isPartStreaming(part)"
-                  :plugins="[highlight()]"
+                  :plugins="plugins"
                   class="*:first:mt-0 *:last:mb-0"
                 />
               </PChatReasoning>
@@ -168,11 +169,11 @@ function onSubmit() {
               />
 
               <template v-else-if="isTextUIPart(part)">
-                <Comark
+                <Markdown
                   v-if="message.role === 'assistant'"
-                  :markdown="part.text"
+                  :value="part.text"
                   :streaming="isPartStreaming(part)"
-                  :plugins="[highlight()]"
+                  :plugins="plugins"
                   class="*:first:mt-0 *:last:mb-0"
                 />
                 <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
@@ -198,11 +199,11 @@ function onSubmit() {
 
 ## Key components
 
-- `PChatMessages` — scrollable message list with auto-scroll. Props: `messages`, `status`. Slots: `#content` (per message), `#actions`, `#indicator`.
-- `PChatMessage` — individual bubble. Props: `message`, `side` (`'left'`/`'right'`).
+- `PChatMessages` — scrollable message list with auto-scroll. Props: `messages`, `status`, `user` / `assistant` (per-role `PChatMessage` props such as `side`, `variant`, `avatar`, `actions`). Slots: `#content` (per message, receives `message`), `#actions`, `#indicator`, `#viewport`.
+- `PChatMessage` — one message. Props include `side` (`'left'`/`'right'`), `variant`, `avatar`, `actions`.
 - `PChatReasoning` — collapsible reasoning block. Auto-opens during streaming, auto-closes when done. Use `isPartStreaming(part)` from `pohon-ui/utils/ai`.
-- `PChatTool` — tool invocation status. Use `isToolStreaming(part)`. Variants: `'inline'` (default), `'card'`.
-- `PChatPrompt` — enhanced textarea for chat. Its typed API exposes a selected subset of `PTextarea` props, forwards additional attributes to the underlying textarea, and adds chat-specific props such as `error` and `submitOnEnter`.
+- `PChatTool` — tool invocation status. Use `isToolStreaming(part)`. Variants: `'inline'` (default), `'card'`. For tools that need approval, pass `actions` when `part.state === 'approval-requested'` and answer with `addToolApprovalResponse({ id: part.approval.id, approved })` from `useChat` (combine with `sendAutomaticallyWhen: lastAssistantMessageIsCompleteWithApprovalResponses`).
+- `PChatPrompt` — prompt textarea. Props: `v-model`, `placeholder`, `error`, `submitOnEnter`, `color`, `variant`; other attributes go to the textarea. Slots: default (submit button area), `#header`, `#footer`, `#body` (replace the textarea, e.g. with `PEditor`).
 - `PChatPromptSubmit` — submit button with automatic status handling (send/stop/reload).
 - `PChatPalette` — layout wrapper for chat inside overlays.
 

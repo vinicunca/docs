@@ -1,6 +1,6 @@
 # Dashboard Layout
 
-Build admin interfaces with resizable sidebars, multi-panel layouts, and toolbars.
+Build admin interfaces with resizable sidebars, multi-panel layouts, and toolbars. Examples use Nuxt layouts; in plain Vue, put the `PDashboardGroup` shell in a layout component around `<RouterView />`. API: [dashboard-group](https://vinicunca.dev/raw/pohon/components/dashboard-group.md), [dashboard-sidebar](https://vinicunca.dev/raw/pohon/components/dashboard-sidebar.md), [dashboard-panel](https://vinicunca.dev/raw/pohon/components/dashboard-panel.md).
 
 ## When to use
 
@@ -123,8 +123,10 @@ Root wrapper. Manages sidebar state and persistence.
 
 | Prop | Default | Purpose |
 |---|---|---|
-| `storage` | `'cookie'` | `'cookie'`, `'localStorage'`, `false` |
-| `storage-key` | `'dashboard'` | Storage key name |
+| `storage` | `'cookie'` | Where sizes and collapsed state persist: `'cookie'` or `'local'` (localStorage) |
+| `storage-key` | `'dashboard'` | Storage key prefix |
+| `persistent` | `true` | Set `false` to skip persisting |
+| `unit` | `'%'` | Size unit: `'%'`, `'rem'`, `'px'` |
 
 ### DashboardSidebar
 
@@ -136,17 +138,19 @@ Resizable, collapsible sidebar. Must be inside `DashboardGroup`.
 | `collapsible` | `false` | Collapse when dragged to edge |
 | `side` | `'left'` | `'left'` or `'right'` |
 | `mode` | `'slideover'` | Mobile: `'modal'`, `'slideover'`, `'drawer'` |
+| `min-size` / `default-size` / `max-size` | `10` / `15` / `20` | Width in the group's `unit` |
+| `collapsed-size` | `0` | Width when collapsed (set it to keep an icon rail) |
 
-All slots receive `{ collapsed, collapse }` — `collapsed` is the boolean state, `collapse(value)` toggles it programmatically. Use `v-model:collapsed` and `v-model:open` (mobile) for state control.
+`#header`, `#default`, and `#footer` receive `{ collapsed, collapse }`: `collapsed` is the state, `collapse(value)` sets it. Control state with `v-model:collapsed` (desktop) and `v-model:open` (mobile menu).
 
 ### DashboardPanel
 
-Content panel with `#header`, `#body` (scrollable), `#footer`, and `#default` (raw, no scroll) slots.
+Content panel with `#header`, `#body` (scrollable), `#footer`, and `#default` (raw, no scroll) slots. Give each panel a unique `id` when you use `resizable`, so its size persists.
 
 ### DashboardNavbar / DashboardToolbar
 
-Navbar: `#leading`, `#left`, `#default`, `#right` slots + `title` prop. Use `PDashboardSidebarCollapse` in `#leading` to collapse the sidebar on desktop. The navbar already renders a mobile toggle, customized with its `toggle` prop.
-Toolbar: same slots, sits below navbar for filters/actions.
+Navbar: `title` and `icon` props, `#leading`, `#title`, `#trailing`, `#left`, `#default`, `#right` slots. Put `PDashboardSidebarCollapse` in `#leading` to collapse the sidebar on desktop. The navbar already renders the mobile sidebar toggle (`toggle` prop, `toggle-side`).
+Toolbar: `#left`, `#default`, `#right` slots; sits below the navbar for filters and actions.
 
 ### PNavigationMenu in sidebar
 
@@ -212,6 +216,7 @@ definePageMeta({ layout: 'dashboard' })
     <slot />
 
     <PDashboardSearch :groups="searchGroups" />
+    <!-- groups: [{ id: 'links', label: 'Go to', items: [{ label: 'Inbox', icon: 'i-lucide-inbox', to: '/inbox' }] }] -->
   </PDashboardGroup>
 </template>
 ```

@@ -2,7 +2,7 @@
   "name": "@vinicunca/docs",
   "type": "module",
   "version": "0.0.1",
-  "packageManager": "pnpm@12.8.1",
+  "packageManager": "pnpm@12.11.2",
   "author": "praburangki<https://github.com/praburangki>",
   "license": "MIT",
   "scripts": {
@@ -11,7 +11,8 @@
     "generate": "NODE_OPTIONS='--max-old-space-size=8192' nuxt generate",
     "prepare": "nuxt prepare",
     "typecheck": "nuxt typecheck",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "check:docs": "node scripts/check-unocss-preset-docs.mjs"
   },
   "devDependencies": {
     "@ai-sdk/vue": "catalog:",
