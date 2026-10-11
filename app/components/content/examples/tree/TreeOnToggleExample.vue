@@ -1,43 +1,46 @@
 <script setup lang="ts">
-import type { TreeItemToggleEvent } from 'akar'
-import type { TreeItem } from 'pohon-ui'
+import type { TreeItemToggleEvent } from 'akar';
+import type { TreeItem } from 'pohon-ui';
 
-const items: TreeItem[] = [
+const items: Array<TreeItem> = [
   {
     label: 'app/',
     defaultExpanded: true,
     onToggle: (e: Event) => {
-      e.preventDefault()
+      e.preventDefault();
     },
     children: [
       {
         label: 'composables/',
         children: [
           { label: 'useAuth.ts', icon: 'i-vscode-icons-file-type-typescript' },
-          { label: 'useUser.ts', icon: 'i-vscode-icons-file-type-typescript' }
-        ]
+          { label: 'useUser.ts', icon: 'i-vscode-icons-file-type-typescript' },
+        ],
       },
       {
         label: 'components/',
         defaultExpanded: true,
         children: [
           { label: 'Card.vue', icon: 'i-vscode-icons-file-type-vue' },
-          { label: 'Button.vue', icon: 'i-vscode-icons-file-type-vue' }
-        ]
-      }
-    ]
+          { label: 'Button.vue', icon: 'i-vscode-icons-file-type-vue' },
+        ],
+      },
+    ],
   },
   { label: 'app.vue', icon: 'i-vscode-icons-file-type-vue' },
-  { label: 'nuxt.config.ts', icon: 'i-vscode-icons-file-type-nuxt' }
-]
+  { label: 'nuxt.config.ts', icon: 'i-vscode-icons-file-type-nuxt' },
+];
 
 function onToggle(e: TreeItemToggleEvent<TreeItem>) {
   if (e.detail.originalEvent.type === 'keydown') {
-    e.preventDefault()
+    e.preventDefault();
   }
 }
 </script>
 
 <template>
-  <PTree :items="items" @toggle="onToggle" />
+  <PTree
+    :items="items"
+    @toggle="onToggle"
+  />
 </template>

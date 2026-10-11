@@ -96,7 +96,7 @@ import {
   RangeCalendarNext,
   RangeCalendarPrev,
   RangeCalendarRoot,
-} from 'akar'
+} from 'akar';
 </script>
 
 <template>

@@ -9,13 +9,13 @@ Use the auto-imported `defineShortcuts` composable to define keyboard shortcuts.
 
 ```vue
 <script setup lang="ts">
-const open = ref(false)
+const open = ref(false);
 
 defineShortcuts({
   meta_k: () => {
-    open.value = !open.value
+    open.value = !open.value;
   }
-})
+});
 </script>
 ```
 
@@ -119,7 +119,7 @@ defineShortcuts({
   '?': () => openHelpModal(),
   'meta_k': () => openCommandPalette(),
   'g-d': () => navigateToDashboard()
-})
+});
 </script>
 ```
 
@@ -128,12 +128,8 @@ defineShortcuts({
 Use `usingInput` to trigger a shortcut only when a specific input is focused.
 
 ```vue
-<template>
-  <PInput v-model="query" name="queryInput" />
-</template>
-
 <script setup lang="ts">
-const query = ref('')
+const query = ref('');
 
 defineShortcuts({
   enter: {
@@ -144,8 +140,15 @@ defineShortcuts({
     usingInput: true,
     handler: () => clearSearch()
   }
-})
+});
 </script>
+
+<template>
+  <PInput
+    v-model="query"
+    name="queryInput"
+  />
+</template>
 ```
 
 ### Extracting shortcuts from menu items

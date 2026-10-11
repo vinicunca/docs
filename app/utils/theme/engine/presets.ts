@@ -1,10 +1,10 @@
-import type { ThemeDoc, StyleOptions } from './types'
+import type { StyleOptions, ThemeDoc } from './types';
 
 export interface ThemePreset {
-  id: string
-  name: string
-  description: string
-  doc: ThemeDoc
+  id: string;
+  name: string;
+  description: string;
+  doc: ThemeDoc;
 }
 
 /**
@@ -22,26 +22,26 @@ const tintedNeutralBase = {
   '--ui-color-text-inverted': { light: 50 },
   '--ui-color-text-highlighted': { dark: 50 },
   '--ui-color-bg-inverted': { dark: 50 },
-  '--ui-color-border-inverted': { dark: 50 }
-} satisfies StyleOptions['tokenShades']
+  '--ui-color-border-inverted': { dark: 50 },
+} satisfies StyleOptions['tokenShades'];
 
 /**
  * A fresh copy per preset. `deriveStyle` puts these objects straight into
  * reactive studio state, so a spread would hand six presets the same
  * per-token object and one in-place write would corrupt all of them.
  */
-const tintedNeutral = () => structuredClone(tintedNeutralBase)
+const tintedNeutral = () => structuredClone(tintedNeutralBase);
 
 /**
  * Presets are plain ThemeDocs: applying one replaces the current document.
  */
-export const presets: ThemePreset[] = [{
+export const presets: Array<ThemePreset> = [{
   id: 'default',
   name: 'Default',
   description: 'The stock theme, everything inherited.',
   doc: {
-    version: 1
-  }
+    version: 1,
+  },
 }, {
   id: 'mono',
   name: 'Mono',
@@ -50,15 +50,15 @@ export const presets: ThemePreset[] = [{
     version: 1,
     blackAsPrimary: true,
     colors: {
-      neutral: 'neutral'
+      neutral: 'neutral',
     },
     radius: 0.5,
     font: { sans: 'Geist', mono: 'Geist Mono' },
     style: {
       defaults: {
         variants: {
-          inputs: 'subtle'
-        }
+          inputs: 'subtle',
+        },
       },
       tokenShades: {
         '--ui-color-bg': { dark: 950 },
@@ -66,10 +66,10 @@ export const presets: ThemePreset[] = [{
         '--ui-color-bg-elevated': { light: 100, dark: 900 },
         '--ui-color-bg-accented': { light: 200, dark: 800 },
         '--ui-color-text': { light: 900, dark: 100 },
-        '--ui-color-text-highlighted': { light: 950, dark: 50 }
-      }
-    }
-  }
+        '--ui-color-text-highlighted': { light: 950, dark: 50 },
+      },
+    },
+  },
 }, {
   id: 'cobalt',
   name: 'Cobalt',
@@ -91,8 +91,8 @@ export const presets: ThemePreset[] = [{
           700: 'oklch(40.2% 0.152 259.656)',
           800: 'oklch(30.7% 0.109 258.934)',
           900: 'oklch(20.4% 0.063 257.52)',
-          950: 'oklch(14.7% 0.037 249.929)'
-        }
+          950: 'oklch(14.7% 0.037 249.929)',
+        },
       },
       // A flat cool gray, its mid stops lighter than UnoCSS's so borders
       // and muted text stay soft against the tinted page.
@@ -108,9 +108,9 @@ export const presets: ThemePreset[] = [{
           700: 'oklch(42.8% 0.015 248.172)',
           800: 'oklch(34.5% 0.013 248.212)',
           900: 'oklch(26.2% 0.009 248.19)',
-          950: 'oklch(20.7% 0.008 248.192)'
-        }
-      }
+          950: 'oklch(20.7% 0.008 248.192)',
+        },
+      },
     },
     // The gray ramp serves as secondary too: a muted second button colour.
     colors: {
@@ -118,7 +118,7 @@ export const presets: ThemePreset[] = [{
       secondary: 'cobalt-gray',
       info: 'cyan',
       warning: 'amber',
-      neutral: 'cobalt-gray'
+      neutral: 'cobalt-gray',
     },
     radius: 0.125,
     // a point under stock, utility UIs run dense
@@ -138,7 +138,7 @@ export const presets: ThemePreset[] = [{
         '--ui-color-text-muted': 'var(--ui-color-neutral-600)',
         '--ui-color-text-dimmed': 'var(--ui-color-neutral-600)',
         '--ui-color-bg-elevated': 'var(--ui-color-neutral-200)',
-        '--ui-color-bg-accented': 'var(--ui-color-neutral-300)'
+        '--ui-color-bg-accented': 'var(--ui-color-neutral-300)',
       },
       // Dark keeps the same brand colours rather than lifting to the 400s.
       dark: {
@@ -149,10 +149,10 @@ export const presets: ThemePreset[] = [{
         '--ui-warning': 'var(--ui-color-warning-500)',
         '--ui-error': 'var(--ui-color-error-500)',
         '--ui-color-bg-muted': 'var(--ui-color-neutral-700)',
-        '--ui-color-text': 'var(--ui-color-neutral-300)'
-      }
-    }
-  }
+        '--ui-color-text': 'var(--ui-color-neutral-300)',
+      },
+    },
+  },
 }, {
   id: 'sky',
   name: 'Sky',
@@ -161,16 +161,16 @@ export const presets: ThemePreset[] = [{
     version: 1,
     colors: {
       primary: 'sky',
-      neutral: 'mist'
+      neutral: 'mist',
     },
     radius: 0.75,
     font: { sans: 'Figtree', lineHeight: 1.6 },
     style: {
       // nothing solid anywhere: one app-wide pastel fill
       defaults: { variants: { buttons: 'soft', inputs: 'soft' } },
-      tokenShades: tintedNeutral()
-    }
-  }
+      tokenShades: tintedNeutral(),
+    },
+  },
 }, {
   id: 'mint',
   name: 'Mint',
@@ -179,7 +179,7 @@ export const presets: ThemePreset[] = [{
     version: 1,
     colors: {
       primary: 'teal',
-      neutral: 'olive'
+      neutral: 'olive',
     },
     radius: 0.75,
     // a step heavier across the ladder, Nunito reads thin at stock weights
@@ -187,7 +187,7 @@ export const presets: ThemePreset[] = [{
     icons: 'iconoir',
     style: {
       defaults: { size: 'lg', variants: { inputs: 'soft' } },
-      tokenShades: tintedNeutral()
+      tokenShades: tintedNeutral(),
     },
     // the radius ladder stops at 0.75rem, the pill has to come from the slots
     components: {
@@ -195,9 +195,9 @@ export const presets: ThemePreset[] = [{
       input: { slots: { base: 'rounded-full' } },
       select: { slots: { base: 'rounded-full' } },
       selectMenu: { slots: { base: 'rounded-full' } },
-      inputMenu: { slots: { base: 'rounded-full' } }
-    }
-  }
+      inputMenu: { slots: { base: 'rounded-full' } },
+    },
+  },
 }, {
   id: 'iris',
   name: 'Iris',
@@ -207,7 +207,7 @@ export const presets: ThemePreset[] = [{
     colors: {
       primary: 'violet',
       secondary: 'fuchsia',
-      neutral: 'mauve'
+      neutral: 'mauve',
     },
     radius: 0.5,
     font: { sans: 'Manrope', letterSpacing: -0.01 },
@@ -215,9 +215,9 @@ export const presets: ThemePreset[] = [{
     style: {
       // the violet stays a line: outlined actions over tinted fields
       defaults: { variants: { buttons: 'outline', inputs: 'subtle' } },
-      tokenShades: tintedNeutral()
-    }
-  }
+      tokenShades: tintedNeutral(),
+    },
+  },
 }, {
   id: 'crimson',
   name: 'Crimson',
@@ -226,7 +226,7 @@ export const presets: ThemePreset[] = [{
     version: 1,
     colors: {
       primary: 'red',
-      neutral: 'neutral'
+      neutral: 'neutral',
     },
     radius: 0,
     font: { sans: 'Inter', weights: { semibold: 700, bold: 800 } },
@@ -242,10 +242,10 @@ export const presets: ThemePreset[] = [{
         // light restates tintedNeutral's step: this key replaces it wholesale
         '--ui-color-bg-muted': { light: 100, dark: 900 },
         '--ui-color-bg-elevated': { dark: 900 },
-        '--ui-color-bg-accented': { dark: 800 }
-      }
-    }
-  }
+        '--ui-color-bg-accented': { dark: 800 },
+      },
+    },
+  },
 }, {
   id: 'coral',
   name: 'Coral',
@@ -255,7 +255,7 @@ export const presets: ThemePreset[] = [{
     colors: {
       primary: 'rose',
       success: 'teal',
-      neutral: 'stone'
+      neutral: 'stone',
     },
     radius: 0.5,
     font: { sans: 'Plus Jakarta Sans' },
@@ -263,16 +263,16 @@ export const presets: ThemePreset[] = [{
     style: {
       // fields ring in neutral, the rose stays on actions
       defaults: { colors: { inputs: 'neutral' } },
-      tokenShades: tintedNeutral()
+      tokenShades: tintedNeutral(),
     },
     components: {
       // Cards float on a shadow instead of sitting in a ring. Dark keeps the
       // ring, a shadow has nothing to fall on there. A compound entry rather
       // than the slot: the variant's own `ring` lands after the slot string
       // and would win the merge.
-      card: { compoundVariants: [{ variant: 'outline', class: { root: 'ring-0 dark:ring shadow-xl shadow-black/5' } }] }
-    }
-  }
+      card: { compoundVariants: [{ variant: 'outline', class: { root: 'ring-0 dark:ring shadow-xl shadow-black/5' } }] },
+    },
+  },
 }, {
   id: 'sunset',
   name: 'Sunset',
@@ -282,7 +282,7 @@ export const presets: ThemePreset[] = [{
     colors: {
       primary: 'orange',
       secondary: 'yellow',
-      neutral: 'taupe'
+      neutral: 'taupe',
     },
     radius: 0.625,
     font: { sans: 'Bricolage Grotesque' },
@@ -292,14 +292,14 @@ export const presets: ThemePreset[] = [{
       tokenShades: {
         ...tintedNeutral(),
         // orange-500 is too light to carry white text, 600 is the burnt stop
-        '--ui-primary': { light: 600 }
-      }
+        '--ui-primary': { light: 600 },
+      },
     },
     components: {
       // solid primary actions cast a warm glow
-      button: { compoundVariants: [{ color: 'primary', variant: 'solid', class: 'shadow-md shadow-primary/30' }] }
-    }
-  }
+      button: { compoundVariants: [{ color: 'primary', variant: 'solid', class: 'shadow-md shadow-primary/30' }] },
+    },
+  },
 }, {
   id: 'carbon',
   name: 'Carbon',
@@ -320,14 +320,14 @@ export const presets: ThemePreset[] = [{
           700: 'oklch(35.9% 0 0)',
           800: 'oklch(28% 0 0)',
           900: 'oklch(20.8% 0 0)',
-          950: 'oklch(14.1% 0.005 285.805)'
-        }
-      }
+          950: 'oklch(14.1% 0.005 285.805)',
+        },
+      },
     },
     colors: {
       primary: 'amber',
       secondary: 'yellow',
-      neutral: 'carbon'
+      neutral: 'carbon',
     },
     radius: 0.5,
     font: { sans: 'Outfit' },
@@ -353,10 +353,10 @@ export const presets: ThemePreset[] = [{
         // only add a line the importer then has to recognise as generated
         '--ui-color-border-muted': { light: 400 },
         '--ui-color-border-accented': { light: 950, dark: 500 },
-        '--ui-color-border-inverted': { light: 500, dark: 50 }
-      }
-    }
-  }
+        '--ui-color-border-inverted': { light: 500, dark: 50 },
+      },
+    },
+  },
 }, {
   id: 'bubblegum',
   name: 'Bubblegum',
@@ -377,14 +377,14 @@ export const presets: ThemePreset[] = [{
           700: 'oklch(34.6% 0.048 322.004)',
           800: 'oklch(27.4% 0.034 321.983)',
           900: 'oklch(20.7% 0.02 322.028)',
-          950: 'oklch(14.5% 0.008 322.12)'
-        }
-      }
+          950: 'oklch(14.5% 0.008 322.12)',
+        },
+      },
     },
     colors: {
       primary: 'pink',
       secondary: 'violet',
-      neutral: 'saturated-mauve'
+      neutral: 'saturated-mauve',
     },
     radius: 0.375,
     font: { sans: 'Poppins' },
@@ -393,15 +393,15 @@ export const presets: ThemePreset[] = [{
       light: {
         '--ui-color-bg': 'var(--ui-color-neutral-50)',
         '--ui-color-text-inverted': 'var(--ui-color-neutral-50)',
-        '--ui-color-bg-muted': 'var(--ui-color-neutral-100)'
+        '--ui-color-bg-muted': 'var(--ui-color-neutral-100)',
       },
       dark: {
         '--ui-color-bg-inverted': 'var(--ui-color-neutral-50)',
         '--ui-color-text-highlighted': 'var(--ui-color-neutral-50)',
-        '--ui-color-border-inverted': 'var(--ui-color-neutral-50)'
-      }
-    }
-  }
+        '--ui-color-border-inverted': 'var(--ui-color-neutral-50)',
+      },
+    },
+  },
 }, {
   id: 'parchment',
   name: 'Parchment',
@@ -422,8 +422,8 @@ export const presets: ThemePreset[] = [{
           700: 'oklch(51.4% 0.123 37.45)',
           800: 'oklch(44.4% 0.103 36.916)',
           900: 'oklch(38.8% 0.086 36.46)',
-          950: 'oklch(25.9% 0.054 38.197)'
-        }
+          950: 'oklch(25.9% 0.054 38.197)',
+        },
       },
       // Warm paper grays, the light end is cream rather than white: the page
       // sits at 100, its surfaces a step below.
@@ -439,13 +439,13 @@ export const presets: ThemePreset[] = [{
           700: 'oklch(38.2% 0.003 84.572)',
           800: 'oklch(29.3% 0.003 106.588)',
           900: 'oklch(21.7% 0.002 106.561)',
-          950: 'oklch(14.6% 0 0)'
-        }
-      }
+          950: 'oklch(14.6% 0 0)',
+        },
+      },
     },
     colors: {
       primary: 'clay',
-      neutral: 'parchment'
+      neutral: 'parchment',
     },
     radius: 0.375,
     font: { sans: 'DM Sans', serif: 'Source Serif 4' },
@@ -464,12 +464,12 @@ export const presets: ThemePreset[] = [{
         // the library leaves this at 200, where the muted surface now sits:
         // a code block's frame would land on its own background
         '--ui-color-border-muted': 'var(--ui-color-neutral-300)',
-        '--ui-color-border-accented': 'var(--ui-color-neutral-400)'
+        '--ui-color-border-accented': 'var(--ui-color-neutral-400)',
       },
       dark: {
         '--ui-primary': 'var(--ui-color-primary-500)',
-        '--ui-color-bg-accented': 'var(--ui-color-neutral-800)'
-      }
-    }
-  }
-}] satisfies ThemePreset[]
+        '--ui-color-bg-accented': 'var(--ui-color-neutral-800)',
+      },
+    },
+  },
+}] satisfies Array<ThemePreset>;

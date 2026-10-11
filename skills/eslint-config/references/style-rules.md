@@ -26,11 +26,13 @@ ESLint Stylistic `customize()` with `indent: 2`, `quotes: 'single'`, `semi: true
 
 ```ts
 // Before
-const isEmpty = (s: string) => s.length === 0
-if (!value) return
-const total = price +
-  tax
-const config = { 'max-age': 60, other: 1 }
+const isEmpty = (s: string) => s.length === 0;
+if (!value) {
+  return;
+}
+const total = price
+  + tax;
+const config = { 'max-age': 60, 'other': 1 };
 
 // After pnpm eslint --fix
 function isEmpty(s: string) {
@@ -134,7 +136,7 @@ Base: typescript-eslint `eslint-recommended` + `strict`, then:
 
 ```ts
 // Before
-type User = { id: number; tags: string[]; greet(name: string): void };
+interface User { id: number; tags: Array<string>; greet: (name: string) => void }
 
 // After
 interface User {
@@ -174,7 +176,9 @@ const emit = defineEmits<{ selectUser: [id: number] }>();
 </template>
 
 <style scoped>
-.card { padding: 1rem; }
+.card {
+  padding: 1rem;
+}
 </style>
 ```
 

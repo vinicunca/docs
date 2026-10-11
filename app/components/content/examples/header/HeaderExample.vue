@@ -1,25 +1,25 @@
 <script setup lang="ts">
-import type { NavigationMenuItem } from 'pohon-ui'
+import type { NavigationMenuItem } from 'pohon-ui';
 
-const route = useRoute()
+const route = useRoute();
 
-const items = computed<NavigationMenuItem[]>(() => [{
+const items = computed<Array<NavigationMenuItem>>(() => [{
   label: 'Docs',
   to: '/docs/getting-started',
-  active: route.path.startsWith('/docs/getting-started')
+  active: route.path.startsWith('/docs/getting-started'),
 }, {
   label: 'Components',
   to: '/docs/components',
-  active: route.path.startsWith('/docs/components')
+  active: route.path.startsWith('/docs/components'),
 }, {
   label: 'Theme',
   to: '/theme',
-  target: '_blank'
+  target: '_blank',
 }, {
   label: 'Releases',
   to: 'https://github.com/vinicunca/pohon/releases',
-  target: '_blank'
-}])
+  target: '_blank',
+}]);
 </script>
 
 <template>
@@ -33,7 +33,10 @@ const items = computed<NavigationMenuItem[]>(() => [{
     <template #right>
       <PColorModeButton />
 
-      <PTooltip text="Open on GitHub" :kbds="['meta', 'G']">
+      <PTooltip
+        text="Open on GitHub"
+        :kbds="['meta', 'G']"
+      >
         <PButton
           color="neutral"
           variant="ghost"

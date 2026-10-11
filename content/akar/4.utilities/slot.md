@@ -46,7 +46,7 @@ Alternatively, If you use `Slot` from Akar, the attributes assigned to the Slot 
 ```vue
 <!-- Akar Slot -->
 <script setup lang="ts">
-import { Slot } from 'akar'
+import { Slot } from 'akar';
 </script>
 
 <!-- Comp.vue -->

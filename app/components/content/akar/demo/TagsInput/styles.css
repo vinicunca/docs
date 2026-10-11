@@ -4,10 +4,10 @@
 @import '../_colors/grass.css';
 
 @scope (.akar-demo-TagsInput) {
-/* reset */
-button,
-fieldset,
-input {
-  all: unset;
-}
+  /* reset */
+  button,
+  fieldset,
+  input {
+    all: unset;
+  }
 }

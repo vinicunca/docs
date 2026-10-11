@@ -43,7 +43,7 @@ export default defineNuxtConfig({
       ]
     }
   }
-})
+});
 ```
 ::
 
@@ -131,10 +131,10 @@ You can use the `extensions` prop to add additional TipTap extensions to enhance
 
 ```vue
 <script setup lang="ts">
-import { Emoji } from '@tiptap/extension-emoji'
-import { TextAlign } from '@tiptap/extension-text-align'
+import { Emoji } from '@tiptap/extension-emoji';
+import { TextAlign } from '@tiptap/extension-text-align';
 
-const value = ref('<h1>Hello World</h1>\n')
+const value = ref('<h1>Hello World</h1>\n');
 </script>
 
 <template>
@@ -143,8 +143,8 @@ const value = ref('<h1>Hello World</h1>\n')
     :extensions="[
       Emoji,
       TextAlign.configure({
-        types: ['heading', 'paragraph']
-      })
+        types: ['heading', 'paragraph'],
+      }),
     ]"
   />
 </template>
@@ -209,7 +209,7 @@ Use the `starter-kit` prop to configure the built-in TipTap StarterKit extension
 
 ```vue
 <script setup lang="ts">
-const value = ref('<h1>Hello World</h1>\n')
+const value = ref('<h1>Hello World</h1>\n');
 </script>
 
 <template>
@@ -218,15 +218,15 @@ const value = ref('<h1>Hello World</h1>\n')
     :starter-kit="{
       blockquote: false,
       headings: {
-        levels: [1, 2, 3, 4]
+        levels: [1, 2, 3, 4],
       },
       dropcursor: {
         color: 'var(--ui-primary)',
-        width: 2
+        width: 2,
       },
       link: {
-        openOnClick: false
-      }
+        openOnClick: false,
+      },
     }"
   />
 </template>
@@ -281,11 +281,11 @@ Here's how to use default handlers in toolbar or suggestion menu items:
 
 ```vue
 <script setup lang="ts">
-import type { EditorToolbarItem } from 'pohon-ui'
+import type { EditorToolbarItem } from 'pohon-ui';
 
-const value = ref('<h1>Hello World</h1>\n')
+const value = ref('<h1>Hello World</h1>\n');
 
-const items: EditorToolbarItem[] = [
+const items: Array<EditorToolbarItem> = [
   { kind: 'mark', mark: 'bold', icon: 'i-lucide-bold' },
   { kind: 'mark', mark: 'italic', icon: 'i-lucide-italic' },
   { kind: 'heading', level: 1, icon: 'i-lucide-heading-1' },
@@ -296,12 +296,18 @@ const items: EditorToolbarItem[] = [
   { kind: 'orderedList', icon: 'i-lucide-list-ordered' },
   { kind: 'blockquote', icon: 'i-lucide-quote' },
   { kind: 'link', icon: 'i-lucide-link' }
-]
+];
 </script>
 
 <template>
-  <PEditor v-slot="{ editor }" v-model="value">
-    <PEditorToolbar :editor="editor" :items="items" />
+  <PEditor
+    v-slot="{ editor }"
+    v-model="value"
+  >
+    <PEditorToolbar
+      :editor="editor"
+      :items="items"
+    />
   </PEditor>
 </template>
 ```
@@ -315,13 +321,13 @@ Each handler implements the `EditorHandler`{lang="ts-type"} interface:
 ```ts
 interface EditorHandler {
   /* Checks if the command can be executed in the current editor state */
-  canExecute: (editor: Editor, item?: any) => boolean
+  canExecute: (editor: Editor, item?: any) => boolean;
   /* Executes the command and returns a Tiptap chain */
-  execute: (editor: Editor, item?: any) => any
+  execute: (editor: Editor, item?: any) => any;
   /* Determines if the item should appear active (used for toggle states) */
-  isActive: (editor: Editor, item?: any) => boolean
+  isActive: (editor: Editor, item?: any) => boolean;
   /* Optional additional check to disable the item (combined with `canExecute`) */
-  isDisabled?: (editor: Editor, item?: any) => boolean
+  isDisabled?: (editor: Editor, item?: any) => boolean;
 }
 ```
 
@@ -329,10 +335,10 @@ Here's an example of creating custom handlers:
 
 ```vue
 <script setup lang="ts">
-import type { Editor } from '@tiptap/vue-3'
-import type { EditorCustomHandlers, EditorToolbarItem } from 'pohon-ui'
+import type { Editor } from '@tiptap/vue-3';
+import type { EditorCustomHandlers, EditorToolbarItem } from 'pohon-ui';
 
-const value = ref('<h1>Hello World</h1>\n')
+const value = ref('<h1>Hello World</h1>\n');
 
 const customHandlers = {
   highlight: {
@@ -341,19 +347,26 @@ const customHandlers = {
     isActive: (editor: Editor) => editor.isActive('highlight'),
     isDisabled: (editor: Editor) => !editor.isEditable
   }
-} satisfies EditorCustomHandlers
+} satisfies EditorCustomHandlers;
 
 const items = [
   // Built-in handler
   { kind: 'mark', mark: 'bold', icon: 'i-lucide-bold' },
   // Custom handler
   { kind: 'highlight', icon: 'i-lucide-highlighter' }
-] satisfies EditorToolbarItem<typeof customHandlers>[]
+] satisfies Array<EditorToolbarItem<typeof customHandlers>>;
 </script>
 
 <template>
-  <PEditor v-slot="{ editor }" v-model="value" :handlers="customHandlers">
-    <PEditorToolbar :editor="editor" :items="items" />
+  <PEditor
+    v-slot="{ editor }"
+    v-model="value"
+    :handlers="customHandlers"
+  >
+    <PEditorToolbar
+      :editor="editor"
+      :items="items"
+    />
   </PEditor>
 </template>
 ```
@@ -536,45 +549,45 @@ lang: 'ts'
 ::code-collapse
 
 ```ts [server/api/completion.post.ts]
-import { streamText, createTextStreamResponse } from 'ai'
-import { gateway } from '@ai-sdk/gateway'
+import { gateway } from '@ai-sdk/gateway';
+import { createTextStreamResponse, streamText } from 'ai';
 
 export default defineEventHandler(async (event) => {
-  const { prompt, mode, language } = await readBody(event)
+  const { prompt, mode, language } = await readBody(event);
   if (!prompt) {
-    throw createError({ statusCode: 400, message: 'Prompt is required' })
+    throw createError({ statusCode: 400, message: 'Prompt is required' });
   }
 
-  let instructions: string
-  let maxOutputTokens: number
+  let instructions: string;
+  let maxOutputTokens: number;
 
-  const preserveMarkdown = 'IMPORTANT: Preserve all markdown formatting (bold, italic, links, etc.) exactly as in the original.'
+  const preserveMarkdown = 'IMPORTANT: Preserve all markdown formatting (bold, italic, links, etc.) exactly as in the original.';
 
   switch (mode) {
     case 'fix':
-      instructions = `You are a writing assistant. Fix all spelling and grammar errors in the given text. ${preserveMarkdown} Only output the corrected text, nothing else.`
-      maxOutputTokens = 500
-      break
+      instructions = `You are a writing assistant. Fix all spelling and grammar errors in the given text. ${preserveMarkdown} Only output the corrected text, nothing else.`;
+      maxOutputTokens = 500;
+      break;
     case 'extend':
-      instructions = `You are a writing assistant. Extend the given text with more details, examples, and explanations while maintaining the same style. ${preserveMarkdown} Only output the extended text, nothing else.`
-      maxOutputTokens = 500
-      break
+      instructions = `You are a writing assistant. Extend the given text with more details, examples, and explanations while maintaining the same style. ${preserveMarkdown} Only output the extended text, nothing else.`;
+      maxOutputTokens = 500;
+      break;
     case 'reduce':
-      instructions = `You are a writing assistant. Make the given text more concise by removing unnecessary words while keeping the meaning. ${preserveMarkdown} Only output the reduced text, nothing else.`
-      maxOutputTokens = 300
-      break
+      instructions = `You are a writing assistant. Make the given text more concise by removing unnecessary words while keeping the meaning. ${preserveMarkdown} Only output the reduced text, nothing else.`;
+      maxOutputTokens = 300;
+      break;
     case 'simplify':
-      instructions = `You are a writing assistant. Simplify the given text to make it easier to understand, using simpler words and shorter sentences. ${preserveMarkdown} Only output the simplified text, nothing else.`
-      maxOutputTokens = 400
-      break
+      instructions = `You are a writing assistant. Simplify the given text to make it easier to understand, using simpler words and shorter sentences. ${preserveMarkdown} Only output the simplified text, nothing else.`;
+      maxOutputTokens = 400;
+      break;
     case 'summarize':
-      instructions = 'You are a writing assistant. Summarize the given text concisely while keeping the key points. Only output the summary, nothing else.'
-      maxOutputTokens = 200
-      break
+      instructions = 'You are a writing assistant. Summarize the given text concisely while keeping the key points. Only output the summary, nothing else.';
+      maxOutputTokens = 200;
+      break;
     case 'translate':
-      instructions = `You are a writing assistant. Translate the given text to ${language || 'English'}. ${preserveMarkdown} Only output the translated text, nothing else.`
-      maxOutputTokens = 500
-      break
+      instructions = `You are a writing assistant. Translate the given text to ${language || 'English'}. ${preserveMarkdown} Only output the translated text, nothing else.`;
+      maxOutputTokens = 500;
+      break;
     case 'continue':
     default:
       instructions = `You are a writing assistant providing inline autocompletions.
@@ -583,9 +596,9 @@ CRITICAL RULES:
 - NEVER repeat any words from the end of the user's text
 - Keep completions short (1 sentence max)
 - Match the tone and style of the existing text
-- ${preserveMarkdown}`
-      maxOutputTokens = 25
-      break
+- ${preserveMarkdown}`;
+      maxOutputTokens = 25;
+      break;
   }
 
   const result = streamText({
@@ -593,10 +606,10 @@ CRITICAL RULES:
     instructions,
     prompt,
     maxOutputTokens
-  })
+  });
 
-  return createTextStreamResponse({ stream: result.textStream })
-})
+  return createTextStreamResponse({ stream: result.textStream });
+});
 ```
 
 ::

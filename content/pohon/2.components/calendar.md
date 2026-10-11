@@ -47,12 +47,12 @@ props:
 ::
 
 ::framework-only
-#nuxt
+# nuxt
 :::note{to="/pohon/getting-started/integrations/i18n/nuxt#locale"}
 This component uses the `@internationalized/date` package for locale-aware formatting. The date format is determined by the `locale` prop of the App component.
 :::
 
-#vue
+# vue
 :::note{to="/pohon/getting-started/integrations/i18n/vue#locale"}
 This component uses the `@internationalized/date` package for locale-aware formatting. The date format is determined by the `locale` prop of the App component.
 :::

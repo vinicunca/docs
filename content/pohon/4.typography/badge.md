@@ -19,7 +19,7 @@ Use markdown in the default slot of the `badge` component to display a [Badge](/
 **v2.0.0**
 :::
 
-#code
+# code
 
 ```mdc
 ::badge

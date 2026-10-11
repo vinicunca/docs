@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { MarkdownDoc } from '../../utils/markdown'
+import type { MarkdownDoc } from '../../utils/markdown';
 
 /**
  * The theme as the files you would ship, for the home hero's right half:
@@ -8,76 +8,76 @@ import type { MarkdownDoc } from '../../utils/markdown'
  * renders the stock theme highlighted; the client takes over after mount,
  * once the persisted theme is on.
  */
-const { exportCSS, exportConfig, configLabel, currentDoc } = useTheme()
-const { framework } = useFrameworks()
+const { exportCSS, exportConfig, configLabel, currentDoc } = useTheme();
+const { framework } = useFrameworks();
 
 interface Pane {
-  key: 'css' | 'config'
-  filename: string
-  doc: MarkdownDoc
+  key: 'css' | 'config';
+  filename: string;
+  doc: MarkdownDoc;
 }
 
 // the doc reads every theme ref, the framework picks the config file
-const themeKey = () => JSON.stringify(currentDoc()) + framework.value
+const themeKey = () => JSON.stringify(currentDoc()) + framework.value;
 
 // the pane is desktop only, so a phone never parses the files
-const large = useMediaQuery('(min-width: 64rem)')
+const large = useMediaQuery('(min-width: 64rem)');
 
-async function generate(): Promise<{ key: string, panes: Pane[] }> {
-  const key = themeKey()
+async function generate(): Promise<{ key: string; panes: Array<Pane> }> {
+  const key = themeKey();
   // loaded here so shiki and its grammars stay out of the landing's entry chunk
-  const { parseCode } = await import('../../utils/markdown')
+  const { parseCode } = await import('../../utils/markdown');
   // explicit: the stock theme is a pair of files too, not an empty diff
-  const [css, config] = await Promise.all([exportCSS({ explicit: true }), exportConfig({ explicit: true })])
-  const [cssDoc, configDoc] = await Promise.all([parseCode(css, 'css'), parseCode(config, 'ts')])
+  const [css, config] = await Promise.all([exportCSS({ explicit: true }), exportConfig({ explicit: true })]);
+  const [cssDoc, configDoc] = await Promise.all([parseCode(css, 'css'), parseCode(config, 'ts')]);
 
   return {
     key,
     panes: [
       { key: 'css', filename: 'main.css', doc: cssDoc },
-      { key: 'config', filename: configLabel.value, doc: configDoc }
-    ]
-  }
+      { key: 'config', filename: configLabel.value, doc: configDoc },
+    ],
+  };
 }
 
 // The payload carries the stock theme's files; the persisted theme is
 // client-only, so the first regeneration waits for mount.
-const { data } = await useAsyncData('home-theme-code', generate, { default: () => ({ key: '', panes: [] as Pane[] }) })
+const { data } = await useAsyncData('home-theme-code', generate, { default: () => ({ key: '', panes: [] as Array<Pane> }) });
 
-const panes = computed(() => data.value.panes)
+const panes = computed(() => data.value.panes);
 
 // the last change wins: a result for a theme that has moved on is dropped
-let version = 0
+let version = 0;
 async function regenerate() {
   // the payload already holds this theme's files, and nothing shows them narrow
   if (!large.value || themeKey() === data.value.key) {
-    return
+    return;
   }
 
-  const current = ++version
+  const current = ++version;
   try {
-    const result = await generate()
+    const result = await generate();
     if (current === version) {
-      data.value = result
+      data.value = result;
     }
   } catch (error) {
-    console.warn('[home] could not render the theme files', error)
+    console.warn('[home] could not render the theme files', error);
   }
 }
 
-onMounted(regenerate)
+onMounted(regenerate);
 // crossing the breakpoint generates the files the phone skipped
-watch(() => themeKey() + large.value, regenerate)
+watch(() => themeKey() + large.value, regenerate);
 
-const tab = ref<Pane['key']>('css')
-const pane = computed(() => panes.value.find(entry => entry.key === tab.value) ?? panes.value[0])
+const tab = ref<Pane['key']>('css');
+const pane = computed(() => panes.value.find((entry) => entry.key === tab.value) ?? panes.value[0]);
 </script>
 
 <template>
   <!-- min-w-0: the controls row would otherwise hold the grid column open at
        its own min-content width and push the hero past the viewport -->
-  <div class="hidden lg:flex flex-col gap-2 min-w-0 rounded-xl bg-background-elevated/50 px-2.5 py-2">
-    <div class="flex items-center gap-1 ps-1 pe-2 pt-0.5">
+  <div class="px-2.5 py-2 rounded-xl bg-background-elevated/50 flex-col gap-2 min-w-0 hidden lg:flex">
+    <div class="pe-2 ps-1 pt-0.5 flex gap-1 items-center">
       <PButton
         v-for="entry in panes"
         :key="entry.key"
@@ -92,7 +92,10 @@ const pane = computed(() => panes.value.find(entry => entry.key === tab.value) ?
         @click="tab = entry.key"
       >
         <template #leading>
-          <ProseCodeIcon :filename="entry.filename" class="size-4 shrink-0" />
+          <ProseCodeIcon
+            :filename="entry.filename"
+            class="shrink-0 size-4"
+          />
         </template>
       </PButton>
     </div>

@@ -19,153 +19,153 @@ import {
   DateRangePickerRoot,
   DateRangePickerTrigger,
   Label,
-} from 'akar'
+} from 'akar';
 
-import './styles.css'
+import './styles.css';
 </script>
 
 <template>
   <div class="akar-demo akar-demo-DateRangePicker">
     <div class="DateFieldWrapper">
-        <Label
-          class="DateFieldLabel"
-          for="date-field"
-        >Birthday</Label>
-        <DateRangePickerRoot
-          id="date-field"
-          :is-date-unavailable="date => date.day === 19"
-          granularity="second"
+      <Label
+        class="DateFieldLabel"
+        for="date-field"
+      >Birthday</Label>
+      <DateRangePickerRoot
+        id="date-field"
+        :is-date-unavailable="date => date.day === 19"
+        granularity="second"
+      >
+        <DateRangePickerField
+          v-slot="{ segments }"
+          class="DateField"
         >
-          <DateRangePickerField
-            v-slot="{ segments }"
-            class="DateField"
+          <template
+            v-for="item in segments.start"
+            :key="item.part"
           >
-            <template
-              v-for="item in segments.start"
-              :key="item.part"
+            <DateRangePickerInput
+              v-if="item.part === 'literal'"
+              :part="item.part"
+              class="DateFieldLiteral"
+              type="start"
             >
-              <DateRangePickerInput
-                v-if="item.part === 'literal'"
-                :part="item.part"
-                class="DateFieldLiteral"
-                type="start"
-              >
-                {{ item.value }}
-              </DateRangePickerInput>
-              <DateRangePickerInput
-                v-else
-                :part="item.part"
-                class="DateFieldSegment"
-                type="start"
-              >
-                {{ item.value }}
-              </DateRangePickerInput>
-            </template>
-            -
-            <template
-              v-for="item in segments.end"
-              :key="item.part"
+              {{ item.value }}
+            </DateRangePickerInput>
+            <DateRangePickerInput
+              v-else
+              :part="item.part"
+              class="DateFieldSegment"
+              type="start"
             >
-              <DateRangePickerInput
-                v-if="item.part === 'literal'"
-                :part="item.part"
-                class="DateFieldLiteral"
-                type="end"
-              >
-                {{ item.value }}
-              </DateRangePickerInput>
-              <DateRangePickerInput
-                v-else
-                :part="item.part"
-                class="DateFieldSegment"
-                type="end"
-              >
-                {{ item.value }}
-              </DateRangePickerInput>
-            </template>
-
-            <DateRangePickerTrigger class="PopoverTrigger">
-              <PIcon
-                name="i-lucide-calendar"
-                class="Icon"
-              />
-            </DateRangePickerTrigger>
-          </DateRangePickerField>
-
-          <DateRangePickerContent
-            align="end"
-            :side-offset="16"
-            class="PopoverContent"
+              {{ item.value }}
+            </DateRangePickerInput>
+          </template>
+          -
+          <template
+            v-for="item in segments.end"
+            :key="item.part"
           >
-            <DateRangePickerArrow class="PopoverArrow" />
-            <DateRangePickerCalendar
-              v-slot="{ weekDays, grid }"
-              class="Calendar"
+            <DateRangePickerInput
+              v-if="item.part === 'literal'"
+              :part="item.part"
+              class="DateFieldLiteral"
+              type="end"
             >
-              <DateRangePickerHeader class="CalendarHeader">
-                <DateRangePickerPrev
-                  class="CalendarNavButton"
-                >
-                  <PIcon
-                    name="i-lucide-chevron-left"
-                    class="Icon"
-                  />
-                </DateRangePickerPrev>
+              {{ item.value }}
+            </DateRangePickerInput>
+            <DateRangePickerInput
+              v-else
+              :part="item.part"
+              class="DateFieldSegment"
+              type="end"
+            >
+              {{ item.value }}
+            </DateRangePickerInput>
+          </template>
 
-                <DateRangePickerHeading class="CalendarHeading" />
-                <DateRangePickerNext
-                  class="CalendarNavButton"
-                >
-                  <PIcon
-                    name="i-lucide-chevron-right"
-                    class="Icon"
-                  />
-                </DateRangePickerNext>
-              </DateRangePickerHeader>
-              <div
-                class="CalendarWrapper"
+          <DateRangePickerTrigger class="PopoverTrigger">
+            <PIcon
+              name="i-lucide-calendar"
+              class="Icon"
+            />
+          </DateRangePickerTrigger>
+        </DateRangePickerField>
+
+        <DateRangePickerContent
+          align="end"
+          :side-offset="16"
+          class="PopoverContent"
+        >
+          <DateRangePickerArrow class="PopoverArrow" />
+          <DateRangePickerCalendar
+            v-slot="{ weekDays, grid }"
+            class="Calendar"
+          >
+            <DateRangePickerHeader class="CalendarHeader">
+              <DateRangePickerPrev
+                class="CalendarNavButton"
               >
-                <DateRangePickerGrid
-                  v-for="month in grid"
-                  :key="month.value.toString()"
-                  class="CalendarGrid"
-                >
-                  <DateRangePickerGridHead>
-                    <DateRangePickerGridRow class="CalendarGridRow">
-                      <DateRangePickerHeadCell
-                        v-for="day in weekDays"
-                        :key="day"
-                        class="CalendarHeadCell"
-                      >
-                        {{ day }}
-                      </DateRangePickerHeadCell>
-                    </DateRangePickerGridRow>
-                  </DateRangePickerGridHead>
-                  <DateRangePickerGridBody>
-                    <DateRangePickerGridRow
-                      v-for="(weekDates, index) in month.rows"
-                      :key="`weekDate-${index}`"
-                      class="CalendarGridRow"
+                <PIcon
+                  name="i-lucide-chevron-left"
+                  class="Icon"
+                />
+              </DateRangePickerPrev>
+
+              <DateRangePickerHeading class="CalendarHeading" />
+              <DateRangePickerNext
+                class="CalendarNavButton"
+              >
+                <PIcon
+                  name="i-lucide-chevron-right"
+                  class="Icon"
+                />
+              </DateRangePickerNext>
+            </DateRangePickerHeader>
+            <div
+              class="CalendarWrapper"
+            >
+              <DateRangePickerGrid
+                v-for="month in grid"
+                :key="month.value.toString()"
+                class="CalendarGrid"
+              >
+                <DateRangePickerGridHead>
+                  <DateRangePickerGridRow class="CalendarGridRow">
+                    <DateRangePickerHeadCell
+                      v-for="day in weekDays"
+                      :key="day"
+                      class="CalendarHeadCell"
                     >
-                      <DateRangePickerCell
-                        v-for="weekDate in weekDates"
-                        :key="weekDate.toString()"
-                        :date="weekDate"
-                        class="CalendarCell"
-                      >
-                        <DateRangePickerCellTrigger
-                          :day="weekDate"
-                          :month="month.value"
-                          class="CalendarCellTrigger"
-                        />
-                      </DateRangePickerCell>
-                    </DateRangePickerGridRow>
-                  </DateRangePickerGridBody>
-                </DateRangePickerGrid>
-              </div>
-            </DateRangePickerCalendar>
-          </DateRangePickerContent>
-        </DateRangePickerRoot>
-      </div>
+                      {{ day }}
+                    </DateRangePickerHeadCell>
+                  </DateRangePickerGridRow>
+                </DateRangePickerGridHead>
+                <DateRangePickerGridBody>
+                  <DateRangePickerGridRow
+                    v-for="(weekDates, index) in month.rows"
+                    :key="`weekDate-${index}`"
+                    class="CalendarGridRow"
+                  >
+                    <DateRangePickerCell
+                      v-for="weekDate in weekDates"
+                      :key="weekDate.toString()"
+                      :date="weekDate"
+                      class="CalendarCell"
+                    >
+                      <DateRangePickerCellTrigger
+                        :day="weekDate"
+                        :month="month.value"
+                        class="CalendarCellTrigger"
+                      />
+                    </DateRangePickerCell>
+                  </DateRangePickerGridRow>
+                </DateRangePickerGridBody>
+              </DateRangePickerGrid>
+            </div>
+          </DateRangePickerCalendar>
+        </DateRangePickerContent>
+      </DateRangePickerRoot>
+    </div>
   </div>
 </template>

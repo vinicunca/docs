@@ -1,4 +1,4 @@
-import { SITE_URL } from './site'
+import { SITE_URL } from './site';
 
 /**
  * "When to use" guidance for agents, rendered as the first section of
@@ -35,7 +35,7 @@ export const WHEN_TO_USE_SECTION = {
     `- For UnoCSS Variants (\`uv\`, slots, compound variants, no class merging), load the agent skill at ${SITE_URL}/.well-known/skills/unocss-variants/SKILL.md.`,
     `- For setting up or troubleshooting a Windows (WSL) dev machine, load the agent skill at ${SITE_URL}/.well-known/skills/windows-dev/SKILL.md.`,
     '',
-    'Entry points:'
+    'Entry points:',
   ].join('\n'),
   // Plain page paths: `nuxt-agent-discovery` maps them to their `/raw/**.md`
   // twins wherever this section is rendered.
@@ -54,32 +54,32 @@ export const WHEN_TO_USE_SECTION = {
     { title: 'Akar agent skill', description: 'When to use Akar, composition, and data attributes', href: '/.well-known/skills/akar/SKILL.md' },
     { title: 'UnoCSS Variants', description: 'uv() variants, slots, and the no-merge layer setup', href: '/unocss-variants/getting-started' },
     { title: 'UnoCSS Variants agent skill', description: 'uv API, slots, compound variants, and the no-merge caveat', href: '/.well-known/skills/unocss-variants/SKILL.md' },
-    { title: 'Markdown sitemap', description: 'Every page on the site, as Markdown links', href: '/sitemap.md' }
-  ]
-}
+    { title: 'Markdown sitemap', description: 'Every page on the site, as Markdown links', href: '/sitemap.md' },
+  ],
+};
 
 /**
  * Renders a `nuxt-llms` section the way `/llms.txt` does, so the same content
  * can be reused in other Markdown documents.
  */
 export function renderLlmsSection(
-  section: { title: string, description?: string, links?: { title: string, description?: string, href: string }[] },
-  resolveHref: (href: string) => string = href => href
+  section: { title: string; description?: string; links?: Array<{ title: string; description?: string; href: string }> },
+  resolveHref: (href: string) => string = (href) => href,
 ): string {
-  const parts = [`## ${section.title}`]
+  const parts = [`## ${section.title}`];
 
   if (section.description) {
-    parts.push(section.description)
+    parts.push(section.description);
   }
 
   if (section.links?.length) {
     // `/llms.txt` gets its links rewritten to the raw twins by the module.
     // Anywhere else has to resolve them, which is what `resolveHref` is for.
     parts.push(section.links.map((link) => {
-      const href = resolveHref(link.href)
-      return link.description ? `- [${link.title}](${href}): ${link.description}` : `- [${link.title}](${href})`
-    }).join('\n'))
+      const href = resolveHref(link.href);
+      return link.description ? `- [${link.title}](${href}): ${link.description}` : `- [${link.title}](${href})`;
+    }).join('\n'));
   }
 
-  return parts.join('\n\n')
+  return parts.join('\n\n');
 }

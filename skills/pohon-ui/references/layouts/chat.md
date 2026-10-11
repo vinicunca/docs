@@ -34,7 +34,7 @@ export default defineNuxtConfig({
     'pohon-ui',
     '@comark/nuxt'
   ]
-})
+});
 ```
 
 **Vue (Vite):** No module registration needed, import directly from `@comark/vue`.
@@ -62,41 +62,41 @@ These examples target AI SDK v7 (`instructions`, `toUIMessageStream`).
 Using [Vercel AI Gateway](https://vercel.com/ai-gateway) (recommended):
 
 ```ts [server/api/chat.post.ts]
-import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
-import { gateway } from '@ai-sdk/gateway'
+import { gateway } from '@ai-sdk/gateway';
+import { convertToModelMessages, createUIMessageStreamResponse, streamText, toUIMessageStream } from 'ai';
 
 export default defineEventHandler(async (event) => {
-  const { messages } = await readBody(event)
+  const { messages } = await readBody(event);
 
   const result = streamText({
     model: gateway('anthropic/claude-sonnet-5'),
     instructions: 'You are a helpful assistant.',
     messages: await convertToModelMessages(messages)
-  })
+  });
 
-  const stream = toUIMessageStream({ stream: result.stream })
-  return createUIMessageStreamResponse({ stream })
-})
+  const stream = toUIMessageStream({ stream: result.stream });
+  return createUIMessageStreamResponse({ stream });
+});
 ```
 
 Or with a direct provider (e.g., `pnpm add @ai-sdk/openai`):
 
 ```ts [server/api/chat.post.ts]
-import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
-import { openai } from '@ai-sdk/openai'
+import { openai } from '@ai-sdk/openai';
+import { convertToModelMessages, createUIMessageStreamResponse, streamText, toUIMessageStream } from 'ai';
 
 export default defineEventHandler(async (event) => {
-  const { messages } = await readBody(event)
+  const { messages } = await readBody(event);
 
   const result = streamText({
     model: openai('gpt-5-nano'),
     instructions: 'You are a helpful assistant.',
     messages: await convertToModelMessages(messages)
-  })
+  });
 
-  const stream = toUIMessageStream({ stream: result.stream })
-  return createUIMessageStreamResponse({ stream })
-})
+  const stream = toUIMessageStream({ stream: result.stream });
+  return createUIMessageStreamResponse({ stream });
+});
 ```
 
 ## Component tree
@@ -115,26 +115,28 @@ PDashboardPanel
 
 ```vue [pages/chat/[id].vue]
 <script setup lang="ts">
-import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName } from 'ai'
-import { useChat } from '@ai-sdk/vue'
-import { isPartStreaming, isToolStreaming } from 'pohon-ui/utils/ai'
-import shiki from '@comark/nuxt/plugins/shiki' // Vue: '@comark/vue/plugins/shiki', plus `import { Markdown } from '@comark/vue'`
+import { useChat } from '@ai-sdk/vue';
+import shiki from '@comark/nuxt/plugins/shiki'; // Vue: '@comark/vue/plugins/shiki', plus `import { Markdown } from '@comark/vue'`
+import { getToolName, isReasoningUIPart, isTextUIPart, isToolUIPart } from 'ai';
+import { isPartStreaming, isToolStreaming } from 'pohon-ui/utils/ai';
 
-definePageMeta({ layout: 'dashboard' })
+definePageMeta({ layout: 'dashboard' });
 
-const plugins = [shiki()]
-const input = ref('')
+const plugins = [shiki()];
+const input = ref('');
 
 const { messages, status, error, sendMessage, stop, regenerate } = useChat({
   onError(error) {
-    console.error(error)
+    console.error(error);
   }
-})
+});
 
 function onSubmit() {
-  if (!input.value.trim()) return
-  sendMessage({ text: input.value })
-  input.value = ''
+  if (!input.value.trim()) {
+    return;
+  }
+  sendMessage({ text: input.value });
+  input.value = '';
 }
 </script>
 
@@ -146,9 +148,15 @@ function onSubmit() {
 
     <template #body>
       <PContainer>
-        <PChatMessages :messages="messages" :status="status">
+        <PChatMessages
+          :messages="messages"
+          :status="status"
+        >
           <template #content="{ message }">
-            <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
+            <template
+              v-for="(part, index) in message.parts"
+              :key="`${message.id}-${part.type}-${index}`"
+            >
               <PChatReasoning
                 v-if="isReasoningUIPart(part)"
                 :text="part.text"
@@ -176,7 +184,10 @@ function onSubmit() {
                   :plugins="plugins"
                   class="*:first:mt-0 *:last:mb-0"
                 />
-                <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
+                <p
+                  v-else-if="message.role === 'user'"
+                  class="whitespace-pre-wrap"
+                >
                   {{ part.text }}
                 </p>
               </template>
@@ -188,8 +199,16 @@ function onSubmit() {
 
     <template #footer>
       <PContainer class="pb-4 sm:pb-6">
-        <PChatPrompt v-model="input" :error="error" @submit="onSubmit">
-          <PChatPromptSubmit :status="status" @stop="stop()" @reload="regenerate()" />
+        <PChatPrompt
+          v-model="input"
+          :error="error"
+          @submit="onSubmit"
+        >
+          <PChatPromptSubmit
+            :status="status"
+            @stop="stop()"
+            @reload="regenerate()"
+          />
         </PChatPrompt>
       </PContainer>
     </template>
@@ -250,13 +269,23 @@ Combine with dashboard layout for a ChatGPT-like interface:
 ```vue [layouts/dashboard.vue]
 <template>
   <PDashboardGroup>
-    <PDashboardSidebar collapsible resizable>
+    <PDashboardSidebar
+      collapsible
+      resizable
+    >
       <template #header>
-        <PButton icon="i-lucide-plus" label="New chat" block />
+        <PButton
+          icon="i-lucide-plus"
+          label="New chat"
+          block
+        />
       </template>
 
       <template #default>
-        <PNavigationMenu :items="conversations" orientation="vertical" />
+        <PNavigationMenu
+          :items="conversations"
+          orientation="vertical"
+        />
       </template>
     </PDashboardSidebar>
 

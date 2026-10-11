@@ -10,10 +10,10 @@ You can either set default value as `undefined` for all the boolean field, or yo
 
 ```vue
 <script setup lang="ts">
-import { useForwardProps } from 'akar'
+import { useForwardProps } from 'akar';
 
-const props = defineProps<CompEmitProps>()
-const forwarded = useForwardProps(props)
+const props = defineProps<CompEmitProps>();
+const forwarded = useForwardProps(props);
 </script>
 
 <template>

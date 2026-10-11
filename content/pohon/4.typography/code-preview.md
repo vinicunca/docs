@@ -18,7 +18,7 @@ Wrap any content with the `code-preview` component to display a live preview alo
 ::code-preview{class="[&>div]:*:my-0"}
 `inline code`
 
-#code
+# code
 
 ```mdc
 `inline code`
@@ -26,7 +26,7 @@ Wrap any content with the `code-preview` component to display a live preview alo
 
 ::
 
-#code
+# code
 
 ````mdc
 ::code-preview

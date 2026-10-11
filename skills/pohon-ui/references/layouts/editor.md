@@ -25,12 +25,12 @@ The toolbar and the menus render nothing until you pass `items`. Each item names
 
 ```vue
 <script setup lang="ts">
-import type { EditorMentionMenuItem, EditorSuggestionMenuItem, EditorToolbarItem } from 'pohon-ui'
-import { Emoji, gitHubEmojis } from '@tiptap/extension-emoji'
+import type { EditorMentionMenuItem, EditorSuggestionMenuItem, EditorToolbarItem } from 'pohon-ui';
+import { Emoji, gitHubEmojis } from '@tiptap/extension-emoji';
 
-const content = ref('# Hello World\n\nStart writing...')
+const content = ref('# Hello World\n\nStart writing...');
 
-const toolbarItems: EditorToolbarItem[][] = [
+const toolbarItems: Array<Array<EditorToolbarItem>> = [
   [
     { kind: 'undo', icon: 'i-lucide-undo', tooltip: { text: 'Undo' } },
     { kind: 'redo', icon: 'i-lucide-redo', tooltip: { text: 'Redo' } }
@@ -52,9 +52,9 @@ const toolbarItems: EditorToolbarItem[][] = [
     { kind: 'bulletList', icon: 'i-lucide-list', tooltip: { text: 'Bullet list' } },
     { kind: 'blockquote', icon: 'i-lucide-text-quote', tooltip: { text: 'Quote' } }
   ]
-]
+];
 
-const suggestionItems: EditorSuggestionMenuItem[][] = [[
+const suggestionItems: Array<Array<EditorSuggestionMenuItem>> = [[
   { type: 'label', label: 'Text' },
   { kind: 'paragraph', label: 'Paragraph', icon: 'i-lucide-type' },
   { kind: 'heading', level: 1, label: 'Heading 1', icon: 'i-lucide-heading-1' },
@@ -63,12 +63,12 @@ const suggestionItems: EditorSuggestionMenuItem[][] = [[
   { type: 'label', label: 'Insert' },
   { kind: 'codeBlock', label: 'Code block', icon: 'i-lucide-square-code' },
   { kind: 'horizontalRule', label: 'Divider', icon: 'i-lucide-separator-horizontal' }
-]]
+]];
 
-const mentionItems: EditorMentionMenuItem[] = [
+const mentionItems: Array<EditorMentionMenuItem> = [
   { label: 'alice', avatar: { src: 'https://i.pravatar.cc/64?u=alice' } },
   { label: 'bob', avatar: { src: 'https://i.pravatar.cc/64?u=bob' } }
-]
+];
 </script>
 
 <template>
@@ -78,12 +78,24 @@ const mentionItems: EditorMentionMenuItem[] = [
     content-type="markdown"
     :extensions="[Emoji]"
     placeholder="Type / for commands..."
-    class="w-full min-h-48"
+    class="min-h-48 w-full"
   >
-    <PEditorToolbar :editor="editor" :items="toolbarItems" />
-    <PEditorSuggestionMenu :editor="editor" :items="suggestionItems" />
-    <PEditorMentionMenu :editor="editor" :items="mentionItems" />
-    <PEditorEmojiMenu :editor="editor" :items="gitHubEmojis" />
+    <PEditorToolbar
+      :editor="editor"
+      :items="toolbarItems"
+    />
+    <PEditorSuggestionMenu
+      :editor="editor"
+      :items="suggestionItems"
+    />
+    <PEditorMentionMenu
+      :editor="editor"
+      :items="mentionItems"
+    />
+    <PEditorEmojiMenu
+      :editor="editor"
+      :items="gitHubEmojis"
+    />
     <PEditorDragHandle :editor="editor" />
   </PEditor>
 </template>
@@ -105,7 +117,7 @@ export default defineNuxtConfig({
       ]
     }
   }
-})
+});
 ```
 
 ## Key components
@@ -150,9 +162,16 @@ Combine with Dashboard layout for a multi-document editor:
 ```vue [layouts/editor.vue]
 <template>
   <PDashboardGroup>
-    <PDashboardSidebar collapsible resizable>
+    <PDashboardSidebar
+      collapsible
+      resizable
+    >
       <template #header>
-        <PButton icon="i-lucide-plus" label="New document" block />
+        <PButton
+          icon="i-lucide-plus"
+          label="New document"
+          block
+        />
       </template>
 
       <template #default="{ collapsed }">
@@ -161,7 +180,7 @@ Combine with Dashboard layout for a multi-document editor:
           :items="documents.map(doc => ({
             label: doc.title,
             to: `/editor/${doc.id}`,
-            icon: 'i-lucide-file-text'
+            icon: 'i-lucide-file-text',
           }))"
           orientation="vertical"
         />
@@ -175,9 +194,9 @@ Combine with Dashboard layout for a multi-document editor:
 
 ```vue [pages/editor/[id].vue]
 <script setup lang="ts">
-definePageMeta({ layout: 'editor' })
+definePageMeta({ layout: 'editor' });
 
-const content = ref({ type: 'doc', content: [] })
+const content = ref({ type: 'doc', content: [] });
 // toolbarItems and suggestionItems as in the basic example
 </script>
 
@@ -186,15 +205,27 @@ const content = ref({ type: 'doc', content: [] })
     <template #header>
       <PDashboardNavbar title="Editor">
         <template #right>
-          <PButton label="Save" icon="i-lucide-save" />
+          <PButton
+            label="Save"
+            icon="i-lucide-save"
+          />
         </template>
       </PDashboardNavbar>
     </template>
 
     <PContainer class="py-8">
-      <PEditor v-slot="{ editor }" v-model="content">
-        <PEditorToolbar :editor="editor" :items="toolbarItems" />
-        <PEditorSuggestionMenu :editor="editor" :items="suggestionItems" />
+      <PEditor
+        v-slot="{ editor }"
+        v-model="content"
+      >
+        <PEditorToolbar
+          :editor="editor"
+          :items="toolbarItems"
+        />
+        <PEditorSuggestionMenu
+          :editor="editor"
+          :items="suggestionItems"
+        />
         <PEditorDragHandle :editor="editor" />
       </PEditor>
     </PContainer>

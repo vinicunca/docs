@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { BreadcrumbItem } from 'pohon-ui'
+import type { BreadcrumbItem } from 'pohon-ui';
 
 const items = [
   {
     label: 'Home',
-    to: '/'
+    to: '/',
   },
   {
     slot: 'dropdown' as const,
@@ -12,32 +12,37 @@ const items = [
     children: [
       {
         label: 'Documentation',
-        to: '/docs'
+        to: '/docs',
       },
       {
-        label: 'Themes'
+        label: 'Themes',
       },
       {
-        label: 'GitHub'
-      }
-    ]
+        label: 'GitHub',
+      },
+    ],
   },
   {
     label: 'Components',
-    to: '/docs/components'
+    to: '/docs/components',
   },
   {
     label: 'Breadcrumb',
-    to: '/docs/components/breadcrumb'
-  }
-] satisfies BreadcrumbItem[]
+    to: '/docs/components/breadcrumb',
+  },
+] satisfies Array<BreadcrumbItem>;
 </script>
 
 <template>
   <PBreadcrumb :items="items">
     <template #dropdown="{ item }">
       <PDropdownMenu :items="item.children">
-        <PButton :icon="item.icon" color="neutral" variant="link" class="p-0.5" />
+        <PButton
+          :icon="item.icon"
+          color="neutral"
+          variant="link"
+          class="p-0.5"
+        />
       </PDropdownMenu>
     </template>
   </PBreadcrumb>

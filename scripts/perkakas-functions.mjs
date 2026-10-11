@@ -19,30 +19,30 @@
  * so the page only prints HTML. Summaries stay Markdown (the page renders
  * them with the site's parser, the raw `.md` output writes them as is).
  */
-import { execFileSync } from 'node:child_process'
-import { mkdirSync, readFileSync, realpathSync, writeFileSync } from 'node:fs'
-import { dirname, join, relative, resolve } from 'node:path'
-import { fileURLToPath } from 'node:url'
-import { format } from 'prettier'
-import { createHighlighter } from 'shiki'
-import { Application, OptionDefaults, ReflectionKind } from 'typedoc'
+import { execFileSync } from 'node:child_process';
+import { mkdirSync, readFileSync, realpathSync, writeFileSync } from 'node:fs';
+import { dirname, join, relative, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { format } from 'prettier';
+import { createHighlighter } from 'shiki';
+import { Application, OptionDefaults, ReflectionKind } from 'typedoc';
 
-const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
-const OUTPUT = join(ROOT, 'app/data/perkakas-functions.json')
-const REPOSITORY = 'https://github.com/vinicunca/perkakas'
+const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const OUTPUT = join(ROOT, 'app/data/perkakas-functions.json');
+const REPOSITORY = 'https://github.com/vinicunca/perkakas';
 // The themes `app/utils/markdown.ts` highlights with, so these blocks match
 // every other code block: `main.css` swaps to `--shiki-dark` in dark mode.
-const THEMES = { light: 'material-theme-lighter', dark: 'material-theme-palenight' }
-const FALLBACK_CATEGORY = 'Other'
-const unformatted = []
-const SIMPLE_REFERENCES = new Set(['Array', 'ReadonlyArray', 'Promise', 'Record', 'Map', 'Set', 'Date', 'RegExp', 'Error'])
+const THEMES = { light: 'material-theme-lighter', dark: 'material-theme-palenight' };
+const FALLBACK_CATEGORY = 'Other';
+const unformatted = [];
+const SIMPLE_REFERENCES = new Set(['Array', 'ReadonlyArray', 'Promise', 'Record', 'Map', 'Set', 'Date', 'RegExp', 'Error']);
 
-const installed = JSON.parse(readFileSync(join(realpathSync(join(ROOT, 'node_modules/@vinicunca/perkakas')), 'package.json'), 'utf8'))
-const version = installed.version
-const tag = `v${version}`
-const source = resolve(process.env.PERKAKAS_SOURCE ?? join(ROOT, '../perkakas'))
+const installed = JSON.parse(readFileSync(join(realpathSync(join(ROOT, 'node_modules/@vinicunca/perkakas')), 'package.json'), 'utf8'));
+const version = installed.version;
+const tag = `v${version}`;
+const source = resolve(process.env.PERKAKAS_SOURCE ?? join(ROOT, '../perkakas'));
 
-checkSource()
+checkSource();
 
 const app = await Application.bootstrap({
   entryPoints: [join(source, 'src/index.ts')],
@@ -57,81 +57,89 @@ const app = await Application.bootstrap({
   jsDocCompatibility: { exampleTag: false },
   blockTags: [...OptionDefaults.blockTags, '@dataFirst', '@dataLast', '@lazy', '@signature'],
   modifierTags: [...OptionDefaults.modifierTags, '@strict', '@indexed', '@pipeable'],
-  logLevel: 'Warn'
-})
+  logLevel: 'Warn',
+});
 
-const project = await app.convert()
+const project = await app.convert();
 if (!project) {
-  throw new Error('TypeDoc could not convert the Perkakas sources')
+  throw new Error('TypeDoc could not convert the Perkakas sources');
 }
-const json = app.serializer.projectToObject(project, source)
+const json = app.serializer.projectToObject(project, source);
 
-const highlighter = await createHighlighter({ themes: Object.values(THEMES), langs: ['typescript'] })
+const highlighter = await createHighlighter({ themes: Object.values(THEMES), langs: ['typescript'] });
 
-const reflections = (json.children ?? []).filter(({ kind }) => kind === ReflectionKind.Function || kind === ReflectionKind.Variable || kind === ReflectionKind.TypeAlias)
-const names = new Set(reflections.map(({ name }) => name))
-const categoryOf = new Map()
+const reflections = (json.children ?? []).filter(({ kind }) => kind === ReflectionKind.Function || kind === ReflectionKind.Variable || kind === ReflectionKind.TypeAlias);
+const names = new Set(reflections.map(({ name }) => name));
+const categoryOf = new Map();
 for (const { title, children = [] } of json.categories ?? []) {
-  for (const id of children) categoryOf.set(id, title)
+  for (const id of children) {
+    categoryOf.set(id, title);
+  }
 }
 
-const functions = []
+const functions = [];
 for (const reflection of reflections) {
   const record = reflection.kind === ReflectionKind.Function
     ? await transformFunction(reflection)
-    : await transformDeclaration(reflection)
-  if (record) functions.push(record)
+    : await transformDeclaration(reflection);
+  if (record) {
+    functions.push(record);
+  }
 }
 
-functions.sort((a, b) => compareCategories(a.category, b.category) || a.name.localeCompare(b.name))
+functions.sort((a, b) => compareCategories(a.category, b.category) || a.name.localeCompare(b.name));
 
-mkdirSync(dirname(OUTPUT), { recursive: true })
-writeFileSync(OUTPUT, `${JSON.stringify({ version, generatedAt: new Date().toISOString(), functions }, null, 2)}\n`)
+mkdirSync(dirname(OUTPUT), { recursive: true });
+writeFileSync(OUTPUT, `${JSON.stringify({ version, generatedAt: new Date().toISOString(), functions }, null, 2)}\n`);
 
-const categories = [...new Set(functions.map(({ category }) => category))]
+const categories = [...new Set(functions.map(({ category }) => category))];
 if (unformatted.length) {
-  console.log(`Prettier could not parse ${unformatted.length} snippets, kept as written:\n  ${unformatted.join('\n  ')}`)
+  console.log(`Prettier could not parse ${unformatted.length} snippets, kept as written:\n  ${unformatted.join('\n  ')}`);
 }
-console.log(`Wrote ${functions.length} entries in ${categories.length} categories for @vinicunca/perkakas ${version} to ${relative(ROOT, OUTPUT)}`)
+console.log(`Wrote ${functions.length} entries in ${categories.length} categories for @vinicunca/perkakas ${version} to ${relative(ROOT, OUTPUT)}`);
 
 function checkSource() {
-  const git = (...args) => execFileSync('git', ['-C', source, ...args], { encoding: 'utf8' }).trim()
-  const checkout = JSON.parse(readFileSync(join(source, 'package.json'), 'utf8'))
+  const git = (...args) => execFileSync('git', ['-C', source, ...args], { encoding: 'utf8' }).trim();
+  const checkout = JSON.parse(readFileSync(join(source, 'package.json'), 'utf8'));
   if (checkout.name !== installed.name) {
-    throw new Error(`${source} is not a Perkakas checkout (set PERKAKAS_SOURCE)`)
+    throw new Error(`${source} is not a Perkakas checkout (set PERKAKAS_SOURCE)`);
   }
   try {
-    git('rev-parse', '--verify', '--quiet', `refs/tags/${tag}`)
+    git('rev-parse', '--verify', '--quiet', `refs/tags/${tag}`);
   } catch {
-    throw new Error(`${source} has no tag ${tag} (the installed version): run \`git fetch --tags\` there`)
+    throw new Error(`${source} has no tag ${tag} (the installed version): run \`git fetch --tags\` there`);
   }
   try {
-    git('diff', '--quiet', tag, '--', 'src')
+    git('diff', '--quiet', tag, '--', 'src');
   } catch {
-    throw new Error(`src/ in ${source} differs from ${tag}: check out ${tag} there so the reference matches the installed package`)
+    throw new Error(`src/ in ${source} differs from ${tag}: check out ${tag} there so the reference matches the installed package`);
   }
 }
 
 async function transformFunction(reflection) {
-  const signatures = (reflection.signatures ?? []).filter(signature => signature.comment)
-  if (!signatures.length) return
+  const signatures = (reflection.signatures ?? []).filter((signature) => signature.comment);
+  if (!signatures.length) {
+    return;
+  }
 
-  const [{ comment }] = signatures
+  const [{ comment }] = signatures;
   // Overloads sharing one `@signature` line only differ in their types, and
   // TypeDoc copies the first comment onto overloads that have none of their own.
   const documented = signatures.some(({ comment }) => tagText(comment, '@signature'))
     ? signatures.filter(({ comment }) => tagText(comment, '@signature'))
-    : signatures.slice(0, 1)
-  const seen = new Set()
-  const records = []
+    : signatures.slice(0, 1);
+  const seen = new Set();
+  const records = [];
   for (const signature of documented) {
-    const record = await transformSignature(signature)
-    if (seen.has(record.signature)) continue
-    seen.add(record.signature)
-    records.push(record)
+    const record = await transformSignature(signature);
+    if (seen.has(record.signature)) {
+      continue;
+    }
+    seen.add(record.signature);
+    records.push(record);
   }
   // Data-first before data-last, overload order otherwise.
-  records.sort((a, b) => Number(a.variant === 'data-last') - Number(b.variant === 'data-last'))
+  records.sort((a, b) => Number(a.variant === 'data-last') - Number(b.variant === 'data-last'));
 
   return {
     name: reflection.name,
@@ -142,21 +150,21 @@ async function transformFunction(reflection) {
       lazy: signatures.some(({ comment }) => hasTag(comment, '@lazy') || hasTag(comment, '@pipeable')),
       strict: hasTag(comment, '@strict'),
       indexed: hasTag(comment, '@indexed'),
-      deprecated: hasTag(documented[0].comment, '@deprecated')
+      deprecated: hasTag(documented[0].comment, '@deprecated'),
     },
     signatures: records,
-    sourceUrl: sourceUrl(reflection)
-  }
+    sourceUrl: sourceUrl(reflection),
+  };
 }
 
 async function transformSignature(signature) {
-  const { comment } = signature
-  const raw = tagText(comment, '@signature')
-  const example = tagText(comment, '@example')
-  const variant = hasTag(comment, '@dataFirst') ? 'data-first' : hasTag(comment, '@dataLast') ? 'data-last' : null
+  const { comment } = signature;
+  const raw = tagText(comment, '@signature');
+  const example = tagText(comment, '@example');
+  const variant = hasTag(comment, '@dataFirst') ? 'data-first' : hasTag(comment, '@dataLast') ? 'data-last' : null;
 
-  const formattedSignature = raw === undefined ? undefined : await formatCode(raw, { printWidth: Number.POSITIVE_INFINITY, signature: true })
-  const formattedExample = example === undefined ? undefined : await formatCode(example)
+  const formattedSignature = raw === undefined ? undefined : await formatCode(raw, { printWidth: Number.POSITIVE_INFINITY, signature: true });
+  const formattedExample = example === undefined ? undefined : await formatCode(example);
 
   return {
     variant,
@@ -167,23 +175,23 @@ async function transformSignature(signature) {
     params: (signature.parameters ?? []).map(({ name, comment, flags, defaultValue }) => ({
       name: flags?.isRest ? `...${name}` : name,
       optional: Boolean(flags?.isOptional || defaultValue !== undefined),
-      description: comment ? plainMarkdown(comment.summary) : undefined
+      description: comment ? plainMarkdown(comment.summary) : undefined,
     })),
     returns: {
       type: returnType(signature.type),
-      description: tagText(comment, '@returns', plainMarkdown)
-    }
-  }
+      description: tagText(comment, '@returns', plainMarkdown),
+    },
+  };
 }
 
 // Constants and types have no call signatures: their declaration stands in
 // for one, so the card still shows what the export is.
 async function transformDeclaration(reflection) {
-  const keyword = reflection.kind === ReflectionKind.Variable ? 'const' : 'type'
+  const keyword = reflection.kind === ReflectionKind.Variable ? 'const' : 'type';
   const declaration = reflection.kind === ReflectionKind.Variable
     ? `declare const ${reflection.name}: ${typeToString(reflection.type)}`
-    : `type ${reflection.name}${typeParameters(reflection.typeParameters)} = ${typeToString(reflection.type)}`
-  const formatted = await formatCode(declaration)
+    : `type ${reflection.name}${typeParameters(reflection.typeParameters)} = ${typeToString(reflection.type)}`;
+  const formatted = await formatCode(declaration);
 
   return {
     name: reflection.name,
@@ -198,16 +206,16 @@ async function transformDeclaration(reflection) {
       example: undefined,
       exampleHtml: undefined,
       params: [],
-      returns: undefined
+      returns: undefined,
     }],
-    sourceUrl: sourceUrl(reflection)
-  }
+    sourceUrl: sourceUrl(reflection),
+  };
 }
 
 // The paths TypeDoc puts in its own links drop the `src/` it resolved them from.
 function sourceUrl({ sources }) {
-  const [first] = sources ?? []
-  return first ? `${REPOSITORY}/blob/${tag}/${first.fileName}#L${first.line}` : undefined
+  const [first] = sources ?? [];
+  return first ? `${REPOSITORY}/blob/${tag}/${first.fileName}#L${first.line}` : undefined;
 }
 
 /**
@@ -215,36 +223,46 @@ function sourceUrl({ sources }) {
  * export linked to its card, unless the author already made it a link.
  */
 function summaryMarkdown(parts = []) {
-  if (!parts.length) return
+  if (!parts.length) {
+    return;
+  }
 
   return parts.map((part, index) => {
     if (part.kind === 'inline-tag') {
-      return names.has(part.text) ? `[\`${part.text}\`](#${part.text})` : `\`${part.text}\``
+      return names.has(part.text) ? `[\`${part.text}\`](#${part.text})` : `\`${part.text}\``;
     }
-    if (part.kind !== 'code') return part.text
+    if (part.kind !== 'code') {
+      return part.text;
+    }
 
-    const code = part.text.replace(/^`+|`+$/g, '')
-    if (!names.has(code)) return part.text
-    if (parts[index - 1]?.text.endsWith('[') && parts[index + 1]?.text.startsWith(']')) return part.text
+    const code = part.text.replace(/^`+|`+$/g, '');
+    if (!names.has(code)) {
+      return part.text;
+    }
+    if (parts[index - 1]?.text.endsWith('[') && parts[index + 1]?.text.startsWith(']')) {
+      return part.text;
+    }
 
-    return `[${part.text}](#${code})`
-  }).join('').trim()
+    return `[${part.text}](#${code})`;
+  }).join('').trim();
 }
 
 function plainMarkdown(parts = []) {
-  const text = parts.map(({ kind, text }) => kind === 'inline-tag' ? `\`${text}\`` : text).join('').trim()
-  return text || undefined
+  const text = parts.map(({ kind, text }) => kind === 'inline-tag' ? `\`${text}\`` : text).join('').trim();
+  return text || undefined;
 }
 
 function hasTag(comment, name) {
-  return Boolean(comment?.blockTags?.some(({ tag }) => tag === name) || comment?.modifierTags?.includes(name))
+  return Boolean(comment?.blockTags?.some(({ tag }) => tag === name) || comment?.modifierTags?.includes(name));
 }
 
-function tagText(comment, name, render = parts => parts.map(({ text }) => text).join('')) {
-  const block = comment?.blockTags?.find(({ tag }) => tag === name)
-  if (!block?.content.length) return
-  const text = render(block.content)
-  return text?.trim() ? text : undefined
+function tagText(comment, name, render = (parts) => parts.map(({ text }) => text).join('')) {
+  const block = comment?.blockTags?.find(({ tag }) => tag === name);
+  if (!block?.content.length) {
+    return;
+  }
+  const text = render(block.content);
+  return text?.trim() ? text : undefined;
 }
 
 /**
@@ -252,92 +270,96 @@ function tagText(comment, name, render = parts => parts.map(({ text }) => text).
  * still call functions through the `P.` namespace the docs no longer import.
  */
 function cleanCode(code) {
-  const lines = code.replace(/^\n+|\s+$/g, '').split('\n')
-  const indent = Math.min(...lines.filter(line => line.trim()).map(line => line.match(/^\s*/)[0].length))
-  return lines.map(line => line.slice(indent)).join('\n').replace(/\bP\.(?=[a-z])/g, '')
+  const lines = code.replace(/^\n+|\s+$/g, '').split('\n');
+  const indent = Math.min(...lines.filter((line) => line.trim()).map((line) => line.match(/^\s*/)[0].length));
+  return lines.map((line) => line.slice(indent)).join('\n').replace(/\bP\.(?=[a-z])/g, '');
 }
 
 async function formatCode(code, { printWidth = 80, signature = false } = {}) {
-  const cleaned = cleanCode(code)
+  const cleaned = cleanCode(code);
   try {
-    const formatted = await format(cleaned, { parser: 'typescript', singleQuote: true, printWidth })
-    return signature ? formatted.trim().replace(/;$/gm, '') : formatted.trimEnd()
+    const formatted = await format(cleaned, { parser: 'typescript', singleQuote: true, printWidth });
+    return signature ? formatted.trim().replace(/;$/gm, '') : formatted.trimEnd();
   } catch {
     // Signatures like `pipe(data, op1, ..., opN)` are notation, not code.
-    unformatted.push(cleaned.split('\n')[0])
-    return signature ? cleaned.replace(/;$/gm, '') : cleaned
+    unformatted.push(cleaned.split('\n')[0]);
+    return signature ? cleaned.replace(/;$/gm, '') : cleaned;
   }
 }
 
 function highlight(code) {
-  const html = highlighter.codeToHtml(code, { lang: 'typescript', themes: THEMES, defaultColor: 'light' })
+  const html = highlighter.codeToHtml(code, { lang: 'typescript', themes: THEMES, defaultColor: 'light' });
   // Only the lines: the page wraps them in its own `<pre>`.
-  return html.replace(/^<pre[^>]*><code>/, '').replace(/<\/code><\/pre>$/, '')
+  return html.replace(/^<pre[^>]*><code>/, '').replace(/<\/code><\/pre>$/, '');
 }
 
 /** A one-word return type in the spirit of Remeda's cards, not the full TypeScript type. */
 function returnType(type) {
-  if (!type) return 'void'
+  if (!type) {
+    return 'void';
+  }
   switch (type.type) {
     case 'intrinsic':
-      return type.name
+      return type.name;
     case 'literal':
-      return JSON.stringify(type.value)
+      return JSON.stringify(type.value);
     case 'array':
-      return 'Array'
+      return 'Array';
     case 'tuple':
-      return 'Array'
+      return 'Array';
     case 'predicate':
-      return 'boolean'
+      return 'boolean';
     case 'reference':
-      return SIMPLE_REFERENCES.has(type.name) ? (type.name === 'ReadonlyArray' ? 'Array' : type.name) : 'Object'
+      return SIMPLE_REFERENCES.has(type.name) ? (type.name === 'ReadonlyArray' ? 'Array' : type.name) : 'Object';
     case 'reflection':
-      return type.declaration?.signatures?.length ? 'Function' : 'Object'
+      return type.declaration?.signatures?.length ? 'Function' : 'Object';
     case 'union': {
-      const members = [...new Set(type.types.map(returnType))]
-      return members.join(' | ')
+      const members = [...new Set(type.types.map(returnType))];
+      return members.join(' | ');
     }
     default:
-      return 'Object'
+      return 'Object';
   }
 }
 
 function typeParameters(parameters) {
-  return parameters?.length ? `<${parameters.map(({ name }) => name).join(', ')}>` : ''
+  return parameters?.length ? `<${parameters.map(({ name }) => name).join(', ')}>` : '';
 }
 
 /** Enough of TypeDoc's type model to print the few non-function exports. */
 function typeToString(type) {
-  if (!type) return 'unknown'
+  if (!type) {
+    return 'unknown';
+  }
   switch (type.type) {
     case 'intrinsic':
-      return type.name
+      return type.name;
     case 'literal':
-      return typeof type.value === 'string' ? `'${type.value}'` : String(type.value)
+      return typeof type.value === 'string' ? `'${type.value}'` : String(type.value);
     case 'reference':
-      return `${type.name}${type.typeArguments?.length ? `<${type.typeArguments.map(typeToString).join(', ')}>` : ''}`
+      return `${type.name}${type.typeArguments?.length ? `<${type.typeArguments.map(typeToString).join(', ')}>` : ''}`;
     case 'array':
-      return `${typeToString(type.elementType)}[]`
+      return `${typeToString(type.elementType)}[]`;
     case 'union':
-      return type.types.map(typeToString).join(' | ')
+      return type.types.map(typeToString).join(' | ');
     case 'indexedAccess':
-      return `${typeToString(type.objectType)}[${typeToString(type.indexType)}]`
+      return `${typeToString(type.objectType)}[${typeToString(type.indexType)}]`;
     case 'typeOperator':
-      return `${type.operator} ${typeToString(type.target)}`
+      return `${type.operator} ${typeToString(type.target)}`;
     case 'conditional':
-      return `${typeToString(type.checkType)} extends ${typeToString(type.extendsType)} ? ${typeToString(type.trueType)} : ${typeToString(type.falseType)}`
+      return `${typeToString(type.checkType)} extends ${typeToString(type.extendsType)} ? ${typeToString(type.trueType)} : ${typeToString(type.falseType)}`;
     case 'mapped':
-      return `{ [${type.parameter} in ${typeToString(type.parameterType)}]${type.optionalModifier === '+' ? '?' : ''}: ${typeToString(type.templateType)} }`
+      return `{ [${type.parameter} in ${typeToString(type.parameterType)}]${type.optionalModifier === '+' ? '?' : ''}: ${typeToString(type.templateType)} }`;
     case 'reflection': {
-      const children = type.declaration?.children ?? []
-      return `{ ${children.map(child => `${child.flags?.isReadonly ? 'readonly ' : ''}${child.name}: ${typeToString(child.type)}`).join('; ')} }`
+      const children = type.declaration?.children ?? [];
+      return `{ ${children.map((child) => `${child.flags?.isReadonly ? 'readonly ' : ''}${child.name}: ${typeToString(child.type)}`).join('; ')} }`;
     }
     default:
-      return 'unknown'
+      return 'unknown';
   }
 }
 
 function compareCategories(a, b) {
-  const rank = category => (category === 'Deprecated' ? 2 : category === FALLBACK_CATEGORY ? 1 : 0)
-  return rank(a) - rank(b) || a.localeCompare(b)
+  const rank = (category) => (category === 'Deprecated' ? 2 : category === FALLBACK_CATEGORY ? 1 : 0);
+  return rank(a) - rank(b) || a.localeCompare(b);
 }

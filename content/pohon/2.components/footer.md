@@ -40,9 +40,9 @@ Use the Footer component in your `app.vue` or in a layout:
 
 ```vue [app.vue]{32-67}
 <script setup lang="ts">
-import type { NavigationMenuItem } from 'pohon-ui'
+import type { NavigationMenuItem } from 'pohon-ui';
 
-const items: NavigationMenuItem[] = [{
+const items: Array<NavigationMenuItem> = [{
   label: 'Theme Studio',
   to: '/theme',
   target: '_blank'
@@ -54,7 +54,7 @@ const items: NavigationMenuItem[] = [{
   label: 'Releases',
   to: 'https://github.com/vinicunca/pohon/releases',
   target: '_blank'
-}]
+}];
 </script>
 
 <template>
@@ -67,16 +67,23 @@ const items: NavigationMenuItem[] = [{
       </NuxtLayout>
     </PMain>
 
-    <PSeparator icon="i-lucide-leaf" type="dashed" class="h-px" />
+    <PSeparator
+      icon="i-lucide-leaf"
+      type="dashed"
+      class="h-px"
+    />
 
     <PFooter>
       <template #left>
-        <p class="color-text-muted text-sm">
+        <p class="text-sm color-text-muted">
           Copyright © {{ new Date().getFullYear() }}
         </p>
       </template>
 
-      <PNavigationMenu :items="items" variant="link" />
+      <PNavigationMenu
+        :items="items"
+        variant="link"
+      />
 
       <template #right>
         <PButton

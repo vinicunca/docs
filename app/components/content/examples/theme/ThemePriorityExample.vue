@@ -2,13 +2,16 @@
   <PTheme
     :ui="{
       button: {
-        base: 'rounded-full'
-      }
+        base: 'rounded-full',
+      },
     }"
   >
-    <div class="flex items-center gap-2">
+    <div class="flex gap-2 items-center">
       <PButton label="Themed" />
-      <PButton label="Overridden" :ui="{ base: 'rounded-none' }" />
+      <PButton
+        label="Overridden"
+        :ui="{ base: 'rounded-none' }"
+      />
     </div>
   </PTheme>
 </template>

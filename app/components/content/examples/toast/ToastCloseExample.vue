@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const toast = useToast()
+const toast = useToast();
 
 function showToast() {
   toast.add({
@@ -9,12 +9,17 @@ function showToast() {
     close: {
       color: 'primary',
       variant: 'outline',
-      class: 'rounded-full'
-    }
-  })
+      class: 'rounded-full',
+    },
+  });
 }
 </script>
 
 <template>
-  <PButton label="Show toast" color="neutral" variant="outline" @click="showToast" />
+  <PButton
+    label="Show toast"
+    color="neutral"
+    variant="outline"
+    @click="showToast"
+  />
 </template>

@@ -1,72 +1,72 @@
 <script setup lang="ts">
-import type { DropdownMenuItem } from 'pohon-ui'
+import type { DropdownMenuItem } from 'pohon-ui';
 
-const appConfig = useAppConfig()
-const studioIcons = useStudioIcons()
+const appConfig = useAppConfig();
+const studioIcons = useStudioIcons();
 
-const toast = useToast()
+const toast = useToast();
 
-const input = ref('')
-const awsMarketplace = ref(true)
-const claudeInChrome = ref(true)
-const webSearch = ref(true)
+const input = ref('');
+const awsMarketplace = ref(true);
+const claudeInChrome = ref(true);
+const webSearch = ref(true);
 
 const models = [
   { value: 'opus-5', label: 'Opus 5', description: 'Deep reasoning and hard problems' },
   { value: 'sonnet-5', label: 'Sonnet 5', description: 'Balanced speed and intelligence' },
-  { value: 'haiku-4-5', label: 'Haiku 4.5', description: 'Fastest for everyday tasks' }
-]
+  { value: 'haiku-4-5', label: 'Haiku 4.5', description: 'Fastest for everyday tasks' },
+];
 const legacyModels = [
   { value: 'opus-4-8', label: 'Opus 4.8' },
-  { value: 'sonnet-4-6', label: 'Sonnet 4.6' }
-]
-const efforts = ['Low', 'Medium', 'High', 'Max']
+  { value: 'sonnet-4-6', label: 'Sonnet 4.6' },
+];
+const efforts = ['Low', 'Medium', 'High', 'Max'];
 
-const model = ref('opus-5')
-const effort = ref('High')
+const model = ref('opus-5');
+const effort = ref('High');
 
-const activeModel = computed(() => [...models, ...legacyModels].find(m => m.value === model.value))
+const activeModel = computed(() => [...models, ...legacyModels].find((m) => m.value === model.value));
 
-const modelItems = computed<DropdownMenuItem[][]>(() => [
-  models.map(m => ({
+const modelItems = computed<Array<Array<DropdownMenuItem>>>(() => [
+  models.map((m) => ({
     label: m.label,
     description: m.description,
     type: 'checkbox',
     checked: model.value === m.value,
     onUpdateChecked() {
-      model.value = m.value
-    }
+      model.value = m.value;
+    },
   })),
   [
     {
       label: 'Legacy models',
       icon: studioIcons.clock,
-      children: legacyModels.map(m => ({
+      children: legacyModels.map((m) => ({
         label: m.label,
         type: 'checkbox',
         checked: model.value === m.value,
         onUpdateChecked() {
-          model.value = m.value
-        }
-      }))
+          model.value = m.value;
+        },
+      })),
     },
     {
       label: 'Effort',
       icon: studioIcons.zap,
       slot: 'effort',
-      children: efforts.map(e => ({
+      children: efforts.map((e) => ({
         label: e,
         type: 'checkbox',
         checked: effort.value === e,
         onUpdateChecked() {
-          effort.value = e
-        }
-      }))
-    }
-  ]
-])
+          effort.value = e;
+        },
+      })),
+    },
+  ],
+]);
 
-const items = computed<DropdownMenuItem[][]>(() => [
+const items = computed<Array<Array<DropdownMenuItem>>>(() => [
   [
     { label: 'Add files or photos', icon: studioIcons.paperclip, kbds: ['meta', 'U'] },
     {
@@ -74,9 +74,9 @@ const items = computed<DropdownMenuItem[][]>(() => [
       icon: appConfig.ui.icons.folder,
       children: [
         { label: 'New project', icon: appConfig.ui.icons.plus },
-        { label: 'Pohon UI', icon: appConfig.ui.icons.folder }
-      ]
-    }
+        { label: 'Pohon UI', icon: appConfig.ui.icons.folder },
+      ],
+    },
   ],
   [
     {
@@ -85,8 +85,8 @@ const items = computed<DropdownMenuItem[][]>(() => [
       children: [
         { label: 'Canvas design', icon: studioIcons.palette },
         { label: 'Slides', icon: studioIcons.presentation },
-        { label: 'PDF', icon: appConfig.ui.icons.file }
-      ]
+        { label: 'PDF', icon: appConfig.ui.icons.file },
+      ],
     },
     {
       label: 'Connectors',
@@ -94,7 +94,7 @@ const items = computed<DropdownMenuItem[][]>(() => [
       children: [
         [
           { label: 'Add connector', icon: appConfig.ui.icons.plus },
-          { label: 'Manage connectors', icon: studioIcons.briefcase }
+          { label: 'Manage connectors', icon: studioIcons.briefcase },
         ],
         [
           {
@@ -103,9 +103,9 @@ const items = computed<DropdownMenuItem[][]>(() => [
             slot: 'switch',
             checked: awsMarketplace.value,
             onSelect(e: Event) {
-              e.preventDefault()
-              awsMarketplace.value = !awsMarketplace.value
-            }
+              e.preventDefault();
+              awsMarketplace.value = !awsMarketplace.value;
+            },
           },
           {
             label: 'Claude in Chrome',
@@ -113,30 +113,32 @@ const items = computed<DropdownMenuItem[][]>(() => [
             slot: 'switch',
             checked: claudeInChrome.value,
             onSelect(e: Event) {
-              e.preventDefault()
-              claudeInChrome.value = !claudeInChrome.value
-            }
-          }
+              e.preventDefault();
+              claudeInChrome.value = !claudeInChrome.value;
+            },
+          },
         ],
         [
-          { label: 'Tool access', icon: appConfig.ui.icons.search }
-        ]
-      ]
+          { label: 'Tool access', icon: appConfig.ui.icons.search },
+        ],
+      ],
     },
-    { label: 'Add plugins…', icon: studioIcons.plug }
+    { label: 'Add plugins…', icon: studioIcons.plug },
   ],
   [
-    { label: 'Ask Vercel',
+    {
+      label: 'Ask Vercel',
       icon: 'i-simple-icons-vercel',
       onSelect(e: Event) {
-        e.preventDefault()
-      }
+        e.preventDefault();
+      },
     },
     {
-      label: 'Research', icon: studioIcons.activity,
+      label: 'Research',
+      icon: studioIcons.activity,
       onSelect(e: Event) {
-        e.preventDefault()
-      }
+        e.preventDefault();
+      },
     },
     {
       label: 'Web search',
@@ -144,20 +146,22 @@ const items = computed<DropdownMenuItem[][]>(() => [
       type: 'checkbox',
       checked: webSearch.value,
       onUpdateChecked(checked: boolean) {
-        webSearch.value = checked
+        webSearch.value = checked;
       },
       onSelect(e: Event) {
-        e.preventDefault()
-      }
-    }
-  ]
-])
+        e.preventDefault();
+      },
+    },
+  ],
+]);
 
 function onSubmit() {
-  if (!input.value.trim()) return
+  if (!input.value.trim()) {
+    return;
+  }
 
-  toast.add({ title: 'Message sent', description: input.value })
-  input.value = ''
+  toast.add({ title: 'Message sent', description: input.value });
+  input.value = '';
 }
 </script>
 
@@ -173,9 +177,13 @@ function onSubmit() {
     @submit="onSubmit"
   >
     <template #footer>
-      <div class="flex items-center justify-between gap-1.5 w-full">
-        <div class="flex items-center gap-1">
-          <PDropdownMenu :items="items" :content="{ align: 'start', side: 'top' }" :modal="false">
+      <div class="flex gap-1.5 w-full items-center justify-between">
+        <div class="flex gap-1 items-center">
+          <PDropdownMenu
+            :items="items"
+            :content="{ align: 'start', side: 'top' }"
+            :modal="false"
+          >
             <template #default="{ open }">
               <PButton
                 :icon="appConfig.ui.icons.plus"
@@ -187,17 +195,25 @@ function onSubmit() {
             </template>
 
             <template #switch-trailing="{ item }">
-              <PSwitch :model-value="(item as DropdownMenuItem).checked" tabindex="-1" />
+              <PSwitch
+                :model-value="(item as DropdownMenuItem).checked"
+                tabindex="-1"
+              />
             </template>
           </PDropdownMenu>
 
-          <PDropdownMenu :items="modelItems" :content="{ align: 'start', side: 'top' }" :modal="false">
+          <PDropdownMenu
+            :items="modelItems"
+            :content="{ align: 'start', side: 'top' }"
+            :modal="false"
+          >
             <template #default="{ open }">
               <PButton
                 color="neutral"
                 variant="ghost"
                 :trailing-icon="appConfig.ui.icons.chevronDown"
-                :class="['group', open && 'bg-background-elevated']"
+                class="group"
+                :class="[open && 'bg-background-elevated']"
                 :ui="{ trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
               >
                 {{ activeModel?.label }} <span class="color-text-dimmed">{{ effort }}</span>
@@ -206,13 +222,22 @@ function onSubmit() {
 
             <template #effort-trailing="{ ui }">
               <span class="color-text-dimmed">{{ effort }}</span>
-              <PIcon :name="appConfig.ui.icons.chevronRight" :class="ui.itemTrailingIcon()" />
+              <PIcon
+                :name="appConfig.ui.icons.chevronRight"
+                :class="ui.itemTrailingIcon()"
+              />
             </template>
           </PDropdownMenu>
         </div>
 
-        <div class="flex items-center gap-1">
-          <PButton :icon="studioIcons.mic" color="neutral" variant="ghost" square aria-label="Dictate" />
+        <div class="flex gap-1 items-center">
+          <PButton
+            :icon="studioIcons.mic"
+            color="neutral"
+            variant="ghost"
+            square
+            aria-label="Dictate"
+          />
           <PButton
             v-if="input.trim()"
             :icon="appConfig.ui.icons.arrowUp"

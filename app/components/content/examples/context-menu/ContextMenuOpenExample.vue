@@ -1,29 +1,35 @@
 <script setup lang="ts">
-import type { ContextMenuItem } from 'pohon-ui'
+import type { ContextMenuItem } from 'pohon-ui';
 
-const open = ref(false)
+const open = ref(false);
 
 defineShortcuts({
-  o: () => open.value = !open.value
-})
+  o: () => open.value = !open.value,
+});
 
-const items: ContextMenuItem[] = [
+const items: Array<ContextMenuItem> = [
   {
     label: 'Profile',
-    icon: 'i-lucide-user'
-  }, {
+    icon: 'i-lucide-user',
+  },
+  {
     label: 'Billing',
-    icon: 'i-lucide-credit-card'
-  }, {
+    icon: 'i-lucide-credit-card',
+  },
+  {
     label: 'Settings',
-    icon: 'i-lucide-cog'
-  }
-]
+    icon: 'i-lucide-cog',
+  },
+];
 </script>
 
 <template>
-  <PContextMenu v-model:open="open" :items="items" :ui="{ content: 'w-48' }">
-    <div class="flex items-center justify-center rounded-md border border-dashed border-border-accented text-sm aspect-video w-72">
+  <PContextMenu
+    v-model:open="open"
+    :items="items"
+    :ui="{ content: 'w-48' }"
+  >
+    <div class="text-sm border border-border-accented rounded-md border-dashed flex w-72 aspect-video items-center justify-center">
       Right click here
     </div>
   </PContextMenu>

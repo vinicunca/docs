@@ -1,29 +1,33 @@
 <script setup lang="ts">
-import type { NavigationMenuItem } from 'pohon-ui'
+import type { NavigationMenuItem } from 'pohon-ui';
 
-const open = useLocalStorage('sidebar-open', true)
+const open = useLocalStorage('sidebar-open', true);
 
 defineShortcuts({
-  o: () => open.value = !open.value
-})
+  o: () => open.value = !open.value,
+});
 
-const items: NavigationMenuItem[] = [{
+const items: Array<NavigationMenuItem> = [{
   label: 'Home',
   icon: 'i-lucide-house',
-  active: true
+  active: true,
 }, {
   label: 'Inbox',
   icon: 'i-lucide-inbox',
-  badge: '4'
+  badge: '4',
 }, {
   label: 'Contacts',
-  icon: 'i-lucide-users'
-}]
+  icon: 'i-lucide-users',
+}];
 </script>
 
 <template>
   <div class="flex flex-1">
-    <PSidebar v-model:open="open" title="Navigation" collapsible="icon">
+    <PSidebar
+      v-model:open="open"
+      title="Navigation"
+      collapsible="icon"
+    >
       <PNavigationMenu
         :items="items"
         orientation="vertical"
@@ -31,8 +35,8 @@ const items: NavigationMenuItem[] = [{
       />
     </PSidebar>
 
-    <div class="flex-1 flex flex-col">
-      <div class="h-(--ui-header-height) shrink-0 flex items-center px-4 border-b border-border">
+    <div class="flex flex-1 flex-col">
+      <div class="px-4 border-b border-border flex shrink-0 h-(--ui-header-height) items-center">
         <PButton
           icon="i-lucide-panel-left"
           color="neutral"
@@ -42,7 +46,7 @@ const items: NavigationMenuItem[] = [{
         />
       </div>
 
-      <div class="flex-1 p-4">
+      <div class="p-4 flex-1">
         <Placeholder class="size-full" />
       </div>
     </div>

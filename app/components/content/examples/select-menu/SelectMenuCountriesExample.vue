@@ -1,16 +1,16 @@
 <script setup lang="ts">
-const { data: countries, status, execute } = await useLazyFetch<{
-  name: string
-  code: string
-  emoji: string
-}[]>('/api/countries.json', {
+const { data: countries, status, execute } = await useLazyFetch<Array<{
+  name: string;
+  code: string;
+  emoji: string;
+}>>('/api/countries.json', {
   key: 'api-countries',
-  immediate: false
-})
+  immediate: false,
+});
 
 function onOpen() {
   if (!countries.value?.length) {
-    execute()
+    execute();
   }
 }
 </script>
@@ -26,13 +26,20 @@ function onOpen() {
     @update:open="onOpen"
   >
     <template #leading="{ modelValue, ui }">
-      <span v-if="modelValue" class="size-5 text-center">
+      <span
+        v-if="modelValue"
+        class="text-center size-5"
+      >
         {{ modelValue?.emoji }}
       </span>
-      <PIcon v-else name="i-lucide-earth" :class="ui.leadingIcon()" />
+      <PIcon
+        v-else
+        name="i-lucide-earth"
+        :class="ui.leadingIcon()"
+      />
     </template>
     <template #item-leading="{ item }">
-      <span class="size-5 text-center">
+      <span class="text-center size-5">
         {{ item.emoji }}
       </span>
     </template>

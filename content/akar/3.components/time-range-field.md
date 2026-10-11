@@ -84,15 +84,27 @@ Import all parts and piece them together.
 import {
   TimeRangeFieldInput,
   TimeRangeFieldRoot,
-} from 'akar'
+} from 'akar';
 </script>
 
 <template>
   <TimeRangeFieldRoot>
-    <TimeRangeFieldInput part="hour" type="start" />
-    <TimeRangeFieldInput part="minute" type="start" />
-    <TimeRangeFieldInput part="hour" type="end" />
-    <TimeRangeFieldInput part="minute" type="end" />
+    <TimeRangeFieldInput
+      part="hour"
+      type="start"
+    />
+    <TimeRangeFieldInput
+      part="minute"
+      type="start"
+    />
+    <TimeRangeFieldInput
+      part="hour"
+      type="end"
+    />
+    <TimeRangeFieldInput
+      part="minute"
+      type="end"
+    />
   </TimeRangeFieldRoot>
 </template>
 ```
@@ -139,26 +151,39 @@ data: [{"keys":["Tab"],"description":"When focus moves onto the time field, focu
 
 ```vue
 <script setup>
-import { Time } from '@internationalized/date'
-import { TimeRangeFieldInput, TimeRangeFieldRoot } from 'akar'
-import { ref } from 'vue'
+import { Time } from '@internationalized/date';
+import { TimeRangeFieldInput, TimeRangeFieldRoot } from 'akar';
+import { ref } from 'vue';
 
 const timeRange = ref({
   start: new Time(9, 0),
   end: new Time(17, 0)
-})
+});
 </script>
 
 <template>
   <TimeRangeFieldRoot v-model="timeRange">
-    <div class="flex items-center gap-2">
-      <TimeRangeFieldInput part="hour" type="start" />
+    <div class="flex gap-2 items-center">
+      <TimeRangeFieldInput
+        part="hour"
+        type="start"
+      />
       :
-      <TimeRangeFieldInput part="minute" type="start" />
+      <TimeRangeFieldInput
+        part="minute"
+        type="start"
+      />
       <span class="mx-2">to
-      <TimeRangeFieldInput part="hour" type="end" />
-      :
-      <TimeRangeFieldInput part="minute" type="end" />
+        <TimeRangeFieldInput
+          part="hour"
+          type="end"
+        />
+        :
+        <TimeRangeFieldInput
+          part="minute"
+          type="end"
+        />
+      </span>
     </div>
   </TimeRangeFieldRoot>
 </template>
@@ -168,17 +193,17 @@ const timeRange = ref({
 
 ```vue
 <script setup>
-import { TimeRangeFieldInput, TimeRangeFieldRoot } from 'akar'
-import { ref } from 'vue'
+import { TimeRangeFieldInput, TimeRangeFieldRoot } from 'akar';
+import { ref } from 'vue';
 
 const timeRange = ref({
   start: undefined,
   end: undefined
-})
+});
 
 function handleTimeRangeChange(newRange) {
-  console.log('Time range changed:', newRange)
-  timeRange.value = newRange
+  console.log('Time range changed:', newRange);
+  timeRange.value = newRange;
 }
 </script>
 
@@ -187,14 +212,27 @@ function handleTimeRangeChange(newRange) {
     :model-value="timeRange"
     @update:model-value="handleTimeRangeChange"
   >
-    <div class="flex items-center gap-2">
-      <TimeRangeFieldInput part="hour" type="start" />
+    <div class="flex gap-2 items-center">
+      <TimeRangeFieldInput
+        part="hour"
+        type="start"
+      />
       :
-      <TimeRangeFieldInput part="minute" type="start" />
+      <TimeRangeFieldInput
+        part="minute"
+        type="start"
+      />
       <span class="mx-2">to
-      <TimeRangeFieldInput part="hour" type="end" />
-      :
-      <TimeRangeFieldInput part="minute" type="end" />
+        <TimeRangeFieldInput
+          part="hour"
+          type="end"
+        />
+        :
+        <TimeRangeFieldInput
+          part="minute"
+          type="end"
+        />
+      </span>
     </div>
   </TimeRangeFieldRoot>
 </template>
@@ -204,19 +242,19 @@ function handleTimeRangeChange(newRange) {
 
 ```vue
 <script setup>
-import { Time } from '@internationalized/date'
-import { TimeRangeFieldInput, TimeRangeFieldRoot } from 'akar'
-import { ref } from 'vue'
+import { Time } from '@internationalized/date';
+import { TimeRangeFieldInput, TimeRangeFieldRoot } from 'akar';
+import { ref } from 'vue';
 
 const timeRange = ref({
   start: new Time(9, 0),
   end: new Time(17, 0)
-})
+});
 
 // Disable times before 8 AM and after 6 PM
 function isTimeUnavailable(time) {
-  const hour = time.hour
-  return hour < 8 || hour > 18
+  const hour = time.hour;
+  return hour < 8 || hour > 18;
 }
 </script>
 
@@ -225,19 +263,38 @@ function isTimeUnavailable(time) {
     v-model="timeRange"
     :is-time-unavailable="isTimeUnavailable"
   >
-    <div class="flex items-center gap-2">
-      <TimeRangeFieldInput part="hour" type="start" />
+    <div class="flex gap-2 items-center">
+      <TimeRangeFieldInput
+        part="hour"
+        type="start"
+      />
       :
-      <TimeRangeFieldInput part="minute" type="start" />
+      <TimeRangeFieldInput
+        part="minute"
+        type="start"
+      />
       <span class="mx-2">to
-      <TimeRangeFieldInput part="hour" type="end" />
-      :
-      <TimeRangeFieldInput part="minute" type="end" />
+        <TimeRangeFieldInput
+          part="hour"
+          type="end"
+        />
+        :
+        <TimeRangeFieldInput
+          part="minute"
+          type="end"
+        />
+      </span>
     </div>
-    <p v-if="timeRange.start && isTimeUnavailable(timeRange.start)" class="text-red-500 text-sm mt-1">
+    <p
+      v-if="timeRange.start && isTimeUnavailable(timeRange.start)"
+      class="text-sm text-red-500 mt-1"
+    >
       Start time is unavailable
     </p>
-    <p v-if="timeRange.end && isTimeUnavailable(timeRange.end)" class="text-red-500 text-sm mt-1">
+    <p
+      v-if="timeRange.end && isTimeUnavailable(timeRange.end)"
+      class="text-sm text-red-500 mt-1"
+    >
       End time is unavailable
     </p>
   </TimeRangeFieldRoot>
@@ -248,62 +305,110 @@ function isTimeUnavailable(time) {
 
 ```vue
 <script setup>
-import { Time } from '@internationalized/date'
-import { TimeRangeFieldInput, TimeRangeFieldRoot } from 'akar'
-import { ref } from 'vue'
+import { Time } from '@internationalized/date';
+import { TimeRangeFieldInput, TimeRangeFieldRoot } from 'akar';
+import { ref } from 'vue';
 
 const timeRange = ref({
   start: new Time(9, 0, 30),
   end: new Time(17, 30, 0)
-})
+});
 </script>
 
 <template>
   <div class="space-y-4">
     <!-- Hour and minute only -->
     <div>
-      <label class="block text-sm font-medium mb-2">Hour and Minute</label>
-      <TimeRangeFieldRoot v-model="timeRange" granularity="minute">
-        <div class="flex items-center gap-2">
-          <TimeRangeFieldInput part="hour" type="start" />
+      <label class="text-sm font-medium mb-2 block">Hour and Minute</label>
+      <TimeRangeFieldRoot
+        v-model="timeRange"
+        granularity="minute"
+      >
+        <div class="flex gap-2 items-center">
+          <TimeRangeFieldInput
+            part="hour"
+            type="start"
+          />
           :
-          <TimeRangeFieldInput part="minute" type="start" />
+          <TimeRangeFieldInput
+            part="minute"
+            type="start"
+          />
           <span class="mx-2">to
-          <TimeRangeFieldInput part="hour" type="end" />
-          :
-          <TimeRangeFieldInput part="minute" type="end" />
+            <TimeRangeFieldInput
+              part="hour"
+              type="end"
+            />
+            :
+            <TimeRangeFieldInput
+              part="minute"
+              type="end"
+            />
+          </span>
         </div>
       </TimeRangeFieldRoot>
     </div>
 
     <!-- Hour only -->
     <div>
-      <label class="block text-sm font-medium mb-2">Hour Only</label>
-      <TimeRangeFieldRoot v-model="timeRange" granularity="hour">
-        <div class="flex items-center gap-2">
-          <TimeRangeFieldInput part="hour" type="start" />
+      <label class="text-sm font-medium mb-2 block">Hour Only</label>
+      <TimeRangeFieldRoot
+        v-model="timeRange"
+        granularity="hour"
+      >
+        <div class="flex gap-2 items-center">
+          <TimeRangeFieldInput
+            part="hour"
+            type="start"
+          />
           <span class="mx-2">to
-          <TimeRangeFieldInput part="hour" type="end" />
+            <TimeRangeFieldInput
+              part="hour"
+              type="end"
+            />
+          </span>
         </div>
       </TimeRangeFieldRoot>
     </div>
 
     <!-- Hour, minute, and second -->
     <div>
-      <label class="block text-sm font-medium mb-2">Hour, Minute, and Second</label>
-      <TimeRangeFieldRoot v-model="timeRange" granularity="second">
-        <div class="flex items-center gap-2">
-          <TimeRangeFieldInput part="hour" type="start" />
+      <label class="text-sm font-medium mb-2 block">Hour, Minute, and Second</label>
+      <TimeRangeFieldRoot
+        v-model="timeRange"
+        granularity="second"
+      >
+        <div class="flex gap-2 items-center">
+          <TimeRangeFieldInput
+            part="hour"
+            type="start"
+          />
           :
-          <TimeRangeFieldInput part="minute" type="start" />
+          <TimeRangeFieldInput
+            part="minute"
+            type="start"
+          />
           :
-          <TimeRangeFieldInput part="second" type="start" />
+          <TimeRangeFieldInput
+            part="second"
+            type="start"
+          />
           <span class="mx-2">to
-          <TimeRangeFieldInput part="hour" type="end" />
-          :
-          <TimeRangeFieldInput part="minute" type="end" />
-          :
-          <TimeRangeFieldInput part="second" type="end" />
+            <TimeRangeFieldInput
+              part="hour"
+              type="end"
+            />
+            :
+            <TimeRangeFieldInput
+              part="minute"
+              type="end"
+            />
+            :
+            <TimeRangeFieldInput
+              part="second"
+              type="end"
+            />
+          </span>
         </div>
       </TimeRangeFieldRoot>
     </div>
@@ -315,64 +420,118 @@ const timeRange = ref({
 
 ```vue
 <script setup>
-import { Time } from '@internationalized/date'
-import { TimeRangeFieldInput, TimeRangeFieldRoot } from 'akar'
-import { ref } from 'vue'
+import { Time } from '@internationalized/date';
+import { TimeRangeFieldInput, TimeRangeFieldRoot } from 'akar';
+import { ref } from 'vue';
 
 const timeRange = ref({
   start: new Time(9, 0),
   end: new Time(17, 0)
-})
+});
 </script>
 
 <template>
   <div class="space-y-4">
     <!-- 24-hour format (default) -->
     <div>
-      <label class="block text-sm font-medium mb-2">24-hour format</label>
-      <TimeRangeFieldRoot v-model="timeRange" hour-cycle="h23">
-        <div class="flex items-center gap-2">
-          <TimeRangeFieldInput part="hour" type="start" />
+      <label class="text-sm font-medium mb-2 block">24-hour format</label>
+      <TimeRangeFieldRoot
+        v-model="timeRange"
+        hour-cycle="h23"
+      >
+        <div class="flex gap-2 items-center">
+          <TimeRangeFieldInput
+            part="hour"
+            type="start"
+          />
           :
-          <TimeRangeFieldInput part="minute" type="start" />
+          <TimeRangeFieldInput
+            part="minute"
+            type="start"
+          />
           <span class="mx-2">to
-          <TimeRangeFieldInput part="hour" type="end" />
-          :
-          <TimeRangeFieldInput part="minute" type="end" />
+            <TimeRangeFieldInput
+              part="hour"
+              type="end"
+            />
+            :
+            <TimeRangeFieldInput
+              part="minute"
+              type="end"
+            />
+          </span>
         </div>
       </TimeRangeFieldRoot>
     </div>
 
     <!-- 12-hour format with AM/PM -->
     <div>
-      <label class="block text-sm font-medium mb-2">12-hour format</label>
-      <TimeRangeFieldRoot v-model="timeRange" hour-cycle="h12">
-        <div class="flex items-center gap-2">
-          <TimeRangeFieldInput part="hour" type="start" />
+      <label class="text-sm font-medium mb-2 block">12-hour format</label>
+      <TimeRangeFieldRoot
+        v-model="timeRange"
+        hour-cycle="h12"
+      >
+        <div class="flex gap-2 items-center">
+          <TimeRangeFieldInput
+            part="hour"
+            type="start"
+          />
           :
-          <TimeRangeFieldInput part="minute" type="start" />
-          <TimeRangeFieldInput part="dayPeriod" type="start" />
+          <TimeRangeFieldInput
+            part="minute"
+            type="start"
+          />
+          <TimeRangeFieldInput
+            part="dayPeriod"
+            type="start"
+          />
           <span class="mx-2">to
-          <TimeRangeFieldInput part="hour" type="end" />
-          :
-          <TimeRangeFieldInput part="minute" type="end" />
-          <TimeRangeFieldInput part="dayPeriod" type="end" />
+            <TimeRangeFieldInput
+              part="hour"
+              type="end"
+            />
+            :
+            <TimeRangeFieldInput
+              part="minute"
+              type="end"
+            />
+            <TimeRangeFieldInput
+              part="dayPeriod"
+              type="end"
+            />
+          </span>
         </div>
       </TimeRangeFieldRoot>
     </div>
 
     <!-- French locale -->
     <div>
-      <label class="block text-sm font-medium mb-2">French locale</label>
-      <TimeRangeFieldRoot v-model="timeRange" locale="fr">
-        <div class="flex items-center gap-2">
-          <TimeRangeFieldInput part="hour" type="start" />
+      <label class="text-sm font-medium mb-2 block">French locale</label>
+      <TimeRangeFieldRoot
+        v-model="timeRange"
+        locale="fr"
+      >
+        <div class="flex gap-2 items-center">
+          <TimeRangeFieldInput
+            part="hour"
+            type="start"
+          />
           :
-          <TimeRangeFieldInput part="minute" type="start" />
+          <TimeRangeFieldInput
+            part="minute"
+            type="start"
+          />
           <span class="mx-2">à
-          <TimeRangeFieldInput part="hour" type="end" />
-          :
-          <TimeRangeFieldInput part="minute" type="end" />
+            <TimeRangeFieldInput
+              part="hour"
+              type="end"
+            />
+            :
+            <TimeRangeFieldInput
+              part="minute"
+              type="end"
+            />
+          </span>
         </div>
       </TimeRangeFieldRoot>
     </div>
@@ -384,18 +543,18 @@ const timeRange = ref({
 
 ```vue
 <script setup>
-import { Time } from '@internationalized/date'
-import { TimeRangeFieldInput, TimeRangeFieldRoot } from 'akar'
-import { ref } from 'vue'
+import { Time } from '@internationalized/date';
+import { TimeRangeFieldInput, TimeRangeFieldRoot } from 'akar';
+import { ref } from 'vue';
 
 const timeRange = ref({
   start: new Time(9, 0),
   end: new Time(17, 0)
-})
+});
 
 // Restrict times between 8 AM and 6 PM
-const minTime = new Time(8, 0)
-const maxTime = new Time(18, 0)
+const minTime = new Time(8, 0);
+const maxTime = new Time(18, 0);
 </script>
 
 <template>
@@ -404,16 +563,29 @@ const maxTime = new Time(18, 0)
     :min-value="minTime"
     :max-value="maxTime"
   >
-    <div class="flex items-center gap-2">
-      <TimeRangeFieldInput part="hour" type="start" />
+    <div class="flex gap-2 items-center">
+      <TimeRangeFieldInput
+        part="hour"
+        type="start"
+      />
       :
-      <TimeRangeFieldInput part="minute" type="start" />
+      <TimeRangeFieldInput
+        part="minute"
+        type="start"
+      />
       <span class="mx-2">to
-      <TimeRangeFieldInput part="hour" type="end" />
-      :
-      <TimeRangeFieldInput part="minute" type="end" />
+        <TimeRangeFieldInput
+          part="hour"
+          type="end"
+        />
+        :
+        <TimeRangeFieldInput
+          part="minute"
+          type="end"
+        />
+      </span>
     </div>
-    <p class="text-gray-500 text-sm mt-1">
+    <p class="text-sm text-gray-500 mt-1">
       Business hours: 8:00 AM - 6:00 PM
     </p>
   </TimeRangeFieldRoot>
@@ -424,17 +596,17 @@ const maxTime = new Time(18, 0)
 
 ```vue
 <script setup>
-import { Time } from '@internationalized/date'
-import { TimeRangeFieldInput, TimeRangeFieldRoot } from 'akar'
-import { ref } from 'vue'
+import { Time } from '@internationalized/date';
+import { TimeRangeFieldInput, TimeRangeFieldRoot } from 'akar';
+import { ref } from 'vue';
 
 const timeRange = ref({
   start: new Time(9, 0),
   end: new Time(17, 0)
-})
+});
 
 // Increment minutes by 15
-const step = { minute: 15 }
+const step = { minute: 15 };
 </script>
 
 <template>
@@ -442,16 +614,29 @@ const step = { minute: 15 }
     v-model="timeRange"
     :step="step"
   >
-    <div class="flex items-center gap-2">
-      <TimeRangeFieldInput part="hour" type="start" />
+    <div class="flex gap-2 items-center">
+      <TimeRangeFieldInput
+        part="hour"
+        type="start"
+      />
       :
-      <TimeRangeFieldInput part="minute" type="start" />
+      <TimeRangeFieldInput
+        part="minute"
+        type="start"
+      />
       <span class="mx-2">to
-      <TimeRangeFieldInput part="hour" type="end" />
-      :
-      <TimeRangeFieldInput part="minute" type="end" />
+        <TimeRangeFieldInput
+          part="hour"
+          type="end"
+        />
+        :
+        <TimeRangeFieldInput
+          part="minute"
+          type="end"
+        />
+      </span>
     </div>
-    <p class="text-gray-500 text-sm mt-1">
+    <p class="text-sm text-gray-500 mt-1">
       Minutes increment by 15
     </p>
   </TimeRangeFieldRoot>
@@ -462,22 +647,26 @@ const step = { minute: 15 }
 
 ```vue
 <script setup>
-import { Time } from '@internationalized/date'
-import { TimeRangeFieldInput, TimeRangeFieldRoot } from 'akar'
-import { ref } from 'vue'
+import { Time } from '@internationalized/date';
+import { TimeRangeFieldInput, TimeRangeFieldRoot } from 'akar';
+import { ref } from 'vue';
 
 const timeRange = ref({
   start: new Time(9, 0),
   end: new Time(17, 0)
-})
+});
 
-const isDisabled = ref(true)
+const isDisabled = ref(true);
 </script>
 
 <template>
   <div class="space-y-4">
-    <div class="flex items-center gap-2">
-      <input id="disable" v-model="isDisabled" type="checkbox">
+    <div class="flex gap-2 items-center">
+      <input
+        id="disable"
+        v-model="isDisabled"
+        type="checkbox"
+      >
       <label for="disable">Disable time range field</label>
     </div>
 
@@ -485,14 +674,27 @@ const isDisabled = ref(true)
       v-model="timeRange"
       :disabled="isDisabled"
     >
-      <div class="flex items-center gap-2">
-        <TimeRangeFieldInput part="hour" type="start" />
+      <div class="flex gap-2 items-center">
+        <TimeRangeFieldInput
+          part="hour"
+          type="start"
+        />
         :
-        <TimeRangeFieldInput part="minute" type="start" />
+        <TimeRangeFieldInput
+          part="minute"
+          type="start"
+        />
         <span class="mx-2">to
-        <TimeRangeFieldInput part="hour" type="end" />
-        :
-        <TimeRangeFieldInput part="minute" type="end" />
+          <TimeRangeFieldInput
+            part="hour"
+            type="end"
+          />
+          :
+          <TimeRangeFieldInput
+            part="minute"
+            type="end"
+          />
+        </span>
       </div>
     </TimeRangeFieldRoot>
   </div>
@@ -503,22 +705,26 @@ const isDisabled = ref(true)
 
 ```vue
 <script setup>
-import { Time } from '@internationalized/date'
-import { TimeRangeFieldInput, TimeRangeFieldRoot } from 'akar'
-import { ref } from 'vue'
+import { Time } from '@internationalized/date';
+import { TimeRangeFieldInput, TimeRangeFieldRoot } from 'akar';
+import { ref } from 'vue';
 
 const timeRange = ref({
   start: new Time(9, 0),
   end: new Time(17, 0)
-})
+});
 
-const isReadonly = ref(true)
+const isReadonly = ref(true);
 </script>
 
 <template>
   <div class="space-y-4">
-    <div class="flex items-center gap-2">
-      <input id="readonly" v-model="isReadonly" type="checkbox">
+    <div class="flex gap-2 items-center">
+      <input
+        id="readonly"
+        v-model="isReadonly"
+        type="checkbox"
+      >
       <label for="readonly">Make time range field read-only</label>
     </div>
 
@@ -526,14 +732,27 @@ const isReadonly = ref(true)
       v-model="timeRange"
       :readonly="isReadonly"
     >
-      <div class="flex items-center gap-2">
-        <TimeRangeFieldInput part="hour" type="start" />
+      <div class="flex gap-2 items-center">
+        <TimeRangeFieldInput
+          part="hour"
+          type="start"
+        />
         :
-        <TimeRangeFieldInput part="minute" type="start" />
+        <TimeRangeFieldInput
+          part="minute"
+          type="start"
+        />
         <span class="mx-2">to
-        <TimeRangeFieldInput part="hour" type="end" />
-        :
-        <TimeRangeFieldInput part="minute" type="end" />
+          <TimeRangeFieldInput
+            part="hour"
+            type="end"
+          />
+          :
+          <TimeRangeFieldInput
+            part="minute"
+            type="end"
+          />
+        </span>
       </div>
     </TimeRangeFieldRoot>
   </div>
@@ -546,14 +765,14 @@ The TimeRangeField provides intuitive keyboard navigation for efficient time inp
 
 ```vue
 <script setup>
-import { Time } from '@internationalized/date'
-import { TimeRangeFieldInput, TimeRangeFieldRoot } from 'akar'
-import { ref } from 'vue'
+import { Time } from '@internationalized/date';
+import { TimeRangeFieldInput, TimeRangeFieldRoot } from 'akar';
+import { ref } from 'vue';
 
 const timeRange = ref({
   start: new Time(9, 0),
   end: new Time(17, 0)
-})
+});
 </script>
 
 <template>
@@ -562,14 +781,27 @@ const timeRange = ref({
       Try navigating with Tab, Arrow keys, and typing numbers. Focus moves automatically between segments.
     </p>
     <TimeRangeFieldRoot v-model="timeRange">
-      <div class="flex items-center gap-2">
-        <TimeRangeFieldInput part="hour" type="start" />
+      <div class="flex gap-2 items-center">
+        <TimeRangeFieldInput
+          part="hour"
+          type="start"
+        />
         :
-        <TimeRangeFieldInput part="minute" type="start" />
+        <TimeRangeFieldInput
+          part="minute"
+          type="start"
+        />
         <span class="mx-2">to
-        <TimeRangeFieldInput part="hour" type="end" />
-        :
-        <TimeRangeFieldInput part="minute" type="end" />
+          <TimeRangeFieldInput
+            part="hour"
+            type="end"
+          />
+          :
+          <TimeRangeFieldInput
+            part="minute"
+            type="end"
+          />
+        </span>
       </div>
     </TimeRangeFieldRoot>
     <div class="text-xs text-gray-500">
@@ -585,38 +817,57 @@ Integrate TimeRangeField with HTML forms to handle submissions and validation.
 
 ```vue
 <script setup>
-import { Time } from '@internationalized/date'
-import { TimeRangeFieldInput, TimeRangeFieldRoot } from 'akar'
-import { ref } from 'vue'
+import { Time } from '@internationalized/date';
+import { TimeRangeFieldInput, TimeRangeFieldRoot } from 'akar';
+import { ref } from 'vue';
 
 const timeRange = ref({
   start: new Time(9, 0),
   end: new Time(17, 0)
-})
+});
 
 function handleSubmit() {
-  console.log('Form submitted with time range:', timeRange.value)
+  console.log('Form submitted with time range:', timeRange.value);
   // Handle form submission
 }
 </script>
 
 <template>
-  <form class="space-y-4" @submit.prevent="handleSubmit">
+  <form
+    class="space-y-4"
+    @submit.prevent="handleSubmit"
+  >
     <div>
-      <label class="block text-sm font-medium mb-2">Select Time Range</label>
+      <label class="text-sm font-medium mb-2 block">Select Time Range</label>
       <TimeRangeFieldRoot v-model="timeRange">
-        <div class="flex items-center gap-2">
-          <TimeRangeFieldInput part="hour" type="start" />
+        <div class="flex gap-2 items-center">
+          <TimeRangeFieldInput
+            part="hour"
+            type="start"
+          />
           :
-          <TimeRangeFieldInput part="minute" type="start" />
+          <TimeRangeFieldInput
+            part="minute"
+            type="start"
+          />
           <span class="mx-2">to
-          <TimeRangeFieldInput part="hour" type="end" />
-          :
-          <TimeRangeFieldInput part="minute" type="end" />
+            <TimeRangeFieldInput
+              part="hour"
+              type="end"
+            />
+            :
+            <TimeRangeFieldInput
+              part="minute"
+              type="end"
+            />
+          </span>
         </div>
       </TimeRangeFieldRoot>
     </div>
-    <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded">
+    <button
+      type="submit"
+      class="text-white px-4 py-2 rounded bg-blue-500"
+    >
       Submit
     </button>
   </form>
@@ -629,42 +880,43 @@ Customize the appearance of the TimeRangeField using CSS classes or Tailwind uti
 
 ```vue
 <script setup>
-import { Time } from '@internationalized/date'
-import { TimeRangeFieldInput, TimeRangeFieldRoot } from 'akar'
-import { ref } from 'vue'
+import { Time } from '@internationalized/date';
+import { TimeRangeFieldInput, TimeRangeFieldRoot } from 'akar';
+import { ref } from 'vue';
 
 const timeRange = ref({
   start: new Time(9, 0),
   end: new Time(17, 0)
-})
+});
 </script>
 
 <template>
   <TimeRangeFieldRoot v-model="timeRange">
-    <div class="flex items-center gap-2 p-4 border border-gray-300 rounded-lg bg-gray-50">
+    <div class="p-4 border border-gray-300 rounded-lg bg-gray-50 flex gap-2 items-center">
       <TimeRangeFieldInput
         part="hour"
         type="start"
-        class="w-12 text-center border border-blue-300 rounded px-2 py-1 focus:border-blue-500 focus:outline-none"
+        class="px-2 py-1 text-center border border-blue-300 rounded w-12 focus:outline-none focus:border-blue-500"
       />
       <span class="text-gray-500">:
-      <TimeRangeFieldInput
-        part="minute"
-        type="start"
-        class="w-12 text-center border border-blue-300 rounded px-2 py-1 focus:border-blue-500 focus:outline-none"
-      />
-      <span class="mx-2 text-gray-500">to
-      <TimeRangeFieldInput
-        part="hour"
-        type="end"
-        class="w-12 text-center border border-blue-300 rounded px-2 py-1 focus:border-blue-500 focus:outline-none"
-      />
-      <span class="text-gray-500">:
-      <TimeRangeFieldInput
-        part="minute"
-        type="end"
-        class="w-12 text-center border border-blue-300 rounded px-2 py-1 focus:border-blue-500 focus:outline-none"
-      />
+        <TimeRangeFieldInput
+          part="minute"
+          type="start"
+          class="px-2 py-1 text-center border border-blue-300 rounded w-12 focus:outline-none focus:border-blue-500"
+        />
+        <span class="text-gray-500 mx-2">to
+          <TimeRangeFieldInput
+            part="hour"
+            type="end"
+            class="px-2 py-1 text-center border border-blue-300 rounded w-12 focus:outline-none focus:border-blue-500"
+          />
+          <span class="text-gray-500">:
+            <TimeRangeFieldInput
+              part="minute"
+              type="end"
+              class="px-2 py-1 text-center border border-blue-300 rounded w-12 focus:outline-none focus:border-blue-500"
+            />
+          </span></span></span>
     </div>
   </TimeRangeFieldRoot>
 </template>
@@ -676,46 +928,66 @@ Implement complex validation rules, such as ensuring the end time is after the s
 
 ```vue
 <script setup>
-import { Time } from '@internationalized/date'
-import { TimeRangeFieldInput, TimeRangeFieldRoot } from 'akar'
-import { ref, watch } from 'vue'
+import { Time } from '@internationalized/date';
+import { TimeRangeFieldInput, TimeRangeFieldRoot } from 'akar';
+import { ref, watch } from 'vue';
 
 const timeRange = ref({
   start: new Time(9, 0),
   end: new Time(17, 0)
-})
+});
 
-const errors = ref([])
+const errors = ref([]);
 
 watch(timeRange, (newRange) => {
-  errors.value = []
+  errors.value = [];
   if (newRange.start && newRange.end) {
     if (newRange.start.compare(newRange.end) >= 0) {
-      errors.value.push('End time must be after start time')
+      errors.value.push('End time must be after start time');
     }
     if (newRange.start.hour < 8 || newRange.start.hour > 18) {
-      errors.value.push('Start time must be between 8 AM and 6 PM')
+      errors.value.push('Start time must be between 8 AM and 6 PM');
     }
     if (newRange.end.hour < 8 || newRange.end.hour > 18) {
-      errors.value.push('End time must be between 8 AM and 6 PM')
+      errors.value.push('End time must be between 8 AM and 6 PM');
     }
   }
-}, { deep: true })
+}, { deep: true });
 </script>
 
 <template>
   <TimeRangeFieldRoot v-model="timeRange">
-    <div class="flex items-center gap-2">
-      <TimeRangeFieldInput part="hour" type="start" />
+    <div class="flex gap-2 items-center">
+      <TimeRangeFieldInput
+        part="hour"
+        type="start"
+      />
       :
-      <TimeRangeFieldInput part="minute" type="start" />
+      <TimeRangeFieldInput
+        part="minute"
+        type="start"
+      />
       <span class="mx-2">to
-      <TimeRangeFieldInput part="hour" type="end" />
-      :
-      <TimeRangeFieldInput part="minute" type="end" />
+        <TimeRangeFieldInput
+          part="hour"
+          type="end"
+        />
+        :
+        <TimeRangeFieldInput
+          part="minute"
+          type="end"
+        />
+      </span>
     </div>
-    <div v-if="errors.length" class="mt-2">
-      <p v-for="error in errors" :key="error" class="text-red-500 text-sm">
+    <div
+      v-if="errors.length"
+      class="mt-2"
+    >
+      <p
+        v-for="error in errors"
+        :key="error"
+        class="text-sm text-red-500"
+      >
         {{ error }}
       </p>
     </div>
@@ -729,47 +1001,61 @@ The TimeRangeField is built with accessibility in mind. Enhance it further with 
 
 ```vue
 <script setup>
-import { Time } from '@internationalized/date'
-import { TimeRangeFieldInput, TimeRangeFieldRoot } from 'akar'
-import { ref } from 'vue'
+import { Time } from '@internationalized/date';
+import { TimeRangeFieldInput, TimeRangeFieldRoot } from 'akar';
+import { ref } from 'vue';
 
 const timeRange = ref({
   start: new Time(9, 0),
   end: new Time(17, 0)
-})
+});
 </script>
 
 <template>
   <div>
-    <label for="time-range" class="block text-sm font-medium mb-2">Meeting Time Range</label>
-    <TimeRangeFieldRoot id="time-range" v-model="timeRange" aria-describedby="time-range-help">
-      <div class="flex items-center gap-2">
+    <label
+      for="time-range"
+      class="text-sm font-medium mb-2 block"
+    >Meeting Time Range</label>
+    <TimeRangeFieldRoot
+      id="time-range"
+      v-model="timeRange"
+      aria-describedby="time-range-help"
+    >
+      <div class="flex gap-2 items-center">
         <TimeRangeFieldInput
           part="hour"
           type="start"
           aria-label="Start hour"
         />
         <span aria-hidden="true">:
-        <TimeRangeFieldInput
-          part="minute"
-          type="start"
-          aria-label="Start minute"
-        />
-        <span class="mx-2" aria-hidden="true">to
-        <TimeRangeFieldInput
-          part="hour"
-          type="end"
-          aria-label="End hour"
-        />
-        <span aria-hidden="true">:
-        <TimeRangeFieldInput
-          part="minute"
-          type="end"
-          aria-label="End minute"
-        />
+          <TimeRangeFieldInput
+            part="minute"
+            type="start"
+            aria-label="Start minute"
+          />
+          <span
+            class="mx-2"
+            aria-hidden="true"
+          >to
+            <TimeRangeFieldInput
+              part="hour"
+              type="end"
+              aria-label="End hour"
+            />
+            <span aria-hidden="true">:
+              <TimeRangeFieldInput
+                part="minute"
+                type="end"
+                aria-label="End minute"
+              />
+            </span></span></span>
       </div>
     </TimeRangeFieldRoot>
-    <p id="time-range-help" class="text-xs text-gray-500 mt-1">
+    <p
+      id="time-range-help"
+      class="text-xs text-gray-500 mt-1"
+    >
       Select the start and end times for your meeting. Use Tab to navigate between fields.
     </p>
   </div>
@@ -782,9 +1068,9 @@ Use TimeRangeField in practical scenarios like scheduling appointments or bookin
 
 ```vue
 <script setup>
-import { Time } from '@internationalized/date'
-import { TimeRangeFieldInput, TimeRangeFieldRoot } from 'akar'
-import { ref } from 'vue'
+import { Time } from '@internationalized/date';
+import { TimeRangeFieldInput, TimeRangeFieldRoot } from 'akar';
+import { ref } from 'vue';
 
 const appointment = ref({
   date: new Date(),
@@ -793,43 +1079,76 @@ const appointment = ref({
     end: new Time(11, 0)
   },
   title: ''
-})
+});
 
 function bookAppointment() {
-  console.log('Booking appointment:', appointment.value)
+  console.log('Booking appointment:', appointment.value);
   // API call to book appointment
 }
 </script>
 
 <template>
-  <div class="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg">
+  <div class="mx-auto p-6 rounded-lg bg-white max-w-md shadow-lg">
     <h2 class="text-xl font-bold mb-4">
       Book an Appointment
     </h2>
-    <form class="space-y-4" @submit.prevent="bookAppointment">
+    <form
+      class="space-y-4"
+      @submit.prevent="bookAppointment"
+    >
       <div>
-        <label class="block text-sm font-medium mb-2">Appointment Title</label>
-        <input v-model="appointment.title" type="text" class="w-full px-3 py-2 border border-gray-300 rounded" required>
+        <label class="text-sm font-medium mb-2 block">Appointment Title</label>
+        <input
+          v-model="appointment.title"
+          type="text"
+          class="px-3 py-2 border border-gray-300 rounded w-full"
+          required
+        >
       </div>
       <div>
-        <label class="block text-sm font-medium mb-2">Date</label>
-        <input v-model="appointment.date" type="date" class="w-full px-3 py-2 border border-gray-300 rounded" required>
+        <label class="text-sm font-medium mb-2 block">Date</label>
+        <input
+          v-model="appointment.date"
+          type="date"
+          class="px-3 py-2 border border-gray-300 rounded w-full"
+          required
+        >
       </div>
       <div>
-        <label class="block text-sm font-medium mb-2">Time Range</label>
+        <label class="text-sm font-medium mb-2 block">Time Range</label>
         <TimeRangeFieldRoot v-model="appointment.timeRange">
-          <div class="flex items-center gap-2">
-            <TimeRangeFieldInput part="hour" type="start" class="w-12 text-center border border-gray-300 rounded px-2 py-1" />
+          <div class="flex gap-2 items-center">
+            <TimeRangeFieldInput
+              part="hour"
+              type="start"
+              class="px-2 py-1 text-center border border-gray-300 rounded w-12"
+            />
             :
-            <TimeRangeFieldInput part="minute" type="start" class="w-12 text-center border border-gray-300 rounded px-2 py-1" />
+            <TimeRangeFieldInput
+              part="minute"
+              type="start"
+              class="px-2 py-1 text-center border border-gray-300 rounded w-12"
+            />
             <span class="mx-2">to
-            <TimeRangeFieldInput part="hour" type="end" class="w-12 text-center border border-gray-300 rounded px-2 py-1" />
-            :
-            <TimeRangeFieldInput part="minute" type="end" class="w-12 text-center border border-gray-300 rounded px-2 py-1" />
+              <TimeRangeFieldInput
+                part="hour"
+                type="end"
+                class="px-2 py-1 text-center border border-gray-300 rounded w-12"
+              />
+              :
+              <TimeRangeFieldInput
+                part="minute"
+                type="end"
+                class="px-2 py-1 text-center border border-gray-300 rounded w-12"
+              />
+            </span>
           </div>
         </TimeRangeFieldRoot>
       </div>
-      <button type="submit" class="w-full px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
+      <button
+        type="submit"
+        class="text-white px-4 py-2 rounded bg-green-500 w-full hover:bg-green-600"
+      >
         Book Appointment
       </button>
     </form>

@@ -20,12 +20,12 @@ Docs: https://vinicunca.dev/raw/taman/guides/api-and-realtime.md, https://vinicu
 Copy `views/todo/use-todos-query.ts`:
 
 ```ts
-import { orpc } from '#/api/orpc';
-import { getErrors } from '#/api/errors';
+import { useTamanToast } from '@taman/app-ui';
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tanstack/vue-query';
 import { isDefinedError } from '@vinicunca/request/orpc';
-import { useTamanToast } from '@taman/app-ui';
 import { computed, toValue } from 'vue';
+import { getErrors } from '#/api/errors';
+import { orpc } from '#/api/orpc';
 
 export function useInvoicesQuery(params: MaybeRefOrGetter<InvoiceListInput>) {
   const queryClient = useQueryClient();
@@ -74,9 +74,9 @@ onScopeDispose(() => controller.abort());
 
 ```vue
 <script setup lang="ts">
+import { invoiceCreateInput } from '@taman/api-contract';
 import { useTamanForm, z } from '#/adapter/form';
 import { $t } from '#/locales';
-import { invoiceCreateInput } from '@taman/api-contract';
 
 const [Form, formApi] = useTamanForm({
   showDefaultActions: false,
@@ -109,7 +109,11 @@ const [Dialog, dialogApi] = useTamanDialog({
   title: 'Edit invoice',
   onConfirm: async () => {
     dialogApi.lock();
-    try { await save(); dialogApi.close(); } finally { dialogApi.unlock(); }
+    try {
+      await save(); dialogApi.close();
+    } finally {
+      dialogApi.unlock();
+    }
   },
 });
 // <Dialog /> in the template; dialogApi.setData(payload) / getData() to pass a record
@@ -118,7 +122,11 @@ const [Dialog, dialogApi] = useTamanDialog({
 Use `useTamanDrawer` for wide forms. `tamanConfirm` rejects when the user cancels, so guard it:
 
 ```ts
-try { await tamanConfirm({ title: $t('invoice.remove.title'), content: '…' }); } catch { return; }
+try {
+  await tamanConfirm({ title: $t('invoice.remove.title'), content: '…' });
+} catch {
+  return;
+}
 remove.mutate({ id });
 ```
 

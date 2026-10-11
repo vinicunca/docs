@@ -1,25 +1,25 @@
 <script setup lang="ts">
-import type { NavigationMenuItem } from 'pohon-ui'
+import type { NavigationMenuItem } from 'pohon-ui';
 
-const items: NavigationMenuItem[] = [
+const items: Array<NavigationMenuItem> = [
   {
     label: 'Home',
     icon: 'i-lucide-house',
-    active: true
+    active: true,
   },
   {
     label: 'Samples',
-    icon: 'i-lucide-circle-play'
+    icon: 'i-lucide-circle-play',
   },
   {
     label: 'Explore',
-    icon: 'i-lucide-compass'
+    icon: 'i-lucide-compass',
   },
   {
     label: 'Library',
-    icon: 'i-lucide-bookmark'
-  }
-]
+    icon: 'i-lucide-bookmark',
+  },
+];
 </script>
 
 <template>
@@ -30,7 +30,7 @@ const items: NavigationMenuItem[] = [
       item: 'py-0',
       link: 'flex-col gap-1 px-3',
       linkLeadingIcon: 'size-5',
-      linkLabel: 'text-[10px]/3 font-normal'
+      linkLabel: 'text-[10px]/3 font-normal',
     }"
     class="w-full"
   />

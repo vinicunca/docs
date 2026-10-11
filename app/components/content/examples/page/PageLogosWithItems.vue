@@ -5,10 +5,13 @@ const items = [
   'i-simple-icons-x',
   'i-simple-icons-instagram',
   'i-simple-icons-linkedin',
-  'i-simple-icons-facebook'
-]
+  'i-simple-icons-facebook',
+];
 </script>
 
 <template>
-  <PPageLogos title="Trusted by the best front-end teams" :items="items" />
+  <PPageLogos
+    title="Trusted by the best front-end teams"
+    :items="items"
+  />
 </template>

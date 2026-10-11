@@ -76,10 +76,10 @@ slots:
   main: Main
 ---
 
-#sidebar
+# sidebar
 Sidebar
 
-#main
+# main
 Main
 ::
 
@@ -112,10 +112,10 @@ slots:
   second: Second
 ---
 
-#first
+# first
 First
 
-#second
+# second
 Second
 ::
 
@@ -160,7 +160,11 @@ Provide an `auto-save-id` to persist the layout to `localStorage` and restore it
 
 ```vue
 <template>
-  <PSplitter id="my-layout" auto-save-id="my-layout" :items="items">
+  <PSplitter
+    id="my-layout"
+    auto-save-id="my-layout"
+    :items="items"
+  >
     <!-- ... -->
   </PSplitter>
 </template>

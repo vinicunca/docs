@@ -53,7 +53,7 @@ Import all parts and piece them together.
 
 ```vue
 <script setup>
-import { TagGroupItem, TagGroupItemDelete, TagGroupItemText, TagGroupRoot } from 'akar'
+import { TagGroupItem, TagGroupItemDelete, TagGroupItemText, TagGroupRoot } from 'akar';
 </script>
 
 <template>

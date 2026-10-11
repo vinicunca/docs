@@ -1,11 +1,16 @@
 <script setup lang="ts">
-const value = ref('')
+const value = ref('');
 </script>
 
 <template>
-  <PInput v-model="value" placeholder="" variant="outline" :ui="{ base: 'peer' }">
-    <label class="pointer-events-none absolute left-0 -top-2.5 color-text-highlighted text-xs font-medium px-1.5 transition-all peer-focus:-top-2.5 peer-focus:color-text-highlighted peer-focus:text-xs peer-focus:font-medium peer-placeholder-shown:text-sm peer-placeholder-shown:color-text-dimmed peer-placeholder-shown:top-1.5 peer-placeholder-shown:font-normal">
-      <span class="inline-flex bg-background px-1">Email address</span>
+  <PInput
+    v-model="value"
+    placeholder=""
+    variant="outline"
+    :ui="{ base: 'peer' }"
+  >
+    <label class="text-xs color-text-highlighted font-medium px-1.5 pointer-events-none transition-all left-0 absolute peer-focus:text-xs peer-placeholder-shown:text-sm peer-focus:color-text-highlighted peer-placeholder-shown:color-text-dimmed peer-focus:font-medium peer-placeholder-shown:font-normal -top-2.5 peer-placeholder-shown:top-1.5 peer-focus:-top-2.5">
+      <span class="px-1 bg-background inline-flex">Email address</span>
     </label>
   </PInput>
 </template>

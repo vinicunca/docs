@@ -5,17 +5,17 @@ description: Access the current direction
 ## Usage
 
 ```ts
-import { useDirection } from 'akar'
+import { useDirection } from 'akar';
 
 // With ConfigProvider setup as follows
 // <ConfigProvider dir="rtl">
-const locale = useDirection() // rtl
+const locale = useDirection(); // rtl
 ```
 
 ```ts
-import { useDirection } from 'akar'
+import { useDirection } from 'akar';
 
 // With ConfigProvider setup as follows
 // <ConfigProvider dir="rtl">
-const locale = useDirection('ltr') // ltr
+const locale = useDirection('ltr'); // ltr
 ```

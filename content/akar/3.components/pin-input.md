@@ -51,7 +51,7 @@ Import all parts and piece them together.
 
 ```vue
 <script setup>
-import { PinInputInput, PinInputRoot } from 'akar'
+import { PinInputInput, PinInputRoot } from 'akar';
 </script>
 
 <template>

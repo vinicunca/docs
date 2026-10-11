@@ -266,12 +266,12 @@ class: '!p-0 !justify-start h-[500px] contain-[paint] transform-gpu'
 ::
 
 ::framework-only
-#nuxt
+# nuxt
 :::tip{to="/pohon/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.close` key.
 :::
 
-#vue
+# vue
 :::tip{to="/pohon/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.close` key.
 :::

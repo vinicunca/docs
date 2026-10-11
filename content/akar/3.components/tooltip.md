@@ -31,7 +31,7 @@ Import all parts and piece them together.
 
 ```vue
 <script setup lang="ts">
-import { TooltipArrow, TooltipContent, TooltipPortal, TooltipProvider, TooltipRoot, TooltipTrigger } from 'akar'
+import { TooltipArrow, TooltipContent, TooltipPortal, TooltipProvider, TooltipRoot, TooltipTrigger } from 'akar';
 </script>
 
 <template>
@@ -173,7 +173,7 @@ import { TooltipContent, TooltipProvider, TooltipRoot, TooltipTrigger } from 'ak
           disabled
           style="{ pointerEvents: 'none' }"
         >…</button>
-      
+
     </TooltipTrigger>
     <TooltipContent>…</TooltipContent>
   </TooltipRoot>
@@ -329,7 +329,7 @@ This example abstracts all of the `Tooltip` parts and introduces a new `content`
 
 ```vue
 <script setup lang="ts">
-import { Tooltip } from './your-tooltip'
+import { Tooltip } from './your-tooltip';
 </script>
 
 <template>

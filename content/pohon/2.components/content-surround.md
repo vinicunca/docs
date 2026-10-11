@@ -62,11 +62,11 @@ Use the ContentSurround component in a page to display the prev and next links:
 
 ```vue [pages/\[...slug\\].vue]{19}
 <script setup lang="ts">
-const route = useRoute()
+const route = useRoute();
 
-const { data: page } = await useAsyncData(route.path, () => queryCollection('docs').path(route.path).first())
+const { data: page } = await useAsyncData(route.path, () => queryCollection('docs').path(route.path).first());
 if (!page.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
+  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true });
 }
 </script>
 
@@ -75,14 +75,20 @@ if (!page.value) {
     <PPageHeader :title="page.title" />
 
     <PPageBody>
-      <ContentRenderer v-if="page.body" :value="page" />
+      <ContentRenderer
+        v-if="page.body"
+        :value="page"
+      />
 
       <PSeparator v-if="surround?.filter(Boolean).length" />
 
       <PContentSurround :surround="(surround as any)" />
     </PPageBody>
 
-    <template v-if="page?.body?.toc?.links?.length" #right>
+    <template
+      v-if="page?.body?.toc?.links?.length"
+      #right
+    >
       <PContentToc :links="page.body.toc.links" />
     </template>
   </PPage>

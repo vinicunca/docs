@@ -1,54 +1,54 @@
 <script setup lang="ts">
-import { useInfiniteScroll } from '@vueuse/core'
+import { useInfiniteScroll } from '@vueuse/core';
 
-type User = {
-  id: number
-  firstName: string
-  lastName: string
-  username: string
-  email: string
-  image: string
+interface User {
+  id: number;
+  firstName: string;
+  lastName: string;
+  username: string;
+  email: string;
+  image: string;
 }
 
-type UserResponse = {
-  users: User[]
-  total: number
-  skip: number
-  limit: number
+interface UserResponse {
+  users: Array<User>;
+  total: number;
+  skip: number;
+  limit: number;
 }
 
-const skip = ref(0)
+const skip = ref(0);
 
 const { data, status } = useLazyFetch('https://dummyjson.com/users?limit=10&select=firstName,lastName,username,email,image', {
   key: 'scroll-area-users-infinite-scroll',
   params: { skip },
   transform: (data?: UserResponse) => {
-    return data?.users
+    return data?.users;
   },
-  server: false
-})
+  server: false,
+});
 
-const users = ref<User[]>([])
+const users = ref<Array<User>>([]);
 
 watch(data, () => {
   users.value = [
     ...users.value,
-    ...(data.value || [])
-  ]
-})
+    ...(data.value || []),
+  ];
+});
 
-const scrollArea = useTemplateRef('scrollArea')
+const scrollArea = useTemplateRef('scrollArea');
 
 onMounted(() => {
   useInfiniteScroll(scrollArea.value?.$el, () => {
-    skip.value += 10
+    skip.value += 10;
   }, {
     distance: 200,
     canLoadMore: () => {
-      return status.value !== 'pending'
-    }
-  })
-})
+      return status.value !== 'pending';
+    },
+  });
+});
 </script>
 
 <template>
@@ -58,7 +58,7 @@ onMounted(() => {
     :items="users"
     :virtualize="{
       estimateSize: 88,
-      skipMeasurement: true
+      skipMeasurement: true,
     }"
     class="h-96 w-full"
   >
@@ -79,7 +79,7 @@ onMounted(() => {
     v-if="status === 'pending' || status === 'idle'"
     indeterminate
     size="xs"
-    class="absolute top-0 inset-x-0 z-1"
+    class="inset-x-0 top-0 absolute z-1"
     :ui="{ base: 'bg-background' }"
   />
 </template>

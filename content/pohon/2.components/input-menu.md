@@ -227,12 +227,12 @@ props:
 ::
 
 ::framework-only
-#nuxt
+# nuxt
 :::tip{to="/pohon/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.close` key.
 :::
 
-#vue
+# vue
 :::tip{to="/pohon/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.close` key.
 :::
@@ -469,12 +469,12 @@ props:
 ::
 
 ::framework-only
-#nuxt
+# nuxt
 :::tip{to="/pohon/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.chevronDown` key.
 :::
 
-#vue
+# vue
 :::tip{to="/pohon/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.chevronDown` key.
 :::
@@ -506,12 +506,12 @@ props:
 ::
 
 ::framework-only
-#nuxt
+# nuxt
 :::tip{to="/pohon/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.check` key.
 :::
 
-#vue
+# vue
 :::tip{to="/pohon/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.check` key.
 :::
@@ -575,12 +575,12 @@ props:
 ::
 
 ::framework-only
-#nuxt
+# nuxt
 :::tip{to="/pohon/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.close` key.
 :::
 
-#vue
+# vue
 :::tip{to="/pohon/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.close` key.
 :::
@@ -665,12 +665,12 @@ props:
 ::
 
 ::framework-only
-#nuxt
+# nuxt
 :::tip{to="/pohon/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.loading` key.
 :::
 
-#vue
+# vue
 :::tip{to="/pohon/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.loading` key.
 :::

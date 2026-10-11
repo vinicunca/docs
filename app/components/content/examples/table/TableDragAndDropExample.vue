@@ -1,40 +1,40 @@
 <script setup lang="ts">
-import type { TableColumn } from 'pohon-ui'
-import { useSortable } from '@vueuse/integrations/useSortable'
+import type { TableColumn } from 'pohon-ui';
+import { useSortable } from '@vueuse/integrations/useSortable';
 
-type Payment = {
-  id: string
-  date: string
-  email: string
-  amount: number
+interface Payment {
+  id: string;
+  date: string;
+  email: string;
+  amount: number;
 }
 
-const data = ref<Payment[]>([{
+const data = ref<Array<Payment>>([{
   id: '4600',
   date: '2024-03-11T15:30:00',
   email: 'james.anderson@example.com',
-  amount: 594
+  amount: 594,
 }, {
   id: '4599',
   date: '2024-03-11T10:10:00',
   email: 'mia.white@example.com',
-  amount: 276
+  amount: 276,
 }, {
   id: '4598',
   date: '2024-03-11T08:50:00',
   email: 'william.brown@example.com',
-  amount: 315
+  amount: 315,
 }, {
   id: '4597',
   date: '2024-03-10T19:45:00',
   email: 'emma.davis@example.com',
-  amount: 529
-}])
+  amount: 529,
+}]);
 
-const columns: TableColumn<Payment>[] = [{
+const columns: Array<TableColumn<Payment>> = [{
   accessorKey: 'id',
   header: '#',
-  cell: ({ row }) => `#${row.getValue('id')}`
+  cell: ({ row }) => `#${row.getValue('id')}`,
 }, {
   accessorKey: 'date',
   header: 'Date',
@@ -44,33 +44,33 @@ const columns: TableColumn<Payment>[] = [{
       month: 'short',
       hour: '2-digit',
       minute: '2-digit',
-      hour12: false
-    })
-  }
+      hour12: false,
+    });
+  },
 }, {
   accessorKey: 'email',
-  header: 'Email'
+  header: 'Email',
 }, {
   accessorKey: 'amount',
   header: 'Amount',
   meta: {
     class: {
       th: 'text-right',
-      td: 'text-right font-medium'
-    }
+      td: 'text-right font-medium',
+    },
   },
   cell: ({ row }) => {
-    const amount = Number.parseFloat(row.getValue('amount'))
+    const amount = Number.parseFloat(row.getValue('amount'));
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'EUR'
-    }).format(amount)
-  }
-}]
+      currency: 'EUR',
+    }).format(amount);
+  },
+}];
 
 useSortable('.my-table-tbody', data, {
-  animation: 150
-})
+  animation: 150,
+});
 </script>
 
 <template>
@@ -79,7 +79,7 @@ useSortable('.my-table-tbody', data, {
     :data="data"
     :columns="columns"
     :ui="{
-      tbody: 'my-table-tbody'
+      tbody: 'my-table-tbody',
     }"
     class="flex-1"
   />

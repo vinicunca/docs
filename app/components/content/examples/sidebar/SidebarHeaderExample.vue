@@ -1,25 +1,28 @@
 <script setup lang="ts">
-import type { NavigationMenuItem } from 'pohon-ui'
+import type { NavigationMenuItem } from 'pohon-ui';
 
-const open = ref(true)
+const open = ref(true);
 
-const items: NavigationMenuItem[] = [{
+const items: Array<NavigationMenuItem> = [{
   label: 'Home',
   icon: 'i-lucide-house',
-  active: true
+  active: true,
 }, {
   label: 'Inbox',
   icon: 'i-lucide-inbox',
-  badge: '4'
+  badge: '4',
 }, {
   label: 'Contacts',
-  icon: 'i-lucide-users'
-}]
+  icon: 'i-lucide-users',
+}];
 </script>
 
 <template>
-  <div class="flex flex-col flex-1">
-    <PHeader toggle-side="left" :ui="{ container: 'px-4!' }">
+  <div class="flex flex-1 flex-col">
+    <PHeader
+      toggle-side="left"
+      :ui="{ container: 'px-4!' }"
+    >
       <template #toggle>
         <PButton
           icon="i-lucide-panel-left"
@@ -37,7 +40,7 @@ const items: NavigationMenuItem[] = [{
         collapsible="icon"
         :ui="{
           gap: 'h-[calc(100%-var(--ui-header-height))]',
-          container: 'absolute top-(--ui-header-height) bottom-0 h-[calc(100%-var(--ui-header-height))]'
+          container: 'absolute top-(--ui-header-height) bottom-0 h-[calc(100%-var(--ui-header-height))]',
         }"
       >
         <PNavigationMenu
@@ -47,7 +50,7 @@ const items: NavigationMenuItem[] = [{
         />
       </PSidebar>
 
-      <div class="flex-1 p-4">
+      <div class="p-4 flex-1">
         <Placeholder class="size-full" />
       </div>
     </div>

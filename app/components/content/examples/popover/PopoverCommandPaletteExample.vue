@@ -1,31 +1,31 @@
 <script setup lang="ts">
-import type { CommandPaletteItem } from 'pohon-ui'
+import type { CommandPaletteItem } from 'pohon-ui';
 
 const items = ref([
   {
     label: 'bug',
     value: 'bug',
     chip: {
-      color: 'error'
-    }
+      color: 'error',
+    },
   },
   {
     label: 'feature',
     value: 'feature',
     chip: {
-      color: 'success'
-    }
+      color: 'success',
+    },
   },
   {
     label: 'enhancement',
     value: 'enhancement',
     chip: {
-      color: 'info'
-    }
-  }
-] satisfies CommandPaletteItem[])
+      color: 'info',
+    },
+  },
+] satisfies Array<CommandPaletteItem>);
 
-const label = ref([])
+const label = ref([]);
 </script>
 
 <template>

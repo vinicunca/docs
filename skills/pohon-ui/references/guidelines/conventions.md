@@ -14,7 +14,7 @@ export default defineNuxtConfig({
   fonts: { /* @nuxt/fonts options */ },
   colorMode: { /* @nuxtjs/color-mode options */ },
   ui: { fonts: false } // turn off @nuxt/fonts; `colorMode: false` turns off color mode
-})
+});
 ```
 
 ## Content module integration
@@ -25,7 +25,7 @@ List `@nuxt/content` **after** `pohon-ui`, or the prose and content components a
 // nuxt.config.ts
 export default defineNuxtConfig({
   modules: ['pohon-ui', '@nuxt/content']
-})
+});
 ```
 
 Add the Markdown files to UnoCSS's filesystem sources so classes used in content are generated:
@@ -35,18 +35,18 @@ Add the Markdown files to UnoCSS's filesystem sources so classes used in content
 export default defineConfig({
   presets: [presetVinicunca()],
   content: { filesystem: ['content/**/*.{md,yml}'] }
-})
+});
 ```
 
 Use `mapContentNavigation` to turn content navigation into component items, for example for `PBreadcrumb`:
 
 ```ts
-import { findPageBreadcrumb } from '@nuxt/content/utils'
-import { mapContentNavigation } from 'pohon-ui/utils/content'
+import { findPageBreadcrumb } from '@nuxt/content/utils';
+import { mapContentNavigation } from 'pohon-ui/utils/content';
 
 const breadcrumb = computed(() =>
   mapContentNavigation(findPageBreadcrumb(navigation.value, page.value?.path, { indexAsChild: true }), { deep: 0 })
-)
+);
 ```
 
 Details: [Content integration](https://vinicunca.dev/raw/pohon/getting-started/integrations/content.md).
@@ -72,7 +72,9 @@ Write icons as `i-{collection}-{name}`, preferring `lucide`:
 
 ```vue
 <PIcon name="i-lucide-sun" class="size-5" />
+
 <PButton icon="i-lucide-plus" label="Add" />
+
 <PAlert icon="i-lucide-info" title="Heads up" />
 ```
 
@@ -105,7 +107,7 @@ export default defineAppConfig({
       light: 'i-lucide-sun'
     }
   }
-})
+});
 ```
 
 Other keys include `arrowLeft`, `arrowRight`, `chevronLeft`, `chevronRight`, `copy`, `copyCheck`, `ellipsis`, `external`, `eye`, `eyeOff`, `info`, `success`, `warning`, `error`, `menu`, `plus`, `minus`, `upload`, `panelOpen`, `panelClose`, `system`.
@@ -136,7 +138,7 @@ Menus and lists take an `items` prop.
 const items = [
   { label: 'Edit', icon: 'i-lucide-pencil', onSelect: () => edit() },
   { label: 'Delete', icon: 'i-lucide-trash', color: 'error', onSelect: () => remove() }
-]
+];
 ```
 
 **Array of arrays**, which renders a separator between groups:
@@ -145,7 +147,7 @@ const items = [
 const items = [
   [{ label: 'Edit', icon: 'i-lucide-pencil' }, { label: 'Duplicate', icon: 'i-lucide-copy' }],
   [{ label: 'Delete', icon: 'i-lucide-trash', color: 'error' }]
-]
+];
 ```
 
 `PDropdownMenu`, `PContextMenu`, `PNavigationMenu`, `PSelect`, `PSelectMenu`, and the editor menus accept both. `PCommandPalette` takes `groups` instead (`[{ id, label, items }]`). Items accept `to` for links, `onSelect` for actions, `kbds` for displayed shortcuts, `slot` for a custom item slot, and `type: 'label' | 'separator'` in menus.
@@ -155,7 +157,7 @@ const items = [
 ### useToast
 
 ```ts
-const toast = useToast()
+const toast = useToast();
 
 const { id } = toast.add({
   title: 'Saved',
@@ -164,11 +166,11 @@ const { id } = toast.add({
   icon: 'i-lucide-circle-check',
   duration: 5000, // 0 keeps it open
   actions: [{ label: 'Undo', onClick: () => undo() }]
-})
+});
 
-toast.update(id, { title: 'Updated' })
-toast.remove(id)
-toast.clear()
+toast.update(id, { title: 'Updated' });
+toast.remove(id);
+toast.clear();
 ```
 
 ### useOverlay
@@ -176,24 +178,24 @@ toast.clear()
 Programmatic modals, slideovers, and drawers without template `v-model`. See the [overlays recipe](../recipes/overlays.md).
 
 ```ts
-const overlay = useOverlay()
-const modal = overlay.create(ConfirmModal, { props: { title: 'Delete?' } })
+const overlay = useOverlay();
+const modal = overlay.create(ConfirmModal, { props: { title: 'Delete?' } });
 
-const confirmed = await modal.open() // resolves with the value the component emits on `close`
+const confirmed = await modal.open(); // resolves with the value the component emits on `close`
 ```
 
 ### defineShortcuts
 
 ```ts
 defineShortcuts({
-  meta_k: () => openSearch(), // Cmd+K on macOS, Ctrl+K elsewhere
-  escape: () => close(),
+  'meta_k': () => openSearch(), // Cmd+K on macOS, Ctrl+K elsewhere
+  'escape': () => close(),
   'g-d': () => navigateTo('/dashboard'), // chained: press g, then d
-  enter: {
+  'enter': {
     usingInput: 'search', // fires only while the input named "search" is focused (true = any input)
     handler: () => submit()
   }
-})
+});
 ```
 
 Combine modifiers with `_` (`ctrl_shift_f`); `meta` maps to Ctrl outside macOS. A shortcut doesn't fire while an input is focused unless it sets `usingInput`. Pass a `computed` config to turn shortcuts on or off reactively.
@@ -206,9 +208,9 @@ Register the `kbds` of menu items as shortcuts:
 const items = [
   { label: 'New file', kbds: ['meta', 'n'], onSelect: () => newFile() },
   { label: 'Save', kbds: ['meta', 's'], onSelect: () => save() }
-]
+];
 
-defineShortcuts(extractShortcuts(items))
+defineShortcuts(extractShortcuts(items));
 ```
 
 ### Internationalization (i18n)
@@ -217,7 +219,7 @@ Pohon UI ships 60+ locales. Set one on `PApp` and every component inherits it.
 
 ```vue
 <script setup lang="ts">
-import { fr } from 'pohon-ui/locale'
+import { fr } from 'pohon-ui/locale';
 </script>
 
 <template>
@@ -230,12 +232,12 @@ import { fr } from 'pohon-ui/locale'
 Extend a built-in locale (`extendLocale` is auto-imported). The `code` sets date and time formatting in Calendar, InputDate, and InputTime:
 
 ```ts
-import { en } from 'pohon-ui/locale'
+import { en } from 'pohon-ui/locale';
 
 const locale = extendLocale(en, {
   code: 'en-AU',
   messages: { commandPalette: { placeholder: 'Search a component...' } }
-})
+});
 ```
 
 Create a locale from scratch with `defineLocale<Messages>({ name, code, dir, messages })` (`import type { Messages } from 'pohon-ui'`).
@@ -244,16 +246,16 @@ With `@nuxtjs/i18n` (or `vue-i18n`), map the active locale and set `lang`/`dir` 
 
 ```vue
 <script setup lang="ts">
-import * as locales from 'pohon-ui/locale'
+import * as locales from 'pohon-ui/locale';
 
-const { locale } = useI18n()
+const { locale } = useI18n();
 
 useHead({
   htmlAttrs: {
     lang: computed(() => locales[locale.value].code),
     dir: computed(() => locales[locale.value].dir)
   }
-})
+});
 </script>
 
 <template>
@@ -273,12 +275,14 @@ For a custom control in Nuxt, read `useColorMode()` inside `ClientOnly` to avoid
 
 ```vue
 <script setup lang="ts">
-const colorMode = useColorMode()
+const colorMode = useColorMode();
 
 const isDark = computed({
   get: () => colorMode.value === 'dark',
-  set: (dark) => { colorMode.preference = dark ? 'dark' : 'light' }
-})
+  set: (dark) => {
+    colorMode.preference = dark ? 'dark' : 'light';
+  }
+});
 </script>
 
 <template>

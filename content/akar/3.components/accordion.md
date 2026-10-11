@@ -55,7 +55,7 @@ Import all parts and piece them together.
 
 ```vue
 <script setup>
-import { AccordionContent, AccordionHeader, AccordionItem, AccordionRoot, AccordionTrigger } from 'akar'
+import { AccordionContent, AccordionHeader, AccordionItem, AccordionRoot, AccordionTrigger } from 'akar';
 </script>
 
 <template>

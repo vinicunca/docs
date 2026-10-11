@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { themeChipStyle, PRESET_ICONS } from '../../utils/theme/studio'
-import { presets } from '../../utils/theme/engine/presets'
-import type { ThemePreset } from '../../utils/theme/engine/presets'
+import type { ThemePreset } from '../../utils/theme/engine/presets';
+import { presets } from '../../utils/theme/engine/presets';
+import { PRESET_ICONS, themeChipStyle } from '../../utils/theme/studio';
 
 /**
  * The presets under the hero file: a click retypes the pane above and
@@ -9,38 +9,47 @@ import type { ThemePreset } from '../../utils/theme/engine/presets'
  * the studio itself loads on the first click, so the landing chunk carries
  * neither the palette math nor the section engine.
  */
-const { selectedPreset } = useTheme()
-const studioIcons = useStudioIcons()
-const nuxtApp = useNuxtApp()
+const { selectedPreset } = useTheme();
+const studioIcons = useStudioIcons();
+const nuxtApp = useNuxtApp();
 
 async function applyPreset(preset: ThemePreset) {
-  const { useThemeStudio } = await import('../../composables/useThemeStudio')
-  nuxtApp.runWithContext(() => useThemeStudio().applyPreset(preset))
+  const { useThemeStudio } = await import('../../composables/useThemeStudio');
+  nuxtApp.runWithContext(() => useThemeStudio().applyPreset(preset));
 }
 
 // the applied preset is client-only, resolve after mount so hydration matches
-const mounted = useThemeMounted()
-const activePreset = computed(() => mounted.value ? selectedPreset.value : 'default')
+const mounted = useThemeMounted();
+const activePreset = computed(() => mounted.value ? selectedPreset.value : 'default');
 
 // Each preset wears the chip the theme menu gives it: its glyph in its own
 // primary, on that primary dimmed to a tint.
-const pills = computed(() => presets.map(preset => ({
+const pills = computed(() => presets.map((preset) => ({
   id: preset.id,
   label: preset.name,
   avatar: {
     icon: PRESET_ICONS[preset.id] || studioIcons.palette,
     class: 'bg-(image:--chip-bg-light) dark:bg-(image:--chip-bg-dark)',
     style: themeChipStyle(preset.doc),
-    ui: { icon: 'text-(--chip-icon-light) dark:text-(--chip-icon-dark)' }
+    ui: { icon: 'text-(--chip-icon-light) dark:text-(--chip-icon-dark)' },
   },
   active: activePreset.value === preset.id,
-  apply: () => applyPreset(preset)
-})))
+  apply: () => applyPreset(preset),
+})));
 </script>
 
 <template>
-  <div class="flex flex-wrap items-center gap-px px-1" role="group" aria-label="Theme preset">
-    <PTooltip v-for="pill in pills" :key="pill.id" :text="pill.label" :delay-duration="0">
+  <div
+    class="px-1 flex flex-wrap gap-px items-center"
+    role="group"
+    aria-label="Theme preset"
+  >
+    <PTooltip
+      v-for="pill in pills"
+      :key="pill.id"
+      :text="pill.label"
+      :delay-duration="0"
+    >
       <PButton
         :avatar="pill.avatar"
         color="neutral"

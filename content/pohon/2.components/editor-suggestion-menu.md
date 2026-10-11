@@ -64,7 +64,11 @@ Use the `char` prop to change the trigger character. Defaults to `/`{lang="ts-ty
 ```vue
 <template>
   <PEditor v-slot="{ editor }">
-    <PEditorSuggestionMenu :editor="editor" :items="items" char=">" />
+    <PEditorSuggestionMenu
+      :editor="editor"
+      :items="items"
+      char=">"
+    />
   </PEditor>
 </template>
 ```
@@ -83,7 +87,7 @@ This is useful when the trigger character should open directly after other chara
       :items="items"
       char=":"
       :suggestion="{
-        allowedPrefixes: null
+        allowedPrefixes: null,
       }"
     />
   </PEditor>
@@ -102,7 +106,7 @@ Use the `options` prop to customize the positioning behavior using [Floating UI 
       :items="items"
       :options="{
         placement: 'bottom-start',
-        offset: 4
+        offset: 4,
       }"
     />
   </PEditor>

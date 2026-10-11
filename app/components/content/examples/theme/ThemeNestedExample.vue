@@ -2,27 +2,35 @@
   <PTheme
     :ui="{
       button: {
-        base: 'rounded-full'
-      }
+        base: 'rounded-full',
+      },
     }"
   >
-    <div class="flex flex-col items-start gap-4 border border-border-muted p-4 rounded-lg">
-      <div class="flex items-center gap-2">
+    <div class="p-4 border border-border-muted rounded-lg flex flex-col gap-4 items-start">
+      <div class="flex gap-2 items-center">
         <PButton label="Outer theme" />
-        <PButton label="Outer theme" color="neutral" variant="outline" />
+        <PButton
+          label="Outer theme"
+          color="neutral"
+          variant="outline"
+        />
       </div>
 
       <PTheme
         :ui="{
           button: {
-            base: 'font-black uppercase'
-          }
+            base: 'font-black uppercase',
+          },
         }"
       >
-        <div class="border border-border-muted p-4 rounded-lg">
-          <div class="flex items-center gap-2">
+        <div class="p-4 border border-border-muted rounded-lg">
+          <div class="flex gap-2 items-center">
             <PButton label="Inner theme" />
-            <PButton label="Inner theme" color="neutral" variant="outline" />
+            <PButton
+              label="Inner theme"
+              color="neutral"
+              variant="outline"
+            />
           </div>
         </div>
       </PTheme>

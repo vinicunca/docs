@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { upperFirst, camelCase } from 'scule'
+import { camelCase, upperFirst } from 'scule';
 
 const props = defineProps<{
-  prose?: boolean
-}>()
+  prose?: boolean;
+}>();
 
-const route = useRoute()
+const route = useRoute();
 
-const camelName = camelCase(route.path.split('/').pop() ?? '')
-const name = props.prose ? `Prose${upperFirst(camelName)}` : `P${upperFirst(camelName)}`
+const camelName = camelCase(route.path.split('/').pop() ?? '');
+const name = props.prose ? `Prose${upperFirst(camelName)}` : `P${upperFirst(camelName)}`;
 
-const { data: meta } = await useFetchComponentMeta(name as any)
+const { data: meta } = await useFetchComponentMeta(name as any);
 </script>
 
 <template>
@@ -26,14 +26,20 @@ const { data: meta } = await useFetchComponentMeta(name as any)
       </ProseTr>
     </ProseThead>
     <ProseTbody>
-      <ProseTr v-for="event in (meta?.meta?.events || [])" :key="event.name">
+      <ProseTr
+        v-for="event in (meta?.meta?.events || [])"
+        :key="event.name"
+      >
         <ProseTd>
           <ProseCode>
             {{ event.name }}
           </ProseCode>
         </ProseTd>
         <ProseTd>
-          <HighlightInlineType v-if="event.type" :type="event.type" />
+          <HighlightInlineType
+            v-if="event.type"
+            :type="event.type"
+          />
         </ProseTd>
       </ProseTr>
     </ProseTbody>

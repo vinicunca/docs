@@ -5,6 +5,6 @@ function track(_event: string, _properties?: Record<string, unknown>) {}
 export function useAnalytics() {
   return {
     track,
-    trackThrottled: track
-  }
+    trackThrottled: track,
+  };
 }

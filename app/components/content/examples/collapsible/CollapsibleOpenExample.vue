@@ -1,13 +1,16 @@
 <script setup lang="ts">
-const open = ref(true)
+const open = ref(true);
 
 defineShortcuts({
-  o: () => open.value = !open.value
-})
+  o: () => open.value = !open.value,
+});
 </script>
 
 <template>
-  <PCollapsible v-model:open="open" class="flex flex-col gap-2 w-48">
+  <PCollapsible
+    v-model:open="open"
+    class="flex flex-col gap-2 w-48"
+  >
     <PButton
       label="Open"
       color="neutral"

@@ -1,25 +1,28 @@
 <script setup lang="ts">
-import type { ContextMenuItem } from 'pohon-ui'
+import type { ContextMenuItem } from 'pohon-ui';
 
-const loading = ref(true)
+const loading = ref(true);
 
 const items = [
   {
     label: 'Refresh the Page',
-    slot: 'refresh' as const
+    slot: 'refresh' as const,
   },
   {
-    label: 'Clear Cookies and Refresh'
+    label: 'Clear Cookies and Refresh',
   },
   {
-    label: 'Clear Cache and Refresh'
-  }
-] satisfies ContextMenuItem[]
+    label: 'Clear Cache and Refresh',
+  },
+] satisfies Array<ContextMenuItem>;
 </script>
 
 <template>
-  <PContextMenu :items="items" :ui="{ content: 'w-48' }">
-    <div class="flex items-center justify-center rounded-md border border-dashed border-border-accented text-sm aspect-video w-72">
+  <PContextMenu
+    :items="items"
+    :ui="{ content: 'w-48' }"
+  >
+    <div class="text-sm border border-border-accented rounded-md border-dashed flex w-72 aspect-video items-center justify-center">
       Right click here
     </div>
 
@@ -28,7 +31,11 @@ const items = [
     </template>
 
     <template #refresh-trailing>
-      <PIcon v-if="loading" name="i-lucide-loader-circle" class="shrink-0 size-5 text-primary animate-spin" />
+      <PIcon
+        v-if="loading"
+        name="i-lucide-loader-circle"
+        class="text-primary shrink-0 size-5 animate-spin"
+      />
     </template>
   </PContextMenu>
 </template>

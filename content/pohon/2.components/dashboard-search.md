@@ -58,7 +58,7 @@ By default, a group of commands will be added to the command palette so you can 
 <script setup lang="ts">
 definePageMeta({
   colorMode: 'dark'
-})
+});
 </script>
 ```
 

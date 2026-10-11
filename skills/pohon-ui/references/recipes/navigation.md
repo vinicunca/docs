@@ -38,15 +38,15 @@ See [dashboard layout](../layouts/dashboard.md) for the full sidebar pattern wit
 
 ```vue
 <script setup lang="ts">
-const route = useRoute()
+const route = useRoute();
 
 const breadcrumbs = computed(() => {
-  const segments = route.path.split('/').filter(Boolean)
+  const segments = route.path.split('/').filter(Boolean);
   return segments.map((segment, index) => ({
     label: segment.charAt(0).toUpperCase() + segment.slice(1),
-    to: '/' + segments.slice(0, index + 1).join('/')
-  }))
-})
+    to: `/${segments.slice(0, index + 1).join('/')}`
+  }));
+});
 </script>
 
 <template>
@@ -70,7 +70,7 @@ const items = [{
   label: 'Members',
   icon: 'i-lucide-users',
   slot: 'members' as const
-}]
+}];
 </script>
 
 <template>

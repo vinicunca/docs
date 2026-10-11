@@ -119,19 +119,19 @@ Use the PageHeader component in a page to display the header of the page:
 
 ```vue [pages/\[...slug\\].vue]{19-24}
 <script setup lang="ts">
-const route = useRoute()
+const route = useRoute();
 
 definePageMeta({
   layout: 'docs'
-})
+});
 
 const { data: page } = await useAsyncData(route.path, () => {
-  return queryCollection('docs').path(route.path).first()
-})
+  return queryCollection('docs').path(route.path).first();
+});
 
 const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
-  return queryCollectionItemSurroundings('content', route.path)
-})
+  return queryCollectionItemSurroundings('content', route.path);
+});
 </script>
 
 <template>

@@ -1,82 +1,109 @@
 <script setup lang="ts">
-import * as z from 'zod'
-import type { FormSubmitEvent } from 'pohon-ui'
+import type { FormSubmitEvent } from 'pohon-ui';
+import * as z from 'zod';
 
-const MAX_FILE_SIZE = 2 * 1024 * 1024 // 2MB
-const MIN_DIMENSIONS = { width: 200, height: 200 }
-const MAX_DIMENSIONS = { width: 4096, height: 4096 }
-const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp']
+const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB
+const MIN_DIMENSIONS = { width: 200, height: 200 };
+const MAX_DIMENSIONS = { width: 4096, height: 4096 };
+const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
 
-const formatBytes = (bytes: number, decimals = 2) => {
-  if (bytes === 0) return '0 Bytes'
-  const k = 1024
-  const dm = decimals < 0 ? 0 : decimals
-  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
-  const i = Math.floor(Math.log(bytes) / Math.log(k))
-  return Number.parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i]
+function formatBytes(bytes: number, decimals = 2) {
+  if (bytes === 0) {
+    return '0 Bytes';
+  }
+  const k = 1024;
+  const dm = decimals < 0 ? 0 : decimals;
+  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  return `${Number.parseFloat((bytes / k ** i).toFixed(dm))} ${sizes[i]}`;
 }
 
 const schema = z.object({
   avatar: z
     .instanceof(File, {
-      message: 'Please select an image file.'
+      message: 'Please select an image file.',
     })
-    .refine(file => file.size <= MAX_FILE_SIZE, {
-      message: `The image is too large. Please choose an image smaller than ${formatBytes(MAX_FILE_SIZE)}.`
+    .refine((file) => file.size <= MAX_FILE_SIZE, {
+      message: `The image is too large. Please choose an image smaller than ${formatBytes(MAX_FILE_SIZE)}.`,
     })
-    .refine(file => ACCEPTED_IMAGE_TYPES.includes(file.type), {
-      message: 'Please upload a valid image file (JPEG, PNG, or WebP).'
+    .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file.type), {
+      message: 'Please upload a valid image file (JPEG, PNG, or WebP).',
     })
     .refine(
-      file =>
+      (file) =>
         new Promise((resolve) => {
-          const reader = new FileReader()
+          const reader = new FileReader();
           reader.onload = (e) => {
-            const img = new Image()
+            const img = new Image();
             img.onload = () => {
               const meetsDimensions
                 = img.width >= MIN_DIMENSIONS.width
                   && img.height >= MIN_DIMENSIONS.height
                   && img.width <= MAX_DIMENSIONS.width
-                  && img.height <= MAX_DIMENSIONS.height
-              resolve(meetsDimensions)
-            }
-            img.src = e.target?.result as string
-          }
-          reader.readAsDataURL(file)
+                  && img.height <= MAX_DIMENSIONS.height;
+              resolve(meetsDimensions);
+            };
+            img.src = e.target?.result as string;
+          };
+          reader.readAsDataURL(file);
         }),
       {
-        message: `The image dimensions are invalid. Please upload an image between ${MIN_DIMENSIONS.width}x${MIN_DIMENSIONS.height} and ${MAX_DIMENSIONS.width}x${MAX_DIMENSIONS.height} pixels.`
-      }
-    )
-})
+        message: `The image dimensions are invalid. Please upload an image between ${MIN_DIMENSIONS.width}x${MIN_DIMENSIONS.height} and ${MAX_DIMENSIONS.width}x${MAX_DIMENSIONS.height} pixels.`,
+      },
+    ),
+});
 
-type Schema = z.output<typeof schema>
+type Schema = z.output<typeof schema>;
 
 const state = reactive<Partial<Schema>>({
-  avatar: undefined
-})
+  avatar: undefined,
+});
 
 function createObjectUrl(file: File): string {
-  return URL.createObjectURL(file)
+  return URL.createObjectURL(file);
 }
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
-  console.log(event.data)
+  console.log(event.data);
 }
 </script>
 
 <template>
-  <PForm :schema="schema" :state="state" class="space-y-4 w-64" @submit="onSubmit">
-    <PFormField name="avatar" label="Avatar" description="JPG, GIF or PNG. 1MB Max.">
-      <PFileUpload v-slot="{ open, removeFile }" v-model="state.avatar" accept="image/*">
-        <div class="flex flex-wrap items-center gap-3">
-          <PAvatar size="lg" :src="state.avatar ? createObjectUrl(state.avatar) : undefined" icon="i-lucide-image" />
+  <PForm
+    :schema="schema"
+    :state="state"
+    class="w-64 space-y-4"
+    @submit="onSubmit"
+  >
+    <PFormField
+      name="avatar"
+      label="Avatar"
+      description="JPG, GIF or PNG. 1MB Max."
+    >
+      <PFileUpload
+        v-slot="{ open, removeFile }"
+        v-model="state.avatar"
+        accept="image/*"
+      >
+        <div class="flex flex-wrap gap-3 items-center">
+          <PAvatar
+            size="lg"
+            :src="state.avatar ? createObjectUrl(state.avatar) : undefined"
+            icon="i-lucide-image"
+          />
 
-          <PButton :label="state.avatar ? 'Change image' : 'Upload image'" color="neutral" variant="outline" @click="open()" />
+          <PButton
+            :label="state.avatar ? 'Change image' : 'Upload image'"
+            color="neutral"
+            variant="outline"
+            @click="open()"
+          />
         </div>
 
-        <p v-if="state.avatar" class="text-xs color-text-muted mt-1.5">
+        <p
+          v-if="state.avatar"
+          class="text-xs color-text-muted mt-1.5"
+        >
           {{ state.avatar.name }}
 
           <PButton
@@ -91,6 +118,10 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       </PFileUpload>
     </PFormField>
 
-    <PButton type="submit" label="Submit" color="neutral" />
+    <PButton
+      type="submit"
+      label="Submit"
+      color="neutral"
+    />
   </PForm>
 </template>

@@ -3,19 +3,19 @@
 @import '../_colors/grass.css';
 
 @scope (.akar-demo-TimeField) {
-.TimeFieldWrapper {
+  .TimeFieldWrapper {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-}
+  }
 
-.TimeFieldLabel {
+  .TimeFieldLabel {
     font-size: 0.875rem;
     line-height: 1.25rem;
     color: var(--gray-9);
-}
+  }
 
-.TimeField {
+  .TimeField {
     display: flex;
     padding: 0.5rem;
     align-items: center;
@@ -26,33 +26,33 @@
     user-select: none;
     color: var(--green-10);
     border: 1px solid var(--gray-9);
-}
+  }
 
-.TimeField::placeholder {
+  .TimeField::placeholder {
     color: var(--mauve-5);
-}
+  }
 
-.TimeField[data-invalid] {
+  .TimeField[data-invalid] {
     border: 1px solid var(--red-500);
-}
+  }
 
-.TimeFieldLiteral {
+  .TimeFieldLiteral {
     padding: 0.25rem;
-}
+  }
 
-.TimeFieldSegment {
+  .TimeFieldSegment {
     padding: 0.25rem;
-}
+  }
 
-.TimeFieldSegment:hover {
+  .TimeFieldSegment:hover {
     background-color: var(--grass-4);
-}
+  }
 
-.TimeFieldSegment:focus {
+  .TimeFieldSegment:focus {
     background-color: var(--grass-2);
-}
+  }
 
-.TimeFieldSegment:[aria-valuetext='Empty'] {
+  .TimeFieldSegment:[aria-valuetext='Empty'] {
     color: var(--grass-6);
-}
+  }
 }

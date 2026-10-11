@@ -62,7 +62,7 @@ You can put this component in the `leading` slot of the [DashboardNavbar](/pohon
 <script setup lang="ts">
 definePageMeta({
   layout: 'dashboard'
-})
+});
 </script>
 
 <template>

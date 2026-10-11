@@ -1,13 +1,25 @@
 <template>
   <PDrawer :ui="{ content: 'h-full', overlay: 'bg-background-inverted/30' }">
-    <PButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+    <PButton
+      label="Open"
+      color="neutral"
+      variant="subtle"
+      trailing-icon="i-lucide-chevron-up"
+    />
 
     <template #footer>
-      <PDrawer nested :ui="{ content: 'h-full', overlay: 'bg-background-inverted/30' }">
-        <PButton color="neutral" variant="outline" label="Open nested" />
+      <PDrawer
+        nested
+        :ui="{ content: 'h-full', overlay: 'bg-background-inverted/30' }"
+      >
+        <PButton
+          color="neutral"
+          variant="outline"
+          label="Open nested"
+        />
 
         <template #content>
-          <Placeholder class="flex-1 m-4" />
+          <Placeholder class="m-4 flex-1" />
         </template>
       </PDrawer>
     </template>

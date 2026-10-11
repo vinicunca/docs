@@ -1,11 +1,11 @@
-import { z } from 'zod'
-import { defineCollection, defineContentConfig } from '@nuxt/content'
-import { defineSitemapSchema } from '@nuxtjs/sitemap/content'
+import { defineCollection, defineContentConfig } from '@nuxt/content';
+import { defineSitemapSchema } from '@nuxtjs/sitemap/content';
+import { z } from 'zod';
 
 const Avatar = z.object({
   src: z.string(),
-  alt: z.string().optional()
-})
+  alt: z.string().optional(),
+});
 
 const Button = z.object({
   label: z.string(),
@@ -19,8 +19,8 @@ const Button = z.object({
   size: z.enum(['xs', 'sm', 'md', 'lg', 'xl']).optional(),
   variant: z.enum(['solid', 'outline', 'subtle', 'soft', 'ghost', 'link']).optional(),
   id: z.string().optional(),
-  class: z.string().optional()
-})
+  class: z.string().optional(),
+});
 
 export default defineContentConfig({
   collections: {
@@ -29,7 +29,7 @@ export default defineContentConfig({
     docs: defineCollection({
       type: 'page',
       source: [{
-        include: '**'
+        include: '**',
       }],
       schema: z.object({
         // Sidebar group inside a section, listed per package in `DOCS_PACKAGES`
@@ -40,7 +40,7 @@ export default defineContentConfig({
         framework: z.enum(['nuxt', 'vue']).optional(),
         navigation: z.object({
           title: z.string().optional(),
-          badge: z.string().optional()
+          badge: z.string().optional(),
         }),
         links: z.array(Button),
         // External navigation entries: the sidebar link points at `to` instead
@@ -48,8 +48,8 @@ export default defineContentConfig({
         to: z.string().optional(),
         target: z.string().optional(),
         // an entry that links out is not a page to index
-        sitemap: defineSitemapSchema({ z, name: 'docs', filter: entry => !entry.to })
-      })
-    })
-  }
-})
+        sitemap: defineSitemapSchema({ z, name: 'docs', filter: (entry) => !entry.to }),
+      }),
+    }),
+  },
+});

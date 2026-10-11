@@ -1,26 +1,26 @@
 <script setup lang="ts">
-import { Markdown } from '@comark/vue'
-import shiki from '@comark/vue/plugins/shiki'
-import type { ContentNavigationLink, ContentSurroundLink, DropdownMenuItem, PageLink } from 'pohon-ui'
+import type { ContentNavigationLink, ContentSurroundLink, DropdownMenuItem, PageLink } from 'pohon-ui';
+import { Markdown } from '@comark/vue';
+import shiki from '@comark/vue/plugins/shiki';
 
 // built once: in the template it would be a new plugin on every render
-const plugins = [shiki()]
+const plugins = [shiki()];
 
-const appConfig = useAppConfig()
-const studioIcons = useStudioIcons()
+const appConfig = useAppConfig();
+const studioIcons = useStudioIcons();
 
 // Left aside. PContentNavigation is prop-driven, not content-coupled: it reads
 // `title`, and `active` forces the state without a route, so the tree is a
 // static array. Paths are empty so nothing navigates out of the studio: the
 // type wants the key, and both the mapper and PLink drop a falsy one.
-const navLinks = computed<ContentNavigationLink[]>(() => [{
+const navLinks = computed<Array<ContentNavigationLink>>(() => [{
   path: '',
   title: 'Getting Started',
   children: [
     { path: '', title: 'Introduction', icon: studioIcons.home },
     { path: '', title: 'Installation', icon: studioIcons.download },
-    { path: '', title: 'Usage', icon: studioIcons.settings, active: true }
-  ]
+    { path: '', title: 'Usage', icon: studioIcons.settings, active: true },
+  ],
 }, {
   path: '',
   title: 'Essentials',
@@ -28,36 +28,36 @@ const navLinks = computed<ContentNavigationLink[]>(() => [{
     { path: '', title: 'Markdown Syntax', icon: studioIcons.heading },
     { path: '', title: 'Code Blocks', icon: studioIcons.code },
     { path: '', title: 'Prose Components', icon: studioIcons.component },
-    { path: '', title: 'Images and Embeds', icon: studioIcons.image }
-  ]
+    { path: '', title: 'Images and Embeds', icon: studioIcons.image },
+  ],
 }, {
   path: '',
   title: 'AI',
   children: [
     { path: '', title: 'MCP Server', icon: studioIcons.cpu },
-    { path: '', title: 'LLMs Integration', icon: appConfig.ui.icons.file }
-  ]
-}])
+    { path: '', title: 'LLMs Integration', icon: appConfig.ui.icons.file },
+  ],
+}]);
 
 // The template's prev/next pair, inert for the same reason.
-const surround: ContentSurroundLink[] = [{
+const surround: Array<ContentSurroundLink> = [{
   path: '',
   class: 'text-start',
   title: 'Installation',
-  description: 'Get started with the documentation template in a few steps.'
+  description: 'Get started with the documentation template in a few steps.',
 }, {
   path: '',
   title: 'Markdown Syntax',
-  description: 'Headings, lists, links and everything Markdown supports.'
-}]
+  description: 'Headings, lists, links and everything Markdown supports.',
+}];
 
 // PageHeaderLinks dropdown, minus the real clipboard / external navigations.
-const copyItems = computed<DropdownMenuItem[]>(() => [
+const copyItems = computed<Array<DropdownMenuItem>>(() => [
   { label: 'Copy Markdown link', icon: studioIcons.link },
   { label: 'View as Markdown', icon: 'i-simple-icons:markdown' },
   { label: 'Open in ChatGPT', icon: 'i-simple-icons:openai' },
-  { label: 'Open in Claude', icon: 'i-simple-icons:anthropic' }
-])
+  { label: 'Open in Claude', icon: 'i-simple-icons:anthropic' },
+]);
 
 // Right column: PContentToc is content-coupled and router-driven, so the
 // same sticky layout is hand-rolled with faked active states.
@@ -68,16 +68,16 @@ const tocLinks = [
     children: [
       { label: 'Header' },
       { label: 'Footer' },
-      { label: 'Table of contents' }
-    ]
-  }
-]
+      { label: 'Table of contents' },
+    ],
+  },
+];
 
-const communityLinks = computed<PageLink[]>(() => [
+const communityLinks = computed<Array<PageLink>>(() => [
   { label: 'Edit this page', icon: appConfig.ui.icons.external },
   { label: 'Star on GitHub', icon: appConfig.ui.icons.star },
-  { label: 'Pohon UI docs', icon: studioIcons.bookOpen }
-])
+  { label: 'Pohon UI docs', icon: studioIcons.bookOpen },
+]);
 
 /**
  * The template's `content/1.getting-started/3.usage.md`, verbatim. It renders
@@ -190,17 +190,24 @@ export default defineAppConfig({
     }
   }
 })
-\`\`\``
+\`\`\``;
 </script>
 
 <template>
   <!-- The pane is the scroll container, so the header and asides stick to it. -->
-  <div class="h-full overflow-y-auto bg-background">
-    <PHeader :toggle="false" class="rounded-t-[inherit]" :ui="{ center: 'flex-1' }">
+  <div class="bg-background h-full overflow-y-auto">
+    <PHeader
+      :toggle="false"
+      class="rounded-t-[inherit]"
+      :ui="{ center: 'flex-1' }"
+    >
       <template #left>
-        <div class="flex items-center gap-1.5">
-          <PIcon :name="studioIcons.bookOpen" class="size-6 text-primary shrink-0" />
-          <span class="text-xl font-bold color-text-highlighted">Docs</span>
+        <div class="flex gap-1.5 items-center">
+          <PIcon
+            :name="studioIcons.bookOpen"
+            class="text-primary shrink-0 size-6"
+          />
+          <span class="text-xl color-text-highlighted font-bold">Docs</span>
         </div>
       </template>
 
@@ -214,7 +221,7 @@ export default defineAppConfig({
         :ui="{ base: 'color-text-dimmed hover:color-text font-normal', leadingIcon: 'size-4' }"
       >
         <template #trailing>
-          <div class="ms-auto hidden lg:flex items-center gap-0.5">
+          <div class="ms-auto gap-0.5 hidden items-center lg:flex">
             <PKbd value="meta" />
             <PKbd value="K" />
           </div>
@@ -223,13 +230,28 @@ export default defineAppConfig({
 
       <template #right>
         <!-- Static: the studio toolbar owns color mode. -->
-        <PButton color="neutral" variant="ghost" aria-label="Color mode">
+        <PButton
+          color="neutral"
+          variant="ghost"
+          aria-label="Color mode"
+        >
           <template #leading="{ ui }">
-            <PIcon :name="appConfig.ui.icons.dark" :class="ui.leadingIcon({ class: 'hidden dark:inline-block' })" />
-            <PIcon :name="appConfig.ui.icons.light" :class="ui.leadingIcon({ class: 'dark:hidden' })" />
+            <PIcon
+              :name="appConfig.ui.icons.dark"
+              :class="ui.leadingIcon({ class: 'hidden dark:inline-block' })"
+            />
+            <PIcon
+              :name="appConfig.ui.icons.light"
+              :class="ui.leadingIcon({ class: 'dark:hidden' })"
+            />
           </template>
         </PButton>
-        <PButton icon="i-simple-icons-github" aria-label="GitHub" color="neutral" variant="ghost" />
+        <PButton
+          icon="i-simple-icons-github"
+          aria-label="GitHub"
+          color="neutral"
+          variant="ghost"
+        />
       </template>
     </PHeader>
 
@@ -237,7 +259,10 @@ export default defineAppConfig({
       <PPage>
         <template #left>
           <PPageAside>
-            <PContentNavigation highlight :navigation="navLinks" />
+            <PContentNavigation
+              highlight
+              :navigation="navLinks"
+            />
           </PPageAside>
         </template>
 
@@ -274,7 +299,10 @@ export default defineAppConfig({
           </PPageHeader>
 
           <PPageBody>
-            <Markdown :value="content" :plugins="plugins" />
+            <Markdown
+              :value="content"
+              :plugins="plugins"
+            />
 
             <PSeparator />
 
@@ -282,27 +310,38 @@ export default defineAppConfig({
           </PPageBody>
 
           <template #right>
-            <div class="hidden lg:flex flex-col gap-6 self-start sticky top-(--ui-header-height) py-8">
+            <div class="py-8 flex-col gap-6 hidden self-start top-(--ui-header-height) sticky lg:flex">
               <div>
-                <p class="text-sm font-semibold color-text-highlighted mb-1.5">
+                <p class="text-sm color-text-highlighted font-semibold mb-1.5">
                   Table of Contents
                 </p>
 
                 <ul class="min-w-0">
-                  <li v-for="link in tocLinks" :key="link.label" class="min-w-0">
+                  <li
+                    v-for="link in tocLinks"
+                    :key="link.label"
+                    class="min-w-0"
+                  >
                     <button
                       type="button"
-                      class="w-full text-start text-sm py-1 truncate transition-colors"
+                      class="text-sm py-1 text-start w-full truncate transition-colors"
                       :class="link.active ? 'text-primary' : 'color-text-muted hover:color-text'"
                     >
                       {{ link.label }}
                     </button>
 
-                    <ul v-if="link.children" class="ms-3 min-w-0">
-                      <li v-for="child in link.children" :key="child.label" class="min-w-0">
+                    <ul
+                      v-if="link.children"
+                      class="ms-3 min-w-0"
+                    >
+                      <li
+                        v-for="child in link.children"
+                        :key="child.label"
+                        class="min-w-0"
+                      >
                         <button
                           type="button"
-                          class="w-full text-start text-sm py-1 truncate color-text-muted hover:color-text transition-colors"
+                          class="text-sm color-text-muted py-1 text-start w-full truncate transition-colors hover:color-text"
                         >
                           {{ child.label }}
                         </button>
@@ -314,7 +353,10 @@ export default defineAppConfig({
 
               <PSeparator type="dashed" />
 
-              <PPageLinks title="Community" :links="communityLinks" />
+              <PPageLinks
+                title="Community"
+                :links="communityLinks"
+              />
             </div>
           </template>
         </PPage>
@@ -329,9 +371,24 @@ export default defineAppConfig({
       </template>
 
       <template #right>
-        <PButton icon="i-simple-icons-discord" aria-label="Discord" color="neutral" variant="ghost" />
-        <PButton icon="i-simple-icons-x" aria-label="X" color="neutral" variant="ghost" />
-        <PButton icon="i-simple-icons-github" aria-label="GitHub" color="neutral" variant="ghost" />
+        <PButton
+          icon="i-simple-icons-discord"
+          aria-label="Discord"
+          color="neutral"
+          variant="ghost"
+        />
+        <PButton
+          icon="i-simple-icons-x"
+          aria-label="X"
+          color="neutral"
+          variant="ghost"
+        />
+        <PButton
+          icon="i-simple-icons-github"
+          aria-label="GitHub"
+          color="neutral"
+          variant="ghost"
+        />
       </template>
     </PFooter>
   </div>

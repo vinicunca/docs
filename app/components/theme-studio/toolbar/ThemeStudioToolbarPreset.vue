@@ -1,49 +1,51 @@
 <script setup lang="ts">
-import type { AvatarProps } from 'pohon-ui'
-import type { ThemeDoc } from '../../../utils/theme/engine'
-import { themeIcons } from '../../../utils/theme/icons'
-import { themeChipStyle, loadFontPreviews, PRESET_ICONS } from '../../../utils/theme/studio'
+import type { AvatarProps } from 'pohon-ui';
+import type { ThemeDoc } from '../../../utils/theme/engine';
+import { themeIcons } from '../../../utils/theme/icons';
+import { loadFontPreviews, PRESET_ICONS, themeChipStyle } from '../../../utils/theme/studio';
 
 /** The preset select: the value names the applied preset, each row previews its doc. */
 defineProps<{
   /** Stacked in the mobile menu: the list takes the trigger's width. */
-  vertical?: boolean
-}>()
+  vertical?: boolean;
+}>();
 
-const { presets, selectedPreset, applyPreset } = useThemeStudio()
-const { fonts } = useTheme()
-const studioIcons = useStudioIcons()
+const { presets, selectedPreset, applyPreset } = useThemeStudio();
+const { fonts } = useTheme();
+const studioIcons = useStudioIcons();
 
 // The persisted preset (and any persisted edits) are client-only, resolve
 // the label after mount so hydration matches the server's fallback.
-const mounted = useMounted()
+const mounted = useMounted();
 // the rows render their own font names, load the faces once
-onMounted(() => loadFontPreviews(fonts.map(entry => entry.name)))
+onMounted(() => loadFontPreviews(fonts.map((entry) => entry.name)));
 
 // Edits deliberately don't clear the preset name (the controls that changed
 // go primary to carry divergence); 'Custom' only when preset-less but
 // diverged from stock, via the placeholder.
 const activeEntry = computed(() => (mounted.value
-  ? presets.find(preset => preset.id === selectedPreset.value)
-  : undefined))
+  ? presets.find((preset) => preset.id === selectedPreset.value)
+  : undefined));
 
 const presetLabel = computed(() => {
-  if (!mounted.value) return 'Presets'
-  return activeEntry.value ? activeEntry.value.name : 'Custom'
-})
+  if (!mounted.value) {
+    return 'Presets';
+  }
+  return activeEntry.value ? activeEntry.value.name : 'Custom';
+});
 
 /** Its row's own glyph; the swatch book stands in when no preset is behind it. */
-const presetIcon = computed(() => (activeEntry.value && PRESET_ICONS[activeEntry.value.id]) || studioIcons.palette)
+const presetIcon = computed(() => (activeEntry.value && PRESET_ICONS[activeEntry.value.id]) || studioIcons.palette);
 
 /** A taste of the doc's icon set (its own, or the default lucide). */
-function iconSamples(doc: ThemeDoc): string[] {
-  const sets = themeIcons as Record<string, Record<string, string>>
-  const set = sets[doc.icons ?? 'lucide'] ?? sets.lucide!
+function iconSamples(doc: ThemeDoc): Array<string> {
+  const sets = themeIcons as Record<string, Record<string, string>>;
+  const set = sets[doc.icons ?? 'lucide'] ?? sets.lucide!;
   // upload, search and folder vary the most between the sets
-  return ['upload', 'search', 'folder'].map(key => set[key]!)
+  return ['upload', 'search', 'folder'].map((key) => set[key]!);
 }
 
-const presetItems = computed(() => presets.map(preset => ({
+const presetItems = computed(() => presets.map((preset) => ({
   label: preset.name,
   value: preset.id,
   // the item's own avatar carries the doc's ramp as its chip
@@ -52,29 +54,31 @@ const presetItems = computed(() => presets.map(preset => ({
     size: 'md',
     class: 'bg-(image:--chip-bg-light) dark:bg-(image:--chip-bg-dark)',
     style: themeChipStyle(preset.doc),
-    ui: { icon: 'text-(--chip-icon-light) dark:text-(--chip-icon-dark)' }
+    ui: { icon: 'text-(--chip-icon-light) dark:text-(--chip-icon-dark)' },
   } as AvatarProps,
   font: preset.doc.font?.sans ?? 'Public Sans',
   iconSamples: iconSamples(preset.doc),
   ui: {
-    itemLeadingAvatar: 'self-center'
-  }
-})))
+    itemLeadingAvatar: 'self-center',
+  },
+})));
 
 function asPreset(item: unknown) {
-  return item as typeof presetItems.value[number]
+  return item as typeof presetItems.value[number];
 }
 
 // picking the applied preset again reapplies it, dropping the edits on top
 function pick(id: string | number | undefined) {
-  const preset = presets.find(entry => entry.id === id)
-  if (preset) applyPreset(preset)
+  const preset = presets.find((entry) => entry.id === id);
+  if (preset) {
+    applyPreset(preset);
+  }
 }
 
 const selected = computed({
   get: () => (mounted.value ? selectedPreset.value : undefined),
-  set: pick
-})
+  set: pick,
+});
 </script>
 
 <template>
@@ -90,13 +94,21 @@ const selected = computed({
     @reselect="pick"
   >
     <template #item-description="{ item }">
-      <span class="flex items-center gap-1">
-        <span class="shrink-0 text-xs color-text-muted truncate" :style="{ fontFamily: `'${asPreset(item).font}', sans-serif` }">{{ asPreset(item).font }}</span>
+      <span class="flex gap-1 items-center">
+        <span
+          class="text-xs color-text-muted shrink-0 truncate"
+          :style="{ fontFamily: `'${asPreset(item).font}', sans-serif` }"
+        >{{ asPreset(item).font }}</span>
 
         <span class="color-text-dimmed select-none">·</span>
 
-        <span class="flex items-center gap-1 shrink-0">
-          <PIcon v-for="name in asPreset(item).iconSamples" :key="name" :name="name" class="size-3 color-text-dimmed" />
+        <span class="flex shrink-0 gap-1 items-center">
+          <PIcon
+            v-for="name in asPreset(item).iconSamples"
+            :key="name"
+            :name="name"
+            class="color-text-dimmed size-3"
+          />
         </span>
       </span>
     </template>

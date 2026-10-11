@@ -110,23 +110,23 @@ Use the PageLinks component in the `bottom` slot of the ContentToc component to 
 
 ```vue [pages/\[...slug\\].vue]{48-52}
 <script setup lang="ts">
-import type { PageLink } from 'pohon-ui'
+import type { PageLink } from 'pohon-ui';
 
-const route = useRoute()
+const route = useRoute();
 
 definePageMeta({
   layout: 'docs'
-})
+});
 
 const { data: page } = await useAsyncData(route.path, () => {
-  return queryCollection('docs').path(route.path).first()
-})
+  return queryCollection('docs').path(route.path).first();
+});
 
 const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
-  return queryCollectionItemSurroundings('content', route.path)
-})
+  return queryCollectionItemSurroundings('content', route.path);
+});
 
-const links = computed<PageLink[]>(() => [{
+const links = computed<Array<PageLink>>(() => [{
   icon: 'i-lucide-file-pen',
   label: 'Edit this page',
   to: `https://github.com/vinicunca/pohon/edit/main/docs/content/${page?.value?.stem}.md`,
@@ -140,12 +140,15 @@ const links = computed<PageLink[]>(() => [{
   label: 'Releases',
   icon: 'i-lucide-rocket',
   to: 'https://github.com/vinicunca/pohon/releases'
-}])
+}]);
 </script>
 
 <template>
   <PPage>
-    <PPageHeader :title="page.title" :description="page.description" />
+    <PPageHeader
+      :title="page.title"
+      :description="page.description"
+    />
 
     <PPageBody>
       <ContentRenderer :value="page" />
@@ -160,7 +163,10 @@ const links = computed<PageLink[]>(() => [{
         <template #bottom>
           <PSeparator type="dashed" />
 
-          <PPageLinks title="Community" :links="links" />
+          <PPageLinks
+            title="Community"
+            :links="links"
+          />
         </template>
       </PContentToc>
     </template>

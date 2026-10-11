@@ -55,7 +55,7 @@ Import all parts and piece them together.
 
 ```vue
 <script setup>
-import { PopoverAnchor, PopoverArrow, PopoverClose, PopoverContent, PopoverPortal, PopoverRoot, PopoverTrigger } from 'akar'
+import { PopoverAnchor, PopoverArrow, PopoverClose, PopoverContent, PopoverPortal, PopoverRoot, PopoverTrigger } from 'akar';
 </script>
 
 <template>
@@ -352,7 +352,7 @@ This example abstracts the `PopoverArrow` part and sets a default `sideOffset` c
 
 ```vue
 <script setup lang="ts">
-import { Popover, PopoverContent, PopoverTrigger } from './your-popover'
+import { Popover, PopoverContent, PopoverTrigger } from './your-popover';
 </script>
 
 <template>
@@ -366,22 +366,22 @@ import { Popover, PopoverContent, PopoverTrigger } from './your-popover'
 #### Implementation
 
 ```ts
-// your-popover.ts
-export { default as PopoverContent } from 'PopoverContent.vue'
+export { PopoverRoot as Popover, PopoverTrigger } from 'akar';
 
-export { PopoverRoot as Popover, PopoverTrigger } from 'akar'
+// your-popover.ts
+export { default as PopoverContent } from 'PopoverContent.vue';
 ```
 
 ```vue
 <!-- PopoverContent.vue -->
 <script setup lang="ts">
-import type { PopoverContentEmits, PopoverContentProps } from 'akar'
-import { PopoverContent, PopoverPortal, useForwardPropsEmits } from 'akar'
+import type { PopoverContentEmits, PopoverContentProps } from 'akar';
+import { PopoverContent, PopoverPortal, useForwardPropsEmits } from 'akar';
 
-const props = defineProps<PopoverContentProps>()
-const emits = defineEmits<PopoverContentEmits>()
+const props = defineProps<PopoverContentProps>();
+const emits = defineEmits<PopoverContentEmits>();
 
-const forwarded = useForwardPropsEmits(props, emits)
+const forwarded = useForwardPropsEmits(props, emits);
 </script>
 
 <template>

@@ -1,28 +1,35 @@
 <script setup lang="ts">
-import type { SplitterItem } from 'pohon-ui'
+import type { SplitterItem } from 'pohon-ui';
 
-const card = 'bg-background-elevated/50 border border-border rounded-xl items-center justify-center color-text-muted font-medium'
+const card = 'bg-background-elevated/50 border border-border rounded-xl items-center justify-center color-text-muted font-medium';
 
-const items: SplitterItem[] = [
+const items: Array<SplitterItem> = [
   { slot: 'left', minSize: 20, class: card },
-  { slot: 'right', minSize: 20 }
-]
+  { slot: 'right', minSize: 20 },
+];
 
-const nested: SplitterItem[] = [
+const nested: Array<SplitterItem> = [
   { slot: 'top', minSize: 20, class: card },
-  { slot: 'bottom', minSize: 20, class: card }
-]
+  { slot: 'bottom', minSize: 20, class: card },
+];
 </script>
 
 <template>
-  <div class="w-full h-96">
-    <PSplitter id="splitter-nested-example" :items="items">
+  <div class="h-96 w-full">
+    <PSplitter
+      id="splitter-nested-example"
+      :items="items"
+    >
       <template #left>
         Left
       </template>
 
       <template #right>
-        <PSplitter id="splitter-nested-example-inner" orientation="vertical" :items="nested">
+        <PSplitter
+          id="splitter-nested-example-inner"
+          orientation="vertical"
+          :items="nested"
+        >
           <template #top>
             Top
           </template>

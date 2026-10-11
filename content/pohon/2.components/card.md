@@ -36,13 +36,13 @@ slots:
     <Placeholder class="h-8" />
 ---
 
-#header
+# header
 :placeholder{class="h-8"}
 
-#default
+# default
 :placeholder{class="h-32"}
 
-#footer
+# footer
 :placeholder{class="h-8"}
 ::
 
@@ -64,7 +64,7 @@ slots:
     <Placeholder class="h-32" />
 ---
 
-#default
+# default
 :placeholder{class="h-32"}
 ::
 
@@ -88,7 +88,7 @@ slots:
     <Placeholder class="h-32" />
 ---
 
-#default
+# default
 :placeholder{class="h-32"}
 ::
 
@@ -118,13 +118,13 @@ slots:
     <Placeholder class="h-8" />
 ---
 
-#header
+# header
 :placeholder{class="h-8"}
 
-#default
+# default
 :placeholder{class="h-32"}
 
-#footer
+# footer
 :placeholder{class="h-8"}
 ::
 

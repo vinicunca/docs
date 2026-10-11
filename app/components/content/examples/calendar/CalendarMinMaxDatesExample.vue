@@ -1,11 +1,15 @@
 <script setup lang="ts">
-import { CalendarDate } from '@internationalized/date'
+import { CalendarDate } from '@internationalized/date';
 
-const modelValue = shallowRef(new CalendarDate(2023, 9, 10))
-const minDate = new CalendarDate(2023, 9, 1)
-const maxDate = new CalendarDate(2023, 9, 30)
+const modelValue = shallowRef(new CalendarDate(2023, 9, 10));
+const minDate = new CalendarDate(2023, 9, 1);
+const maxDate = new CalendarDate(2023, 9, 30);
 </script>
 
 <template>
-  <PCalendar v-model="modelValue" :min-value="minDate" :max-value="maxDate" />
+  <PCalendar
+    v-model="modelValue"
+    :min-value="minDate"
+    :max-value="maxDate"
+  />
 </template>

@@ -1,19 +1,19 @@
-import { camelCase, upperFirst } from 'scule'
-import { linkKeys } from 'pohon-ui/utils/link-keys'
-import * as theme from '../../.nuxt/ui'
+import { linkKeys } from 'pohon-ui/utils/link-keys';
+import { camelCase, upperFirst } from 'scule';
+import * as theme from '../../.nuxt/ui';
 
 export interface ComponentMetaTag {
-  name: string
-  text?: string
+  name: string;
+  text?: string;
 }
 
 export interface CompactProp {
-  name: string
-  type: string
-  description?: string
-  required?: boolean
-  default?: any
-  tags?: ComponentMetaTag[]
+  name: string;
+  type: string;
+  description?: string;
+  required?: boolean;
+  default?: any;
+  tags?: Array<ComponentMetaTag>;
 }
 
 /**
@@ -28,30 +28,30 @@ export function compactProp(prop: any, defaultVariants?: Record<string, any>): C
     ? Array.isArray(prop.type)
       ? prop.type.map((t: any) => t.name || t).join(' | ')
       : prop.type.name || prop.type
-    : 'any'
-  let type: string = typeof rawType === 'string' ? rawType : 'any'
+    : 'any';
+  let type: string = typeof rawType === 'string' ? rawType : 'any';
 
   if (!type.startsWith('boolean') && prop.schema?.kind === 'enum' && Object.keys(prop.schema.schema ?? {}).length) {
-    const values = Object.values(prop.schema.schema).map((schema: any) => schema?.type ? schema.type : schema)
+    const values = Object.values(prop.schema.schema).map((schema: any) => schema?.type ? schema.type : schema);
     // Enum schemas list `undefined` first, keep it last so optional props read like their source type
-    type = [...values.filter(value => value !== 'undefined'), ...values.filter(value => value === 'undefined')].join(' | ')
+    type = [...values.filter((value) => value !== 'undefined'), ...values.filter((value) => value === 'undefined')].join(' | ');
   }
 
-  let defaultValue = prop.default
+  let defaultValue = prop.default;
   if (typeof defaultValue === 'string') {
-    defaultValue = defaultValue.replace(' as never', '').replace(/^"(.*)"$/, '\'$1\'')
+    defaultValue = defaultValue.replace(' as never', '').replace(/^"(.*)"$/, '\'$1\'');
   }
   if (defaultValue === undefined) {
-    const tag = prop.tags?.find((tag: ComponentMetaTag) => tag.name === 'defaultValue')?.text
+    const tag = prop.tags?.find((tag: ComponentMetaTag) => tag.name === 'defaultValue')?.text;
     if (tag !== undefined) {
-      defaultValue = tag
+      defaultValue = tag;
     } else if (defaultVariants && prop.name in defaultVariants) {
-      const variant = defaultVariants[prop.name]
-      defaultValue = typeof variant === 'string' ? `'${variant}'` : variant
+      const variant = defaultVariants[prop.name];
+      defaultValue = typeof variant === 'string' ? `'${variant}'` : variant;
     }
   }
 
-  const tags = prop.tags?.filter((tag: ComponentMetaTag) => tag.name !== 'defaultValue')
+  const tags = prop.tags?.filter((tag: ComponentMetaTag) => tag.name !== 'defaultValue');
 
   return {
     name: prop.name,
@@ -59,16 +59,16 @@ export function compactProp(prop: any, defaultVariants?: Record<string, any>): C
     ...(prop.description?.trim() ? { description: prop.description } : {}),
     ...(prop.required ? { required: true } : {}),
     ...(defaultValue !== undefined ? { default: defaultValue } : {}),
-    ...(tags?.length ? { tags } : {})
-  }
+    ...(tags?.length ? { tags } : {}),
+  };
 }
 
-export function compactProps(props: any[] | undefined, defaultVariants?: Record<string, any>): CompactProp[] {
-  return (props ?? []).map(prop => compactProp(prop, defaultVariants))
+export function compactProps(props: Array<any> | undefined, defaultVariants?: Record<string, any>): Array<CompactProp> {
+  return (props ?? []).map((prop) => compactProp(prop, defaultVariants));
 }
 
 export function getDefaultVariants(camelName: string, prose = false): Record<string, any> | undefined {
-  return ((prose ? (theme as Record<string, any>).prose : theme) as Record<string, any>)[camelName]?.defaultVariants
+  return ((prose ? (theme as Record<string, any>).prose : theme) as Record<string, any>)[camelName]?.defaultVariants;
 }
 
 /**
@@ -77,14 +77,14 @@ export function getDefaultVariants(camelName: string, prose = false): Record<str
  * Returns `null` when no meta exists for the component.
  */
 export async function fetchComponentMetadata(normalizedName: string, { full = false }: { full?: boolean } = {}) {
-  const camelName = camelCase(normalizedName)
-  const componentMetaName: string = `P${upperFirst(camelName)}`
+  const camelName = camelCase(normalizedName);
+  const componentMetaName: string = `P${upperFirst(camelName)}`;
 
-  let metadata: Record<string, any>
+  let metadata: Record<string, any>;
   try {
-    metadata = await $fetch<Record<string, any>>(`/api/component-meta/${componentMetaName}.json`)
+    metadata = await $fetch<Record<string, any>>(`/api/component-meta/${componentMetaName}.json`);
   } catch {
-    return null
+    return null;
   }
 
   return {
@@ -92,8 +92,8 @@ export async function fetchComponentMetadata(normalizedName: string, { full = fa
     kebabName: metadata.kebabName,
     props: full ? metadata.meta.props : compactProps(metadata.meta.props, getDefaultVariants(camelName)),
     slots: metadata.meta.slots,
-    emits: metadata.meta.events
-  }
+    emits: metadata.meta.events,
+  };
 }
 
 /**
@@ -116,18 +116,18 @@ export const OWN_LINK_KEYS = [
   'onClick',
   'title',
   'type',
-  'viewTransition'
-] as const
+  'viewTransition',
+] as const;
 
-const linkPassthroughKeys = new Set<string>(linkKeys.filter(key => !(OWN_LINK_KEYS as readonly string[]).includes(key)))
+const linkPassthroughKeys = new Set<string>(linkKeys.filter((key) => !(OWN_LINK_KEYS as ReadonlyArray<string>).includes(key)));
 
-export function hasLinkPassthrough(props: { name: string }[]): boolean {
-  return props.some(prop => prop.name === 'to') && props.some(prop => prop.name === 'href')
+export function hasLinkPassthrough(props: Array<{ name: string }>): boolean {
+  return props.some((prop) => prop.name === 'to') && props.some((prop) => prop.name === 'href');
 }
 
-export function partitionLinkProps<T extends { name: string }>(props: T[]): { own: T[], inherited: T[] } {
+export function partitionLinkProps<T extends { name: string }>(props: Array<T>): { own: Array<T>; inherited: Array<T> } {
   return {
-    own: props.filter(prop => !linkPassthroughKeys.has(prop.name)),
-    inherited: props.filter(prop => linkPassthroughKeys.has(prop.name))
-  }
+    own: props.filter((prop) => !linkPassthroughKeys.has(prop.name)),
+    inherited: props.filter((prop) => linkPassthroughKeys.has(prop.name)),
+  };
 }

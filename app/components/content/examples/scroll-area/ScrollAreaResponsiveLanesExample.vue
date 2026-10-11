@@ -4,16 +4,16 @@ const items = Array.from({ length: 1000 }).map((_, index) => ({
   title: `Item ${index + 1}`,
   src: `https://picsum.photos/640/480?v=${index}`,
   width: 640,
-  height: 480
-}))
+  height: 480,
+}));
 
-const gap = 16
-const scrollArea = useTemplateRef('scrollArea')
-const { width } = useElementSize(() => scrollArea.value?.$el)
+const gap = 16;
+const scrollArea = useTemplateRef('scrollArea');
+const { width } = useElementSize(() => scrollArea.value?.$el);
 
-const lanes = computed(() => Math.max(1, Math.min(4, Math.floor(width.value / 200))))
-const laneWidth = computed(() => (width.value - (lanes.value - 1) * gap) / lanes.value)
-const estimateSize = computed(() => laneWidth.value * (480 / 640))
+const lanes = computed(() => Math.max(1, Math.min(4, Math.floor(width.value / 200))));
+const laneWidth = computed(() => (width.value - (lanes.value - 1) * gap) / lanes.value);
+const estimateSize = computed(() => laneWidth.value * (480 / 640));
 </script>
 
 <template>
@@ -25,9 +25,9 @@ const estimateSize = computed(() => laneWidth.value * (480 / 640))
       gap,
       lanes,
       estimateSize,
-      skipMeasurement: true
+      skipMeasurement: true,
     }"
-    class="w-full h-96 p-4"
+    class="p-4 h-96 w-full"
   >
     <img
       :src="item.src"

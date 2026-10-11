@@ -59,7 +59,7 @@ import {
   EditablePreview,
   EditableRoot,
   EditableSubmitTrigger
-} from 'akar'
+} from 'akar';
 </script>
 
 <template>

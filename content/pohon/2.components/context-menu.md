@@ -374,18 +374,19 @@ const items = [
     label: 'Show Sidebar',
     kbds: ['meta', 'S'],
     onSelect() {
-      console.log('Show Sidebar clicked')
+      console.log('Show Sidebar clicked');
     }
   }, {
     label: 'Show Toolbar',
     kbds: ['shift', 'meta', 'D'],
     onSelect() {
-      console.log('Show Toolbar clicked')
+      console.log('Show Toolbar clicked');
     }
   }, {
     label: 'Collapse Pinned Tabs',
     disabled: true
-  }], [{
+  }],
+  [{
     label: 'Refresh the Page'
   }, {
     label: 'Clear Cookies and Refresh'
@@ -399,31 +400,31 @@ const items = [
       label: 'View Source',
       kbds: ['option', 'meta', 'U'],
       onSelect() {
-        console.log('View Source clicked')
+        console.log('View Source clicked');
       }
     }, {
       label: 'Developer Tools',
       kbds: ['option', 'meta', 'I'],
       onSelect() {
-        console.log('Developer Tools clicked')
+        console.log('Developer Tools clicked');
       }
     }], [{
       label: 'Inspect Elements',
       kbds: ['option', 'meta', 'C'],
       onSelect() {
-        console.log('Inspect Elements clicked')
+        console.log('Inspect Elements clicked');
       }
     }], [{
       label: 'JavaScript Console',
       kbds: ['option', 'meta', 'J'],
       onSelect() {
-        console.log('JavaScript Console clicked')
+        console.log('JavaScript Console clicked');
       }
     }]]
   }]
-]
+];
 
-defineShortcuts(extractShortcuts(items))
+defineShortcuts(extractShortcuts(items));
 </script>
 ```
 

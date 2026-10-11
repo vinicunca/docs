@@ -1,74 +1,74 @@
 <script setup lang="ts">
-import type { TableColumn } from 'pohon-ui'
-import { useInfiniteScroll } from '@vueuse/core'
+import type { TableColumn } from 'pohon-ui';
+import { useInfiniteScroll } from '@vueuse/core';
 
-const PAvatar = resolveComponent('PAvatar')
+const PAvatar = resolveComponent('PAvatar');
 
-type User = {
-  id: number
-  firstName: string
-  username: string
-  email: string
-  image: string
+interface User {
+  id: number;
+  firstName: string;
+  username: string;
+  email: string;
+  image: string;
 }
 
-type UserResponse = {
-  users: User[]
-  total: number
-  skip: number
-  limit: number
+interface UserResponse {
+  users: Array<User>;
+  total: number;
+  skip: number;
+  limit: number;
 }
 
-const skip = ref(0)
+const skip = ref(0);
 
 const { data, status } = useLazyFetch('https://dummyjson.com/users?limit=10&select=firstName,username,email,image', {
   key: 'table-users-infinite-scroll',
   params: { skip },
   transform: (data?: UserResponse) => {
-    return data?.users
+    return data?.users;
   },
-  server: false
-})
+  server: false,
+});
 
-const columns: TableColumn<User>[] = [{
+const columns: Array<TableColumn<User>> = [{
   accessorKey: 'id',
-  header: 'ID'
+  header: 'ID',
 }, {
   accessorKey: 'image',
   header: 'Avatar',
-  cell: ({ row }) => h(PAvatar, { src: row.original.image, loading: 'lazy' })
+  cell: ({ row }) => h(PAvatar, { src: row.original.image, loading: 'lazy' }),
 }, {
   accessorKey: 'firstName',
-  header: 'First name'
+  header: 'First name',
 }, {
   accessorKey: 'email',
-  header: 'Email'
+  header: 'Email',
 }, {
   accessorKey: 'username',
-  header: 'Username'
-}]
+  header: 'Username',
+}];
 
-const users = ref<User[]>([])
+const users = ref<Array<User>>([]);
 
 watch(data, () => {
   users.value = [
     ...users.value,
-    ...(data.value || [])
-  ]
-})
+    ...(data.value || []),
+  ];
+});
 
-const table = useTemplateRef('table')
+const table = useTemplateRef('table');
 
 onMounted(() => {
   useInfiniteScroll(table.value?.$el, () => {
-    skip.value += 10
+    skip.value += 10;
   }, {
     distance: 200,
     canLoadMore: () => {
-      return status.value !== 'pending'
-    }
-  })
-})
+      return status.value !== 'pending';
+    },
+  });
+});
 </script>
 
 <template>

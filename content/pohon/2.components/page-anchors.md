@@ -92,12 +92,12 @@ Use the PageAnchors component inside the [PageAside](/pohon/components/page-asid
 
 ```vue [layouts/docs.vue]{35}
 <script setup lang="ts">
-import type { PageAnchor } from 'pohon-ui'
-import type { ContentNavigationItem } from '@nuxt/content'
+import type { ContentNavigationItem } from '@nuxt/content';
+import type { PageAnchor } from 'pohon-ui';
 
-const navigation = inject<ContentNavigationItem[]>('navigation')
+const navigation = inject<Array<ContentNavigationItem>>('navigation');
 
-const links: PageAnchor[] = [{
+const links: Array<PageAnchor> = [{
   label: 'Documentation',
   icon: 'i-lucide-book-open',
   to: '/pohon/getting-started'
@@ -115,7 +115,7 @@ const links: PageAnchor[] = [{
   icon: 'i-lucide-rocket',
   to: 'https://github.com/vinicunca/pohon/releases',
   target: '_blank'
-}]
+}];
 </script>
 
 <template>

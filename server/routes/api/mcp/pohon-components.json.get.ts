@@ -1,5 +1,5 @@
-import { queryCollection } from '@nuxt/content/server'
-import { pascalCase } from 'scule'
+import { queryCollection } from '@nuxt/content/server';
+import { pascalCase } from 'scule';
 
 /**
  * Pohon UI components with a documentation page, prerendered as
@@ -11,23 +11,23 @@ export default defineEventHandler(async (event) => {
   const pages = await queryCollection(event, 'docs')
     .select('path', 'title', 'description', 'category')
     .where('path', 'LIKE', '/pohon/components/%')
-    .all()
+    .all();
 
   const components = pages.map((page) => {
-    const slug = page.path.split('/').pop() as string
+    const slug = page.path.split('/').pop() as string;
     return {
       name: `P${pascalCase(slug)}`,
       slug,
       path: page.path,
       title: page.title,
       description: page.description,
-      category: page.category
-    }
-  })
+      category: page.category,
+    };
+  });
 
   if (import.meta.prerender) {
-    appendHeader(event, 'x-nitro-prerender', components.map(component => `/api/component-meta/${component.name}.json`).join(','))
+    appendHeader(event, 'x-nitro-prerender', components.map((component) => `/api/component-meta/${component.name}.json`).join(','));
   }
 
-  return components
-})
+  return components;
+});

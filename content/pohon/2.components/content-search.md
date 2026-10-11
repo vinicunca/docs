@@ -45,7 +45,7 @@ Use the `navigation` prop with [`queryCollectionNavigation`](https://content.nux
 
 ```vue [app.vue] {2, 9}
 <script setup lang="ts">
-const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('content'))
+const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('content'));
 </script>
 
 <template>
@@ -65,13 +65,13 @@ Use the `files` prop with [`queryCollectionSearchSections`](https://content.nuxt
 
 ```vue [app.vue] {4-8, 16}
 <script setup lang="ts">
-const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('content'))
+const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('content'));
 
 const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('docs', {
   ignoredTags: ['style']
 }), {
   server: false
-})
+});
 </script>
 
 <template>
@@ -101,21 +101,21 @@ Requires `@nuxt/content` v3.14+.
 
 ```vue [app.vue] {4-7, 24-25}
 <script setup lang="ts">
-const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('content'))
+const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('content'));
 
 const { search, status, init } = useSearchCollection('content', {
   immediate: false,
   ignoredTags: ['style']
-})
+});
 
-const { open } = useContentSearch()
+const { open } = useContentSearch();
 
 // Defer index initialization until the user opens the palette when using `immediate: false`
 watch(open, (value) => {
   if (value && status.value === 'idle') {
-    init()
+    init();
   }
-})
+});
 </script>
 
 <template>
@@ -173,7 +173,7 @@ const links = [{
   label: 'Showcase',
   icon: 'i-lucide-presentation',
   to: '/showcase'
-}]
+}];
 </script>
 
 <template>
@@ -195,7 +195,7 @@ By default, a group of commands will be added to the command palette so you can 
 <script setup lang="ts">
 definePageMeta({
   colorMode: 'dark'
-})
+});
 </script>
 ```
 

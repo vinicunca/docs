@@ -5,17 +5,17 @@
  * six toolbar controls; width and aria-label ride the caller's attrs.
  */
 defineProps<{
-  label?: string
+  label?: string;
   /** The trigger's leading glyph; Colors renders its chip pair in #leading instead. */
-  icon?: string
+  icon?: string;
   /** Overrides the dimmed leading glyph while clean (the preset chip stays primary). */
-  leadingIconClass?: string
-  dirty?: boolean
+  leadingIconClass?: string;
+  dirty?: boolean;
   /** Bound by the owning popover; drives the chevron rotation. */
-  open?: boolean
-}>()
+  open?: boolean;
+}>();
 
-const appConfig = useAppConfig()
+const appConfig = useAppConfig();
 </script>
 
 <template>
@@ -30,10 +30,13 @@ const appConfig = useAppConfig()
     :ui="{
       label: ['flex-1 min-w-0 text-left truncate', dirty && 'text-primary'],
       leadingIcon: dirty ? 'text-primary' : (leadingIconClass ?? 'color-text-dimmed'),
-      trailingIcon: ['transition-transform duration-200', open && 'rotate-180', dirty ? 'text-primary' : 'color-text-dimmed']
+      trailingIcon: ['transition-transform duration-200', open && 'rotate-180', dirty ? 'text-primary' : 'color-text-dimmed'],
     }"
   >
-    <template v-if="$slots.leading" #leading>
+    <template
+      v-if="$slots.leading"
+      #leading
+    >
       <slot name="leading" />
     </template>
   </PButton>

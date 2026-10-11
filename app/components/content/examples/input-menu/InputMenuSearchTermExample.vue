@@ -1,9 +1,13 @@
 <script setup lang="ts">
-const searchTerm = ref('D')
-const items = ref(['Backlog', 'Todo', 'In Progress', 'Done'])
-const value = ref('Backlog')
+const searchTerm = ref('D');
+const items = ref(['Backlog', 'Todo', 'In Progress', 'Done']);
+const value = ref('Backlog');
 </script>
 
 <template>
-  <PInputMenu v-model="value" v-model:search-term="searchTerm" :items="items" />
+  <PInputMenu
+    v-model="value"
+    v-model:search-term="searchTerm"
+    :items="items"
+  />
 </template>

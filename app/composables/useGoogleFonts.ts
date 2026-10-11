@@ -1,8 +1,8 @@
-import { useFilter } from 'pohon-ui/composables'
+import { useFilter } from 'pohon-ui/composables';
 
 export interface GoogleFont {
-  name: string
-  category: string
+  name: string;
+  category: string;
 }
 
 /**
@@ -12,31 +12,35 @@ export interface GoogleFont {
  * through useState so every picker searches the same copy.
  */
 export function useGoogleFonts() {
-  const catalog = useState<GoogleFont[]>('google-fonts-catalog', () => [])
-  const status = useState<'idle' | 'loading' | 'ready' | 'error'>('google-fonts-status', () => 'idle')
+  const catalog = useState<Array<GoogleFont>>('google-fonts-catalog', () => []);
+  const status = useState<'idle' | 'loading' | 'ready' | 'error'>('google-fonts-status', () => 'idle');
 
   async function load() {
-    if (status.value === 'ready' || status.value === 'loading') return
-    status.value = 'loading'
+    if (status.value === 'ready' || status.value === 'loading') {
+      return;
+    }
+    status.value = 'loading';
     try {
-      catalog.value = await $fetch<GoogleFont[]>('/api/fonts.json')
-      status.value = 'ready'
+      catalog.value = await $fetch<Array<GoogleFont>>('/api/fonts.json');
+      status.value = 'ready';
     } catch {
-      status.value = 'error'
+      status.value = 'error';
     }
   }
 
-  const { filter } = useFilter()
+  const { filter } = useFilter();
 
   /**
    * Relevance-tiered (exact > prefix > substring, locale-aware) and
    * popularity-ordered within each tier, `filter`'s sort being stable.
    */
-  function search(query: string, limit = 30): GoogleFont[] {
-    const q = query.trim()
-    if (!q) return []
-    return filter(catalog.value, q, ['name']).slice(0, limit)
+  function search(query: string, limit = 30): Array<GoogleFont> {
+    const q = query.trim();
+    if (!q) {
+      return [];
+    }
+    return filter(catalog.value, q, ['name']).slice(0, limit);
   }
 
-  return { catalog, status, load, search }
+  return { catalog, status, load, search };
 }

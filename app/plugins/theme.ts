@@ -1,19 +1,19 @@
-import { defu } from 'defu'
-import { watchDebounced } from '@vueuse/core'
-import { themeIcons } from '../utils/theme/icons'
-import { cssVariableDefaults } from '../utils/theme/tokens'
-import { THEME_STATE_KEYS, THEME_STORAGE_KEY, clamped, readStoredTheme, snapshotStoredTheme, writeStoredTheme } from '../utils/theme/storage'
-import type { StoredTheme } from '../utils/theme/storage'
-import { mergeUi, styleComponents, DEFAULT_COLORS, THEME_DEFAULTS } from '../utils/theme/engine/types'
-import { SAFE_NAME, sanitizeCustomColors, sanitizeCSSVariables } from '../utils/theme/sanitize'
+import type { StoredTheme } from '../utils/theme/storage';
+import { watchDebounced } from '@vueuse/core';
+import { defu } from 'defu';
+import { DEFAULT_COLORS, mergeUi, styleComponents, THEME_DEFAULTS } from '../utils/theme/engine/types';
+import { themeIcons } from '../utils/theme/icons';
+import { SAFE_NAME, sanitizeCSSVariables, sanitizeCustomColors } from '../utils/theme/sanitize';
+import { clamped, readStoredTheme, snapshotStoredTheme, THEME_STATE_KEYS, THEME_STORAGE_KEY, writeStoredTheme } from '../utils/theme/storage';
+import { cssVariableDefaults } from '../utils/theme/tokens';
 
 export default defineNuxtPlugin({
   enforce: 'post',
   setup() {
-    const appConfig = useAppConfig()
+    const appConfig = useAppConfig();
 
     // Client only, see below; the server's copy is inert.
-    let restoreStoredTheme = () => {}
+    let restoreStoredTheme = () => {};
 
     if (import.meta.client) {
       // Everything a stored theme touches, in one pass, with defaults for
@@ -25,30 +25,30 @@ export default defineNuxtPlugin({
       // setup but AFTER the SSR payload is hydrated, so every useState key
       // already holds the server's default and its initializer will not
       // re-run.
-      let appliedUiKeys: string[] = []
+      let appliedUiKeys: Array<string> = [];
 
       const distribute = (saved: StoredTheme, defer: (fn: () => void) => void) => {
         // Both end up interpolated into <style> text, and storage is writable
         // by anything on the origin, so they get the same clamp the FOUC
         // script (num) and applyThemeSettings already apply.
-        useState('pohon-ui-radius').value = clamped(saved.radius, 0, 4) ?? THEME_DEFAULTS.radius
-        useState('pohon-ui-font-size').value = clamped(saved.fontSize, 12, 20) ?? THEME_DEFAULTS.fontSize
-        useState('pohon-ui-font').value = saved.font ?? {}
-        useState('pohon-ui-icons').value = saved.icons ?? THEME_DEFAULTS.icons
-        useState('pohon-ui-black-as-primary').value = saved.blackAsPrimary ?? false
+        useState('pohon-ui-radius').value = clamped(saved.radius, 0, 4) ?? THEME_DEFAULTS.radius;
+        useState('pohon-ui-font-size').value = clamped(saved.fontSize, 12, 20) ?? THEME_DEFAULTS.fontSize;
+        useState('pohon-ui-font').value = saved.font ?? {};
+        useState('pohon-ui-icons').value = saved.icons ?? THEME_DEFAULTS.icons;
+        useState('pohon-ui-black-as-primary').value = saved.blackAsPrimary ?? false;
         // Through the same boundary the AI path uses: these two are
         // concatenated into <style> text, and storage is writable by anything
         // on the origin. (The inline FOUC script still paints the raw values
         // once, before the boot pass runs.)
-        useState('pohon-ui-custom-colors').value = sanitizeCustomColors(saved.customColors ?? {})
-        useState('pohon-ui-css-variables').value = saved.cssVariables ? sanitizeCSSVariables(saved.cssVariables) : {}
-        useState(THEME_STATE_KEYS.stylePrefs).value = saved.style ?? {}
-        useState(THEME_STATE_KEYS.paletteParams).value = saved.paletteParams ?? {}
-        useState(THEME_STATE_KEYS.themePreset).value = saved.preset
+        useState('pohon-ui-custom-colors').value = sanitizeCustomColors(saved.customColors ?? {});
+        useState('pohon-ui-css-variables').value = saved.cssVariables ? sanitizeCSSVariables(saved.cssVariables) : {};
+        useState(THEME_STATE_KEYS.stylePrefs).value = saved.style ?? {};
+        useState(THEME_STATE_KEYS.paletteParams).value = saved.paletteParams ?? {};
+        useState(THEME_STATE_KEYS.themePreset).value = saved.preset;
         useState<Record<string, any>>('pohon-ui-ai-theme').value = {
           ...(saved.colors ? { colors: { ...saved.colors } } : {}),
-          ...(saved.components ? { ui: { ...saved.components } } : {})
-        }
+          ...(saved.components ? { ui: { ...saved.components } } : {}),
+        };
 
         // Same distribution order the per-key restores used, which carries
         // two fixes worth keeping. Colors land now, before hydration, because
@@ -61,11 +61,11 @@ export default defineNuxtPlugin({
         // inside <style> text.
         for (const alias of Object.keys(DEFAULT_COLORS) as Array<keyof typeof DEFAULT_COLORS>) {
           const value = alias === 'primary' ? saved.primary : alias === 'neutral' ? saved.neutral : saved.colors?.[alias]
-          ;(appConfig.ui.colors as any)[alias] = typeof value === 'string' && SAFE_NAME.test(value) ? value : DEFAULT_COLORS[alias]
+          ;(appConfig.ui.colors as any)[alias] = typeof value === 'string' && SAFE_NAME.test(value) ? value : DEFAULT_COLORS[alias];
         }
 
-        const pack = saved.icons && Object.hasOwn(themeIcons, saved.icons) ? themeIcons[saved.icons as keyof typeof themeIcons] : themeIcons.lucide
-        defer(() => (appConfig.ui.icons = pack as any))
+        const pack = saved.icons && Object.hasOwn(themeIcons, saved.icons) ? themeIcons[saved.icons as keyof typeof themeIcons] : themeIcons.lucide;
+        defer(() => (appConfig.ui.icons = pack as any));
 
         // The class bundle is DERIVED from the style prefs, so it is rebuilt
         // here rather than stored. A generator change therefore reaches
@@ -73,53 +73,59 @@ export default defineNuxtPlugin({
         // like the studio's own rebuild: a corrupt persisted style must not
         // take the whole plugin down before the persistence watcher even
         // registers.
-        let styleUi: Record<string, any> = {}
+        let styleUi: Record<string, any> = {};
         try {
-          styleUi = saved.style ? styleComponents(saved.style) : {}
+          styleUi = saved.style ? styleComponents(saved.style) : {};
         } catch {
           // ignored: the theme still restores, minus the style bundle
         }
-        useState<Record<string, any>>('pohon-ui-style-ui').value = styleUi
+        useState<Record<string, any>>('pohon-ui-style-ui').value = styleUi;
         defer(() => {
           // same order as the live path: style bundle first, explicit wins;
           // keys a previous distribution touched but this one doesn't reset
-          const merged = mergeUi(styleUi, saved.components || {})
+          const merged = mergeUi(styleUi, saved.components || {});
           for (const key of appliedUiKeys) {
-            if (!(key in merged)) (appConfig.ui as any)[key] = undefined
+            if (!(key in merged)) {
+              (appConfig.ui as any)[key] = undefined;
+            }
           }
           for (const [key, value] of Object.entries(merged)) {
-            if (key === 'colors' || key === 'icons') continue
-            (appConfig.ui as any)[key] = defu(value as Record<string, any>, (appConfig.ui as any)[key] || {})
+            if (key === 'colors' || key === 'icons') {
+              continue;
+            }
+            (appConfig.ui as any)[key] = defu(value as Record<string, any>, (appConfig.ui as any)[key] || {});
           }
-          appliedUiKeys = Object.keys(merged).filter(key => key !== 'colors' && key !== 'icons')
-        })
-      }
+          appliedUiKeys = Object.keys(merged).filter((key) => key !== 'colors' && key !== 'icons');
+        });
+      };
 
       // A shared theme link (/theme?doc=, see pages/theme.vue) renders
       // server-side in its own theme; restoring the stored one here would
       // paint over it between SSR and hydration. The page applies the link
       // instead and stores it, or calls the restore back when the payload
       // turns out not to be a theme.
-      restoreStoredTheme = () => distribute(readStoredTheme(), onNuxtReady)
-      const linked = /^\/theme\/?$/.test(window.location.pathname) && /[?&]doc=/.test(window.location.search)
+      restoreStoredTheme = () => distribute(readStoredTheme(), onNuxtReady);
+      const linked = /^\/theme\/?$/.test(window.location.pathname) && /[?&]doc=/.test(window.location.search);
       if (!linked) {
-        restoreStoredTheme()
+        restoreStoredTheme();
       }
 
       // Another tab wrote the theme: adopt it, or this tab's next debounced
       // write would clobber it with stale state (the single key is atomic
       // per write, not across tabs).
       window.addEventListener('storage', (event) => {
-        if (event.key !== null && event.key !== THEME_STORAGE_KEY) return
-        distribute(readStoredTheme(), fn => fn())
-      })
+        if (event.key !== null && event.key !== THEME_STORAGE_KEY) {
+          return;
+        }
+        distribute(readStoredTheme(), (fn) => fn());
+      });
 
       // One watcher owns every write. Each setting used to persist itself, so
       // a reload could restore them out of step and the derived stores needed
       // self-heals to reconcile; one atomic write makes that impossible.
       // Debounced: the getter still runs per flush, but a slider drag no
       // longer costs a synchronous localStorage write per frame.
-      watchDebounced(() => JSON.stringify(snapshotStoredTheme()), json => writeStoredTheme(JSON.parse(json)), { debounce: 250, flush: 'post' })
+      watchDebounced(() => JSON.stringify(snapshotStoredTheme()), (json) => writeStoredTheme(JSON.parse(json)), { debounce: 250, flush: 'post' });
     }
 
     if (import.meta.server) {
@@ -239,13 +245,13 @@ export default defineNuxtPlugin({
             })();
           `.replace(/\s+/g, ' '),
           type: 'text/javascript',
-          tagPriority: -1
-        }]
-      })
+          tagPriority: -1,
+        }],
+      });
     }
 
     return {
-      provide: { restoreStoredTheme }
-    }
-  }
-})
+      provide: { restoreStoredTheme },
+    };
+  },
+});

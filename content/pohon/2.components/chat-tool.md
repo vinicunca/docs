@@ -149,12 +149,12 @@ props:
 ::
 
 ::framework-only
-#nuxt
+# nuxt
 :::tip{to="/pohon/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.loading` key.
 :::
 
-#vue
+# vue
 :::tip{to="/pohon/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.loading` key.
 :::
@@ -210,12 +210,12 @@ slots:
 ::
 
 ::framework-only
-#nuxt
+# nuxt
 :::tip{to="/pohon/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.chevronDown` key.
 :::
 
-#vue
+# vue
 :::tip{to="/pohon/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.chevronDown` key.
 :::
@@ -300,12 +300,12 @@ Use the `isToolApprovalPending` utility from `pohon-ui/utils/ai` to detect a pen
 
 ```vue
 <script setup lang="ts">
-import { useChat } from '@ai-sdk/vue'
-import { lastAssistantMessageIsCompleteWithApprovalResponses } from 'ai'
+import { useChat } from '@ai-sdk/vue';
+import { lastAssistantMessageIsCompleteWithApprovalResponses } from 'ai';
 
 const { messages, addToolApprovalResponse } = useChat({
   sendAutomaticallyWhen: lastAssistantMessageIsCompleteWithApprovalResponses
-})
+});
 </script>
 
 <template>
@@ -315,7 +315,7 @@ const { messages, addToolApprovalResponse } = useChat({
     :streaming="isToolStreaming(part)"
     :actions="part.state === 'approval-requested' ? [
       { label: 'Approve', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: true }) },
-      { label: 'Deny', color: 'neutral', variant: 'ghost', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: false }) }
+      { label: 'Deny', color: 'neutral', variant: 'ghost', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: false }) },
     ] : undefined"
   />
 </template>

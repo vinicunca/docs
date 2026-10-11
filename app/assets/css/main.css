@@ -1,9 +1,9 @@
-@import "../../designs/styles/theme.css";
+@import '../../designs/styles/theme.css';
 
 :root {
   --container-8xl: 90rem;
 
-  --font-sans: "Public Sans", sans-serif;
+  --font-sans: 'Public Sans', sans-serif;
   /* Keep headings on the body stack until the studio selects a serif font. */
   --font-serif: var(--font-sans);
 
@@ -40,20 +40,24 @@
   }
 }
 
-body.theme-studio .font-normal { font-weight: var(--font-weight-normal, 400); }
-body.theme-studio .font-medium { font-weight: var(--font-weight-medium, 500); }
-body.theme-studio .font-semibold { font-weight: var(--font-weight-semibold, 600); }
-body.theme-studio .font-bold { font-weight: var(--font-weight-bold, 700); }
+body.theme-studio .font-normal {
+  font-weight: var(--font-weight-normal, 400);
+}
+body.theme-studio .font-medium {
+  font-weight: var(--font-weight-medium, 500);
+}
+body.theme-studio .font-semibold {
+  font-weight: var(--font-weight-semibold, 600);
+}
+body.theme-studio .font-bold {
+  font-weight: var(--font-weight-bold, 700);
+}
 
 /* The studio's canvas sits recessed behind the preview card. Mixed off
    --ui-color-bg so editing that token moves the canvas too. */
 body.theme-studio,
 body.theme-studio #__nuxt {
-  background-color: color-mix(
-    in oklab,
-    var(--ui-color-bg) 98%,
-    var(--ui-color-neutral-950)
-  );
+  background-color: color-mix(in oklab, var(--ui-color-bg) 98%, var(--ui-color-neutral-950));
 }
 
 .dark body.theme-studio,
@@ -61,15 +65,15 @@ body.theme-studio #__nuxt {
   background-color: color-mix(in oklab, var(--ui-color-bg) 70%, black);
 }
 
-html[data-framework="nuxt"] .vue-only,
-html[data-framework="vue"] .nuxt-only {
+html[data-framework='nuxt'] .vue-only,
+html[data-framework='vue'] .nuxt-only {
   display: none;
 }
 
 /* Shiki dark mode styles. A colour swatch keeps the background and contrast
    foreground the transformer wrote, inline with Comark or as a generated
    class with the content pipeline. */
-html.dark .shiki span:not([style*="background-color"], .shiki-color-highlight) {
+html.dark .shiki span:not([style*='background-color'], .shiki-color-highlight) {
   color: var(--shiki-dark) !important;
   background-color: var(--shiki-dark-bg) !important;
   font-style: var(--shiki-dark-font-style) !important;

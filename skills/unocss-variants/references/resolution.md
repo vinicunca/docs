@@ -20,15 +20,15 @@ const button = uv({
   },
   compoundVariants: [{ color: ['primary', 'neutral'], size: 'sm', class: 'rounded-sm' }],
   defaultVariants: { color: 'primary', size: 'md' },
-})
+});
 
-button()
+button();
 // 'inline-flex rounded-md bg-blue-600 px-3 text-sm'
-button({ color: 'neutral', size: 'sm', disabled: true, class: 'X' })
+button({ color: 'neutral', size: 'sm', disabled: true, class: 'X' });
 // 'inline-flex rounded-md bg-zinc-200 px-2 text-xs opacity-50 uno-layer-uv:bg-zinc-400 rounded-sm X'
-uv({ base: 'a' })({ class: 'b', className: 'c' })
+uv({ base: 'a' })({ class: 'b', className: 'c' });
 // 'a b c'
-uv({})()
+uv({})();
 // undefined
 ```
 
@@ -43,13 +43,13 @@ For each axis, `uv` looks up a key in the axis map:
 5. If there is still no value, the `'false'` key is used.
 
 ```ts
-const b = uv({ base: 'btn', variants: { flat: { true: 'flat', false: 'raised' } } })
-b()                // 'btn raised'   (omitted → the false key)
-b({ flat: false }) // 'btn raised'
+const b = uv({ base: 'btn', variants: { flat: { true: 'flat', false: 'raised' } } });
+b(); // 'btn raised'   (omitted → the false key)
+b({ flat: false }); // 'btn raised'
 
-const d = uv({ base: 'btn', variants: { size: { sm: 'sm', md: 'md' } }, defaultVariants: { size: 'md' } })
-d({ size: undefined }) // 'btn md'  (undefined → default)
-d({ size: null })      // 'btn'     (null → axis off)
+const d = uv({ base: 'btn', variants: { size: { sm: 'sm', md: 'md' } }, defaultVariants: { size: 'md' } });
+d({ size: undefined }); // 'btn md'  (undefined → default)
+d({ size: null }); // 'btn'     (null → axis off)
 ```
 
 Consequence: an axis with only a `true` key adds nothing when the flag is omitted. An axis with a `false` key always adds something unless you pass `null`.
@@ -66,8 +66,8 @@ Before matching, `uv` builds the complete props: `defaultVariants`, then the rec
 const cv = uv({
   variants: { a: { true: 'A' }, c: { x: 'X' } },
   compoundVariants: [{ a: false, c: 'x', class: 'CMP' }],
-})
-cv({ c: 'x' }) // 'X CMP'  (a omitted counts as false)
+});
+cv({ c: 'x' }); // 'X CMP'  (a omitted counts as false)
 ```
 
 `compoundVariants` and `compoundSlots` must be arrays. A non-array throws `TypeError: The "compoundVariants" prop must be an array` on the first call, not when the recipe is created.
@@ -93,12 +93,12 @@ const s = uv({
   variants: { size: { sm: { item: 'v-sm' } }, on: { true: { item: 'v-on' } } },
   compoundVariants: [{ size: 'sm', on: true, class: { item: 'cv' } }],
   compoundSlots: [{ slots: ['item'], size: 'sm', class: 'cs' }],
-})
+});
 
-s({ size: 'sm', on: true }).item({ class: 'X' }) // 'I v-sm v-on cv cs X'
-s({ size: 'sm' }).item({ on: true })            // 'I v-sm v-on cv cs'  (slot-level override also drives compounds)
-s({ size: 'sm' }).base()                        // 'B'
-uv({ slots: { base: 'b', x: 'x' } })({ class: 'zz' }).base() // 'b'  (root class ignored)
+s({ size: 'sm', on: true }).item({ class: 'X' }); // 'I v-sm v-on cv cs X'
+s({ size: 'sm' }).item({ on: true }); // 'I v-sm v-on cv cs'  (slot-level override also drives compounds)
+s({ size: 'sm' }).base(); // 'B'
+uv({ slots: { base: 'b', x: 'x' } })({ class: 'zz' }).base(); // 'b'  (root class ignored)
 ```
 
 ## `extend` merging
@@ -109,18 +109,18 @@ const parent = uv({
   variants: { size: { sm: 'p-sm' }, color: { red: 'p-red' } },
   defaultVariants: { size: 'sm', color: 'red' },
   compoundVariants: [{ size: 'sm', class: 'P-CV' }],
-})
+});
 const child = uv({
   extend: parent,
   base: 'C',
   variants: { tone: { x: 'c-x' }, color: { red: 'c-red', blue: 'c-blue' } },
   defaultVariants: { color: 'blue' },
   compoundVariants: [{ color: 'blue', class: 'C-CV' }],
-})
+});
 
-child()            // 'P C c-blue p-sm P-CV C-CV'
-child.variantKeys  // ['tone', 'color', 'size']   (child axes first, then parent-only axes)
-child({ color: 'red' }) // includes 'p-red c-red'  (the same value concatenates, parent first)
+child(); // 'P C c-blue p-sm P-CV C-CV'
+child.variantKeys; // ['tone', 'color', 'size']   (child axes first, then parent-only axes)
+child({ color: 'red' }); // includes 'p-red c-red'  (the same value concatenates, parent first)
 ```
 
 | Field | Rule |

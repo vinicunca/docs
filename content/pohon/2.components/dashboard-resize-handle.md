@@ -28,7 +28,7 @@ Even though this component is automatically displayed when the `resizable` prop 
     <PDashboardSidebar resizable>
       <template #resize-handle="{ onMouseDown, onTouchStart, onDoubleClick }">
         <PDashboardResizeHandle
-          class="after:absolute after:inset-y-0 after:right-0 after:w-px hover:after:bg-(--ui-color-border-accented) after:transition"
+          class="hover:after:bg---ui-color-border-accented after:w-px after:transition after:inset-y-0 after:right-0 after:absolute"
           @mousedown="onMouseDown"
           @touchstart="onTouchStart"
           @dblclick="onDoubleClick"
@@ -45,14 +45,14 @@ Even though this component is automatically displayed when the `resizable` prop 
 <script setup lang="ts">
 definePageMeta({
   layout: 'dashboard'
-})
+});
 </script>
 
 <template>
   <PDashboardPanel resizable>
     <template #resize-handle="{ onMouseDown, onTouchStart, onDoubleClick }">
       <PDashboardResizeHandle
-        class="after:absolute after:inset-y-0 after:right-0 after:w-px hover:after:bg-(--ui-color-border-accented) after:transition"
+        class="hover:after:bg---ui-color-border-accented after:w-px after:transition after:inset-y-0 after:right-0 after:absolute"
         @mousedown="onMouseDown"
         @touchstart="onTouchStart"
         @dblclick="onDoubleClick"

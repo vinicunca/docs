@@ -1,20 +1,20 @@
 export interface DocsPackage {
   /** First URL segment and `content/<id>` folder. */
-  id: string
-  title: string
-  description: string
-  icon: string
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
   /** Landing page of the package (its first section). */
-  to: string
+  to: string;
   /** npm package name, its version comes from `runtimeConfig.public.versions`. */
-  npm?: string
-  github: string
-  group: 'packages' | 'guides'
+  npm?: string;
+  github: string;
+  group: 'packages' | 'guides';
   /** Section slug -> sidebar categories, read from each page's `category` frontmatter. */
-  categories?: Record<string, { id: string, title: string, framework?: string }[]>
+  categories?: Record<string, Array<{ id: string; title: string; framework?: string }>>;
 }
 
-export const DOCS_PACKAGES: DocsPackage[] = [{
+export const DOCS_PACKAGES: Array<DocsPackage> = [{
   id: 'pohon',
   title: 'Pohon UI',
   description: 'A Vue and Nuxt component library styled with UnoCSS, built on Akar.',
@@ -37,12 +37,12 @@ export const DOCS_PACKAGES: DocsPackage[] = [{
       { id: 'editor', title: 'Editor' },
       { id: 'content', title: 'Content', framework: 'nuxt' },
       { id: 'color-mode', title: 'Color Mode' },
-      { id: 'i18n', title: 'i18n' }
+      { id: 'i18n', title: 'i18n' },
     ],
     typography: [
-      { id: 'components', title: 'Components' }
-    ]
-  }
+      { id: 'components', title: 'Components' },
+    ],
+  },
 }, {
   id: 'akar',
   title: 'Akar',
@@ -51,7 +51,7 @@ export const DOCS_PACKAGES: DocsPackage[] = [{
   to: '/akar/overview',
   npm: 'akar',
   github: 'https://github.com/vinicunca/akar',
-  group: 'packages'
+  group: 'packages',
 }, {
   id: 'perkakas',
   title: 'Perkakas',
@@ -60,7 +60,7 @@ export const DOCS_PACKAGES: DocsPackage[] = [{
   to: '/perkakas/getting-started',
   npm: '@vinicunca/perkakas',
   github: 'https://github.com/vinicunca/perkakas',
-  group: 'packages'
+  group: 'packages',
 }, {
   id: 'taman',
   title: 'Taman',
@@ -69,7 +69,7 @@ export const DOCS_PACKAGES: DocsPackage[] = [{
   to: '/taman/getting-started',
   npm: 'create-taman',
   github: 'https://github.com/vinicunca/taman',
-  group: 'packages'
+  group: 'packages',
 }, {
   id: 'eslint',
   title: 'ESLint Config',
@@ -78,7 +78,7 @@ export const DOCS_PACKAGES: DocsPackage[] = [{
   to: '/eslint/getting-started',
   npm: '@vinicunca/eslint-config',
   github: 'https://github.com/vinicunca/eslint-config',
-  group: 'packages'
+  group: 'packages',
 }, {
   id: 'unocss-preset',
   title: 'UnoCSS Preset',
@@ -87,7 +87,7 @@ export const DOCS_PACKAGES: DocsPackage[] = [{
   to: '/unocss-preset/getting-started',
   npm: '@vinicunca/unocss-preset',
   github: 'https://github.com/vinicunca/unocss-preset-vinicunca',
-  group: 'packages'
+  group: 'packages',
 }, {
   id: 'unocss-variants',
   title: 'UnoCSS Variants',
@@ -96,7 +96,7 @@ export const DOCS_PACKAGES: DocsPackage[] = [{
   to: '/unocss-variants/getting-started',
   npm: 'unocss-variants',
   github: 'https://github.com/praburangki/unocss-variants',
-  group: 'packages'
+  group: 'packages',
 }, {
   id: 'windows-dev',
   title: 'Windows Dev Setup',
@@ -104,10 +104,10 @@ export const DOCS_PACKAGES: DocsPackage[] = [{
   icon: 'i-simple-icons-windows',
   to: '/windows-dev/guide',
   github: 'https://github.com/vinicunca/docs',
-  group: 'guides'
-}]
+  group: 'guides',
+}];
 
 export function findDocsPackage(path: string): DocsPackage | undefined {
-  const id = path.split('/')[1]
-  return DOCS_PACKAGES.find(pkg => pkg.id === id)
+  const id = path.split('/')[1];
+  return DOCS_PACKAGES.find((pkg) => pkg.id === id);
 }

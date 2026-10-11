@@ -87,7 +87,7 @@ const classes = computed(() => alert({
     </div>
 
     <div class="flex flex-col gap-2">
-      <span class="font-semibold text-slate-800 dark:text-slate-200">
+      <span class="text-slate-800 font-semibold dark:text-slate-200">
         Select severity:
       </span>
       <PRadioGroup
@@ -95,7 +95,7 @@ const classes = computed(() => alert({
         :items="['success', 'error']"
         :ui="{ label: 'capitalize' }"
       />
-      <span class="font-semibold text-slate-800 dark:text-slate-200">
+      <span class="text-slate-800 font-semibold dark:text-slate-200">
         Select variant:
       </span>
       <PRadioGroup

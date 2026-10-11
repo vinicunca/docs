@@ -1,46 +1,57 @@
 <script setup lang="ts">
-import type { NavigationMenuItem } from 'pohon-ui'
+import type { NavigationMenuItem } from 'pohon-ui';
 
-const items: NavigationMenuItem[][] = [[{
+const items: Array<Array<NavigationMenuItem>> = [[{
   label: 'Home',
   icon: 'i-lucide-house',
-  active: true
+  active: true,
 }, {
   label: 'Inbox',
   icon: 'i-lucide-inbox',
-  badge: '4'
+  badge: '4',
 }, {
   label: 'Contacts',
-  icon: 'i-lucide-users'
+  icon: 'i-lucide-users',
 }, {
   label: 'Settings',
   icon: 'i-lucide-settings',
   defaultOpen: true,
   children: [{
-    label: 'General'
+    label: 'General',
   }, {
-    label: 'Members'
+    label: 'Members',
   }, {
-    label: 'Notifications'
-  }]
+    label: 'Notifications',
+  }],
 }], [{
   label: 'Feedback',
   icon: 'i-lucide-message-circle',
   to: 'https://github.com/vinicunca/pohon/tree/main/playgrounds/nuxt',
-  target: '_blank'
+  target: '_blank',
 }, {
   label: 'Help & Support',
   icon: 'i-lucide-info',
   to: 'https://github.com/vinicunca/pohon',
-  target: '_blank'
-}]]
+  target: '_blank',
+}]];
 </script>
 
 <template>
-  <PDashboardSidebar collapsible resizable :ui="{ footer: 'border-t border-border' }">
+  <PDashboardSidebar
+    collapsible
+    resizable
+    :ui="{ footer: 'border-t border-border' }"
+  >
     <template #header="{ collapsed }">
-      <Logo v-if="!collapsed" class="h-5 w-auto shrink-0" />
-      <PIcon v-else name="i-simple-icons-nuxtdotjs" class="size-5 text-primary mx-auto" />
+      <Logo
+        v-if="!collapsed"
+        class="shrink-0 h-5 w-auto"
+      />
+      <PIcon
+        v-else
+        name="i-simple-icons-nuxtdotjs"
+        class="text-primary mx-auto size-5"
+      />
     </template>
 
     <template #default="{ collapsed }">
@@ -52,10 +63,19 @@ const items: NavigationMenuItem[][] = [[{
         block
         :square="collapsed"
       >
-        <template v-if="!collapsed" #trailing>
-          <div class="flex items-center gap-0.5 ms-auto">
-            <PKbd value="meta" variant="subtle" />
-            <PKbd value="K" variant="subtle" />
+        <template
+          v-if="!collapsed"
+          #trailing
+        >
+          <div class="ms-auto flex gap-0.5 items-center">
+            <PKbd
+              value="meta"
+              variant="subtle"
+            />
+            <PKbd
+              value="K"
+              variant="subtle"
+            />
           </div>
         </template>
       </PButton>
@@ -78,7 +98,7 @@ const items: NavigationMenuItem[][] = [[{
       <PButton
         :avatar="{
           src: 'https://github.com/benjamincanac.png',
-          loading: 'lazy' as const
+          loading: 'lazy' as const,
         }"
         :label="collapsed ? undefined : 'Benjamin'"
         color="neutral"

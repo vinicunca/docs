@@ -1,24 +1,24 @@
 <script setup lang="ts">
-import type { TabsItem } from 'pohon-ui'
+import type { TabsItem } from 'pohon-ui';
 
-const items: TabsItem[] = [
+const items: Array<TabsItem> = [
   {
     label: 'Home',
-    icon: 'i-lucide-house'
+    icon: 'i-lucide-house',
   },
   {
     label: 'Activity',
-    icon: 'i-lucide-activity'
+    icon: 'i-lucide-activity',
   },
   {
     label: 'Settings',
-    icon: 'i-lucide-settings'
+    icon: 'i-lucide-settings',
   },
   {
     label: 'Profile',
-    icon: 'i-lucide-user'
-  }
-]
+    icon: 'i-lucide-user',
+  },
+];
 </script>
 
 <template>
@@ -28,7 +28,7 @@ const items: TabsItem[] = [
     :ui="{
       list: 'justify-around w-full',
       trigger: 'grow flex-col gap-1 py-1',
-      label: 'text-[10px]/3'
+      label: 'text-[10px]/3',
     }"
     class="w-full"
   />

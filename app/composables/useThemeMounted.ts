@@ -9,11 +9,11 @@
  * hydration is done. Shared, it is already true for that second instance.
  */
 export function useThemeMounted() {
-  const mounted = useState('theme-mounted', () => false)
+  const mounted = useState('theme-mounted', () => false);
 
   onMounted(() => {
-    mounted.value = true
-  })
+    mounted.value = true;
+  });
 
-  return mounted
+  return mounted;
 }

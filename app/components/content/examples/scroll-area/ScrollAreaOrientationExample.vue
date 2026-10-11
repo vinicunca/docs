@@ -1,13 +1,13 @@
 <script setup lang="ts">
 defineProps<{
-  orientation?: 'vertical' | 'horizontal'
-}>()
+  orientation?: 'vertical' | 'horizontal';
+}>();
 
 const items = Array.from({ length: 30 }, (_, i) => ({
   id: i + 1,
   title: `Item ${i + 1}`,
-  description: `Description for item ${i + 1}`
-}))
+  description: `Description for item ${i + 1}`,
+}));
 </script>
 
 <template>

@@ -1,136 +1,138 @@
-import { existsSync, readFileSync } from 'node:fs'
-import fsp from 'node:fs/promises'
-import { join } from 'pathe'
-import { defineNuxtModule, addServerHandler, createResolver } from '@nuxt/kit'
+import { existsSync, readFileSync } from 'node:fs';
+import fsp from 'node:fs/promises';
+import { addServerHandler, createResolver, defineNuxtModule } from '@nuxt/kit';
+import { join } from 'pathe';
 
 export default defineNuxtModule({
   meta: {
-    name: 'component-example'
+    name: 'component-example',
   },
   async setup(_options, nuxt) {
-    const resolver = createResolver(import.meta.url)
-    let _configResolved: any
-    let components: Record<string, any>
-    const outputDir = join(nuxt.options.buildDir, 'component-examples')
+    const resolver = createResolver(import.meta.url);
+    let _configResolved: any;
+    let components: Record<string, any>;
+    const outputDir = join(nuxt.options.buildDir, 'component-examples');
 
     async function ensureOutputDir() {
       if (!existsSync(outputDir)) {
-        await fsp.mkdir(outputDir, { recursive: true })
+        await fsp.mkdir(outputDir, { recursive: true });
       }
     }
 
     async function stubOutput() {
-      await ensureOutputDir()
-      const indexPath = join(outputDir, '_index.json')
+      await ensureOutputDir();
+      const indexPath = join(outputDir, '_index.json');
       if (!existsSync(indexPath)) {
-        await fsp.writeFile(indexPath, '[]', 'utf-8')
+        await fsp.writeFile(indexPath, '[]', 'utf-8');
       }
     }
 
     async function fetchComponent(component: string | any) {
       if (typeof component === 'string') {
         if (components[component]) {
-          component = components[component]
+          component = components[component];
         } else {
           component = Object.entries(components).find(
-            ([, comp]: any) => comp.filePath === component
-          )
+            ([, comp]: any) => comp.filePath === component,
+          );
           if (!component) {
-            return
+            return;
           }
 
-          component = component[1]
+          component = component[1];
         }
       }
 
       if (!component?.filePath || !component?.pascalName) {
-        return
+        return;
       }
-      const code = await fsp.readFile(component.filePath, 'utf-8')
+      const code = await fsp.readFile(component.filePath, 'utf-8');
       components[component.pascalName] = {
         code,
         filePath: component.filePath,
-        pascalName: component.pascalName
-      }
+        pascalName: component.pascalName,
+      };
     }
 
     async function writeComponentFile(name: string) {
-      const comp = components[name]
-      if (!comp?.code) return
+      const comp = components[name];
+      if (!comp?.code) {
+        return;
+      }
       await fsp.writeFile(
         join(outputDir, `${name}.json`),
         JSON.stringify({ code: comp.code, filePath: comp.filePath, pascalName: comp.pascalName }),
-        'utf-8'
-      )
+        'utf-8',
+      );
     }
 
     async function writeIndex() {
-      const names = Object.keys(components).filter(k => components[k]?.code)
-      await fsp.writeFile(join(outputDir, '_index.json'), JSON.stringify(names), 'utf-8')
+      const names = Object.keys(components).filter((k) => components[k]?.code);
+      await fsp.writeFile(join(outputDir, '_index.json'), JSON.stringify(names), 'utf-8');
     }
 
     async function updateOutput() {
-      await ensureOutputDir()
-      await Promise.all(Object.keys(components).map(writeComponentFile))
-      await writeIndex()
+      await ensureOutputDir();
+      await Promise.all(Object.keys(components).map(writeComponentFile));
+      await writeIndex();
     }
 
     async function fetchComponents() {
-      await Promise.all(Object.keys(components).map(fetchComponent))
+      await Promise.all(Object.keys(components).map(fetchComponent));
     }
 
     nuxt.hook('components:extend', async (_components) => {
       components = _components
-        .filter(v => v.shortPath.includes('components/content/examples/'))
+        .filter((v) => v.shortPath.includes('components/content/examples/'))
         .reduce((acc, component) => {
-          acc[component.pascalName] = component
-          return acc
-        }, {} as Record<string, any>)
-      await stubOutput()
-    })
+          acc[component.pascalName] = component;
+          return acc;
+        }, {} as Record<string, any>);
+      await stubOutput();
+    });
 
     nuxt.hook('vite:extend', (vite: any) => {
-      vite.config.plugins = vite.config.plugins || []
+      vite.config.plugins = vite.config.plugins || [];
       vite.config.plugins.push({
         name: 'component-example',
         enforce: 'post',
         async buildStart() {
           if (_configResolved?.build.ssr) {
-            return
+            return;
           }
-          await fetchComponents()
-          await updateOutput()
+          await fetchComponents();
+          await updateOutput();
         },
         configResolved(config: any) {
-          _configResolved = config
+          _configResolved = config;
         },
         async handleHotUpdate({ file }: { file: any }) {
           if (
             Object.entries(components).some(
-              ([, comp]: any) => comp.filePath === file
+              ([, comp]: any) => comp.filePath === file,
             )
           ) {
-            await fetchComponent(file)
+            await fetchComponent(file);
             const entry = Object.entries(components).find(
-              ([, comp]: any) => comp.filePath === file
-            )
+              ([, comp]: any) => comp.filePath === file,
+            );
             if (entry) {
-              await ensureOutputDir()
-              await writeComponentFile(entry[0])
-              await writeIndex()
+              await ensureOutputDir();
+              await writeComponentFile(entry[0]);
+              await writeIndex();
             }
           }
-        }
-      })
-    })
+        },
+      });
+    });
 
     nuxt.hook('nitro:config', (nitroConfig) => {
-      nitroConfig.virtual = nitroConfig.virtual || {}
+      nitroConfig.virtual = nitroConfig.virtual || {};
       nitroConfig.virtual['#component-example/nitro'] = () => {
-        const indexPath = join(outputDir, '_index.json')
-        const names: string[] = existsSync(indexPath)
+        const indexPath = join(outputDir, '_index.json');
+        const names: Array<string> = existsSync(indexPath)
           ? JSON.parse(readFileSync(indexPath, 'utf-8'))
-          : []
+          : [];
 
         // The examples are inlined rather than read from `outputDir` at
         // runtime: that directory only exists on the build machine, so on a
@@ -138,28 +140,28 @@ export default defineNuxtModule({
         // 404 for anything that was not prerendered as a static file (which
         // is every request the MCP `get-example` tool makes, since its
         // internal `$fetch` reaches the handler instead of the CDN).
-        const examples: Record<string, unknown> = {}
+        const examples: Record<string, unknown> = {};
         // Only the examples that actually loaded are listed, so
         // `listComponentExamples()` never advertises a name that
         // `getComponentExample()` cannot return.
-        const availableNames: string[] = []
+        const availableNames: Array<string> = [];
 
         for (const name of names) {
-          let contents: string
+          let contents: string;
           try {
-            contents = readFileSync(join(outputDir, `${name}.json`), 'utf-8')
+            contents = readFileSync(join(outputDir, `${name}.json`), 'utf-8');
           } catch (error) {
             // The example was removed between the scan and codegen. Anything
             // else (a permission error, unreadable JSON below) is a real
             // problem and should fail the build.
             if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
-              continue
+              continue;
             }
-            throw error
+            throw error;
           }
 
-          examples[name] = JSON.parse(contents)
-          availableNames.push(name)
+          examples[name] = JSON.parse(contents);
+          availableNames.push(name);
         }
 
         return `const names = ${JSON.stringify(availableNames)}
@@ -188,14 +190,14 @@ export default new Proxy(Object.create(null), {
     return undefined
   }
 })
-`
-      }
-    })
+`;
+      };
+    });
 
     addServerHandler({
       method: 'get',
       route: '/api/component-example/:component?',
-      handler: resolver.resolve('../server/api/component-example.get')
-    })
-  }
-})
+      handler: resolver.resolve('../server/api/component-example.get'),
+    });
+  },
+});

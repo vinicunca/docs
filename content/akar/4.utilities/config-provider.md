@@ -14,7 +14,7 @@ Import the component.
 
 ```vue
 <script setup lang="ts">
-import { ConfigProvider } from 'akar'
+import { ConfigProvider } from 'akar';
 </script>
 
 <template>
@@ -42,7 +42,7 @@ Set global direction to `rtl`, and scroll body behavior to `false` (will not set
 
 ```vue
 <script setup lang="ts">
-import { ConfigProvider } from 'akar'
+import { ConfigProvider } from 'akar';
 </script>
 
 <template>
@@ -66,9 +66,9 @@ This is useful in Nuxt projects where prerendered HTML and client hydration can 
  ```vue
  <!-- in Nuxt's app.vue -->
 <script setup lang="ts">
-import { ConfigProvider } from 'akar'
+import { ConfigProvider } from 'akar';
 
-const useIdFunction = () => useId()
+const useIdFunction = () => useId();
 </script>
 
 <template>

@@ -6,34 +6,58 @@
 
 ```vue
 <script setup lang="ts">
-import type { FormSubmitEvent } from 'pohon-ui'
-import * as z from 'zod'
+import type { FormSubmitEvent } from 'pohon-ui';
+import * as z from 'zod';
 
 const schema = z.object({
   email: z.email('Invalid email'),
   password: z.string().min(8, 'Min 8 characters')
-})
+});
 
-type Schema = z.output<typeof schema>
-const state = reactive<Partial<Schema>>({ email: '', password: '' })
+type Schema = z.output<typeof schema>;
+const state = reactive<Partial<Schema>>({ email: '', password: '' });
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   // Runs only when validation passes; event.data is the parsed output.
-  await $fetch('/api/login', { method: 'POST', body: event.data })
+  await $fetch('/api/login', { method: 'POST', body: event.data });
 }
 </script>
 
 <template>
-  <PForm :schema="schema" :state="state" class="space-y-4" @submit="onSubmit">
-    <PFormField name="email" label="Email" required>
-      <PInput v-model="state.email" type="email" placeholder="you@example.com" />
+  <PForm
+    :schema="schema"
+    :state="state"
+    class="space-y-4"
+    @submit="onSubmit"
+  >
+    <PFormField
+      name="email"
+      label="Email"
+      required
+    >
+      <PInput
+        v-model="state.email"
+        type="email"
+        placeholder="you@example.com"
+      />
     </PFormField>
 
-    <PFormField name="password" label="Password" required>
-      <PInput v-model="state.password" type="password" />
+    <PFormField
+      name="password"
+      label="Password"
+      required
+    >
+      <PInput
+        v-model="state.password"
+        type="password"
+      />
     </PFormField>
 
-    <PButton type="submit" label="Sign in" loading-auto />
+    <PButton
+      type="submit"
+      label="Sign in"
+      loading-auto
+    />
   </PForm>
 </template>
 ```
@@ -188,18 +212,27 @@ Object items bind their `value` key by default (`:items="[{ label: 'Admin', valu
 
 ```vue
 <script setup lang="ts">
-import { CalendarDate } from '@internationalized/date'
+import { CalendarDate } from '@internationalized/date';
 
-state.date = new CalendarDate(2026, 1, 15)
+state.date = new CalendarDate(2026, 1, 15);
 </script>
 
 <template>
-  <PFormField name="date" label="Date">
+  <PFormField
+    name="date"
+    label="Date"
+  >
     <PInputDate v-model="state.date" />
   </PFormField>
 
-  <PFormField name="period" label="Period">
-    <PInputDate v-model="state.period" range />
+  <PFormField
+    name="period"
+    label="Period"
+  >
+    <PInputDate
+      v-model="state.period"
+      range
+    />
   </PFormField>
 </template>
 ```
@@ -208,30 +241,35 @@ state.date = new CalendarDate(2026, 1, 15)
 
 ```vue
 <script setup lang="ts">
-const form = useTemplateRef('form')
+const form = useTemplateRef('form');
 
 async function check() {
-  const data = await form.value?.validate({ silent: true }) // false when invalid
+  const data = await form.value?.validate({ silent: true }); // false when invalid
   if (data) {
     // valid
   }
 }
 
 async function checkEmail() {
-  await form.value?.validate({ name: 'email', silent: true })
+  await form.value?.validate({ name: 'email', silent: true });
 }
 
 function setServerError() {
-  form.value?.setErrors([{ name: 'email', message: 'Email already taken' }])
+  form.value?.setErrors([{ name: 'email', message: 'Email already taken' }]);
 }
 
 function clearErrors() {
-  form.value?.clear() // or clear('email')
+  form.value?.clear(); // or clear('email')
 }
 </script>
 
 <template>
-  <PForm ref="form" :schema="schema" :state="state" @submit="onSubmit">
+  <PForm
+    ref="form"
+    :schema="schema"
+    :state="state"
+    @submit="onSubmit"
+  >
     <!-- fields -->
   </PForm>
 </template>

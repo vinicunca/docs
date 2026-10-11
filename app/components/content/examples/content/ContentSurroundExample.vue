@@ -1,11 +1,11 @@
 <script setup lang="ts">
-const route = useRoute()
+const route = useRoute();
 
 const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
   return queryCollectionItemSurroundings('docs', route.path, {
-    fields: ['description']
-  })
-})
+    fields: ['description'],
+  });
+});
 </script>
 
 <template>

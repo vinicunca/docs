@@ -19,10 +19,10 @@ It extends the [Button](/pohon/components/button) component, so you can pass any
 
 ::code-preview
 
-#default
+# default
 :u-chat-prompt-submit
 
-#code
+# code
 ```vue
 <template>
   <PChatPrompt>
@@ -69,12 +69,12 @@ props:
 ::
 
 ::framework-only
-#nuxt
+# nuxt
 :::tip{to="/pohon/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.arrowUp` key.
 :::
 
-#vue
+# vue
 :::tip{to="/pohon/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.arrowUp` key.
 :::
@@ -120,12 +120,12 @@ props:
 ::
 
 ::framework-only
-#nuxt
+# nuxt
 :::tip{to="/pohon/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.stop` key.
 :::
 
-#vue
+# vue
 :::tip{to="/pohon/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.stop` key.
 :::
@@ -171,12 +171,12 @@ props:
 ::
 
 ::framework-only
-#nuxt
+# nuxt
 :::tip{to="/pohon/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.stop` key.
 :::
 
-#vue
+# vue
 :::tip{to="/pohon/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.stop` key.
 :::
@@ -222,12 +222,12 @@ props:
 ::
 
 ::framework-only
-#nuxt
+# nuxt
 :::tip{to="/pohon/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.reload` key.
 :::
 
-#vue
+# vue
 :::tip{to="/pohon/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.reload` key.
 :::

@@ -1,52 +1,63 @@
 <script setup lang="ts">
-import { h, resolveComponent } from 'vue'
-import { CalendarDate, DateFormatter } from '@internationalized/date'
-import type { DropdownMenuItem, NavigationMenuItem, TableColumn } from 'pohon-ui'
+import type { DropdownMenuItem, NavigationMenuItem, TableColumn } from 'pohon-ui';
+import { CalendarDate, DateFormatter } from '@internationalized/date';
+import { h, resolveComponent } from 'vue';
 
-const PAvatar = resolveComponent('PAvatar')
-const PBadge = resolveComponent('PBadge')
-const PButton = resolveComponent('PButton')
-const PCheckbox = resolveComponent('PCheckbox')
-const PDropdownMenu = resolveComponent('PDropdownMenu')
+const PAvatar = resolveComponent('PAvatar');
+const PBadge = resolveComponent('PBadge');
+const PButton = resolveComponent('PButton');
+const PCheckbox = resolveComponent('PCheckbox');
+const PDropdownMenu = resolveComponent('PDropdownMenu');
 
-const appConfig = useAppConfig()
-const studioIcons = useStudioIcons()
+const appConfig = useAppConfig();
+const studioIcons = useStudioIcons();
 
-type Page = 'home' | 'inbox' | 'customers' | 'settings'
-const page = ref<Page>('home')
-const settingsSection = ref<'general' | 'notifications' | 'security'>('general')
+type Page = 'home' | 'inbox' | 'customers' | 'settings';
+const page = ref<Page>('home');
+const settingsSection = ref<'general' | 'notifications' | 'security'>('general');
 
 const teams = [
   { label: 'Nuxt', avatar: { src: 'https://github.com/nuxt.png', alt: 'Nuxt' } },
   { label: 'NuxtHub', avatar: { src: 'https://github.com/nuxt-hub.png', alt: 'NuxtHub' } },
-  { label: 'NuxtLabs', avatar: { src: 'https://github.com/nuxtlabs.png', alt: 'NuxtLabs' } }
-]
-const selectedTeam = ref(teams[0]!)
+  { label: 'NuxtLabs', avatar: { src: 'https://github.com/nuxtlabs.png', alt: 'NuxtLabs' } },
+];
+const selectedTeam = ref(teams[0]!);
 
-const teamItems = computed<DropdownMenuItem[][]>(() => [
-  teams.map(team => ({ ...team, onSelect: () => { selectedTeam.value = team } })),
+const teamItems = computed<Array<Array<DropdownMenuItem>>>(() => [
+  teams.map((team) => ({
+    ...team,
+    onSelect: () => {
+      selectedTeam.value = team;
+    },
+  })),
   [
     { label: 'Create team', icon: appConfig.ui.icons.plus },
-    { label: 'Manage teams', icon: studioIcons.settings }
-  ]
-])
+    { label: 'Manage teams', icon: studioIcons.settings },
+  ],
+]);
 
-const links = computed<NavigationMenuItem[][]>(() => [[{
+const links = computed<Array<Array<NavigationMenuItem>>>(() => [[{
   label: 'Home',
   icon: studioIcons.home,
   active: page.value === 'home',
-  onSelect: () => { page.value = 'home' }
+  onSelect: () => {
+    page.value = 'home';
+  },
 }, {
   label: 'Inbox',
   icon: studioIcons.inbox,
   badge: String(unreadCount),
   active: page.value === 'inbox',
-  onSelect: () => { page.value = 'inbox' }
+  onSelect: () => {
+    page.value = 'inbox';
+  },
 }, {
   label: 'Customers',
   icon: studioIcons.users,
   active: page.value === 'customers',
-  onSelect: () => { page.value = 'customers' }
+  onSelect: () => {
+    page.value = 'customers';
+  },
 }, {
   label: 'Settings',
   icon: studioIcons.settings,
@@ -57,56 +68,56 @@ const links = computed<NavigationMenuItem[][]>(() => [[{
     label: 'General',
     active: page.value === 'settings' && settingsSection.value === 'general',
     onSelect: () => {
-      page.value = 'settings'
-      settingsSection.value = 'general'
-    }
+      page.value = 'settings';
+      settingsSection.value = 'general';
+    },
   }, {
     label: 'Notifications',
     active: page.value === 'settings' && settingsSection.value === 'notifications',
     onSelect: () => {
-      page.value = 'settings'
-      settingsSection.value = 'notifications'
-    }
+      page.value = 'settings';
+      settingsSection.value = 'notifications';
+    },
   }, {
     label: 'Security',
     active: page.value === 'settings' && settingsSection.value === 'security',
     onSelect: () => {
-      page.value = 'settings'
-      settingsSection.value = 'security'
-    }
-  }]
+      page.value = 'settings';
+      settingsSection.value = 'security';
+    },
+  }],
 }], [{
   label: 'Feedback',
-  icon: studioIcons.messageCircle
+  icon: studioIcons.messageCircle,
 }, {
   label: 'Help & Support',
-  icon: appConfig.ui.icons.info
-}]])
+  icon: appConfig.ui.icons.info,
+}]]);
 
 const user = {
   name: 'Benjamin Canac',
-  avatar: { src: 'https://github.com/benjamincanac.png', alt: 'Benjamin Canac' }
-}
+  avatar: { src: 'https://github.com/benjamincanac.png', alt: 'Benjamin Canac' },
+};
 
-const userItems = computed<DropdownMenuItem[][]>(() => [[{
+const userItems = computed<Array<Array<DropdownMenuItem>>>(() => [[{
   type: 'label',
   label: user.name,
-  avatar: user.avatar
+  avatar: user.avatar,
 }], [
   { label: 'Profile', icon: studioIcons.user },
   { label: 'Billing', icon: studioIcons.creditCard },
-  { label: 'Settings', icon: studioIcons.settings }
+  { label: 'Settings', icon: studioIcons.settings },
 ], [
-  { label: 'Log out', icon: studioIcons.logout }
-]])
+  { label: 'Log out', icon: studioIcons.logout },
+]]);
 
-const newItems = computed<DropdownMenuItem[][]>(() => [[
+const newItems = computed<Array<Array<DropdownMenuItem>>>(() => [[
   { label: 'New mail', icon: studioIcons.send },
-  { label: 'New customer', icon: studioIcons.userPlus }
-]])
+  { label: 'New customer', icon: studioIcons.userPlus },
+]]);
 
 // lowercase like the template, capitalized back through the select's `ui`
-const periodItems = ['daily', 'weekly', 'monthly']
+const periodItems = ['daily', 'weekly', 'monthly'];
 
 /**
  * The template's HomeDateRangePicker, over CalendarDate directly since nothing
@@ -114,8 +125,8 @@ const periodItems = ['daily', 'weekly', 'monthly']
  * the studio renders on the server too, and a live date risks a hydration
  * mismatch across timezones.
  */
-const dateFormatter = new DateFormatter('en-US', { dateStyle: 'medium' })
-const referenceDate = new CalendarDate(2026, 7, 6)
+const dateFormatter = new DateFormatter('en-US', { dateStyle: 'medium' });
+const referenceDate = new CalendarDate(2026, 7, 6);
 
 const dateRanges = [
   { label: 'Last 7 days', days: 7 },
@@ -123,80 +134,84 @@ const dateRanges = [
   { label: 'Last 30 days', days: 30 },
   { label: 'Last 3 months', months: 3 },
   { label: 'Last 6 months', months: 6 },
-  { label: 'Last year', years: 1 }
-]
+  { label: 'Last year', years: 1 },
+];
 
-type DateRangePreset = (typeof dateRanges)[number]
+type DateRangePreset = (typeof dateRanges)[number];
 
 function rangeStart(range: DateRangePreset) {
-  return referenceDate.subtract({ days: range.days, months: range.months, years: range.years })
+  return referenceDate.subtract({ days: range.days, months: range.months, years: range.years });
 }
 
 // shallowRef, not ref: a deep ref unwraps the CalendarDate instances and they
 // stop matching the calendar's DateValue.
-const selectedDateRange = shallowRef({ start: rangeStart(dateRanges[1]!), end: referenceDate })
+const selectedDateRange = shallowRef({ start: rangeStart(dateRanges[1]!), end: referenceDate });
 
 const dateRangeLabel = computed(() => {
-  const { start, end } = selectedDateRange.value
-  if (!start) return 'Pick a date'
-  if (!end) return dateFormatter.format(start.toDate('UTC'))
-  return `${dateFormatter.format(start.toDate('UTC'))} - ${dateFormatter.format(end.toDate('UTC'))}`
-})
+  const { start, end } = selectedDateRange.value;
+  if (!start) {
+    return 'Pick a date';
+  }
+  if (!end) {
+    return dateFormatter.format(start.toDate('UTC'));
+  }
+  return `${dateFormatter.format(start.toDate('UTC'))} - ${dateFormatter.format(end.toDate('UTC'))}`;
+});
 
 function isDateRangeSelected(range: DateRangePreset) {
-  const { start, end } = selectedDateRange.value
-  return !!start && !!end && start.compare(rangeStart(range)) === 0 && end.compare(referenceDate) === 0
+  const { start, end } = selectedDateRange.value;
+  return !!start && !!end && start.compare(rangeStart(range)) === 0 && end.compare(referenceDate) === 0;
 }
 
 function selectDateRange(range: DateRangePreset) {
-  selectedDateRange.value = { start: rangeStart(range), end: referenceDate }
+  selectedDateRange.value = { start: rangeStart(range), end: referenceDate };
 }
-const period = ref('daily')
+const period = ref('daily');
 
 const stats = computed(() => [
   { title: 'Customers', icon: studioIcons.users, value: '892', variation: 14 },
   { title: 'Conversions', icon: studioIcons.chart, value: '1,436', variation: 8 },
   { title: 'Revenue', icon: studioIcons.dollar, value: '$312,540', variation: 23 },
-  { title: 'Orders', icon: studioIcons.cart, value: '254', variation: -5 }
-])
+  { title: 'Orders', icon: studioIcons.cart, value: '254', variation: -5 },
+]);
 
-const revenue = [6200, 7400, 6800, 9100, 8600, 10400, 9800, 11900, 11200, 13000, 12400, 14100, 13600, 15200]
-const revenueMin = Math.min(...revenue)
-const revenueMax = Math.max(...revenue)
+const revenue = [6200, 7400, 6800, 9100, 8600, 10400, 9800, 11900, 11200, 13000, 12400, 14100, 13600, 15200];
+const revenueMin = Math.min(...revenue);
+const revenueMax = Math.max(...revenue);
 const chartPoints = revenue
   .map((value, index) => `${(index * (400 / (revenue.length - 1))).toFixed(1)},${(110 - ((value - revenueMin) / (revenueMax - revenueMin)) * 100).toFixed(1)}`)
-  .join(' ')
-const chartArea = `0,120 ${chartPoints} 400,120`
-const chartTicks = ['22 Jun', '26 Jun', '30 Jun', '3 Jul', '6 Jul']
+  .join(' ');
+const chartArea = `0,120 ${chartPoints} 400,120`;
+const chartTicks = ['22 Jun', '26 Jun', '30 Jun', '3 Jul', '6 Jul'];
 const revenueTotal = new Intl.NumberFormat('en-US', {
   style: 'currency',
   currency: 'USD',
-  maximumFractionDigits: 0
-}).format(revenue.reduce((acc, amount) => acc + amount, 0))
+  maximumFractionDigits: 0,
+}).format(revenue.reduce((acc, amount) => acc + amount, 0));
 
-type Sale = {
-  id: string
-  date: string
-  status: 'paid' | 'failed' | 'refunded'
-  email: string
-  amount: number
+interface Sale {
+  id: string;
+  date: string;
+  status: 'paid' | 'failed' | 'refunded';
+  email: string;
+  amount: number;
 }
 
-const sales: Sale[] = [
+const sales: Array<Sale> = [
   { id: '4600', date: 'Jul 6, 14:32', status: 'paid', email: 'james.anderson@example.com', amount: 594 },
   { id: '4599', date: 'Jul 6, 11:05', status: 'failed', email: 'mia.white@example.com', amount: 276 },
   { id: '4598', date: 'Jul 5, 22:47', status: 'refunded', email: 'william.brown@example.com', amount: 315 },
   { id: '4597', date: 'Jul 5, 18:20', status: 'paid', email: 'emma.davis@example.com', amount: 529 },
-  { id: '4596', date: 'Jul 5, 09:12', status: 'paid', email: 'ethan.harris@example.com', amount: 639 }
-]
+  { id: '4596', date: 'Jul 5, 09:12', status: 'paid', email: 'ethan.harris@example.com', amount: 639 },
+];
 
-const salesColumns: TableColumn<Sale>[] = [{
+const salesColumns: Array<TableColumn<Sale>> = [{
   accessorKey: 'id',
   header: 'ID',
-  cell: ({ row }) => `#${row.getValue('id')}`
+  cell: ({ row }) => `#${row.getValue('id')}`,
 }, {
   accessorKey: 'date',
-  header: 'Date'
+  header: 'Date',
 }, {
   accessorKey: 'status',
   header: 'Status',
@@ -204,51 +219,51 @@ const salesColumns: TableColumn<Sale>[] = [{
     const color = ({
       paid: 'success' as const,
       failed: 'error' as const,
-      refunded: 'neutral' as const
-    })[row.getValue('status') as string]
+      refunded: 'neutral' as const,
+    })[row.getValue('status') as string];
 
-    return h(PBadge, { class: 'capitalize', variant: 'subtle', color }, () => row.getValue('status'))
-  }
+    return h(PBadge, { class: 'capitalize', variant: 'subtle', color }, () => row.getValue('status'));
+  },
 }, {
   accessorKey: 'email',
-  header: 'Email'
+  header: 'Email',
 }, {
   accessorKey: 'amount',
   header: 'Amount',
   meta: {
     class: {
       th: 'text-right',
-      td: 'text-right font-medium'
-    }
+      td: 'text-right font-medium',
+    },
   },
   cell: ({ row }) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'EUR'
-    }).format(Number.parseFloat(row.getValue('amount')))
-  }
-}]
+      currency: 'EUR',
+    }).format(Number.parseFloat(row.getValue('amount')));
+  },
+}];
 
 // Inbox, mirrors app/pages/inbox.vue + InboxList/InboxMail from the template,
 // with dates pre-formatted as strings instead of pulling in date-fns.
-type Mail = {
-  id: number
-  unread?: boolean
-  from: { name: string, email: string, avatar: { src: string, alt: string } }
-  subject: string
-  date: string
-  datetime: string
-  body: string
+interface Mail {
+  id: number;
+  unread?: boolean;
+  from: { name: string; email: string; avatar: { src: string; alt: string } };
+  subject: string;
+  date: string;
+  datetime: string;
+  body: string;
 }
 
-const mails: Mail[] = [{
+const mails: Array<Mail> = [{
   id: 1,
   unread: true,
   from: { name: 'Alex Smith', email: 'alex.smith@example.com', avatar: { src: 'https://github.com/nuxt.png', alt: 'Alex Smith' } },
   subject: 'Meeting Schedule: Project Update',
   date: '14:32',
   datetime: '10 Jul 14:32',
-  body: 'Hi there,\n\nJust a quick reminder that we have a meeting scheduled for tomorrow at 10 AM to discuss the latest project updates. Please come prepared with your progress reports.\n\nHere is the agenda so nobody has to improvise:\n\n- Sprint 12 review, twenty minutes\n- The migration off the legacy billing service\n- Headcount for Q3, including the two open design roles\n- Anything you add to the shared doc before tonight\n\nI have blocked the room until noon in case we run long. If you cannot make it, send me your notes beforehand and I will present them on your behalf rather than push the whole thing another week.\n\nBest regards,\nAlex'
+  body: 'Hi there,\n\nJust a quick reminder that we have a meeting scheduled for tomorrow at 10 AM to discuss the latest project updates. Please come prepared with your progress reports.\n\nHere is the agenda so nobody has to improvise:\n\n- Sprint 12 review, twenty minutes\n- The migration off the legacy billing service\n- Headcount for Q3, including the two open design roles\n- Anything you add to the shared doc before tonight\n\nI have blocked the room until noon in case we run long. If you cannot make it, send me your notes beforehand and I will present them on your behalf rather than push the whole thing another week.\n\nBest regards,\nAlex',
 }, {
   id: 2,
   unread: true,
@@ -256,14 +271,14 @@ const mails: Mail[] = [{
   subject: 'Urgent: Server Maintenance Tonight',
   date: '11:05',
   datetime: '10 Jul 11:05',
-  body: 'Attention team,\n\nWe will be conducting server maintenance tonight from 11 PM to 2 AM. During this period, all services will be temporarily unavailable.\n\nWhat is changing:\n\n- Database failover to the new primary in eu-west-1\n- Certificate rotation across every edge node\n- A long overdue kernel upgrade on the build fleet\n\nQueued jobs will drain before the window opens and resume automatically afterwards, so nothing should need replaying by hand. If you have a deploy planned for tonight, land it before 10 PM or hold it until the morning.\n\nWe will post updates in #ops as each step completes.\n\nIT Department'
+  body: 'Attention team,\n\nWe will be conducting server maintenance tonight from 11 PM to 2 AM. During this period, all services will be temporarily unavailable.\n\nWhat is changing:\n\n- Database failover to the new primary in eu-west-1\n- Certificate rotation across every edge node\n- A long overdue kernel upgrade on the build fleet\n\nQueued jobs will drain before the window opens and resume automatically afterwards, so nothing should need replaying by hand. If you have a deploy planned for tonight, land it before 10 PM or hold it until the morning.\n\nWe will post updates in #ops as each step completes.\n\nIT Department',
 }, {
   id: 3,
   from: { name: 'Taylor Green', email: 'taylor.green@example.com', avatar: { src: 'https://github.com/nuxt-hub.png', alt: 'Taylor Green' } },
   subject: 'Feedback Request: New Design Mockups',
   date: '09 Jul',
   datetime: '09 Jul 16:20',
-  body: 'Hello,\n\nWe value your opinion! Could you please take a moment to review the attached design mockups for the upcoming dashboard refresh?\n\nThe main changes since the last round:\n\n- The stats row is now four cards that join into a single surface on wide screens\n- Revenue moved above the fold, with the range picker beside the period select\n- Table rows gained a hover state and the status column reads as a badge\n\nI am mostly after a gut check on the density. The old layout wasted a lot of vertical space and this one may have overcorrected. Comments directly on the file are perfect, no need to write anything long.\n\nThank you,\nTaylor'
+  body: 'Hello,\n\nWe value your opinion! Could you please take a moment to review the attached design mockups for the upcoming dashboard refresh?\n\nThe main changes since the last round:\n\n- The stats row is now four cards that join into a single surface on wide screens\n- Revenue moved above the fold, with the range picker beside the period select\n- Table rows gained a hover state and the status column reads as a badge\n\nI am mostly after a gut check on the density. The old layout wasted a lot of vertical space and this one may have overcorrected. Comments directly on the file are perfect, no need to write anything long.\n\nThank you,\nTaylor',
 }, {
   id: 4,
   unread: true,
@@ -271,55 +286,55 @@ const mails: Mail[] = [{
   subject: 'Invitation: Annual Company Retreat',
   date: '08 Jul',
   datetime: '08 Jul 10:12',
-  body: 'Dear colleague,\n\nYou are cordially invited to our annual company retreat on August 15th. It will be a great opportunity to unwind and connect with your peers outside the office.\n\nRSVP by July 25th.\n\nHR Team'
+  body: 'Dear colleague,\n\nYou are cordially invited to our annual company retreat on August 15th. It will be a great opportunity to unwind and connect with your peers outside the office.\n\nRSVP by July 25th.\n\nHR Team',
 }, {
   id: 5,
   from: { name: 'Casey Gray', email: 'casey.gray@example.com', avatar: { src: 'https://github.com/vuejs.png', alt: 'Casey Gray' } },
   subject: 'Reminder: Submit Your Timesheets',
   date: '07 Jul',
   datetime: '07 Jul 08:45',
-  body: 'Hi all,\n\nThis is a friendly reminder to submit your timesheets by the end of the day Friday. Timely submission helps us process payroll without delays.\n\nThanks,\nCasey'
-}]
+  body: 'Hi all,\n\nThis is a friendly reminder to submit your timesheets by the end of the day Friday. Timely submission helps us process payroll without delays.\n\nThanks,\nCasey',
+}];
 
-const unreadCount = mails.filter(mail => mail.unread).length
+const unreadCount = mails.filter((mail) => mail.unread).length;
 
-const mailTabItems = [{ label: 'All', value: 'all' }, { label: 'Unread', value: 'unread' }]
-const selectedMailTab = ref('all')
+const mailTabItems = [{ label: 'All', value: 'all' }, { label: 'Unread', value: 'unread' }];
+const selectedMailTab = ref('all');
 
 const filteredMails = computed(() => {
-  return selectedMailTab.value === 'unread' ? mails.filter(mail => !!mail.unread) : mails
-})
+  return selectedMailTab.value === 'unread' ? mails.filter((mail) => !!mail.unread) : mails;
+});
 
-const selectedMail = ref<Mail | null>(mails[0]!)
+const selectedMail = ref<Mail | null>(mails[0]!);
 
 // Reset selected mail if it's not in the filtered mails
 watch(filteredMails, () => {
-  if (!filteredMails.value.find(mail => mail.id === selectedMail.value?.id)) {
-    selectedMail.value = filteredMails.value[0] ?? null
+  if (!filteredMails.value.some((mail) => mail.id === selectedMail.value?.id)) {
+    selectedMail.value = filteredMails.value[0] ?? null;
   }
-})
+});
 
-const mailDropdownItems = computed<DropdownMenuItem[][]>(() => [[
+const mailDropdownItems = computed<Array<Array<DropdownMenuItem>>>(() => [[
   { label: 'Mark as unread', icon: appConfig.ui.icons.success },
-  { label: 'Mark as important', icon: appConfig.ui.icons.warning }
+  { label: 'Mark as important', icon: appConfig.ui.icons.warning },
 ], [
-  { label: 'Star thread', icon: appConfig.ui.icons.star }
-]])
+  { label: 'Star thread', icon: appConfig.ui.icons.star },
+]]);
 
-const reply = ref('')
+const reply = ref('');
 
 // Customers, mirrors app/pages/customers.vue from the template.
-type Customer = {
-  id: number
-  name: string
-  username: string
-  email: string
-  location: string
-  status: 'subscribed' | 'unsubscribed' | 'bounced'
-  avatar: { src: string, alt: string }
+interface Customer {
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+  location: string;
+  status: 'subscribed' | 'unsubscribed' | 'bounced';
+  avatar: { src: string; alt: string };
 }
 
-const customers: Customer[] = [
+const customers: Array<Customer> = [
   { id: 1, name: 'Alex Smith', username: 'alexsmith', email: 'alex.smith@example.com', location: 'New York, USA', status: 'subscribed', avatar: { src: 'https://github.com/nuxt.png', alt: 'Alex Smith' } },
   { id: 2, name: 'Jordan Brown', username: 'jordanbrown', email: 'jordan.brown@example.com', location: 'London, UK', status: 'unsubscribed', avatar: { src: 'https://github.com/nuxtlabs.png', alt: 'Jordan Brown' } },
   { id: 3, name: 'Taylor Green', username: 'taylorgreen', email: 'taylor.green@example.com', location: 'Paris, France', status: 'bounced', avatar: { src: 'https://github.com/nuxt-hub.png', alt: 'Taylor Green' } },
@@ -327,53 +342,53 @@ const customers: Customer[] = [
   { id: 5, name: 'Casey Gray', username: 'caseygray', email: 'casey.gray@example.com', location: 'Tokyo, Japan', status: 'subscribed', avatar: { src: 'https://github.com/vuejs.png', alt: 'Casey Gray' } },
   { id: 6, name: 'Riley Davis', username: 'rileydavis', email: 'riley.davis@example.com', location: 'Sydney, Australia', status: 'subscribed', avatar: { src: 'https://github.com/unjs.png', alt: 'Riley Davis' } },
   { id: 7, name: 'Jamie Johnson', username: 'jamiejohnson', email: 'jamie.johnson@example.com', location: 'Toronto, Canada', status: 'unsubscribed', avatar: { src: 'https://github.com/nitrojs.png', alt: 'Jamie Johnson' } },
-  { id: 8, name: 'Kelly Wilson', username: 'kellywilson', email: 'kelly.wilson@example.com', location: 'Madrid, Spain', status: 'subscribed', avatar: { src: 'https://github.com/vueuse.png', alt: 'Kelly Wilson' } }
-]
+  { id: 8, name: 'Kelly Wilson', username: 'kellywilson', email: 'kelly.wilson@example.com', location: 'Madrid, Spain', status: 'subscribed', avatar: { src: 'https://github.com/vueuse.png', alt: 'Kelly Wilson' } },
+];
 
-const customerRowSelection = ref({ 1: true })
-const customerEmailFilter = ref('')
-const customerStatusFilter = ref('all')
+const customerRowSelection = ref({ 1: true });
+const customerEmailFilter = ref('');
+const customerStatusFilter = ref('all');
 
 const displayedCustomers = computed(() => {
   return customers.filter((customer) => {
     if (customerStatusFilter.value !== 'all' && customer.status !== customerStatusFilter.value) {
-      return false
+      return false;
     }
-    return customer.email.toLowerCase().includes(customerEmailFilter.value.toLowerCase())
-  })
-})
+    return customer.email.toLowerCase().includes(customerEmailFilter.value.toLowerCase());
+  });
+});
 
 const customerStatusItems = [
   { label: 'All', value: 'all' },
   { label: 'Subscribed', value: 'subscribed' },
   { label: 'Unsubscribed', value: 'unsubscribed' },
-  { label: 'Bounced', value: 'bounced' }
-]
+  { label: 'Bounced', value: 'bounced' },
+];
 
-const customerRowItems = computed<DropdownMenuItem[]>(() => [
+const customerRowItems = computed<Array<DropdownMenuItem>>(() => [
   { type: 'label', label: 'Actions' },
   { label: 'Copy customer ID', icon: appConfig.ui.icons.copy },
   { type: 'separator' },
   { label: 'View customer details', icon: studioIcons.list },
   { type: 'separator' },
-  { label: 'Delete customer', icon: studioIcons.trash, color: 'error' }
-])
+  { label: 'Delete customer', icon: studioIcons.trash, color: 'error' },
+]);
 
-const customerColumns: TableColumn<Customer>[] = [{
+const customerColumns: Array<TableColumn<Customer>> = [{
   id: 'select',
   header: ({ table }) => h(PCheckbox, {
     'modelValue': table.getIsSomePageRowsSelected() ? 'indeterminate' : table.getIsAllPageRowsSelected(),
     'onUpdate:modelValue': (value: boolean | 'indeterminate') => table.toggleAllPageRowsSelected(!!value),
-    'ariaLabel': 'Select all'
+    'ariaLabel': 'Select all',
   }),
   cell: ({ row }) => h(PCheckbox, {
     'modelValue': row.getIsSelected(),
     'onUpdate:modelValue': (value: boolean | 'indeterminate') => row.toggleSelected(!!value),
-    'ariaLabel': 'Select row'
-  })
+    'ariaLabel': 'Select row',
+  }),
 }, {
   accessorKey: 'id',
-  header: 'ID'
+  header: 'ID',
 }, {
   accessorKey: 'name',
   header: 'Name',
@@ -382,10 +397,10 @@ const customerColumns: TableColumn<Customer>[] = [{
       h(PAvatar, { ...row.original.avatar, size: 'lg' }),
       h('div', undefined, [
         h('p', { class: 'font-medium color-text-highlighted' }, row.original.name),
-        h('p', undefined, `@${row.original.username}`)
-      ])
-    ])
-  }
+        h('p', undefined, `@${row.original.username}`),
+      ]),
+    ]);
+  },
 }, {
   accessorKey: 'email',
   // the template's one sortable column, so it reads as a button
@@ -395,11 +410,11 @@ const customerColumns: TableColumn<Customer>[] = [{
     label: 'Email',
     icon: studioIcons.sort,
     class: '-mx-2.5',
-    onClick: () => column.toggleSorting(column.getIsSorted() === 'asc')
-  })
+    onClick: () => column.toggleSorting(column.getIsSorted() === 'asc'),
+  }),
 }, {
   accessorKey: 'location',
-  header: 'Location'
+  header: 'Location',
 }, {
   accessorKey: 'status',
   header: 'Status',
@@ -407,119 +422,125 @@ const customerColumns: TableColumn<Customer>[] = [{
     const color = ({
       subscribed: 'success' as const,
       unsubscribed: 'error' as const,
-      bounced: 'warning' as const
-    })[row.original.status]
+      bounced: 'warning' as const,
+    })[row.original.status];
 
-    return h(PBadge, { class: 'capitalize', variant: 'subtle', color }, () => row.original.status)
-  }
+    return h(PBadge, { class: 'capitalize', variant: 'subtle', color }, () => row.original.status);
+  },
 }, {
   id: 'actions',
   cell: () => {
     return h('div', { class: 'text-right' }, h(
       PDropdownMenu,
       { content: { align: 'end' }, items: customerRowItems.value },
-      () => h(PButton, { icon: appConfig.ui.icons.ellipsis, color: 'neutral', variant: 'ghost', class: 'ml-auto' })
-    ))
-  }
-}]
+      () => h(PButton, { icon: appConfig.ui.icons.ellipsis, color: 'neutral', variant: 'ghost', class: 'ml-auto' }),
+    ));
+  },
+}];
 
 // Settings, mirrors app/pages/settings.vue + settings/index.vue + settings/notifications.vue,
 // trimmed to two sections without zod/PForm validation.
-const settingsLinks = computed<NavigationMenuItem[][]>(() => [[{
+const settingsLinks = computed<Array<Array<NavigationMenuItem>>>(() => [[{
   label: 'General',
   icon: studioIcons.user,
   active: settingsSection.value === 'general',
-  onSelect: () => { settingsSection.value = 'general' }
+  onSelect: () => {
+    settingsSection.value = 'general';
+  },
 }, {
   label: 'Notifications',
   icon: studioIcons.bell,
   active: settingsSection.value === 'notifications',
-  onSelect: () => { settingsSection.value = 'notifications' }
+  onSelect: () => {
+    settingsSection.value = 'notifications';
+  },
 }, {
   label: 'Security',
   icon: studioIcons.shield,
   active: settingsSection.value === 'security',
-  onSelect: () => { settingsSection.value = 'security' }
+  onSelect: () => {
+    settingsSection.value = 'security';
+  },
 }], [{
   label: 'Documentation',
-  icon: studioIcons.bookOpen
-}]])
+  icon: studioIcons.bookOpen,
+}]]);
 
 const profile = reactive({
   name: 'Benjamin Canac',
   email: 'ben@nuxtlabs.com',
   username: 'benjamincanac',
-  bio: ''
-})
+  bio: '',
+});
 
 const profileFields = [
   { name: 'name', label: 'Name', description: 'Will appear on receipts, invoices, and other communication.' },
   { name: 'email', label: 'Email', description: 'Used to sign in, for email receipts and product updates.' },
-  { name: 'username', label: 'Username', description: 'Your unique username for logging in and your profile URL.' }
-] as const
+  { name: 'username', label: 'Username', description: 'Your unique username for logging in and your profile URL.' },
+] as const;
 
-const password = reactive({ current: '', new: '' })
+const password = reactive({ current: '', new: '' });
 
 const notificationsState = reactive<{ [key: string]: boolean }>({
   email: true,
   desktop: false,
   weekly_digest: false,
-  product_updates: true
-})
+  product_updates: true,
+});
 
 const notificationSections = [{
   title: 'Notification channels',
   description: 'Where can we notify you?',
   fields: [
     { name: 'email', label: 'Email', description: 'Receive a daily email digest.' },
-    { name: 'desktop', label: 'Desktop', description: 'Receive desktop notifications.' }
-  ]
+    { name: 'desktop', label: 'Desktop', description: 'Receive desktop notifications.' },
+  ],
 }, {
   title: 'Account updates',
   description: 'Receive updates about Pohon UI.',
   fields: [
     { name: 'weekly_digest', label: 'Weekly digest', description: 'Receive a weekly digest of news.' },
-    { name: 'product_updates', label: 'Product updates', description: 'Receive a monthly email with all new features and updates.' }
-  ]
-}]
+    { name: 'product_updates', label: 'Product updates', description: 'Receive a monthly email with all new features and updates.' },
+  ],
+}];
 
 // the template's Display menu, over real column visibility
-const customerColumnVisibility = ref<Record<string, boolean>>({})
+const customerColumnVisibility = ref<Record<string, boolean>>({});
 
-const customerDisplayItems = computed<DropdownMenuItem[]>(() =>
-  (['email', 'location', 'status'] as const).map(column => ({
+const customerDisplayItems = computed<Array<DropdownMenuItem>>(() =>
+  (['email', 'location', 'status'] as const).map((column) => ({
     label: column,
     type: 'checkbox' as const,
     checked: customerColumnVisibility.value[column] !== false,
     onUpdateChecked(checked: boolean) {
-      customerColumnVisibility.value = { ...customerColumnVisibility.value, [column]: checked }
+      customerColumnVisibility.value = { ...customerColumnVisibility.value, [column]: checked };
     },
     onSelect(event: Event) {
-      event.preventDefault()
-    }
-  }))
-)
+      event.preventDefault();
+    },
+  })),
+);
 
-const customerPage = ref(1)
+const customerPage = ref(1);
 
 watch([customerEmailFilter, customerStatusFilter], () => {
-  customerPage.value = 1
-})
+  customerPage.value = 1;
+});
 
 const paginatedCustomers = computed(() => {
-  return displayedCustomers.value.slice((customerPage.value - 1) * 5, customerPage.value * 5)
-})
+  return displayedCustomers.value.slice((customerPage.value - 1) * 5, customerPage.value * 5);
+});
 
 const selectedCustomersCount = computed(() => {
-  return Object.values(customerRowSelection.value).filter(Boolean).length
-})
+  return Object.values(customerRowSelection.value).filter(Boolean).length;
+});
 
 const pageTitles: Record<Page, string> = {
   home: 'Home',
   inbox: 'Inbox',
   customers: 'Customers',
-  settings: 'Settings'
-}
+  settings: 'Settings',
+};
 </script>
 
 <template>
@@ -527,7 +548,7 @@ const pageTitles: Record<Page, string> = {
   <PDashboardGroup
     unit="rem"
     :persistent="false"
-    class="relative inset-auto h-full w-full"
+    class="h-full w-full inset-auto relative"
   >
     <PDashboardSidebar
       collapsible
@@ -545,7 +566,7 @@ const pageTitles: Record<Page, string> = {
             v-bind="{
               ...selectedTeam,
               label: collapsed ? undefined : selectedTeam.label,
-              trailingIcon: collapsed ? undefined : studioIcons.sort
+              trailingIcon: collapsed ? undefined : studioIcons.sort,
             }"
             color="neutral"
             variant="ghost"
@@ -559,7 +580,10 @@ const pageTitles: Record<Page, string> = {
       </template>
 
       <template #default="{ collapsed }">
-        <PDashboardSearchButton :collapsed="collapsed" class="bg-transparent ring-ring" />
+        <PDashboardSearchButton
+          :collapsed="collapsed"
+          class="bg-transparent ring-ring"
+        />
 
         <PNavigationMenu
           :collapsed="collapsed"
@@ -588,7 +612,7 @@ const pageTitles: Record<Page, string> = {
             v-bind="{
               ...user,
               label: collapsed ? undefined : user.name,
-              trailingIcon: collapsed ? undefined : studioIcons.sort
+              trailingIcon: collapsed ? undefined : studioIcons.sort,
             }"
             color="neutral"
             variant="ghost"
@@ -616,7 +640,10 @@ const pageTitles: Record<Page, string> = {
             <PDashboardSidebarCollapse />
           </template>
           <template #trailing>
-            <PBadge :label="String(filteredMails.length)" variant="subtle" />
+            <PBadge
+              :label="String(filteredMails.length)"
+              variant="subtle"
+            />
           </template>
 
           <template #right>
@@ -629,20 +656,26 @@ const pageTitles: Record<Page, string> = {
           </template>
         </PDashboardNavbar>
 
-        <div class="overflow-y-auto divide-y divide-border">
-          <div v-for="mail in filteredMails" :key="mail.id">
+        <div class="overflow-y-auto divide-border divide-y">
+          <div
+            v-for="mail in filteredMails"
+            :key="mail.id"
+          >
             <div
-              class="p-4 sm:px-6 text-sm cursor-pointer border-l-2 transition-colors"
+              class="text-sm p-4 border-l-2 cursor-pointer transition-colors sm:px-6"
               :class="[
                 mail.unread ? 'color-text-highlighted' : 'color-text-toned',
                 selectedMail && selectedMail.id === mail.id
                   ? 'border-primary bg-primary/10'
-                  : 'border-bg hover:border-primary hover:bg-primary/5'
+                  : 'border-bg hover:border-primary hover:bg-primary/5',
               ]"
               @click="selectedMail = mail"
             >
-              <div class="flex items-center justify-between" :class="[mail.unread && 'font-semibold']">
-                <div class="flex items-center gap-3">
+              <div
+                class="flex items-center justify-between"
+                :class="[mail.unread && 'font-semibold']"
+              >
+                <div class="flex gap-3 items-center">
                   {{ mail.from.name }}
 
                   <PChip v-if="mail.unread" />
@@ -650,7 +683,10 @@ const pageTitles: Record<Page, string> = {
 
                 <span>{{ mail.date }}</span>
               </div>
-              <p class="truncate" :class="[mail.unread && 'font-semibold']">
+              <p
+                class="truncate"
+                :class="[mail.unread && 'font-semibold']"
+              >
                 {{ mail.subject }}
               </p>
               <p class="color-text-dimmed line-clamp-1">
@@ -661,8 +697,15 @@ const pageTitles: Record<Page, string> = {
         </div>
       </PDashboardPanel>
 
-      <PDashboardPanel v-if="selectedMail" id="theme-studio-inbox-mail" :ui="{ root: 'min-h-0' }">
-        <PDashboardNavbar :title="selectedMail.subject" :toggle="false">
+      <PDashboardPanel
+        v-if="selectedMail"
+        id="theme-studio-inbox-mail"
+        :ui="{ root: 'min-h-0' }"
+      >
+        <PDashboardNavbar
+          :title="selectedMail.subject"
+          :toggle="false"
+        >
           <template #leading>
             <PButton
               :icon="appConfig.ui.icons.close"
@@ -676,25 +719,43 @@ const pageTitles: Record<Page, string> = {
 
           <template #right>
             <PTooltip text="Archive">
-              <PButton :icon="studioIcons.inbox" color="neutral" variant="ghost" aria-label="Archive" />
+              <PButton
+                :icon="studioIcons.inbox"
+                color="neutral"
+                variant="ghost"
+                aria-label="Archive"
+              />
             </PTooltip>
 
             <PTooltip text="Reply">
-              <PButton :icon="studioIcons.reply" color="neutral" variant="ghost" aria-label="Reply" />
+              <PButton
+                :icon="studioIcons.reply"
+                color="neutral"
+                variant="ghost"
+                aria-label="Reply"
+              />
             </PTooltip>
 
             <PDropdownMenu :items="mailDropdownItems">
-              <PButton :icon="appConfig.ui.icons.ellipsis" color="neutral" variant="ghost" aria-label="More actions" />
+              <PButton
+                :icon="appConfig.ui.icons.ellipsis"
+                color="neutral"
+                variant="ghost"
+                aria-label="More actions"
+              />
             </PDropdownMenu>
           </template>
         </PDashboardNavbar>
 
-        <div class="flex flex-col sm:flex-row justify-between gap-1 p-4 sm:px-6 border-b border-border">
-          <div class="flex items-start gap-4 sm:my-1.5">
-            <PAvatar v-bind="selectedMail.from.avatar" size="3xl" />
+        <div class="p-4 border-b border-border flex flex-col gap-1 justify-between sm:px-6 sm:flex-row">
+          <div class="flex gap-4 items-start sm:my-1.5">
+            <PAvatar
+              v-bind="selectedMail.from.avatar"
+              size="3xl"
+            />
 
             <div class="min-w-0">
-              <p class="font-semibold color-text-highlighted">
+              <p class="color-text-highlighted font-semibold">
                 {{ selectedMail.from.name }}
               </p>
               <p class="color-text-muted">
@@ -703,21 +764,28 @@ const pageTitles: Record<Page, string> = {
             </div>
           </div>
 
-          <p class="max-sm:pl-16 color-text-muted text-sm sm:mt-2">
+          <p class="text-sm color-text-muted sm:mt-2 max-sm:pl-16">
             {{ selectedMail.datetime }}
           </p>
         </div>
 
-        <div class="flex-1 p-4 sm:p-6 overflow-y-auto">
+        <div class="p-4 flex-1 overflow-y-auto sm:p-6">
           <p class="whitespace-pre-wrap">
             {{ selectedMail.body }}
           </p>
         </div>
 
-        <div class="pb-4 px-4 sm:px-6 shrink-0">
-          <PCard variant="subtle" class="mt-auto" :ui="{ header: 'flex items-center gap-1.5 color-text-dimmed' }">
+        <div class="px-4 pb-4 shrink-0 sm:px-6">
+          <PCard
+            variant="subtle"
+            class="mt-auto"
+            :ui="{ header: 'flex items-center gap-1.5 color-text-dimmed' }"
+          >
             <template #header>
-              <PIcon :name="studioIcons.reply" class="size-5" />
+              <PIcon
+                :name="studioIcons.reply"
+                class="size-5"
+              />
 
               <span class="text-sm truncate">
                 Reply to {{ selectedMail.from.name }} ({{ selectedMail.from.email }})
@@ -738,35 +806,75 @@ const pageTitles: Record<Page, string> = {
 
               <div class="flex items-center justify-between">
                 <PTooltip text="Attach file">
-                  <PButton color="neutral" variant="ghost" :icon="studioIcons.paperclip" aria-label="Attach file" />
+                  <PButton
+                    color="neutral"
+                    variant="ghost"
+                    :icon="studioIcons.paperclip"
+                    aria-label="Attach file"
+                  />
                 </PTooltip>
 
-                <div class="flex items-center gap-2">
-                  <PButton color="neutral" variant="ghost" label="Save draft" />
-                  <PButton type="submit" color="neutral" label="Send" :icon="studioIcons.send" />
+                <div class="flex gap-2 items-center">
+                  <PButton
+                    color="neutral"
+                    variant="ghost"
+                    label="Save draft"
+                  />
+                  <PButton
+                    type="submit"
+                    color="neutral"
+                    label="Send"
+                    :icon="studioIcons.send"
+                  />
                 </div>
               </div>
             </form>
           </PCard>
         </div>
       </PDashboardPanel>
-      <div v-else class="flex-1 hidden lg:flex items-center justify-center">
-        <PIcon :name="studioIcons.inbox" class="size-32 color-text-dimmed" />
+      <div
+        v-else
+        class="flex-1 hidden items-center justify-center lg:flex"
+      >
+        <PIcon
+          :name="studioIcons.inbox"
+          class="color-text-dimmed size-32"
+        />
       </div>
     </template>
 
-    <PDashboardPanel v-else :ui="{ root: 'min-h-0' }">
+    <PDashboardPanel
+      v-else
+      :ui="{ root: 'min-h-0' }"
+    >
       <template #header>
-        <PDashboardNavbar :title="pageTitles[page]" :ui="{ right: 'gap-3' }">
+        <PDashboardNavbar
+          :title="pageTitles[page]"
+          :ui="{ right: 'gap-3' }"
+        >
           <template #leading>
             <PDashboardSidebarCollapse />
           </template>
 
           <template #right>
-            <PTooltip text="Notifications" :shortcuts="['N']">
-              <PButton color="neutral" variant="ghost" square aria-label="Notifications">
-                <PChip color="error" inset>
-                  <PIcon :name="studioIcons.bell" class="size-5 shrink-0" />
+            <PTooltip
+              text="Notifications"
+              :shortcuts="['N']"
+            >
+              <PButton
+                color="neutral"
+                variant="ghost"
+                square
+                aria-label="Notifications"
+              >
+                <PChip
+                  color="error"
+                  inset
+                >
+                  <PIcon
+                    :name="studioIcons.bell"
+                    class="shrink-0 size-5"
+                  />
                 </PChip>
               </PButton>
             </PTooltip>
@@ -776,8 +884,15 @@ const pageTitles: Record<Page, string> = {
               label="New customer"
               :icon="appConfig.ui.icons.plus"
             />
-            <PDropdownMenu v-else :items="newItems">
-              <PButton :icon="appConfig.ui.icons.plus" class="rounded-full" aria-label="New" />
+            <PDropdownMenu
+              v-else
+              :items="newItems"
+            >
+              <PButton
+                :icon="appConfig.ui.icons.plus"
+                class="rounded-full"
+                aria-label="New"
+              />
             </PDropdownMenu>
           </template>
         </PDashboardNavbar>
@@ -789,35 +904,40 @@ const pageTitles: Record<Page, string> = {
                 color="neutral"
                 variant="ghost"
                 :icon="studioIcons.calendar"
-                class="-ms-1 group data-[state=open]:bg-background-elevated"
+                class="group -ms-1 data-[state=open]:bg-background-elevated"
               >
                 <span class="truncate">{{ dateRangeLabel }}</span>
 
                 <template #trailing>
                   <PIcon
                     :name="appConfig.ui.icons.chevronDown"
-                    class="shrink-0 color-text-dimmed size-5 group-data-[state=open]:rotate-180 transition-transform duration-200"
+                    class="color-text-dimmed shrink-0 size-5 transition-transform duration-200 group-data-[state=open]:rotate-180"
                   />
                 </template>
               </PButton>
 
               <template #content>
-                <div class="flex items-stretch sm:divide-x divide-border">
-                  <div class="hidden sm:flex flex-col justify-center">
+                <div class="flex items-stretch divide-border sm:divide-x">
+                  <div class="flex-col hidden justify-center sm:flex">
                     <PButton
                       v-for="range in dateRanges"
                       :key="range.label"
                       :label="range.label"
                       color="neutral"
                       variant="ghost"
-                      class="rounded-none px-4"
+                      class="px-4 rounded-none"
                       :class="isDateRangeSelected(range) ? 'bg-background-elevated' : 'hover:bg-background-elevated/50'"
                       truncate
                       @click="selectDateRange(range)"
                     />
                   </div>
 
-                  <PCalendar v-model="selectedDateRange" class="p-2" :number-of-months="2" range />
+                  <PCalendar
+                    v-model="selectedDateRange"
+                    class="p-2"
+                    :number-of-months="2"
+                    range
+                  />
                 </div>
               </template>
             </PPopover>
@@ -830,14 +950,18 @@ const pageTitles: Record<Page, string> = {
               :ui="{
                 value: 'capitalize',
                 itemLabel: 'capitalize',
-                trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200'
+                trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200',
               }"
             />
           </template>
         </PDashboardToolbar>
 
         <PDashboardToolbar v-else-if="page === 'settings'">
-          <PNavigationMenu :items="settingsLinks" highlight class="-mx-1 flex-1" />
+          <PNavigationMenu
+            :items="settingsLinks"
+            highlight
+            class="flex-1 -mx-1"
+          />
         </PDashboardToolbar>
       </template>
 
@@ -847,7 +971,7 @@ const pageTitles: Record<Page, string> = {
         <!-- shrink-0 everywhere: the panel body is a scrollable flex column,
              and a shrinking child gets crushed into its own overflow-hidden -->
         <template v-if="page === 'home'">
-          <PPageGrid class="shrink-0 grid-cols-2 xl:grid-cols-4 gap-4 xl:gap-px">
+          <PPageGrid class="shrink-0 gap-4 grid-cols-2 xl:gap-px xl:grid-cols-4">
             <PPageCard
               v-for="stat in stats"
               :key="stat.title"
@@ -857,27 +981,34 @@ const pageTitles: Record<Page, string> = {
                 container: 'gap-y-1.5',
                 wrapper: 'items-start',
                 leading: 'p-2.5 rounded-full bg-primary/10 ring ring-inset ring-primary/25 flex-col',
-                title: 'font-normal color-text-muted text-xs uppercase'
+                title: 'font-normal color-text-muted text-xs uppercase',
               }"
               variant="subtle"
               class="xl:rounded-none xl:first:rounded-l-lg xl:last:rounded-r-lg"
             >
-              <div class="flex items-center gap-2 flex-wrap min-w-0">
-                <span class="text-2xl font-semibold color-text-highlighted">
+              <div class="flex flex-wrap gap-2 min-w-0 items-center">
+                <span class="text-2xl color-text-highlighted font-semibold">
                   {{ stat.value }}
                 </span>
 
-                <PBadge :color="stat.variation > 0 ? 'success' : 'error'" variant="subtle" class="text-xs">
+                <PBadge
+                  :color="stat.variation > 0 ? 'success' : 'error'"
+                  variant="subtle"
+                  class="text-xs"
+                >
                   {{ stat.variation > 0 ? '+' : '' }}{{ stat.variation }}%
                 </PBadge>
               </div>
             </PPageCard>
           </PPageGrid>
 
-          <PCard class="shrink-0" :ui="{ body: 'px-0! pt-0! pb-3!' }">
+          <PCard
+            class="shrink-0"
+            :ui="{ body: 'px-0! pt-0! pb-3!' }"
+          >
             <template #header>
               <div>
-                <p class="text-xs color-text-muted uppercase mb-1.5">
+                <p class="text-xs color-text-muted mb-1.5 uppercase">
                   Revenue
                 </p>
                 <p class="text-3xl color-text-highlighted font-semibold">
@@ -889,10 +1020,14 @@ const pageTitles: Record<Page, string> = {
             <svg
               viewBox="0 0 400 120"
               preserveAspectRatio="none"
-              class="w-full h-80 text-primary"
+              class="text-primary h-80 w-full"
               aria-hidden="true"
             >
-              <polygon :points="chartArea" fill="currentColor" class="opacity-10" />
+              <polygon
+                :points="chartArea"
+                fill="currentColor"
+                class="opacity-10"
+              />
               <polyline
                 :points="chartPoints"
                 fill="none"
@@ -902,8 +1037,11 @@ const pageTitles: Record<Page, string> = {
               />
             </svg>
 
-            <div class="flex items-center justify-between px-4 sm:px-6 pt-2 text-xs color-text-dimmed">
-              <span v-for="tick in chartTicks" :key="tick">{{ tick }}</span>
+            <div class="text-xs color-text-dimmed px-4 pt-2 flex items-center justify-between sm:px-6">
+              <span
+                v-for="tick in chartTicks"
+                :key="tick"
+              >{{ tick }}</span>
             </div>
           </PCard>
 
@@ -916,13 +1054,13 @@ const pageTitles: Record<Page, string> = {
               thead: '[&>tr]:bg-background-elevated/50 [&>tr]:after:content-none',
               tbody: '[&>tr]:last:[&>td]:border-b-0',
               th: 'first:rounded-l-lg last:rounded-r-lg border-y border-border first:border-l last:border-r',
-              td: 'border-b border-border'
+              td: 'border-b border-border',
             }"
           />
         </template>
 
         <template v-else-if="page === 'customers'">
-          <div class="flex flex-wrap items-center justify-between gap-1.5 shrink-0">
+          <div class="flex shrink-0 flex-wrap gap-1.5 items-center justify-between">
             <PInput
               v-model="customerEmailFilter"
               class="max-w-sm"
@@ -930,7 +1068,7 @@ const pageTitles: Record<Page, string> = {
               placeholder="Filter emails..."
             />
 
-            <div class="flex flex-wrap items-center gap-1.5">
+            <div class="flex flex-wrap gap-1.5 items-center">
               <PButton
                 v-if="selectedCustomersCount"
                 label="Delete"
@@ -951,7 +1089,11 @@ const pageTitles: Record<Page, string> = {
                 class="min-w-28"
               />
 
-              <PDropdownMenu :items="customerDisplayItems" :content="{ align: 'end' }" :ui="{ itemLabel: 'capitalize' }">
+              <PDropdownMenu
+                :items="customerDisplayItems"
+                :content="{ align: 'end' }"
+                :ui="{ itemLabel: 'capitalize' }"
+              >
                 <PButton
                   label="Display"
                   color="neutral"
@@ -973,11 +1115,11 @@ const pageTitles: Record<Page, string> = {
               thead: '[&>tr]:bg-background-elevated/50 [&>tr]:after:content-none',
               tbody: '[&>tr]:last:[&>td]:border-b-0',
               th: 'py-2 first:rounded-l-lg last:rounded-r-lg border-y border-border first:border-l last:border-r',
-              td: 'border-b border-border'
+              td: 'border-b border-border',
             }"
           />
 
-          <div class="flex items-center justify-between gap-3 border-t border-border pt-4 mt-auto shrink-0">
+          <div class="mt-auto pt-4 border-t border-border flex shrink-0 gap-3 items-center justify-between">
             <div class="text-sm color-text-muted">
               {{ selectedCustomersCount }} of {{ displayedCustomers.length }} row(s) selected.
             </div>
@@ -990,7 +1132,10 @@ const pageTitles: Record<Page, string> = {
           </div>
         </template>
 
-        <div v-else-if="page === 'settings'" class="flex flex-col gap-4 sm:gap-6 w-full lg:max-w-2xl mx-auto shrink-0">
+        <div
+          v-else-if="page === 'settings'"
+          class="mx-auto flex shrink-0 flex-col gap-4 w-full sm:gap-6 lg:max-w-2xl"
+        >
           <template v-if="settingsSection === 'general'">
             <PPageCard
               title="Profile"
@@ -998,11 +1143,18 @@ const pageTitles: Record<Page, string> = {
               variant="naked"
               orientation="horizontal"
             >
-              <PButton label="Save changes" color="neutral" class="w-fit lg:ms-auto" />
+              <PButton
+                label="Save changes"
+                color="neutral"
+                class="w-fit lg:ms-auto"
+              />
             </PPageCard>
 
             <PPageCard variant="subtle">
-              <template v-for="(field, index) in profileFields" :key="field.name">
+              <template
+                v-for="(field, index) in profileFields"
+                :key="field.name"
+              >
                 <PSeparator v-if="index > 0" />
 
                 <PFormField
@@ -1010,9 +1162,12 @@ const pageTitles: Record<Page, string> = {
                   :label="field.label"
                   :description="field.description"
                   required
-                  class="flex max-sm:flex-col justify-between items-start gap-4"
+                  class="flex gap-4 items-start justify-between max-sm:flex-col"
                 >
-                  <PInput v-model="profile[field.name]" autocomplete="off" />
+                  <PInput
+                    v-model="profile[field.name]"
+                    autocomplete="off"
+                  />
                 </PFormField>
               </template>
               <PSeparator />
@@ -1020,16 +1175,24 @@ const pageTitles: Record<Page, string> = {
                 name="bio"
                 label="Bio"
                 description="Brief description for your profile."
-                class="flex max-sm:flex-col justify-between items-start gap-4"
+                class="flex gap-4 items-start justify-between max-sm:flex-col"
                 :ui="{ container: 'w-full' }"
               >
-                <PTextarea v-model="profile.bio" :rows="4" autoresize class="w-full" />
+                <PTextarea
+                  v-model="profile.bio"
+                  :rows="4"
+                  autoresize
+                  class="w-full"
+                />
               </PFormField>
             </PPageCard>
           </template>
 
           <template v-else-if="settingsSection === 'notifications'">
-            <div v-for="(section, index) in notificationSections" :key="index">
+            <div
+              v-for="(section, index) in notificationSections"
+              :key="index"
+            >
               <PPageCard
                 :title="section.title"
                 :description="section.description"
@@ -1037,14 +1200,17 @@ const pageTitles: Record<Page, string> = {
                 class="mb-4"
               />
 
-              <PPageCard variant="subtle" :ui="{ container: 'divide-y divide-border' }">
+              <PPageCard
+                variant="subtle"
+                :ui="{ container: 'divide-y divide-border' }"
+              >
                 <PFormField
                   v-for="field in section.fields"
                   :key="field.name"
                   :name="field.name"
                   :label="field.label"
                   :description="field.description"
-                  class="flex items-center justify-between not-last:pb-4 gap-2"
+                  class="flex gap-2 items-center justify-between not-last:pb-4"
                 >
                   <PSwitch v-model="notificationsState[field.name]" />
                 </PFormField>
@@ -1072,17 +1238,23 @@ const pageTitles: Record<Page, string> = {
                   class="w-full"
                 />
 
-                <PButton label="Update" class="w-fit" />
+                <PButton
+                  label="Update"
+                  class="w-fit"
+                />
               </div>
             </PPageCard>
 
             <PPageCard
               title="Account"
               description="No longer want to use our service? You can delete your account here. This action is not reversible. All information related to this account will be deleted permanently."
-              class="bg-linear-to-tl from-error/10 from-5% to-default"
+              class="to-default from-error/10 from-5% bg-linear-to-tl"
             >
               <template #footer>
-                <PButton label="Delete account" color="error" />
+                <PButton
+                  label="Delete account"
+                  color="error"
+                />
               </template>
             </PPageCard>
           </template>

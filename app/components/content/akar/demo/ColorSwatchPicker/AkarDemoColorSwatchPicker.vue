@@ -7,9 +7,9 @@ import {
   red,
   violet,
   yellow,
-} from '@radix-ui/colors'
-import { ColorSwatchPickerItem, ColorSwatchPickerItemIndicator, ColorSwatchPickerItemSwatch, ColorSwatchPickerRoot } from 'akar'
-import './styles.css'
+} from '@radix-ui/colors';
+import { ColorSwatchPickerItem, ColorSwatchPickerItemIndicator, ColorSwatchPickerItemSwatch, ColorSwatchPickerRoot } from 'akar';
+import './styles.css';
 
 const colors = [
   red.red9,
@@ -19,25 +19,25 @@ const colors = [
   green.green9,
   orange.orange9,
   yellow.yellow9,
-]
+];
 </script>
 
 <template>
   <div class="akar-demo akar-demo-ColorSwatchPicker">
     <ColorSwatchPickerRoot class="root">
-        <ColorSwatchPickerItem
-          v-for="color in colors"
-          :key="color"
-          :value="color"
-          class="item"
-        >
-          <ColorSwatchPickerItemSwatch
-            class="swatch"
-          />
-          <ColorSwatchPickerItemIndicator class="indicator">
-            <PIcon name="i-lucide-check" />
-          </ColorSwatchPickerItemIndicator>
-        </ColorSwatchPickerItem>
-      </ColorSwatchPickerRoot>
+      <ColorSwatchPickerItem
+        v-for="color in colors"
+        :key="color"
+        :value="color"
+        class="item"
+      >
+        <ColorSwatchPickerItemSwatch
+          class="swatch"
+        />
+        <ColorSwatchPickerItemIndicator class="indicator">
+          <PIcon name="i-lucide-check" />
+        </ColorSwatchPickerItemIndicator>
+      </ColorSwatchPickerItem>
+    </ColorSwatchPickerRoot>
   </div>
 </template>

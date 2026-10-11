@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const value = ref('Click to clear')
+const value = ref('Click to clear');
 </script>
 
 <template>
@@ -8,7 +8,10 @@ const value = ref('Click to clear')
     placeholder="Type something..."
     :ui="{ trailing: 'pe-1' }"
   >
-    <template v-if="value?.length" #trailing>
+    <template
+      v-if="value?.length"
+      #trailing
+    >
       <PButton
         color="neutral"
         variant="link"

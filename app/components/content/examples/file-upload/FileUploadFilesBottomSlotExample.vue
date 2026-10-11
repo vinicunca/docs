@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const value = ref<File[]>([])
+const value = ref<Array<File>>([]);
 </script>
 
 <template>
@@ -11,7 +11,7 @@ const value = ref<File[]>([])
     layout="list"
     multiple
     :interactive="false"
-    class="w-96 min-h-48"
+    class="min-h-48 w-96"
   >
     <template #actions="{ open }">
       <PButton

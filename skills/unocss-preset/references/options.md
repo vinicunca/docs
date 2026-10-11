@@ -20,7 +20,7 @@ These become the base CSS of `animate-in` / `animate-out`. Every field except `u
 | `timingFunction` | `string` | `animation-timing-function` |
 
 ```ts
-presetVinicunca({ animation: { duration: 200, fillMode: 'both' } })
+presetVinicunca({ animation: { duration: 200, fillMode: 'both' } });
 ```
 
 `fillMode` and friends belong under `animation`, never at the top level.
@@ -46,7 +46,7 @@ presetVinicunca({
     defaultBaseUnit: 'rem',
     utilities: [['stroke', ['stroke-width']]] // fluid-stroke-1/3
   }
-})
+});
 ```
 
 ## `scrollbar: UnoPresetScrollbarOption`

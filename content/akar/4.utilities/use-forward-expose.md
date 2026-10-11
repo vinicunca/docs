@@ -10,18 +10,16 @@ Furthermore, this composable extend the missing exposed `props` from the templat
 
 ```vue
 <script setup lang="ts">
-import { useForwardExpose } from 'akar'
+import { useForwardExpose } from 'akar';
 
-const selectedElementId = ref(1)
-const { forwardRef } = useForwardExpose()
+const selectedElementId = ref(1);
+const { forwardRef } = useForwardExpose();
 </script>
 
 <template>
-  
-    <!-- We want to expose div as the template ref's element -->
-    <div :ref="forwardRef">
-      ...
-    </div>
-  
+  <!-- We want to expose div as the template ref's element -->
+  <div :ref="forwardRef">
+    ...
+  </div>
 </template>
 ```

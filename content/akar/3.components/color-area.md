@@ -61,7 +61,7 @@ import {
   ColorAreaArea,
   ColorAreaRoot,
   ColorAreaThumb,
-} from 'akar'
+} from 'akar';
 </script>
 
 <template>
@@ -105,10 +105,10 @@ import {
   ColorAreaArea,
   ColorAreaRoot,
   ColorAreaThumb,
-} from 'akar'
-import { ref } from 'vue'
+} from 'akar';
+import { ref } from 'vue';
 
-const color = ref('#3b82f6')
+const color = ref('#3b82f6');
 </script>
 
 <template>
@@ -136,10 +136,10 @@ import {
   ColorAreaArea,
   ColorAreaRoot,
   ColorAreaThumb,
-} from 'akar'
-import { ref } from 'vue'
+} from 'akar';
+import { ref } from 'vue';
 
-const color = ref('#ff0000')
+const color = ref('#ff0000');
 </script>
 
 <template>
@@ -167,10 +167,10 @@ import {
   ColorAreaArea,
   ColorAreaRoot,
   ColorAreaThumb,
-} from 'akar'
-import { ref } from 'vue'
+} from 'akar';
+import { ref } from 'vue';
 
-const color = ref('#3b82f6')
+const color = ref('#3b82f6');
 </script>
 
 <template>

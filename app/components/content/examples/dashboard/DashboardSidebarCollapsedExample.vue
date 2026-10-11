@@ -1,30 +1,40 @@
 <script setup lang="ts">
-import type { NavigationMenuItem } from 'pohon-ui'
+import type { NavigationMenuItem } from 'pohon-ui';
 
-const items: NavigationMenuItem[] = [{
+const items: Array<NavigationMenuItem> = [{
   label: 'Home',
   icon: 'i-lucide-house',
-  active: true
+  active: true,
 }, {
   label: 'Inbox',
-  icon: 'i-lucide-inbox'
+  icon: 'i-lucide-inbox',
 }, {
   label: 'Contacts',
-  icon: 'i-lucide-users'
-}]
+  icon: 'i-lucide-users',
+}];
 
-const collapsed = ref(false)
+const collapsed = ref(false);
 
 defineShortcuts({
-  c: () => collapsed.value = !collapsed.value
-})
+  c: () => collapsed.value = !collapsed.value,
+});
 </script>
 
 <template>
-  <PDashboardSidebar v-model:collapsed="collapsed" collapsible>
+  <PDashboardSidebar
+    v-model:collapsed="collapsed"
+    collapsible
+  >
     <template #header>
-      <Logo v-if="!collapsed" class="h-5 w-auto" />
-      <PIcon v-else name="i-simple-icons-nuxtdotjs" class="size-5 text-primary mx-auto" />
+      <Logo
+        v-if="!collapsed"
+        class="h-5 w-auto"
+      />
+      <PIcon
+        v-else
+        name="i-simple-icons-nuxtdotjs"
+        class="text-primary mx-auto size-5"
+      />
     </template>
 
     <PNavigationMenu

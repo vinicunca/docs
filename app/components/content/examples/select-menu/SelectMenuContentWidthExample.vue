@@ -1,20 +1,20 @@
 <script setup lang="ts">
 const { data: users, execute } = await useLazyFetch('https://jsonplaceholder.typicode.com/users', {
   key: 'typicode-users-email',
-  transform: (data: { id: number, name: string, email: string }[]) => {
-    return data?.map(user => ({
+  transform: (data: Array<{ id: number; name: string; email: string }>) => {
+    return data?.map((user) => ({
       label: user.name,
       email: user.email,
       value: String(user.id),
-      avatar: { src: `https://i.pravatar.cc/120?img=${user.id}`, loading: 'lazy' as const }
-    }))
+      avatar: { src: `https://i.pravatar.cc/120?img=${user.id}`, loading: 'lazy' as const },
+    }));
   },
-  immediate: false
-})
+  immediate: false,
+});
 
 function onOpen() {
   if (!users.value?.length) {
-    execute()
+    execute();
   }
 }
 </script>

@@ -1,10 +1,10 @@
-type Country = {
-  name: string
-  code: string
-  emoji: string
+interface Country {
+  name: string;
+  code: string;
+  emoji: string;
 }
 
-const countries: Country[] = [
+const countries: Array<Country> = [
   { name: 'Afghanistan', code: 'AF', emoji: '🇦🇫' },
   { name: 'Albania', code: 'AL', emoji: '🇦🇱' },
   { name: 'Algeria', code: 'DZ', emoji: '🇩🇿' },
@@ -197,7 +197,7 @@ const countries: Country[] = [
   { name: 'Vietnam', code: 'VN', emoji: '🇻🇳' },
   { name: 'Yemen', code: 'YE', emoji: '🇾🇪' },
   { name: 'Zambia', code: 'ZM', emoji: '🇿🇲' },
-  { name: 'Zimbabwe', code: 'ZW', emoji: '🇿🇼' }
-]
+  { name: 'Zimbabwe', code: 'ZW', emoji: '🇿🇼' },
+];
 
-export default eventHandler(async () => countries)
+export default eventHandler(async () => countries);

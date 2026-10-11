@@ -142,12 +142,12 @@ name: 'toast-close-icon-example'
 ::
 
 ::framework-only
-#nuxt
+# nuxt
 :::tip{to="/pohon/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.close` key.
 :::
 
-#vue
+# vue
 :::tip{to="/pohon/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.close` key.
 :::
@@ -233,7 +233,7 @@ Change the `toaster.position` prop on the [App](/pohon/components/app#props) com
 
 ```vue [app.vue]
 <script setup lang="ts">
-const toaster = { position: 'bottom-right' }
+const toaster = { position: 'bottom-right' };
 </script>
 
 <template>
@@ -249,7 +249,7 @@ prettier: true
 name: 'toast-example'
 ---
 
-#options
+# options
 :toaster-position-example
 ::
 
@@ -260,7 +260,7 @@ Change the `toaster.duration` prop on the [App](/pohon/components/app#props) com
 
 ```vue [app.vue]
 <script setup lang="ts">
-const toaster = { duration: 5000 }
+const toaster = { duration: 5000 };
 </script>
 
 <template>
@@ -276,7 +276,7 @@ prettier: true
 name: 'toast-example'
 ---
 
-#options
+# options
 :toaster-duration-example
 ::
 
@@ -287,7 +287,7 @@ Change the `toaster.max` prop on the [App](/pohon/components/app#props) componen
 
 ```vue [app.vue]
 <script setup lang="ts">
-const toaster = { max: 3 }
+const toaster = { max: 3 };
 </script>
 
 <template>
@@ -303,7 +303,7 @@ prettier: true
 name: 'toast-example'
 ---
 
-#options
+# options
 :toaster-max-example
 ::
 
@@ -314,7 +314,7 @@ Set the `toaster.expand` prop to `false` on the [App](/pohon/components/app#prop
 
 ```vue [app.vue]
 <script setup lang="ts">
-const toaster = { expand: true }
+const toaster = { expand: true };
 </script>
 
 <template>
@@ -334,7 +334,7 @@ prettier: true
 name: 'toast-example'
 ---
 
-#options
+# options
 :toaster-expand-example
 ::
 

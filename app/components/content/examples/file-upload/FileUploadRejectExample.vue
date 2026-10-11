@@ -1,14 +1,14 @@
 <script setup lang="ts">
-const value = ref<File[]>([])
+const value = ref<Array<File>>([]);
 
-const toast = useToast()
+const toast = useToast();
 
-function onReject(files: File[]) {
+function onReject(files: Array<File>) {
   toast.add({
     title: 'Only images are allowed',
-    description: files.map(file => file.name).join(', '),
-    color: 'error'
-  })
+    description: files.map((file) => file.name).join(', '),
+    color: 'error',
+  });
 }
 </script>
 
@@ -20,7 +20,7 @@ function onReject(files: File[]) {
     label="Drop your images here"
     description="SVG, PNG, JPG or GIF"
     multiple
-    class="w-96 min-h-48"
+    class="min-h-48 w-96"
     @reject="onReject"
   />
 </template>

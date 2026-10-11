@@ -3,56 +3,56 @@
 @import '../_colors/grass.css';
 
 @scope (.akar-demo-DateField) {
-.DateFieldWrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
+  .DateFieldWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 
-.DateFieldLabel {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  color: var(--gray-9);
-}
+  .DateFieldLabel {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: var(--gray-9);
+  }
 
-.DateField {
-  display: flex;
-  padding: 0.5rem;
-  align-items: center;
-  border-radius: 0.25rem;
-  border-width: 1px;
-  text-align: center;
-  background-color: #ffffff;
-  user-select: none;
-  color: var(--green-10);
-  border: 1px solid var(--gray-9);
-}
+  .DateField {
+    display: flex;
+    padding: 0.5rem;
+    align-items: center;
+    border-radius: 0.25rem;
+    border-width: 1px;
+    text-align: center;
+    background-color: #ffffff;
+    user-select: none;
+    color: var(--green-10);
+    border: 1px solid var(--gray-9);
+  }
 
-.DateField::placeholder {
-  color: var(--mauve-5);
-}
+  .DateField::placeholder {
+    color: var(--mauve-5);
+  }
 
-.DateField[data-invalid] {
-  border: 1px solid var(--red-500);
-}
+  .DateField[data-invalid] {
+    border: 1px solid var(--red-500);
+  }
 
-.DateFieldLiteral {
-  padding: 0.25rem;
-}
+  .DateFieldLiteral {
+    padding: 0.25rem;
+  }
 
-.DateFieldSegment {
-  padding: 0.25rem;
-}
+  .DateFieldSegment {
+    padding: 0.25rem;
+  }
 
-.DateFieldSegment:hover{
-  background-color: var(--grass-4);
-}
+  .DateFieldSegment:hover {
+    background-color: var(--grass-4);
+  }
 
-.DateFieldSegment:focus {
-  background-color: var(--grass-2);
-}
+  .DateFieldSegment:focus {
+    background-color: var(--grass-2);
+  }
 
-.DateFieldSegment:[aria-valuetext='Empty'] {
-  color: var(--grass-6);
-}
+  .DateFieldSegment:[aria-valuetext='Empty'] {
+    color: var(--grass-6);
+  }
 }

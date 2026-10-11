@@ -55,7 +55,7 @@ Import all parts and piece them together. `RatingRoot` exposes the list of `item
 
 ```vue
 <script setup>
-import { RatingItem, RatingItemIndicator, RatingRoot } from 'akar'
+import { RatingItem, RatingItemIndicator, RatingRoot } from 'akar';
 </script>
 
 <template>

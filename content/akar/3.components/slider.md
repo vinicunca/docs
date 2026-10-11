@@ -55,7 +55,7 @@ Import all parts and piece them together.
 
 ```vue
 <script setup>
-import { SliderRange, SliderRoot, SliderThumb, SliderTrack } from 'akar'
+import { SliderRange, SliderRoot, SliderThumb, SliderTrack } from 'akar';
 </script>
 
 <template>
@@ -282,7 +282,7 @@ This example abstracts all of the `Slider` parts so it can be used as a self clo
 
 ```vue
 <script setup lang="ts">
-import { Slider } from './your-slider'
+import { Slider } from './your-slider';
 </script>
 
 <template>
@@ -294,23 +294,26 @@ import { Slider } from './your-slider'
 
  ```ts
 // your-slider.ts
-export { default as Slider } from 'Slider.vue'
+export { default as Slider } from 'Slider.vue';
 ```
 
 ```vue
  <!-- Slider.vue -->
 <script setup lang="ts">
-import type { SliderRootEmits, SliderRootProps } from 'akar'
-import { SliderRange, SliderRoot, SliderThumb, SliderTrack, useForwardPropsEmits } from 'akar'
+import type { SliderRootEmits, SliderRootProps } from 'akar';
+import { SliderRange, SliderRoot, SliderThumb, SliderTrack, useForwardPropsEmits } from 'akar';
 
-const props = defineProps<SliderRootProps>()
-const emits = defineEmits<SliderRootEmits>()
+const props = defineProps<SliderRootProps>();
+const emits = defineEmits<SliderRootEmits>();
 
-const forward = useForwardPropsEmits(props, emits)
+const forward = useForwardPropsEmits(props, emits);
 </script>
 
 <template>
-  <SliderRoot v-slot="{ modelValue }" v-bind="forward">
+  <SliderRoot
+    v-slot="{ modelValue }"
+    v-bind="forward"
+  >
     <SliderTrack>
       <SliderRange />
     </SliderTrack>

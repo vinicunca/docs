@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import type { TabsItem } from 'pohon-ui'
+import type { TabsItem } from 'pohon-ui';
 
-const items: TabsItem[] = [{
+const items: Array<TabsItem> = [{
   label: 'All',
-  value: 'all'
+  value: 'all',
 }, {
   label: 'Unread',
-  value: 'unread'
-}]
+  value: 'unread',
+}];
 </script>
 
 <template>
@@ -17,7 +17,10 @@ const items: TabsItem[] = [{
     </template>
 
     <template #trailing>
-      <PBadge label="4" variant="subtle" />
+      <PBadge
+        label="4"
+        variant="subtle"
+      />
     </template>
 
     <template #right>

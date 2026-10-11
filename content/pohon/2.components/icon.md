@@ -32,7 +32,7 @@ You can use any name from the <https://iconify.design> collection. Browse them e
 ::
 
 ::framework-only
-#nuxt
+# nuxt
 :::caution{to="/pohon/getting-started/integrations/icons/nuxt#collections"}
 It's highly recommended to install the icons collections you need, read more about this.
 :::
@@ -54,11 +54,14 @@ You can define your icon components yourself, or use [`unplugin-icons`](https://
 
 ```vue
 <script setup lang="ts">
-import IconLightbulb from '~icons/lucide/lightbulb'
+import IconLightbulb from '~icons/lucide/lightbulb';
 </script>
 
 <template>
-  <PIcon :name="IconLightbulb" class="size-5" />
+  <PIcon
+    :name="IconLightbulb"
+    class="size-5"
+  />
 </template>
 ```
 

@@ -8,8 +8,8 @@ const users = ref([
     avatar: {
       src: 'https://github.com/benjamincanac.png',
       alt: 'benjamincanac',
-      loading: 'lazy' as const
-    }
+      loading: 'lazy' as const,
+    },
   },
   {
     name: 'Hugo Richard',
@@ -19,8 +19,8 @@ const users = ref([
     avatar: {
       src: 'https://github.com/HugoRCD.png',
       alt: 'HugoRCD',
-      loading: 'lazy' as const
-    }
+      loading: 'lazy' as const,
+    },
   },
   {
     name: 'Sébastien Chopin',
@@ -30,8 +30,8 @@ const users = ref([
     avatar: {
       src: 'https://github.com/atinux.png',
       alt: 'atinux',
-      loading: 'lazy' as const
-    }
+      loading: 'lazy' as const,
+    },
   },
   {
     name: 'Romain Hamel',
@@ -41,8 +41,8 @@ const users = ref([
     avatar: {
       src: 'https://github.com/romhml.png',
       alt: 'romhml',
-      loading: 'lazy' as const
-    }
+      loading: 'lazy' as const,
+    },
   },
   {
     name: 'Sandro Circi',
@@ -52,8 +52,8 @@ const users = ref([
     avatar: {
       src: 'https://github.com/sandros94.png',
       alt: 'sandros94',
-      loading: 'lazy' as const
-    }
+      loading: 'lazy' as const,
+    },
   },
   {
     name: 'Jakub Michálek',
@@ -63,8 +63,8 @@ const users = ref([
     avatar: {
       src: 'https://github.com/J-Michalek.png',
       alt: 'J-Michalek',
-      loading: 'lazy' as const
-    }
+      loading: 'lazy' as const,
+    },
   },
   {
     name: 'Alex',
@@ -74,8 +74,8 @@ const users = ref([
     avatar: {
       src: 'https://github.com/hywax.png',
       alt: 'hywax',
-      loading: 'lazy' as const
-    }
+      loading: 'lazy' as const,
+    },
   },
   {
     name: 'Maxime Pauvert',
@@ -85,10 +85,10 @@ const users = ref([
     avatar: {
       src: 'https://github.com/maximepvrt.png',
       alt: 'maximepvrt',
-      loading: 'lazy' as const
-    }
-  }
-])
+      loading: 'lazy' as const,
+    },
+  },
+]);
 </script>
 
 <template>
@@ -101,7 +101,12 @@ const users = ref([
       :target="user.target"
     >
       <template #body>
-        <PUser :name="user.name" :description="user.description" :avatar="user.avatar" size="xl" />
+        <PUser
+          :name="user.name"
+          :description="user.description"
+          :avatar="user.avatar"
+          size="xl"
+        />
       </template>
     </PPageCard>
   </PPageList>

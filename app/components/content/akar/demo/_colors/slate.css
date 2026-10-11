@@ -1,4 +1,6 @@
-:root, .light, .light-theme {
+:root,
+.light,
+.light-theme {
   --slate-1: #fcfcfd;
   --slate-2: #f9f9fb;
   --slate-3: #f0f0f3;
@@ -15,7 +17,9 @@
 
 @supports (color: color(display-p3 1 1 1)) {
   @media (color-gamut: p3) {
-    :root, .light, .light-theme {
+    :root,
+    .light,
+    .light-theme {
       --slate-1: color(display-p3 0.988 0.988 0.992);
       --slate-2: color(display-p3 0.976 0.976 0.984);
       --slate-3: color(display-p3 0.94 0.941 0.953);

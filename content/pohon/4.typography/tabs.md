@@ -37,7 +37,7 @@ Lorem velit voluptate ex reprehenderit ullamco et culpa.
 
 :::
 
-#code
+# code
 
 ````mdc
 ::tabs

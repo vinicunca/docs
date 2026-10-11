@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineProps<{
-  data: { cssVariable: string, description: string }[]
-}>()
+  data: Array<{ cssVariable: string; description: string }>;
+}>();
 </script>
 
 <template>
@@ -15,12 +15,18 @@ defineProps<{
       </ProseTr>
     </ProseThead>
     <ProseTbody>
-      <ProseTr v-for="item in data" :key="item.cssVariable">
+      <ProseTr
+        v-for="item in data"
+        :key="item.cssVariable"
+      >
         <ProseTd>
           <ProseCode>{{ item.cssVariable }}</ProseCode>
         </ProseTd>
         <ProseTd>
-          <DocsMarkdown :value="item.description" unwrap />
+          <DocsMarkdown
+            :value="item.description"
+            unwrap
+          />
         </ProseTd>
       </ProseTr>
     </ProseTbody>

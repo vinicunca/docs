@@ -12,11 +12,11 @@ const versions = [{
     avatar: {
       src: 'https://github.com/danielroe.png',
       alt: 'Daniel Roe',
-      loading: 'lazy' as const
+      loading: 'lazy' as const,
     },
     to: 'https://github.com/danielroe',
-    target: '_blank'
-  }]
+    target: '_blank',
+  }],
 }, {
   title: 'Nuxt 3.16',
   description: 'Nuxt 3.16 is out - packed with features and performance improvements!',
@@ -30,11 +30,11 @@ const versions = [{
     avatar: {
       src: 'https://github.com/danielroe.png',
       alt: 'Daniel Roe',
-      loading: 'lazy' as const
+      loading: 'lazy' as const,
     },
     to: 'https://github.com/danielroe',
-    target: '_blank'
-  }]
+    target: '_blank',
+  }],
 }, {
   title: 'Nuxt 3.15',
   description: 'Nuxt 3.15 is out - with Vite 6, better HMR and faster performance!',
@@ -48,12 +48,12 @@ const versions = [{
     avatar: {
       src: 'https://github.com/danielroe.png',
       alt: 'Daniel Roe',
-      loading: 'lazy' as const
+      loading: 'lazy' as const,
     },
     to: 'https://github.com/danielroe',
-    target: '_blank'
-  }]
-}]
+    target: '_blank',
+  }],
+}];
 </script>
 
 <template>
@@ -66,11 +66,14 @@ const versions = [{
       class="flex items-start"
       :ui="{
         container: 'max-w-lg me-0',
-        indicator: 'sticky top-(--ui-header-height) pt-4 -mt-4 flex flex-col items-end'
+        indicator: 'sticky top-(--ui-header-height) pt-4 -mt-4 flex flex-col items-end',
       }"
     >
       <template #indicator>
-        <PBadge :label="version.badge" variant="soft" />
+        <PBadge
+          :label="version.badge"
+          variant="soft"
+        />
 
         <span class="text-sm color-text-muted">{{ new Date(version.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) }}</span>
       </template>

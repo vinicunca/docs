@@ -15,316 +15,316 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from 'akar'
-import { ref } from 'vue'
-import './styles.css'
+} from 'akar';
+import { ref } from 'vue';
+import './styles.css';
 
-const toggleState = ref(false)
-const checkboxOne = ref(false)
-const checkboxTwo = ref(false)
-const person = ref('pedro')
+const toggleState = ref(false);
+const checkboxOne = ref(false);
+const checkboxTwo = ref(false);
+const person = ref('pedro');
 
 function handleSelect() {
   // eslint-disable-next-line no-alert
-  alert('hello!')
+  alert('hello!');
 }
 </script>
 
 <template>
   <div class="akar-demo akar-demo-DropdownMenu">
     <DropdownMenuRoot v-model:open="toggleState">
-        <DropdownMenuTrigger
-          class="IconButton"
-          aria-label="Customise options"
-        >
-          <PIcon name="i-lucide-menu" />
-        </DropdownMenuTrigger>
+      <DropdownMenuTrigger
+        class="IconButton"
+        aria-label="Customise options"
+      >
+        <PIcon name="i-lucide-menu" />
+      </DropdownMenuTrigger>
 
-        <DropdownMenuPortal>
-          <DropdownMenuContent
-            class="DropdownMenuContent"
-            :side-offset="5"
+      <DropdownMenuPortal>
+        <DropdownMenuContent
+          class="DropdownMenuContent"
+          :side-offset="5"
+        >
+          <DropdownMenuItem
+            value="New Tab"
+            class="DropdownMenuItem"
+            @select="handleSelect"
           >
-            <DropdownMenuItem
-              value="New Tab"
-              class="DropdownMenuItem"
-              @select="handleSelect"
+            New Tab
+            <div
+              class="RightSlot"
             >
-              New Tab
+              ⌘+T
+            </div>
+          </DropdownMenuItem>
+          <DropdownMenuSub>
+            <DropdownMenuSubTrigger
+              value="more toolsz"
+              class="DropdownMenuSubTrigger"
+            >
+              More Tools
               <div
                 class="RightSlot"
               >
-                ⌘+T
+                <PIcon name="i-lucide-chevron-right" />
               </div>
-            </DropdownMenuItem>
-            <DropdownMenuSub>
-              <DropdownMenuSubTrigger
-                value="more toolsz"
-                class="DropdownMenuSubTrigger"
+            </DropdownMenuSubTrigger>
+            <DropdownMenuPortal>
+              <DropdownMenuSubContent
+                class="DropdownMenuContent"
+                :side-offset="2"
+                :align-offset="-5"
               >
-                More Tools
-                <div
-                  class="RightSlot"
+                <DropdownMenuItem
+                  class="DropdownMenuItem"
                 >
-                  <PIcon name="i-lucide-chevron-right" />
-                </div>
-              </DropdownMenuSubTrigger>
-              <DropdownMenuPortal>
-                <DropdownMenuSubContent
-                  class="DropdownMenuContent"
-                  :side-offset="2"
-                  :align-offset="-5"
-                >
-                  <DropdownMenuItem
-                    class="DropdownMenuItem"
+                  Save Page As…
+                  <div
+                    class="RightSlot"
                   >
-                    Save Page As…
+                    ⌘+S
+                  </div>
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  class="DropdownMenuItem"
+                >
+                  Create Shortcut…
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  class="DropdownMenuItem"
+                >
+                  Name Window…
+                </DropdownMenuItem>
+                <DropdownMenuSeparator class="DropdownMenuSeparator" />
+                <DropdownMenuItem
+                  class="DropdownMenuItem"
+                >
+                  Developer Tools
+                </DropdownMenuItem>
+              </DropdownMenuSubContent>
+            </DropdownMenuPortal>
+          </DropdownMenuSub>
+          <DropdownMenuItem
+            value="New Window"
+            class="DropdownMenuItem"
+          >
+            New Window
+            <div
+              class="RightSlot"
+            >
+              ⌘+N
+            </div>
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            value="New Private Window"
+            class="DropdownMenuItem"
+            disabled
+          >
+            New Private Window
+            <div
+              class="RightSlot"
+            >
+              ⇧+⌘+N
+            </div>
+          </DropdownMenuItem>
+          <DropdownMenuSub>
+            <DropdownMenuSubTrigger
+              value="more tools"
+              class="DropdownMenuSubTrigger"
+            >
+              More Tools
+              <div
+                class="RightSlot"
+              >
+                <PIcon name="i-lucide-chevron-right" />
+              </div>
+            </DropdownMenuSubTrigger>
+            <DropdownMenuPortal>
+              <DropdownMenuSubContent
+                class="DropdownMenuContent"
+                :side-offset="2"
+                :align-offset="-5"
+              >
+                <DropdownMenuItem
+                  class="DropdownMenuItem"
+                >
+                  Save Page As…
+                  <div
+                    class="RightSlot"
+                  >
+                    ⌘+S
+                  </div>
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  class="DropdownMenuItem"
+                >
+                  Create Shortcut…
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  class="DropdownMenuItem"
+                >
+                  Name Window…
+                </DropdownMenuItem>
+                <DropdownMenuSeparator class="DropdownMenuSeparator" />
+                <DropdownMenuItem
+                  class="DropdownMenuItem"
+                >
+                  Developer Tools
+                </DropdownMenuItem>
+                <DropdownMenuSub>
+                  <DropdownMenuSubTrigger
+                    value="more toolsz"
+                    class="DropdownMenuSubTrigger"
+                  >
+                    More Tools
                     <div
                       class="RightSlot"
                     >
-                      ⌘+S
+                      <PIcon name="i-lucide-chevron-right" />
                     </div>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem
-                    class="DropdownMenuItem"
-                  >
-                    Create Shortcut…
-                  </DropdownMenuItem>
-                  <DropdownMenuItem
-                    class="DropdownMenuItem"
-                  >
-                    Name Window…
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator class="DropdownMenuSeparator" />
-                  <DropdownMenuItem
-                    class="DropdownMenuItem"
-                  >
-                    Developer Tools
-                  </DropdownMenuItem>
-                </DropdownMenuSubContent>
-              </DropdownMenuPortal>
-            </DropdownMenuSub>
-            <DropdownMenuItem
-              value="New Window"
-              class="DropdownMenuItem"
-            >
-              New Window
-              <div
-                class="RightSlot"
-              >
-                ⌘+N
-              </div>
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              value="New Private Window"
-              class="DropdownMenuItem"
-              disabled
-            >
-              New Private Window
-              <div
-                class="RightSlot"
-              >
-                ⇧+⌘+N
-              </div>
-            </DropdownMenuItem>
-            <DropdownMenuSub>
-              <DropdownMenuSubTrigger
-                value="more tools"
-                class="DropdownMenuSubTrigger"
-              >
-                More Tools
-                <div
-                  class="RightSlot"
-                >
-                  <PIcon name="i-lucide-chevron-right" />
-                </div>
-              </DropdownMenuSubTrigger>
-              <DropdownMenuPortal>
-                <DropdownMenuSubContent
-                  class="DropdownMenuContent"
-                  :side-offset="2"
-                  :align-offset="-5"
-                >
-                  <DropdownMenuItem
-                    class="DropdownMenuItem"
-                  >
-                    Save Page As…
-                    <div
-                      class="RightSlot"
+                  </DropdownMenuSubTrigger>
+                  <DropdownMenuPortal>
+                    <DropdownMenuSubContent
+                      class="DropdownMenuContent"
+                      :side-offset="2"
+                      :align-offset="-5"
                     >
-                      ⌘+S
-                    </div>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem
-                    class="DropdownMenuItem"
-                  >
-                    Create Shortcut…
-                  </DropdownMenuItem>
-                  <DropdownMenuItem
-                    class="DropdownMenuItem"
-                  >
-                    Name Window…
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator class="DropdownMenuSeparator" />
-                  <DropdownMenuItem
-                    class="DropdownMenuItem"
-                  >
-                    Developer Tools
-                  </DropdownMenuItem>
-                  <DropdownMenuSub>
-                    <DropdownMenuSubTrigger
-                      value="more toolsz"
-                      class="DropdownMenuSubTrigger"
-                    >
-                      More Tools
-                      <div
-                        class="RightSlot"
+                      <DropdownMenuItem
+                        class="DropdownMenuItem"
                       >
-                        <PIcon name="i-lucide-chevron-right" />
-                      </div>
-                    </DropdownMenuSubTrigger>
-                    <DropdownMenuPortal>
-                      <DropdownMenuSubContent
-                        class="DropdownMenuContent"
-                        :side-offset="2"
-                        :align-offset="-5"
-                      >
-                        <DropdownMenuItem
-                          class="DropdownMenuItem"
+                        Save Page As…
+                        <div
+                          class="RightSlot"
                         >
-                          Save Page As…
+                          ⌘+S
+                        </div>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
+                        class="DropdownMenuItem"
+                      >
+                        Create Shortcut…
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
+                        class="DropdownMenuItem"
+                      >
+                        Name Window…
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator class="DropdownMenuSeparator" />
+                      <DropdownMenuItem
+                        class="DropdownMenuItem"
+                      >
+                        Developer Tools
+                      </DropdownMenuItem>
+                      <DropdownMenuSub>
+                        <DropdownMenuSubTrigger
+                          value="more toolsz"
+                          class="DropdownMenuSubTrigger"
+                        >
+                          More Tools
                           <div
                             class="RightSlot"
                           >
-                            ⌘+S
+                            <PIcon name="i-lucide-chevron-right" />
                           </div>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem
-                          class="DropdownMenuItem"
-                        >
-                          Create Shortcut…
-                        </DropdownMenuItem>
-                        <DropdownMenuItem
-                          class="DropdownMenuItem"
-                        >
-                          Name Window…
-                        </DropdownMenuItem>
-                        <DropdownMenuSeparator class="DropdownMenuSeparator" />
-                        <DropdownMenuItem
-                          class="DropdownMenuItem"
-                        >
-                          Developer Tools
-                        </DropdownMenuItem>
-                        <DropdownMenuSub>
-                          <DropdownMenuSubTrigger
-                            value="more toolsz"
-                            class="DropdownMenuSubTrigger"
+                        </DropdownMenuSubTrigger>
+                        <DropdownMenuPortal>
+                          <DropdownMenuSubContent
+                            class="DropdownMenuContent"
+                            :side-offset="2"
+                            :align-offset="-5"
                           >
-                            More Tools
-                            <div
-                              class="RightSlot"
+                            <DropdownMenuItem
+                              class="DropdownMenuItem"
                             >
-                              <PIcon name="i-lucide-chevron-right" />
-                            </div>
-                          </DropdownMenuSubTrigger>
-                          <DropdownMenuPortal>
-                            <DropdownMenuSubContent
-                              class="DropdownMenuContent"
-                              :side-offset="2"
-                              :align-offset="-5"
+                              Save Page As…
+                              <div
+                                class="RightSlot"
+                              >
+                                ⌘+S
+                              </div>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem
+                              class="DropdownMenuItem"
                             >
-                              <DropdownMenuItem
-                                class="DropdownMenuItem"
-                              >
-                                Save Page As…
-                                <div
-                                  class="RightSlot"
-                                >
-                                  ⌘+S
-                                </div>
-                              </DropdownMenuItem>
-                              <DropdownMenuItem
-                                class="DropdownMenuItem"
-                              >
-                                Create Shortcut…
-                              </DropdownMenuItem>
-                              <DropdownMenuItem
-                                class="DropdownMenuItem"
-                              >
-                                Name Window…
-                              </DropdownMenuItem>
-                              <DropdownMenuSeparator class="DropdownMenuSeparator" />
-                              <DropdownMenuItem
-                                class="DropdownMenuItem"
-                              >
-                                Developer Tools
-                              </DropdownMenuItem>
-                            </DropdownMenuSubContent>
-                          </DropdownMenuPortal>
-                        </DropdownMenuSub>
-                      </DropdownMenuSubContent>
-                    </DropdownMenuPortal>
-                  </DropdownMenuSub>
-                  <DropdownMenuItem
-                    class="DropdownMenuItem"
-                  >
-                    Developer Tools
-                  </DropdownMenuItem>
-                </DropdownMenuSubContent>
-              </DropdownMenuPortal>
-            </DropdownMenuSub>
-            <DropdownMenuSeparator class="DropdownMenuSeparator" />
-            <DropdownMenuCheckboxItem
-              v-model="checkboxOne"
-              class="DropdownMenuItem"
+                              Create Shortcut…
+                            </DropdownMenuItem>
+                            <DropdownMenuItem
+                              class="DropdownMenuItem"
+                            >
+                              Name Window…
+                            </DropdownMenuItem>
+                            <DropdownMenuSeparator class="DropdownMenuSeparator" />
+                            <DropdownMenuItem
+                              class="DropdownMenuItem"
+                            >
+                              Developer Tools
+                            </DropdownMenuItem>
+                          </DropdownMenuSubContent>
+                        </DropdownMenuPortal>
+                      </DropdownMenuSub>
+                    </DropdownMenuSubContent>
+                  </DropdownMenuPortal>
+                </DropdownMenuSub>
+                <DropdownMenuItem
+                  class="DropdownMenuItem"
+                >
+                  Developer Tools
+                </DropdownMenuItem>
+              </DropdownMenuSubContent>
+            </DropdownMenuPortal>
+          </DropdownMenuSub>
+          <DropdownMenuSeparator class="DropdownMenuSeparator" />
+          <DropdownMenuCheckboxItem
+            v-model="checkboxOne"
+            class="DropdownMenuItem"
+          >
+            <DropdownMenuItemIndicator class="DropdownMenuItemIndicator">
+              <PIcon name="i-lucide-check" />
+            </DropdownMenuItemIndicator>
+            Show Bookmarks
+            <div
+              class="RightSlot"
             >
-              <DropdownMenuItemIndicator class="DropdownMenuItemIndicator">
-                <PIcon name="i-lucide-check" />
-              </DropdownMenuItemIndicator>
-              Show Bookmarks
-              <div
-                class="RightSlot"
-              >
-                ⌘+B
-              </div>
-            </DropdownMenuCheckboxItem>
-            <DropdownMenuCheckboxItem
-              v-model="checkboxTwo"
-              class="DropdownMenuItem"
-            >
-              <DropdownMenuItemIndicator class="DropdownMenuItemIndicator">
-                <PIcon name="i-lucide-check" />
-              </DropdownMenuItemIndicator>
-              Show Full URLs
-            </DropdownMenuCheckboxItem>
-            <DropdownMenuSeparator class="DropdownMenuSeparator" />
+              ⌘+B
+            </div>
+          </DropdownMenuCheckboxItem>
+          <DropdownMenuCheckboxItem
+            v-model="checkboxTwo"
+            class="DropdownMenuItem"
+          >
+            <DropdownMenuItemIndicator class="DropdownMenuItemIndicator">
+              <PIcon name="i-lucide-check" />
+            </DropdownMenuItemIndicator>
+            Show Full URLs
+          </DropdownMenuCheckboxItem>
+          <DropdownMenuSeparator class="DropdownMenuSeparator" />
 
-            <DropdownMenuLabel class="DropdownMenuLabel">
-              People
-            </DropdownMenuLabel>
-            <DropdownMenuRadioGroup v-model="person">
-              <DropdownMenuRadioItem
-                class="DropdownMenuItem"
-                value="pedro"
-              >
-                <DropdownMenuItemIndicator class="DropdownMenuItemIndicator">
-                  <PIcon name="i-lucide-circle" />
-                </DropdownMenuItemIndicator>
-                Pedro Duarte
-              </DropdownMenuRadioItem>
-              <DropdownMenuRadioItem
-                class="DropdownMenuItem"
-                value="colm"
-              >
-                <DropdownMenuItemIndicator class="DropdownMenuItemIndicator">
-                  <PIcon name="i-lucide-circle" />
-                </DropdownMenuItemIndicator>
-                Colm Tuite
-              </DropdownMenuRadioItem>
-            </DropdownMenuRadioGroup>
-            <DropdownMenuArrow class="DropdownMenuArrow" />
-          </DropdownMenuContent>
-        </DropdownMenuPortal>
-      </DropdownMenuRoot>
+          <DropdownMenuLabel class="DropdownMenuLabel">
+            People
+          </DropdownMenuLabel>
+          <DropdownMenuRadioGroup v-model="person">
+            <DropdownMenuRadioItem
+              class="DropdownMenuItem"
+              value="pedro"
+            >
+              <DropdownMenuItemIndicator class="DropdownMenuItemIndicator">
+                <PIcon name="i-lucide-circle" />
+              </DropdownMenuItemIndicator>
+              Pedro Duarte
+            </DropdownMenuRadioItem>
+            <DropdownMenuRadioItem
+              class="DropdownMenuItem"
+              value="colm"
+            >
+              <DropdownMenuItemIndicator class="DropdownMenuItemIndicator">
+                <PIcon name="i-lucide-circle" />
+              </DropdownMenuItemIndicator>
+              Colm Tuite
+            </DropdownMenuRadioItem>
+          </DropdownMenuRadioGroup>
+          <DropdownMenuArrow class="DropdownMenuArrow" />
+        </DropdownMenuContent>
+      </DropdownMenuPortal>
+    </DropdownMenuRoot>
   </div>
 </template>

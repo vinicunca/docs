@@ -1,33 +1,36 @@
 <script setup lang="ts">
-import type { DropdownMenuItem } from 'pohon-ui'
+import type { DropdownMenuItem } from 'pohon-ui';
 
-const items: DropdownMenuItem[][] = [
+const items: Array<Array<DropdownMenuItem>> = [
   [
     {
       label: 'View',
-      icon: 'i-lucide-eye'
+      icon: 'i-lucide-eye',
     },
     {
       label: 'Copy',
-      icon: 'i-lucide-copy'
+      icon: 'i-lucide-copy',
     },
     {
       label: 'Edit',
-      icon: 'i-lucide-pencil'
-    }
+      icon: 'i-lucide-pencil',
+    },
   ],
   [
     {
       label: 'Delete',
       color: 'error',
-      icon: 'i-lucide-trash'
-    }
-  ]
-]
+      icon: 'i-lucide-trash',
+    },
+  ],
+];
 </script>
 
 <template>
-  <PDropdownMenu :items="items" :ui="{ content: 'w-(--akar-dropdown-menu-trigger-width)' }">
+  <PDropdownMenu
+    :items="items"
+    :ui="{ content: 'w-(--akar-dropdown-menu-trigger-width)' }"
+  >
     <PButton
       label="Open"
       class="w-46"

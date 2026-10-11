@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Markdown } from '@comark/vue'
-import shiki from '@comark/vue/plugins/shiki'
+import { Markdown } from '@comark/vue';
+import shiki from '@comark/vue/plugins/shiki';
 
 // Example changelog layout for the theme preview
 // in a single self-contained preview: app.vue's split layout with the sticky
@@ -9,24 +9,24 @@ import shiki from '@comark/vue/plugins/shiki'
 // from GitHub and renders them with Comark, neither of which is available here.
 
 // built once: in the template it would be a new plugin on every render
-const plugins = [shiki()]
+const plugins = [shiki()];
 
-const appConfig = useAppConfig()
-const studioIcons = useStudioIcons()
+const appConfig = useAppConfig();
+const studioIcons = useStudioIcons();
 
 const introLinks = computed(() => [{
   label: 'Documentation',
   icon: studioIcons.bookOpen,
   color: 'neutral' as const,
   variant: 'ghost' as const,
-  size: 'md' as const
+  size: 'md' as const,
 }, {
   label: 'GitHub',
   icon: 'i-simple-icons-github',
   color: 'neutral' as const,
   variant: 'ghost' as const,
-  size: 'md' as const
-}])
+  size: 'md' as const,
+}]);
 
 /**
  * Invented releases in the shape the template fetches from GitHub: a tag, a
@@ -36,14 +36,14 @@ const introLinks = computed(() => [{
  * from hand-written prose markup.
  */
 interface Release {
-  tag: string
-  title: string
-  description: string
-  date: string
-  body: string
+  tag: string;
+  title: string;
+  description: string;
+  date: string;
+  body: string;
 }
 
-const versions: Release[] = [{
+const versions: Array<Release> = [{
   tag: 'sample-2',
   title: 'Sample release 2',
   description: 'Example release notes for the theme preview.',
@@ -51,7 +51,7 @@ const versions: Release[] = [{
   body: `## Changes
 
 - Add a new component example.
-- Improve keyboard navigation in a sample workflow.`
+- Improve keyboard navigation in a sample workflow.`,
 }, {
   tag: 'sample-1',
   title: 'Sample release 1',
@@ -60,48 +60,54 @@ const versions: Release[] = [{
   body: `## Changes
 
 - Set up the application shell.
-- Add a theme with semantic colors.`
-}]
+- Add a theme with semantic colors.`,
+}];
 
 // Inline replica of the template's SkyBg component: twinkling primary stars
 // scattered across the sticky intro panel.
 interface Star {
-  x: number
-  y: number
-  size: number
-  delay: number
+  x: number;
+  y: number;
+  size: number;
+  delay: number;
 }
 
-const stars = ref<Star[]>([])
+const stars = ref<Array<Star>>([]);
 
 onMounted(() => {
   stars.value = Array.from({ length: 50 }, () => ({
     x: Math.floor(Math.random() * 100),
     y: Math.floor(Math.random() * 100),
     size: Math.random() * 2 + 1,
-    delay: Math.random() * 5
-  }))
-})
+    delay: Math.random() * 5,
+  }));
+});
 </script>
 
 <template>
   <!-- The pane is the scroll container; the intro panel sticks to it on xl. The
        color mode button sits outside it, the way the template's is fixed. -->
-  <div class="relative h-full">
+  <div class="h-full relative">
     <!-- Static: the studio toolbar owns color mode. -->
     <PButton
       color="neutral"
       variant="ghost"
       aria-label="Color mode"
-      class="absolute top-4 right-4 z-20"
+      class="right-4 top-4 absolute z-20"
     >
       <template #leading="{ ui }">
-        <PIcon :name="appConfig.ui.icons.dark" :class="ui.leadingIcon({ class: 'hidden dark:inline-block' })" />
-        <PIcon :name="appConfig.ui.icons.light" :class="ui.leadingIcon({ class: 'dark:hidden' })" />
+        <PIcon
+          :name="appConfig.ui.icons.dark"
+          :class="ui.leadingIcon({ class: 'hidden dark:inline-block' })"
+        />
+        <PIcon
+          :name="appConfig.ui.icons.light"
+          :class="ui.leadingIcon({ class: 'dark:hidden' })"
+        />
       </template>
     </PButton>
 
-    <div class="h-full overflow-y-auto bg-background">
+    <div class="bg-background h-full overflow-y-auto">
       <div class="min-h-full xl:grid xl:grid-cols-2">
         <PPageSection
           title="Release Notes"
@@ -115,34 +121,37 @@ onMounted(() => {
             headline: 'mb-6',
             title: 'text-left text-4xl',
             description: 'text-left max-w-lg',
-            links: 'gap-1 justify-start -ms-2.5'
+            links: 'gap-1 justify-start -ms-2.5',
           }"
         >
           <template #top>
             <!-- Template's SkyBg: twinkling primary stars. -->
-            <div class="absolute inset-0 pointer-events-none z-[-1] overflow-hidden">
+            <div class="pointer-events-none inset-0 absolute z-[-1] overflow-hidden">
               <div
                 v-for="(star, index) in stars"
                 :key="index"
-                class="star absolute rounded-full bg-primary"
+                class="star rounded-full bg-primary absolute"
                 :style="{
                   'left': `${star.x}%`,
                   'top': `${star.y}%`,
                   'width': `${star.size}px`,
                   'height': `${star.size}px`,
                   'transform': 'translate(-50%, -50%)',
-                  '--twinkle-delay': `${star.delay}s`
+                  '--twinkle-delay': `${star.delay}s`,
                 }"
               />
             </div>
 
-            <div class="absolute -right-1/2 z-[-1] rounded-full bg-primary blur-[300px] size-60 sm:size-100 transform -translate-y-1/2 top-1/2" />
+            <div class="rounded-full bg-primary size-60 transform top-1/2 absolute z-[-1] blur-[300px] sm:size-100 -translate-y-1/2 -right-1/2" />
           </template>
 
           <template #headline>
             <!-- Stand-in for the template's AppLogo wordmark. -->
-            <div class="flex items-center gap-1.5">
-              <PIcon name="i-simple-icons-nuxt" class="size-6 text-primary shrink-0" />
+            <div class="flex gap-1.5 items-center">
+              <PIcon
+                name="i-simple-icons-nuxt"
+                class="text-primary shrink-0 size-6"
+              />
               <span class="text-xl font-bold"><span class="color-text-highlighted">Nuxt</span><span class="text-primary">UI</span></span>
             </div>
           </template>
@@ -150,13 +159,13 @@ onMounted(() => {
           <template #default />
         </PPageSection>
 
-        <section class="relative px-4 sm:px-6 xl:px-0 xl:-ms-30 xl:flex-1">
+        <section class="px-4 relative sm:px-6 xl:px-0 xl:flex-1 xl:-ms-30">
           <PChangelogVersions
             as="main"
             :indicator-motion="false"
             :ui="{
               root: 'py-16 sm:py-24 lg:py-32',
-              indicator: 'inset-y-0'
+              indicator: 'inset-y-0',
             }"
           >
             <PChangelogVersion
@@ -172,11 +181,15 @@ onMounted(() => {
                 title: 'text-3xl',
                 description: 'mt-2',
                 date: 'text-xs/9 color-text-highlighted font-mono',
-                indicator: 'sticky top-0 pt-16 -mt-16 sm:pt-24 sm:-mt-24 lg:pt-32 lg:-mt-32'
+                indicator: 'sticky top-0 pt-16 -mt-16 sm:pt-24 sm:-mt-24 lg:pt-32 lg:-mt-32',
               }"
             >
               <template #body>
-                <Markdown :value="version.body" :plugins="plugins" class="*:first:mt-0 *:last:mb-0" />
+                <Markdown
+                  :value="version.body"
+                  :plugins="plugins"
+                  class="*:first:mt-0 *:last:mb-0"
+                />
               </template>
             </PChangelogVersion>
           </PChangelogVersions>
@@ -194,7 +207,8 @@ onMounted(() => {
 }
 
 @keyframes changelog-twinkle {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.2;
   }
 

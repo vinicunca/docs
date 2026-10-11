@@ -64,7 +64,7 @@ import {
   DialogRoot,
   DialogTitle,
   DialogTrigger,
-} from 'akar'
+} from 'akar';
 </script>
 
 <template>
@@ -213,8 +213,8 @@ Move the content inside the overlay to render a dialog with overflow.
 ```vue
 // index.vue
 <script setup>
-import { DialogContent, DialogOverlay, DialogPortal, DialogRoot, DialogTrigger } from 'akar'
-import './styles.css'
+import { DialogContent, DialogOverlay, DialogPortal, DialogRoot, DialogTrigger } from 'akar';
+import './styles.css';
 </script>
 
 <template>
@@ -386,7 +386,7 @@ This example abstracts the `DialogOverlay` and `DialogClose` parts.
 
 ```vue
 <script setup>
-import { Dialog, DialogContent, DialogTrigger } from './your-dialog'
+import { Dialog, DialogContent, DialogTrigger } from './your-dialog';
 </script>
 
 <template>
@@ -400,22 +400,22 @@ import { Dialog, DialogContent, DialogTrigger } from './your-dialog'
 #### Implementation
 
 ```ts
+export { DialogRoot as Dialog, DialogTrigger } from 'akar';
 // your-dialog.ts
-export { default as DialogContent } from 'DialogContent.vue'
-export { DialogRoot as Dialog, DialogTrigger } from 'akar'
+export { default as DialogContent } from 'DialogContent.vue';
 ```
 
 ```vue
 <!-- DialogContent.vue -->
 <script setup lang="ts">
-import type { DialogContentEmits, DialogContentProps } from 'akar'
-import { Cross2Icon } from '@radix-icons/vue'
-import { DialogClose, DialogContent, DialogOverlay, DialogPortal, useForwardPropsEmits } from 'akar'
+import type { DialogContentEmits, DialogContentProps } from 'akar';
+import { Cross2Icon } from '@radix-icons/vue';
+import { DialogClose, DialogContent, DialogOverlay, DialogPortal, useForwardPropsEmits } from 'akar';
 
-const props = defineProps<DialogContentProps>()
-const emits = defineEmits<DialogContentEmits>()
+const props = defineProps<DialogContentProps>();
+const emits = defineEmits<DialogContentEmits>();
 
-const forwarded = useForwardPropsEmits(props, emits)
+const forwarded = useForwardPropsEmits(props, emits);
 </script>
 
 <template>
@@ -427,6 +427,7 @@ const forwarded = useForwardPropsEmits(props, emits)
       <DialogClose>
         <Cross2Icon />
         <span class="sr-only">Close
+        </span>
       </DialogClose>
     </DialogContent>
   </DialogPortal>

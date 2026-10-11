@@ -1,50 +1,50 @@
 <script setup lang="ts">
-import { useFilter } from 'pohon-ui/composables'
-import type { ContentNavigationItem } from '@nuxt/content'
+import type { ContentNavigationItem } from '@nuxt/content';
+import { useFilter } from 'pohon-ui/composables';
 
-const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
+const navigation = inject<Ref<Array<ContentNavigationItem>>>('navigation');
 
-const route = useRoute()
-const { scoreItem } = useFilter()
-const { navigationByCategory } = useNavigation(navigation!)
+const route = useRoute();
+const { scoreItem } = useFilter();
+const { navigationByCategory } = useNavigation(navigation!);
 
 const filteredNavigation = computed(() => {
   if (!cleanedSearchTerm.value) {
-    return navigationByCategory.value
+    return navigationByCategory.value;
   }
 
-  return navigationByCategory.value.map(item => ({
+  return navigationByCategory.value.map((item) => ({
     ...item,
-    children: item.children?.filter(child => scoreItem(child, cleanedSearchTerm.value, ['title', 'description']) !== null)
-  })).filter(item => item.children && item.children.length > 0)
-})
+    children: item.children?.filter((child) => scoreItem(child, cleanedSearchTerm.value, ['title', 'description']) !== null),
+  })).filter((item) => item.children && item.children.length > 0);
+});
 
-const searchTerm = ref('')
-const FILTERABLE_SECTIONS = ['/pohon/components', '/akar/components', '/akar/utilities']
-const isSearchActive = computed(() => FILTERABLE_SECTIONS.some(section => route.path.startsWith(section)))
-const navigationKey = computed(() => `${route.path}-${searchTerm.value ? 'filtered' : 'unfiltered'}`)
+const searchTerm = ref('');
+const FILTERABLE_SECTIONS = ['/pohon/components', '/akar/components', '/akar/utilities'];
+const isSearchActive = computed(() => FILTERABLE_SECTIONS.some((section) => route.path.startsWith(section)));
+const navigationKey = computed(() => `${route.path}-${searchTerm.value ? 'filtered' : 'unfiltered'}`);
 const cleanedSearchTerm = computed(() => {
   return searchTerm.value
     .replace(/^P(?=[A-Z])/, '')
-    .replace(/^p-/, '')
-})
+    .replace(/^p-/, '');
+});
 
 watch(() => route.path, () => {
   if (!isSearchActive.value) {
-    searchTerm.value = ''
+    searchTerm.value = '';
   }
-})
+});
 
-const input = useTemplateRef('input')
+const input = useTemplateRef('input');
 
 defineShortcuts({
   '/': {
     usingInput: false,
     handler: () => {
-      input.value?.inputRef?.focus()
-    }
-  }
-})
+      input.value?.inputRef?.focus();
+    },
+  },
+});
 </script>
 
 <template>
@@ -53,10 +53,23 @@ defineShortcuts({
       <PPage>
         <template #left>
           <PPageAside>
-            <template v-if="isSearchActive" #top>
-              <PInput ref="input" v-model="searchTerm" variant="soft" placeholder="Filter..." class="group">
+            <template
+              v-if="isSearchActive"
+              #top
+            >
+              <PInput
+                ref="input"
+                v-model="searchTerm"
+                variant="soft"
+                placeholder="Filter..."
+                class="group"
+              >
                 <template #trailing>
-                  <PKbd value="/" variant="subtle" class="ring-ring-muted bg-transparent color-text-muted" />
+                  <PKbd
+                    value="/"
+                    variant="subtle"
+                    class="color-text-muted bg-transparent ring-ring-muted"
+                  />
                 </template>
               </PInput>
             </template>
@@ -67,7 +80,7 @@ defineShortcuts({
               :navigation="filteredNavigation"
               highlight
               :ui="{
-                linkTrailingBadge: 'font-semibold uppercase'
+                linkTrailingBadge: 'font-semibold uppercase',
               }"
             />
           </PPageAside>

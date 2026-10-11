@@ -1,17 +1,22 @@
 <script setup lang="ts">
-const open = ref(false)
+const open = ref(false);
 
 defineShortcuts({
-  o: () => open.value = !open.value
-})
+  o: () => open.value = !open.value,
+});
 </script>
 
 <template>
   <PDrawer v-model:open="open">
-    <PButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+    <PButton
+      label="Open"
+      color="neutral"
+      variant="subtle"
+      trailing-icon="i-lucide-chevron-up"
+    />
 
     <template #content>
-      <Placeholder class="h-48 m-4" />
+      <Placeholder class="m-4 h-48" />
     </template>
   </PDrawer>
 </template>

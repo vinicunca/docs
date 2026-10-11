@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { FontCategory } from '../../../utils/theme/studio';
 /**
  * A font family picker: the curated shortlist grouped by category up front,
  * with a search box over the full Google Fonts catalog (fetched lazily on
@@ -9,91 +10,98 @@
  * Every instance offers all three categories. The stacks are independent, so
  * the slot a picker fills says nothing about which face belongs in it.
  */
-import { watchDebounced } from '@vueuse/core'
-import { loadFontPreviews, keepPanels } from '../../../utils/theme/studio'
-import type { FontCategory } from '../../../utils/theme/studio'
+import { watchDebounced } from '@vueuse/core';
+import { keepPanels, loadFontPreviews } from '../../../utils/theme/studio';
 
 const props = defineProps<{
   /** The shortlist offered before the user searches. */
-  curated: Array<{ name: string, category: FontCategory }>
+  curated: Array<{ name: string; category: FontCategory }>;
   /** The value that wears the (Default) tag. */
-  defaultValue?: string
+  defaultValue?: string;
   /** Prepend an "Inherit" option, for the stacks that may follow the body. */
-  inherit?: boolean
-  ariaLabel?: string
-}>()
+  inherit?: boolean;
+  ariaLabel?: string;
+}>();
 
-const model = defineModel<string>({ required: true })
+const model = defineModel<string>({ required: true });
 
-const { status, load, search } = useGoogleFonts()
+const { status, load, search } = useGoogleFonts();
 // the studio chrome skins to the applied pack, the search glyph included
-const appConfig = useAppConfig()
+const appConfig = useAppConfig();
 
-const open = ref(false)
-const query = ref('')
+const open = ref(false);
+const query = ref('');
 
 // A stale query would flash old results on reopen; the catalog fetch only
 // starts once someone actually reaches for the picker.
 watch(open, (value) => {
   if (value) {
-    query.value = ''
-    load()
+    query.value = '';
+    load();
   }
-})
+});
 
-const results = computed(() => open.value ? search(query.value) : [])
+const results = computed(() => open.value ? search(query.value) : []);
 
 /**
  * The metadata endpoint reports `Sans Serif` / `Serif` / `Monospace` /
  * `Display` / `Handwriting`, the developer API the same in lowercase.
  */
 function categoryOf(raw: string): FontCategory {
-  const category = raw.toLowerCase()
-  if (category.startsWith('mono')) return 'Mono'
-  if (category === 'serif') return 'Serif'
-  return 'Sans'
+  const category = raw.toLowerCase();
+  if (category.startsWith('mono')) {
+    return 'Mono';
+  }
+  if (category === 'serif') {
+    return 'Serif';
+  }
+  return 'Sans';
 }
 
-type FontItem = { label: string, value?: string, type?: 'label' }
+interface FontItem { label: string; value?: string; type?: 'label' }
 
 /** One group per category, each led by its own label row. */
-function group(entries: Array<{ name: string, category: FontCategory }>): FontItem[][] {
+function group(entries: Array<{ name: string; category: FontCategory }>): Array<Array<FontItem>> {
   return (['Sans', 'Serif', 'Mono'] as const)
-    .map(category => ({ category, entries: entries.filter(entry => entry.category === category) }))
+    .map((category) => ({ category, entries: entries.filter((entry) => entry.category === category) }))
     .filter(({ entries }) => entries.length)
     .map(({ category, entries }) => [
       { label: category, type: 'label' as const },
-      ...entries.map(entry => ({ label: entry.name, value: entry.name }))
-    ])
+      ...entries.map((entry) => ({ label: entry.name, value: entry.name })),
+    ]);
 }
 
-const items = computed<FontItem[][]>(() => {
+const items = computed<Array<Array<FontItem>>>(() => {
   if (query.value.trim()) {
-    return group(results.value.map(font => ({ name: font.name, category: categoryOf(font.category) })))
+    return group(results.value.map((font) => ({ name: font.name, category: categoryOf(font.category) })));
   }
-  const curated = [...props.curated]
+  const curated = [...props.curated];
   // A searched pick isn't in the shortlist, pin it on top so the selection
   // stays visible (and deselectable) on reopen.
-  if (model.value !== 'inherit' && !curated.some(entry => entry.name === model.value)) {
-    curated.unshift({ name: model.value, category: 'Sans' })
+  if (model.value !== 'inherit' && !curated.some((entry) => entry.name === model.value)) {
+    curated.unshift({ name: model.value, category: 'Sans' });
   }
   return [
     ...(props.inherit ? [[{ label: 'Inherit', value: 'inherit' }]] : []),
-    ...group(curated)
-  ]
-})
+    ...group(curated),
+  ];
+});
 
-watchDebounced(results, value => loadFontPreviews(value.map(font => font.name)), { debounce: 250 })
+watchDebounced(results, (value) => loadFontPreviews(value.map((font) => font.name)), { debounce: 250 });
 
 const empty = computed(() => {
-  if (status.value === 'loading') return 'Loading the Google Fonts catalog…'
-  if (status.value === 'error') return 'Couldn’t load the Google Fonts catalog'
-  return 'No fonts match your search'
-})
+  if (status.value === 'loading') {
+    return 'Loading the Google Fonts catalog…';
+  }
+  if (status.value === 'error') {
+    return 'Couldn’t load the Google Fonts catalog';
+  }
+  return 'No fonts match your search';
+});
 
 /** Rows preview themselves; `inherit` has no face of its own to show. */
 function faceOf(value?: string) {
-  return !value || value === 'inherit' ? undefined : { fontFamily: `'${value}', sans-serif` }
+  return !value || value === 'inherit' ? undefined : { fontFamily: `'${value}', sans-serif` };
 }
 </script>
 
@@ -119,7 +127,10 @@ function faceOf(value?: string) {
     </template>
 
     <template #item-label="{ item }">
-      <span :style="faceOf(item.value)">{{ item.label }}</span><span v-if="item.value && item.value === defaultValue" class="color-text-dimmed">&nbsp;(Default)</span>
+      <span :style="faceOf(item.value)">{{ item.label }}</span><span
+        v-if="item.value && item.value === defaultValue"
+        class="color-text-dimmed"
+      >&nbsp;(Default)</span>
     </template>
 
     <template #item-description="{ item }">

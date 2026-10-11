@@ -1,6 +1,6 @@
 <script setup lang="ts">
-const value = ref('')
-const maxLength = 15
+const value = ref('');
+const maxLength = 15;
 </script>
 
 <template>

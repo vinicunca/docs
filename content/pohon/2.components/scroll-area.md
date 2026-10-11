@@ -248,16 +248,20 @@ You can access the typed component instance using [`useTemplateRef`](https://vue
 
 ```vue
 <script setup lang="ts">
-const scrollArea = useTemplateRef('scrollArea')
+const scrollArea = useTemplateRef('scrollArea');
 
 // Scroll to a specific item
 function scrollToItem(index: number) {
-  scrollArea.value?.virtualizer?.scrollToIndex(index, { align: 'center' })
+  scrollArea.value?.virtualizer?.scrollToIndex(index, { align: 'center' });
 }
 </script>
 
 <template>
-  <PScrollArea ref="scrollArea" :items="items" virtualize />
+  <PScrollArea
+    ref="scrollArea"
+    :items="items"
+    virtualize
+  />
 </template>
 ```
 

@@ -75,7 +75,7 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from 'akar'
+} from 'akar';
 </script>
 
 <template>
@@ -713,22 +713,22 @@ import {
   DropdownMenuRoot,
   DropdownMenuTrigger,
   useId,
-} from 'akar'
-import { computed, ref } from 'vue'
+} from 'akar';
+import { computed, ref } from 'vue';
 
-const menuId = useId()
-const search = ref('')
+const menuId = useId();
+const search = ref('');
 const items = [
   { id: 'new-tab', label: 'New Tab' },
   { id: 'new-window', label: 'New Window' },
   { id: 'bookmarks', label: 'Show Bookmarks' },
   { id: 'history', label: 'Show History' },
-]
+];
 const filteredItems = computed(() =>
-  items.filter(item =>
+  items.filter((item) =>
     item.label.toLowerCase().includes(search.value.toLowerCase()),
   ),
-)
+);
 </script>
 
 <template>
@@ -770,29 +770,29 @@ data: []
 ---
 ::
           When focus is on an item, activates the focused item.
-        
+
       `,
     },
     {
       keys: ['Enter'],
       description: `
-        
+
           When focus is on <Code>DropdownMenuTrigger</Code>, opens the dropdown
           menu and focuses the first item.
           <br />
           When focus is on an item, activates the focused item.
-        
+
       `,
     },
     {
       keys: ['ArrowDown'],
       description: `
-        
+
           When focus is on <Code>DropdownMenuTrigger</Code>, opens the dropdown
           menu.
           <br />
           When focus is on an item, moves focus to the next item.
-        
+
       `,
     },
     {
@@ -804,19 +804,19 @@ data: []
     {
       keys: ['ArrowRight', 'ArrowLeft'],
       description: `
-        
+
           When focus is on <Code>DropdownMenuSubTrigger</Code>, opens or closes
           the submenu depending on reading direction.
-        
+
       `,
     },
     {
       keys: ['Esc'],
       description: `
-        
+
           Closes the dropdown menu and moves focus to{' '}
           <Code>DropdownMenuTrigger</Code>.
-        
+
       `,
     },
   ]"
@@ -855,7 +855,7 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from './your-dropdown-menu'
+} from './your-dropdown-menu';
 </script>
 
 <template>
@@ -879,11 +879,6 @@ import {
 #### Implementation
 
 ```ts
-export { default as DropdownMenuCheckboxItem } from 'DropdownMenuCheckboxItem.vue'
-// your-dropdown-menu.ts
-export { default as DropdownMenuContent } from 'DropdownMenuContent.vue'
-export { default as DropdownMenuRadioItem } from 'DropdownMenuRadioItem.vue'
-
 export {
   DropdownMenuRoot as DropdownMenu,
   DropdownMenuGroup,
@@ -892,19 +887,24 @@ export {
   DropdownMenuRadioGroup,
   DropdownMenuSeparator,
   DropdownMenuTrigger
-} from 'akar'
+} from 'akar';
+export { default as DropdownMenuCheckboxItem } from 'DropdownMenuCheckboxItem.vue';
+// your-dropdown-menu.ts
+export { default as DropdownMenuContent } from 'DropdownMenuContent.vue';
+
+export { default as DropdownMenuRadioItem } from 'DropdownMenuRadioItem.vue';
 ```
 
 ```vue
 <!-- DropdownMenuContent.vue -->
 <script setup lang="ts">
-import type { DropdownMenuContentEmits, DropdownMenuContentProps } from 'akar'
-import { DropdownMenuContent, DropdownMenuPortal, useForwardPropsEmits } from 'akar'
+import type { DropdownMenuContentEmits, DropdownMenuContentProps } from 'akar';
+import { DropdownMenuContent, DropdownMenuPortal, useForwardPropsEmits } from 'akar';
 
-const props = defineProps<DropdownMenuContentProps>()
-const emits = defineEmits<DropdownMenuContentEmits>()
+const props = defineProps<DropdownMenuContentProps>();
+const emits = defineEmits<DropdownMenuContentEmits>();
 
-const forwarded = useForwardPropsEmits(props, emits)
+const forwarded = useForwardPropsEmits(props, emits);
 </script>
 
 <template>
@@ -919,23 +919,22 @@ const forwarded = useForwardPropsEmits(props, emits)
 ```vue
 <!-- DropdownMenuCheckboxItem.vue -->
 <script setup lang="ts">
-import type { DropdownMenuCheckboxItemEmits, DropdownMenuCheckboxItemProps } from 'akar'
-import { CheckIcon } from '@radix-icons/vue'
-import { DropdownMenuCheckboxItem, DropdownMenuItemIndicator, useForwardPropsEmits } from 'akar'
+import type { DropdownMenuCheckboxItemEmits, DropdownMenuCheckboxItemProps } from 'akar';
+import { CheckIcon } from '@radix-icons/vue';
+import { DropdownMenuCheckboxItem, DropdownMenuItemIndicator, useForwardPropsEmits } from 'akar';
 
-const props = defineProps<DropdownMenuCheckboxItemProps>()
-const emits = defineEmits<DropdownMenuCheckboxItemEmits>()
+const props = defineProps<DropdownMenuCheckboxItemProps>();
+const emits = defineEmits<DropdownMenuCheckboxItemEmits>();
 
-const forwarded = useForwardPropsEmits(props, emits)
+const forwarded = useForwardPropsEmits(props, emits);
 </script>
 
 <template>
   <DropdownMenuCheckboxItem v-bind="forwarded">
-    
-      <DropdownMenuItemIndicator>
-        <CheckIcon />
-      </DropdownMenuItemIndicator>
-    
+    <DropdownMenuItemIndicator>
+      <CheckIcon />
+    </DropdownMenuItemIndicator>
+
     <slot />
   </DropdownMenuCheckboxItem>
 </template>
@@ -944,23 +943,22 @@ const forwarded = useForwardPropsEmits(props, emits)
 ```vue
 <!-- DropdownMenuRadioItem.vue -->
 <script setup lang="ts">
-import type { DropdownMenuRadioItemEmits, DropdownMenuRadioItemProps } from 'akar'
-import { DotFilledIcon } from '@radix-icons/vue'
-import { DropdownMenuItemIndicator, DropdownMenuRadioItem, useForwardPropsEmits } from 'akar'
+import type { DropdownMenuRadioItemEmits, DropdownMenuRadioItemProps } from 'akar';
+import { DotFilledIcon } from '@radix-icons/vue';
+import { DropdownMenuItemIndicator, DropdownMenuRadioItem, useForwardPropsEmits } from 'akar';
 
-const props = defineProps<DropdownMenuRadioItemProps>()
-const emits = defineEmits<DropdownMenuRadioItemEmits>()
+const props = defineProps<DropdownMenuRadioItemProps>();
+const emits = defineEmits<DropdownMenuRadioItemEmits>();
 
-const forwarded = useForwardPropsEmits(props, emits)
+const forwarded = useForwardPropsEmits(props, emits);
 </script>
 
 <template>
   <DropdownMenuRadioItem v-bind="forwarded">
-    
-      <DropdownMenuItemIndicator>
-        <DotFilledIcon />
-      </DropdownMenuItemIndicator>
-    
+    <DropdownMenuItemIndicator>
+      <DotFilledIcon />
+    </DropdownMenuItemIndicator>
+
     <slot />
   </DropdownMenuRadioItem>
 </template>

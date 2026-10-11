@@ -10,5 +10,9 @@ export default defineAppConfig({
       primary: 'green',
       neutral: 'slate',
     },
+
+    main: {
+      base: 'container',
+    },
   },
 });

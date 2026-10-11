@@ -1,32 +1,34 @@
 <script setup lang="ts">
-import type { NodeViewProps } from '@tiptap/vue-3'
-import { NodeViewWrapper } from '@tiptap/vue-3'
+import type { NodeViewProps } from '@tiptap/vue-3';
+import { NodeViewWrapper } from '@tiptap/vue-3';
 
-const props = defineProps<NodeViewProps>()
+const props = defineProps<NodeViewProps>();
 
-const file = ref<File | null>(null)
-const loading = ref(false)
+const file = ref<File | null>(null);
+const loading = ref(false);
 
 watch(file, async (newFile) => {
-  if (!newFile) return
+  if (!newFile) {
+    return;
+  }
 
-  loading.value = true
+  loading.value = true;
 
-  const reader = new FileReader()
+  const reader = new FileReader();
   reader.onload = async (e) => {
-    const dataUrl = e.target?.result as string
+    const dataUrl = e.target?.result as string;
     if (!dataUrl) {
-      loading.value = false
-      return
+      loading.value = false;
+      return;
     }
 
     // Simulate upload delay
-    await new Promise(resolve => setTimeout(resolve, 1000))
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    const pos = props.getPos()
+    const pos = props.getPos();
     if (typeof pos !== 'number') {
-      loading.value = false
-      return
+      loading.value = false;
+      return;
     }
 
     props.editor
@@ -34,12 +36,12 @@ watch(file, async (newFile) => {
       .focus()
       .deleteRange({ from: pos, to: pos + 1 })
       .setImage({ src: dataUrl })
-      .run()
+      .run();
 
-    loading.value = false
-  }
-  reader.readAsDataURL(newFile)
-})
+    loading.value = false;
+  };
+  reader.readAsDataURL(newFile);
+});
 </script>
 
 <template>

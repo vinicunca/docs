@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { isTextUIPart } from 'ai'
-import { useChat } from '@ai-sdk/vue'
-import { isPartStreaming } from 'pohon-ui/utils/ai'
-import { Markdown } from '@comark/vue'
-import shiki from '@comark/vue/plugins/shiki'
-import security from '@comark/vue/plugins/security'
+import { useChat } from '@ai-sdk/vue';
+import { Markdown } from '@comark/vue';
+import security from '@comark/vue/plugins/security';
+import shiki from '@comark/vue/plugins/shiki';
+import { isTextUIPart } from 'ai';
+import { isPartStreaming } from 'pohon-ui/utils/ai';
 
-const plugins = [shiki(), security({ blockedTags: ['script', 'style', 'iframe', 'object', 'embed', 'form'] })]
+const plugins = [shiki(), security({ blockedTags: ['script', 'style', 'iframe', 'object', 'embed', 'form'] })];
 
-const input = ref('')
+const input = ref('');
 
-const { messages, status, error, sendMessage, regenerate } = useChat()
+const { messages, status, error, sendMessage, regenerate } = useChat();
 
 const groups = computed(() => [{
   id: 'ai',
@@ -19,38 +19,40 @@ const groups = computed(() => [{
     label: searchTerm.value ? `Ask AI for “${searchTerm.value}”` : 'Ask AI',
     icon: 'i-lucide-bot',
     onSelect: (e: any) => {
-      e.preventDefault()
+      e.preventDefault();
 
-      ai.value = true
+      ai.value = true;
 
       if (searchTerm.value) {
         messages.value = [...messages.value, {
           id: '1',
           role: 'user',
-          parts: [{ type: 'text', text: searchTerm.value }]
-        }]
+          parts: [{ type: 'text', text: searchTerm.value }],
+        }];
 
-        regenerate()
+        regenerate();
       }
-    }
-  }]
-}])
+    },
+  }],
+}]);
 
-const ai = ref(false)
-const searchTerm = ref('')
+const ai = ref(false);
+const searchTerm = ref('');
 
 function onSubmit() {
-  if (!input.value.trim()) return
+  if (!input.value.trim()) {
+    return;
+  }
 
-  sendMessage({ text: input.value })
+  sendMessage({ text: input.value });
 
-  input.value = ''
+  input.value = '';
 }
 
 function onClose(e: Event) {
-  e.preventDefault()
+  e.preventDefault();
 
-  ai.value = false
+  ai.value = false;
 }
 
 const ui = {
@@ -65,14 +67,21 @@ const ui = {
     h4: { base: 'text-sm my-2' },
     pre: { root: 'my-2' },
     table: { root: 'my-2' },
-    hr: { base: 'my-2' }
-  }
-}
+    hr: { base: 'my-2' },
+  },
+};
 </script>
 
 <template>
-  <PContentSearch v-model:search-term="searchTerm" open :groups="groups">
-    <template v-if="ai" #content>
+  <PContentSearch
+    v-model:search-term="searchTerm"
+    open
+    :groups="groups"
+  >
+    <template
+      v-if="ai"
+      #content
+    >
       <PTheme :ui="ui">
         <PChatPalette>
           <PChatMessages
@@ -82,7 +91,10 @@ const ui = {
             :assistant="{ icon: 'i-lucide-bot' }"
           >
             <template #content="{ message }">
-              <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
+              <template
+                v-for="(part, index) in message.parts"
+                :key="`${message.id}-${part.type}-${index}`"
+              >
                 <template v-if="isTextUIPart(part)">
                   <Markdown
                     v-if="message.role === 'assistant'"
@@ -91,7 +103,10 @@ const ui = {
                     :plugins="plugins"
                     class="*:first:mt-0 *:last:mb-0"
                   />
-                  <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap leading-6">
+                  <p
+                    v-else-if="message.role === 'user'"
+                    class="leading-6 whitespace-pre-wrap"
+                  >
                     {{ part.text }}
                   </p>
                 </template>

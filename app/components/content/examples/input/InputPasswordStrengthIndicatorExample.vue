@@ -1,35 +1,49 @@
 <script setup lang="ts">
-const show = ref(false)
-const password = ref('')
+const show = ref(false);
+const password = ref('');
 
 function checkStrength(str: string) {
   const requirements = [
     { regex: /.{8,}/, text: 'At least 8 characters' },
     { regex: /\d/, text: 'At least 1 number' },
     { regex: /[a-z]/, text: 'At least 1 lowercase letter' },
-    { regex: /[A-Z]/, text: 'At least 1 uppercase letter' }
-  ]
+    { regex: /[A-Z]/, text: 'At least 1 uppercase letter' },
+  ];
 
-  return requirements.map(req => ({ met: req.regex.test(str), text: req.text }))
+  return requirements.map((req) => ({ met: req.regex.test(str), text: req.text }));
 }
 
-const strength = computed(() => checkStrength(password.value))
-const score = computed(() => strength.value.filter(req => req.met).length)
+const strength = computed(() => checkStrength(password.value));
+const score = computed(() => strength.value.filter((req) => req.met).length);
 
 const color = computed(() => {
-  if (score.value === 0) return 'neutral'
-  if (score.value <= 1) return 'error'
-  if (score.value <= 2) return 'warning'
-  if (score.value === 3) return 'warning'
-  return 'success'
-})
+  if (score.value === 0) {
+    return 'neutral';
+  }
+  if (score.value <= 1) {
+    return 'error';
+  }
+  if (score.value <= 2) {
+    return 'warning';
+  }
+  if (score.value === 3) {
+    return 'warning';
+  }
+  return 'success';
+});
 
 const text = computed(() => {
-  if (score.value === 0) return 'Enter a password'
-  if (score.value <= 2) return 'Weak password'
-  if (score.value === 3) return 'Medium password'
-  return 'Strong password'
-})
+  if (score.value === 0) {
+    return 'Enter a password';
+  }
+  if (score.value <= 2) {
+    return 'Weak password';
+  }
+  if (score.value === 3) {
+    return 'Medium password';
+  }
+  return 'Strong password';
+});
 </script>
 
 <template>
@@ -68,18 +82,27 @@ const text = computed(() => {
       size="sm"
     />
 
-    <p id="password-strength" class="text-sm font-medium">
+    <p
+      id="password-strength"
+      class="text-sm font-medium"
+    >
       {{ text }}. Must contain:
     </p>
 
-    <ul class="space-y-1" aria-label="Password requirements">
+    <ul
+      class="space-y-1"
+      aria-label="Password requirements"
+    >
       <li
         v-for="(req, index) in strength"
         :key="index"
-        class="flex items-center gap-0.5"
+        class="flex gap-0.5 items-center"
         :class="req.met ? 'text-success' : 'color-text-muted'"
       >
-        <PIcon :name="req.met ? 'i-lucide-circle-check' : 'i-lucide-circle-x'" class="size-4 shrink-0" />
+        <PIcon
+          :name="req.met ? 'i-lucide-circle-check' : 'i-lucide-circle-x'"
+          class="shrink-0 size-4"
+        />
 
         <span class="text-xs font-light">
           {{ req.text }}

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import DocsFluidContainer from './unocss-preset/DocsFluidContainer.vue'
+import DocsFluidContainer from './unocss-preset/DocsFluidContainer.vue';
 </script>
 
 <template>

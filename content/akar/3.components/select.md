@@ -70,7 +70,7 @@ import {
   SelectTrigger,
   SelectValue,
   SelectViewport,
-} from 'akar'
+} from 'akar';
 </script>
 
 <template>
@@ -695,7 +695,7 @@ This example abstracts most of the parts.
 
 ```vue
 <script setup lang="ts">
-import { Select, SelectItem } from './your-select'
+import { Select, SelectItem } from './your-select';
 </script>
 
 <template>
@@ -717,21 +717,21 @@ import { Select, SelectItem } from './your-select'
 
 ```ts
 // your-select.ts
-export { default as Select } from 'Select.vue'
-export { default as SelectItem } from 'SelectItem.vue'
+export { default as Select } from 'Select.vue';
+export { default as SelectItem } from 'SelectItem.vue';
 ```
 
 ```vue
 <!-- Select.vue -->
 <script setup lang="ts">
-import type { SelectRootEmits, SelectRootProps } from 'akar'
-import { CheckIcon, ChevronDownIcon, ChevronUpIcon, } from '@radix-icons/vue'
-import { SelectContent, SelectIcon, SelectPortal, SelectRoot, SelectScrollDownButton, SelectScrollUpButton, SelectTrigger, SelectValue, SelectViewport, useForwardPropsEmits } from 'akar'
+import type { SelectRootEmits, SelectRootProps } from 'akar';
+import { CheckIcon, ChevronDownIcon, ChevronUpIcon, } from '@radix-icons/vue';
+import { SelectContent, SelectIcon, SelectPortal, SelectRoot, SelectScrollDownButton, SelectScrollUpButton, SelectTrigger, SelectValue, SelectViewport, useForwardPropsEmits } from 'akar';
 
-const props = defineProps<SelectRootProps>()
-const emits = defineEmits<SelectRootEmits>()
+const props = defineProps<SelectRootProps>();
+const emits = defineEmits<SelectRootEmits>();
 
-const forward = useForwardPropsEmits(props, emits)
+const forward = useForwardPropsEmits(props, emits);
 </script>
 
 <template>
@@ -763,11 +763,11 @@ const forward = useForwardPropsEmits(props, emits)
 ```vue
 <!-- SelectItem.vue -->
 <script setup lang="ts">
-import type { SelectItemProps } from 'akar'
-import { CheckIcon } from '@radix-icons/vue'
-import { SelectItem, SelectItemIndicator, SelectItemText } from 'akar'
+import type { SelectItemProps } from 'akar';
+import { CheckIcon } from '@radix-icons/vue';
+import { SelectItem, SelectItemIndicator, SelectItemText } from 'akar';
 
-const props = defineProps<SelectItemProps>()
+const props = defineProps<SelectItemProps>();
 </script>
 
 <template>

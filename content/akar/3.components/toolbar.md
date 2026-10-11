@@ -62,7 +62,7 @@ import {
   ToolbarSeparator,
   ToolbarToggleGroup,
   ToolbarToggleItem,
-} from 'akar'
+} from 'akar';
 </script>
 
 <template>

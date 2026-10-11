@@ -1,7 +1,12 @@
 <script setup lang="ts">
-import { upperFirst } from 'scule'
-import { keepPanels, toolbarPanelClass, FONT_WEIGHT_DEFAULTS, loadFontPreviews } from '../../../utils/theme/studio'
-import { THEME_DEFAULTS } from '../../../utils/theme/engine/types'
+import { upperFirst } from 'scule';
+import { THEME_DEFAULTS } from '../../../utils/theme/engine/types';
+import { FONT_WEIGHT_DEFAULTS, keepPanels, loadFontPreviews, toolbarPanelClass } from '../../../utils/theme/studio';
+
+const props = defineProps<{
+  /** Stacked in the mobile menu: the panel takes the trigger's width, like a select. */
+  vertical?: boolean;
+}>();
 
 /**
  * Every typographic setting in one panel: the three stacks up top, then the
@@ -11,42 +16,42 @@ import { THEME_DEFAULTS } from '../../../utils/theme/engine/types'
  * points `code`/`kbd`/`pre`/`samp` at it) and serif drives the h1–h6 rule in
  * main.css while headings use `--font-serif`.
  */
-const { fonts, font, fontPrefs, setFontPrefs, fontSize } = useTheme()
+const { fonts, font, fontPrefs, setFontPrefs, fontSize } = useTheme();
 
 // The saved font is client-only: report the stock face until mounted, like
 // the other triggers, so hydration adopts the server's label and aria-label.
-const mounted = useMounted()
-const fontLabel = computed(() => (mounted.value ? font.value : THEME_DEFAULTS.font))
+const mounted = useMounted();
+const fontLabel = computed(() => (mounted.value ? font.value : THEME_DEFAULTS.font));
 
-onMounted(() => loadFontPreviews(fonts.map(entry => entry.name)))
+onMounted(() => loadFontPreviews(fonts.map((entry) => entry.name)));
 
 // One writable model per unoPalette weight step, the knobs components
 // actually dereference at runtime.
 function weightStepModel(step: keyof typeof FONT_WEIGHT_DEFAULTS) {
   return computed({
     get: () => fontPrefs.value.weights?.[step] ?? FONT_WEIGHT_DEFAULTS[step],
-    set: (value: number) => setFontPrefs({ ...fontPrefs.value, weights: { ...fontPrefs.value.weights, [step]: value } })
-  })
+    set: (value: number) => setFontPrefs({ ...fontPrefs.value, weights: { ...fontPrefs.value.weights, [step]: value } }),
+  });
 }
 
-const WEIGHT_STEPS = ['normal', 'medium', 'semibold', 'bold'] as const
-const weightSteps = Object.fromEntries(WEIGHT_STEPS.map(step => [step, weightStepModel(step)])) as Record<typeof WEIGHT_STEPS[number], ReturnType<typeof weightStepModel>>
-const weights = WEIGHT_STEPS.map(step => ({ label: upperFirst(step), model: weightSteps[step]! }))
+const WEIGHT_STEPS = ['normal', 'medium', 'semibold', 'bold'] as const;
+const weightSteps = Object.fromEntries(WEIGHT_STEPS.map((step) => [step, weightStepModel(step)])) as Record<typeof WEIGHT_STEPS[number], ReturnType<typeof weightStepModel>>;
+const weights = WEIGHT_STEPS.map((step) => ({ label: upperFirst(step), model: weightSteps[step]! }));
 
 const uppercase = computed({
   get: () => !!fontPrefs.value.uppercase,
-  set: (value: boolean) => setFontPrefs({ ...fontPrefs.value, uppercase: value })
-})
+  set: (value: boolean) => setFontPrefs({ ...fontPrefs.value, uppercase: value }),
+});
 
 const letterSpacing = computed({
   get: () => fontPrefs.value.letterSpacing ?? 0,
-  set: (value: number) => setFontPrefs({ ...fontPrefs.value, letterSpacing: value })
-})
+  set: (value: number) => setFontPrefs({ ...fontPrefs.value, letterSpacing: value }),
+});
 
 const lineHeight = computed({
   get: () => fontPrefs.value.lineHeight ?? 1.5,
-  set: (value: number) => setFontPrefs({ ...fontPrefs.value, lineHeight: value })
-})
+  set: (value: number) => setFontPrefs({ ...fontPrefs.value, lineHeight: value }),
+});
 
 /**
  * UnoCSS's other two stacks, labelled by what they drive rather than by
@@ -56,32 +61,31 @@ const lineHeight = computed({
 function stackModel(key: 'serif' | 'mono') {
   return computed({
     get: () => fontPrefs.value[key] ?? 'inherit',
-    set: (value: string) => setFontPrefs({ ...fontPrefs.value, [key]: value === 'inherit' ? undefined : value })
-  })
+    set: (value: string) => setFontPrefs({ ...fontPrefs.value, [key]: value === 'inherit' ? undefined : value }),
+  });
 }
 
 const stacks = [
   { label: 'Body', model: font, inherit: false, default: 'Public Sans', hint: 'Body font' },
   { label: 'Heading', model: stackModel('serif'), inherit: true, default: undefined, hint: 'Heading font' },
-  { label: 'Code', model: stackModel('mono'), inherit: true, default: undefined, hint: 'Code font' }
-]
+  { label: 'Code', model: stackModel('mono'), inherit: true, default: undefined, hint: 'Code font' },
+];
 
-const props = defineProps<{
-  /** Stacked in the mobile menu: the panel takes the trigger's width, like a select. */
-  vertical?: boolean
-}>()
+const studioIcons = useStudioIcons();
+const { groupDirtyFlags } = useThemeStudioToolbar();
 
-const studioIcons = useStudioIcons()
-const { groupDirtyFlags } = useThemeStudioToolbar()
+const open = ref(false);
+const dirty = groupDirtyFlags.font;
 
-const open = ref(false)
-const dirty = groupDirtyFlags.font
-
-const content = computed(() => [...toolbarPanelClass(props.vertical), 'divide-y divide-border *:p-3'])
+const content = computed(() => [...toolbarPanelClass(props.vertical), 'divide-y divide-border *:p-3']);
 </script>
 
 <template>
-  <PPopover v-model:open="open" :content="{ align: 'center', onInteractOutside: keepPanels }" :ui="{ content }">
+  <PPopover
+    v-model:open="open"
+    :content="{ align: 'center', onInteractOutside: keepPanels }"
+    :ui="{ content }"
+  >
     <ThemeStudioToolbarTrigger
       :label="fontLabel"
       :icon="studioIcons.text"
@@ -92,7 +96,10 @@ const content = computed(() => [...toolbarPanelClass(props.vertical), 'divide-y 
     />
 
     <template #content>
-      <ThemeStudioSection label="Fonts" section-key="font">
+      <ThemeStudioSection
+        label="Fonts"
+        section-key="font"
+      >
         <ThemeStudioRow
           v-for="stack in stacks"
           :key="stack.label"
@@ -109,7 +116,10 @@ const content = computed(() => [...toolbarPanelClass(props.vertical), 'divide-y 
         </ThemeStudioRow>
       </ThemeStudioSection>
 
-      <ThemeStudioSection label="Treatment" section-key="type">
+      <ThemeStudioSection
+        label="Treatment"
+        section-key="type"
+      >
         <!-- font-size scales every rem metric, so it belongs with the type
            decisions rather than beside radius -->
         <ThemeStudioRow
@@ -148,7 +158,10 @@ const content = computed(() => [...toolbarPanelClass(props.vertical), 'divide-y 
         />
       </ThemeStudioSection>
 
-      <ThemeStudioSection label="Weights" section-key="weights">
+      <ThemeStudioSection
+        label="Weights"
+        section-key="weights"
+      >
         <ThemeStudioRow
           v-for="weight in weights"
           :key="weight.label"

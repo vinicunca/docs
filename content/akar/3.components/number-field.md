@@ -77,7 +77,7 @@ Import all parts and piece them together.
 
 ```vue
 <script setup>
-import { NumberFieldDecrement, NumberFieldIncrement, NumberFieldInput, NumberFieldRoot } from 'akar'
+import { NumberFieldDecrement, NumberFieldIncrement, NumberFieldInput, NumberFieldRoot } from 'akar';
 </script>
 
 <template>

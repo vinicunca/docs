@@ -70,7 +70,7 @@ Even though this component is automatically displayed on mobile, you can use the
 <script setup lang="ts">
 definePageMeta({
   layout: 'dashboard'
-})
+});
 </script>
 
 <template>

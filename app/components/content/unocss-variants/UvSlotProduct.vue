@@ -54,7 +54,7 @@ const classes = computed(() => item({ color: color.value }));
         >
       </div>
       <div class="pl-4 flex-auto sm:pl-8">
-        <div class="relative flex flex-wrap items-baseline">
+        <div class="flex flex-wrap items-baseline relative">
           <h1 :class="classes.title()">
             Nike Adapt BB 2.0
           </h1>
@@ -69,7 +69,7 @@ const classes = computed(() => item({ color: color.value }));
           </div>
         </div>
         <div class="my-4 flex items-baseline">
-          <div class="flex space-x-3 text-sm font-medium">
+          <div class="text-sm font-medium flex space-x-3">
             <label
               v-for="itemSize in ['xs', 's', 'm', 'l', 'xl']"
               :key="itemSize"
@@ -99,7 +99,7 @@ const classes = computed(() => item({ color: color.value }));
     </div>
 
     <div class="flex flex-col gap-2">
-      <span class="font-semibold text-slate-800 dark:text-slate-200">
+      <span class="text-slate-800 font-semibold dark:text-slate-200">
         Select color:
       </span>
       <PRadioGroup

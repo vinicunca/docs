@@ -42,8 +42,7 @@ import { generateTimestampColumns } from './utils/utils.timestamps.schema';
 
 const invoiceTable = pgTable('invoice', {
   id: uuid('id').primaryKey().default(sql`uuidv7()`), // Postgres 18 built-in
-  organizationId: uuid('organization_id').notNull()
-    .references(() => organizationTable.id, { onDelete: 'cascade' }),
+  organizationId: uuid('organization_id').notNull().references(() => organizationTable.id, { onDelete: 'cascade' }),
   number: text('number').notNull(),
   amountCents: integer('amount_cents').notNull(),
   createdBy: uuid('created_by').references(() => userTable.id, { onDelete: 'set null' }),
@@ -60,14 +59,21 @@ Add `export * from './invoice.schema';` to `schemas/index.ts`, then run `pnpm db
 ## 3. Contract (`packages/shared/api-contract/src`)
 
 ```ts
+// invoice/invoice.contract.ts
+import { oc } from '@orpc/contract';
 // invoice/invoice.schema.ts
 import { z } from 'zod';
+
 import { paginated, paginationInput } from '../shared/pagination';
 
 // Leave organizationId out: the session supplies the scope
 export const invoiceSchema = z.object({
-  id: z.uuid(), number: z.string(), amountCents: z.number().int(),
-  createdBy: z.uuid().nullable(), createdAt: z.date(), updatedAt: z.date(), // Dates survive the RPC protocol
+  id: z.uuid(),
+  number: z.string(),
+  amountCents: z.number().int(),
+  createdBy: z.uuid().nullable(),
+  createdAt: z.date(),
+  updatedAt: z.date(), // Dates survive the RPC protocol
 });
 export type Invoice = z.infer<typeof invoiceSchema>;
 export const invoiceIdInput = z.object({ id: z.uuid() });
@@ -77,9 +83,6 @@ export const invoiceListInput = paginationInput.extend({ search: z.string().trim
 export type InvoiceListInput = z.infer<typeof invoiceListInput>;
 export const invoicePageSchema = paginated(invoiceSchema);
 export type InvoicePage = z.infer<typeof invoicePageSchema>;
-
-// invoice/invoice.contract.ts
-import { oc } from '@orpc/contract';
 const withNotFound = oc.errors({ NOT_FOUND: { message: 'Invoice not found.' } });
 export const invoiceContract = {
   list: oc.input(invoiceListInput).output(invoicePageSchema),
@@ -94,19 +97,17 @@ In `src/index.ts`, add `invoice: invoiceContract` to `contract`, plus `export * 
 ## 4. Repo and service (`apps/api/server/domains/invoice/`)
 
 ```ts
+import { invoiceTable } from '@taman/db-pg';
+import { and, count, desc, eq } from 'drizzle-orm';
 // invoice.repo.ts — drizzle only; every query takes organizationId
 import { CoreRepo } from '#domains/core/core.repo.ts';
-import { and, count, desc, eq } from 'drizzle-orm';
-import { invoiceTable } from '@taman/db-pg';
 
 export type InvoiceRow = typeof invoiceTable.$inferSelect;
 export interface InvoiceRepoPort { findById: (organizationId: string, id: string) => Promise<InvoiceRow | null> /* … */ }
 
 export class InvoiceRepo extends CoreRepo implements InvoiceRepoPort {
   async findById(organizationId: string, id: string) {
-    const rows = await this.db.select().from(invoiceTable)
-      .where(and(eq(invoiceTable.organizationId, organizationId), eq(invoiceTable.id, id)))
-      .limit(1);
+    const rows = await this.db.select().from(invoiceTable).where(and(eq(invoiceTable.organizationId, organizationId), eq(invoiceTable.id, id))).limit(1);
     return rows[0] ?? null;
   }
 }
@@ -117,9 +118,9 @@ The `*RepoPort` interface lets tests swap in a fake (`todo.repo.fake.ts`). For t
 ```ts
 // invoice.service.ts
 import type { TamanContext } from '#lib/context.ts';
-import { CoreService } from '#domains/core/core.service.ts';
 import { ORPCError } from '@orpc/server';
 import { ORG_REQUIRED } from '@taman/api-contract';
+import { CoreService } from '#domains/core/core.service.ts';
 import { InvoiceRepo } from './invoice.repo.ts';
 
 type InvoiceAction = 'create' | 'read' | 'update' | 'delete';
@@ -181,12 +182,12 @@ In `server/rpc/router.ts`, write `os.router({ menu: menuRouter, todo: todoRouter
 
 ```ts
 // apps/web/src/router/routes/routes.constants.ts — add an order slot
-export const ROUTE_ORDER = { DASHBOARD: 100, TODO: 101, INVOICE: 102, /* … */ } as const;
-
 // apps/web/src/router/routes/modules/invoice.ts
 import type { RouteRecordRaw } from 'vue-router';
 import { $t } from '#/locales';
 import { ROUTE_ORDER } from '../routes.constants';
+
+export const ROUTE_ORDER = { DASHBOARD: 100, TODO: 101, INVOICE: 102, /* … */ } as const;
 
 const routes: Array<RouteRecordRaw> = [{
   meta: { icon: 'lucide:receipt', order: ROUTE_ORDER.INVOICE, title: $t('invoice.title') },

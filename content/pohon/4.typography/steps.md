@@ -23,13 +23,13 @@ Use the `level` prop to define which heading will be used for the steps.
 ```ts [nuxt.config.ts]
 export default defineNuxtConfig({
   modules: ['pohon-ui']
-})
+});
 ```
 
 #### Import UnoCSS in your CSS
 
 ```css [app/assets/css/main.css]
-```
+``
 
 #### Start your development server
 
@@ -39,7 +39,7 @@ npm run dev
 
 ::
 
-#code
+# code
 
 ````mdc
 ::steps{level="4"}

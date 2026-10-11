@@ -1,85 +1,91 @@
 <script setup lang="ts">
-import { AutocompleteAnchor, AutocompleteContent, AutocompleteEmpty, AutocompleteGroup, AutocompleteInput, AutocompleteItem, AutocompleteLabel, AutocompleteRoot, AutocompleteSeparator, AutocompleteTrigger, AutocompleteViewport } from 'akar'
-import { ref } from 'vue'
-import './styles.css'
+import { AutocompleteAnchor, AutocompleteContent, AutocompleteEmpty, AutocompleteGroup, AutocompleteInput, AutocompleteItem, AutocompleteLabel, AutocompleteRoot, AutocompleteSeparator, AutocompleteTrigger, AutocompleteViewport } from 'akar';
+import { ref } from 'vue';
+import './styles.css';
 
-const v = ref('')
+const v = ref('');
 
 const options = [
-  { name: 'Fruit', children: [
-    { name: 'Apple' },
-    { name: 'Banana' },
-    { name: 'Orange' },
-    { name: 'Honeydew' },
-    { name: 'Grapes' },
-    { name: 'Watermelon' },
-    { name: 'Cantaloupe' },
-    { name: 'Pear' },
-  ] },
-  { name: 'Vegetable', children: [
-    { name: 'Cabbage' },
-    { name: 'Broccoli' },
-    { name: 'Carrots' },
-    { name: 'Lettuce' },
-    { name: 'Spinach' },
-    { name: 'Bok Choy' },
-    { name: 'Cauliflower' },
-    { name: 'Potatoes' },
-  ] },
-]
+  {
+    name: 'Fruit',
+    children: [
+      { name: 'Apple' },
+      { name: 'Banana' },
+      { name: 'Orange' },
+      { name: 'Honeydew' },
+      { name: 'Grapes' },
+      { name: 'Watermelon' },
+      { name: 'Cantaloupe' },
+      { name: 'Pear' },
+    ],
+  },
+  {
+    name: 'Vegetable',
+    children: [
+      { name: 'Cabbage' },
+      { name: 'Broccoli' },
+      { name: 'Carrots' },
+      { name: 'Lettuce' },
+      { name: 'Spinach' },
+      { name: 'Bok Choy' },
+      { name: 'Cauliflower' },
+      { name: 'Potatoes' },
+    ],
+  },
+];
 </script>
 
 <template>
   <div class="akar-demo akar-demo-Autocomplete">
     <AutocompleteRoot
-        v-model="v"
-        class="AutocompleteRoot"
-      >
-        <AutocompleteAnchor class="AutocompleteAnchor">
-          <AutocompleteInput
-            class="AutocompleteInput"
-            placeholder="Type or select an option..."
+      v-model="v"
+      class="AutocompleteRoot"
+    >
+      <AutocompleteAnchor class="AutocompleteAnchor">
+        <AutocompleteInput
+          class="AutocompleteInput"
+          placeholder="Type or select an option..."
+        />
+        <AutocompleteTrigger>
+          <PIcon
+            name="i-lucide-chevron-down"
+            class="AutocompleteIcon"
           />
-          <AutocompleteTrigger>
-            <PIcon
-              name="i-lucide-chevron-down"
-              class="AutocompleteIcon"
-            />
-          </AutocompleteTrigger>
-        </AutocompleteAnchor>
+        </AutocompleteTrigger>
+      </AutocompleteAnchor>
 
-        <AutocompleteContent class="AutocompleteContent">
-          <AutocompleteViewport class="AutocompleteViewport">
-            <AutocompleteEmpty class="AutocompleteEmpty" />
+      <AutocompleteContent class="AutocompleteContent">
+        <AutocompleteViewport class="AutocompleteViewport">
+          <AutocompleteEmpty class="AutocompleteEmpty" />
 
-            <template
-              v-for="(group, index) in options"
-              :key="group.name"
-            >
-              <AutocompleteGroup>
-                <AutocompleteSeparator
-                  v-if="index !== 0"
-                  class="AutocompleteSeparator"
-                />
+          <template
+            v-for="(group, index) in options"
+            :key="group.name"
+          >
+            <AutocompleteGroup>
+              <AutocompleteSeparator
+                v-if="index !== 0"
+                class="AutocompleteSeparator"
+              />
 
-                <AutocompleteLabel class="AutocompleteLabel">
-                  {{ group.name }}
-                </AutocompleteLabel>
+              <AutocompleteLabel class="AutocompleteLabel">
+                {{ group.name }}
+              </AutocompleteLabel>
 
-                <AutocompleteItem
-                  v-for="option in group.children"
-                  :key="option.name"
-                  :value="option.name"
-                  class="AutocompleteItem"
-                >
-                  <span>
-                    {{ option.name }}
-                  </span>
-                </AutocompleteItem>
-              </AutocompleteGroup>
-            </template>
-          </AutocompleteViewport>
-        </AutocompleteContent>
-      </AutocompleteRoot>
+              <AutocompleteItem
+                v-for="option in group.children"
+                :key="option.name"
+                :value="option.name"
+                class="AutocompleteItem"
+              >
+                <span>
+                  {{ option.name }}
+                </span>
+              </AutocompleteItem>
+            </AutocompleteGroup>
+          </template>
+        </AutocompleteViewport>
+      </AutocompleteContent>
+    </AutocompleteRoot>
   </div>
 </template>

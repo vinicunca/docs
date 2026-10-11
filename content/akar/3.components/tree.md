@@ -57,7 +57,7 @@ Import all parts and piece them together.
 
 ```vue
 <script setup>
-import { TreeItem, TreeRoot, TreeVirtualizer } from 'akar'
+import { TreeItem, TreeRoot, TreeVirtualizer } from 'akar';
 </script>
 
 <template>
@@ -228,18 +228,18 @@ In `Tree.vue`,
 
 ```vue
 <script setup lang="ts">
-import { TreeItem } from 'akar'
+import { TreeItem } from 'akar';
 
 interface TreeNode {
-  title: string
-  icon: string
-  children?: TreeNode[]
+  title: string;
+  icon: string;
+  children?: Array<TreeNode>;
 }
 
 withDefaults(defineProps<{
-  treeItems: TreeNode[]
-  level?: number
-}>(), { level: 0 })
+  treeItems: Array<TreeNode>;
+  level?: number;
+}>(), { level: 0 });
 </script>
 
 <template>

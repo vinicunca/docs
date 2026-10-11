@@ -72,7 +72,7 @@ import {
   AutocompleteSeparator,
   AutocompleteTrigger,
   AutocompleteViewport,
-} from 'akar'
+} from 'akar';
 </script>
 
 <template>
@@ -251,11 +251,11 @@ The `modelValue` is a string that reflects whatever the user types. Selecting an
 
 ```vue
 <script setup lang="ts">
-import { AutocompleteContent, AutocompleteInput, AutocompleteItem, AutocompletePortal, AutocompleteRoot } from 'akar'
-import { ref } from 'vue'
+import { AutocompleteContent, AutocompleteInput, AutocompleteItem, AutocompletePortal, AutocompleteRoot } from 'akar';
+import { ref } from 'vue';
 
-const searchText = ref('')
-const fruits = ['Apple', 'Banana', 'Orange', 'Grapes', 'Pineapple']
+const searchText = ref('');
+const fruits = ['Apple', 'Banana', 'Orange', 'Grapes', 'Pineapple'];
 </script>
 
 <template>
@@ -305,16 +305,19 @@ The Autocomplete value is submitted as a regular text field in forms.
 
 ```vue
 <script setup lang="ts">
-import { AutocompleteContent, AutocompleteInput, AutocompleteItem, AutocompletePortal, AutocompleteRoot } from 'akar'
-import { ref } from 'vue'
+import { AutocompleteContent, AutocompleteInput, AutocompleteItem, AutocompletePortal, AutocompleteRoot } from 'akar';
+import { ref } from 'vue';
 
-const query = ref('')
-const cities = ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Phoenix']
+const query = ref('');
+const cities = ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Phoenix'];
 </script>
 
 <template>
   <form>
-    <AutocompleteRoot v-model="query" name="city">
+    <AutocompleteRoot
+      v-model="query"
+      name="city"
+    >
       <AutocompleteInput placeholder="Enter a city..." />
       <AutocompletePortal>
         <AutocompleteContent>

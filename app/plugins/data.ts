@@ -1,14 +1,14 @@
 export default defineNuxtPlugin({
   enforce: 'post',
   setup() {
-    const { framework } = useFrameworks()
+    const { framework } = useFrameworks();
 
     if (import.meta.client) {
       useHead({
         htmlAttrs: {
-          'data-framework': framework
-        }
-      })
+          'data-framework': framework,
+        },
+      });
     }
 
     if (import.meta.server) {
@@ -27,9 +27,9 @@ export default defineNuxtPlugin({
           document.documentElement.setAttribute('data-framework', f || 'nuxt');
           `.replace(/\s+/g, ' '),
           type: 'text/javascript',
-          tagPriority: -1
-        }]
-      })
+          tagPriority: -1,
+        }],
+      });
     }
-  }
-})
+  },
+});

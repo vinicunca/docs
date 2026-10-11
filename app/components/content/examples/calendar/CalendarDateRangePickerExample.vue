@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { useBreakpoints } from '@vueuse/core'
-import { DateFormatter, getLocalTimeZone, today } from '@internationalized/date'
+import { DateFormatter, getLocalTimeZone, today } from '@internationalized/date';
+import { useBreakpoints } from '@vueuse/core';
 
-const df = new DateFormatter('en-US', { dateStyle: 'medium' })
-const tz = getLocalTimeZone()
-const breakpoints = useBreakpoints({ sm: 640, md: 768, lg: 1024, xl: 1280, '2xl': 1536 })
-const isDesktop = breakpoints.greaterOrEqual('sm')
+const df = new DateFormatter('en-US', { dateStyle: 'medium' });
+const tz = getLocalTimeZone();
+const breakpoints = useBreakpoints({ 'sm': 640, 'md': 768, 'lg': 1024, 'xl': 1280, '2xl': 1536 });
+const isDesktop = breakpoints.greaterOrEqual('sm');
 
 const ranges = [
   { label: 'Last 7 days', days: 7 },
@@ -13,61 +13,76 @@ const ranges = [
   { label: 'Last 30 days', days: 30 },
   { label: 'Last 3 months', months: 3 },
   { label: 'Last 6 months', months: 6 },
-  { label: 'Last year', years: 1 }
-]
+  { label: 'Last year', years: 1 },
+];
 
-const initialEnd = today(tz)
+const initialEnd = today(tz);
 const modelValue = shallowRef({
   start: initialEnd.subtract({ days: 14 }),
-  end: initialEnd
-})
+  end: initialEnd,
+});
 
 const label = computed(() => {
-  const { start, end } = modelValue.value
-  if (!start) return 'Pick a date'
-  if (!end) return df.format(start.toDate(tz))
-  return `${df.format(start.toDate(tz))} - ${df.format(end.toDate(tz))}`
-})
+  const { start, end } = modelValue.value;
+  if (!start) {
+    return 'Pick a date';
+  }
+  if (!end) {
+    return df.format(start.toDate(tz));
+  }
+  return `${df.format(start.toDate(tz))} - ${df.format(end.toDate(tz))}`;
+});
 
 function computeStart(range: typeof ranges[number]) {
-  const end = today(tz)
-  return { start: end.subtract({ days: range.days, months: range.months, years: range.years }), end }
+  const end = today(tz);
+  return { start: end.subtract({ days: range.days, months: range.months, years: range.years }), end };
 }
 
 function isRangeSelected(range: typeof ranges[number]) {
-  if (!modelValue.value?.start || !modelValue.value?.end) return false
-  const { start, end } = computeStart(range)
-  return modelValue.value.start.compare(start) === 0 && modelValue.value.end.compare(end) === 0
+  if (!modelValue.value?.start || !modelValue.value?.end) {
+    return false;
+  }
+  const { start, end } = computeStart(range);
+  return modelValue.value.start.compare(start) === 0 && modelValue.value.end.compare(end) === 0;
 }
 
 function selectRange(range: typeof ranges[number]) {
-  modelValue.value = computeStart(range)
+  modelValue.value = computeStart(range);
 }
 </script>
 
 <template>
   <PPopover :content="{ align: 'center' }">
-    <PButton color="neutral" variant="subtle" icon="i-lucide-calendar">
+    <PButton
+      color="neutral"
+      variant="subtle"
+      icon="i-lucide-calendar"
+    >
       {{ label }}
     </PButton>
 
     <template #content>
-      <div class="flex items-stretch divide-x divide-(--ui-color-border)">
-        <div class="hidden sm:flex flex-col justify-center py-2">
+      <div class="divide---ui-color-border flex items-stretch divide-(x)">
+        <div class="py-2 flex-col hidden justify-center sm:flex">
           <PButton
             v-for="(range, index) in ranges"
             :key="index"
             :label="range.label"
             color="neutral"
             variant="ghost"
-            class="rounded-none px-4"
+            class="px-4 rounded-none"
             :class="[isRangeSelected(range) ? 'bg-background-elevated' : 'hover:bg-background-elevated/50']"
             truncate
             @click="selectRange(range)"
           />
         </div>
 
-        <PCalendar v-model="modelValue" class="p-2" :number-of-months="isDesktop ? 2 : 1" range />
+        <PCalendar
+          v-model="modelValue"
+          class="p-2"
+          :number-of-months="isDesktop ? 2 : 1"
+          range
+        />
       </div>
     </template>
   </PPopover>

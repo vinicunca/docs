@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { MarkdownDocument } from '@comark/vue'
-import { parseMarkdownDoc } from '../../utils/markdown'
-import type { MarkdownDoc } from '../../utils/markdown'
+import type { MarkdownDoc } from '../../utils/markdown';
+import { MarkdownDocument } from '@comark/vue';
+import { parseMarkdownDoc } from '../../utils/markdown';
 
 /**
  * Markdown rendered at runtime, through the parser the whole site shares:
@@ -11,53 +11,56 @@ import type { MarkdownDoc } from '../../utils/markdown'
  */
 const props = defineProps<{
   /** Markdown to parse, or a document already parsed (the release notes). */
-  value?: string | MarkdownDoc
+  value?: string | MarkdownDoc;
   /** Drop the block the parser wraps a single line in, `p` unless named. */
-  unwrap?: boolean | string
-}>()
+  unwrap?: boolean | string;
+}>();
 
 async function resolve(value: string | MarkdownDoc | undefined) {
   if (!value) {
-    return null
+    return null;
   }
 
-  const doc = typeof value === 'string' ? await parseMarkdownDoc(value) : value
+  const doc = typeof value === 'string' ? await parseMarkdownDoc(value) : value;
   if (!props.unwrap) {
-    return doc
+    return doc;
   }
 
-  const tags = props.unwrap === true ? ['p'] : String(props.unwrap).split(' ')
-  const nodes = doc.nodes.flatMap(node => (Array.isArray(node) && tags.includes(node[0] as string) ? node.slice(2) : [node]))
+  const tags = props.unwrap === true ? ['p'] : String(props.unwrap).split(' ');
+  const nodes = doc.nodes.flatMap((node) => (Array.isArray(node) && tags.includes(node[0] as string) ? node.slice(2) : [node]));
 
-  return { ...doc, nodes } as MarkdownDoc
+  return { ...doc, nodes } as MarkdownDoc;
 }
 
-const doc = shallowRef<MarkdownDoc | null>(null)
+const doc = shallowRef<MarkdownDoc | null>(null);
 
 // the last change wins: a parse for a value that has moved on is dropped
-let version = 0
+let version = 0;
 async function update() {
-  const current = ++version
-  let next: MarkdownDoc | null
+  const current = ++version;
+  let next: MarkdownDoc | null;
   try {
-    next = await resolve(props.value)
+    next = await resolve(props.value);
   } catch (error) {
-    console.warn('[markdown] could not parse', error)
+    console.warn('[markdown] could not parse', error);
     // the source as plain text, so a broken string never fails the page
-    const fallback = { frontmatter: {}, meta: {}, nodes: [['p', {}, props.value]] } as unknown as MarkdownDoc
-    next = await resolve(fallback)
+    const fallback = { frontmatter: {}, meta: {}, nodes: [['p', {}, props.value]] } as unknown as MarkdownDoc;
+    next = await resolve(fallback);
   }
   if (current === version) {
-    doc.value = next
+    doc.value = next;
   }
 }
 
-watch(() => [props.value, props.unwrap], update)
+watch(() => [props.value, props.unwrap], update);
 
 // awaited so the server renders it
-await update()
+await update();
 </script>
 
 <template>
-  <MarkdownDocument v-if="doc" :value="doc" />
+  <MarkdownDocument
+    v-if="doc"
+    :value="doc"
+  />
 </template>

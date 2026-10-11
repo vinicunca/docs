@@ -53,7 +53,7 @@ Import the component.
 
 ```vue
 <script setup lang="ts">
-import { ToastAction, ToastClose, ToastDescription, ToastProvider, ToastRoot, ToastTitle, ToastViewport } from 'akar'
+import { ToastAction, ToastClose, ToastDescription, ToastProvider, ToastRoot, ToastTitle, ToastViewport } from 'akar';
 </script>
 
 <template>
@@ -328,7 +328,7 @@ Create your own API by abstracting the primitive parts into your own component.
 
 ```vue
 <script setup lang="ts">
-import Toast from './your-toast.vue'
+import Toast from './your-toast.vue';
 </script>
 
 <template>
@@ -348,12 +348,12 @@ import Toast from './your-toast.vue'
 ```vue
 // your-toast.vue
 <script setup lang="ts">
-import { ToastAction, ToastClose, ToastDescription, ToastRoot, ToastTitle } from 'akar'
+import { ToastAction, ToastClose, ToastDescription, ToastRoot, ToastTitle } from 'akar';
 
 defineProps<{
-  title: string
-  content: string
-}>()
+  title: string;
+  content: string;
+}>();
 </script>
 
 <template>
@@ -372,6 +372,7 @@ defineProps<{
     </ToastAction>
     <ToastClose aria-label="Close">
       <span aria-hidden="true">×
+      </span>
     </ToastClose>
   </ToastRoot>
 </template>
@@ -385,9 +386,9 @@ Create your own imperative API to allow [toast duplication](/akar/components/toa
 
 ```vue
 <script setup lang="ts">
-import Toast from './your-toast.vue'
+import Toast from './your-toast.vue';
 
-const savedRef = ref<InstanceType<typeof Toast>>()
+const savedRef = ref<InstanceType<typeof Toast>>();
 </script>
 
 <template>
@@ -407,18 +408,18 @@ const savedRef = ref<InstanceType<typeof Toast>>()
 ```vue
 // your-toast.vue
 <script setup lang="ts">
-import { ToastClose, ToastDescription, ToastRoot, ToastTitle } from 'akar'
-import { ref } from 'vue'
+import { ToastClose, ToastDescription, ToastRoot, ToastTitle } from 'akar';
+import { ref } from 'vue';
 
-const count = ref(0)
+const count = ref(0);
 
 function publish() {
-  count.value++
+  count.value++;
 }
 
 defineExpose({
   publish
-})
+});
 </script>
 
 <template>

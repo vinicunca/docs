@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type { CommandPaletteGroup, CommandPaletteItem } from 'pohon-ui'
+import type { CommandPaletteGroup, CommandPaletteItem } from 'pohon-ui';
 
-const studioIcons = useStudioIcons()
+const studioIcons = useStudioIcons();
 
-const toast = useToast()
+const toast = useToast();
 
-const groups = computed<CommandPaletteGroup<CommandPaletteItem>[]>(() => [
+const groups = computed<Array<CommandPaletteGroup<CommandPaletteItem>>>(() => [
   {
     id: 'users',
     label: 'Users',
@@ -13,19 +13,19 @@ const groups = computed<CommandPaletteGroup<CommandPaletteItem>[]>(() => [
       {
         label: 'Benjamin Canac',
         suffix: 'benjamincanac',
-        avatar: { src: 'https://github.com/benjamincanac.png', loading: 'lazy' }
+        avatar: { src: 'https://github.com/benjamincanac.png', loading: 'lazy' },
       },
       {
         label: 'Hugo Richard',
         suffix: 'HugoRCD',
-        avatar: { src: 'https://github.com/HugoRCD.png', loading: 'lazy' }
+        avatar: { src: 'https://github.com/HugoRCD.png', loading: 'lazy' },
       },
       {
         label: 'Sébastien Chopin',
         suffix: 'atinux',
-        avatar: { src: 'https://github.com/atinux.png', loading: 'lazy' }
-      }
-    ]
+        avatar: { src: 'https://github.com/atinux.png', loading: 'lazy' },
+      },
+    ],
   },
   {
     id: 'actions',
@@ -36,8 +36,8 @@ const groups = computed<CommandPaletteGroup<CommandPaletteItem>[]>(() => [
         icon: studioIcons.filePlus,
         kbds: ['meta', 'N'],
         onSelect() {
-          toast.add({ title: 'Add new file' })
-        }
+          toast.add({ title: 'Add new file' });
+        },
       },
       {
         label: 'Add new folder',
@@ -45,8 +45,8 @@ const groups = computed<CommandPaletteGroup<CommandPaletteItem>[]>(() => [
         icon: studioIcons.folderPlus,
         kbds: ['meta', 'F'],
         onSelect() {
-          toast.add({ title: 'Add new folder' })
-        }
+          toast.add({ title: 'Add new folder' });
+        },
       },
       {
         label: 'Add label',
@@ -54,14 +54,19 @@ const groups = computed<CommandPaletteGroup<CommandPaletteItem>[]>(() => [
         icon: studioIcons.tag,
         kbds: ['meta', 'L'],
         onSelect() {
-          toast.add({ title: 'Add label' })
-        }
-      }
-    ]
-  }
-])
+          toast.add({ title: 'Add label' });
+        },
+      },
+    ],
+  },
+]);
 </script>
 
 <template>
-  <PCommandPalette :groups="groups" placeholder="Search users and actions..." :autofocus="false" class="h-71.5" />
+  <PCommandPalette
+    :groups="groups"
+    placeholder="Search users and actions..."
+    :autofocus="false"
+    class="h-71.5"
+  />
 </template>

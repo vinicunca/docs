@@ -30,9 +30,9 @@ PApp
 
 ```vue [layouts/dashboard.vue]
 <script setup lang="ts">
-import type { NavigationMenuItem } from 'pohon-ui'
+import type { NavigationMenuItem } from 'pohon-ui';
 
-const items = computed<NavigationMenuItem[]>(() => [{
+const items = computed<Array<NavigationMenuItem>>(() => [{
   label: 'Home',
   icon: 'i-lucide-house',
   to: '/dashboard'
@@ -48,12 +48,15 @@ const items = computed<NavigationMenuItem[]>(() => [{
   label: 'Settings',
   icon: 'i-lucide-settings',
   to: '/dashboard/settings'
-}])
+}]);
 </script>
 
 <template>
   <PDashboardGroup>
-    <PDashboardSidebar collapsible resizable>
+    <PDashboardSidebar
+      collapsible
+      resizable
+    >
       <template #header="{ collapsed }">
         <PDashboardSearchButton :collapsed="collapsed" />
       </template>
@@ -86,7 +89,7 @@ const items = computed<NavigationMenuItem[]>(() => [{
 
 ```vue [pages/dashboard/index.vue]
 <script setup lang="ts">
-definePageMeta({ layout: 'dashboard' })
+definePageMeta({ layout: 'dashboard' });
 </script>
 
 <template>
@@ -97,7 +100,10 @@ definePageMeta({ layout: 'dashboard' })
           <PDashboardSidebarCollapse />
         </template>
         <template #right>
-          <PButton icon="i-lucide-plus" label="New" />
+          <PButton
+            icon="i-lucide-plus"
+            label="New"
+          />
         </template>
       </PDashboardNavbar>
     </template>
@@ -160,11 +166,14 @@ Always pass `:collapsed="collapsed"` to `PNavigationMenu` inside a collapsible s
 
 ```vue [pages/dashboard/inbox.vue]
 <script setup lang="ts">
-definePageMeta({ layout: 'dashboard' })
+definePageMeta({ layout: 'dashboard' });
 </script>
 
 <template>
-  <PDashboardPanel id="inbox-list" resizable>
+  <PDashboardPanel
+    id="inbox-list"
+    resizable
+  >
     <template #header>
       <PDashboardNavbar title="Inbox" />
     </template>
@@ -173,7 +182,10 @@ definePageMeta({ layout: 'dashboard' })
     </template>
   </PDashboardPanel>
 
-  <PDashboardPanel id="inbox-detail" class="hidden lg:flex">
+  <PDashboardPanel
+    id="inbox-detail"
+    class="hidden lg:flex"
+  >
     <template #header>
       <PDashboardNavbar title="Message" />
     </template>

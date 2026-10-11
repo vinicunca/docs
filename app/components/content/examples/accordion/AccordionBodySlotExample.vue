@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import type { AccordionItem } from 'pohon-ui'
+import type { AccordionItem } from 'pohon-ui';
 
-const items: AccordionItem[] = [
+const items: Array<AccordionItem> = [
   {
     label: 'Icons',
-    icon: 'i-lucide-smile'
+    icon: 'i-lucide-smile',
   },
   {
     label: 'Colors',
-    icon: 'i-lucide-swatch-book'
+    icon: 'i-lucide-swatch-book',
   },
   {
     label: 'Components',
-    icon: 'i-lucide-box'
-  }
-]
+    icon: 'i-lucide-box',
+  },
+];
 </script>
 
 <template>

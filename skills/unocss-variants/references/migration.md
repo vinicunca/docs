@@ -24,7 +24,7 @@ Recipe shape is unchanged: `base`, `slots`, `variants`, `compoundVariants`, `com
 ```ts
 // tailwind-variants (default twMerge): 'py-1 px-4'
 // unocss-variants:                      'px-2 py-1 px-4'
-uv({ base: 'px-2 py-1' })({ class: 'px-4' })
+uv({ base: 'px-2 py-1' })({ class: 'px-4' });
 ```
 
 Find every place where the old code relied on a later class replacing an earlier one, and prefix the winner with `uno-layer-uv:`. Add `layers: { uv: 10 }` to `uno.config.ts` once.
@@ -40,9 +40,9 @@ Typical spots:
 
 ```ts
 // Before
-import { tv } from 'tailwind-variants'
+import { tv } from 'tailwind-variants';
 
-const base = tv({ base: 'rounded-full bg-zinc-100 px-3 py-1' })
+const base = tv({ base: 'rounded-full bg-zinc-100 px-3 py-1' });
 const buy = tv(
   {
     extend: base,
@@ -51,23 +51,23 @@ const buy = tv(
     responsiveVariants: ['md'],
   },
   { twMerge: true },
-)
-buy({ size: { initial: 'sm', md: 'md' } })
+);
+buy({ size: { initial: 'sm', md: 'md' } });
 ```
 
 ```ts
 // After
-import { uv } from 'unocss-variants'
+import { uv } from 'unocss-variants';
 
-const base = uv({ base: 'rounded-full bg-zinc-100 px-3 py-1' })
+const base = uv({ base: 'rounded-full bg-zinc-100 px-3 py-1' });
 const buy = uv({
   extend: base,
   base: 'uno-layer-uv:rounded-lg uno-layer-uv:bg-blue-500 text-white',
   variants: {
     size: { sm: 'text-xs', md: 'text-sm', responsive: 'text-xs md:text-sm' }, // breakpoints live in the strings
   },
-})
-buy({ size: 'responsive' })
+});
+buy({ size: 'responsive' });
 ```
 
 ## Checklist

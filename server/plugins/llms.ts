@@ -1,4 +1,4 @@
-import { rawUrl } from '#agent-discovery'
+import { rawUrl } from '#agent-discovery';
 
 export default defineNitroPlugin((nitroApp) => {
   // `nuxt-llms` unshifts its "Documentation Sets" section, which is a single
@@ -7,17 +7,17 @@ export default defineNitroPlugin((nitroApp) => {
   // The documentation links are rewritten to their `/raw/**.md` twins by
   // `nuxt-agent-discovery`, from the same route config the negotiation uses.
   nitroApp.hooks.hook('llms:generate', (_, { sections }) => {
-    const docSetIdx = sections.findIndex(s => s.title === 'Documentation Sets')
+    const docSetIdx = sections.findIndex((s) => s.title === 'Documentation Sets');
     if (docSetIdx !== -1) {
-      const [docSet] = sections.splice(docSetIdx, 1)
-      sections.push(docSet)
+      const [docSet] = sections.splice(docSetIdx, 1);
+      sections.push(docSet);
     }
-  })
+  });
 
   // `llms-full.txt` is built from the documentation pages alone, so the
   // when-to-use guidance has to be prepended here to reach agents that only
   // read the full document.
   nitroApp.hooks.hook('llms:generate:full', (event, _options, contents) => {
-    contents.unshift(renderLlmsSection(WHEN_TO_USE_SECTION, href => rawUrl(event, href)))
-  })
-})
+    contents.unshift(renderLlmsSection(WHEN_TO_USE_SECTION, (href) => rawUrl(event, href)));
+  });
+});

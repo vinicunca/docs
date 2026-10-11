@@ -1,11 +1,11 @@
 <script setup lang="ts">
 const { data: users } = useLazyFetch('https://jsonplaceholder.typicode.com/users', {
   key: 'command-palette-users',
-  transform: (data: { id: number, name: string, email: string }[]) => {
-    return data?.map(user => ({ id: user.id, label: user.name, suffix: user.email, avatar: { src: `https://i.pravatar.cc/120?img=${user.id}`, loading: 'lazy' as const } })) || []
+  transform: (data: Array<{ id: number; name: string; email: string }>) => {
+    return data?.map((user) => ({ id: user.id, label: user.name, suffix: user.email, avatar: { src: `https://i.pravatar.cc/120?img=${user.id}`, loading: 'lazy' as const } })) || [];
   },
-  server: false
-})
+  server: false,
+});
 </script>
 
 <template>

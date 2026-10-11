@@ -8,68 +8,68 @@ import {
   DialogRoot,
   DialogTitle,
   DialogTrigger,
-} from 'akar'
-import './styles.css'
+} from 'akar';
+import './styles.css';
 </script>
 
 <template>
   <div class="akar-demo akar-demo-Dialog">
     <DialogRoot>
-        <DialogTrigger
-          class="Button grass"
+      <DialogTrigger
+        class="Button grass"
+      >
+        Edit profile
+      </DialogTrigger>
+      <DialogPortal>
+        <DialogOverlay class="DialogOverlay" />
+        <DialogContent
+          class="DialogContent"
         >
-          Edit profile
-        </DialogTrigger>
-        <DialogPortal>
-          <DialogOverlay class="DialogOverlay" />
-          <DialogContent
-            class="DialogContent"
-          >
-            <DialogTitle class="DialogTitle">
-              Edit profile
-            </DialogTitle>
-            <DialogDescription class="DialogDescription">
-              Make changes to your profile here. Click save when you're done.
-            </DialogDescription>
-            <fieldset class="Fieldset">
-              <label
-                class="Label"
-                for="name"
-              > Name </label>
-              <input
-                id="name"
-                class="Input"
-                defaultValue="Pedro Duarte"
-              >
-            </fieldset>
-            <fieldset class="Fieldset">
-              <label
-                class="Label"
-                for="username"
-              > Username </label>
-              <input
-                id="username"
-                class="Input"
-                defaultValue="@peduarte"
-              >
-            </fieldset>
-            <div :style="{ display: 'flex', marginTop: 25, justifyContent: 'flex-end' }">
-              <DialogClose as-child>
-                <button
-                  class="Button green"
-                >
-                  Save changes
-                </button>
-              </DialogClose>
-            </div>
-            <DialogClose
-              class="IconButton"
-              aria-label="Close"
+          <DialogTitle class="DialogTitle">
+            Edit profile
+          </DialogTitle>
+          <DialogDescription class="DialogDescription">
+            Make changes to your profile here. Click save when you're done.
+          </DialogDescription>
+          <fieldset class="Fieldset">
+            <label
+              class="Label"
+              for="name"
+            > Name </label>
+            <input
+              id="name"
+              class="Input"
+              defaultValue="Pedro Duarte"
             >
-              <PIcon name="i-lucide-x" />
+          </fieldset>
+          <fieldset class="Fieldset">
+            <label
+              class="Label"
+              for="username"
+            > Username </label>
+            <input
+              id="username"
+              class="Input"
+              defaultValue="@peduarte"
+            >
+          </fieldset>
+          <div :style="{ display: 'flex', marginTop: 25, justifyContent: 'flex-end' }">
+            <DialogClose as-child>
+              <button
+                class="Button green"
+              >
+                Save changes
+              </button>
             </DialogClose>
-          </DialogContent>
-        </DialogPortal>
-      </DialogRoot>
+          </div>
+          <DialogClose
+            class="IconButton"
+            aria-label="Close"
+          >
+            <PIcon name="i-lucide-x" />
+          </DialogClose>
+        </DialogContent>
+      </DialogPortal>
+    </DialogRoot>
   </div>
 </template>

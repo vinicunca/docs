@@ -13,9 +13,9 @@ Build public-facing pages (landing, blog, changelog, pricing) with the Header + 
 
 ```vue [app.vue]
 <script setup lang="ts">
-import type { NavigationMenuItem } from 'pohon-ui'
+import type { NavigationMenuItem } from 'pohon-ui';
 
-const items = computed<NavigationMenuItem[]>(() => [{
+const items = computed<Array<NavigationMenuItem>>(() => [{
   label: 'Features',
   to: '#features'
 }, {
@@ -24,7 +24,7 @@ const items = computed<NavigationMenuItem[]>(() => [{
 }, {
   label: 'Blog',
   to: '/blog'
-}])
+}]);
 </script>
 
 <template>
@@ -38,12 +38,20 @@ const items = computed<NavigationMenuItem[]>(() => [{
 
       <template #right>
         <PColorModeButton />
-        <PButton label="Sign in" color="neutral" variant="ghost" />
+        <PButton
+          label="Sign in"
+          color="neutral"
+          variant="ghost"
+        />
         <PButton label="Get started" />
       </template>
 
       <template #body>
-        <PNavigationMenu :items="items" orientation="vertical" class="-mx-2.5" />
+        <PNavigationMenu
+          :items="items"
+          orientation="vertical"
+          class="-mx-2.5"
+        />
       </template>
     </PHeader>
 
@@ -53,10 +61,18 @@ const items = computed<NavigationMenuItem[]>(() => [{
 
     <PFooter>
       <template #left>
-        <p class="color-text-muted text-sm">Copyright © {{ new Date().getFullYear() }}</p>
+        <p class="text-sm color-text-muted">
+          Copyright © {{ new Date().getFullYear() }}
+        </p>
       </template>
       <template #right>
-        <PButton icon="i-simple-icons-github" color="neutral" variant="ghost" to="https://github.com" target="_blank" />
+        <PButton
+          icon="i-simple-icons-github"
+          color="neutral"
+          variant="ghost"
+          to="https://github.com"
+          target="_blank"
+        />
       </template>
     </PFooter>
   </PApp>
@@ -77,11 +93,15 @@ const items = computed<NavigationMenuItem[]>(() => [{
     description="A comprehensive Vue UI component library."
     :links="[
       { label: 'Get started', to: '/docs', icon: 'i-lucide-square-play' },
-      { label: 'Learn more', color: 'neutral', variant: 'subtle', trailingIcon: 'i-lucide-arrow-right' }
+      { label: 'Learn more', color: 'neutral', variant: 'subtle', trailingIcon: 'i-lucide-arrow-right' },
     ]"
     orientation="horizontal"
   >
-    <img src="/hero-image.png" alt="App screenshot" class="rounded-lg shadow-2xl ring ring-ring" />
+    <img
+      src="/hero-image.png"
+      alt="App screenshot"
+      class="rounded-lg ring ring-ring shadow-2xl"
+    >
   </PPageHero>
 
   <PPageSection
@@ -92,7 +112,7 @@ const items = computed<NavigationMenuItem[]>(() => [{
     :features="[
       { title: 'Accessible', description: 'Built on Akar with full ARIA support.', icon: 'i-lucide-accessibility' },
       { title: 'Customizable', description: 'UnoCSS Variants theming with full control.', icon: 'i-lucide-palette' },
-      { title: 'Responsive', description: 'Mobile-first components.', icon: 'i-lucide-monitor-smartphone' }
+      { title: 'Responsive', description: 'Mobile-first components.', icon: 'i-lucide-monitor-smartphone' },
     ]"
   />
 
@@ -101,16 +121,20 @@ const items = computed<NavigationMenuItem[]>(() => [{
     description="Join the community and start building today."
     :links="[
       { label: 'Get started', color: 'neutral' },
-      { label: 'Star on GitHub', color: 'neutral', variant: 'subtle', trailingIcon: 'i-lucide-arrow-right' }
+      { label: 'Star on GitHub', color: 'neutral', variant: 'subtle', trailingIcon: 'i-lucide-arrow-right' },
     ]"
   />
 
-  <PPageSection id="pricing" headline="Pricing" title="Simple, transparent pricing">
+  <PPageSection
+    id="pricing"
+    headline="Pricing"
+    title="Simple, transparent pricing"
+  >
     <PPricingPlans
       :plans="[
         { title: 'Free', price: '$0', description: 'For personal projects', features: ['10 components', 'Community support'] },
         { title: 'Pro', price: '$99', description: 'For teams', features: ['All components', 'Priority support'], highlight: true },
-        { title: 'Enterprise', price: 'Custom', description: 'For large teams', features: ['Custom components', 'Dedicated support'] }
+        { title: 'Enterprise', price: 'Custom', description: 'For large teams', features: ['Custom components', 'Dedicated support'] },
       ]"
     />
   </PPageSection>
@@ -146,16 +170,24 @@ const items = computed<NavigationMenuItem[]>(() => [{
 
 ```vue [pages/blog/index.vue]
 <script setup lang="ts">
-const { data: posts } = await useAsyncData('posts', () => queryCollection('posts').all())
+const { data: posts } = await useAsyncData('posts', () => queryCollection('posts').all());
 </script>
 
 <template>
   <PPage>
-    <PPageHero title="Blog" description="The latest news and updates." />
+    <PPageHero
+      title="Blog"
+      description="The latest news and updates."
+    />
     <PPageBody>
       <PContainer>
         <PBlogPosts>
-          <PBlogPost v-for="post in posts" :key="post.path" v-bind="post" :to="post.path" />
+          <PBlogPost
+            v-for="post in posts"
+            :key="post.path"
+            v-bind="post"
+            :to="post.path"
+          />
         </PBlogPosts>
       </PContainer>
     </PPageBody>
@@ -167,7 +199,7 @@ const { data: posts } = await useAsyncData('posts', () => queryCollection('posts
 
 ```vue [pages/changelog.vue]
 <script setup lang="ts">
-const { data: versions } = await useAsyncData('versions', () => queryCollection('changelog').all())
+const { data: versions } = await useAsyncData('versions', () => queryCollection('changelog').all());
 </script>
 
 <template>
@@ -176,7 +208,11 @@ const { data: versions } = await useAsyncData('versions', () => queryCollection(
     <PPageBody>
       <PContainer>
         <PChangelogVersions>
-          <PChangelogVersion v-for="version in versions" :key="version.path" v-bind="version" />
+          <PChangelogVersion
+            v-for="version in versions"
+            :key="version.path"
+            v-bind="version"
+          />
         </PChangelogVersions>
       </PContainer>
     </PPageBody>

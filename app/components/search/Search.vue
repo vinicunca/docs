@@ -1,33 +1,33 @@
 <script setup lang="ts">
-import type { ContentNavigationItem } from '@nuxt/content'
+import type { ContentNavigationItem } from '@nuxt/content';
 
 defineProps<{
-  navigation?: ContentNavigationItem[]
-}>()
+  navigation?: Array<ContentNavigationItem>;
+}>();
 
 const { status, search, init } = useSearchCollection('docs', {
   immediate: false,
-  ignoredTags: ['style']
-})
+  ignoredTags: ['style'],
+});
 
-const { links, groups, searchTerm } = useSearch()
-const { track } = useAnalytics()
+const { links, groups, searchTerm } = useSearch();
+const { track } = useAnalytics();
 
 const fuse = {
   resultLimit: 20,
   fuseOptions: {
     useTokenSearch: false,
-    threshold: 0
-  }
-}
+    threshold: 0,
+  },
+};
 
-onNuxtReady(init)
+onNuxtReady(init);
 
 watchDebounced(searchTerm, (term) => {
   if (term) {
-    track('Search Performed', { term })
+    track('Search Performed', { term });
   }
-}, { debounce: 500 })
+}, { debounce: 500 });
 </script>
 
 <template>

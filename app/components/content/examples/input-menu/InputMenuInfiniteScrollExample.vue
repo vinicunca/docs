@@ -1,54 +1,54 @@
 <script setup lang="ts">
-import { useInfiniteScroll } from '@vueuse/core'
+import { useInfiniteScroll } from '@vueuse/core';
 
-type User = {
-  firstName: string
+interface User {
+  firstName: string;
 }
 
-type UserResponse = {
-  users: User[]
-  total: number
-  skip: number
-  limit: number
+interface UserResponse {
+  users: Array<User>;
+  total: number;
+  skip: number;
+  limit: number;
 }
 
-const skip = ref(0)
+const skip = ref(0);
 
 const { data, status, execute } = await useLazyFetch('https://dummyjson.com/users?limit=10&select=firstName', {
   key: 'input-menu-users-infinite-scroll',
   params: { skip },
   transform: (data?: UserResponse) => {
-    return data?.users.map(user => user.firstName)
+    return data?.users.map((user) => user.firstName);
   },
-  immediate: false
-})
+  immediate: false,
+});
 
-const users = ref<string[]>([])
+const users = ref<Array<string>>([]);
 
 watch(data, () => {
   users.value = [
     ...users.value,
-    ...(data.value || [])
-  ]
-})
+    ...(data.value || []),
+  ];
+});
 
 function onOpen() {
   if (!users.value?.length) {
-    execute()
+    execute();
   }
 }
 
-const inputMenu = useTemplateRef('inputMenu')
+const inputMenu = useTemplateRef('inputMenu');
 
 onMounted(() => {
   useInfiniteScroll(() => inputMenu.value?.viewportRef, () => {
-    skip.value += 10
+    skip.value += 10;
   }, {
     canLoadMore: () => {
-      return status.value !== 'pending'
-    }
-  })
-})
+      return status.value !== 'pending';
+    },
+  });
+});
 </script>
 
 <template>

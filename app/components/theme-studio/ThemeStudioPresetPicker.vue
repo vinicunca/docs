@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { upperFirst } from 'scule'
-import type { DropdownMenuItem } from 'pohon-ui'
-import type { ThemeDoc } from '../../utils/theme/engine/types'
-import { DEFAULT_PRESET_ID } from '../../utils/theme/engine/types'
-import { studioIcons as stockIcons } from '../../utils/theme/icons'
-import { keepPanels, paletteLabel, rampCssName, themeChipStyle, loadFontPreviews, PRESET_ICONS, FONTS } from '../../utils/theme/studio'
+import type { DropdownMenuItem } from 'pohon-ui';
+import type { ThemeDoc } from '../../utils/theme/engine/types';
+import { upperFirst } from 'scule';
+import { DEFAULT_PRESET_ID } from '../../utils/theme/engine/types';
+import { studioIcons as stockIcons } from '../../utils/theme/icons';
+import { FONTS, keepPanels, loadFontPreviews, paletteLabel, PRESET_ICONS, rampCssName, themeChipStyle } from '../../utils/theme/studio';
 
 /**
  * The header's theme menu: the applied preset up top with the presets a
@@ -13,31 +13,31 @@ import { keepPanels, paletteLabel, rampCssName, themeChipStyle, loadFontPreviews
  * segmented control, and the full studio at the bottom. The header drops this on /theme, where the
  * studio's own toolbar covers it.
  */
-const { track } = useAnalytics()
-const appConfig = useAppConfig()
-const colorMode = useColorMode()
-const studioIcons = useStudioIcons()
-const { primary, primaryColors, neutral, neutralColors, blackAsPrimary, setBlackAsPrimary, radius, radiuses, font, icon, icons, currentDoc } = useTheme()
-const { presets, selectedPreset, applyPreset, selectPalette, isCustomPalette, neutralChip, sectionDirty } = useThemeStudio()
+const { track } = useAnalytics();
+const appConfig = useAppConfig();
+const colorMode = useColorMode();
+const studioIcons = useStudioIcons();
+const { primary, primaryColors, neutral, neutralColors, blackAsPrimary, setBlackAsPrimary, radius, radiuses, font, icon, icons, currentDoc } = useTheme();
+const { presets, selectedPreset, applyPreset, selectPalette, isCustomPalette, neutralChip, sectionDirty } = useThemeStudio();
 // "changed from the preset" per control, the cue the studio toolbar carries
-const { groupDirtyFlags } = useThemeStudioToolbar()
+const { groupDirtyFlags } = useThemeStudioToolbar();
 
 // The persisted theme is client-only, resolve once the client has it so
 // hydration matches the server's fallback (the stock preset). Shared, or the
 // copy the mobile menu mounts would flash the fallback.
-const mounted = useThemeMounted()
+const mounted = useThemeMounted();
 
-const preset = computed(() => (mounted.value ? presets.find(entry => entry.id === selectedPreset.value) : presets[0]))
+const preset = computed(() => (mounted.value ? presets.find((entry) => entry.id === selectedPreset.value) : presets[0]));
 // the color mode preference is client-only too
-const mode = computed(() => (mounted.value ? colorMode.preference : 'system') as 'light' | 'dark' | 'system')
-const name = computed(() => `${preset.value?.name ?? 'Custom'} theme`)
-const modified = computed(() => Object.values(groupDirtyFlags).some(flag => flag.value))
+const mode = computed(() => (mounted.value ? colorMode.preference : 'system') as 'light' | 'dark' | 'system');
+const name = computed(() => `${preset.value?.name ?? 'Custom'} theme`);
+const modified = computed(() => Object.values(groupDirtyFlags).some((flag) => flag.value));
 // the toolbar's colors flag spans both ramps, the two rows each want their own
-const primaryDirty = sectionDirty('primary')
-const neutralDirty = sectionDirty('neutral')
+const primaryDirty = sectionDirty('primary');
+const neutralDirty = sectionDirty('neutral');
 
 /** A preset's glyph in the menu; a custom theme wears the studio's palette. */
-const presetIcon = (id?: string) => (id && PRESET_ICONS[id]) || studioIcons.palette
+const presetIcon = (id?: string) => (id && PRESET_ICONS[id]) || studioIcons.palette;
 
 // The trigger keeps the palette for the stock theme: the header button stands
 // for the theme picker, and a Nuxt mark there would read as a Nuxt link. The
@@ -45,13 +45,15 @@ const presetIcon = (id?: string) => (id && PRESET_ICONS[id]) || studioIcons.pale
 // applied the saved pack, and a class that disagrees with the server's
 // markup is never patched during hydration.
 const triggerIcon = computed(() => {
-  if (!mounted.value) return stockIcons.palette
-  const id = preset.value?.id
-  return (id && id !== DEFAULT_PRESET_ID && PRESET_ICONS[id]) || studioIcons.palette
-})
+  if (!mounted.value) {
+    return stockIcons.palette;
+  }
+  const id = preset.value?.id;
+  return (id && id !== DEFAULT_PRESET_ID && PRESET_ICONS[id]) || studioIcons.palette;
+});
 
 /** A palette's swatch, through the ramp name the docs expose it under. */
-const swatch = (palette: string) => `var(--color-${rampCssName(palette)}-500)`
+const swatch = (palette: string) => `var(--color-${rampCssName(palette)}-500)`;
 
 /** A theme as a chip avatar: its icon in its primary, on that primary's tint. */
 function chip(id: string | undefined, doc: ThemeDoc): DropdownMenuItem['avatar'] {
@@ -59,21 +61,23 @@ function chip(id: string | undefined, doc: ThemeDoc): DropdownMenuItem['avatar']
     icon: presetIcon(id),
     class: 'bg-(image:--chip-bg-light) dark:bg-(image:--chip-bg-dark)',
     style: themeChipStyle(doc),
-    ui: { icon: 'text-(--chip-icon-light) dark:text-(--chip-icon-dark)' }
-  }
+    ui: { icon: 'text-(--chip-icon-light) dark:text-(--chip-icon-dark)' },
+  };
 }
 
 /** Picking an option keeps the menu open, so several settings can be changed in a row. */
-const keep = (apply: () => void) => (event: Event) => {
-  event.preventDefault()
-  apply()
+function keep(apply: () => void) {
+  return (event: Event) => {
+    event.preventDefault();
+    apply();
+  };
 }
 
 /**
  * The menu's width (ui.content) reaches every submenu too, this hands the
  * submenus their own size back.
  */
-const submenu = { content: { class: 'w-auto' } }
+const submenu = { content: { class: 'w-auto' } };
 
 /**
  * A setting row: its value and swatch ride the trailing slot, its options the
@@ -81,8 +85,8 @@ const submenu = { content: { class: 'w-auto' } }
  * its width (the menu's label wrapper is flex-1, it would give way first),
  * a long value ("Saturated mauve") is the part that truncates.
  */
-function setting(row: { label: string, icon: string, value: string, dot?: string, dirty?: boolean, children: NonNullable<DropdownMenuItem['children']> }): DropdownMenuItem {
-  return { ...row, ...submenu, slot: 'setting', ui: { itemWrapper: 'flex-none', itemTrailing: 'min-w-0' } }
+function setting(row: { label: string; icon: string; value: string; dot?: string; dirty?: boolean; children: NonNullable<DropdownMenuItem['children']> }): DropdownMenuItem {
+  return { ...row, ...submenu, slot: 'setting', ui: { itemWrapper: 'flex-none', itemTrailing: 'min-w-0' } };
 }
 
 /** A font as a menu option, previewing its own face through the `font` slot. */
@@ -92,8 +96,8 @@ function fontOption(name: string): DropdownMenuItem {
     slot: 'font',
     type: 'checkbox',
     checked: font.value === name,
-    onSelect: keep(() => (font.value = name))
-  }
+    onSelect: keep(() => (font.value = name)),
+  };
 }
 
 /**
@@ -101,29 +105,29 @@ function fontOption(name: string): DropdownMenuItem {
  * the studio's font picker lays it out. A face picked through the picker's
  * search isn't in the shortlist, it sits on top so its check stays visible.
  */
-const fontGroups = computed<DropdownMenuItem[][]>(() => [
-  ...(FONTS.some(entry => entry.name === font.value) ? [] : [[fontOption(font.value)]]),
-  ...(['Sans', 'Serif', 'Mono'] as const).map(category => [
+const fontGroups = computed<Array<Array<DropdownMenuItem>>>(() => [
+  ...(FONTS.some((entry) => entry.name === font.value) ? [] : [[fontOption(font.value)]]),
+  ...(['Sans', 'Serif', 'Mono'] as const).map((category) => [
     { label: category, type: 'label' as const },
-    ...FONTS.filter(entry => entry.category === category).map(entry => fontOption(entry.name))
-  ])
-])
+    ...FONTS.filter((entry) => entry.category === category).map((entry) => fontOption(entry.name)),
+  ]),
+]);
 
-const items = computed<DropdownMenuItem[][]>(() => [[{
+const items = computed<Array<Array<DropdownMenuItem>>>(() => [[{
   ...submenu,
   label: preset.value?.name ?? 'Custom',
   avatar: chip(preset.value?.id, preset.value?.doc ?? currentDoc()),
   // edits on top of a preset keep its name (it stays the baseline), the name
   // goes primary like a changed value does
   ui: { itemLabel: `font-semibold ${preset.value && modified.value ? 'text-primary' : 'color-text-highlighted'}` },
-  children: presets.map(entry => ({
+  children: presets.map((entry) => ({
     label: entry.name,
     type: 'checkbox' as const,
     checked: entry.id === preset.value?.id,
     avatar: chip(entry.id, entry.doc),
     // picking the current preset again reapplies it, dropping the edits on top
-    onSelect: keep(() => applyPreset(entry))
-  }))
+    onSelect: keep(() => applyPreset(entry)),
+  })),
 }], [
   setting({
     label: 'Primary',
@@ -137,15 +141,15 @@ const items = computed<DropdownMenuItem[][]>(() => [[{
       dot: 'var(--ui-color-text-highlighted)',
       type: 'checkbox' as const,
       checked: blackAsPrimary.value,
-      onSelect: keep(() => setBlackAsPrimary(true))
-    }, ...primaryColors.map(color => ({
+      onSelect: keep(() => setBlackAsPrimary(true)),
+    }, ...primaryColors.map((color) => ({
       label: upperFirst(paletteLabel(color)),
       slot: 'color',
       dot: swatch(color),
       type: 'checkbox' as const,
       checked: !blackAsPrimary.value && !isCustomPalette('primary') && primary.value === color,
-      onSelect: keep(() => selectPalette('primary', color))
-    }))]
+      onSelect: keep(() => selectPalette('primary', color)),
+    }))],
   }),
   setting({
     label: 'Neutral',
@@ -153,47 +157,47 @@ const items = computed<DropdownMenuItem[][]>(() => [[{
     icon: studioIcons.contrast,
     value: isCustomPalette('neutral') ? 'Custom' : upperFirst(paletteLabel(neutral.value)),
     dot: `var(--color-${neutralChip.value}-500)`,
-    children: neutralColors.map(color => ({
+    children: neutralColors.map((color) => ({
       label: upperFirst(paletteLabel(color)),
       slot: 'color',
       dot: swatch(color),
       type: 'checkbox' as const,
       checked: !isCustomPalette('neutral') && neutral.value === color,
-      onSelect: keep(() => selectPalette('neutral', color))
-    }))
+      onSelect: keep(() => selectPalette('neutral', color)),
+    })),
   }),
   setting({
     label: 'Font',
     dirty: groupDirtyFlags.font.value,
     icon: studioIcons.text,
     value: font.value,
-    children: fontGroups.value
+    children: fontGroups.value,
   }),
   setting({
     label: 'Icons',
     dirty: groupDirtyFlags.icons.value,
     icon: studioIcons.shapes,
-    value: icons.find(pack => pack.value === icon.value)?.label ?? icon.value,
-    children: icons.map(pack => ({
+    value: icons.find((pack) => pack.value === icon.value)?.label ?? icon.value,
+    children: icons.map((pack) => ({
       label: pack.label,
       icon: pack.icon,
       type: 'checkbox' as const,
       checked: icon.value === pack.value,
-      onSelect: keep(() => (icon.value = pack.value))
-    }))
+      onSelect: keep(() => (icon.value = pack.value)),
+    })),
   }),
   setting({
     label: 'Radius',
     dirty: groupDirtyFlags.radius.value,
     icon: studioIcons.radius,
     value: `${radius.value}rem`,
-    children: radiuses.map(value => ({
+    children: radiuses.map((value) => ({
       label: `${value}rem`,
       type: 'checkbox' as const,
       checked: radius.value === value,
-      onSelect: keep(() => (radius.value = value))
-    }))
-  })
+      onSelect: keep(() => (radius.value = value)),
+    })),
+  }),
 ], [{
   // a label, not an item: the segmented control inside takes the clicks
   type: 'label',
@@ -201,27 +205,27 @@ const items = computed<DropdownMenuItem[][]>(() => [[{
   label: upperFirst(mode.value),
   icon: appConfig.ui.icons[mode.value],
   // a row, not a group label: item size and weight
-  ui: { label: 'font-normal text-sm color-text' }
+  ui: { label: 'font-normal text-sm color-text' },
 }], [{
   label: 'Edit theme',
   icon: studioIcons.options,
   slot: 'link',
-  to: '/theme'
-}]])
+  to: '/theme',
+}]]);
 
 function asRow(item: unknown) {
-  return item as { label: string, icon?: string, value?: string, dot?: string, dirty?: boolean }
+  return item as { label: string; icon?: string; value?: string; dot?: string; dirty?: boolean };
 }
 
-const open = ref(false)
+const open = ref(false);
 
 watch(open, (isOpen) => {
   if (isOpen) {
-    track('Theme Picker Opened')
+    track('Theme Picker Opened');
     // the font submenu previews each face, load them once the menu is in use
-    loadFontPreviews(FONTS.map(entry => entry.name))
+    loadFontPreviews(FONTS.map((entry) => entry.name));
   }
-})
+});
 </script>
 
 <template>
@@ -231,7 +235,10 @@ watch(open, (isOpen) => {
     :content="{ align: 'start', alignOffset: -4, onInteractOutside: keepPanels }"
     :ui="{ content: 'w-56 min-w-36 max-h-98', label: 'text-xs' }"
   >
-    <PTooltip :text="name" ignore-non-keyboard-focus>
+    <PTooltip
+      :text="name"
+      ignore-non-keyboard-focus
+    >
       <PButton
         :icon="triggerIcon"
         color="neutral"
@@ -242,23 +249,39 @@ watch(open, (isOpen) => {
     </PTooltip>
 
     <template #setting-trailing="{ item }">
-      <span class="flex items-center gap-1.5 min-w-0" :class="asRow(item).dirty ? 'text-primary' : 'color-text-muted'">
-        <span v-if="asRow(item).dot" class="size-2 shrink-0 rounded-full" :style="{ backgroundColor: asRow(item).dot }" />
+      <span
+        class="flex gap-1.5 min-w-0 items-center"
+        :class="asRow(item).dirty ? 'text-primary' : 'color-text-muted'"
+      >
+        <span
+          v-if="asRow(item).dot"
+          class="rounded-full shrink-0 size-2"
+          :style="{ backgroundColor: asRow(item).dot }"
+        />
         <span class="truncate">{{ asRow(item).value }}</span>
       </span>
 
-      <PIcon :name="appConfig.ui.icons.chevronRight" class="size-5 shrink-0 color-text-dimmed" />
+      <PIcon
+        :name="appConfig.ui.icons.chevronRight"
+        class="color-text-dimmed shrink-0 size-5"
+      />
     </template>
 
     <!-- the swatch sits in the box an item icon takes, so it centers on the label -->
     <template #color-leading="{ item }">
-      <span class="size-5 shrink-0 flex items-center justify-center">
-        <span class="size-2 rounded-full" :style="{ backgroundColor: asRow(item).dot }" />
+      <span class="flex shrink-0 size-5 items-center justify-center">
+        <span
+          class="rounded-full size-2"
+          :style="{ backgroundColor: asRow(item).dot }"
+        />
       </span>
     </template>
 
     <template #color-mode="{ item }">
-      <PIcon :name="asRow(item).icon" class="size-5 shrink-0 color-text-dimmed" />
+      <PIcon
+        :name="asRow(item).icon"
+        class="color-text-dimmed shrink-0 size-5"
+      />
       {{ asRow(item).label }}
       <ThemeStudioColorModeTabs class="ms-auto -my-1.5 [&>div]:ring-0" />
     </template>
@@ -266,7 +289,10 @@ watch(open, (isOpen) => {
     <!-- its own slot: the menu only draws a trailing icon for submenus, and
          appConfig.ui.icons is swapped whole with the pack so this follows it -->
     <template #link-trailing>
-      <PIcon :name="appConfig.ui.icons.arrowRight" class="size-5 shrink-0 color-text-dimmed" />
+      <PIcon
+        :name="appConfig.ui.icons.arrowRight"
+        class="color-text-dimmed shrink-0 size-5"
+      />
     </template>
 
     <template #font-label="{ item }">

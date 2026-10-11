@@ -769,7 +769,7 @@ You can access the typed component instance using [`useTemplateRef`](https://vue
 
 ```vue
 <script setup lang="ts">
-const table = useTemplateRef('table')
+const table = useTemplateRef('table');
 </script>
 
 <template>

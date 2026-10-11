@@ -1,5 +1,10 @@
 <template>
-  <PAvatar class="rounded-none squircle" src="https://avatars.githubusercontent.com/u/739984?v=4" alt="Benjamin Canac" loading="lazy" />
+  <PAvatar
+    class="squircle rounded-none"
+    src="https://avatars.githubusercontent.com/u/739984?v=4"
+    alt="Benjamin Canac"
+    loading="lazy"
+  />
 </template>
 
 <style>

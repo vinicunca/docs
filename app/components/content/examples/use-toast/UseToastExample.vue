@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const toast = useToast()
+const toast = useToast();
 
 function showToast() {
   toast.add({
@@ -11,13 +11,16 @@ function showToast() {
       color: 'neutral',
       variant: 'outline',
       onClick: () => {
-        toast.add({ title: 'Reply sent', color: 'success' })
-      }
-    }]
-  })
+        toast.add({ title: 'Reply sent', color: 'success' });
+      },
+    }],
+  });
 }
 </script>
 
 <template>
-  <PButton label="Show toast" @click="showToast" />
+  <PButton
+    label="Show toast"
+    @click="showToast"
+  />
 </template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const open = ref(false)
+const open = ref(false);
 </script>
 
 <template>
@@ -11,7 +11,12 @@ const open = ref(false)
     :modal="false"
     :handle="false"
   >
-    <PButton label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up" />
+    <PButton
+      label="Open"
+      color="neutral"
+      variant="subtle"
+      trailing-icon="i-lucide-chevron-up"
+    />
 
     <template #body>
       <Placeholder class="size-full min-h-48" />

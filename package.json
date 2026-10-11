@@ -11,7 +11,7 @@
     "generate": "NODE_OPTIONS='--max-old-space-size=8192' nuxt generate",
     "prepare": "nuxt prepare",
     "typecheck": "nuxt typecheck",
-    "lint": "eslint .",
+    "lint": "eslint . --fix",
     "check:docs": "node scripts/check-unocss-preset-docs.mjs"
   },
   "devDependencies": {
@@ -46,8 +46,6 @@
     "ai": "catalog:",
     "akar": "catalog:",
     "eslint": "catalog:",
-    "eslint-plugin-format": "catalog:",
-    "eslint-plugin-sonarjs": "catalog:",
     "fflate": "catalog:",
     "h3": "catalog:",
     "joi": "catalog:",

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TimelineItem } from 'pohon-ui'
+import type { TimelineItem } from 'pohon-ui';
 
 const items = [{
   date: 'Mar 15, 2025',
@@ -7,13 +7,13 @@ const items = [{
   subtitle: 'Project Initiation',
   description: 'Kicked off the project with team alignment. Set up project milestones and allocated resources.',
   icon: 'i-lucide-rocket',
-  value: 'kickoff'
+  value: 'kickoff',
 }, {
   date: 'Mar 22, 2025',
   title: 'Design Phase',
   description: 'User research and design workshops. Created wireframes and prototypes for user testing.',
   icon: 'i-lucide-palette',
-  value: 'design'
+  value: 'design',
 }, {
   date: 'Mar 29, 2025',
   title: 'Development Sprint',
@@ -24,29 +24,38 @@ const items = [{
   developers: [
     {
       src: 'https://github.com/J-Michalek.png',
-      loading: 'lazy' as const
-    }, {
+      loading: 'lazy' as const,
+    },
+    {
       src: 'https://github.com/benjamincanac.png',
-      loading: 'lazy' as const
-    }
-  ]
+      loading: 'lazy' as const,
+    },
+  ],
 }, {
   date: 'Apr 5, 2025',
   title: 'Testing & Deployment',
   description: 'QA testing and performance optimization. Deployed the application to production.',
   icon: 'i-lucide-check-circle',
-  value: 'deployment'
-}] satisfies TimelineItem[]
+  value: 'deployment',
+}] satisfies Array<TimelineItem>;
 </script>
 
 <template>
-  <PTimeline :items="items" :default-value="2" class="w-96">
+  <PTimeline
+    :items="items"
+    :default-value="2"
+    class="w-96"
+  >
     <template #development-title="{ item }">
-      <div class="flex items-center gap-1">
+      <div class="flex gap-1 items-center">
         <span>{{ item.title }}</span>
 
         <PAvatarGroup size="2xs">
-          <PAvatar v-for="(developer, index) of item.developers" :key="index" v-bind="developer" />
+          <PAvatar
+            v-for="(developer, index) of item.developers"
+            :key="index"
+            v-bind="developer"
+          />
         </PAvatarGroup>
       </div>
     </template>

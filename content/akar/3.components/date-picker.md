@@ -102,7 +102,7 @@ import {
   DatePickerPrev,
   DatePickerRoot,
   DatePickerTrigger,
-} from 'akar'
+} from 'akar';
 </script>
 
 <template>

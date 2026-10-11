@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Markdown } from '@comark/vue'
+import { Markdown } from '@comark/vue';
 
 const ui = {
   prose: {
@@ -14,9 +14,9 @@ const ui = {
     code: { base: 'text-xs' },
     pre: { root: 'my-2.5', base: 'text-xs/5' },
     table: { root: 'my-2.5' },
-    hr: { base: 'my-5' }
-  }
-}
+    hr: { base: 'my-5' },
+  },
+};
 
 const value = `## Getting started
 
@@ -26,11 +26,14 @@ This is a paragraph with a **tighter typographic scale** applied through the \`T
 - Second item
 - Third item
 
-> The spacing and font sizes are smaller than the defaults, making it ideal for compact content areas.`
+> The spacing and font sizes are smaller than the defaults, making it ideal for compact content areas.`;
 </script>
 
 <template>
   <PTheme :ui="ui">
-    <Markdown :value="value" class="*:first:mt-0 *:last:mb-0" />
+    <Markdown
+      :value="value"
+      class="*:first:mt-0 *:last:mb-0"
+    />
   </PTheme>
 </template>

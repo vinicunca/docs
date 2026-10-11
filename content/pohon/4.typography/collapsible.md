@@ -25,7 +25,7 @@ Wrap your content with the `collapsible` component to display a [Collapsible](/p
 
 ::
 
-#code
+# code
 
 ```mdc
 ::collapsible

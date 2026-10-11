@@ -55,7 +55,7 @@ Import all parts and piece them together.
 
 ```vue
 <script setup>
-import { ProgressIndicator, ProgressRoot } from 'akar'
+import { ProgressIndicator, ProgressRoot } from 'akar';
 </script>
 
 <template>

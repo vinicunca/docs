@@ -18,7 +18,7 @@ Use it inside the `header` slot of the [DashboardPanel](/pohon/components/dashbo
 <script setup lang="ts">
 definePageMeta({
   layout: 'dashboard'
-})
+});
 </script>
 
 <template>

@@ -51,7 +51,7 @@ Import the component.
 
 ```vue
 <script setup>
-import { AspectRatio } from 'akar'
+import { AspectRatio } from 'akar';
 </script>
 
 <template>

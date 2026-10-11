@@ -1,13 +1,13 @@
 <script setup lang="ts">
 defineProps<{
-  orientation?: 'vertical' | 'horizontal'
-}>()
+  orientation?: 'vertical' | 'horizontal';
+}>();
 
 const items = computed(() => Array.from({ length: 1000 }, (_, i) => ({
   id: i + 1,
   title: `Item ${i + 1}`,
-  description: `Description for item ${i + 1}`
-})))
+  description: `Description for item ${i + 1}`,
+})));
 </script>
 
 <template>
@@ -16,7 +16,7 @@ const items = computed(() => Array.from({ length: 1000 }, (_, i) => ({
     :items="items"
     :orientation="orientation"
     virtualize
-    class="w-full data-[orientation=vertical]:h-96 data-[orientation=horizontal]:h-24.5"
+    class="w-full data-[orientation=horizontal]:h-24.5 data-[orientation=vertical]:h-96"
   >
     <PPageCard
       v-bind="item"

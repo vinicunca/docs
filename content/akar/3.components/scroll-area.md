@@ -53,7 +53,7 @@ Import all parts and piece them together.
 
 ```vue
 <script setup>
-import { ScrollAreaRoot, ScrollAreaScrollbar, ScrollAreaThumb, ScrollAreaViewport } from 'akar'
+import { ScrollAreaRoot, ScrollAreaScrollbar, ScrollAreaThumb, ScrollAreaViewport } from 'akar';
 </script>
 
 <template>

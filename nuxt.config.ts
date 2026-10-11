@@ -24,7 +24,7 @@ function resolveVersions() {
 
 const packageRedirects = Object.fromEntries(DOCS_PACKAGES.map((pkg) => [`/${pkg.id}`, { prerender: false, redirect: pkg.to }]));
 
-// @keep-sorted
+/** @keep-sorted */
 export default defineNuxtConfig({
   $development: {
     site: {

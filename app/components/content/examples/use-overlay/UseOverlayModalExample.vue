@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const emit = defineEmits<{ close: [] }>()
+const emit = defineEmits<{ close: [] }>();
 </script>
 
 <template>
@@ -10,7 +10,11 @@ const emit = defineEmits<{ close: [] }>()
     :ui="{ footer: 'justify-end' }"
   >
     <template #footer>
-      <PButton label="Close" color="neutral" @click="emit('close')" />
+      <PButton
+        label="Close"
+        color="neutral"
+        @click="emit('close')"
+      />
     </template>
   </PModal>
 </template>

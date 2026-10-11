@@ -1,25 +1,25 @@
 <script setup lang="ts">
-import type { NavigationMenuItem } from 'pohon-ui'
+import type { NavigationMenuItem } from 'pohon-ui';
 
-const items: NavigationMenuItem[] = [
+const items: Array<NavigationMenuItem> = [
   {
     label: 'Home',
-    icon: 'i-lucide-house'
+    icon: 'i-lucide-house',
   },
   {
     label: 'Search',
-    icon: 'i-lucide-search'
+    icon: 'i-lucide-search',
   },
   {
     label: 'Users',
     icon: 'i-lucide-users',
-    active: true
+    active: true,
   },
   {
     label: 'Settings',
-    icon: 'i-lucide-cog'
-  }
-]
+    icon: 'i-lucide-cog',
+  },
+];
 </script>
 
 <template>
@@ -29,7 +29,7 @@ const items: NavigationMenuItem[] = [
     :items="items"
     :ui="{
       link: 'flex-col gap-1',
-      linkLabel: 'block text-[10px]/3 text-center'
+      linkLabel: 'block text-[10px]/3 text-center',
     }"
   />
 </template>

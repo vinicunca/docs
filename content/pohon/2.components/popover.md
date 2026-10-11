@@ -37,7 +37,7 @@ slots:
 
 :u-button{label="Open" color="neutral" variant="subtle"}
 
-#content
+# content
 :placeholder{class="size-48 m-4 inline-flex"}
 ::
 
@@ -71,7 +71,7 @@ slots:
 
 :u-button{label="Open" color="neutral" variant="subtle"}
 
-#content
+# content
 :placeholder{class="size-48 m-4 inline-flex"}
 ::
 
@@ -104,7 +104,7 @@ slots:
 
 :u-button{label="Open" color="neutral" variant="subtle"}
 
-#content
+# content
 :placeholder{class="size-48 m-4 inline-flex"}
 ::
 
@@ -142,7 +142,7 @@ slots:
 
 :u-button{label="Open" color="neutral" variant="subtle"}
 
-#content
+# content
 :placeholder{class="size-48 m-4 inline-flex"}
 ::
 
@@ -169,7 +169,7 @@ slots:
 
 :u-button{label="Open" color="neutral" variant="subtle"}
 
-#content
+# content
 :placeholder{class="size-48 m-4 inline-flex"}
 ::
 
@@ -196,7 +196,7 @@ slots:
 
 :u-button{label="Open" color="neutral" variant="subtle"}
 
-#content
+# content
 :placeholder{class="size-48 m-4 inline-flex"}
 ::
 

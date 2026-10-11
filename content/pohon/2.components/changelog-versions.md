@@ -168,7 +168,7 @@ Use the ChangelogVersions component in a page to create a changelog page:
 
 ```vue [pages/changelog.vue]{10-17}
 <script setup lang="ts">
-const { data: versions } = await useAsyncData('versions', () => queryCollection('versions').all())
+const { data: versions } = await useAsyncData('versions', () => queryCollection('versions').all());
 </script>
 
 <template>
@@ -218,12 +218,18 @@ Pass an object to the `indicator` prop to configure the scroll container. By def
 
 ```vue
 <script setup lang="ts">
-const scrollContainer = ref<HTMLElement>()
+const scrollContainer = ref<HTMLElement>();
 </script>
 
 <template>
-  <div ref="scrollContainer" class="max-h-96 overflow-y-auto">
-    <PChangelogVersions v-if="scrollContainer" :indicator="{ container: scrollContainer }" />
+  <div
+    ref="scrollContainer"
+    class="max-h-96 overflow-y-auto"
+  >
+    <PChangelogVersions
+      v-if="scrollContainer"
+      :indicator="{ container: scrollContainer }"
+    />
   </div>
 </template>
 ```

@@ -13,11 +13,11 @@ The one rule that drives everything else: **`uv` concatenates and never merges.*
 
 ```ts
 // uno.config.ts
-import { defineConfig } from 'unocss'
+import { defineConfig } from 'unocss';
 
 export default defineConfig({
   layers: { uv: 10 }, // higher than the default layer, so it is emitted later and wins
-})
+});
 ```
 
 Prefix the utility that must win with `uno-layer-uv:`. Use the prefix only where two utilities set the same property: a child recipe over its parent, a compound or flag over a color variant, or a call-site override over the recipe.
@@ -25,7 +25,8 @@ Prefix the utility that must win with `uno-layer-uv:`. Use the prefix only where
 ## Recipe anatomy
 
 ```ts
-import { uv, type VariantProps } from 'unocss-variants'
+import type { VariantProps } from 'unocss-variants';
+import { uv } from 'unocss-variants';
 
 export const button = uv({
   base: 'inline-flex items-center rounded-md font-medium', // string or (nested) array
@@ -41,11 +42,11 @@ export const button = uv({
     { color: ['primary', 'neutral'], size: 'sm', class: 'rounded-sm' }, // array = match any
   ],
   defaultVariants: { color: 'primary', size: 'md' }, // variant VALUES, not classes
-})
+});
 
-button() // defaults applied
-button({ color: 'neutral', disabled: true, class: props.class }) // class/className are appended
-export type ButtonVariants = VariantProps<typeof button>
+button(); // defaults applied
+button({ color: 'neutral', disabled: true, class: props.class }); // class/className are appended
+export type ButtonVariants = VariantProps<typeof button>;
 ```
 
 Output order is always: `base`, then each variant axis, then matching `compoundVariants`, then `class`, then `className`. Order only affects readability, never which style wins.
@@ -80,11 +81,11 @@ const card = uv({
     { slots: ['title', 'body'], tone: 'danger', class: 'tracking-tight' }, // gated by variants
   ],
   defaultVariants: { tone: 'plain' },
-})
+});
 
-const { base, title, body } = card({ tone: 'danger' })
-base({ class: 'max-w-md' }) // overrides go to the SLOT function
-title({ selected: true }) // a slot function also accepts variant overrides for that part only
+const { base, title, body } = card({ tone: 'danger' });
+base({ class: 'max-w-md' }); // overrides go to the SLOT function
+title({ selected: true }); // a slot function also accepts variant overrides for that part only
 ```
 
 - Slot order: slot classes, variants, compound variants, compound slots, then the slot call's `class`/`className`.

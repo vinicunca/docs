@@ -1,18 +1,21 @@
 <script setup lang="ts">
-import type { ButtonProps } from 'pohon-ui'
+import type { ButtonProps } from 'pohon-ui';
 
 withDefaults(defineProps<ButtonProps & {
-  vertical?: boolean
+  vertical?: boolean;
 }>(), {
-  variant: 'ghost'
-})
+  variant: 'ghost',
+});
 
-const studioIcons = useStudioIcons()
-const { canReset, resetLabel, resetToBaseline } = useThemeStudioToolbar()
+const studioIcons = useStudioIcons();
+const { canReset, resetLabel, resetToBaseline } = useThemeStudioToolbar();
 </script>
 
 <template>
-  <PTooltip :text="resetLabel" :disabled="vertical">
+  <PTooltip
+    :text="resetLabel"
+    :disabled="vertical"
+  >
     <PButton
       :icon="studioIcons.reset"
       :label="vertical ? resetLabel : undefined"

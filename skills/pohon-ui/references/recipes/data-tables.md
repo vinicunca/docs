@@ -6,14 +6,14 @@ Patterns for displaying and managing tabular data with `PTable`, which wraps [Ta
 
 ```vue
 <script setup lang="ts">
-import type { TableColumn } from 'pohon-ui'
+import type { TableColumn } from 'pohon-ui';
 
 const data = ref([
   { name: 'Alice', email: 'alice@example.com', role: 'Admin' },
   { name: 'Bob', email: 'bob@example.com', role: 'Editor' }
-])
+]);
 
-const columns: TableColumn<typeof data.value[number]>[] = [{
+const columns: Array<TableColumn<typeof data.value[number]>> = [{
   accessorKey: 'name',
   header: 'Name'
 }, {
@@ -22,11 +22,14 @@ const columns: TableColumn<typeof data.value[number]>[] = [{
 }, {
   accessorKey: 'role',
   header: 'Role'
-}]
+}];
 </script>
 
 <template>
-  <PTable :data="data" :columns="columns" />
+  <PTable
+    :data="data"
+    :columns="columns"
+  />
 </template>
 ```
 
@@ -34,31 +37,31 @@ const columns: TableColumn<typeof data.value[number]>[] = [{
 
 ```vue
 <script setup lang="ts">
-import type { TableColumn } from 'pohon-ui'
+import type { TableColumn } from 'pohon-ui';
 
-const search = ref('')
-const roleFilter = ref('All')
+const search = ref('');
+const roleFilter = ref('All');
 
 const rows = ref([
   { name: 'Alice', email: 'alice@example.com', role: 'Admin', status: 'Active' },
   { name: 'Bob', email: 'bob@example.com', role: 'Editor', status: 'Inactive' }
-])
+]);
 
-const columns: TableColumn[] = [
+const columns: Array<TableColumn> = [
   { accessorKey: 'name', header: 'Name' },
   { accessorKey: 'email', header: 'Email' },
   { accessorKey: 'role', header: 'Role' },
   { accessorKey: 'status', header: 'Status' },
   { id: 'actions' }
-]
+];
 
 const filteredRows = computed(() => {
-  return rows.value.filter(row => {
-    const matchesSearch = !search.value || row.name.toLowerCase().includes(search.value.toLowerCase())
-    const matchesRole = roleFilter.value === 'All' || row.role === roleFilter.value
-    return matchesSearch && matchesRole
-  })
-})
+  return rows.value.filter((row) => {
+    const matchesSearch = !search.value || row.name.toLowerCase().includes(search.value.toLowerCase());
+    const matchesRole = roleFilter.value === 'All' || row.role === roleFilter.value;
+    return matchesSearch && matchesRole;
+  });
+});
 </script>
 
 <template>
@@ -68,28 +71,46 @@ const filteredRows = computed(() => {
 
       <PDashboardToolbar>
         <template #left>
-          <PInput v-model="search" icon="i-lucide-search" placeholder="Search users..." />
+          <PInput
+            v-model="search"
+            icon="i-lucide-search"
+            placeholder="Search users..."
+          />
         </template>
         <template #right>
-          <PSelect v-model="roleFilter" :items="['All', 'Admin', 'Editor', 'Viewer']" />
+          <PSelect
+            v-model="roleFilter"
+            :items="['All', 'Admin', 'Editor', 'Viewer']"
+          />
         </template>
       </PDashboardToolbar>
     </template>
 
     <template #body>
-      <PTable :data="filteredRows" :columns="columns">
+      <PTable
+        :data="filteredRows"
+        :columns="columns"
+      >
         <template #status-cell="{ row }">
-          <PBadge :color="row.original.status === 'Active' ? 'success' : 'neutral'" :label="row.original.status" variant="subtle" />
+          <PBadge
+            :color="row.original.status === 'Active' ? 'success' : 'neutral'"
+            :label="row.original.status"
+            variant="subtle"
+          />
         </template>
 
         <template #actions-cell="{ row }">
           <PDropdownMenu
             :items="[
               [{ label: 'Edit', icon: 'i-lucide-pencil', onSelect: () => edit(row.original) }],
-              [{ label: 'Delete', icon: 'i-lucide-trash', color: 'error', onSelect: () => remove(row.original) }]
+              [{ label: 'Delete', icon: 'i-lucide-trash', color: 'error', onSelect: () => remove(row.original) }],
             ]"
           >
-            <PButton icon="i-lucide-ellipsis" color="neutral" variant="ghost" />
+            <PButton
+              icon="i-lucide-ellipsis"
+              color="neutral"
+              variant="ghost"
+            />
           </PDropdownMenu>
         </template>
       </PTable>
@@ -104,14 +125,19 @@ Row selection uses TanStack Table's `rowSelection` state: a `Record<string, bool
 
 ```vue
 <script setup lang="ts">
-const table = useTemplateRef('table')
-const rowSelection = ref<Record<string, boolean>>({})
+const table = useTemplateRef('table');
+const rowSelection = ref<Record<string, boolean>>({});
 </script>
 
 <template>
-  <PTable ref="table" v-model:row-selection="rowSelection" :data="data" :columns="columns" />
+  <PTable
+    ref="table"
+    v-model:row-selection="rowSelection"
+    :data="data"
+    :columns="columns"
+  />
 
-  <div class="px-4 py-3.5 text-sm color-text-muted">
+  <div class="text-sm color-text-muted px-4 py-3.5">
     {{ table?.tableApi?.getFilteredSelectedRowModel().rows.length || 0 }} of
     {{ table?.tableApi?.getFilteredRowModel().rows.length || 0 }} row(s) selected.
   </div>
@@ -121,11 +147,11 @@ const rowSelection = ref<Record<string, boolean>>({})
 Add a checkbox column with the `h` function. Use the tri-state `modelValue` (`true`, `false`, or `'indeterminate'`) for the "select all" header. In Nuxt, get components with `resolveComponent('PCheckbox')`; in plain Vue, import them (`import PCheckbox from 'pohon-ui/components/Checkbox.vue'`).
 
 ```ts
-import { h, resolveComponent } from 'vue'
+import { h, resolveComponent } from 'vue';
 
-const PCheckbox = resolveComponent('PCheckbox')
+const PCheckbox = resolveComponent('PCheckbox');
 
-const columns: TableColumn[] = [{
+const columns: Array<TableColumn> = [{
   id: 'select',
   header: ({ table }) => h(PCheckbox, {
     'modelValue': table.getIsSomePageRowsSelected() ? 'indeterminate' : table.getIsAllPageRowsSelected(),
@@ -139,7 +165,7 @@ const columns: TableColumn[] = [{
   })
 },
 // ... other columns
-]
+];
 ```
 
 ## With pagination
@@ -148,14 +174,14 @@ Use `v-model:pagination` on `PTable` with TanStack's `getPaginationRowModel`, th
 
 ```vue
 <script setup lang="ts">
-import { getPaginationRowModel } from '@tanstack/vue-table'
+import { getPaginationRowModel } from '@tanstack/vue-table';
 
-const table = useTemplateRef('table')
+const table = useTemplateRef('table');
 
 const pagination = ref({
   pageIndex: 0,
   pageSize: 5
-})
+});
 </script>
 
 <template>
@@ -167,7 +193,7 @@ const pagination = ref({
     :pagination-options="{ getPaginationRowModel: getPaginationRowModel() }"
   />
 
-  <div class="flex justify-end p-4">
+  <div class="p-4 flex justify-end">
     <PPagination
       :page="(table?.tableApi?.getState().pagination.pageIndex || 0) + 1"
       :items-per-page="table?.tableApi?.getState().pagination.pageSize"
@@ -184,11 +210,15 @@ Use `status === 'pending' || status === 'idle'` for loading state — `idle` cov
 
 ```vue
 <script setup lang="ts">
-const { data, status } = useLazyFetch('/api/users', { server: false })
+const { data, status } = useLazyFetch('/api/users', { server: false });
 </script>
 
 <template>
-  <PTable :data="data" :columns="columns" :loading="status === 'pending' || status === 'idle'" />
+  <PTable
+    :data="data"
+    :columns="columns"
+    :loading="status === 'pending' || status === 'idle'"
+  />
 </template>
 ```
 
@@ -196,20 +226,28 @@ For server-side pagination:
 
 ```vue
 <script setup lang="ts">
-const page = ref(1)
+const page = ref(1);
 
 const { data, status } = await useAsyncData(
   'users',
   () => $fetch('/api/users', { query: { page: page.value } }),
   { watch: [page] }
-)
+);
 </script>
 
 <template>
-  <PTable :data="data?.items" :columns="columns" :loading="status === 'pending'" />
+  <PTable
+    :data="data?.items"
+    :columns="columns"
+    :loading="status === 'pending'"
+  />
 
-  <div class="flex justify-end p-4">
-    <PPagination v-model:page="page" :total="data?.total" :items-per-page="data?.pageSize" />
+  <div class="p-4 flex justify-end">
+    <PPagination
+      v-model:page="page"
+      :total="data?.total"
+      :items-per-page="data?.pageSize"
+    />
   </div>
 </template>
 ```

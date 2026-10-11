@@ -12,16 +12,24 @@ Controls that accept `name` (Checkbox, CheckboxGroup, RadioGroup, Switch, Toggle
 
 ```vue
 <script setup lang="ts">
-import { FieldControl, FieldDescription, FieldError, FieldLabel, FieldRoot } from 'akar'
+import { FieldControl, FieldDescription, FieldError, FieldLabel, FieldRoot } from 'akar';
 </script>
 
 <template>
-  <FieldRoot name="email" required validation-mode="onBlur">
+  <FieldRoot
+    name="email"
+    required
+    validation-mode="onBlur"
+  >
     <FieldLabel>Email</FieldLabel>
     <FieldControl type="email" />
     <FieldDescription>We never share it.</FieldDescription>
-    <FieldError match="valueMissing">Enter your email.</FieldError>
-    <FieldError match="typeMismatch">Enter a valid email.</FieldError>
+    <FieldError match="valueMissing">
+      Enter your email.
+    </FieldError>
+    <FieldError match="typeMismatch">
+      Enter a valid email.
+    </FieldError>
   </FieldRoot>
 </template>
 ```
@@ -41,26 +49,35 @@ import { FieldControl, FieldDescription, FieldError, FieldLabel, FieldRoot } fro
 
 ```vue
 <script setup lang="ts">
-import { FieldControl, FieldError, FieldLabel, FieldRoot, FormRoot } from 'akar'
-import { ref } from 'vue'
+import { FieldControl, FieldError, FieldLabel, FieldRoot, FormRoot } from 'akar';
+import { ref } from 'vue';
 
-const serverErrors = ref<Record<string, string>>({})
+const serverErrors = ref<Record<string, string>>({});
 
 async function onFormSubmit(values: Record<string, unknown>) {
-  const result = await api.createAccount(values)
-  if (result.error)
-    serverErrors.value = { email: result.error }
+  const result = await api.createAccount(values);
+  if (result.error) {
+    serverErrors.value = { email: result.error };
+  }
 }
 </script>
 
 <template>
-  <FormRoot :errors="serverErrors" @form-submit="onFormSubmit">
-    <FieldRoot name="email" required>
+  <FormRoot
+    :errors="serverErrors"
+    @form-submit="onFormSubmit"
+  >
+    <FieldRoot
+      name="email"
+      required
+    >
       <FieldLabel>Email</FieldLabel>
       <FieldControl type="email" />
       <FieldError />
     </FieldRoot>
-    <button type="submit">Create account</button>
+    <button type="submit">
+      Create account
+    </button>
   </FormRoot>
 </template>
 ```

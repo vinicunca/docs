@@ -1,40 +1,40 @@
 <script setup lang="ts">
-import { motion } from 'motion-v'
-import type { VariantType } from 'motion-v'
-import type { NavigationMenuItem } from 'pohon-ui'
+import type { VariantType } from 'motion-v';
+import type { NavigationMenuItem } from 'pohon-ui';
+import { motion } from 'motion-v';
 
-const route = useRoute()
+const route = useRoute();
 
-const items = computed<NavigationMenuItem[]>(() => [{
+const items = computed<Array<NavigationMenuItem>>(() => [{
   label: 'Docs',
   to: '/docs/getting-started',
   icon: 'i-lucide-book-open',
-  active: route.path.startsWith('/docs/getting-started')
+  active: route.path.startsWith('/docs/getting-started'),
 }, {
   label: 'Components',
   to: '/docs/components',
   icon: 'i-lucide-box',
-  active: route.path.startsWith('/docs/components')
+  active: route.path.startsWith('/docs/components'),
 }, {
   label: 'Theme',
   icon: 'i-lucide-palette',
   to: '/theme',
-  target: '_blank'
+  target: '_blank',
 }, {
   label: 'Releases',
   icon: 'i-lucide-rocket',
   to: 'https://github.com/vinicunca/pohon/releases',
-  target: '_blank'
-}])
+  target: '_blank',
+}]);
 
 const variants: { [k: string]: VariantType | ((custom: unknown) => VariantType) } = {
   normal: {
     rotate: 0,
     y: 0,
-    opacity: 1
+    opacity: 1,
   },
   close: (custom: unknown) => {
-    const c = custom as number
+    const c = custom as number;
     return {
       rotate: c === 1 ? 45 : c === 3 ? -45 : 0,
       y: c === 1 ? 6 : c === 3 ? -6 : 0,
@@ -42,11 +42,11 @@ const variants: { [k: string]: VariantType | ((custom: unknown) => VariantType) 
       transition: {
         type: 'spring',
         stiffness: 260,
-        damping: 20
-      }
-    }
-  }
-}
+        damping: 20,
+      },
+    };
+  },
+};
 </script>
 
 <template>
@@ -60,7 +60,10 @@ const variants: { [k: string]: VariantType | ((custom: unknown) => VariantType) 
     <template #right>
       <PColorModeButton />
 
-      <PTooltip text="Open on GitHub" :kbds="['meta', 'G']">
+      <PTooltip
+        text="Open on GitHub"
+        :kbds="['meta', 'G']"
+      >
         <PButton
           color="neutral"
           variant="ghost"
@@ -126,7 +129,11 @@ const variants: { [k: string]: VariantType | ((custom: unknown) => VariantType) 
     </template>
 
     <template #body>
-      <PNavigationMenu :items="items" orientation="vertical" class="-mx-2.5" />
+      <PNavigationMenu
+        :items="items"
+        orientation="vertical"
+        class="-mx-2.5"
+      />
     </template>
   </PHeader>
 </template>

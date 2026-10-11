@@ -1,55 +1,55 @@
 <script setup lang="ts">
-import type { DropdownMenuItem, NavigationMenuItem } from 'pohon-ui'
+import type { DropdownMenuItem, NavigationMenuItem } from 'pohon-ui';
 
-const open = ref(true)
+const open = ref(true);
 
-const colorMode = useColorMode()
+const colorMode = useColorMode();
 
 const teams = ref([{
   label: 'Nuxt',
   avatar: {
     src: 'https://github.com/nuxt.png',
-    alt: 'Nuxt'
-  }
+    alt: 'Nuxt',
+  },
 }, {
   label: 'Vue',
   avatar: {
     src: 'https://github.com/vuejs.png',
-    alt: 'Vue'
-  }
+    alt: 'Vue',
+  },
 }, {
   label: 'UnJS',
   avatar: {
     src: 'https://github.com/unjs.png',
-    alt: 'UnJS'
-  }
-}])
-const selectedTeam = ref(teams.value[0])
+    alt: 'UnJS',
+  },
+}]);
+const selectedTeam = ref(teams.value[0]);
 
-const teamsItems = computed<DropdownMenuItem[][]>(() => {
+const teamsItems = computed<Array<Array<DropdownMenuItem>>>(() => {
   return [teams.value.map((team, index) => ({
     ...team,
     kbds: ['meta', String(index + 1)],
     onSelect() {
-      selectedTeam.value = team
-    }
+      selectedTeam.value = team;
+    },
   })), [{
     label: 'Create team',
-    icon: 'i-lucide-circle-plus'
-  }]]
-})
+    icon: 'i-lucide-circle-plus',
+  }]];
+});
 
 function getItems(state: 'collapsed' | 'expanded') {
   return [{
     label: 'Inbox',
     icon: 'i-lucide-inbox',
-    badge: '4'
+    badge: '4',
   }, {
     label: 'Issues',
-    icon: 'i-lucide-square-dot'
+    icon: 'i-lucide-square-dot',
   }, {
     label: 'Activity',
-    icon: 'i-lucide-square-activity'
+    icon: 'i-lucide-square-activity',
   }, {
     label: 'Settings',
     icon: 'i-lucide-settings',
@@ -57,36 +57,36 @@ function getItems(state: 'collapsed' | 'expanded') {
     children: state === 'expanded'
       ? [{
           label: 'General',
-          icon: 'i-lucide-house'
+          icon: 'i-lucide-house',
         }, {
           label: 'Team',
-          icon: 'i-lucide-users'
+          icon: 'i-lucide-users',
         }, {
           label: 'Billing',
-          icon: 'i-lucide-credit-card'
+          icon: 'i-lucide-credit-card',
         }]
-      : []
-  }] satisfies NavigationMenuItem[]
+      : [],
+  }] satisfies Array<NavigationMenuItem>;
 }
 
 const user = ref({
   name: 'Benjamin Canac',
   avatar: {
     src: 'https://github.com/benjamincanac.png',
-    alt: 'Benjamin Canac'
-  }
-})
+    alt: 'Benjamin Canac',
+  },
+});
 
-const userItems = computed<DropdownMenuItem[][]>(() => ([[{
+const userItems = computed<Array<Array<DropdownMenuItem>>>(() => ([[{
   label: 'Profile',
-  icon: 'i-lucide-user'
+  icon: 'i-lucide-user',
 }, {
   label: 'Billing',
-  icon: 'i-lucide-credit-card'
+  icon: 'i-lucide-credit-card',
 }, {
   label: 'Settings',
   icon: 'i-lucide-settings',
-  to: '/settings'
+  to: '/settings',
 }], [{
   label: 'Appearance',
   icon: 'i-lucide-sun-moon',
@@ -97,12 +97,12 @@ const userItems = computed<DropdownMenuItem[][]>(() => ([[{
     checked: colorMode.value === 'light',
     onUpdateChecked(checked: boolean) {
       if (checked) {
-        colorMode.preference = 'light'
+        colorMode.preference = 'light';
       }
     },
     onSelect(e: Event) {
-      e.preventDefault()
-    }
+      e.preventDefault();
+    },
   }, {
     label: 'Dark',
     icon: 'i-lucide-moon',
@@ -110,24 +110,24 @@ const userItems = computed<DropdownMenuItem[][]>(() => ([[{
     checked: colorMode.value === 'dark',
     onUpdateChecked(checked: boolean) {
       if (checked) {
-        colorMode.preference = 'dark'
+        colorMode.preference = 'dark';
       }
     },
     onSelect(e: Event) {
-      e.preventDefault()
-    }
-  }]
+      e.preventDefault();
+    },
+  }],
 }], [{
   label: 'GitHub',
   icon: 'i-simple-icons-github',
   to: 'https://github.com/vinicunca/pohon',
-  target: '_blank'
+  target: '_blank',
 }, {
   label: 'Log out',
-  icon: 'i-lucide-log-out'
-}]]))
+  icon: 'i-lucide-log-out',
+}]]));
 
-defineShortcuts(extractShortcuts(teamsItems.value))
+defineShortcuts(extractShortcuts(teamsItems.value));
 </script>
 
 <template>
@@ -139,7 +139,7 @@ defineShortcuts(extractShortcuts(teamsItems.value))
       :ui="{
         container: 'h-full',
         inner: 'bg-background-elevated/25 divide-transparent',
-        body: 'py-0'
+        body: 'py-0',
       }"
     >
       <template #header>
@@ -154,9 +154,9 @@ defineShortcuts(extractShortcuts(teamsItems.value))
             color="neutral"
             variant="ghost"
             square
-            class="w-full data-[state=open]:bg-background-elevated overflow-hidden"
+            class="w-full overflow-hidden data-[state=open]:bg-background-elevated"
             :ui="{
-              trailingIcon: 'color-text-dimmed ms-auto'
+              trailingIcon: 'color-text-dimmed ms-auto',
             }"
           />
         </PDropdownMenu>
@@ -184,17 +184,17 @@ defineShortcuts(extractShortcuts(teamsItems.value))
             color="neutral"
             variant="ghost"
             square
-            class="w-full data-[state=open]:bg-background-elevated overflow-hidden"
+            class="w-full overflow-hidden data-[state=open]:bg-background-elevated"
             :ui="{
-              trailingIcon: 'color-text-dimmed ms-auto'
+              trailingIcon: 'color-text-dimmed ms-auto',
             }"
           />
         </PDropdownMenu>
       </template>
     </PSidebar>
 
-    <div class="flex-1 flex flex-col">
-      <div class="h-(--ui-header-height) shrink-0 flex items-center px-4 border-b border-border">
+    <div class="flex flex-1 flex-col">
+      <div class="px-4 border-b border-border flex shrink-0 h-(--ui-header-height) items-center">
         <PButton
           icon="i-lucide-panel-left"
           color="neutral"
@@ -204,7 +204,7 @@ defineShortcuts(extractShortcuts(teamsItems.value))
         />
       </div>
 
-      <div class="flex-1 p-4">
+      <div class="p-4 flex-1">
         <Placeholder class="size-full" />
       </div>
     </div>

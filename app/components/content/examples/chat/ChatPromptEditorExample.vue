@@ -1,71 +1,74 @@
 <script setup lang="ts">
-import { Extension } from '@tiptap/core'
-import type { EditorMentionMenuItem, SelectItem } from 'pohon-ui'
+import type { EditorMentionMenuItem, SelectItem } from 'pohon-ui';
+import { Extension } from '@tiptap/core';
 
-const input = ref('')
-const mode = ref('auto')
-const attachments = ref<{ name: string, src?: string }[]>([])
-const fileInputRef = useTemplateRef('fileInputRef')
+const input = ref('');
+const mode = ref('auto');
+const attachments = ref<Array<{ name: string; src?: string }>>([]);
+const fileInputRef = useTemplateRef('fileInputRef');
 
-const files: EditorMentionMenuItem[] = [
+const files: Array<EditorMentionMenuItem> = [
   { label: 'app.vue', icon: 'i-vscode-icons-file-type-vue' },
   { label: 'nuxt.config.ts', icon: 'i-vscode-icons-file-type-nuxt' },
   { label: 'package.json', icon: 'i-vscode-icons-file-type-json' },
   { label: 'README.md', icon: 'i-vscode-icons-file-type-markdown' },
   { label: 'AuthForm.vue', icon: 'i-vscode-icons-file-type-vue' },
-  { label: 'useChat.ts', icon: 'i-vscode-icons-file-type-typescript' }
-]
+  { label: 'useChat.ts', icon: 'i-vscode-icons-file-type-typescript' },
+];
 
-const commands: EditorMentionMenuItem[] = [
+const commands: Array<EditorMentionMenuItem> = [
   { label: 'init', icon: 'i-lucide-sparkles' },
   { label: 'review', icon: 'i-lucide-search-code' },
   { label: 'security-review', icon: 'i-lucide-shield-check' },
   { label: 'clear', icon: 'i-lucide-eraser' },
   { label: 'compact', icon: 'i-lucide-fold-vertical' },
-  { label: 'config', icon: 'i-lucide-settings' }
-]
+  { label: 'config', icon: 'i-lucide-settings' },
+];
 
 const modes = [
   { label: 'Manual', value: 'manual', icon: 'i-lucide-hand' },
   { label: 'Edit automatically', value: 'edit', icon: 'i-lucide-code-xml' },
   { label: 'Plan mode', value: 'plan', icon: 'i-lucide-list-checks' },
-  { label: 'Auto mode', value: 'auto', icon: 'i-lucide-zap' }
-] satisfies SelectItem[]
+  { label: 'Auto mode', value: 'auto', icon: 'i-lucide-zap' },
+] satisfies Array<SelectItem>;
 
 // SSR-safe target so the menus aren't clipped by overflow
-const appendToBody = import.meta.client ? () => document.body : undefined
+const appendToBody = import.meta.client ? () => document.body : undefined;
 
 function onFilesChange(event: Event) {
-  const target = event.target as HTMLInputElement
+  const target = event.target as HTMLInputElement;
   for (const file of Array.from(target.files ?? [])) {
     attachments.value.push({
       name: file.name,
-      src: file.type.startsWith('image/') ? URL.createObjectURL(file) : undefined
-    })
+      src: file.type.startsWith('image/') ? URL.createObjectURL(file) : undefined,
+    });
   }
-  target.value = ''
+  target.value = '';
 }
 
 function onSubmit() {
-  console.log('submit', input.value)
+  console.log('submit', input.value);
 
-  input.value = ''
-  attachments.value = []
+  input.value = '';
+  attachments.value = [];
 }
 </script>
 
 <template>
   <PChatPrompt
     v-model="input"
-    class="w-full p-0 gap-0"
+    class="p-0 gap-0 w-full"
     placeholder="Press / to open the command menu"
     :ui="{
       header: 'px-2.5 py-2 border-b border-border',
-      footer: 'px-2.5 py-2 border-t border-border'
+      footer: 'px-2.5 py-2 border-t border-border',
     }"
     @submit="onSubmit"
   >
-    <template v-if="attachments.length" #header>
+    <template
+      v-if="attachments.length"
+      #header
+    >
       <PButton
         v-for="(file, index) in attachments"
         :key="index"
@@ -88,21 +91,33 @@ function onSubmit() {
         content-type="markdown"
         :starter-kit="false"
         :placeholder="placeholder"
-        class="w-full min-h-12"
+        class="min-h-12 w-full"
         :ui="{ base: 'p-2.5! [&_.mention]:bg-primary/5 [&_.mention]:rounded-sm [&_.mention]:px-0.5 [&_.mention]:py-0.25' }"
         :extensions="[Extension.create({
           name: 'chatPromptSubmit',
           priority: 1000,
-          addKeyboardShortcuts: () => ({ Enter: () => (submit(), true) })
+          addKeyboardShortcuts: () => ({ Enter: () => (submit(), true) }),
         })]"
       >
-        <PEditorMentionMenu :editor="editor" char="@" plugin-key="mention" :items="files" :append-to="appendToBody" />
-        <PEditorMentionMenu :editor="editor" char="/" plugin-key="command" :items="commands" :append-to="appendToBody" />
+        <PEditorMentionMenu
+          :editor="editor"
+          char="@"
+          plugin-key="mention"
+          :items="files"
+          :append-to="appendToBody"
+        />
+        <PEditorMentionMenu
+          :editor="editor"
+          char="/"
+          plugin-key="command"
+          :items="commands"
+          :append-to="appendToBody"
+        />
       </PEditor>
     </template>
 
     <template #footer>
-      <div class="flex items-center gap-0.5">
+      <div class="flex gap-0.5 items-center">
         <PButton
           icon="i-lucide-plus"
           color="neutral"
@@ -111,10 +126,16 @@ function onSubmit() {
           size="sm"
           @click="fileInputRef?.click()"
         />
-        <input ref="fileInputRef" type="file" multiple class="hidden" @change="onFilesChange">
+        <input
+          ref="fileInputRef"
+          type="file"
+          multiple
+          class="hidden"
+          @change="onFilesChange"
+        >
       </div>
 
-      <div class="flex items-center gap-1">
+      <div class="flex gap-1 items-center">
         <PSelect
           v-model="mode"
           :items="modes"
@@ -125,7 +146,10 @@ function onSubmit() {
           square
         />
 
-        <PChatPromptSubmit size="sm" :disabled="!input.trim()" />
+        <PChatPromptSubmit
+          size="sm"
+          :disabled="!input.trim()"
+        />
       </div>
     </template>
   </PChatPrompt>

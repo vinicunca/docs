@@ -71,7 +71,7 @@ import {
   ComboboxSeparator,
   ComboboxTrigger,
   ComboboxViewport,
-} from 'akar'
+} from 'akar';
 </script>
 
 <template>
@@ -632,7 +632,7 @@ Combobox can be use to build your own Command Menu.
 
 ```vue
 <script setup lang="ts">
-import { Command, CommandItem } from './your-command'
+import { Command, CommandItem } from './your-command';
 </script>
 
 <template>
@@ -654,21 +654,21 @@ import { Command, CommandItem } from './your-command'
 
 ```ts
 // your-command.ts
-export { default as Command } from 'Command.vue'
-export { default as CommandItem } from 'CommandItem.vue'
+export { default as Command } from 'Command.vue';
+export { default as CommandItem } from 'CommandItem.vue';
 ```
 
 ```vue
 <!-- Command.vue -->
 <script setup lang="ts">
-import type { ComboboxRootEmits, ComboboxRootProps } from 'akar'
-import { CheckIcon, ChevronDownIcon, ChevronUpIcon, } from '@radix-icons/vue'
-import { ComboboxContent, ComboboxInput, ComboboxPortal, ComboboxRoot, useForwardPropsEmits } from 'akar'
+import type { ComboboxRootEmits, ComboboxRootProps } from 'akar';
+import { CheckIcon, ChevronDownIcon, ChevronUpIcon, } from '@radix-icons/vue';
+import { ComboboxContent, ComboboxInput, ComboboxPortal, ComboboxRoot, useForwardPropsEmits } from 'akar';
 
-const props = defineProps<ComboboxRootProps>()
-const emits = defineEmits<ComboboxRootEmits>()
+const props = defineProps<ComboboxRootProps>();
+const emits = defineEmits<ComboboxRootEmits>();
 
-const forward = useForwardPropsEmits(props, emits)
+const forward = useForwardPropsEmits(props, emits);
 </script>
 
 <template>
@@ -698,11 +698,11 @@ const forward = useForwardPropsEmits(props, emits)
 ```vue
 <!-- ComboboxItem.vue -->
 <script setup lang="ts">
-import type { ComboboxItemProps } from 'akar'
-import { CheckIcon } from '@radix-icons/vue'
-import { ComboboxItem } from 'akar'
+import type { ComboboxItemProps } from 'akar';
+import { CheckIcon } from '@radix-icons/vue';
+import { ComboboxItem } from 'akar';
 
-const props = defineProps<ComboboxItemProps>()
+const props = defineProps<ComboboxItemProps>();
 </script>
 
 <template>

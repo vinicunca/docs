@@ -1,31 +1,31 @@
 <script setup lang="ts">
-import type { AvatarProps, TableColumn } from 'pohon-ui'
+import type { AvatarProps, TableColumn } from 'pohon-ui';
 
-const PAvatar = resolveComponent('PAvatar')
+const PAvatar = resolveComponent('PAvatar');
 
-type User = {
-  id: number
-  name: string
-  username: string
-  email: string
-  avatar: AvatarProps
-  company: { name: string }
+interface User {
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+  avatar: AvatarProps;
+  company: { name: string };
 }
 
-const { data, status } = useLazyFetch<User[]>('https://jsonplaceholder.typicode.com/users', {
+const { data, status } = useLazyFetch<Array<User>>('https://jsonplaceholder.typicode.com/users', {
   key: 'table-users',
   transform: (data) => {
-    return data?.map(user => ({
+    return data?.map((user) => ({
       ...user,
-      avatar: { src: `https://i.pravatar.cc/120?img=${user.id}`, alt: `${user.name} avatar` }
-    })) || []
+      avatar: { src: `https://i.pravatar.cc/120?img=${user.id}`, alt: `${user.name} avatar` },
+    })) || [];
   },
-  server: false
-})
+  server: false,
+});
 
-const columns: TableColumn<User>[] = [{
+const columns: Array<TableColumn<User>> = [{
   accessorKey: 'id',
-  header: 'ID'
+  header: 'ID',
 }, {
   accessorKey: 'name',
   header: 'Name',
@@ -34,22 +34,22 @@ const columns: TableColumn<User>[] = [{
       h(PAvatar, {
         ...row.original.avatar,
         loading: 'lazy',
-        size: 'lg'
+        size: 'lg',
       }),
       h('div', undefined, [
         h('p', { class: 'font-medium color-text-highlighted' }, row.original.name),
-        h('p', { class: '' }, `@${row.original.username}`)
-      ])
-    ])
-  }
+        h('p', { class: '' }, `@${row.original.username}`),
+      ]),
+    ]);
+  },
 }, {
   accessorKey: 'email',
-  header: 'Email'
+  header: 'Email',
 }, {
   accessorKey: 'company',
   header: 'Company',
-  cell: ({ row }) => row.original.company.name
-}]
+  cell: ({ row }) => row.original.company.name,
+}];
 </script>
 
 <template>

@@ -51,12 +51,18 @@ Import all parts and piece them together. See the [Field](/akar/components/field
 
 ```vue
 <script setup>
-import { FieldControl, FieldError, FieldLabel, FieldRoot, FormRoot } from 'akar'
+import { FieldControl, FieldError, FieldLabel, FieldRoot, FormRoot } from 'akar';
 </script>
 
 <template>
-  <FormRoot :errors="serverErrors" @form-submit="onFormSubmit">
-    <FieldRoot name="email" required>
+  <FormRoot
+    :errors="serverErrors"
+    @form-submit="onFormSubmit"
+  >
+    <FieldRoot
+      name="email"
+      required
+    >
       <FieldLabel>Email</FieldLabel>
       <FieldControl type="email" />
       <FieldError />

@@ -35,7 +35,7 @@ The Chat components are designed to be used with the [Vercel AI SDK](https://ai-
 Install the required dependencies:
 
 ::framework-only
-#nuxt
+# nuxt
 :::div
 
 ::::code-group{sync="pm"}
@@ -66,7 +66,7 @@ export default defineNuxtConfig({
     'pohon-ui',
     '@comark/nuxt'
   ]
-})
+});
 ```
 
 ::::note
@@ -75,7 +75,7 @@ export default defineNuxtConfig({
 
 :::
 
-#vue
+# vue
 :::div
 
 ::::code-group{sync="pm"}
@@ -103,9 +103,9 @@ bun add ai @ai-sdk/gateway @ai-sdk/vue @comark/vue
 <br><br>To use Pohon UI's [prose components](/pohon/typography) with Comark, enable the `prose` option in your `vite.config.ts`:
 
 ```ts [vite.config.ts] {9}
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import ui from 'pohon-ui/vite'
+import vue from '@vitejs/plugin-vue';
+import ui from 'pohon-ui/vite';
+import { defineConfig } from 'vite';
 
 export default defineConfig({
   plugins: [
@@ -114,7 +114,7 @@ export default defineConfig({
       prose: true
     })
   ]
-})
+});
 ```
 ::::
 
@@ -127,22 +127,22 @@ export default defineConfig({
 Create a server API endpoint to handle chat requests using [`streamText`](https://ai-sdk.dev/docs/reference/ai-sdk-core/stream-text). You can use the [Vercel AI Gateway](https://vercel.com/ai-gateway) to access AI models through a centralized endpoint:
 
 ```ts [server/api/chat.post.ts]
-import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
-import { gateway } from '@ai-sdk/gateway'
+import { gateway } from '@ai-sdk/gateway';
+import { convertToModelMessages, createUIMessageStreamResponse, streamText, toUIMessageStream } from 'ai';
 
 export default defineEventHandler(async (event) => {
-  const { messages } = await readBody(event)
+  const { messages } = await readBody(event);
 
   const result = streamText({
     model: gateway('anthropic/claude-sonnet-5'),
     maxOutputTokens: 10000,
     instructions: 'You are a helpful assistant.',
     messages: await convertToModelMessages(messages)
-  })
+  });
 
-  const stream = toUIMessageStream({ stream: result.stream })
-  return createUIMessageStreamResponse({ stream })
-})
+  const stream = toUIMessageStream({ stream: result.stream });
+  return createUIMessageStreamResponse({ stream });
+});
 ```
 
 ### Reasoning
@@ -150,11 +150,11 @@ export default defineEventHandler(async (event) => {
 To enable [reasoning](https://ai-sdk.dev/docs/ai-sdk-ui/chatbot#reasoning), configure `providerOptions` for your provider ([Anthropic](https://ai-sdk.dev/providers/ai-sdk-providers/anthropic#reasoning), [Google](https://ai-sdk.dev/providers/ai-sdk-providers/google#thinking), [OpenAI](https://ai-sdk.dev/providers/ai-sdk-providers/openai#reasoning)):
 
 ```ts [server/api/chat.post.ts]
-import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
-import { gateway } from '@ai-sdk/gateway'
+import { gateway } from '@ai-sdk/gateway';
+import { convertToModelMessages, createUIMessageStreamResponse, streamText, toUIMessageStream } from 'ai';
 
 export default defineEventHandler(async (event) => {
-  const { messages } = await readBody(event)
+  const { messages } = await readBody(event);
 
   const result = streamText({
     model: gateway('anthropic/claude-sonnet-5'),
@@ -179,11 +179,11 @@ export default defineEventHandler(async (event) => {
         reasoningSummary: 'detailed'
       }
     }
-  })
+  });
 
-  const stream = toUIMessageStream({ stream: result.stream })
-  return createUIMessageStreamResponse({ stream })
-})
+  const stream = toUIMessageStream({ stream: result.stream });
+  return createUIMessageStreamResponse({ stream });
+});
 ```
 
 ### Web Search
@@ -193,12 +193,12 @@ Some providers offer built-in web search tools: [Anthropic](https://ai-sdk.dev/p
 ::code-group
 
 ```ts [Anthropic]
-import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
-import { anthropic } from '@ai-sdk/anthropic'
-import { gateway } from '@ai-sdk/gateway'
+import { anthropic } from '@ai-sdk/anthropic';
+import { gateway } from '@ai-sdk/gateway';
+import { convertToModelMessages, createUIMessageStreamResponse, streamText, toUIMessageStream } from 'ai';
 
 export default defineEventHandler(async (event) => {
-  const { messages } = await readBody(event)
+  const { messages } = await readBody(event);
 
   const result = streamText({
     model: gateway('anthropic/claude-sonnet-5'),
@@ -207,20 +207,20 @@ export default defineEventHandler(async (event) => {
     tools: {
       web_search: anthropic.tools.webSearch_20260209({})
     }
-  })
+  });
 
-  const stream = toUIMessageStream({ stream: result.stream })
-  return createUIMessageStreamResponse({ stream })
-})
+  const stream = toUIMessageStream({ stream: result.stream });
+  return createUIMessageStreamResponse({ stream });
+});
 ```
 
 ```ts [Google]
-import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
-import { google } from '@ai-sdk/google'
-import { gateway } from '@ai-sdk/gateway'
+import { gateway } from '@ai-sdk/gateway';
+import { google } from '@ai-sdk/google';
+import { convertToModelMessages, createUIMessageStreamResponse, streamText, toUIMessageStream } from 'ai';
 
 export default defineEventHandler(async (event) => {
-  const { messages } = await readBody(event)
+  const { messages } = await readBody(event);
 
   const result = streamText({
     model: gateway('google/gemini-3-flash'),
@@ -229,20 +229,20 @@ export default defineEventHandler(async (event) => {
     tools: {
       google_search: google.tools.googleSearch({})
     }
-  })
+  });
 
-  const stream = toUIMessageStream({ stream: result.stream })
-  return createUIMessageStreamResponse({ stream })
-})
+  const stream = toUIMessageStream({ stream: result.stream });
+  return createUIMessageStreamResponse({ stream });
+});
 ```
 
 ```ts [OpenAI]
-import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
-import { openai } from '@ai-sdk/openai'
-import { gateway } from '@ai-sdk/gateway'
+import { gateway } from '@ai-sdk/gateway';
+import { openai } from '@ai-sdk/openai';
+import { convertToModelMessages, createUIMessageStreamResponse, streamText, toUIMessageStream } from 'ai';
 
 export default defineEventHandler(async (event) => {
-  const { messages } = await readBody(event)
+  const { messages } = await readBody(event);
 
   const result = streamText({
     model: gateway('openai/gpt-5-nano'),
@@ -251,11 +251,11 @@ export default defineEventHandler(async (event) => {
     tools: {
       web_search: openai.tools.webSearch({})
     }
-  })
+  });
 
-  const stream = toUIMessageStream({ stream: result.stream })
-  return createUIMessageStreamResponse({ stream })
-})
+  const stream = toUIMessageStream({ stream: result.stream });
+  return createUIMessageStreamResponse({ stream });
+});
 ```
 
 ::
@@ -285,18 +285,18 @@ yarn add @ai-sdk/mcp
 Then, configure your server endpoint to use MCP tools:
 
 ```ts [server/api/chat.post.ts]
-import { streamText, convertToModelMessages, isStepCount, toUIMessageStream, createUIMessageStreamResponse } from 'ai'
-import { createMCPClient } from '@ai-sdk/mcp'
-import { gateway } from '@ai-sdk/gateway'
+import { gateway } from '@ai-sdk/gateway';
+import { createMCPClient } from '@ai-sdk/mcp';
+import { convertToModelMessages, createUIMessageStreamResponse, isStepCount, streamText, toUIMessageStream } from 'ai';
 
 export default defineEventHandler(async (event) => {
-  const { messages } = await readBody(event)
+  const { messages } = await readBody(event);
 
   const httpClient = await createMCPClient({
     transport: { type: 'http', url: 'https://your-app.com/mcp' }
-  })
+  });
   try {
-    const tools = await httpClient.tools()
+    const tools = await httpClient.tools();
 
     const result = streamText({
       model: gateway('anthropic/claude-sonnet-5'),
@@ -306,22 +306,22 @@ export default defineEventHandler(async (event) => {
       stopWhen: isStepCount(6),
       tools,
       onEnd: async () => {
-        await httpClient.close()
+        await httpClient.close();
       },
       onError: async (error) => {
-        console.error(error)
-        await httpClient.close()
+        console.error(error);
+        await httpClient.close();
       }
-    })
+    });
 
-    const stream = toUIMessageStream({ stream: result.stream })
-    return createUIMessageStreamResponse({ stream })
+    const stream = toUIMessageStream({ stream: result.stream });
+    return createUIMessageStreamResponse({ stream });
   } catch (error) {
     // Close the MCP client if setup fails before streaming starts
-    await httpClient.close()
-    throw error
+    await httpClient.close();
+    throw error;
   }
-})
+});
 ```
 
 ### Tool Approval
@@ -329,12 +329,12 @@ export default defineEventHandler(async (event) => {
 Require a user confirmation before a tool runs with the [`toolApproval`](https://ai-sdk.dev/docs/agents/tool-approvals) option. The tool part pauses in the `approval-requested` state until the user responds:
 
 ```ts [server/api/chat.post.ts]
-import { streamText, convertToModelMessages, toUIMessageStream, createUIMessageStreamResponse, tool } from 'ai'
-import { gateway } from '@ai-sdk/gateway'
-import { z } from 'zod'
+import { gateway } from '@ai-sdk/gateway';
+import { convertToModelMessages, createUIMessageStreamResponse, streamText, tool, toUIMessageStream } from 'ai';
+import { z } from 'zod';
 
 export default defineEventHandler(async (event) => {
-  const { messages } = await readBody(event)
+  const { messages } = await readBody(event);
 
   const result = streamText({
     model: gateway('anthropic/claude-sonnet-5'),
@@ -351,11 +351,11 @@ export default defineEventHandler(async (event) => {
     toolApproval: {
       deleteFile: 'user-approval'
     }
-  })
+  });
 
-  const stream = toUIMessageStream({ stream: result.stream })
-  return createUIMessageStreamResponse({ stream })
-})
+  const stream = toUIMessageStream({ stream: result.stream });
+  return createUIMessageStreamResponse({ stream });
+});
 ```
 
 ## Client Setup
@@ -363,29 +363,29 @@ export default defineEventHandler(async (event) => {
 Use the `useChat` composable from `@ai-sdk/vue` to manage chat state and connect to your server endpoint:
 
 ::framework-only
-#nuxt
+# nuxt
 ```vue
 <script setup lang="ts">
-import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName, lastAssistantMessageIsCompleteWithApprovalResponses } from 'ai'
-import { useChat } from '@ai-sdk/vue'
-import { isPartStreaming, isToolStreaming } from 'pohon-ui/utils/ai'
-import shiki from '@comark/nuxt/plugins/shiki'
+import { useChat } from '@ai-sdk/vue';
+import shiki from '@comark/nuxt/plugins/shiki';
+import { getToolName, isReasoningUIPart, isTextUIPart, isToolUIPart, lastAssistantMessageIsCompleteWithApprovalResponses } from 'ai';
+import { isPartStreaming, isToolStreaming } from 'pohon-ui/utils/ai';
 
-const plugins = [shiki()]
+const plugins = [shiki()];
 
-const input = ref('')
+const input = ref('');
 
 const { messages, status, error, sendMessage, regenerate, stop, addToolApprovalResponse } = useChat({
   sendAutomaticallyWhen: lastAssistantMessageIsCompleteWithApprovalResponses,
   onError(error) {
-    console.error(error)
+    console.error(error);
   }
-})
+});
 
 function onSubmit() {
-  sendMessage({ text: input.value })
+  sendMessage({ text: input.value });
 
-  input.value = ''
+  input.value = '';
 }
 </script>
 
@@ -418,7 +418,7 @@ function onSubmit() {
           :streaming="isToolStreaming(part)"
           :actions="part.state === 'approval-requested' ? [
             { label: 'Approve', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: true }) },
-            { label: 'Deny', color: 'neutral', variant: 'ghost', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: false }) }
+            { label: 'Deny', color: 'neutral', variant: 'ghost', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: false }) },
           ] : undefined"
         />
 
@@ -430,7 +430,10 @@ function onSubmit() {
             :plugins="plugins"
             class="*:first:mt-0 *:last:mb-0"
           />
-          <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
+          <p
+            v-else-if="message.role === 'user'"
+            class="whitespace-pre-wrap"
+          >
             {{ part.text }}
           </p>
         </template>
@@ -452,31 +455,31 @@ function onSubmit() {
 </template>
 ```
 
-#vue
+# vue
 ```vue
 <script setup lang="ts">
-import { ref } from 'vue'
-import { isReasoningUIPart, isTextUIPart, isToolUIPart, getToolName, lastAssistantMessageIsCompleteWithApprovalResponses } from 'ai'
-import { useChat } from '@ai-sdk/vue'
-import { isPartStreaming, isToolStreaming } from 'pohon-ui/utils/ai'
-import { Markdown } from '@comark/vue'
-import shiki from '@comark/vue/plugins/shiki'
+import { useChat } from '@ai-sdk/vue';
+import { Markdown } from '@comark/vue';
+import shiki from '@comark/vue/plugins/shiki';
+import { getToolName, isReasoningUIPart, isTextUIPart, isToolUIPart, lastAssistantMessageIsCompleteWithApprovalResponses } from 'ai';
+import { isPartStreaming, isToolStreaming } from 'pohon-ui/utils/ai';
+import { ref } from 'vue';
 
-const plugins = [shiki()]
+const plugins = [shiki()];
 
-const input = ref('')
+const input = ref('');
 
 const { messages, status, error, sendMessage, regenerate, stop, addToolApprovalResponse } = useChat({
   sendAutomaticallyWhen: lastAssistantMessageIsCompleteWithApprovalResponses,
   onError(error) {
-    console.error(error)
+    console.error(error);
   }
-})
+});
 
 function onSubmit() {
-  sendMessage({ text: input.value })
+  sendMessage({ text: input.value });
 
-  input.value = ''
+  input.value = '';
 }
 </script>
 
@@ -509,7 +512,7 @@ function onSubmit() {
           :streaming="isToolStreaming(part)"
           :actions="part.state === 'approval-requested' ? [
             { label: 'Approve', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: true }) },
-            { label: 'Deny', color: 'neutral', variant: 'ghost', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: false }) }
+            { label: 'Deny', color: 'neutral', variant: 'ghost', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: false }) },
           ] : undefined"
         />
 
@@ -521,7 +524,10 @@ function onSubmit() {
             :plugins="plugins"
             class="*:first:mt-0 *:last:mb-0"
           />
-          <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap">
+          <p
+            v-else-if="message.role === 'user'"
+            class="whitespace-pre-wrap"
+          >
             {{ part.text }}
           </p>
         </template>
@@ -549,30 +555,30 @@ function onSubmit() {
 For reusable Comark configuration (plugins, class, etc.), use [`defineMarkdownComponent`](https://comark.dev/rendering/vue#code-markdown-code-definemarkdowncomponent-code) to create a custom component instead of passing props inline each time.
 
 ::framework-only
-#nuxt
+# nuxt
 :::div{class="*:my-0"}
 ```ts [components/chat/Markdown.ts]
-import shiki from '@comark/nuxt/plugins/shiki'
+import shiki from '@comark/nuxt/plugins/shiki';
 
 export default defineMarkdownComponent({
   name: 'ChatMarkdown',
   plugins: [shiki()],
   class: '*:first:mt-0 *:last:mb-0'
-})
+});
 ```
 :::
 
-#vue
+# vue
 :::div{class="*:my-0"}
 ```ts [components/chat/Markdown.ts]
-import { defineMarkdownComponent } from '@comark/vue'
-import shiki from '@comark/vue/plugins/shiki'
+import { defineMarkdownComponent } from '@comark/vue';
+import shiki from '@comark/vue/plugins/shiki';
 
 export default defineMarkdownComponent({
   name: 'ChatMarkdown',
   plugins: [shiki()],
   class: '*:first:mt-0 *:last:mb-0'
-})
+});
 ```
 :::
 ::

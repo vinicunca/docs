@@ -1,36 +1,36 @@
 <script setup lang="ts">
-import { resolveComponent } from 'vue'
-import type { TableColumn } from 'pohon-ui'
-import { getGroupedRowModel } from '@tanstack/vue-table'
-import type { GroupingOptions } from '@tanstack/vue-table'
+import type { GroupingOptions } from '@tanstack/vue-table';
+import type { TableColumn } from 'pohon-ui';
+import { getGroupedRowModel } from '@tanstack/vue-table';
+import { resolveComponent } from 'vue';
 
-const PBadge = resolveComponent('PBadge')
+const PBadge = resolveComponent('PBadge');
 
-type Account = {
-  id: string
-  name: string
+interface Account {
+  id: string;
+  name: string;
 }
 
-type PaymentStatus = 'paid' | 'failed' | 'refunded'
+type PaymentStatus = 'paid' | 'failed' | 'refunded';
 
-type Payment = {
-  id: string
-  date: string
-  status: PaymentStatus
-  email: string
-  amount: number
-  account: Account
+interface Payment {
+  id: string;
+  date: string;
+  status: PaymentStatus;
+  email: string;
+  amount: number;
+  account: Account;
 }
 
-const getColorByStatus = (status: PaymentStatus) => {
+function getColorByStatus(status: PaymentStatus) {
   return {
     paid: 'success',
     failed: 'error',
-    refunded: 'neutral'
-  }[status]
+    refunded: 'neutral',
+  }[status];
 }
 
-const data = ref<Payment[]>([
+const data = ref<Array<Payment>>([
   {
     id: '4600',
     date: '2024-03-11T15:30:00',
@@ -39,8 +39,8 @@ const data = ref<Payment[]>([
     amount: 594,
     account: {
       id: '1',
-      name: 'Account 1'
-    }
+      name: 'Account 1',
+    },
   },
   {
     id: '4599',
@@ -50,8 +50,8 @@ const data = ref<Payment[]>([
     amount: 276,
     account: {
       id: '2',
-      name: 'Account 2'
-    }
+      name: 'Account 2',
+    },
   },
   {
     id: '4598',
@@ -61,8 +61,8 @@ const data = ref<Payment[]>([
     amount: 315,
     account: {
       id: '1',
-      name: 'Account 1'
-    }
+      name: 'Account 1',
+    },
   },
   {
     id: '4597',
@@ -72,8 +72,8 @@ const data = ref<Payment[]>([
     amount: 529,
     account: {
       id: '2',
-      name: 'Account 2'
-    }
+      name: 'Account 2',
+    },
   },
   {
     id: '4596',
@@ -83,19 +83,19 @@ const data = ref<Payment[]>([
     amount: 639,
     account: {
       id: '1',
-      name: 'Account 1'
-    }
-  }
-])
+      name: 'Account 1',
+    },
+  },
+]);
 
-const columns: TableColumn<Payment>[] = [
+const columns: Array<TableColumn<Payment>> = [
   {
     id: 'title',
-    header: 'Item'
+    header: 'Item',
   },
   {
     id: 'account_id',
-    accessorKey: 'account.id'
+    accessorKey: 'account.id',
   },
   {
     accessorKey: 'id',
@@ -104,7 +104,7 @@ const columns: TableColumn<Payment>[] = [
       row.getIsGrouped()
         ? `${row.getValue('id')} records`
         : `#${row.getValue('id')}`,
-    aggregationFn: 'count'
+    aggregationFn: 'count',
   },
   {
     accessorKey: 'date',
@@ -115,28 +115,28 @@ const columns: TableColumn<Payment>[] = [
         month: 'short',
         hour: '2-digit',
         minute: '2-digit',
-        hour12: false
-      })
+        hour12: false,
+      });
     },
-    aggregationFn: 'max'
+    aggregationFn: 'max',
   },
   {
     accessorKey: 'status',
-    header: 'Status'
+    header: 'Status',
   },
   {
     accessorKey: 'email',
     header: 'Email',
     meta: {
       class: {
-        td: 'w-full'
-      }
+        td: 'w-full',
+      },
     },
     cell: ({ row }) =>
       row.getIsGrouped()
         ? `${row.getValue('email')} customers`
         : row.getValue('email'),
-    aggregationFn: 'uniqueCount'
+    aggregationFn: 'uniqueCount',
   },
   {
     accessorKey: 'amount',
@@ -144,24 +144,24 @@ const columns: TableColumn<Payment>[] = [
     meta: {
       class: {
         th: 'text-right',
-        td: 'text-right font-medium'
-      }
+        td: 'text-right font-medium',
+      },
     },
     cell: ({ row }) => {
-      const amount = Number.parseFloat(row.getValue('amount'))
+      const amount = Number.parseFloat(row.getValue('amount'));
       return new Intl.NumberFormat('en-US', {
         style: 'currency',
-        currency: 'EUR'
-      }).format(amount)
+        currency: 'EUR',
+      }).format(amount);
     },
-    aggregationFn: 'sum'
-  }
-]
+    aggregationFn: 'sum',
+  },
+];
 
 const grouping_options = ref<GroupingOptions>({
   groupedColumnMode: 'remove',
-  getGroupedRowModel: getGroupedRowModel()
-})
+  getGroupedRowModel: getGroupedRowModel(),
+});
 </script>
 
 <template>
@@ -172,11 +172,14 @@ const grouping_options = ref<GroupingOptions>({
     :grouping-options="grouping_options"
     :ui="{
       root: 'min-w-full',
-      td: 'empty:p-0' // helps with the colspaned row added for expand slot
+      td: 'empty:p-0', // helps with the colspaned row added for expand slot
     }"
   >
     <template #title-cell="{ row }">
-      <div v-if="row.getIsGrouped()" class="flex items-center">
+      <div
+        v-if="row.getIsGrouped()"
+        class="flex items-center"
+      >
         <span
           class="inline-block"
           :style="{ width: `calc(${row.depth} * 1rem)` }"

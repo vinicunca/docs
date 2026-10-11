@@ -1,31 +1,36 @@
 <script setup lang="ts">
-import type { EditorToolbarItem } from 'pohon-ui'
+import type { EditorToolbarItem } from 'pohon-ui';
 
 defineProps<{
-  layout: 'fixed' | 'bubble' | 'floating'
-}>()
+  layout: 'fixed' | 'bubble' | 'floating';
+}>();
 
 const value = ref(`Switch between layouts to see the different toolbar modes.
 
-The **fixed** layout displays the toolbar above the editor. The **bubble** layout shows the toolbar when you select text. The **floating** layout appears on empty lines.`)
+The **fixed** layout displays the toolbar above the editor. The **bubble** layout shows the toolbar when you select text. The **floating** layout appears on empty lines.`);
 
-const items: EditorToolbarItem[][] = [[{
+const items: Array<Array<EditorToolbarItem>> = [[{
   kind: 'mark',
   mark: 'bold',
-  icon: 'i-lucide-bold'
+  icon: 'i-lucide-bold',
 }, {
   kind: 'mark',
   mark: 'italic',
-  icon: 'i-lucide-italic'
+  icon: 'i-lucide-italic',
 }, {
   kind: 'mark',
   mark: 'code',
-  icon: 'i-lucide-code'
-}]]
+  icon: 'i-lucide-code',
+}]];
 </script>
 
 <template>
-  <PEditor v-slot="{ editor }" v-model="value" content-type="markdown" class="w-full min-h-26 flex flex-col gap-4">
+  <PEditor
+    v-slot="{ editor }"
+    v-model="value"
+    content-type="markdown"
+    class="flex flex-col gap-4 min-h-26 w-full"
+  >
     <PEditorToolbar
       :key="layout"
       :editor="editor"

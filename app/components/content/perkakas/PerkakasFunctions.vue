@@ -1,32 +1,37 @@
 <script setup lang="ts">
-import { perkakasCategories, perkakasFunctions, perkakasVersion, groupPerkakasFunctions, matchesPerkakasQuery } from './catalog'
+import { groupPerkakasFunctions, matchesPerkakasQuery, perkakasCategories, perkakasFunctions, perkakasVersion } from './catalog';
 
-const query = ref('')
-const category = ref<string | 'all'>('all')
+const query = ref('');
+const category = ref<string | 'all'>('all');
 
-const cleaned = computed(() => query.value.trim().toLowerCase())
+const cleaned = computed(() => query.value.trim().toLowerCase());
 
 const visible = computed(() => {
   const filtered = perkakasFunctions.filter((fn) => {
-    if (category.value !== 'all' && fn.category !== category.value) return false
-    return matchesPerkakasQuery(fn, cleaned.value)
-  })
-  return groupPerkakasFunctions(filtered)
-})
+    if (category.value !== 'all' && fn.category !== category.value) {
+      return false;
+    }
+    return matchesPerkakasQuery(fn, cleaned.value);
+  });
+  return groupPerkakasFunctions(filtered);
+});
 
-const total = computed(() => visible.value.reduce((sum, group) => sum + group.functions.length, 0))
+const total = computed(() => visible.value.reduce((sum, group) => sum + group.functions.length, 0));
 </script>
 
 <template>
   <div class="perkakas-functions">
-    <div class="not-prose sticky top-0 z-10 -mx-1 mb-6 space-y-3 bg-background/90 px-1 py-3 backdrop-blur-sm">
+    <div class="not-prose mb-6 px-1 py-3 bg-background/90 top-0 sticky z-10 backdrop-blur-sm space-y-3 -mx-1">
       <PInput
         v-model="query"
         icon="i-lucide-search"
         variant="soft"
         placeholder="Search functions…"
       >
-        <template v-if="query" #trailing>
+        <template
+          v-if="query"
+          #trailing
+        >
           <PButton
             color="neutral"
             variant="link"
@@ -58,17 +63,28 @@ const total = computed(() => visible.value.reduce((sum, group) => sum + group.fu
           {{ name }}
         </PButton>
       </div>
-      <p class="color-text-muted m-0 text-sm">
+      <p class="text-sm color-text-muted m-0">
         {{ total }} of {{ perkakasFunctions.length }} exports in @vinicunca/perkakas {{ perkakasVersion }}
       </p>
     </div>
 
-    <p v-if="!visible.length" class="color-text-muted">
+    <p
+      v-if="!visible.length"
+      class="color-text-muted"
+    >
       No functions match that search.
     </p>
 
-    <section v-for="group in visible" :key="group.category" class="mb-10">
-      <ProseH2 :id="group.category" :anchor="true" class="scroll-mt-36">
+    <section
+      v-for="group in visible"
+      :key="group.category"
+      class="mb-10"
+    >
+      <ProseH2
+        :id="group.category"
+        :anchor="true"
+        class="scroll-mt-36"
+      >
         {{ group.category }}
       </ProseH2>
       <PerkakasFunctionCard

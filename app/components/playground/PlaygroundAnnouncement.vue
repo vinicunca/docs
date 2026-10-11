@@ -1,17 +1,20 @@
 <script setup lang="ts">
-const appConfig = useAppConfig()
-const toast = useToast()
-const studioIcons = useStudioIcons()
+const appConfig = useAppConfig();
+const toast = useToast();
+const studioIcons = useStudioIcons();
 </script>
 
 <template>
   <div>
-    <div class="p-4 flex items-start gap-3">
-      <div class="flex items-center justify-center size-9 rounded-lg bg-background-elevated text-primary shrink-0">
-        <PIcon :name="studioIcons.radar" class="size-5" />
+    <div class="p-4 flex gap-3 items-start">
+      <div class="text-primary rounded-lg bg-background-elevated flex shrink-0 size-9 items-center justify-center">
+        <PIcon
+          :name="studioIcons.radar"
+          class="size-5"
+        />
       </div>
       <div>
-        <p class="font-semibold color-text-highlighted">
+        <p class="color-text-highlighted font-semibold">
           Observability Plus
         </p>
         <p class="text-sm color-text-muted">
@@ -20,8 +23,12 @@ const studioIcons = useStudioIcons()
       </div>
     </div>
 
-    <div class="flex items-center justify-end gap-2 border-t border-border px-4 py-3">
-      <PButton label="Dismiss" color="neutral" variant="ghost" />
+    <div class="px-4 py-3 border-t border-border flex gap-2 items-center justify-end">
+      <PButton
+        label="Dismiss"
+        color="neutral"
+        variant="ghost"
+      />
       <PButton
         label="Learn more"
         color="neutral"

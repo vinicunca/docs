@@ -1,18 +1,18 @@
 <script setup lang="ts">
 // as a string this stays an unresolved <nuxtlink> element, with no href
-import { NuxtLink } from '#components'
+import { NuxtLink } from '#components';
 
 /**
  * A row of figures for the hero's `links` slot, each a link when it has
  * somewhere to go.
  */
 defineProps<{
-  items: { value: string, label: string, to?: string }[]
-}>()
+  items: Array<{ value: string; label: string; to?: string }>;
+}>();
 </script>
 
 <template>
-  <div class="relative flex flex-wrap items-end gap-4 sm:gap-x-6 lg:gap-x-8">
+  <div class="flex flex-wrap gap-4 items-end relative lg:gap-x-8 sm:gap-x-6">
     <component
       :is="item.to ? NuxtLink : 'div'"
       v-for="item in items"
@@ -21,10 +21,10 @@ defineProps<{
       :target="item.to?.startsWith('http') ? '_blank' : undefined"
       class="group flex flex-col gap-1.5 focus-visible:outline-primary"
     >
-      <span class="text-3xl sm:text-4xl font-semibold leading-[.95] tracking-[-.03em] tabular-nums color-text-highlighted group-hover:text-primary transition-colors">
+      <span class="text-3xl color-text-highlighted leading-[.95] tracking-[-.03em] font-semibold transition-colors tabular-nums sm:text-4xl group-hover:text-primary">
         {{ item.value }}
       </span>
-      <span class="text-[9px] sm:text-[11.5px] font-medium uppercase tracking-[.09em] color-text-muted whitespace-nowrap">
+      <span class="text-[9px] color-text-muted tracking-[.09em] font-medium whitespace-nowrap uppercase sm:text-[11.5px]">
         {{ item.label }}
       </span>
     </component>

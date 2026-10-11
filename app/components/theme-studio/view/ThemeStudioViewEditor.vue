@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import type { DropdownMenuItem, EditorEmojiMenuItem, EditorMentionMenuItem, EditorSuggestionMenuItem, EditorToolbarItem } from 'pohon-ui'
-import type { Editor, JSONContent } from '@tiptap/vue-3'
-import { Emoji, gitHubEmojis } from '@tiptap/extension-emoji'
-import { upperFirst } from 'scule'
-import { mapEditorItems } from 'pohon-ui/utils/editor'
-import EditorLinkPopover from '../../content/examples/editor/EditorLinkPopover.vue'
+import type { Editor, JSONContent } from '@tiptap/vue-3';
+import type { DropdownMenuItem, EditorEmojiMenuItem, EditorMentionMenuItem, EditorSuggestionMenuItem, EditorToolbarItem } from 'pohon-ui';
+import { Emoji, gitHubEmojis } from '@tiptap/extension-emoji';
+import { mapEditorItems } from 'pohon-ui/utils/editor';
+import { upperFirst } from 'scule';
+import EditorLinkPopover from '../../content/examples/editor/EditorLinkPopover.vue';
 
-const appConfig = useAppConfig()
-const studioIcons = useStudioIcons()
+const appConfig = useAppConfig();
+const studioIcons = useStudioIcons();
 
 /**
  * Self-contained replica of the official Pohon UI Editor template
@@ -68,79 +68,79 @@ Type \`/\` anywhere to access quick insertion commands for headings, lists, code
 ---
 
 Every heading, quote and code block above is styled by the semantic tokens you are editing right now.
-`)
+`);
 
 // Formatting glyphs (headings, marks, blocks) stay lucide on purpose: no pack
 // the studio offers covers bold/italic/underline/strike, so routing only the
 // rest through `studioIcons` would split one toolbar row across two styles.
-const headingItems = [1, 2, 3, 4].map(level => ({
+const headingItems = [1, 2, 3, 4].map((level) => ({
   kind: 'heading' as const,
   level,
   label: `Heading ${level}`,
-  icon: `i-lucide-heading-${level}`
-}))
+  icon: `i-lucide-heading-${level}`,
+}));
 
 const blockItems = computed(() => [{
   kind: 'bulletList' as const,
   label: 'Bullet List',
-  icon: 'i-lucide-list'
+  icon: 'i-lucide-list',
 }, {
   kind: 'orderedList' as const,
   label: 'Ordered List',
-  icon: 'i-lucide-list-ordered'
+  icon: 'i-lucide-list-ordered',
 }, {
   kind: 'blockquote' as const,
   label: 'Blockquote',
-  icon: 'i-lucide-text-quote'
+  icon: 'i-lucide-text-quote',
 }, {
   kind: 'codeBlock' as const,
   label: 'Code Block',
-  icon: 'i-lucide-square-code'
-}])
+  icon: 'i-lucide-square-code',
+}]);
 
 const markItems = [{
   kind: 'mark' as const,
   mark: 'bold' as const,
   icon: 'i-lucide-bold',
-  tooltip: { text: 'Bold' }
+  tooltip: { text: 'Bold' },
 }, {
   kind: 'mark' as const,
   mark: 'italic' as const,
   icon: 'i-lucide-italic',
-  tooltip: { text: 'Italic' }
+  tooltip: { text: 'Italic' },
 }, {
   kind: 'mark' as const,
   mark: 'underline' as const,
   icon: 'i-lucide-underline',
-  tooltip: { text: 'Underline' }
+  tooltip: { text: 'Underline' },
 }, {
   kind: 'mark' as const,
   mark: 'strike' as const,
   icon: 'i-lucide-strikethrough',
-  tooltip: { text: 'Strikethrough' }
+  tooltip: { text: 'Strikethrough' },
 }, {
   kind: 'mark' as const,
   mark: 'code' as const,
   icon: 'i-lucide-code',
-  tooltip: { text: 'Code' }
-}]
+  tooltip: { text: 'Code' },
+}];
 
-const toolbarItems = computed<EditorToolbarItem[][]>(() => [[{
+const toolbarItems = computed<Array<Array<EditorToolbarItem>>>(() => [[{
   kind: 'undo',
   icon: studioIcons.undo,
-  tooltip: { text: 'Undo' }
+  tooltip: { text: 'Undo' },
 }, {
   kind: 'redo',
   icon: studioIcons.redo,
-  tooltip: { text: 'Redo' }
+  tooltip: { text: 'Redo' },
 }], [{
   icon: studioIcons.heading,
   tooltip: { text: 'Headings' },
   content: { align: 'start' },
-  items: headingItems
-}, ...blockItems.value.map(({ label, ...item }) => ({ ...item, tooltip: { text: label } }))], markItems])
+  items: headingItems,
+}, ...blockItems.value.map(({ label, ...item }) => ({ ...item, tooltip: { text: label } }))], markItems]);
 
-const bubbleToolbarItems = computed<EditorToolbarItem[][]>(() => [[{
+const bubbleToolbarItems = computed<Array<Array<EditorToolbarItem>>>(() => [[{
   label: 'Turn into',
   trailingIcon: appConfig.ui.icons.chevronDown,
   activeColor: 'neutral',
@@ -150,45 +150,45 @@ const bubbleToolbarItems = computed<EditorToolbarItem[][]>(() => [[{
   ui: { label: 'text-xs' },
   items: [{
     type: 'label',
-    label: 'Turn into'
+    label: 'Turn into',
   }, {
     kind: 'paragraph',
     label: 'Paragraph',
-    icon: studioIcons.text
-  }, ...headingItems, ...blockItems.value]
+    icon: studioIcons.text,
+  }, ...headingItems, ...blockItems.value],
 }], markItems, [{
   slot: 'link' as const,
   icon: studioIcons.link,
-  tooltip: { text: 'Link' }
-}]])
+  tooltip: { text: 'Link' },
+}]]);
 
-const suggestionItems = computed<EditorSuggestionMenuItem[][]>(() => [[{
+const suggestionItems = computed<Array<Array<EditorSuggestionMenuItem>>>(() => [[{
   type: 'label',
-  label: 'Style'
+  label: 'Style',
 }, {
   kind: 'paragraph',
   label: 'Paragraph',
-  icon: studioIcons.text
+  icon: studioIcons.text,
 }, ...headingItems, ...blockItems.value], [{
   type: 'label',
-  label: 'Insert'
+  label: 'Insert',
 }, {
   kind: 'horizontalRule',
   label: 'Horizontal Rule',
-  icon: 'i-lucide-separator-horizontal'
-}]])
+  icon: 'i-lucide-separator-horizontal',
+}]]);
 
-const mentionItems: EditorMentionMenuItem[] = [
+const mentionItems: Array<EditorMentionMenuItem> = [
   { label: 'benjamincanac', avatar: { src: 'https://github.com/benjamincanac.png', loading: 'lazy' as const } },
   { label: 'HugoRCD', avatar: { src: 'https://github.com/HugoRCD.png', loading: 'lazy' as const } },
   { label: 'atinux', avatar: { src: 'https://github.com/atinux.png', loading: 'lazy' as const } },
-  { label: 'romhml', avatar: { src: 'https://github.com/romhml.png', loading: 'lazy' as const } }
-]
+  { label: 'romhml', avatar: { src: 'https://github.com/romhml.png', loading: 'lazy' as const } },
+];
 
-const emojiItems: EditorEmojiMenuItem[] = gitHubEmojis.filter(emoji => !emoji.name.startsWith('regional_indicator_'))
+const emojiItems: Array<EditorEmojiMenuItem> = gitHubEmojis.filter((emoji) => !emoji.name.startsWith('regional_indicator_'));
 
 // Both menus portal out of the pane, which otherwise clips them.
-const appendToBody = import.meta.client ? () => document.body : undefined
+const appendToBody = import.meta.client ? () => document.body : undefined;
 
 // CollaborationUsers without the Y.js room: initials tinted per user. The
 // template squares these off with a hardcoded `rounded-md` in its app.config,
@@ -197,51 +197,51 @@ const appendToBody = import.meta.client ? () => document.body : undefined
 const collaborators = [
   { alt: 'Anna Cooper', color: '#f97316' },
   { alt: 'Ben Rogers', color: '#0ea5e9' },
-  { alt: 'Chloe Diaz', color: '#a855f7' }
-]
+  { alt: 'Chloe Diaz', color: '#a855f7' },
+];
 
-const selectedNode = ref<{ node: JSONContent, pos: number }>()
+const selectedNode = ref<{ node: JSONContent; pos: number }>();
 
-function dragHandleItems(editor: Editor): DropdownMenuItem[][] {
+function dragHandleItems(editor: Editor): Array<Array<DropdownMenuItem>> {
   if (!selectedNode.value?.node?.type) {
-    return []
+    return [];
   }
 
-  const pos = selectedNode.value.pos
+  const pos = selectedNode.value.pos;
 
   return mapEditorItems(editor, [[{
     type: 'label',
-    label: upperFirst(selectedNode.value.node.type)
+    label: upperFirst(selectedNode.value.node.type),
   }, {
     label: 'Turn into',
     icon: 'i-lucide-repeat-2',
-    children: [{ kind: 'paragraph', label: 'Paragraph', icon: studioIcons.text }, ...headingItems, ...blockItems.value]
+    children: [{ kind: 'paragraph', label: 'Paragraph', icon: studioIcons.text }, ...headingItems, ...blockItems.value],
   }], [{
     kind: 'duplicate',
     pos,
     label: 'Duplicate',
-    icon: appConfig.ui.icons.copy
+    icon: appConfig.ui.icons.copy,
   }, {
     kind: 'moveUp',
     pos,
     label: 'Move up',
-    icon: appConfig.ui.icons.arrowUp
+    icon: appConfig.ui.icons.arrowUp,
   }, {
     kind: 'moveDown',
     pos,
     label: 'Move down',
-    icon: appConfig.ui.icons.arrowDown
+    icon: appConfig.ui.icons.arrowDown,
   }], [{
     kind: 'delete',
     pos,
     label: 'Delete',
-    icon: studioIcons.trash
-  }]]) as DropdownMenuItem[][]
+    icon: studioIcons.trash,
+  }]]) as Array<Array<DropdownMenuItem>>;
 }
 </script>
 
 <template>
-  <div class="h-full overflow-y-auto bg-background">
+  <div class="bg-background h-full overflow-y-auto">
     <ClientOnly>
       <PEditor
         v-slot="{ editor, handlers }"
@@ -260,15 +260,22 @@ function dragHandleItems(editor: Editor): DropdownMenuItem[][] {
           :ui="{ container: 'sm:px-14!', right: 'justify-end-safe overflow-x-auto py-2' }"
         >
           <template #left>
-            <div class="flex items-center gap-1.5">
-              <PIcon :name="studioIcons.editor" class="size-6 text-primary shrink-0" />
-              <span class="text-xl font-bold color-text-highlighted">Editor</span>
+            <div class="flex gap-1.5 items-center">
+              <PIcon
+                :name="studioIcons.editor"
+                class="text-primary shrink-0 size-6"
+              />
+              <span class="text-xl color-text-highlighted font-bold">Editor</span>
             </div>
           </template>
 
           <template #right>
             <PAvatarGroup size="sm">
-              <PTooltip v-for="user in collaborators" :key="user.alt" :text="user.alt">
+              <PTooltip
+                v-for="user in collaborators"
+                :key="user.alt"
+                :text="user.alt"
+              >
                 <PAvatar
                   :alt="user.alt"
                   :style="{ color: user.color }"
@@ -277,21 +284,47 @@ function dragHandleItems(editor: Editor): DropdownMenuItem[][] {
               </PTooltip>
             </PAvatarGroup>
 
-            <PSeparator orientation="vertical" class="h-7 shrink-0" />
+            <PSeparator
+              orientation="vertical"
+              class="shrink-0 h-7"
+            />
 
-            <PEditorToolbar :editor="editor" :items="toolbarItems" />
+            <PEditorToolbar
+              :editor="editor"
+              :items="toolbarItems"
+            />
 
-            <PSeparator orientation="vertical" class="h-7 shrink-0" />
+            <PSeparator
+              orientation="vertical"
+              class="shrink-0 h-7"
+            />
 
             <!-- Static: the studio toolbar owns color mode. -->
-            <PButton color="neutral" variant="ghost" size="sm" aria-label="Color mode">
+            <PButton
+              color="neutral"
+              variant="ghost"
+              size="sm"
+              aria-label="Color mode"
+            >
               <template #leading="{ ui }">
-                <PIcon :name="appConfig.ui.icons.dark" :class="ui.leadingIcon({ class: 'hidden dark:inline-block' })" />
-                <PIcon :name="appConfig.ui.icons.light" :class="ui.leadingIcon({ class: 'dark:hidden' })" />
+                <PIcon
+                  :name="appConfig.ui.icons.dark"
+                  :class="ui.leadingIcon({ class: 'hidden dark:inline-block' })"
+                />
+                <PIcon
+                  :name="appConfig.ui.icons.light"
+                  :class="ui.leadingIcon({ class: 'dark:hidden' })"
+                />
               </template>
             </PButton>
 
-            <PButton icon="i-simple-icons-github" color="neutral" variant="ghost" size="sm" aria-label="GitHub" />
+            <PButton
+              icon="i-simple-icons-github"
+              color="neutral"
+              variant="ghost"
+              size="sm"
+              aria-label="GitHub"
+            />
           </template>
         </PHeader>
 
@@ -307,17 +340,35 @@ function dragHandleItems(editor: Editor): DropdownMenuItem[][] {
           }"
         >
           <template #link>
-            <EditorLinkPopover :editor="editor" auto-open />
+            <EditorLinkPopover
+              :editor="editor"
+              auto-open
+            />
           </template>
         </PEditorToolbar>
 
-        <PEditorSuggestionMenu :editor="editor" :items="suggestionItems" />
+        <PEditorSuggestionMenu
+          :editor="editor"
+          :items="suggestionItems"
+        />
 
-        <PEditorMentionMenu :editor="editor" :items="mentionItems" :append-to="appendToBody" />
+        <PEditorMentionMenu
+          :editor="editor"
+          :items="mentionItems"
+          :append-to="appendToBody"
+        />
 
-        <PEditorEmojiMenu :editor="editor" :items="emojiItems" :append-to="appendToBody" />
+        <PEditorEmojiMenu
+          :editor="editor"
+          :items="emojiItems"
+          :append-to="appendToBody"
+        />
 
-        <PEditorDragHandle v-slot="{ ui, onClick }" :editor="editor" @node-change="selectedNode = $event">
+        <PEditorDragHandle
+          v-slot="{ ui, onClick }"
+          :editor="editor"
+          @node-change="selectedNode = $event"
+        >
           <PButton
             :icon="appConfig.ui.icons.plus"
             color="neutral"
@@ -355,7 +406,7 @@ function dragHandleItems(editor: Editor): DropdownMenuItem[][] {
       </PEditor>
 
       <template #fallback>
-        <div class="p-4 sm:p-14 max-w-4xl mx-auto space-y-4">
+        <div class="mx-auto p-4 max-w-4xl space-y-4 sm:p-14">
           <PSkeleton class="h-8 w-2/3" />
           <PSkeleton class="h-4 w-full" />
           <PSkeleton class="h-4 w-5/6" />

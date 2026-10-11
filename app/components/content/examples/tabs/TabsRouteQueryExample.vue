@@ -1,37 +1,42 @@
 <script setup lang="ts">
-import type { TabsItem } from 'pohon-ui'
+import type { TabsItem } from 'pohon-ui';
 
-const route = useRoute()
-const router = useRouter()
+const route = useRoute();
+const router = useRouter();
 
-const items: TabsItem[] = [
+const items: Array<TabsItem> = [
   {
     label: 'Account',
     icon: 'i-lucide-user',
-    value: 'account'
+    value: 'account',
   },
   {
     label: 'Password',
     icon: 'i-lucide-lock',
-    value: 'password'
-  }
-]
+    value: 'password',
+  },
+];
 
 const active = computed({
   get() {
-    return (route.query.tab as string) || 'account'
+    return (route.query.tab as string) || 'account';
   },
   set(tab) {
     // Hash is specified here to prevent the page from scrolling to the top
     router.push({
       path: '/docs/components/tabs',
       query: { tab },
-      hash: '#with-route-query'
-    })
-  }
-})
+      hash: '#with-route-query',
+    });
+  },
+});
 </script>
 
 <template>
-  <PTabs v-model="active" :content="false" :items="items" class="w-full" />
+  <PTabs
+    v-model="active"
+    :content="false"
+    :items="items"
+    class="w-full"
+  />
 </template>

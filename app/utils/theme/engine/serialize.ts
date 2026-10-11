@@ -4,26 +4,27 @@
  * settings (the semantic colors, the body font) even at their defaults, for
  * a pane that shows the theme rather than a diff to paste.
  */
-export interface SerializeOptions {
-  explicit?: boolean
-}
-import type { ThemeDoc } from './types'
+import type { ThemeDoc } from './types';
+import json5 from 'json5';
+import { themeIcons } from '../icons';
 import {
   DEFAULT_COLORS,
-  THEME_DEFAULTS,
   LIBRARY_TOKEN_DEFAULTS,
+  mergeUi,
   styleComponents,
   styleTokens,
-  mergeUi
-} from './types'
-import json5 from 'json5'
-import { themeIcons } from '../icons'
+  THEME_DEFAULTS,
+} from './types';
+
+export interface SerializeOptions {
+  explicit?: boolean;
+}
 
 /* ======================================================== emit (export) == */
 
 /** Generate the minimal `main.css`, the doc only holds overrides, so everything present is emitted. */
 export function generateCSS(doc: ThemeDoc, framework: string = 'nuxt', { explicit = false }: SerializeOptions = {}): string {
-  const lines: string[] = []
+  const lines: Array<string> = [];
 
   // Nuxt resolves the `--font-*` variables below through @nuxt/fonts and
   // self-hosts the faces, so an import there would load each one twice. The
@@ -33,53 +34,57 @@ export function generateCSS(doc: ThemeDoc, framework: string = 'nuxt', { explici
   // serif and mono are emitted whatever they are, so the default face still
   // needs importing when it is one of those.
   if (framework === 'vue') {
-    const sans = doc.font?.sans ?? THEME_DEFAULTS.font
+    const sans = doc.font?.sans ?? THEME_DEFAULTS.font;
     const families = [...new Set([
       explicit || sans !== THEME_DEFAULTS.font ? sans : undefined,
       doc.font?.serif,
-      doc.font?.mono
-    ].filter((name): name is string => !!name))]
+      doc.font?.mono,
+    ].filter((name): name is string => !!name))];
     for (const family of families) {
-      lines.push(`@import url("https://fonts.googleapis.com/css2?family=${encodeURIComponent(family)}:wght@300;400;500;600;700;800&display=swap");`)
+      lines.push(`@import url("https://fonts.googleapis.com/css2?family=${encodeURIComponent(family)}:wght@300;400;500;600;700;800&display=swap");`);
     }
   }
 
-  const themeLines: string[] = []
+  const themeLines: Array<string> = [];
   if (explicit || (doc.font?.sans && doc.font.sans !== THEME_DEFAULTS.font)) {
-    themeLines.push(`  --font-sans: '${doc.font?.sans ?? THEME_DEFAULTS.font}', sans-serif;`)
+    themeLines.push(`  --font-sans: '${doc.font?.sans ?? THEME_DEFAULTS.font}', sans-serif;`);
   }
-  if (doc.font?.serif) themeLines.push(`  --font-serif: '${doc.font.serif}', serif;`)
-  if (doc.font?.mono) themeLines.push(`  --font-mono: '${doc.font.mono}', monospace;`)
+  if (doc.font?.serif) {
+    themeLines.push(`  --font-serif: '${doc.font.serif}', serif;`);
+  }
+  if (doc.font?.mono) {
+    themeLines.push(`  --font-mono: '${doc.font.mono}', monospace;`);
+  }
   // Keep custom weight choices as CSS variables for the exported theme.
   for (const step of ['normal', 'medium', 'semibold', 'bold'] as const) {
-    const weight = doc.font?.weights?.[step]
+    const weight = doc.font?.weights?.[step];
     if (weight !== undefined) {
-      themeLines.push(`  --font-weight-${step}: ${weight};`)
+      themeLines.push(`  --font-weight-${step}: ${weight};`);
     }
   }
   if (themeLines.length) {
-    lines.push('', ':root {', ...themeLines, '}')
+    lines.push('', ':root {', ...themeLines, '}');
   }
 
   for (const step of ['normal', 'medium', 'semibold', 'bold'] as const) {
     if (doc.font?.weights?.[step] !== undefined) {
-      lines.push(`.font-${step} { font-weight: var(--font-weight-${step}); }`)
+      lines.push(`.font-${step} { font-weight: var(--font-weight-${step}); }`);
     }
   }
 
-  const colorLines: string[] = []
+  const colorLines: Array<string> = [];
   for (const [name, palette] of Object.entries(doc.palettes || {})) {
     for (const [shade, color] of Object.entries(palette.shades)) {
-      colorLines.push(`  --color-${name}-${shade}: ${color};`)
+      colorLines.push(`  --color-${name}-${shade}: ${color};`);
     }
   }
 
   if (colorLines.length) {
-    lines.push('', ':root {', ...colorLines, '}')
+    lines.push('', ':root {', ...colorLines, '}');
   }
 
   if (doc.fontSize !== undefined && doc.fontSize !== THEME_DEFAULTS.fontSize) {
-    lines.push('', '@layer base {', '  html {', `    font-size: ${doc.fontSize}px;`, '  }', '}')
+    lines.push('', '@layer base {', '  html {', `    font-size: ${doc.fontSize}px;`, '  }', '}');
   }
 
   // Classless text has no utility to dereference the weight variable, and
@@ -88,117 +93,129 @@ export function generateCSS(doc: ThemeDoc, framework: string = 'nuxt', { explici
   // would beat the utilities too and `<h1 class="font-mono">` could not
   // override the heading family. In base they still beat preflight (same
   // layer, later source order) while utilities keep winning.
-  const bodyLines: string[] = []
-  if (doc.font?.weights?.normal !== undefined) bodyLines.push(`  font-weight: ${doc.font.weights.normal};`)
-  if (doc.font?.uppercase) bodyLines.push('  text-transform: uppercase;')
-  if (doc.font?.italic) bodyLines.push('  font-style: italic;')
-  if (doc.font?.letterSpacing !== undefined) bodyLines.push(`  letter-spacing: ${doc.font.letterSpacing}em;`)
-  if (doc.font?.lineHeight !== undefined) bodyLines.push(`  line-height: ${doc.font.lineHeight};`)
+  const bodyLines: Array<string> = [];
+  if (doc.font?.weights?.normal !== undefined) {
+    bodyLines.push(`  font-weight: ${doc.font.weights.normal};`);
+  }
+  if (doc.font?.uppercase) {
+    bodyLines.push('  text-transform: uppercase;');
+  }
+  if (doc.font?.italic) {
+    bodyLines.push('  font-style: italic;');
+  }
+  if (doc.font?.letterSpacing !== undefined) {
+    bodyLines.push(`  letter-spacing: ${doc.font.letterSpacing}em;`);
+  }
+  if (doc.font?.lineHeight !== undefined) {
+    bodyLines.push(`  line-height: ${doc.font.lineHeight};`);
+  }
   if (bodyLines.length) {
-    lines.push('', '@layer base {', '  body {', ...bodyLines.map(line => `  ${line}`), '  }', '}')
+    lines.push('', '@layer base {', '  body {', ...bodyLines.map((line) => `  ${line}`), '  }', '}');
   }
 
   if (doc.font?.sans) {
-    lines.push('', '@layer base {', '  body { font-family: var(--font-sans); }', '}')
+    lines.push('', '@layer base {', '  body { font-family: var(--font-sans); }', '}');
   }
 
   // Headings consume the optional serif stack directly.
   if (doc.font?.serif) {
-    lines.push('', '@layer base {', '  h1, h2, h3, h4, h5, h6 {', '    font-family: var(--font-serif);', '  }', '}')
+    lines.push('', '@layer base {', '  h1, h2, h3, h4, h5, h6 {', '    font-family: var(--font-serif);', '  }', '}');
   }
 
-  const rootLines: string[] = []
+  const rootLines: Array<string> = [];
   if (doc.radius !== undefined && doc.radius !== THEME_DEFAULTS.radius) {
-    rootLines.push(`  --ui-radius: ${doc.radius}rem;`)
+    rootLines.push(`  --ui-radius: ${doc.radius}rem;`);
   }
   if (doc.blackAsPrimary) {
-    rootLines.push('  --ui-primary: black;')
+    rootLines.push('  --ui-primary: black;');
   }
 
   if (rootLines.length) {
-    lines.push('', ':root {', ...rootLines, '}')
+    lines.push('', ':root {', ...rootLines, '}');
   }
 
   // Semantic token shades behind the style choices.
-  const style = styleTokens(doc.style || {})
+  const style = styleTokens(doc.style || {});
   // Style expansion and explicit token overrides merge, explicit last so a
   // round-tripped doc collapses instead of printing every variable twice.
-  const light = { ...style.light, ...doc.tokens?.light }
+  const light = { ...style.light, ...doc.tokens?.light };
 
   const dark: Record<string, string> = {
     ...style.dark,
     ...(doc.blackAsPrimary ? { '--ui-primary': 'white' } : {}),
-    ...doc.tokens?.dark
-  }
+    ...doc.tokens?.dark,
+  };
   // `:root, .light` matches `<html class="dark">` too and lands after the
   // library's `.dark` block, so a light-only override would win in dark mode.
   // Restate the library's dark value so the `.dark` block wins it back.
   for (const [key, value] of Object.entries(light)) {
-    if (key in dark) continue
-    const fallback = (LIBRARY_TOKEN_DEFAULTS.dark as Record<string, string>)[key]
+    if (key in dark) {
+      continue;
+    }
+    const fallback = (LIBRARY_TOKEN_DEFAULTS.dark as Record<string, string>)[key];
     if (fallback && fallback !== value) {
-      dark[key] = fallback
+      dark[key] = fallback;
     }
   }
 
   if (Object.keys(light).length) {
-    lines.push('', ':root, .light {', ...Object.entries(light).map(([key, val]) => `  ${key}: ${val};`), '}')
+    lines.push('', ':root, .light {', ...Object.entries(light).map(([key, val]) => `  ${key}: ${val};`), '}');
   }
 
   if (Object.keys(dark).length) {
-    lines.push('', '.dark {', ...Object.entries(dark).map(([key, val]) => `  ${key}: ${val};`), '}')
+    lines.push('', '.dark {', ...Object.entries(dark).map(([key, val]) => `  ${key}: ${val};`), '}');
   }
 
-  return lines.join('\n')
+  return lines.join('\n');
 }
 
 /** Serialize to JS object-literal source, like the docs' code panes do. */
 function toObjectSource(value: Record<string, any>): string {
-  return json5.stringify(value, { space: 2, quote: '\'' }).replace(/,([ \t\n]+[}\]])/g, '$1')
+  return json5.stringify(value, { space: 2, quote: '\'' }).replace(/,([ \t\n]+[}\]])/g, '$1');
 }
 
 /** The `app.config.ts` / `vite.config.ts` side of the export. */
 export function generateConfig(doc: ThemeDoc, framework: string = 'nuxt', { explicit = false }: SerializeOptions = {}): string {
-  const config: Record<string, any> = {}
+  const config: Record<string, any> = {};
 
-  const colorEntries = Object.entries(doc.colors || {}).filter(([key, value]) => value !== DEFAULT_COLORS[key as keyof typeof DEFAULT_COLORS])
-  const colors = explicit ? { ...DEFAULT_COLORS, ...doc.colors } : Object.fromEntries(colorEntries)
+  const colorEntries = Object.entries(doc.colors || {}).filter(([key, value]) => value !== DEFAULT_COLORS[key as keyof typeof DEFAULT_COLORS]);
+  const colors = explicit ? { ...DEFAULT_COLORS, ...doc.colors } : Object.fromEntries(colorEntries);
   if (Object.keys(colors).length) {
-    config.ui = { colors }
+    config.ui = { colors };
   }
 
   if (doc.icons && doc.icons !== THEME_DEFAULTS.icons && Object.hasOwn(themeIcons, doc.icons)) {
-    config.ui = config.ui || {}
-    config.ui.icons = themeIcons[doc.icons as keyof typeof themeIcons]
+    config.ui = config.ui || {};
+    config.ui.icons = themeIcons[doc.icons as keyof typeof themeIcons];
   }
 
   // Explicit components merge INTO the style expansion (classes concatenate,
   // explicit last), a spread would drop one side wholesale.
-  const componentOverrides = mergeUi(doc.style ? styleComponents(doc.style) : undefined, doc.components)
+  const componentOverrides = mergeUi(doc.style ? styleComponents(doc.style) : undefined, doc.components);
   if (Object.keys(componentOverrides).length) {
-    config.ui = config.ui || {}
-    Object.assign(config.ui, componentOverrides)
+    config.ui = config.ui || {};
+    Object.assign(config.ui, componentOverrides);
   }
 
-  const configString = toObjectSource(config)
+  const configString = toObjectSource(config);
 
   if (framework === 'vue') {
     const pluginConfig = config.ui
       ? toObjectSource({ ui: config.ui })
-      : '{}'
+      : '{}';
     return [
       'import { defineConfig } from \'vite\'',
       'import vue from \'@vitejs/plugin-vue\'',
       'import ui from \'pohon-ui/vite\'',
       '',
-      `export default defineConfig({`,
+      'export default defineConfig({',
       '  plugins: [',
       '    vue(),',
-      `    ui(${pluginConfig.split('\n').map((line, i) => i === 0 ? line : '    ' + line).join('\n')})`,
+      `    ui(${pluginConfig.split('\n').map((line, i) => i === 0 ? line : `    ${line}`).join('\n')})`,
       '  ]',
-      '})'
-    ].join('\n')
+      '})',
+    ].join('\n');
   }
 
-  return `export default defineAppConfig(${configString})`
+  return `export default defineAppConfig(${configString})`;
 }

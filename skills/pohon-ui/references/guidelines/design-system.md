@@ -40,7 +40,7 @@ export default defineAppConfig({
       neutral: 'zinc'
     }
   }
-})
+});
 ```
 
 ```ts
@@ -49,7 +49,7 @@ ui({
   ui: {
     colors: { primary: 'indigo', secondary: 'violet', neutral: 'zinc' }
   }
-})
+});
 ```
 
 A value must be a palette that exists: a UnoCSS default color or one you define with `--color-<name>-<shade>` variables. `black` and `white` have no shades and cannot be used here (see [Black or white as primary](#black-or-white-as-primary)).
@@ -103,12 +103,12 @@ export default defineNuxtConfig({
       colors: ['primary', 'secondary', 'tertiary', 'info', 'success', 'warning', 'error']
     }
   }
-})
+});
 ```
 
 ```ts
 // app.config.ts
-export default defineAppConfig({ ui: { colors: { tertiary: 'indigo' } } })
+export default defineAppConfig({ ui: { colors: { tertiary: 'indigo' } } });
 ```
 
 Then use `color="tertiary"` or `text-tertiary`. Each alias in `theme.colors` generates variants for every colored component, so trim the list to what you use, and keep `error`: form validation styles depend on it.
@@ -179,6 +179,7 @@ Overrides the classes of any **slot** on one instance:
 
 ```vue
 <PButton :ui="{ leadingIcon: 'size-3', label: 'tracking-wide' }" />
+
 <PCard :ui="{ header: 'bg-background-muted', body: 'p-8' }" />
 ```
 
@@ -200,6 +201,7 @@ A function receives the slot's default classes and returns the classes to use:
 
 ```vue
 <PButton :ui="{ label: () => 'text-base font-bold' }" />
+
 <PButton :ui="{ base: (defaults) => `${defaults} !rounded-full` }" />
 ```
 
@@ -242,7 +244,7 @@ export default defineAppConfig({
       }
     }
   }
-})
+});
 ```
 
 Prose components sit under `ui.prose.<name>`; content components use their camelCase name (`ui.contentToc`).
@@ -260,7 +262,7 @@ export default defineNuxtConfig({
       unstyled: false // true strips every default class, layout included
     }
   }
-})
+});
 ```
 
 ## Design tokens
@@ -287,7 +289,7 @@ Breakpoints live in the UnoCSS theme:
 export default defineConfig({
   presets: [presetVinicunca()],
   theme: { breakpoints: { '3xl': '1920px' } }
-})
+});
 ```
 
 ### Motion

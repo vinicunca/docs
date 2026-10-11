@@ -55,7 +55,7 @@ Import all parts and piece them together.
 
 ```vue
 <script setup>
-import { Separator } from 'akar'
+import { Separator } from 'akar';
 </script>
 
 <template>

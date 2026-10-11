@@ -65,7 +65,7 @@ import {
   AlertDialogRoot,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from 'akar'
+} from 'akar';
 </script>
 
 <template>

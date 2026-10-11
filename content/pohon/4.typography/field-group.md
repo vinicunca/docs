@@ -35,7 +35,7 @@ Group fields together in a list.
 
 ::
 
-#code
+# code
 
 ```mdc
 ::field-group

@@ -57,7 +57,7 @@ Import all parts and piece them together.
 
 ```vue
 <script setup>
-import { RadioGroupIndicator, RadioGroupItem, RadioGroupRoot } from 'akar'
+import { RadioGroupIndicator, RadioGroupItem, RadioGroupRoot } from 'akar';
 </script>
 
 <template>

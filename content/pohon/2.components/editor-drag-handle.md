@@ -38,18 +38,21 @@ Use the `icon` prop to customize the drag handle icon.
 ```vue
 <template>
   <PEditor v-slot="{ editor }">
-    <PEditorDragHandle :editor="editor" icon="i-lucide-move" />
+    <PEditorDragHandle
+      :editor="editor"
+      icon="i-lucide-move"
+    />
   </PEditor>
 </template>
 ```
 
 ::framework-only
-#nuxt
+# nuxt
 :::tip{to="/pohon/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.drag` key.
 :::
 
-#vue
+# vue
 :::tip{to="/pohon/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.drag` key.
 :::
@@ -69,7 +72,7 @@ The offset is automatically calculated to center the handle for small blocks and
     <PEditorDragHandle
       :editor="editor"
       :options="{
-        placement: 'left'
+        placement: 'left',
       }"
     />
   </PEditor>

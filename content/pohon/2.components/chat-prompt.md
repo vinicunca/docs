@@ -71,18 +71,18 @@ You can also use it in your chat interface home page.
 
 ```vue [pages/index.vue] {2,4,8-15,24,26}
 <script setup lang="ts">
-import { useChat } from '@ai-sdk/vue'
+import { useChat } from '@ai-sdk/vue';
 
-const input = ref('')
+const input = ref('');
 
-const { messages, status, sendMessage } = useChat()
+const { messages, status, sendMessage } = useChat();
 
 async function onSubmit() {
-  sendMessage({ text: input.value })
+  sendMessage({ text: input.value });
 
   // Navigate to chat page after first message
   if (messages.value.length === 1) {
-    await navigateTo('/chat')
+    await navigateTo('/chat');
   }
 }
 </script>
@@ -93,7 +93,10 @@ async function onSubmit() {
       <PContainer>
         <h1>How can I help you today?</h1>
 
-        <PChatPrompt v-model="input" @submit="onSubmit">
+        <PChatPrompt
+          v-model="input"
+          @submit="onSubmit"
+        >
           <PChatPromptSubmit :status="status" />
         </PChatPrompt>
       </PContainer>

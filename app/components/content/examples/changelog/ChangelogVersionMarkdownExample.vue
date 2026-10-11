@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Markdown } from '@comark/vue'
+import { Markdown } from '@comark/vue';
 
 const content = `
 ![Pohon UI v3](https://nuxt.com/assets/blog/pohon-ui-v3.png)
@@ -47,7 +47,7 @@ To upgrade your project:
 ## 🙏 Acknowledgements
 
 This release represents thousands of hours of work from our team and the community. We'd like to thank everyone who contributed to making Pohon UI v3 a reality, especially @romhml, @sandros94, and @hywax for their tremendous work.
-`
+`;
 
 const version = {
   title: 'Introducing Pohon UI v3',
@@ -62,16 +62,20 @@ const version = {
     avatar: {
       src: 'https://github.com/benjamincanac.png',
       alt: 'Benjamin Canac',
-      loading: 'lazy' as const
+      loading: 'lazy' as const,
     },
     to: 'https://github.com/benjamincanac',
-    target: '_blank'
-  }]
-}
+    target: '_blank',
+  }],
+};
 </script>
 
 <template>
-  <PChangelogVersion v-bind="version" :ui="{ container: 'max-w-lg' }" class="w-full">
+  <PChangelogVersion
+    v-bind="version"
+    :ui="{ container: 'max-w-lg' }"
+    class="w-full"
+  >
     <template #body>
       <Markdown :value="version.content" />
     </template>

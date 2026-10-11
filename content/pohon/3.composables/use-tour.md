@@ -18,23 +18,36 @@ Each step requires a `target` that the popover anchors to. It accepts a bare id 
 
 ```vue
 <script setup lang="ts">
-const card = useTemplateRef('card')
+const card = useTemplateRef('card');
 
 const tour = useTour([
   { target: '#cta', title: 'Get started' },
   { target: () => card.value, title: 'Profile', side: 'right' },
   { target: null, title: 'All set' }
-])
+]);
 </script>
 
 <template>
-  <PButton @click="tour.start()">Start tour</PButton>
+  <PButton @click="tour.start()">
+    Start tour
+  </PButton>
 
-  <PPopover :open="tour.open.value" :reference="tour.reference.value" :dismissible="false">
+  <PPopover
+    :open="tour.open.value"
+    :reference="tour.reference.value"
+    :dismissible="false"
+  >
     <template #content>
       <!-- your content + buttons -->
-      <PButton :disabled="!tour.hasPrev.value" @click="tour.prev()">Back</PButton>
-      <PButton @click="tour.next()">{{ tour.hasNext.value ? 'Next' : 'Finish' }}</PButton>
+      <PButton
+        :disabled="!tour.hasPrev.value"
+        @click="tour.prev()"
+      >
+        Back
+      </PButton>
+      <PButton @click="tour.next()">
+        {{ tour.hasNext.value ? 'Next' : 'Finish' }}
+      </PButton>
     </template>
   </PPopover>
 </template>

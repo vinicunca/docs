@@ -1,37 +1,39 @@
 <script setup lang="ts">
-import type { UIMessage } from 'ai'
-import { isTextUIPart } from 'ai'
-import { useChat } from '@ai-sdk/vue'
-import { isPartStreaming } from 'pohon-ui/utils/ai'
-import { Markdown } from '@comark/vue'
-import shiki from '@comark/vue/plugins/shiki'
-import security from '@comark/vue/plugins/security'
+import type { UIMessage } from 'ai';
+import { useChat } from '@ai-sdk/vue';
+import { Markdown } from '@comark/vue';
+import security from '@comark/vue/plugins/security';
+import shiki from '@comark/vue/plugins/shiki';
+import { isTextUIPart } from 'ai';
+import { isPartStreaming } from 'pohon-ui/utils/ai';
 
-const plugins = [shiki(), security({ blockedTags: ['script', 'style', 'iframe', 'object', 'embed', 'form'] })]
+const plugins = [shiki(), security({ blockedTags: ['script', 'style', 'iframe', 'object', 'embed', 'form'] })];
 
-const open = ref(true)
-const input = ref('')
+const open = ref(true);
+const input = ref('');
 
-const initialMessages: UIMessage[] = [{
+const initialMessages: Array<UIMessage> = [{
   id: '1',
   role: 'user',
-  parts: [{ type: 'text', text: 'What is Pohon UI?' }]
+  parts: [{ type: 'text', text: 'What is Pohon UI?' }],
 }, {
   id: '2',
   role: 'assistant',
-  parts: [{ type: 'text', text: 'Pohon UI is a Vue component library built on Akar, UnoCSS, and UnoCSS Variants. It provides 125+ accessible components for building modern web apps.' }]
-}]
+  parts: [{ type: 'text', text: 'Pohon UI is a Vue component library built on Akar, UnoCSS, and UnoCSS Variants. It provides 125+ accessible components for building modern web apps.' }],
+}];
 
 const { messages, status, error, sendMessage, regenerate, stop } = useChat({
-  messages: initialMessages
-})
+  messages: initialMessages,
+});
 
 function onSubmit() {
-  if (!input.value.trim()) return
+  if (!input.value.trim()) {
+    return;
+  }
 
-  sendMessage({ text: input.value })
+  sendMessage({ text: input.value });
 
-  input.value = ''
+  input.value = '';
 }
 
 const ui = {
@@ -47,15 +49,15 @@ const ui = {
     code: { base: 'text-xs' },
     pre: { root: 'my-2', base: 'text-xs/5' },
     table: { root: 'my-2' },
-    hr: { base: 'my-4' }
-  }
-}
+    hr: { base: 'my-4' },
+  },
+};
 </script>
 
 <template>
   <div class="flex flex-1">
-    <div class="flex-1 flex flex-col">
-      <div class="h-(--ui-header-height) shrink-0 flex items-center justify-end px-4 border-b border-border">
+    <div class="flex flex-1 flex-col">
+      <div class="px-4 border-b border-border flex shrink-0 h-(--ui-header-height) items-center justify-end">
         <PButton
           icon="i-lucide-panel-right"
           color="neutral"
@@ -65,7 +67,7 @@ const ui = {
         />
       </div>
 
-      <div class="flex-1 p-4">
+      <div class="p-4 flex-1">
         <Placeholder class="size-full" />
       </div>
     </div>
@@ -86,7 +88,10 @@ const ui = {
           class="px-0"
         >
           <template #content="{ message }">
-            <template v-for="(part, index) in message.parts" :key="`${message.id}-${part.type}-${index}`">
+            <template
+              v-for="(part, index) in message.parts"
+              :key="`${message.id}-${part.type}-${index}`"
+            >
               <template v-if="isTextUIPart(part)">
                 <Markdown
                   v-if="message.role === 'assistant'"
@@ -95,7 +100,10 @@ const ui = {
                   :plugins="plugins"
                   class="*:first:mt-0 *:last:mb-0"
                 />
-                <p v-else-if="message.role === 'user'" class="whitespace-pre-wrap text-sm/6">
+                <p
+                  v-else-if="message.role === 'user'"
+                  class="text-sm/6 whitespace-pre-wrap"
+                >
                   {{ part.text }}
                 </p>
               </template>

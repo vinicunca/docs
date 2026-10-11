@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { icon, icons } = useTheme()
+const { icon, icons } = useTheme();
 </script>
 
 <template>

@@ -22,12 +22,11 @@ export default defineNuxtConfig({
   modules: ['pohon-ui'],
 
   css: ['~/assets/css/main.css']
-})
-
+});
 ```
 
 ```css [app/assets/css/main.css]
-```
+``
 
 ```ts [app/app.config.ts]
 export default defineAppConfig({
@@ -37,7 +36,7 @@ export default defineAppConfig({
       colors: 'slate'
     }
   }
-})
+});
 ```
 
 ```vue [app/app.vue]
@@ -159,7 +158,7 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
 
 ::
 
-#code
+# code
 
 ::code-collapse{class="[&>div>pre]:rounded-t-none [&>div]:my-0"}
 

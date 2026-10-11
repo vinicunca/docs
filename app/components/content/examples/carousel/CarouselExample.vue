@@ -5,8 +5,8 @@ const items = [
   'https://picsum.photos/640/640?random=3',
   'https://picsum.photos/640/640?random=4',
   'https://picsum.photos/640/640?random=5',
-  'https://picsum.photos/640/640?random=6'
-]
+  'https://picsum.photos/640/640?random=6',
+];
 </script>
 
 <template>
@@ -23,9 +23,13 @@ const items = [
       item: 'basis-1/3 ps-0',
       prev: 'sm:start-8',
       next: 'sm:end-8',
-      container: 'ms-0'
+      container: 'ms-0',
     }"
   >
-    <img :src="item" width="320" height="320">
+    <img
+      :src="item"
+      width="320"
+      height="320"
+    >
   </PCarousel>
 </template>

@@ -647,9 +647,9 @@ Use the [extractShortcuts](/pohon/composables/extract-shortcuts) utility to auto
 
 ```vue
 <script setup lang="ts">
-import type { DropdownMenuItem } from 'pohon-ui'
+import type { DropdownMenuItem } from 'pohon-ui';
 
-const items: DropdownMenuItem[] = [{
+const items: Array<DropdownMenuItem> = [{
   label: 'Invite users',
   icon: 'i-lucide-user-plus',
   children: [{
@@ -657,14 +657,14 @@ const items: DropdownMenuItem[] = [{
     icon: 'i-lucide-send-horizontal',
     kbds: ['meta', 'e'],
     onSelect() {
-      console.log('Invite by email clicked')
+      console.log('Invite by email clicked');
     }
   }, {
     label: 'Invite by link',
     icon: 'i-lucide-link',
     kbds: ['meta', 'i'],
     onSelect() {
-      console.log('Invite by link clicked')
+      console.log('Invite by link clicked');
     }
   }]
 }, {
@@ -672,11 +672,11 @@ const items: DropdownMenuItem[] = [{
   icon: 'i-lucide-plus',
   kbds: ['meta', 'n'],
   onSelect() {
-    console.log('New team clicked')
+    console.log('New team clicked');
   }
-}]
+}];
 
-defineShortcuts(extractShortcuts(items))
+defineShortcuts(extractShortcuts(items));
 </script>
 ```
 

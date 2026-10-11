@@ -1,25 +1,25 @@
 <script setup lang="ts">
-import type { NavigationMenuItem } from 'pohon-ui'
+import type { NavigationMenuItem } from 'pohon-ui';
 
-const appConfig = useAppConfig()
-const studioIcons = useStudioIcons()
+const appConfig = useAppConfig();
+const studioIcons = useStudioIcons();
 
 // Replicates the Pohon UI Portfolio template home page: floating pill nav,
 // avatar hero with polaroid marquee, about + work experience columns,
 // blog list, testimonial carousel, FAQ tabs and footer.
-const navItems = computed<NavigationMenuItem[]>(() => [
+const navItems = computed<Array<NavigationMenuItem>>(() => [
   { label: 'Home', icon: studioIcons.home, active: true },
   { label: 'Projects', icon: appConfig.ui.icons.folder },
   { label: 'Blog', icon: appConfig.ui.icons.file },
   { label: 'Speaking', icon: studioIcons.mic },
-  { label: 'About', icon: studioIcons.user }
-])
+  { label: 'About', icon: studioIcons.user },
+]);
 
 const socialLinks = [
   { 'icon': 'i-simple-icons-discord', 'aria-label': 'Discord' },
   { 'icon': 'i-simple-icons-x', 'aria-label': 'X' },
-  { 'icon': 'i-simple-icons-github', 'aria-label': 'GitHub' }
-]
+  { 'icon': 'i-simple-icons-github', 'aria-label': 'GitHub' },
+];
 
 // The template scrolls travel photos in a marquee; gradient polaroids stand in
 // because a tinted surface tracks the theme and a photo does not.
@@ -32,119 +32,122 @@ const heroImages = computed(() => [
   { icon: studioIcons.trees, label: 'Veluwe hike' },
   { icon: studioIcons.palette, label: 'Color studies' },
   { icon: studioIcons.ferrisWheel, label: 'Rotterdam fair' },
-  { icon: studioIcons.waves, label: 'North Sea' }
-])
+  { icon: studioIcons.waves, label: 'North Sea' },
+]);
 
 const about = {
   title: 'About Me',
   // \n renders as a real break via whitespace-pre-line on the description slot
-  description: 'I\'m an English designer and developer based in Amsterdam. I sit right between design and engineering, which means both teams assume I\'m the other team\'s problem.'
-}
+  description: 'I\'m an English designer and developer based in Amsterdam. I sit right between design and engineering, which means both teams assume I\'m the other team\'s problem.',
+};
 
 const experience = computed(() => [{
   date: '2025 - Present',
   position: 'Public Contributor for',
-  company: { name: 'Pohon UI', logo: 'i-simple-icons-nuxtdotjs' }
+  company: { name: 'Pohon UI', logo: 'i-simple-icons-nuxtdotjs' },
 }, {
   date: '2024 - Present',
   position: 'Founder of',
-  company: { name: 'Lovd', logo: 'material-symbols:bookmark-heart' }
+  company: { name: 'Lovd', logo: 'material-symbols:bookmark-heart' },
 }, {
   date: '2019 - 2021',
   position: 'Web Developer at',
-  company: { name: 'Blender', logo: 'i-simple-icons-blender' }
+  company: { name: 'Blender', logo: 'i-simple-icons-blender' },
 }, {
   date: '1995 - Present',
   position: 'Human person on',
-  company: { name: 'Earth', logo: studioIcons.globe }
-}])
+  company: { name: 'Earth', logo: studioIcons.globe },
+}]);
 
 const posts = [{
   title: 'Twelve Identical Greys: A Field Guide to Choosing Your Neutral',
   description: 'They are not identical and I will die on this hill. Slate is cool, stone is warm, zinc is for when you can\'t commit - a practical taxonomy.',
-  date: 'Apr 23, 2025'
+  date: 'Apr 23, 2025',
 }, {
   title: 'I Nudged a Border Radius by 0.125rem and Felt Something',
   description: 'A meditation on the space between rounded-md and rounded-lg, and why nobody else at the review could see the difference. They saw it. They\'re being polite.',
-  date: 'Mar 15, 2025'
+  date: 'Mar 15, 2025',
 }, {
   title: 'My Design System Now Has Its Own Design System',
   description: 'The tokens have tokens. The naming convention has a naming convention. At some point I will ship a button - a retrospective.',
-  date: 'Mar 5, 2025'
-}]
+  date: 'Mar 5, 2025',
+}];
 
 // Obviously-fake reviews: the testimonial carousel demos better with famous
 // dead Dutch masters than with invented product directors.
 const testimonials = [{
   quote: 'At last, a man who treats the grid as a moral position. I did notice his palette editor permits more than three colors, I have chosen to forgive this.',
-  author: { name: 'Piet Mondrian', description: 'Painter & grid enthusiast, 1872–1944' }
+  author: { name: 'Piet Mondrian', description: 'Painter & grid enthusiast, 1872–1944' },
 }, {
   quote: 'I asked for a simple staircase component. The popovers opened into popovers, which opened into further popovers. Honestly, I have never felt more at home.',
-  author: { name: 'M.C. Escher', description: 'Staircase guy, 1898–1972' }
+  author: { name: 'M.C. Escher', description: 'Staircase guy, 1898–1972' },
 }, {
   quote: 'I set the primary color to chrome yellow and wept at the shades it produced. Five stars. Would have commissioned him, but our schedules never aligned.',
-  author: { name: 'Vincent van Gogh', description: 'Colorist, freelance, 1853–1890' }
-}]
+  author: { name: 'Vincent van Gogh', description: 'Colorist, freelance, 1853–1890' },
+}];
 
 const faqCategories = [{
   label: 'Services & Process',
   questions: [{
     label: 'What services do you offer?',
-    content: 'Design systems, UX/UI design and front-end development - designed in Figma, built in Nuxt. I also cover the surrounding craft: branding, print, photography, video and animation.'
+    content: 'Design systems, UX/UI design and front-end development - designed in Figma, built in Nuxt. I also cover the surrounding craft: branding, print, photography, video and animation.',
   }, {
     label: 'What is your design process like?',
-    content: 'Iterative: sketch, build, squint at it in dark mode, nudge a slider by 0.125rem, declare it the final tweak. Repeat until shipped, or until someone gently takes the slider away.'
+    content: 'Iterative: sketch, build, squint at it in dark mode, nudge a slider by 0.125rem, declare it the final tweak. Repeat until shipped, or until someone gently takes the slider away.',
   }, {
     label: 'Do you work with startups?',
-    content: 'Absolutely - I run one. The daily standup is me and a wall of post-it notes, and the post-its are consistently flaking.'
-  }]
+    content: 'Absolutely - I run one. The daily standup is me and a wall of post-it notes, and the post-its are consistently flaking.',
+  }],
 }, {
   label: 'Pricing & Timelines',
   questions: [{
     label: 'How much does a project typically cost?',
-    content: 'This theme editor is free and takes payment in GitHub stars. For anything else: it depends - an answer that has never once been wrong.'
+    content: 'This theme editor is free and takes payment in GitHub stars. For anything else: it depends - an answer that has never once been wrong.',
   }, {
     label: 'What are your payment terms?',
-    content: 'Stroopwafels, baked beans, or sincere compliments about my border-radius choices. Bank transfer is also, grudgingly, accepted.'
+    content: 'Stroopwafels, baked beans, or sincere compliments about my border-radius choices. Bank transfer is also, grudgingly, accepted.',
   }, {
     label: 'How long does a typical project take?',
-    content: 'Somewhere between one focused afternoon and "I rebuilt the design system twice, it\'s better now, please don\'t ask." Discovery narrows this down considerably.'
-  }]
+    content: 'Somewhere between one focused afternoon and "I rebuilt the design system twice, it\'s better now, please don\'t ask." Discovery narrows this down considerably.',
+  }],
 }, {
   label: 'About Me',
   questions: [{
     label: 'What do you enjoy most about your work?',
-    content: 'Watching someone use a thing I built and say "oh, I found a bug". Bridging user needs and technical constraints is the puzzle that keeps me here while the users scare me away.'
+    content: 'Watching someone use a thing I built and say "oh, I found a bug". Bridging user needs and technical constraints is the puzzle that keeps me here while the users scare me away.',
   }, {
     label: 'What are your hobbies outside of work?',
-    content: 'Arts and crafts, film photography, hunting down good curry in Amsterdam and contributing to open-source UI tooling.'
-  }]
-}]
+    content: 'Arts and crafts, film photography, hunting down good curry in Amsterdam and contributing to open-source UI tooling.',
+  }],
+}];
 
 // Template's Motion blur-in on the hero, replayed as staggered CSS transitions.
-const heroAppear = ref(false)
-let appearTimeout: ReturnType<typeof setTimeout> | undefined
+const heroAppear = ref(false);
+let appearTimeout: ReturnType<typeof setTimeout> | undefined;
 onMounted(() => {
   appearTimeout = setTimeout(() => {
-    heroAppear.value = true
-  }, 0)
-})
-onUnmounted(() => clearTimeout(appearTimeout))
+    heroAppear.value = true;
+  }, 0);
+});
+onUnmounted(() => clearTimeout(appearTimeout));
 </script>
 
 <template>
   <!-- A mini portfolio: the pane is the scroll container, so the pill nav sticks to it. -->
-  <div class="h-full overflow-y-auto bg-background" style="--ui-container: var(--container-4xl)">
+  <div
+    class="bg-background h-full overflow-y-auto"
+    style="--ui-container: var(--container-4xl)"
+  >
     <!-- Template's AppHeader: a floating centered pill navigation. -->
-    <div class="sticky top-2 sm:top-4 z-10 h-0 flex items-start justify-center pointer-events-none">
+    <div class="flex h-0 pointer-events-none items-start top-2 justify-center sticky z-10 sm:top-4">
       <PNavigationMenu
         :items="navItems"
         variant="link"
         color="neutral"
-        class="pointer-events-auto bg-background-muted/80 backdrop-blur-sm rounded-full px-2 sm:px-4 border border-border-muted/50 shadow-lg shadow-neutral-950/5"
+        class="px-2 border border-border-muted/50 rounded-full bg-background-muted/80 pointer-events-auto shadow-lg shadow-neutral-950/5 backdrop-blur-sm sm:px-4"
         :ui="{
           link: 'px-2 py-1',
-          linkLeadingIcon: 'hidden'
+          linkLeadingIcon: 'hidden',
         }"
       >
         <template #list-trailing>
@@ -157,15 +160,21 @@ onUnmounted(() => clearTimeout(appearTimeout))
             aria-label="Color mode"
           >
             <template #leading="{ ui }">
-              <PIcon :name="appConfig.ui.icons.dark" :class="ui.leadingIcon({ class: 'hidden dark:inline-block' })" />
-              <PIcon :name="appConfig.ui.icons.light" :class="ui.leadingIcon({ class: 'dark:hidden' })" />
+              <PIcon
+                :name="appConfig.ui.icons.dark"
+                :class="ui.leadingIcon({ class: 'hidden dark:inline-block' })"
+              />
+              <PIcon
+                :name="appConfig.ui.icons.light"
+                :class="ui.leadingIcon({ class: 'dark:hidden' })"
+              />
             </template>
           </PButton>
         </template>
       </PNavigationMenu>
     </div>
 
-    <PContainer class="sm:border-x border-border pt-10">
+    <PContainer class="pt-10 border-border sm:border-x">
       <PPageHero
         title="Hey, I'm Mike Newbon Design Engineer"
         description="Based in Amsterdam, I craft intuitive digital products, where design meets fun-ctionality. Like this theme editor!"
@@ -174,7 +183,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
           headline: 'flex items-center justify-center',
           title: 'text-shadow-md max-w-lg mx-auto text-pretty text-3xl sm:text-4xl lg:text-5xl',
           description: 'mt-2 text-base mx-auto max-w-2xl text-pretty sm:text-base color-text-muted',
-          links: 'mt-4 flex-col justify-center items-center'
+          links: 'mt-4 flex-col justify-center items-center',
         }"
       >
         <template #headline>
@@ -182,25 +191,36 @@ onUnmounted(() => clearTimeout(appearTimeout))
             alt="Mike Newbon"
             size="3xl"
             src="https://github.com/mikenewbon.png"
-            class="size-18 ring ring-ring ring-offset-3 ring-offset-bg transition-all duration-600"
+            class="ring-offset-bg size-18 ring ring-ring ring-offset-3 transition-all duration-600"
             :class="heroAppear ? 'opacity-100 blur-none scale-100' : 'opacity-0 blur-lg scale-110'"
           />
         </template>
 
         <template #links>
-          <div class="flex items-center gap-2">
-            <PButton icon="i-simple-icons-github" label="View Github" color="neutral" to="https://github.com/mikenewbon/" target="_blank" />
-            <PButton color="success" variant="ghost" class="gap-2" label="Always online">
+          <div class="flex gap-2 items-center">
+            <PButton
+              icon="i-simple-icons-github"
+              label="View Github"
+              color="neutral"
+              to="https://github.com/mikenewbon/"
+              target="_blank"
+            />
+            <PButton
+              color="success"
+              variant="ghost"
+              class="gap-2"
+              label="Always online"
+            >
               <template #leading>
-                <span class="relative flex size-2">
-                  <span class="absolute inline-flex size-full rounded-full opacity-75 bg-success animate-ping" />
-                  <span class="relative inline-flex size-2 scale-90 rounded-full bg-success" />
+                <span class="flex size-2 relative">
+                  <span class="rounded-full bg-success opacity-75 inline-flex size-full absolute animate-ping" />
+                  <span class="rounded-full bg-success inline-flex size-2 scale-90 relative" />
                 </span>
               </template>
             </PButton>
           </div>
 
-          <div class="gap-x-4 inline-flex mt-4">
+          <div class="mt-4 inline-flex gap-x-4">
             <PButton
               v-for="(link, index) of socialLinks"
               :key="index"
@@ -209,18 +229,24 @@ onUnmounted(() => clearTimeout(appearTimeout))
           </div>
         </template>
 
-        <PMarquee pause-on-hover class="py-2 -mx-8 sm:-mx-12 lg:-mx-16 [--duration:40s]">
+        <PMarquee
+          pause-on-hover
+          class="py-2 [--duration:40s] -mx-8 lg:-mx-16 sm:-mx-12"
+        >
           <div
             v-for="(img, index) in heroImages"
             :key="index"
-            class="w-[234px] aspect-square shrink-0 rounded-lg overflow-hidden relative bg-background-elevated flex flex-col items-center justify-center gap-3"
+            class="rounded-lg bg-background-elevated flex shrink-0 flex-col gap-3 w-[234px] aspect-square items-center justify-center relative overflow-hidden"
             :class="index % 2 === 0 ? '-rotate-2' : 'rotate-2'"
           >
             <div
-              class="absolute inset-0"
+              class="inset-0 absolute"
               :style="{ background: `radial-gradient(ellipse at ${index % 2 === 0 ? '30% 20%' : '70% 80%'}, color-mix(in srgb, var(--ui-primary) ${12 + (index % 3) * 6}%, transparent), transparent 70%)` }"
             />
-            <PIcon :name="img.icon" class="size-10 color-text-dimmed relative" />
+            <PIcon
+              :name="img.icon"
+              class="color-text-dimmed size-10 relative"
+            />
             <span class="text-xs color-text-muted font-medium relative">{{ img.label }}</span>
           </div>
         </PMarquee>
@@ -234,7 +260,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
           :ui="{
             container: 'p-0!',
             title: 'text-left text-xl sm:text-xl lg:text-2xl font-medium',
-            description: 'text-left mt-3 text-sm sm:text-base lg:text-sm color-text-muted whitespace-pre-line'
+            description: 'text-left mt-3 text-sm sm:text-base lg:text-sm color-text-muted whitespace-pre-line',
           }"
         />
 
@@ -243,7 +269,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
           :ui="{
             container: 'p-0! gap-4 sm:gap-4',
             title: 'text-left text-xl sm:text-xl lg:text-2xl font-medium',
-            description: 'mt-2'
+            description: 'mt-2',
           }"
         >
           <template #description>
@@ -251,16 +277,16 @@ onUnmounted(() => clearTimeout(appearTimeout))
               <div
                 v-for="(item, index) in experience"
                 :key="index"
-                class="color-text-muted flex items-center text-nowrap gap-2"
+                class="color-text-muted flex gap-2 text-nowrap items-center"
               >
                 <p class="text-sm">
                   {{ item.date }}
                 </p>
                 <PSeparator />
-                <span class="flex items-center gap-1">
+                <span class="flex gap-1 items-center">
                   <span class="text-sm">{{ item.position }}</span>
-                  <span class="inline-flex items-center gap-1 color-text-highlighted">
-                    <span class="font-medium text-sm">{{ item.company.name }}</span>
+                  <span class="color-text-highlighted inline-flex gap-1 items-center">
+                    <span class="text-sm font-medium">{{ item.company.name }}</span>
                     <PIcon :name="item.company.logo" />
                   </span>
                 </span>
@@ -276,10 +302,13 @@ onUnmounted(() => clearTimeout(appearTimeout))
         :ui="{
           container: 'px-0 pt-0! sm:gap-6 lg:gap-8',
           title: 'text-left text-xl sm:text-xl lg:text-2xl font-medium',
-          description: 'text-left mt-2 text-sm sm:text-base lg:text-sm color-text-muted'
+          description: 'text-left mt-2 text-sm sm:text-base lg:text-sm color-text-muted',
         }"
       >
-        <PBlogPosts orientation="vertical" class="gap-4 lg:gap-y-4">
+        <PBlogPosts
+          orientation="vertical"
+          class="gap-4 lg:gap-y-4"
+        >
           <PBlogPost
             v-for="(post, index) in posts"
             :key="index"
@@ -289,15 +318,20 @@ onUnmounted(() => clearTimeout(appearTimeout))
             :ui="{
               root: 'group relative lg:items-start lg:flex ring-0 hover:ring-0',
               body: 'px-0!',
-              header: 'hidden'
+              header: 'hidden',
             }"
           >
             <template #footer>
-              <PButton size="xs" variant="link" class="px-0 gap-0" label="Read Article">
+              <PButton
+                size="xs"
+                variant="link"
+                class="px-0 gap-0"
+                label="Read Article"
+              >
                 <template #trailing>
                   <PIcon
                     :name="appConfig.ui.icons.arrowRight"
-                    class="size-4 text-primary transition-all opacity-0 group-hover:translate-x-1 group-hover:opacity-100"
+                    class="text-primary opacity-0 size-4 transition-all group-hover:opacity-100 group-hover:translate-x-1"
                   />
                 </template>
               </PButton>
@@ -321,7 +355,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
             class="rounded-none"
             :ui="{
               container: 'sm:py-12 lg:py-12 sm:gap-8',
-              description: 'text-base! text-balance before:content-[open-quote] before:text-5xl lg:before:text-7xl before:inline-block before:color-text-dimmed before:absolute before:-ml-6 lg:before:-ml-10 before:-mt-2 lg:before:-mt-4 after:content-[close-quote] after:text-5xl lg:after:text-7xl after:inline-block after:color-text-dimmed after:absolute after:mt-1 lg:after:mt-0 after:ml-1 lg:after:ml-2'
+              description: 'text-base! text-balance before:content-[open-quote] before:text-5xl lg:before:text-7xl before:inline-block before:color-text-dimmed before:absolute before:-ml-6 lg:before:-ml-10 before:-mt-2 lg:before:-mt-4 after:content-[close-quote] after:text-5xl lg:after:text-7xl after:inline-block after:color-text-dimmed after:absolute after:mt-1 lg:after:mt-0 after:ml-1 lg:after:ml-2',
             }"
           >
             <PUser
@@ -340,7 +374,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
         :ui="{
           container: 'px-0 pt-0! gap-4 sm:gap-4',
           title: 'text-left text-xl sm:text-xl lg:text-2xl font-medium',
-          description: 'text-left mt-2 text-sm sm:text-base lg:text-sm color-text-muted'
+          description: 'text-left mt-2 text-sm sm:text-base lg:text-sm color-text-muted',
         }"
       >
         <PTabs
@@ -351,7 +385,7 @@ onUnmounted(() => clearTimeout(appearTimeout))
             list: 'relative flex bg-transparent dark:bg-transparent gap-2 px-0',
             indicator: 'absolute top-[4px] duration-200 ease-out focus:outline-none rounded-lg bg-background-elevated/60',
             trigger: 'px-3 py-2 rounded-lg hover:bg-background-muted/50 data-[state=active]:color-text-highlighted data-[state=inactive]:color-text-muted',
-            label: 'truncate'
+            label: 'truncate',
           }"
         >
           <template #content="{ item }">
@@ -363,14 +397,17 @@ onUnmounted(() => clearTimeout(appearTimeout))
                 item: 'border-none',
                 trigger: 'mb-2 border-0 group px-4 transform-gpu rounded-lg bg-background-elevated/60 will-change-transform hover:bg-background-muted/50 text-base',
                 body: 'px-4',
-                trailingIcon: 'group-data-[state=closed]:rotate-0 group-data-[state=open]:rotate-135 text-base color-text-muted'
+                trailingIcon: 'group-data-[state=closed]:rotate-0 group-data-[state=open]:rotate-135 text-base color-text-muted',
               }"
             />
           </template>
         </PTabs>
       </PPageSection>
 
-      <PFooter class="z-10 bg-background" :ui="{ left: 'color-text-muted text-xs' }">
+      <PFooter
+        class="bg-background z-10"
+        :ui="{ left: 'color-text-muted text-xs' }"
+      >
         <template #left>
           Built with Pohon UI • © 2026
         </template>

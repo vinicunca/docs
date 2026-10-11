@@ -59,7 +59,7 @@ Import all parts and piece them together.
 <script setup>
 import {
   ColorSwatch,
-} from 'akar'
+} from 'akar';
 </script>
 
 <template>

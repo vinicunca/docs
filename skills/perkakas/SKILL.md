@@ -8,8 +8,8 @@ description: Write TypeScript with @vinicunca/perkakas, a typed Remeda fork of d
 `@vinicunca/perkakas` (current: 1.17.1) is a fork of [Remeda](https://remeda.org): the Remeda v2 runtime API plus a few extras. Every function is a named export from the package root. There is no default export and no subpath.
 
 ```ts
-import { filter, isNonNullish, map, pipe } from '@vinicunca/perkakas'
-import type { DeepPartial } from '@vinicunca/perkakas'
+import type { DeepPartial } from '@vinicunca/perkakas';
+import { filter, isNonNullish, map, pipe } from '@vinicunca/perkakas';
 ```
 
 The one rename from Remeda: `purry` is `curry`.
@@ -19,11 +19,11 @@ The one rename from Remeda: `purry` is `curry`.
 Most functions have two forms on the same import. Data-first passes the data as the first argument. Data-last omits the data and returns a unary function to pass to `pipe`.
 
 ```ts
-map(users, u => u.name) // data-first
-pipe(users, map(u => u.name)) // data-last
+map(users, (u) => u.name); // data-first
+pipe(users, map((u) => u.name)); // data-last
 
-sortBy(users, [prop('age'), 'desc'], prop('name'))
-pipe(users, sortBy([prop('age'), 'desc'], prop('name')))
+sortBy(users, [prop('age'), 'desc'], prop('name'));
+pipe(users, sortBy([prop('age'), 'desc'], prop('name')));
 ```
 
 Rules that trip agents:
@@ -40,7 +40,7 @@ Rules that trip agents:
 The Lazy helpers are `map`, `filter`, `flatMap`, `forEach`, `find`, `first`, `take`, `drop`, `unique`, `uniqueBy`, `uniqueWith`, `difference`, `differenceWith`, `intersection`, `intersectionWith`, `flat`, `zip`, `zipWith`, and `mapWithFeedback`. When consecutive lazy steps sit in a `pipe` in data-last form, Perkakas walks the input one item at a time. A later `take(n)` or `find` stops iteration early, so expensive callbacks run only on the items needed.
 
 ```ts
-pipe(hugeArray, map(expensive), filter(isValid), take(2)) // stops after 2 matches
+pipe(hugeArray, map(expensive), filter(isValid), take(2)); // stops after 2 matches
 ```
 
 Two consequences:
@@ -103,10 +103,10 @@ Not in Remeda: `curry`, `slugify`, `humanReadableFileSize`, `sleep`, `isBrowser`
 - `curry(impl, args)` builds the data-first/data-last pair for your own helpers. It is untyped: declare both overloads yourself and type the implementation's return as `unknown`. It dispatches on `impl.length`, so `impl` must declare every parameter.
 
 ```ts
-function double(data: number): number
-function double(): (data: number) => number
+function double(data: number): number;
+function double(): (data: number) => number;
 function double(...args: ReadonlyArray<unknown>): unknown {
-  return curry((n: number) => n * 2, args)
+  return curry((n: number) => n * 2, args);
 }
 ```
 

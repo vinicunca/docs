@@ -1,63 +1,63 @@
 <script setup lang="ts">
-import type { EditorToolbarItem } from 'pohon-ui'
+import type { EditorToolbarItem } from 'pohon-ui';
 
 const value = ref(`# Toolbar
 
-Select some text to see the formatting toolbar appear above your selection.`)
+Select some text to see the formatting toolbar appear above your selection.`);
 
-const items: EditorToolbarItem[][] = [[{
+const items: Array<Array<EditorToolbarItem>> = [[{
   icon: 'i-lucide-heading',
   tooltip: { text: 'Headings' },
   content: {
-    align: 'start'
+    align: 'start',
   },
   items: [{
     kind: 'heading',
     level: 1,
     icon: 'i-lucide-heading-1',
-    label: 'Heading 1'
+    label: 'Heading 1',
   }, {
     kind: 'heading',
     level: 2,
     icon: 'i-lucide-heading-2',
-    label: 'Heading 2'
+    label: 'Heading 2',
   }, {
     kind: 'heading',
     level: 3,
     icon: 'i-lucide-heading-3',
-    label: 'Heading 3'
+    label: 'Heading 3',
   }, {
     kind: 'heading',
     level: 4,
     icon: 'i-lucide-heading-4',
-    label: 'Heading 4'
-  }]
+    label: 'Heading 4',
+  }],
 }], [{
   kind: 'mark',
   mark: 'bold',
   icon: 'i-lucide-bold',
-  tooltip: { text: 'Bold' }
+  tooltip: { text: 'Bold' },
 }, {
   kind: 'mark',
   mark: 'italic',
   icon: 'i-lucide-italic',
-  tooltip: { text: 'Italic' }
+  tooltip: { text: 'Italic' },
 }, {
   kind: 'mark',
   mark: 'underline',
   icon: 'i-lucide-underline',
-  tooltip: { text: 'Underline' }
+  tooltip: { text: 'Underline' },
 }, {
   kind: 'mark',
   mark: 'strike',
   icon: 'i-lucide-strikethrough',
-  tooltip: { text: 'Strikethrough' }
+  tooltip: { text: 'Strikethrough' },
 }, {
   kind: 'mark',
   mark: 'code',
   icon: 'i-lucide-code',
-  tooltip: { text: 'Code' }
-}]]
+  tooltip: { text: 'Code' },
+}]];
 </script>
 
 <template>
@@ -65,8 +65,12 @@ const items: EditorToolbarItem[][] = [[{
     v-slot="{ editor }"
     v-model="value"
     content-type="markdown"
-    class="w-full min-h-21"
+    class="min-h-21 w-full"
   >
-    <PEditorToolbar :editor="editor" :items="items" layout="bubble" />
+    <PEditorToolbar
+      :editor="editor"
+      :items="items"
+      layout="bubble"
+    />
   </PEditor>
 </template>

@@ -1,6 +1,6 @@
 ---
 name: unocss-preset
-description: Configure @vinicunca/unocss-preset (`presetVinicunca`) and write its classes — wind4 + icons bundle, fluid-* clamp sizing, animate-in/animate-out enter-exit motion, opt-in scrollbar and Magic CSS. Use when editing uno.config.ts with presetVinicunca, setting up UnoCSS for Pohon UI, extending keyframes/animations, or writing fluid-*, fade/zoom/spin/slide-in/out, scrollbar-*, or Magic CSS animate-* classes.
+description: Configure @vinicunca/unocss-preset (`presetVinicunca`) and write its classes — wind4 + icons bundle, fluid-*clamp sizing, animate-in/animate-out enter-exit motion, opt-in scrollbar and Magic CSS. Use when editing uno.config.ts with presetVinicunca, setting up UnoCSS for Pohon UI, extending keyframes/animations, or writing fluid-*, fade/zoom/spin/slide-in/out, scrollbar-*, or Magic CSS animate-* classes.
 ---
 
 # UnoCSS Preset (Vinicunca)
@@ -16,12 +16,12 @@ pnpm add -D unocss @vinicunca/unocss-preset
 ```
 
 ```ts [uno.config.ts]
-import { presetVinicunca } from '@vinicunca/unocss-preset'
-import { defineConfig } from 'unocss'
+import { presetVinicunca } from '@vinicunca/unocss-preset';
+import { defineConfig } from 'unocss';
 
 export default defineConfig({
   presets: [presetVinicunca()]
-})
+});
 ```
 
 `presetVinicunca()` is the whole preset list. Configure Wind4 and Icons through its `wind4` / `icons` options rather than adding `presetWind4()` or `presetIcons()` next to it. It has no `presets`, `wind3`, or `akar` option (Akar support was removed in v2.1.0).
@@ -68,7 +68,7 @@ presetVinicunca({
     // "name duration timing-function iteration-count"
     animation: { 'accordion-down': 'accordion-down 200ms ease-out' }
   }
-})
+});
 // -> animate-accordion-down
 ```
 
@@ -116,7 +116,7 @@ Utility list, modifiers, theme tables, and options: [references/fluid.md](refere
 ## Scrollbar (opt-in)
 
 ```ts
-presetVinicunca({ scrollbar: true })
+presetVinicunca({ scrollbar: true });
 ```
 
 ```html

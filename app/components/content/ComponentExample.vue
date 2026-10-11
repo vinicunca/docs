@@ -1,193 +1,208 @@
 <script setup lang="ts">
-import type { ChipProps } from 'pohon-ui'
-import { camelCase, upperFirst } from 'scule'
-import { hash } from 'ohash'
-import { useElementSize } from '@vueuse/core'
-import { get, set } from '#ui/utils'
+import type { ChipProps } from 'pohon-ui';
+import { useElementSize } from '@vueuse/core';
+import { hash } from 'ohash';
+import { camelCase, upperFirst } from 'scule';
+import { get, set } from '#ui/utils';
 
 const props = withDefaults(defineProps<{
-  name: string
-  class?: any
+  name: string;
+  class?: any;
   /**
    * Whether to render the component in an iframe
    * @defaultValue false
    */
-  iframe?: boolean | { [key: string]: any }
+  iframe?: boolean | { [key: string]: any };
   /**
    * Whether to display the component in a mobile-sized iframe viewport
    * @defaultValue false
    */
-  iframeMobile?: boolean
-  props?: { [key: string]: any }
+  iframeMobile?: boolean;
+  props?: { [key: string]: any };
   /**
    * Whether to format the code with Prettier
    * @defaultValue false
    */
-  prettier?: boolean
+  prettier?: boolean;
   /**
    * Whether to collapse the code block
    * @defaultValue false
    */
-  collapse?: boolean
+  collapse?: boolean;
   /**
    * Whether to show the preview
    * When `false`, the filename will be shown instead
    * @defaultValue true
    */
-  preview?: boolean
+  preview?: boolean;
   /**
    * Whether to show the source code
    * @defaultValue true
    */
-  source?: boolean
+  source?: boolean;
   /**
    * A list of variable props to link to the component.
    */
   options?: Array<{
-    type?: string
-    alias?: string
-    name: string
-    label: string
-    items?: any[]
-    default: any
-    multiple?: boolean
-  }>
+    type?: string;
+    alias?: string;
+    name: string;
+    label: string;
+    items?: Array<any>;
+    default: any;
+    multiple?: boolean;
+  }>;
   /**
    * A list of line numbers to highlight in the code block
    */
-  highlights?: number[]
+  highlights?: Array<number>;
   /**
    * Whether to add overflow-hidden to wrapper
    */
-  overflowHidden?: boolean
+  overflowHidden?: boolean;
   /**
    * Whether to add background-elevated to wrapper
    */
-  elevated?: boolean
-  lang?: string
+  elevated?: boolean;
+  lang?: string;
   /**
    * Override the filename used for the code block
    */
-  filename?: string
+  filename?: string;
 }>(), {
   preview: true,
   source: true,
-  lang: 'vue'
-})
+  lang: 'vue',
+});
 
 const slots = defineSlots<{
-  options(props?: {}): any
-  code(props?: {}): any
-}>()
+  options: (props?: {}) => any;
+  code: (props?: {}) => any;
+}>();
 
-const el = ref<HTMLElement | null>(null)
-const wrapperContainer = ref<HTMLElement | null>(null)
-const componentContainer = ref<HTMLElement | null>(null)
+const el = ref<HTMLElement | null>(null);
+const wrapperContainer = ref<HTMLElement | null>(null);
+const componentContainer = ref<HTMLElement | null>(null);
 
-const { $prettier } = useNuxtApp()
-const { width } = useElementSize(el)
+const { $prettier } = useNuxtApp();
+const { width } = useElementSize(el);
 
-const camelName = camelCase(props.name)
+const camelName = camelCase(props.name);
 
-const exampleModules = import.meta.glob('~/components/content/examples/**/*.vue')
-const exampleMatch = Object.entries(exampleModules).find(([path]) => path.endsWith(`/${upperFirst(camelName)}.vue`))
-const resolvedComponent = exampleMatch ? defineAsyncComponent(exampleMatch[1] as any) : undefined
+const exampleModules = import.meta.glob('~/components/content/examples/**/*.vue');
+const exampleMatch = Object.entries(exampleModules).find(([path]) => path.endsWith(`/${upperFirst(camelName)}.vue`));
+const resolvedComponent = exampleMatch ? defineAsyncComponent(exampleMatch[1] as any) : undefined;
 
-const { data } = await useFetchComponentExample(camelName)
+const { data } = await useFetchComponentExample(camelName);
 
-const componentProps = reactive({ ...(props.props || {}) })
+const componentProps = reactive({ ...(props.props || {}) });
 
 function buildCodeBlock(source: string, cssClass?: string) {
   const codeFence = `\`\`\`${props.lang} ${props.preview ? '' : ` [${props.filename ?? data.value?.pascalName}.${props.lang}]`}${props.highlights?.length ? `{${props.highlights.join('-')}}` : ''}
 ${source}
-\`\`\``
+\`\`\``;
 
   if (props.collapse) {
     return `::code-collapse${cssClass ? `{class="${cssClass}"}` : ''}
 ${codeFence}
-::`
+::`;
   }
 
   if (cssClass) {
     return `::div{class="${cssClass}"}
 ${codeFence}
-::`
+::`;
   }
 
-  return codeFence
+  return codeFence;
 }
 
 const code = computed(() => {
-  const rawCode = data.value?.code ?? ''
-  const vueCode = addVueImports(rawCode)
+  const rawCode = data.value?.code ?? '';
+  const vueCode = addVueImports(rawCode);
 
   if (vueCode !== rawCode) {
-    return buildCodeBlock(rawCode, 'nuxt-only') + '\n\n' + buildCodeBlock(vueCode, 'vue-only')
+    return `${buildCodeBlock(rawCode, 'nuxt-only')}\n\n${buildCodeBlock(vueCode, 'vue-only')}`;
   }
 
-  return buildCodeBlock(rawCode)
-})
+  return buildCodeBlock(rawCode);
+});
 
 const { data: markdown } = useAsyncData(`component-example-${camelName}${hash({ props: componentProps, collapse: props.collapse })}`, async () => {
   if (!props.prettier) {
-    return code.value
+    return code.value;
   }
 
-  let formatted = ''
+  let formatted = '';
   try {
     formatted = await $prettier.format(code.value, {
       trailingComma: 'none',
       semi: false,
       singleQuote: true,
-      printWidth: 100
-    })
+      printWidth: 100,
+    });
   } catch {
-    formatted = code.value
+    formatted = code.value;
   }
 
-  return formatted
-}, { lazy: import.meta.client, watch: [code] })
+  return formatted;
+}, { lazy: import.meta.client, watch: [code] });
 
 const optionsValues = ref(props.options?.reduce((acc, option) => {
   if (option.name) {
-    acc[option.alias || option.name] = option.default
+    acc[option.alias || option.name] = option.default;
   }
   if (option.name.toLowerCase().endsWith('color') && option.items?.length) {
     option.items = option.items.map((item: any) => ({
       label: item,
       value: item,
-      chip: { color: item }
-    }))
+      chip: { color: item },
+    }));
   }
-  return acc
-}, {} as Record<string, any>) || {})
+  return acc;
+}, {} as Record<string, any>) || {});
 
 const playgroundUrl = computed(() => {
-  const rawCode = data.value?.code
-  if (!rawCode) return null
-  return getPlaygroundUrl(addVueImports(rawCode))
-})
+  const rawCode = data.value?.code;
+  if (!rawCode) {
+    return null;
+  }
+  return getPlaygroundUrl(addVueImports(rawCode));
+});
 
 const urlSearchParams = computed(() => {
   const params = {
     ...optionsValues.value,
-    ...componentProps
-  }
+    ...componentProps,
+  };
 
   if (!props.iframeMobile) {
-    params.width = Math.round(width.value).toString()
+    params.width = Math.round(width.value).toString();
   }
 
-  return new URLSearchParams(params).toString()
-})
+  return new URLSearchParams(params).toString();
+});
 </script>
 
 <template>
-  <div ref="el" class="my-5" :style="{ '--ui-header-height': '4rem' }">
+  <div
+    ref="el"
+    class="my-5"
+    :style="{ '--ui-header-height': '4rem' }"
+  >
     <template v-if="preview">
-      <div ref="wrapperContainer" class="relative group/component">
-        <div class="border border-border-muted relative z-1" :class="[{ 'border-b-0 rounded-t-md': props.source, 'rounded-md': !props.source, 'overflow-hidden': props.overflowHidden }]">
-          <div v-if="props.options?.length || !!slots.options" class="flex gap-4 p-4 border-b border-border-muted">
+      <div
+        ref="wrapperContainer"
+        class="group/component relative"
+      >
+        <div
+          class="border border-border-muted relative z-1"
+          :class="[{ 'border-b-0 rounded-t-md': props.source, 'rounded-md': !props.source, 'overflow-hidden': props.overflowHidden }]"
+        >
+          <div
+            v-if="props.options?.length || !!slots.options"
+            class="p-4 border-b border-border-muted flex gap-4"
+          >
             <slot name="options" />
 
             <PFormField
@@ -196,11 +211,11 @@ const urlSearchParams = computed(() => {
               :label="option.label"
               :name="option.name"
               size="sm"
-              class="inline-flex ring ring-ring-accented rounded-sm"
+              class="rounded-sm inline-flex ring ring-ring-accented"
               :ui="{
                 wrapper: 'bg-background-elevated/50 rounded-l-sm flex border-r border-border-accented',
                 label: 'color-text-muted px-2 py-1.5',
-                container: 'mt-0'
+                container: 'mt-0',
               }"
             >
               <PSelectMenu
@@ -217,7 +232,10 @@ const urlSearchParams = computed(() => {
                 :ui="{ itemLeadingChip: 'w-2' }"
                 @update:model-value="set(optionsValues, option.name, $event)"
               >
-                <template v-if="option.name.toLowerCase().endsWith('color')" #leading="{ modelValue, ui }">
+                <template
+                  v-if="option.name.toLowerCase().endsWith('color')"
+                  #leading="{ modelValue, ui }"
+                >
                   <PChip
                     inset
                     standalone
@@ -243,16 +261,28 @@ const urlSearchParams = computed(() => {
             v-if="iframe"
             v-bind="typeof iframe === 'object' ? iframe : {}"
             :src="`/examples/${name}?${urlSearchParams}`"
-            class="relative w-full"
+            class="w-full relative"
             :class="[props.class, { 'dark:bg-neutral-950/50 rounded-t-md': props.elevated }, !iframeMobile && 'lg:left-1/2 lg:-translate-x-1/2 lg:w-[1024px]']"
           />
-          <div v-else-if="resolvedComponent" ref="componentContainer" class="flex justify-center p-4" :class="[props.class, { 'dark:bg-neutral-950/50 rounded-t-md': props.elevated }]">
-            <component :is="resolvedComponent" v-bind="{ ...componentProps, ...optionsValues }" />
+          <div
+            v-else-if="resolvedComponent"
+            ref="componentContainer"
+            class="p-4 flex justify-center"
+            :class="[props.class, { 'dark:bg-neutral-950/50 rounded-t-md': props.elevated }]"
+          >
+            <component
+              :is="resolvedComponent"
+              v-bind="{ ...componentProps, ...optionsValues }"
+            />
           </div>
         </div>
 
         <ClientOnly>
-          <ComponentPlaygroundButton v-if="playgroundUrl" :to="playgroundUrl" :component="camelName" />
+          <ComponentPlaygroundButton
+            v-if="playgroundUrl"
+            :to="playgroundUrl"
+            :component="camelName"
+          />
 
           <LazyComponentThemeVisualizer
             :container="componentContainer"
@@ -263,10 +293,17 @@ const urlSearchParams = computed(() => {
     </template>
 
     <template v-if="props.source">
-      <div v-if="!!slots.code" class="[&_pre]:rounded-t-none! [&_div.my-5]:mt-0!">
+      <div
+        v-if="!!slots.code"
+        class="[&_div.my-5]:mt-0! [&_pre]:rounded-t-none!"
+      >
         <slot name="code" />
       </div>
-      <DocsMarkdown v-else-if="markdown" :value="markdown" class="[&_pre]:rounded-t-none! [&_div.my-5]:mt-0!" />
+      <DocsMarkdown
+        v-else-if="markdown"
+        :value="markdown"
+        class="[&_div.my-5]:mt-0! [&_pre]:rounded-t-none!"
+      />
     </template>
   </div>
 </template>

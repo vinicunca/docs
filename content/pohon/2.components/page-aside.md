@@ -40,9 +40,9 @@ Use the PageAside component in a layout to display the navigation:
 
 ```vue [layouts/docs.vue]{9-13}
 <script setup lang="ts">
-import type { ContentNavigationItem } from '@nuxt/content'
+import type { ContentNavigationItem } from '@nuxt/content';
 
-const navigation = inject<Ref<ContentNavigationItem[]>>('navigation')
+const navigation = inject<Ref<Array<ContentNavigationItem>>>('navigation');
 </script>
 
 <template>

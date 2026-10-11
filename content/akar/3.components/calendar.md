@@ -94,7 +94,7 @@ import {
   CalendarNext,
   CalendarPrev,
   CalendarRoot,
-} from 'akar'
+} from 'akar';
 </script>
 
 <template>

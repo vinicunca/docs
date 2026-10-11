@@ -1,22 +1,33 @@
 <script setup lang="ts">
 const usernames = [
-  'benjamincanac', 'HugoRCD', 'atinux', 'romhml', 'sandros94',
-  'J-Michalek', 'hywax', 'maximepvrt', 'malik-jouda', 'genu'
-]
+  'benjamincanac',
+  'HugoRCD',
+  'atinux',
+  'romhml',
+  'sandros94',
+  'J-Michalek',
+  'hywax',
+  'maximepvrt',
+  'malik-jouda',
+  'genu',
+];
 </script>
 
 <template>
   <div class="p-4 space-y-4">
     <div class="flex items-start justify-between">
       <div>
-        <p class="font-semibold color-text-highlighted">
+        <p class="color-text-highlighted font-semibold">
           Contributors
         </p>
         <p class="text-sm color-text-muted">
           Built by the community.
         </p>
       </div>
-      <PBadge color="neutral" variant="subtle">
+      <PBadge
+        color="neutral"
+        variant="subtle"
+      >
         312
       </PBadge>
     </div>
@@ -29,7 +40,7 @@ const usernames = [
         :alt="username"
         loading="lazy"
       />
-      <div class="flex items-center justify-center size-8 rounded-full bg-background-elevated text-xs font-medium color-text-muted">
+      <div class="text-xs color-text-muted font-medium rounded-full bg-background-elevated flex size-8 items-center justify-center">
         +300
       </div>
     </div>

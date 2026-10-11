@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import type { ListboxItem } from 'pohon-ui'
+import type { ListboxItem } from 'pohon-ui';
 
-const items: ListboxItem[] = [
+const items: Array<ListboxItem> = [
   { label: 'France', icon: 'i-lucide-map-pin', value: 'FR' },
   { label: 'Germany', icon: 'i-lucide-map-pin', value: 'DE' },
   { label: 'Italy', icon: 'i-lucide-map-pin', value: 'IT' },
   { label: 'Spain', icon: 'i-lucide-map-pin', value: 'ES' },
   { label: 'Netherlands', icon: 'i-lucide-map-pin', value: 'NL' },
-  { label: 'Poland', icon: 'i-lucide-map-pin', value: 'PL' }
-]
+  { label: 'Poland', icon: 'i-lucide-map-pin', value: 'PL' },
+];
 
-const value = ref<ListboxItem>(items[2]!)
+const value = ref<ListboxItem>(items[2]!);
 </script>
 
 <template>

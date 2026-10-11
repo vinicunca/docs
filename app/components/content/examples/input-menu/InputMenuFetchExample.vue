@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import type { AvatarProps } from 'pohon-ui'
+import type { AvatarProps } from 'pohon-ui';
 
 const { data: users, status, execute } = await useLazyFetch('https://jsonplaceholder.typicode.com/users', {
   key: 'typicode-users',
-  transform: (data: { id: number, name: string }[]) => {
-    return data?.map(user => ({
+  transform: (data: Array<{ id: number; name: string }>) => {
+    return data?.map((user) => ({
       label: user.name,
       value: String(user.id),
-      avatar: { src: `https://i.pravatar.cc/120?img=${user.id}`, loading: 'lazy' as const }
-    }))
+      avatar: { src: `https://i.pravatar.cc/120?img=${user.id}`, loading: 'lazy' as const },
+    }));
   },
-  immediate: false
-})
+  immediate: false,
+});
 
 function onOpen() {
   if (!users.value?.length) {
-    execute()
+    execute();
   }
 }
 </script>

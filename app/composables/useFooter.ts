@@ -1,10 +1,10 @@
 export function useFooter() {
-  const links = computed(() => DOCS_PACKAGES.map(pkg => ({
+  const links = computed(() => DOCS_PACKAGES.map((pkg) => ({
     label: pkg.title,
-    to: pkg.to
-  })))
+    to: pkg.to,
+  })));
 
   return {
-    links
-  }
+    links,
+  };
 }

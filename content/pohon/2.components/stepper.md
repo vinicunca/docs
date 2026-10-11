@@ -256,7 +256,7 @@ You can access the typed component instance using [`useTemplateRef`](https://vue
 
 ```vue
 <script setup lang="ts">
-const stepper = useTemplateRef('stepper')
+const stepper = useTemplateRef('stepper');
 </script>
 
 <template>

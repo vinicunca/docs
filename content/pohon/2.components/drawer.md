@@ -35,7 +35,7 @@ slots:
 
 :u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
-#content
+# content
 :placeholder{class="h-48 m-4"}
 ::
 
@@ -62,7 +62,7 @@ slots:
 
 :u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
-#body
+# body
 :placeholder{class="h-48"}
 ::
 
@@ -90,7 +90,7 @@ slots:
 
 :u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
-#body
+# body
 :placeholder{class="h-48"}
 ::
 
@@ -125,7 +125,7 @@ slots:
 
 :u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
-#body
+# body
 :placeholder{class="h-48"}
 ::
 
@@ -154,7 +154,7 @@ slots:
 
 :u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
-#body
+# body
 :placeholder{class="h-48"}
 ::
 
@@ -179,7 +179,7 @@ slots:
 
 :u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
-#content
+# content
 :placeholder{class="min-w-96 min-h-96 size-full m-4"}
 ::
 
@@ -205,7 +205,7 @@ slots:
 
 :u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
-#content
+# content
 :placeholder{class="min-w-96 min-h-96 size-full m-4"}
 ::
 
@@ -230,7 +230,7 @@ slots:
 
 :u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
-#content
+# content
 :placeholder{class="h-48 m-4"}
 ::
 
@@ -255,7 +255,7 @@ slots:
 
 :u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
-#content
+# content
 :placeholder{class="h-48 m-4"}
 ::
 
@@ -280,7 +280,7 @@ slots:
 
 :u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
-#content
+# content
 :placeholder{class="h-48 m-4"}
 ::
 
@@ -309,7 +309,7 @@ slots:
 
 :u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
-#content
+# content
 :placeholder{class="h-48 m-4"}
 ::
 
@@ -354,7 +354,7 @@ slots:
 
 :u-button{label="Open" color="neutral" variant="subtle" trailing-icon="i-lucide-chevron-up"}
 
-#content
+# content
 :placeholder{class="h-screen m-4"}
 ::
 
@@ -364,7 +364,10 @@ Make sure to add the `data-vaul-drawer-wrapper` directive to a parent element of
 ```vue [app.vue]
 <template>
   <PApp>
-    <div class="bg-background" data-vaul-drawer-wrapper>
+    <div
+      class="bg-background"
+      data-vaul-drawer-wrapper
+    >
       <NuxtLayout>
         <NuxtPage />
       </NuxtLayout>
@@ -381,7 +384,7 @@ export default defineNuxtConfig({
       'class': 'bg-background'
     }
   }
-})
+});
 ```
 
 ::

@@ -71,7 +71,7 @@ import {
   ContextMenuSubContent,
   ContextMenuSubTrigger,
   ContextMenuTrigger,
-} from 'akar'
+} from 'akar';
 </script>
 
 <template>

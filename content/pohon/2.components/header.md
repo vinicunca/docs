@@ -69,7 +69,7 @@ slots:
 class: '!px-0 !pt-0'
 ---
 
-#title
+# title
 :logo{class="h-6 w-auto"}
 ::
 
@@ -107,7 +107,7 @@ slots:
     </NuxtLink>
 ---
 
-#left
+# left
 ::nuxt-link{to="/docs"}
 :logo{class="h-6 w-auto"}
 ::
@@ -205,11 +205,11 @@ Use the Header component in your `app.vue` or in a layout:
 
 ```vue [app.vue]{28-51}
 <script setup lang="ts">
-import type { NavigationMenuItem } from 'pohon-ui'
+import type { NavigationMenuItem } from 'pohon-ui';
 
-const route = useRoute()
+const route = useRoute();
 
-const items = computed<NavigationMenuItem[]>(() => [{
+const items = computed<Array<NavigationMenuItem>>(() => [{
   label: 'Docs',
   to: '/pohon/getting-started',
   active: route.path.startsWith('/pohon/getting-started')
@@ -225,7 +225,7 @@ const items = computed<NavigationMenuItem[]>(() => [{
   label: 'Releases',
   to: 'https://github.com/vinicunca/pohon/releases',
   target: '_blank'
-}])
+}]);
 </script>
 
 <template>
@@ -251,7 +251,11 @@ const items = computed<NavigationMenuItem[]>(() => [{
       </template>
 
       <template #body>
-        <PNavigationMenu :items="items" orientation="vertical" class="-mx-2.5" />
+        <PNavigationMenu
+          :items="items"
+          orientation="vertical"
+          class="-mx-2.5"
+        />
       </template>
     </PHeader>
 

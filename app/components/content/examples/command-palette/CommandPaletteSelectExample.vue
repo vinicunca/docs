@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const toast = useToast()
+const toast = useToast();
 
 const groups = ref([
   {
@@ -13,8 +13,8 @@ const groups = ref([
         target: '_blank',
         avatar: {
           src: 'https://github.com/benjamincanac.png',
-          loading: 'lazy' as const
-        }
+          loading: 'lazy' as const,
+        },
       },
       {
         label: 'Hugo Richard',
@@ -23,8 +23,8 @@ const groups = ref([
         target: '_blank',
         avatar: {
           src: 'https://github.com/HugoRCD.png',
-          loading: 'lazy' as const
-        }
+          loading: 'lazy' as const,
+        },
       },
       {
         label: 'Sébastien Chopin',
@@ -33,8 +33,8 @@ const groups = ref([
         target: '_blank',
         avatar: {
           src: 'https://github.com/atinux.png',
-          loading: 'lazy' as const
-        }
+          loading: 'lazy' as const,
+        },
       },
       {
         label: 'Romain Hamel',
@@ -43,8 +43,8 @@ const groups = ref([
         target: '_blank',
         avatar: {
           src: 'https://github.com/romhml.png',
-          loading: 'lazy' as const
-        }
+          loading: 'lazy' as const,
+        },
       },
       {
         label: 'Sandro Circi',
@@ -53,8 +53,8 @@ const groups = ref([
         target: '_blank',
         avatar: {
           src: 'https://github.com/sandros94.png',
-          loading: 'lazy' as const
-        }
+          loading: 'lazy' as const,
+        },
       },
       {
         label: 'Jakub Michálek',
@@ -63,8 +63,8 @@ const groups = ref([
         target: '_blank',
         avatar: {
           src: 'https://github.com/J-Michalek.png',
-          loading: 'lazy' as const
-        }
+          loading: 'lazy' as const,
+        },
       },
       {
         label: 'Alex',
@@ -73,8 +73,8 @@ const groups = ref([
         target: '_blank',
         avatar: {
           src: 'https://github.com/hywax.png',
-          loading: 'lazy' as const
-        }
+          loading: 'lazy' as const,
+        },
       },
       {
         label: 'Maxime Pauvert',
@@ -83,10 +83,10 @@ const groups = ref([
         target: '_blank',
         avatar: {
           src: 'https://github.com/maximepvrt.png',
-          loading: 'lazy' as const
-        }
-      }
-    ]
+          loading: 'lazy' as const,
+        },
+      },
+    ],
   },
   {
     id: 'actions',
@@ -97,11 +97,11 @@ const groups = ref([
         icon: 'i-lucide-file-plus',
         kbds: [
           'meta',
-          'N'
+          'N',
         ],
         onSelect() {
-          toast.add({ title: 'Add new file' })
-        }
+          toast.add({ title: 'Add new file' });
+        },
       },
       {
         label: 'Add new folder',
@@ -109,11 +109,11 @@ const groups = ref([
         icon: 'i-lucide-folder-plus',
         kbds: [
           'meta',
-          'F'
+          'F',
         ],
         onSelect() {
-          toast.add({ title: 'Add new folder' })
-        }
+          toast.add({ title: 'Add new folder' });
+        },
       },
       {
         label: 'Add hashtag',
@@ -121,11 +121,11 @@ const groups = ref([
         icon: 'i-lucide-hash',
         kbds: [
           'meta',
-          'H'
+          'H',
         ],
         onSelect() {
-          toast.add({ title: 'Add hashtag' })
-        }
+          toast.add({ title: 'Add hashtag' });
+        },
       },
       {
         label: 'Add label',
@@ -133,18 +133,18 @@ const groups = ref([
         icon: 'i-lucide-tag',
         kbds: [
           'meta',
-          'L'
+          'L',
         ],
         onSelect() {
-          toast.add({ title: 'Add label' })
-        }
-      }
-    ]
-  }
-])
+          toast.add({ title: 'Add label' });
+        },
+      },
+    ],
+  },
+]);
 
 function onSelect(item: any) {
-  console.log(item)
+  console.log(item);
 }
 </script>
 

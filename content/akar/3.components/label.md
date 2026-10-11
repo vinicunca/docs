@@ -51,7 +51,7 @@ Import the component.
 
 ```vue
 <script setup>
-import { Label } from 'akar'
+import { Label } from 'akar';
 </script>
 
 <template>

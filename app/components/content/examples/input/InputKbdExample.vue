@@ -1,11 +1,11 @@
 <script setup lang="ts">
-const input = useTemplateRef('input')
+const input = useTemplateRef('input');
 
 defineShortcuts({
   '/': () => {
-    input.value?.inputRef?.focus()
-  }
-})
+    input.value?.inputRef?.focus();
+  },
+});
 </script>
 
 <template>

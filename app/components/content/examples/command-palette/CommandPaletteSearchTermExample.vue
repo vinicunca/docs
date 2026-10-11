@@ -7,8 +7,8 @@ const users = [
     target: '_blank',
     avatar: {
       src: 'https://github.com/benjamincanac.png',
-      loading: 'lazy' as const
-    }
+      loading: 'lazy' as const,
+    },
   },
   {
     label: 'Hugo Richard',
@@ -17,8 +17,8 @@ const users = [
     target: '_blank',
     avatar: {
       src: 'https://github.com/HugoRCD.png',
-      loading: 'lazy' as const
-    }
+      loading: 'lazy' as const,
+    },
   },
   {
     label: 'Sébastien Chopin',
@@ -27,8 +27,8 @@ const users = [
     target: '_blank',
     avatar: {
       src: 'https://github.com/atinux.png',
-      loading: 'lazy' as const
-    }
+      loading: 'lazy' as const,
+    },
   },
   {
     label: 'Romain Hamel',
@@ -37,8 +37,8 @@ const users = [
     target: '_blank',
     avatar: {
       src: 'https://github.com/romhml.png',
-      loading: 'lazy' as const
-    }
+      loading: 'lazy' as const,
+    },
   },
   {
     label: 'Sandro Circi',
@@ -47,8 +47,8 @@ const users = [
     target: '_blank',
     avatar: {
       src: 'https://github.com/sandros94.png',
-      loading: 'lazy' as const
-    }
+      loading: 'lazy' as const,
+    },
   },
   {
     label: 'Jakub Michálek',
@@ -57,8 +57,8 @@ const users = [
     target: '_blank',
     avatar: {
       src: 'https://github.com/J-Michalek.png',
-      loading: 'lazy' as const
-    }
+      loading: 'lazy' as const,
+    },
   },
   {
     label: 'Alex',
@@ -67,8 +67,8 @@ const users = [
     target: '_blank',
     avatar: {
       src: 'https://github.com/hywax.png',
-      loading: 'lazy' as const
-    }
+      loading: 'lazy' as const,
+    },
   },
   {
     label: 'Maxime Pauvert',
@@ -77,15 +77,15 @@ const users = [
     target: '_blank',
     avatar: {
       src: 'https://github.com/maximepvrt.png',
-      loading: 'lazy' as const
-    }
-  }
-]
+      loading: 'lazy' as const,
+    },
+  },
+];
 
-const searchTerm = ref('B')
+const searchTerm = ref('B');
 
 function onSelect() {
-  searchTerm.value = ''
+  searchTerm.value = '';
 }
 </script>
 

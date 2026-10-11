@@ -22,7 +22,7 @@ The ColorModeSwitch component extends the [Switch](/pohon/components/switch) com
 ### With custom icons
 
 ::framework-only
-#nuxt
+# nuxt
 ::div
 
 Use the `app.config.ts` to customize the icon with the `ui.icons` property:
@@ -35,19 +35,19 @@ export default defineAppConfig({
       dark: 'i-lucide-moon-star'
     }
   }
-})
+});
 ```
 
 ::
 
-#vue
+# vue
 ::div
 Use the `vite.config.ts` to customize the icon with the `ui.icons` property:
 
 ```ts [vite.config.ts]
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import ui from 'pohon-ui/vite'
+import vue from '@vitejs/plugin-vue';
+import ui from 'pohon-ui/vite';
+import { defineConfig } from 'vite';
 
 export default defineConfig({
   plugins: [
@@ -61,7 +61,7 @@ export default defineConfig({
       }
     })
   ]
-})
+});
 ```
 
 ::

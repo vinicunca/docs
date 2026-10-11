@@ -4,21 +4,21 @@
       src="https://github.com/benjamincanac.png"
       alt="Benjamin Canac"
       loading="lazy"
-      class="rounded-none squircle"
+      class="squircle rounded-none"
     />
 
     <PAvatar
       src="https://github.com/HugoRCD.png"
       alt="Hugo Richard"
       loading="lazy"
-      class="rounded-none squircle"
+      class="squircle rounded-none"
     />
 
     <PAvatar
       src="https://github.com/atinux.png"
       alt="Sébastien Chopin"
       loading="lazy"
-      class="rounded-none squircle"
+      class="squircle rounded-none"
     />
   </PAvatarGroup>
 </template>

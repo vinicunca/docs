@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import { motion } from 'motion-v'
-import type { VariantType } from 'motion-v'
+import type { VariantType } from 'motion-v';
+import { motion } from 'motion-v';
 
 const props = defineProps<{
-  open: boolean
-}>()
+  open: boolean;
+}>();
 
 const variants: { [k: string]: VariantType | ((custom: unknown) => VariantType) } = {
   normal: {
     rotate: 0,
     y: 0,
-    opacity: 1
+    opacity: 1,
   },
   close: (custom: unknown) => {
-    const c = custom as number
+    const c = custom as number;
     return {
       rotate: c === 1 ? 45 : c === 3 ? -45 : 0,
       y: c === 1 ? 6 : c === 3 ? -6 : 0,
@@ -21,13 +21,13 @@ const variants: { [k: string]: VariantType | ((custom: unknown) => VariantType) 
       transition: {
         type: 'spring',
         stiffness: 260,
-        damping: 20
-      }
-    }
-  }
-}
+        damping: 20,
+      },
+    };
+  },
+};
 
-const state = computed(() => props.open ? 'close' : 'normal')
+const state = computed(() => props.open ? 'close' : 'normal');
 </script>
 
 <template>

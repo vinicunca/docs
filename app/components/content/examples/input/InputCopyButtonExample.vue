@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { useClipboard } from '@vueuse/core'
+import { useClipboard } from '@vueuse/core';
 
-const value = ref('pnpm add pohon-ui')
+const value = ref('pnpm add pohon-ui');
 
-const { copy, copied } = useClipboard()
+const { copy, copied } = useClipboard();
 </script>
 
 <template>
@@ -11,8 +11,14 @@ const { copy, copied } = useClipboard()
     v-model="value"
     :ui="{ trailing: 'pr-0.5' }"
   >
-    <template v-if="value?.length" #trailing>
-      <PTooltip text="Copy to clipboard" :content="{ side: 'right' }">
+    <template
+      v-if="value?.length"
+      #trailing
+    >
+      <PTooltip
+        text="Copy to clipboard"
+        :content="{ side: 'right' }"
+      >
         <PButton
           :color="copied ? 'success' : 'neutral'"
           variant="link"

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const studioIcons = useStudioIcons()
+const studioIcons = useStudioIcons();
 </script>
 
 <template>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-const value = ref('')
-const domains = ['.com', '.dev', '.org']
-const domain = ref(domains[0])
+const value = ref('');
+const domains = ['.com', '.dev', '.org'];
+const domain = ref(domains[0]);
 </script>
 
 <template>
@@ -11,7 +11,7 @@ const domain = ref(domains[0])
       placeholder="nuxt"
       :ui="{
         base: 'pl-14.5',
-        leading: 'pointer-events-none'
+        leading: 'pointer-events-none',
       }"
     >
       <template #leading>
@@ -21,6 +21,9 @@ const domain = ref(domains[0])
       </template>
     </PInput>
 
-    <PSelectMenu v-model="domain" :items="domains" />
+    <PSelectMenu
+      v-model="domain"
+      :items="domains"
+    />
   </PFieldGroup>
 </template>

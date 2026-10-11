@@ -94,7 +94,7 @@ import {
   MonthPickerNext,
   MonthPickerPrev,
   MonthPickerRoot,
-} from 'akar'
+} from 'akar';
 </script>
 
 <template>

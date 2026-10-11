@@ -55,7 +55,7 @@ Import all parts and piece them together.
 
 ```vue
 <script setup>
-import { SwitchRoot, SwitchThumb } from 'akar'
+import { SwitchRoot, SwitchThumb } from 'akar';
 </script>
 
 <template>

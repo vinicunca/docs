@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const value = ref(1500)
+const value = ref(1500);
 </script>
 
 <template>
@@ -9,7 +9,7 @@ const value = ref(1500)
       style: 'currency',
       currency: 'EUR',
       currencyDisplay: 'code',
-      currencySign: 'accounting'
+      currencySign: 'accounting',
     }"
   />
 </template>

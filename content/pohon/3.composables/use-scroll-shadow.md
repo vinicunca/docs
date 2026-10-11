@@ -72,13 +72,17 @@ Use the `orientation` option for horizontally scrollable containers:
 
 ```vue
 <script setup lang="ts">
-const el = useTemplateRef('el')
+const el = useTemplateRef('el');
 
-const { style } = useScrollShadow(el, { orientation: 'horizontal' })
+const { style } = useScrollShadow(el, { orientation: 'horizontal' });
 </script>
 
 <template>
-  <div ref="el" class="overflow-x-auto whitespace-nowrap" :style="style">
+  <div
+    ref="el"
+    class="whitespace-nowrap overflow-x-auto"
+    :style="style"
+  >
     <!-- Horizontally scrollable content -->
   </div>
 </template>
@@ -90,13 +94,17 @@ Use the `size` option to change the shadow size in pixels:
 
 ```vue
 <script setup lang="ts">
-const el = useTemplateRef('el')
+const el = useTemplateRef('el');
 
-const { style } = useScrollShadow(el, { size: 48 })
+const { style } = useScrollShadow(el, { size: 48 });
 </script>
 
 <template>
-  <div ref="el" class="max-h-[300px] overflow-y-auto" :style="style">
+  <div
+    ref="el"
+    class="max-h-[300px] overflow-y-auto"
+    :style="style"
+  >
     <!-- Scrollable content -->
   </div>
 </template>

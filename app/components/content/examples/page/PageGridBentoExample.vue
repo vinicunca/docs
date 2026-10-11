@@ -6,21 +6,21 @@ const cards = ref([
     icon: 'i-lucide-swatch-book',
     to: '/docs/getting-started/theme/design-system',
     class: 'lg:col-span-2',
-    orientation: 'horizontal' as const
+    orientation: 'horizontal' as const,
   },
   {
     title: 'Fonts',
     description: 'Pohon UI integrates with Nuxt Fonts to provide plug-and-play font optimization.',
     icon: 'i-lucide-a-large-small',
     to: '/docs/getting-started/integrations/fonts',
-    variant: 'soft' as const
+    variant: 'soft' as const,
   },
   {
     title: 'Color Mode',
     description: 'Pohon UI integrates with Nuxt Color Mode to switch between light and dark.',
     icon: 'i-lucide-sun-moon',
     to: '/docs/getting-started/integrations/color-mode',
-    variant: 'soft' as const
+    variant: 'soft' as const,
   },
   {
     title: 'Icons',
@@ -29,9 +29,9 @@ const cards = ref([
     to: '/docs/getting-started/integrations/icons',
     class: 'lg:col-span-2',
     orientation: 'horizontal' as const,
-    reverse: true
-  }
-])
+    reverse: true,
+  },
+]);
 </script>
 
 <template>

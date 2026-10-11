@@ -1,26 +1,26 @@
 <script setup lang="ts">
-import { refDebounced } from '@vueuse/core'
-import type { AvatarProps } from 'pohon-ui'
+import type { AvatarProps } from 'pohon-ui';
+import { refDebounced } from '@vueuse/core';
 
-const searchTerm = ref('')
-const searchTermDebounced = refDebounced(searchTerm, 200)
+const searchTerm = ref('');
+const searchTermDebounced = refDebounced(searchTerm, 200);
 
 const { data: users, status, execute } = await useLazyFetch('https://jsonplaceholder.typicode.com/users', {
   key: 'select-menu-users-search',
   params: { q: searchTermDebounced },
-  transform: (data: { id: number, name: string }[]) => {
-    return data?.map(user => ({
+  transform: (data: Array<{ id: number; name: string }>) => {
+    return data?.map((user) => ({
       label: user.name,
       value: String(user.id),
-      avatar: { src: `https://i.pravatar.cc/120?img=${user.id}`, loading: 'lazy' as const }
-    }))
+      avatar: { src: `https://i.pravatar.cc/120?img=${user.id}`, loading: 'lazy' as const },
+    }));
   },
-  immediate: false
-})
+  immediate: false,
+});
 
 function onOpen() {
   if (!users.value?.length) {
-    execute()
+    execute();
   }
 }
 </script>
@@ -31,7 +31,7 @@ function onOpen() {
     :items="users"
     :search-input="{
       icon: 'i-lucide-search',
-      loading: status === 'pending'
+      loading: status === 'pending',
     }"
     ignore-filter
     icon="i-lucide-user"

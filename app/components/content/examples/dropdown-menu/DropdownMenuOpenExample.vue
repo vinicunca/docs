@@ -1,28 +1,39 @@
 <script setup lang="ts">
-import type { DropdownMenuItem } from 'pohon-ui'
+import type { DropdownMenuItem } from 'pohon-ui';
 
-const open = ref(false)
+const open = ref(false);
 
 defineShortcuts({
-  o: () => open.value = !open.value
-})
+  o: () => open.value = !open.value,
+});
 
-const items: DropdownMenuItem[] = [
+const items: Array<DropdownMenuItem> = [
   {
     label: 'Profile',
-    icon: 'i-lucide-user'
-  }, {
+    icon: 'i-lucide-user',
+  },
+  {
     label: 'Billing',
-    icon: 'i-lucide-credit-card'
-  }, {
+    icon: 'i-lucide-credit-card',
+  },
+  {
     label: 'Settings',
-    icon: 'i-lucide-cog'
-  }
-]
+    icon: 'i-lucide-cog',
+  },
+];
 </script>
 
 <template>
-  <PDropdownMenu v-model:open="open" :items="items" :ui="{ content: 'w-48' }">
-    <PButton label="Open" color="neutral" variant="outline" icon="i-lucide-menu" />
+  <PDropdownMenu
+    v-model:open="open"
+    :items="items"
+    :ui="{ content: 'w-48' }"
+  >
+    <PButton
+      label="Open"
+      color="neutral"
+      variant="outline"
+      icon="i-lucide-menu"
+    />
   </PDropdownMenu>
 </template>

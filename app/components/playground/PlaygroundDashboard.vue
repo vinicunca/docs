@@ -1,42 +1,50 @@
 <script setup lang="ts">
-import type { DropdownMenuItem } from 'pohon-ui'
+import type { DropdownMenuItem } from 'pohon-ui';
 
-const toast = useToast()
-const appConfig = useAppConfig()
-const studioIcons = useStudioIcons()
+const toast = useToast();
+const appConfig = useAppConfig();
+const studioIcons = useStudioIcons();
 
-const items = computed<DropdownMenuItem[][]>(() => [
+const items = computed<Array<Array<DropdownMenuItem>>>(() => [
   [
     { label: 'View report', icon: appConfig.ui.icons.eye, onSelect: () => toast.add({ title: 'View report' }) },
     { label: 'Export as CSV', icon: studioIcons.download, onSelect: () => toast.add({ title: 'Exporting…' }) },
-    { label: 'Refresh', icon: appConfig.ui.icons.reload, onSelect: () => toast.add({ title: 'Refreshed' }) }
+    { label: 'Refresh', icon: appConfig.ui.icons.reload, onSelect: () => toast.add({ title: 'Refreshed' }) },
   ],
   [
-    { label: 'Delete', icon: studioIcons.trash, color: 'error', onSelect: () => toast.add({ title: 'Deleted', color: 'error' }) }
-  ]
-])
+    { label: 'Delete', icon: studioIcons.trash, color: 'error', onSelect: () => toast.add({ title: 'Deleted', color: 'error' }) },
+  ],
+]);
 
-const progress = ref(75)
+const progress = ref(75);
 </script>
 
 <template>
-  <div class="flex flex-col gap-4 p-4">
+  <div class="p-4 flex flex-col gap-4">
     <div class="flex items-start justify-between">
       <div>
         <p class="text-sm color-text-muted">
           Total revenue
         </p>
-        <p class="text-2xl font-semibold color-text-highlighted">
+        <p class="text-2xl color-text-highlighted font-semibold">
           $48,200
         </p>
       </div>
 
-      <div class="flex items-center gap-2">
-        <PBadge color="success" variant="subtle" size="sm" :icon="studioIcons.trendingUp">
+      <div class="flex gap-2 items-center">
+        <PBadge
+          color="success"
+          variant="subtle"
+          size="sm"
+          :icon="studioIcons.trendingUp"
+        >
           +12.5%
         </PBadge>
 
-        <PDropdownMenu :items="items" :ui="{ content: 'w-44' }">
+        <PDropdownMenu
+          :items="items"
+          :ui="{ content: 'w-44' }"
+        >
           <PButton
             :icon="appConfig.ui.icons.ellipsis"
             color="neutral"
@@ -50,22 +58,37 @@ const progress = ref(75)
     </div>
 
     <div class="space-y-1.5">
-      <div class="flex items-center justify-between text-sm">
+      <div class="text-sm flex items-center justify-between">
         <span class="color-text-muted">Monthly goal</span>
-        <span class="font-medium color-text-highlighted">{{ progress }}%</span>
+        <span class="color-text-highlighted font-medium">{{ progress }}%</span>
       </div>
-      <PProgress v-model="progress" size="sm" />
+      <PProgress
+        v-model="progress"
+        size="sm"
+      />
     </div>
 
     <PSeparator />
 
     <div class="flex items-center justify-between">
       <PAvatarGroup size="sm">
-        <PAvatar src="https://github.com/benjamincanac.png" alt="Benjamin Canac" loading="lazy" />
-        <PAvatar src="https://github.com/HugoRCD.png" alt="Hugo Richard" loading="lazy" />
-        <PAvatar src="https://github.com/atinux.png" alt="Sébastien Chopin" loading="lazy" />
+        <PAvatar
+          src="https://github.com/benjamincanac.png"
+          alt="Benjamin Canac"
+          loading="lazy"
+        />
+        <PAvatar
+          src="https://github.com/HugoRCD.png"
+          alt="Hugo Richard"
+          loading="lazy"
+        />
+        <PAvatar
+          src="https://github.com/atinux.png"
+          alt="Sébastien Chopin"
+          loading="lazy"
+        />
       </PAvatarGroup>
-      <span class="text-[13px] italic color-text-muted">+8 active now</span>
+      <span class="text-[13px] color-text-muted italic">+8 active now</span>
     </div>
   </div>
 </template>

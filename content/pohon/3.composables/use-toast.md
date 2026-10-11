@@ -123,14 +123,14 @@ Adds a new toast notification.
 
 ```vue
 <script setup lang="ts">
-const toast = useToast()
+const toast = useToast();
 
 function showToast() {
   toast.add({
     title: 'Success',
     description: 'Your action was completed successfully.',
     color: 'success'
-  })
+  });
 }
 </script>
 ```
@@ -155,13 +155,13 @@ Updates an existing toast notification.
 
 ```vue
 <script setup lang="ts">
-const toast = useToast()
+const toast = useToast();
 
 function updateToast(id: string | number) {
   toast.update(id, {
     title: 'Updated Toast',
     description: 'This toast has been updated.'
-  })
+  });
 }
 </script>
 ```
@@ -182,10 +182,10 @@ Removes a toast notification.
 
 ```vue
 <script setup lang="ts">
-const toast = useToast()
+const toast = useToast();
 
 function removeToast(id: string | number) {
-  toast.remove(id)
+  toast.remove(id);
 }
 </script>
 ```
@@ -198,10 +198,10 @@ Removes all toast notifications.
 
 ```vue
 <script setup lang="ts">
-const toast = useToast()
+const toast = useToast();
 
 function clearAllToasts() {
-  toast.clear()
+  toast.clear();
 }
 </script>
 ```
@@ -214,7 +214,7 @@ A reactive array containing all current toast notifications.
 
 ```vue
 <script setup lang="ts">
-const { toasts } = useToast()
+const { toasts } = useToast();
 </script>
 
 <template>

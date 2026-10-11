@@ -1,84 +1,86 @@
-import catalog from '~/data/perkakas-functions.json'
+import catalog from '~/data/perkakas-functions.json';
 
-export type PerkakasParam = {
-  name: string
-  optional?: boolean
-  description?: string
+export interface PerkakasParam {
+  name: string;
+  optional?: boolean;
+  description?: string;
 }
 
-export type PerkakasReturns = {
-  type?: string
-  description?: string
+export interface PerkakasReturns {
+  type?: string;
+  description?: string;
 }
 
-export type PerkakasSignature = {
-  variant: 'data-first' | 'data-last' | null
-  signature?: string
-  signatureHtml?: string
-  example?: string
-  exampleHtml?: string
-  params: PerkakasParam[]
-  returns?: PerkakasReturns
+export interface PerkakasSignature {
+  variant: 'data-first' | 'data-last' | null;
+  signature?: string;
+  signatureHtml?: string;
+  example?: string;
+  exampleHtml?: string;
+  params: Array<PerkakasParam>;
+  returns?: PerkakasReturns;
 }
 
-export type PerkakasFunction = {
-  name: string
-  kind: 'function' | 'constant' | 'type'
-  category: string
-  summary?: string
+export interface PerkakasFunction {
+  name: string;
+  kind: 'function' | 'constant' | 'type';
+  category: string;
+  summary?: string;
   tags: {
-    lazy: boolean
-    strict: boolean
-    indexed: boolean
-    deprecated: boolean
-  }
-  signatures: PerkakasSignature[]
-  sourceUrl?: string
+    lazy: boolean;
+    strict: boolean;
+    indexed: boolean;
+    deprecated: boolean;
+  };
+  signatures: Array<PerkakasSignature>;
+  sourceUrl?: string;
 }
 
-export type PerkakasCatalog = {
-  version: string
-  generatedAt: string
-  functions: PerkakasFunction[]
+export interface PerkakasCatalog {
+  version: string;
+  generatedAt: string;
+  functions: Array<PerkakasFunction>;
 }
 
-export const perkakasCatalog = catalog as PerkakasCatalog
+export const perkakasCatalog = catalog as PerkakasCatalog;
 
-export const perkakasVersion = perkakasCatalog.version
+export const perkakasVersion = perkakasCatalog.version;
 
-export const perkakasFunctions = perkakasCatalog.functions
+export const perkakasFunctions = perkakasCatalog.functions;
 
-export const perkakasNames = new Set(perkakasFunctions.map(({ name }) => name))
+export const perkakasNames = new Set(perkakasFunctions.map(({ name }) => name));
 
-export type PerkakasGroup = {
-  category: string
-  functions: PerkakasFunction[]
+export interface PerkakasGroup {
+  category: string;
+  functions: Array<PerkakasFunction>;
 }
 
-export function groupPerkakasFunctions(functions: readonly PerkakasFunction[]): PerkakasGroup[] {
-  const groups = new Map<string, PerkakasFunction[]>()
+export function groupPerkakasFunctions(functions: ReadonlyArray<PerkakasFunction>): Array<PerkakasGroup> {
+  const groups = new Map<string, Array<PerkakasFunction>>();
   for (const fn of functions) {
-    const list = groups.get(fn.category)
+    const list = groups.get(fn.category);
     if (list) {
-      list.push(fn)
+      list.push(fn);
     } else {
-      groups.set(fn.category, [fn])
+      groups.set(fn.category, [fn]);
     }
   }
-  return [...groups.entries()].map(([category, grouped]) => ({ category, functions: grouped }))
+  return [...groups.entries()].map(([category, grouped]) => ({ category, functions: grouped }));
 }
 
-export const perkakasGroups = groupPerkakasFunctions(perkakasFunctions)
+export const perkakasGroups = groupPerkakasFunctions(perkakasFunctions);
 
-export const perkakasCategories = perkakasGroups.map(({ category }) => category)
+export const perkakasCategories = perkakasGroups.map(({ category }) => category);
 
 export function matchesPerkakasQuery(fn: PerkakasFunction, query: string): boolean {
-  if (!query) return true
+  if (!query) {
+    return true;
+  }
   const haystack = [
     fn.name,
     fn.category,
     fn.summary ?? '',
-    ...fn.signatures.flatMap(({ signature, example }) => [signature ?? '', example ?? ''])
-  ].join('\n').toLowerCase()
-  return haystack.includes(query)
+    ...fn.signatures.flatMap(({ signature, example }) => [signature ?? '', example ?? '']),
+  ].join('\n').toLowerCase();
+  return haystack.includes(query);
 }

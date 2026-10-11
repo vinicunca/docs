@@ -55,7 +55,7 @@ Import the components and piece the parts together.
 
 ```vue
 <script setup>
-import { CollapsibleContent, CollapsibleRoot, CollapsibleTrigger } from 'akar'
+import { CollapsibleContent, CollapsibleRoot, CollapsibleTrigger } from 'akar';
 </script>
 
 <template>

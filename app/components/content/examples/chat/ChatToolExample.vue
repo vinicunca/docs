@@ -1,23 +1,23 @@
 <script setup lang="ts">
-const streaming = ref(true)
+const streaming = ref(true);
 const result = ref(`$ pnpm run lint
 
 > eslint .
 
 ✔ No lint errors found.
-`)
+`);
 
-let timer: ReturnType<typeof setTimeout> | undefined
+let timer: ReturnType<typeof setTimeout> | undefined;
 
 onMounted(() => {
   timer = setTimeout(() => {
-    streaming.value = false
-  }, 5000)
-})
+    streaming.value = false;
+  }, 5000);
+});
 
 onUnmounted(() => {
-  clearTimeout(timer)
-})
+  clearTimeout(timer);
+});
 </script>
 
 <template>
@@ -30,6 +30,9 @@ onUnmounted(() => {
     chevron="leading"
     class="w-80"
   >
-    <pre language="bash" v-text="result" />
+    <pre
+      language="bash"
+      v-text="result"
+    />
   </PChatTool>
 </template>

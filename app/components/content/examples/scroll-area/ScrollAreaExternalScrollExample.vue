@@ -1,75 +1,83 @@
 <script setup lang="ts">
 const props = withDefaults(defineProps<{
-  orientation?: 'vertical' | 'horizontal'
+  orientation?: 'vertical' | 'horizontal';
 }>(), {
-  orientation: 'vertical'
-})
+  orientation: 'vertical',
+});
 
-type User = {
-  id: number
-  firstName: string
-  lastName: string
-  email: string
-  image: string
+interface User {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  image: string;
 }
 
 const { data: users } = useLazyFetch('https://dummyjson.com/users?limit=100&select=firstName,lastName,email,image', {
   key: 'scroll-area-external-scroll-users',
-  transform: (data?: { users: User[] }) => data?.users ?? [],
-  default: () => [] as User[],
-  server: false
-})
+  transform: (data?: { users: Array<User> }) => data?.users ?? [],
+  default: () => [] as Array<User>,
+  server: false,
+});
 
-const isHorizontal = computed(() => props.orientation === 'horizontal')
+const isHorizontal = computed(() => props.orientation === 'horizontal');
 
 // The container owns the scroll; the list virtualizes against it so the header and cards share one scrollbar.
-const container = useTemplateRef('container')
-const title = useTemplateRef('title')
-const toolbar = useTemplateRef('toolbar')
-const scrollArea = useTemplateRef('scrollArea')
+const container = useTemplateRef('container');
+const title = useTemplateRef('title');
+const toolbar = useTemplateRef('toolbar');
+const scrollArea = useTemplateRef('scrollArea');
 
 // Item size along the scroll axis: card width when horizontal, row height when vertical.
-const itemSize = computed(() => isHorizontal.value ? 256 : 88)
-const getScrollElement = () => container.value
+const itemSize = computed(() => isHorizontal.value ? 256 : 88);
+const getScrollElement = () => container.value;
 
 // `scrollMargin` is the title's offset along the scroll axis: its width when it sits left of the cards, its height when it sits above them.
-const { width: titleWidth, height: titleHeight } = useElementSize(title, undefined, { box: 'border-box' })
-const { height: toolbarHeight } = useElementSize(toolbar, undefined, { box: 'border-box' })
-const scrollMargin = computed(() => isHorizontal.value ? titleWidth.value : toolbarHeight.value + titleHeight.value)
+const { width: titleWidth, height: titleHeight } = useElementSize(title, undefined, { box: 'border-box' });
+const { height: toolbarHeight } = useElementSize(toolbar, undefined, { box: 'border-box' });
+const scrollMargin = computed(() => isHorizontal.value ? titleWidth.value : toolbarHeight.value + titleHeight.value);
 
 // Find: jump through the items whose name matches the query (like a find toolbar).
-const query = ref('')
+const query = ref('');
 const matches = computed(() => {
-  const q = query.value.trim().toLowerCase()
-  if (!q) return []
-  return users.value.reduce<number[]>((acc, user, index) => {
-    if (`${user.firstName} ${user.lastName}`.toLowerCase().includes(q)) acc.push(index)
-    return acc
-  }, [])
-})
-const cursor = ref(0)
-const currentMatch = computed(() => matches.value[cursor.value] ?? -1)
+  const q = query.value.trim().toLowerCase();
+  if (!q) {
+    return [];
+  }
+  return users.value.reduce<Array<number>>((acc, user, index) => {
+    if (`${user.firstName} ${user.lastName}`.toLowerCase().includes(q)) {
+      acc.push(index);
+    }
+    return acc;
+  }, []);
+});
+const cursor = ref(0);
+const currentMatch = computed(() => matches.value[cursor.value] ?? -1);
 
 function scrollToMatch() {
-  if (currentMatch.value < 0) return
-  scrollArea.value?.virtualizer?.scrollToIndex(currentMatch.value, { align: 'center', behavior: 'smooth' })
+  if (currentMatch.value < 0) {
+    return;
+  }
+  scrollArea.value?.virtualizer?.scrollToIndex(currentMatch.value, { align: 'center', behavior: 'smooth' });
 }
 
 function step(delta: number) {
-  if (!matches.value.length) return
-  cursor.value = (cursor.value + delta + matches.value.length) % matches.value.length
-  scrollToMatch()
+  if (!matches.value.length) {
+    return;
+  }
+  cursor.value = (cursor.value + delta + matches.value.length) % matches.value.length;
+  scrollToMatch();
 }
 
 function scrollToStart() {
-  container.value?.scrollTo(isHorizontal.value ? { left: 0, behavior: 'smooth' } : { top: 0, behavior: 'smooth' })
+  container.value?.scrollTo(isHorizontal.value ? { left: 0, behavior: 'smooth' } : { top: 0, behavior: 'smooth' });
 }
 
 // Re-runs on a new query and when `users` resolves, so the first match centers as soon as results arrive.
 watch(matches, () => {
-  cursor.value = 0
-  scrollToMatch()
-})
+  cursor.value = 0;
+  scrollToMatch();
+});
 </script>
 
 <template>
@@ -81,10 +89,10 @@ watch(matches, () => {
     <div
       v-if="!isHorizontal"
       ref="title"
-      class="flex items-end justify-between gap-4 p-6 bg-background-elevated/50"
+      class="p-6 bg-background-elevated/50 flex gap-4 items-end justify-between"
     >
       <div>
-        <h2 class="text-2xl font-bold color-text-highlighted">
+        <h2 class="text-2xl color-text-highlighted font-bold">
           Members
         </h2>
         <p class="color-text-muted">
@@ -100,7 +108,7 @@ watch(matches, () => {
 
     <div
       ref="toolbar"
-      class="z-10 flex items-center px-6 py-3 border-y border-border bg-background-elevated/50 backdrop-blur"
+      class="px-6 py-3 border-y border-border bg-background-elevated/50 flex items-center z-10 backdrop-blur"
       :class="isHorizontal ? 'sticky left-0' : 'sticky top-0'"
     >
       <PFieldGroup>
@@ -156,10 +164,10 @@ watch(matches, () => {
       <div
         v-if="isHorizontal"
         ref="title"
-        class="w-72 shrink-0 flex flex-col justify-center gap-4 p-6 bg-background-elevated/50 border-r border-border"
+        class="p-6 border-r border-border bg-background-elevated/50 flex shrink-0 flex-col gap-4 w-72 justify-center"
       >
         <div>
-          <h2 class="text-2xl font-bold color-text-highlighted">
+          <h2 class="text-2xl color-text-highlighted font-bold">
             Members
           </h2>
           <p class="color-text-muted">
@@ -197,7 +205,7 @@ watch(matches, () => {
               loading="lazy"
             />
             <div class="min-w-0">
-              <p class="font-medium color-text-highlighted truncate">
+              <p class="color-text-highlighted font-medium truncate">
                 {{ item.firstName }} {{ item.lastName }}
               </p>
               <p class="text-sm color-text-muted truncate">

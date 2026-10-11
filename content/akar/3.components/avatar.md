@@ -51,7 +51,7 @@ Import all parts and piece them together.
 
 ```vue
 <script setup>
-import { AvatarImage, AvatarRoot } from 'akar'
+import { AvatarImage, AvatarRoot } from 'akar';
 </script>
 
 <template>

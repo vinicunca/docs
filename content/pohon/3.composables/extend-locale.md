@@ -9,7 +9,7 @@ Use the auto-imported `extendLocale` utility to customize an existing locale by 
 
 ```vue
 <script setup lang="ts">
-import { en } from 'pohon-ui/locale'
+import { en } from 'pohon-ui/locale';
 
 const locale = extendLocale(en, {
   code: 'en-AU',
@@ -18,7 +18,7 @@ const locale = extendLocale(en, {
       placeholder: 'Search a component...'
     }
   }
-})
+});
 </script>
 
 <template>
@@ -34,12 +34,12 @@ This is useful when you want to:
 - Customize component labels for your application
 
 ::framework-only
-#nuxt
+# nuxt
 :::tip{to="/pohon/getting-started/integrations/i18n/nuxt"}
 Learn more about internationalization in the **i18n integration** documentation.
 :::
 
-#vue
+# vue
 :::tip{to="/pohon/getting-started/integrations/i18n/vue"}
 Learn more about internationalization in the **i18n integration** documentation.
 :::
@@ -94,7 +94,7 @@ Here's an example extending the English locale for an Australian variant:
 
 ```vue
 <script setup lang="ts">
-import { en } from 'pohon-ui/locale'
+import { en } from 'pohon-ui/locale';
 
 const locale = extendLocale(en, {
   name: 'English (Australia)',
@@ -111,7 +111,7 @@ const locale = extendLocale(en, {
       noMatch: 'No matching results'
     }
   }
-})
+});
 </script>
 
 <template>

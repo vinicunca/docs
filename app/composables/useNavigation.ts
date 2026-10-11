@@ -1,103 +1,103 @@
-import type { ContentNavigationItem } from '@nuxt/content'
-import { findPageChildren, findPageBreadcrumb } from '@nuxt/content/utils'
-import { mapContentNavigation } from 'pohon-ui/utils/content'
+import type { ContentNavigationItem } from '@nuxt/content';
+import { findPageBreadcrumb, findPageChildren } from '@nuxt/content/utils';
+import { mapContentNavigation } from 'pohon-ui/utils/content';
 
-function groupChildrenByCategory(items: ContentNavigationItem[], pkg: DocsPackage | undefined, sectionPath: string, slug: string): ContentNavigationItem[] {
+function groupChildrenByCategory(items: Array<ContentNavigationItem>, pkg: DocsPackage | undefined, sectionPath: string, slug: string): Array<ContentNavigationItem> {
   if (!items.length) {
-    return []
+    return [];
   }
 
-  const groups: ContentNavigationItem[] = []
+  const groups: Array<ContentNavigationItem> = [];
 
-  const categorized: Record<string, ContentNavigationItem[]> = {}
-  const uncategorized: ContentNavigationItem[] = []
+  const categorized: Record<string, Array<ContentNavigationItem>> = {};
+  const uncategorized: Array<ContentNavigationItem> = [];
 
   for (const item of items) {
     if (item.category) {
-      categorized[item.category as string] = categorized[item.category as string] || []
-      categorized[item.category as string]?.push(item)
+      categorized[item.category as string] = categorized[item.category as string] || [];
+      categorized[item.category as string]?.push(item);
     } else {
-      uncategorized.push(item)
+      uncategorized.push(item);
     }
   }
 
   if (uncategorized.length) {
-    const withChildren = uncategorized.filter(item => item.children?.length)
-      ?.map(item => ({ ...item, children: item.children?.map(child => ({ ...child, icon: undefined })) }))
-    const withoutChildren = uncategorized.filter(item => !item.children?.length)
+    const withChildren = uncategorized.filter((item) => item.children?.length)
+      ?.map((item) => ({ ...item, children: item.children?.map((child) => ({ ...child, icon: undefined })) }));
+    const withoutChildren = uncategorized.filter((item) => !item.children?.length);
 
     if (withoutChildren.length) {
       groups.push({
         title: 'Overview',
         path: sectionPath,
-        children: withoutChildren?.map(item => ({ ...item, icon: undefined }))
-      })
+        children: withoutChildren?.map((item) => ({ ...item, icon: undefined })),
+      });
     }
 
-    groups.push(...withChildren)
+    groups.push(...withChildren);
   }
 
-  const categories = pkg?.categories?.[slug] || []
+  const categories = pkg?.categories?.[slug] || [];
   for (const category of categories) {
     if (categorized[category.id]?.length) {
       groups.push({
         title: category.title,
         path: sectionPath,
         class: category.framework ? [`${category.framework}-only`] : undefined,
-        children: categorized[category.id]
-      })
+        children: categorized[category.id],
+      });
     }
   }
 
   // Categories a page declares but the package does not list keep their pages visible
   for (const [id, children] of Object.entries(categorized)) {
-    if (!categories.some(category => category.id === id)) {
-      groups.push({ title: id.replace(/-/g, ' ').replace(/^\w/, c => c.toUpperCase()), path: sectionPath, children })
+    if (!categories.some((category) => category.id === id)) {
+      groups.push({ title: id.replace(/-/g, ' ').replace(/^\w/, (c) => c.toUpperCase()), path: sectionPath, children });
     }
   }
 
-  return groups
+  return groups;
 }
 
 function resolveNavigationIcon(item: ContentNavigationItem, icons: ReturnType<typeof useStudioIcons>) {
-  let icon = item.icon
+  let icon = item.icon;
   if (item.path.startsWith('/pohon/components')) {
-    icon = icons.squareCode
+    icon = icons.squareCode;
   }
   if (item.path.startsWith('/pohon/composables')) {
-    icon = icons.squareFunction
+    icon = icons.squareFunction;
   }
   if (item.path.startsWith('/pohon/typography')) {
-    icon = icons.squarePilcrow
+    icon = icons.squarePilcrow;
   }
 
   return {
     ...item,
-    icon
-  }
+    icon,
+  };
 }
 
 function filterChildrenByFramework(item: ContentNavigationItem, framework: string, icons: ReturnType<typeof useStudioIcons>): ContentNavigationItem {
   const filteredChildren = item.children?.filter((child) => {
     if (child.path.startsWith('/pohon/components')) {
-      return true
+      return true;
     }
 
     if (child.framework && child.framework !== framework) {
-      return false
+      return false;
     }
-    return true
-  })?.map(child => filterChildrenByFramework(resolveNavigationIcon(child, icons), framework, icons))
+    return true;
+  })?.map((child) => filterChildrenByFramework(resolveNavigationIcon(child, icons), framework, icons));
 
   return {
     ...item,
-    children: filteredChildren?.length ? filteredChildren : undefined
-  }
+    children: filteredChildren?.length ? filteredChildren : undefined,
+  };
 }
 
-function processNavigationItem(item: ContentNavigationItem, parent?: ContentNavigationItem): ContentNavigationItem | ContentNavigationItem[] {
+function processNavigationItem(item: ContentNavigationItem, parent?: ContentNavigationItem): ContentNavigationItem | Array<ContentNavigationItem> {
   if (item.shadow) {
-    return item.children?.flatMap(child => processNavigationItem(child, item)) || []
+    return item.children?.flatMap((child) => processNavigationItem(child, item)) || [];
   }
 
   return {
@@ -105,8 +105,8 @@ function processNavigationItem(item: ContentNavigationItem, parent?: ContentNavi
     title: parent?.title ? parent.title : item.title,
     badge: parent?.badge || item.badge,
     class: [item.framework && `${item.framework}-only`].filter(Boolean),
-    children: item.children?.length ? item.children?.flatMap(child => processNavigationItem(child)) : undefined
-  }
+    children: item.children?.length ? item.children?.flatMap((child) => processNavigationItem(child)) : undefined,
+  };
 }
 
 /**
@@ -114,64 +114,64 @@ function processNavigationItem(item: ContentNavigationItem, parent?: ContentNavi
  * with its sections (`/pohon/components`) as children. A package without
  * section folders keeps its pages directly under the root item.
  */
-export const useNavigation = (navigation: Ref<ContentNavigationItem[] | undefined>) => {
-  const route = useRoute()
-  const { framework } = useFrameworks()
+export function useNavigation(navigation: Ref<Array<ContentNavigationItem> | undefined>) {
+  const route = useRoute();
+  const { framework } = useFrameworks();
   // the section glyphs follow the applied icon pack
-  const studioIcons = useStudioIcons()
+  const studioIcons = useStudioIcons();
 
-  const currentPackage = computed(() => findDocsPackage(route.path))
+  const currentPackage = computed(() => findDocsPackage(route.path));
 
   const rootNavigation = computed(() =>
-    navigation.value?.map(item => processNavigationItem(item)) as ContentNavigationItem[] | undefined
-  )
+    navigation.value?.map((item) => processNavigationItem(item)) as Array<ContentNavigationItem> | undefined,
+  );
 
   /** The current package's sections, shown as header tabs. */
   const packageSections = computed(() => {
-    const root = rootNavigation.value?.find(item => item.path === `/${currentPackage.value?.id}`)
-    return root?.children?.filter(item => item.children?.length) ?? []
-  })
+    const root = rootNavigation.value?.find((item) => item.path === `/${currentPackage.value?.id}`);
+    return root?.children?.filter((item) => item.children?.length) ?? [];
+  });
 
   /** Every package with framework-filtered pages, for the command palette. */
   const navigationByFramework = computed(() =>
-    rootNavigation.value?.map(item => filterChildrenByFramework(item, framework.value, studioIcons))
-  )
+    rootNavigation.value?.map((item) => filterChildrenByFramework(item, framework.value, studioIcons)),
+  );
 
   /** The sidebar: the current section of the current package, grouped by category. */
   const navigationByCategory = computed(() => {
-    const pkg = currentPackage.value
+    const pkg = currentPackage.value;
     if (!pkg) {
-      return []
+      return [];
     }
 
-    const slug = route.path.split('/')[2] as string
-    const sectionPath = `/${pkg.id}/${slug}`
-    const hasSections = packageSections.value.length > 0
-    const parentPath = hasSections ? sectionPath : `/${pkg.id}`
+    const slug = route.path.split('/')[2] as string;
+    const sectionPath = `/${pkg.id}/${slug}`;
+    const hasSections = packageSections.value.length > 0;
+    const parentPath = hasSections ? sectionPath : `/${pkg.id}`;
 
-    const children = findPageChildren(navigation?.value, parentPath, { indexAsChild: true })
+    const children = findPageChildren(navigation?.value, parentPath, { indexAsChild: true });
 
-    return groupChildrenByCategory(children, pkg, parentPath, slug)
-  })
+    return groupChildrenByCategory(children, pkg, parentPath, slug);
+  });
 
   function findSurround(path: string, fwk: string = framework.value): [ContentNavigationItem | undefined, ContentNavigationItem | undefined] {
     // an entry with its own `to` links out: nothing to step onto
     const flattenNavigation = navigationByCategory.value
-      ?.flatMap(item => filterChildrenByFramework(item, fwk, studioIcons)?.children)
-      .filter(item => !item?.to) ?? []
+      ?.flatMap((item) => filterChildrenByFramework(item, fwk, studioIcons)?.children)
+      .filter((item) => !item?.to) ?? [];
 
-    const index = flattenNavigation.findIndex(item => item?.path === path)
+    const index = flattenNavigation.findIndex((item) => item?.path === path);
     if (index === -1) {
-      return [undefined, undefined]
+      return [undefined, undefined];
     }
 
-    return [flattenNavigation[index - 1], flattenNavigation[index + 1]]
+    return [flattenNavigation[index - 1], flattenNavigation[index + 1]];
   }
 
   function findBreadcrumb(path: string) {
-    const breadcrumb = findPageBreadcrumb(navigation?.value, path, { indexAsChild: true })
+    const breadcrumb = findPageBreadcrumb(navigation?.value, path, { indexAsChild: true });
 
-    return mapContentNavigation(breadcrumb).map(({ icon, ...link }) => link)
+    return mapContentNavigation(breadcrumb).map(({ icon, ...link }) => link);
   }
 
   return {
@@ -181,6 +181,6 @@ export const useNavigation = (navigation: Ref<ContentNavigationItem[] | undefine
     navigationByCategory,
     navigationByFramework,
     findSurround,
-    findBreadcrumb
-  }
+    findBreadcrumb,
+  };
 }

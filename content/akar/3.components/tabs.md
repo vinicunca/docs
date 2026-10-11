@@ -55,7 +55,7 @@ Import all parts and piece them together.
 
 ```vue
 <script setup>
-import { TabsContent, TabsIndicator, TabsList, TabsRoot, TabsTrigger } from 'akar'
+import { TabsContent, TabsIndicator, TabsList, TabsRoot, TabsTrigger } from 'akar';
 </script>
 
 <template>

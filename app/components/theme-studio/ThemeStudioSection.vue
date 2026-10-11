@@ -4,55 +4,65 @@
  * slice it owns. Panels are read top to bottom, so nothing here folds;
  * whatever does fold hangs off its own toggle in the header (#actions).
  */
-import type { SectionKey } from '../../utils/theme/engine'
+import type { SectionKey } from '../../utils/theme/engine';
 
 const props = defineProps<{
   /** Omit on a static section for a bare group, no header drawn. */
-  label?: string
+  label?: string;
   /** Docs page the header's help icon links to */
-  helpTo?: string
+  helpTo?: string;
   /** The ThemeDoc slice(s) this section owns; drives its reset button. */
-  sectionKey?: SectionKey | SectionKey[]
+  sectionKey?: SectionKey | Array<SectionKey>;
   /** Reset a section the doc has no slice for, the caller says when it's dirty. */
-  resettable?: boolean
-  resetDirty?: boolean
+  resettable?: boolean;
+  resetDirty?: boolean;
   /** Tightens the header spacing and mutes the label; the fold is the caller's. */
-  collapsible?: boolean
-}>()
+  collapsible?: boolean;
+}>();
 
-const emit = defineEmits<{ reset: [] }>()
+const emit = defineEmits<{ reset: [] }>();
 
-const { sectionDirty, resetSection } = useThemeStudio()
-const studioIcons = useStudioIcons()
+const slots = defineSlots<{
+  default: () => any;
+  /** Controls beside the heading (the edit/adjust toggles). */
+  actions: () => any;
+}>();
+const { sectionDirty, resetSection } = useThemeStudio();
+const studioIcons = useStudioIcons();
 
 // A section resets either its doc slice or whatever the caller wired up.
-const showReset = computed(() => !!props.sectionKey || !!props.resettable)
+const showReset = computed(() => !!props.sectionKey || !!props.resettable);
 // sectionDirty is a computed factory, so it is called once (with a getter,
 // so it follows the prop) rather than inside a getter of our own, which
 // would allocate a fresh computed on every re-run
-const sliceDirty = sectionDirty(() => props.sectionKey)
-const dirty = computed(() => (props.sectionKey ? sliceDirty.value : !!props.resetDirty))
+const sliceDirty = sectionDirty(() => props.sectionKey);
+const dirty = computed(() => (props.sectionKey ? sliceDirty.value : !!props.resetDirty));
 
 function reset() {
-  if (props.sectionKey) resetSection(props.sectionKey)
-  else emit('reset')
+  if (props.sectionKey) {
+    resetSection(props.sectionKey);
+  } else {
+    emit('reset');
+  }
 }
 
-const slots = defineSlots<{
-  default: () => any
-  /** Controls beside the heading (the edit/adjust toggles). */
-  actions: () => any
-}>()
-
-const hasHeader = computed(() => !!(props.label || props.helpTo || showReset.value || slots.actions))
+const hasHeader = computed(() => !!(props.label || props.helpTo || showReset.value || slots.actions));
 </script>
 
 <template>
   <div :class="[{ 'flex flex-col gap-1': !collapsible }]">
-    <div v-if="hasHeader" class="flex items-center gap-0.5" :class="[collapsible ? '-my-1' : '-mt-1']">
-      <span class="flex-1 min-w-0 text-xs/7 font-semibold truncate color-text-highlighted">{{ label }}</span>
+    <div
+      v-if="hasHeader"
+      class="flex gap-0.5 items-center"
+      :class="[collapsible ? '-my-1' : '-mt-1']"
+    >
+      <span class="text-xs/7 color-text-highlighted font-semibold flex-1 min-w-0 truncate">{{ label }}</span>
 
-      <PTooltip v-if="helpTo" text="Docs" ignore-non-keyboard-focus>
+      <PTooltip
+        v-if="helpTo"
+        text="Docs"
+        ignore-non-keyboard-focus
+      >
         <PButton
           :to="helpTo"
           size="sm"
@@ -63,7 +73,11 @@ const hasHeader = computed(() => !!(props.label || props.helpTo || showReset.val
         />
       </PTooltip>
 
-      <PTooltip v-if="showReset && dirty" text="Reset to preset" ignore-non-keyboard-focus>
+      <PTooltip
+        v-if="showReset && dirty"
+        text="Reset to preset"
+        ignore-non-keyboard-focus
+      >
         <PButton
           size="sm"
           color="primary"

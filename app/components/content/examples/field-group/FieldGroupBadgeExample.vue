@@ -1,7 +1,16 @@
 <template>
   <PFieldGroup>
-    <PBadge color="neutral" variant="outline" size="lg" label="https://" />
+    <PBadge
+      color="neutral"
+      variant="outline"
+      size="lg"
+      label="https://"
+    />
 
-    <PInput color="neutral" variant="outline" placeholder="www.example.com" />
+    <PInput
+      color="neutral"
+      variant="outline"
+      placeholder="www.example.com"
+    />
   </PFieldGroup>
 </template>

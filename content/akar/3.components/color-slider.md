@@ -61,7 +61,7 @@ import {
   ColorSliderRoot,
   ColorSliderThumb,
   ColorSliderTrack,
-} from 'akar'
+} from 'akar';
 </script>
 
 <template>
@@ -104,10 +104,10 @@ import {
   ColorSliderRoot,
   ColorSliderThumb,
   ColorSliderTrack,
-} from 'akar'
-import { ref } from 'vue'
+} from 'akar';
+import { ref } from 'vue';
 
-const color = ref('#3b82f6')
+const color = ref('#3b82f6');
 </script>
 
 <template>
@@ -132,10 +132,10 @@ import {
   ColorSliderRoot,
   ColorSliderThumb,
   ColorSliderTrack,
-} from 'akar'
-import { ref } from 'vue'
+} from 'akar';
+import { ref } from 'vue';
 
-const color = ref('#3b82f6')
+const color = ref('#3b82f6');
 </script>
 
 <template>
@@ -159,10 +159,10 @@ import {
   ColorSliderRoot,
   ColorSliderThumb,
   ColorSliderTrack,
-} from 'akar'
-import { ref } from 'vue'
+} from 'akar';
+import { ref } from 'vue';
 
-const color = ref('#3b82f6')
+const color = ref('#3b82f6');
 </script>
 
 <template>
@@ -188,10 +188,10 @@ import {
   ColorSliderRoot,
   ColorSliderThumb,
   ColorSliderTrack,
-} from 'akar'
-import { ref } from 'vue'
+} from 'akar';
+import { ref } from 'vue';
 
-const color = ref('#3b82f6')
+const color = ref('#3b82f6');
 </script>
 
 <template>
@@ -236,10 +236,10 @@ import {
   ColorSliderRoot,
   ColorSliderThumb,
   ColorSliderTrack,
-} from 'akar'
-import { ref } from 'vue'
+} from 'akar';
+import { ref } from 'vue';
 
-const color = ref('#3b82f6')
+const color = ref('#3b82f6');
 </script>
 
 <template>

@@ -224,7 +224,7 @@ Use the PricingPlans component in a page to create a pricing page:
 
 ```vue [pages/pricing/index.vue]{11}
 <script setup lang="ts">
-const { data: plans } = await useAsyncData('plans', () => queryCollection('plans').all())
+const { data: plans } = await useAsyncData('plans', () => queryCollection('plans').all());
 </script>
 
 <template>

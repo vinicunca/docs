@@ -1,23 +1,23 @@
 <script setup lang="ts">
-import type { NavigationMenuItem, SidebarProps } from 'pohon-ui'
+import type { NavigationMenuItem, SidebarProps } from 'pohon-ui';
 
 // Ignore the props for the example
-defineProps<Pick<SidebarProps, 'variant' | 'collapsible' | 'side'>>()
+defineProps<Pick<SidebarProps, 'variant' | 'collapsible' | 'side'>>();
 
-const open = ref(true)
+const open = ref(true);
 
-const items: NavigationMenuItem[] = [{
+const items: Array<NavigationMenuItem> = [{
   label: 'Home',
   icon: 'i-lucide-house',
-  active: true
+  active: true,
 }, {
   label: 'Inbox',
   icon: 'i-lucide-inbox',
-  badge: '4'
+  badge: '4',
 }, {
   label: 'Contacts',
-  icon: 'i-lucide-users'
-}]
+  icon: 'i-lucide-users',
+}];
 </script>
 
 <template>
@@ -25,7 +25,7 @@ const items: NavigationMenuItem[] = [{
     class="flex flex-1"
     :class="[
       variant === 'inset' && 'bg-neutral-50 dark:bg-neutral-950',
-      side === 'right' && 'flex-row-reverse'
+      side === 'right' && 'flex-row-reverse',
     ]"
   >
     <PSidebar
@@ -34,11 +34,14 @@ const items: NavigationMenuItem[] = [{
       :collapsible="collapsible"
       :side="side"
       :ui="{
-        container: 'h-full'
+        container: 'h-full',
       }"
     >
       <template #header>
-        <PIcon name="i-logos-nuxt-icon" class="size-8" />
+        <PIcon
+          name="i-logos-nuxt-icon"
+          class="size-8"
+        />
       </template>
 
       <PNavigationMenu
@@ -48,12 +51,12 @@ const items: NavigationMenuItem[] = [{
       />
     </PSidebar>
 
-    <div class="flex-1 flex flex-col overflow-hidden lg:peer-data-[variant=floating]:my-4 peer-data-[variant=inset]:m-4 lg:peer-data-[variant=inset]:not-peer-data-[collapsible=offcanvas]:ms-0 peer-data-[variant=inset]:rounded-xl peer-data-[variant=inset]:shadow-sm peer-data-[variant=inset]:ring peer-data-[variant=inset]:ring-ring bg-background">
+    <div class="lg:peer-data-[variant=inset]:not-peer-data-[collapsible=offcanvas]:ms-0 bg-background flex flex-1 flex-col overflow-hidden peer-data-[variant=inset]:m-4 peer-data-[variant=inset]:rounded-xl peer-data-[variant=inset]:ring peer-data-[variant=inset]:ring-ring peer-data-[variant=inset]:shadow-sm lg:peer-data-[variant=floating]:my-4">
       <div
-        class="h-(--ui-header-height) shrink-0 flex items-center px-4"
+        class="px-4 flex shrink-0 h-(--ui-header-height) items-center"
         :class="[
           variant !== 'floating' && 'border-b border-border',
-          side === 'right' && 'justify-end'
+          side === 'right' && 'justify-end',
         ]"
       >
         <PButton
@@ -65,7 +68,7 @@ const items: NavigationMenuItem[] = [{
         />
       </div>
 
-      <div class="flex-1 p-4">
+      <div class="p-4 flex-1">
         <Placeholder class="size-full" />
       </div>
     </div>

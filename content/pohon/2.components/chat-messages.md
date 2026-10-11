@@ -351,12 +351,12 @@ props:
 ::
 
 ::framework-only
-#nuxt
+# nuxt
 :::tip{to="/pohon/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.arrowDown` key.
 :::
 
-#vue
+# vue
 :::tip{to="/pohon/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.arrowDown` key.
 :::
@@ -368,7 +368,10 @@ Use the `should-auto-scroll` prop to enable/disable continuous auto scroll while
 
 ```vue
 <template>
-  <PChatMessages :messages="messages" should-auto-scroll />
+  <PChatMessages
+    :messages="messages"
+    should-auto-scroll
+  />
 </template>
 ```
 
@@ -378,7 +381,10 @@ Use the `should-scroll-to-bottom` prop to enable/disable bottom auto scroll when
 
 ```vue
 <template>
-  <PChatMessages :messages="messages" :should-scroll-to-bottom="false" />
+  <PChatMessages
+    :messages="messages"
+    :should-scroll-to-bottom="false"
+  />
 </template>
 ```
 

@@ -35,7 +35,7 @@ slots:
 
 :u-button{label="Open" color="neutral" variant="subtle"}
 
-#content
+# content
 :placeholder{class="h-full m-4"}
 ::
 
@@ -62,7 +62,7 @@ slots:
 
 :u-button{label="Open" color="neutral" variant="subtle"}
 
-#body
+# body
 :placeholder{class="h-full"}
 ::
 
@@ -90,7 +90,7 @@ slots:
 
 :u-button{label="Open" color="neutral" variant="subtle"}
 
-#body
+# body
 :placeholder{class="h-full"}
 ::
 
@@ -125,7 +125,7 @@ slots:
 
 :u-button{label="Open" color="neutral" variant="subtle"}
 
-#body
+# body
 :placeholder{class="h-full"}
 ::
 
@@ -157,17 +157,17 @@ slots:
 
 :u-button{label="Open" color="neutral" variant="subtle"}
 
-#body
+# body
 :placeholder{class="h-full"}
 ::
 
 ::framework-only
-#nuxt
+# nuxt
 :::tip{to="/pohon/getting-started/integrations/icons/nuxt#theme"}
 You can customize this icon globally in your `app.config.ts` under `ui.icons.close` key.
 :::
 
-#vue
+# vue
 :::tip{to="/pohon/getting-started/integrations/icons/vue#theme"}
 You can customize this icon globally in your `vite.config.ts` under `ui.icons.close` key.
 :::
@@ -197,7 +197,7 @@ slots:
 
 :u-button{label="Open" color="neutral" variant="subtle"}
 
-#body
+# body
 :placeholder{class="h-full min-h-48"}
 ::
 
@@ -226,7 +226,7 @@ slots:
 
 :u-button{label="Open" color="neutral" variant="subtle"}
 
-#body
+# body
 :placeholder{class="min-w-96 min-h-96 size-full"}
 ::
 
@@ -254,7 +254,7 @@ slots:
 
 :u-button{label="Open" color="neutral" variant="subtle"}
 
-#body
+# body
 :placeholder{class="h-full"}
 ::
 
@@ -282,7 +282,7 @@ slots:
 
 :u-button{label="Open" color="neutral" variant="subtle"}
 
-#body
+# body
 :placeholder{class="h-full"}
 ::
 
@@ -314,7 +314,7 @@ slots:
 
 :u-button{label="Open" color="neutral" variant="subtle"}
 
-#body
+# body
 :placeholder{class="h-full"}
 ::
 
@@ -351,7 +351,7 @@ slots:
 
 :u-button{label="Open" color="neutral" variant="subtle"}
 
-#body
+# body
 :placeholder{class="h-full"}
 ::
 
@@ -379,7 +379,7 @@ slots:
 
 :u-button{label="Open" color="neutral" variant="subtle"}
 
-#body
+# body
 :placeholder{class="h-full"}
 ::
 

@@ -1,24 +1,24 @@
 <script setup lang="ts">
-import { upperFirst } from 'scule'
-import type { DropdownMenuItem } from 'pohon-ui'
-import { mapEditorItems } from 'pohon-ui/utils/editor'
-import type { Editor, JSONContent } from '@tiptap/vue-3'
+import type { Editor, JSONContent } from '@tiptap/vue-3';
+import type { DropdownMenuItem } from 'pohon-ui';
+import { mapEditorItems } from 'pohon-ui/utils/editor';
+import { upperFirst } from 'scule';
 
 const value = ref(`Hover over the left side to see both drag handle and menu button.
 
-Click the menu to see block actions. Try duplicating or deleting a block.`)
+Click the menu to see block actions. Try duplicating or deleting a block.`);
 
-const selectedNode = ref<{ node: JSONContent, pos: number }>()
+const selectedNode = ref<{ node: JSONContent; pos: number }>();
 
-const items = (editor: Editor): DropdownMenuItem[][] => {
+function items(editor: Editor): Array<Array<DropdownMenuItem>> {
   if (!selectedNode.value?.node?.type) {
-    return []
+    return [];
   }
 
   return mapEditorItems(editor, [[
     {
       type: 'label',
-      label: upperFirst(selectedNode.value.node.type)
+      label: upperFirst(selectedNode.value.node.type),
     },
     {
       label: 'Turn into',
@@ -32,56 +32,58 @@ const items = (editor: Editor): DropdownMenuItem[][] => {
         { kind: 'bulletList', label: 'Bullet List', icon: 'i-lucide-list' },
         { kind: 'orderedList', label: 'Ordered List', icon: 'i-lucide-list-ordered' },
         { kind: 'blockquote', label: 'Blockquote', icon: 'i-lucide-text-quote' },
-        { kind: 'codeBlock', label: 'Code Block', icon: 'i-lucide-square-code' }
-      ]
+        { kind: 'codeBlock', label: 'Code Block', icon: 'i-lucide-square-code' },
+      ],
     },
     {
       kind: 'clearFormatting',
       pos: selectedNode.value?.pos,
       label: 'Reset formatting',
-      icon: 'i-lucide-rotate-ccw'
-    }
+      icon: 'i-lucide-rotate-ccw',
+    },
   ], [
     {
       kind: 'duplicate',
       pos: selectedNode.value?.pos,
       label: 'Duplicate',
-      icon: 'i-lucide-copy'
+      icon: 'i-lucide-copy',
     },
     {
       label: 'Copy to clipboard',
       icon: 'i-lucide-clipboard',
       onSelect: async () => {
-        if (!selectedNode.value) return
-
-        const pos = selectedNode.value.pos
-        const node = editor.state.doc.nodeAt(pos)
-        if (node) {
-          await navigator.clipboard.writeText(node.textContent)
+        if (!selectedNode.value) {
+          return;
         }
-      }
-    }
+
+        const pos = selectedNode.value.pos;
+        const node = editor.state.doc.nodeAt(pos);
+        if (node) {
+          await navigator.clipboard.writeText(node.textContent);
+        }
+      },
+    },
   ], [
     {
       kind: 'moveUp',
       pos: selectedNode.value?.pos,
       label: 'Move up',
-      icon: 'i-lucide-arrow-up'
+      icon: 'i-lucide-arrow-up',
     },
     {
       kind: 'moveDown',
       pos: selectedNode.value?.pos,
       label: 'Move down',
-      icon: 'i-lucide-arrow-down'
-    }
+      icon: 'i-lucide-arrow-down',
+    },
   ], [
     {
       kind: 'delete',
       pos: selectedNode.value?.pos,
       label: 'Delete',
-      icon: 'i-lucide-trash'
-    }
-  ]]) as DropdownMenuItem[][]
+      icon: 'i-lucide-trash',
+    },
+  ]]) as Array<Array<DropdownMenuItem>>;
 }
 </script>
 
@@ -90,9 +92,13 @@ const items = (editor: Editor): DropdownMenuItem[][] => {
     v-slot="{ editor }"
     v-model="value"
     content-type="markdown"
-    class="w-full min-h-19"
+    class="min-h-19 w-full"
   >
-    <PEditorDragHandle v-slot="{ ui }" :editor="editor" @node-change="selectedNode = $event">
+    <PEditorDragHandle
+      v-slot="{ ui }"
+      :editor="editor"
+      @node-change="selectedNode = $event"
+    >
       <PDropdownMenu
         v-slot="{ open }"
         :modal="false"

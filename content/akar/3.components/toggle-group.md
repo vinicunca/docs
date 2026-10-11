@@ -57,7 +57,7 @@ Import the component.
 
 ```vue
 <script setup>
-import { ToggleGroupItem, ToggleGroupRoot } from 'akar'
+import { ToggleGroupItem, ToggleGroupRoot } from 'akar';
 </script>
 
 <template>

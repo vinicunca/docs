@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { keepPanels, toolbarPanelClass } from '../../../utils/theme/studio'
+import { keepPanels, toolbarPanelClass } from '../../../utils/theme/studio';
+
+defineOptions({ inheritAttrs: false });
 
 /**
  * The toolbar's pick-one controls (preset, icons, radius): the shared trigger
@@ -9,31 +11,29 @@ import { keepPanels, toolbarPanelClass } from '../../../utils/theme/studio'
  */
 const props = defineProps<{
   /** Radius stops are numbers, icon sets are strings. */
-  items: { label: string, value: string | number, icon?: string }[]
+  items: Array<{ label: string; value: string | number; icon?: string }>;
   /** The trigger's leading glyph. */
-  icon?: string
+  icon?: string;
   /** Overrides the dimmed leading glyph while clean (the preset chip stays primary). */
-  leadingIconClass?: string
-  dirty?: boolean
+  leadingIconClass?: string;
+  dirty?: boolean;
   /** Trigger text while no item matches the value (preset-less, or pre-mount). */
-  placeholder?: string
+  placeholder?: string;
   /** Stacked in the mobile menu: the list takes the trigger's width. */
-  vertical?: boolean
-}>()
-
-defineOptions({ inheritAttrs: false })
-
-const model = defineModel<string | number>()
-
-/** Local unless a caller binds it; drives the chevron rotation. */
-const open = defineModel<boolean>('open', { default: false })
-
-const attrs = useAttrs()
+  vertical?: boolean;
+}>();
 
 /** The selected row picked again, which Akar reports as a toggle off. */
-const emit = defineEmits<{ reselect: [value: string | number] }>()
+const emit = defineEmits<{ reselect: [value: string | number] }>();
 
-const triggerLabel = computed(() => props.items.find(item => item.value === model.value)?.label ?? props.placeholder)
+const model = defineModel<string | number>();
+
+/** Local unless a caller binds it; drives the chevron rotation. */
+const open = defineModel<boolean>('open', { default: false });
+
+const attrs = useAttrs();
+
+const triggerLabel = computed(() => props.items.find((item) => item.value === model.value)?.label ?? props.placeholder);
 
 // Akar toggles the selected row off with `undefined`; a pick-one control
 // keeps its value and just closes, but still reports the re-pick, which the
@@ -41,15 +41,22 @@ const triggerLabel = computed(() => props.items.find(item => item.value === mode
 const selected = computed({
   get: () => model.value,
   set: (value: string | number | undefined) => {
-    if (value !== undefined) model.value = value
-    else if (model.value !== undefined) emit('reselect', model.value)
-    open.value = false
-  }
-})
+    if (value !== undefined) {
+      model.value = value;
+    } else if (model.value !== undefined) {
+      emit('reselect', model.value);
+    }
+    open.value = false;
+  },
+});
 </script>
 
 <template>
-  <PPopover v-model:open="open" :content="{ align: 'center', onInteractOutside: keepPanels }" :ui="{ content: toolbarPanelClass(vertical) }">
+  <PPopover
+    v-model:open="open"
+    :content="{ align: 'center', onInteractOutside: keepPanels }"
+    :ui="{ content: toolbarPanelClass(vertical) }"
+  >
     <ThemeStudioToolbarTrigger
       :label="triggerLabel"
       :icon="icon"
@@ -69,8 +76,15 @@ const selected = computed({
         :aria-label="(attrs['aria-label'] as string | undefined)"
         :ui="{ root: 'ring-0 has-focus-visible:outline-0', content: 'max-h-106' }"
       >
-        <template v-for="(_, name) in $slots" :key="name" #[name]="scope">
-          <slot :name="name" v-bind="scope ?? {}" />
+        <template
+          v-for="(_, name) in $slots"
+          :key="name"
+          #[name]="scope"
+        >
+          <slot
+            :name="name"
+            v-bind="scope ?? {}"
+          />
         </template>
       </PListbox>
     </template>

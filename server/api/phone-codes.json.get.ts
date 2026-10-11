@@ -1,12 +1,12 @@
-type PhoneCode = {
-  name: string
-  code: string
-  emoji: string
-  dialCode: string
-  mask: string
+interface PhoneCode {
+  name: string;
+  code: string;
+  emoji: string;
+  dialCode: string;
+  mask: string;
 }
 
-const phoneCodes: PhoneCode[] = [
+const phoneCodes: Array<PhoneCode> = [
   { name: 'Afghanistan', code: 'AF', emoji: '\u{1F1E6}\u{1F1EB}', dialCode: '+93', mask: '## ### ####' },
   { name: 'Albania', code: 'AL', emoji: '\u{1F1E6}\u{1F1F1}', dialCode: '+355', mask: '## ### ####' },
   { name: 'Algeria', code: 'DZ', emoji: '\u{1F1E9}\u{1F1FF}', dialCode: '+213', mask: '### ## ## ##' },
@@ -198,7 +198,7 @@ const phoneCodes: PhoneCode[] = [
   { name: 'Vietnam', code: 'VN', emoji: '\u{1F1FB}\u{1F1F3}', dialCode: '+84', mask: '## ### ## ##' },
   { name: 'Yemen', code: 'YE', emoji: '\u{1F1FE}\u{1F1EA}', dialCode: '+967', mask: '### ### ###' },
   { name: 'Zambia', code: 'ZM', emoji: '\u{1F1FF}\u{1F1F2}', dialCode: '+260', mask: '## #######' },
-  { name: 'Zimbabwe', code: 'ZW', emoji: '\u{1F1FF}\u{1F1FC}', dialCode: '+263', mask: '## ### ####' }
-]
+  { name: 'Zimbabwe', code: 'ZW', emoji: '\u{1F1FF}\u{1F1FC}', dialCode: '+263', mask: '## ### ####' },
+];
 
-export default eventHandler(async () => phoneCodes)
+export default eventHandler(async () => phoneCodes);

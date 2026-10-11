@@ -6,7 +6,7 @@ import { BRANDS } from './app/designs/design.constants';
 const COLOR_PLACEHOLDER = '${color}';
 const TOKEN_PATTERN = /[^\s`]+/g;
 
-// @keep-sorted
+/** @keep-sorted */
 export default defineConfig({
   content: {
     pipeline: {
@@ -224,6 +224,7 @@ export default defineConfig({
   safelist: [
     'isolate',
     'font-sans',
+    'container',
   ],
 
   theme: {

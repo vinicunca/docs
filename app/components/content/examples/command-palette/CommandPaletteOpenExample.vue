@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const open = ref(false)
+const open = ref(false);
 
 const users = [
   {
@@ -9,8 +9,8 @@ const users = [
     target: '_blank',
     avatar: {
       src: 'https://github.com/benjamincanac.png',
-      loading: 'lazy' as const
-    }
+      loading: 'lazy' as const,
+    },
   },
   {
     label: 'Hugo Richard',
@@ -19,8 +19,8 @@ const users = [
     target: '_blank',
     avatar: {
       src: 'https://github.com/HugoRCD.png',
-      loading: 'lazy' as const
-    }
+      loading: 'lazy' as const,
+    },
   },
   {
     label: 'Sébastien Chopin',
@@ -29,8 +29,8 @@ const users = [
     target: '_blank',
     avatar: {
       src: 'https://github.com/atinux.png',
-      loading: 'lazy' as const
-    }
+      loading: 'lazy' as const,
+    },
   },
   {
     label: 'Romain Hamel',
@@ -39,8 +39,8 @@ const users = [
     target: '_blank',
     avatar: {
       src: 'https://github.com/romhml.png',
-      loading: 'lazy' as const
-    }
+      loading: 'lazy' as const,
+    },
   },
   {
     label: 'Sandro Circi',
@@ -49,8 +49,8 @@ const users = [
     target: '_blank',
     avatar: {
       src: 'https://github.com/sandros94.png',
-      loading: 'lazy' as const
-    }
+      loading: 'lazy' as const,
+    },
   },
   {
     label: 'Jakub Michálek',
@@ -59,8 +59,8 @@ const users = [
     target: '_blank',
     avatar: {
       src: 'https://github.com/J-Michalek.png',
-      loading: 'lazy' as const
-    }
+      loading: 'lazy' as const,
+    },
   },
   {
     label: 'Alex',
@@ -69,8 +69,8 @@ const users = [
     target: '_blank',
     avatar: {
       src: 'https://github.com/hywax.png',
-      loading: 'lazy' as const
-    }
+      loading: 'lazy' as const,
+    },
   },
   {
     label: 'Maxime Pauvert',
@@ -79,10 +79,10 @@ const users = [
     target: '_blank',
     avatar: {
       src: 'https://github.com/maximepvrt.png',
-      loading: 'lazy' as const
-    }
-  }
-]
+      loading: 'lazy' as const,
+    },
+  },
+];
 </script>
 
 <template>
@@ -95,7 +95,11 @@ const users = [
     />
 
     <template #content>
-      <PCommandPalette close :groups="[{ id: 'users', items: users }]" @update:open="open = $event" />
+      <PCommandPalette
+        close
+        :groups="[{ id: 'users', items: users }]"
+        @update:open="open = $event"
+      />
     </template>
   </PModal>
 </template>

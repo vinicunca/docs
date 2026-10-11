@@ -81,17 +81,17 @@ pnpm add pohon-ui unocss @vinicunca/unocss-preset
 
 ```ts
 // uno.config.ts
-import { presetVinicunca } from '@vinicunca/unocss-preset'
-import { defineConfig } from 'unocss'
+import { presetVinicunca } from '@vinicunca/unocss-preset';
+import { defineConfig } from 'unocss';
 
-export default defineConfig({ presets: [presetVinicunca()] })
+export default defineConfig({ presets: [presetVinicunca()] });
 ```
 
 ### Nuxt (`>=4.1`)
 
 ```ts
 // nuxt.config.ts
-export default defineNuxtConfig({ modules: ['pohon-ui'] })
+export default defineNuxtConfig({ modules: ['pohon-ui'] });
 ```
 
 ```vue
@@ -109,23 +109,23 @@ The module registers `@unocss/nuxt`, `@nuxt/icon`, `@nuxt/fonts`, and `@nuxtjs/c
 
 ```ts
 // vite.config.ts
-import vue from '@vitejs/plugin-vue'
-import ui from 'pohon-ui/vite'
-import UnoCSS from 'unocss/vite'
-import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue';
+import ui from 'pohon-ui/vite';
+import UnoCSS from 'unocss/vite';
+import { defineConfig } from 'vite';
 
 export default defineConfig({
   plugins: [UnoCSS(), vue(), ui()]
-})
+});
 ```
 
 ```ts
 // src/main.ts
-import ui from 'pohon-ui/vue-plugin'
-import 'virtual:uno.css'
+import ui from 'pohon-ui/vue-plugin';
+import 'virtual:uno.css';
 
-app.use(router) // vue-router, unless the plugin has `router: false` or `'inertia'`
-app.use(ui)
+app.use(router); // vue-router, unless the plugin has `router: false` or `'inertia'`
+app.use(ui);
 ```
 
 Then wrap `<RouterView />` in `<PApp>`, and add `class="isolate"` to the mount element (`<div id="app" class="isolate">`).

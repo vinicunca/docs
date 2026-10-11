@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { upperFirst, camelCase } from 'scule'
-import type { ComponentMeta } from 'vue-component-meta'
-import * as theme from '#build/ui'
+import type { ComponentMeta } from 'vue-component-meta';
+import { camelCase, upperFirst } from 'scule';
+import * as theme from '#build/ui';
 
 const props = withDefaults(defineProps<{
-  slug?: string
-  ignore?: string[]
-  prose?: boolean
+  slug?: string;
+  ignore?: Array<string>;
+  prose?: boolean;
 }>(), {
   ignore: () => [
     'activeClass',
@@ -33,62 +33,62 @@ const props = withDefaults(defineProps<{
     'formenctype',
     'formmethod',
     'formnovalidate',
-    'formtarget'
-  ]
-})
+    'formtarget',
+  ],
+});
 
-const route = useRoute()
+const route = useRoute();
 
-const camelName = camelCase(props.slug ?? route.path.split('/').pop() ?? '')
-const componentName = props.prose ? `Prose${upperFirst(camelName)}` : `P${upperFirst(camelName)}`
+const camelName = camelCase(props.slug ?? route.path.split('/').pop() ?? '');
+const componentName = props.prose ? `Prose${upperFirst(camelName)}` : `P${upperFirst(camelName)}`;
 
-const componentTheme = ((props.prose ? theme.prose : theme) as any)[camelName]
-const { data: meta } = await useFetchComponentMeta(componentName as any)
+const componentTheme = ((props.prose ? theme.prose : theme) as any)[camelName];
+const { data: meta } = await useFetchComponentMeta(componentName as any);
 
 const metaProps: ComputedRef<ComponentMeta['props']> = computed(() => {
   if (!meta.value?.meta?.props?.length) {
-    return []
+    return [];
   }
 
   return meta.value.meta.props.filter((prop) => {
-    return !props.ignore?.includes(prop.name)
+    return !props.ignore?.includes(prop.name);
   }).map((prop) => {
     if (prop.default) {
-      prop.default = prop.default.replace(' as never', '').replace(/^"(.*)"$/, '\'$1\'')
+      prop.default = prop.default.replace(' as never', '').replace(/^"(.*)"$/, '\'$1\'');
     } else {
-      const tag = prop.tags?.find(tag => tag.name === 'defaultValue')?.text
+      const tag = prop.tags?.find((tag) => tag.name === 'defaultValue')?.text;
       if (tag) {
-        prop.default = tag
+        prop.default = tag;
       } else if (componentTheme?.defaultVariants?.[prop.name]) {
-        prop.default = typeof componentTheme?.defaultVariants?.[prop.name] === 'string' ? `'${componentTheme?.defaultVariants?.[prop.name]}'` : componentTheme?.defaultVariants?.[prop.name]
+        prop.default = typeof componentTheme?.defaultVariants?.[prop.name] === 'string' ? `'${componentTheme?.defaultVariants?.[prop.name]}'` : componentTheme?.defaultVariants?.[prop.name];
       }
     }
 
     // @ts-expect-error - Type is not correct
-    prop.type = !prop.type.startsWith('boolean') && prop.schema?.kind === 'enum' && Object.keys(prop.schema.schema)?.length ? Object.values(prop.schema.schema).map(schema => schema?.type ? schema.type : schema).join(' | ') : prop.type
+    prop.type = !prop.type.startsWith('boolean') && prop.schema?.kind === 'enum' && Object.keys(prop.schema.schema)?.length ? Object.values(prop.schema.schema).map((schema) => schema?.type ? schema.type : schema).join(' | ') : prop.type;
     // `(string & {})` widens a literal union while keeping autocompletion, display it as plain `string`
-    prop.type = prop.type.replace(/\(?string & \{\}\)?/g, 'string')
-    return prop
+    prop.type = prop.type.replace(/\(?string & \{\}\)?/g, 'string');
+    return prop;
   }).sort((a, b) => {
     if (a.name === 'as') {
-      return -1
+      return -1;
     }
 
     if (b.name === 'as') {
-      return 1
+      return 1;
     }
 
     if (a.name === 'ui') {
-      return 1
+      return 1;
     }
 
     if (b.name === 'ui') {
-      return -1
+      return -1;
     }
 
-    return 0
-  })
-})
+    return 0;
+  });
+});
 </script>
 
 <template>
@@ -107,22 +107,42 @@ const metaProps: ComputedRef<ComponentMeta['props']> = computed(() => {
       </ProseTr>
     </ProseThead>
     <ProseTbody>
-      <ProseTr v-for="prop in metaProps" :key="prop.name">
+      <ProseTr
+        v-for="prop in metaProps"
+        :key="prop.name"
+      >
         <ProseTd>
           <ProseCode>
             {{ prop.name }}
           </ProseCode>
         </ProseTd>
         <ProseTd>
-          <HighlightInlineType v-if="prop.default" :type="prop.default" />
+          <HighlightInlineType
+            v-if="prop.default"
+            :type="prop.default"
+          />
         </ProseTd>
         <ProseTd>
-          <HighlightInlineType v-if="prop.type" :type="prop.type" />
+          <HighlightInlineType
+            v-if="prop.type"
+            :type="prop.type"
+          />
 
-          <DocsMarkdown v-if="prop.description" :value="prop.description" class="color-text-toned mt-1" />
+          <DocsMarkdown
+            v-if="prop.description"
+            :value="prop.description"
+            class="color-text-toned mt-1"
+          />
 
-          <ComponentPropsLinks v-if="prop.tags?.length" :prop="prop" />
-          <ComponentPropsSchema v-if="prop.schema" :prop="prop" :ignore="ignore" />
+          <ComponentPropsLinks
+            v-if="prop.tags?.length"
+            :prop="prop"
+          />
+          <ComponentPropsSchema
+            v-if="prop.schema"
+            :prop="prop"
+            :ignore="ignore"
+          />
         </ProseTd>
       </ProseTr>
     </ProseTbody>

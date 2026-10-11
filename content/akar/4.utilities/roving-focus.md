@@ -14,7 +14,7 @@ Import all parts and piece them together.
 
 ```vue
 <script setup>
-import { RovingFocusGroup, RovingFocusItem } from 'akar'
+import { RovingFocusGroup, RovingFocusItem } from 'akar';
 </script>
 
 <template>

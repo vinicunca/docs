@@ -9,7 +9,7 @@ Use the auto-imported `defineLocale` utility to create a custom locale with your
 
 ```vue
 <script setup lang="ts">
-import type { Messages } from 'pohon-ui'
+import type { Messages } from 'pohon-ui';
 
 const locale = defineLocale<Messages>({
   name: 'My custom locale',
@@ -18,7 +18,7 @@ const locale = defineLocale<Messages>({
   messages: {
     // implement pairs
   }
-})
+});
 </script>
 
 <template>
@@ -29,12 +29,12 @@ const locale = defineLocale<Messages>({
 ```
 
 ::framework-only
-#nuxt
+# nuxt
 :::tip{to="/pohon/getting-started/integrations/i18n/nuxt"}
 Learn more about internationalization in the **i18n integration** documentation.
 :::
 
-#vue
+# vue
 :::tip{to="/pohon/getting-started/integrations/i18n/vue"}
 Learn more about internationalization in the **i18n integration** documentation.
 :::
@@ -85,7 +85,7 @@ Here's a complete example of creating a custom locale:
 
 ```vue
 <script setup lang="ts">
-import type { Messages } from 'pohon-ui'
+import type { Messages } from 'pohon-ui';
 
 const locale = defineLocale<Messages>({
   name: 'Español',
@@ -107,7 +107,7 @@ const locale = defineLocale<Messages>({
     }
     // ... other component messages
   }
-})
+});
 </script>
 
 <template>

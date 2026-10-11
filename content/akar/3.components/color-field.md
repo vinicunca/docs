@@ -60,7 +60,7 @@ Import all parts and piece them together.
 import {
   ColorFieldInput,
   ColorFieldRoot,
-} from 'akar'
+} from 'akar';
 </script>
 
 <template>
@@ -95,10 +95,10 @@ Basic hex color input field.
 import {
   ColorFieldInput,
   ColorFieldRoot,
-} from 'akar'
-import { ref } from 'vue'
+} from 'akar';
+import { ref } from 'vue';
 
-const color = ref('#3b82f6')
+const color = ref('#3b82f6');
 </script>
 
 <template>
@@ -117,10 +117,10 @@ Input for a specific color channel (e.g., hue).
 import {
   ColorFieldInput,
   ColorFieldRoot,
-} from 'akar'
-import { ref } from 'vue'
+} from 'akar';
+import { ref } from 'vue';
 
-const color = ref('#3b82f6')
+const color = ref('#3b82f6');
 </script>
 
 <template>
@@ -143,10 +143,10 @@ Prevent changing values with mouse wheel.
 import {
   ColorFieldInput,
   ColorFieldRoot,
-} from 'akar'
-import { ref } from 'vue'
+} from 'akar';
+import { ref } from 'vue';
 
-const color = ref('#3b82f6')
+const color = ref('#3b82f6');
 </script>
 
 <template>
@@ -168,10 +168,10 @@ Display the color value without allowing edits.
 import {
   ColorFieldInput,
   ColorFieldRoot,
-} from 'akar'
-import { ref } from 'vue'
+} from 'akar';
+import { ref } from 'vue';
 
-const color = ref('#3b82f6')
+const color = ref('#3b82f6');
 </script>
 
 <template>

@@ -84,7 +84,7 @@ Import all parts and piece them together.
 import {
   DateRangeFieldInput,
   DateRangeFieldRoot,
-} from 'akar'
+} from 'akar';
 </script>
 
 <template>

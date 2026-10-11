@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { UserProps } from 'pohon-ui'
+import type { UserProps } from 'pohon-ui';
 
-const members: UserProps[] = [
+const members: Array<UserProps> = [
   {
     name: 'Daniel Roe',
     description: 'danielroe',
@@ -10,8 +10,8 @@ const members: UserProps[] = [
     avatar: {
       src: 'https://github.com/danielroe.png',
       alt: 'danielroe',
-      loading: 'lazy' as const
-    }
+      loading: 'lazy' as const,
+    },
   },
   {
     name: 'Pooya Parsa',
@@ -21,8 +21,8 @@ const members: UserProps[] = [
     avatar: {
       src: 'https://github.com/pi0.png',
       alt: 'pi0',
-      loading: 'lazy' as const
-    }
+      loading: 'lazy' as const,
+    },
   },
   {
     name: 'Sébastien Chopin',
@@ -32,8 +32,8 @@ const members: UserProps[] = [
     avatar: {
       src: 'https://github.com/atinux.png',
       alt: 'atinux',
-      loading: 'lazy' as const
-    }
+      loading: 'lazy' as const,
+    },
   },
   {
     name: 'Benjamin Canac',
@@ -43,10 +43,10 @@ const members: UserProps[] = [
     avatar: {
       src: 'https://github.com/benjamincanac.png',
       alt: 'benjamincanac',
-      loading: 'lazy' as const
-    }
-  }
-]
+      loading: 'lazy' as const,
+    },
+  },
+];
 </script>
 
 <template>
@@ -57,20 +57,28 @@ const members: UserProps[] = [
     :actions="[{
       label: 'Invite members',
       icon: 'i-lucide-user-plus',
-      color: 'neutral'
+      color: 'neutral',
     }]"
   >
     <template #leading>
       <PAvatarGroup size="xl">
-        <PAvatar src="https://github.com/nuxt.png" alt="Nuxt" loading="lazy" />
-        <PAvatar src="https://github.com/unjs.png" alt="Unjs" loading="lazy" />
+        <PAvatar
+          src="https://github.com/nuxt.png"
+          alt="Nuxt"
+          loading="lazy"
+        />
+        <PAvatar
+          src="https://github.com/unjs.png"
+          alt="Unjs"
+          loading="lazy"
+        />
       </PAvatarGroup>
     </template>
 
     <template #footer>
       <PSeparator class="my-4" />
 
-      <div class="grid grid-cols-2 gap-4">
+      <div class="gap-4 grid grid-cols-2">
         <PPageCard
           v-for="(member, index) in members"
           :key="index"

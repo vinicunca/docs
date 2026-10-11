@@ -202,8 +202,10 @@ function templateAttribute(key: string, value: unknown): string {
   return `:${key}="${value}"`;
 }
 
-// A paragraph holding ready-made markdown: the stringifier writes a string
-// child as is, so this is how a block it has no handler for gets through.
+/**
+ * A paragraph holding ready-made markdown: the stringifier writes a string
+ * child as is, so this is how a block it has no handler for gets through.
+ */
 export function replaceNodeWithMarkdown(node: Array<any>, markdown: string) {
   node[0] = 'p';
   node[1] = {};
@@ -211,8 +213,10 @@ export function replaceNodeWithMarkdown(node: Array<any>, markdown: string) {
   node.length = 3;
 }
 
-// A preview without a `#code` slot is a component demo written in MDC, so
-// the closest thing to its source is the tree read back as a template.
+/**
+ * A preview without a `#code` slot is a component demo written in MDC, so
+ * the closest thing to its source is the tree read back as a template.
+ */
 export function templateSnippet(nodes: Array<any>): string {
   return nodes.map((child) => {
     if (typeof child === 'string') {

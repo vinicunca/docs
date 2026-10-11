@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { createCalendar, getLocalTimeZone, toCalendar, today } from '@internationalized/date'
-import { CalendarCell, CalendarCellTrigger, CalendarGrid, CalendarGridBody, CalendarGridHead, CalendarGridRow, CalendarHeadCell, CalendarHeader, CalendarHeading, CalendarNext, CalendarPrev, CalendarRoot, Label, SelectContent, SelectGroup, SelectItem, SelectItemIndicator, SelectItemText, SelectLabel, SelectPortal, SelectRoot, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue, SelectViewport } from 'akar'
-import { computed, ref } from 'vue'
+import { createCalendar, getLocalTimeZone, toCalendar, today } from '@internationalized/date';
+import { CalendarCell, CalendarCellTrigger, CalendarGrid, CalendarGridBody, CalendarGridHead, CalendarGridRow, CalendarHeadCell, CalendarHeader, CalendarHeading, CalendarNext, CalendarPrev, CalendarRoot, Label, SelectContent, SelectGroup, SelectItem, SelectItemIndicator, SelectItemText, SelectLabel, SelectPortal, SelectRoot, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue, SelectViewport } from 'akar';
+import { computed, ref } from 'vue';
 
 const preferences = [
   { locale: 'en-US', label: 'Default', ordering: 'gregory' },
@@ -17,7 +17,7 @@ const preferences = [
   { label: 'Japanese (Japan)', locale: 'ja-JP', territories: 'JP', ordering: 'gregory japanese' },
   { label: 'Thai (Thailand)', locale: 'th-TH', territories: 'TH', ordering: 'buddhist gregory' },
   { label: 'Chinese (Taiwan)', locale: 'zh-TW', territories: 'TW', ordering: 'gregory roc chinese' },
-]
+];
 
 const calendars = [
   { key: 'gregory', name: 'Gregorian' },
@@ -33,213 +33,213 @@ const calendars = [
   { key: 'coptic', name: 'Coptic' },
   { key: 'ethiopic', name: 'Ethiopic' },
   { key: 'ethioaa', name: 'Ethiopic (Amete Alem)' },
-]
+];
 
-const locale = ref(preferences[0].locale)
-const calendar = ref(calendars[0].key)
+const locale = ref(preferences[0].locale);
+const calendar = ref(calendars[0].key);
 
-const pref = computed(() => preferences.find(p => p.locale === locale.value))
-const preferredCalendars = computed(() => pref.value ? pref.value.ordering.split(' ').map(p => calendars.find(c => c.key === p)).filter(Boolean) : [calendars[0]])
-const otherCalendars = computed(() => calendars.filter(c => !preferredCalendars.value.some(p => p!.key === c.key)))
+const pref = computed(() => preferences.find((p) => p.locale === locale.value));
+const preferredCalendars = computed(() => pref.value ? pref.value.ordering.split(' ').map((p) => calendars.find((c) => c.key === p)).filter(Boolean) : [calendars[0]]);
+const otherCalendars = computed(() => calendars.filter((c) => !preferredCalendars.value.some((p) => p!.key === c.key)));
 
 function updateLocale(newLocale: string) {
-  locale.value = newLocale
-  calendar.value = pref.value!.ordering.split(' ')[0]
+  locale.value = newLocale;
+  calendar.value = pref.value!.ordering.split(' ')[0];
 }
-const value = computed(() => toCalendar(today(getLocalTimeZone()), createCalendar(calendar.value)))
+const value = computed(() => toCalendar(today(getLocalTimeZone()), createCalendar(calendar.value)));
 </script>
 
 <template>
   <div class="akar-demo akar-demo-CalendarSelect">
     <div class="Wrapper">
-        <Label class="Label">Locale</Label>
-        <SelectRoot
-          v-model="locale"
-          @update:model-value="updateLocale"
+      <Label class="Label">Locale</Label>
+      <SelectRoot
+        v-model="locale"
+        @update:model-value="updateLocale"
+      >
+        <SelectTrigger
+          class="SelectTrigger"
+          aria-label="Select a locale"
         >
-          <SelectTrigger
-            class="SelectTrigger"
-            aria-label="Select a locale"
+          <SelectValue placeholder="Please select a locale">
+            {{ pref!.label }}
+          </SelectValue>
+          <PIcon
+            name="i-lucide-chevron-down"
+            class="Icon"
+          />
+        </SelectTrigger>
+
+        <SelectPortal>
+          <SelectContent
+            class="SelectContent"
+            :side-offset="5"
           >
-            <SelectValue placeholder="Please select a locale">
-              {{ pref!.label }}
-            </SelectValue>
-            <PIcon
-              name="i-lucide-chevron-down"
-              class="Icon"
-            />
-          </SelectTrigger>
+            <SelectScrollUpButton class="SelectScrollButton">
+              <PIcon name="i-lucide-chevron-up" />
+            </SelectScrollUpButton>
 
-          <SelectPortal>
-            <SelectContent
-              class="SelectContent"
-              :side-offset="5"
-            >
-              <SelectScrollUpButton class="SelectScrollButton">
-                <PIcon name="i-lucide-chevron-up" />
-              </SelectScrollUpButton>
+            <SelectViewport class="SelectViewport">
+              <SelectItem
+                v-for="(option, index) in preferences"
+                :key="index"
+                class="SelectItem"
+                :value="option.locale"
+              >
+                <SelectItemIndicator class="SelectItemIndicator">
+                  <PIcon name="i-lucide-check" />
+                </SelectItemIndicator>
+                <SelectItemText>
+                  {{ option.label }}
+                </SelectItemText>
+              </SelectItem>
+            </SelectViewport>
 
-              <SelectViewport class="SelectViewport">
+            <SelectScrollDownButton class="SelectScrollButton">
+              <PIcon name="i-lucide-chevron-down" />
+            </SelectScrollDownButton>
+          </SelectContent>
+        </SelectPortal>
+      </SelectRoot>
+      <Label class="Label">Calendar</Label>
+      <SelectRoot v-model="calendar">
+        <SelectTrigger
+          class="SelectTrigger"
+          aria-label="Select a calendar"
+        >
+          <SelectValue placeholder="Please select a calendar">
+            {{ calendars.find(c => c.key === calendar)?.name }}
+          </SelectValue>
+
+          <PIcon
+            name="i-lucide-chevron-down"
+            class="Icon"
+          />
+        </SelectTrigger>
+
+        <SelectPortal>
+          <SelectContent
+            class="SelectContent"
+            :side-offset="5"
+          >
+            <SelectScrollUpButton class="SelectScrollButton">
+              <PIcon name="i-lucide-chevron-up" />
+            </SelectScrollUpButton>
+
+            <SelectViewport class="SelectViewport">
+              <SelectLabel class="SelectLabel">
+                Preferred
+              </SelectLabel>
+              <SelectGroup>
                 <SelectItem
-                  v-for="(option, index) in preferences"
+                  v-for="(option, index) in preferredCalendars"
                   :key="index"
                   class="SelectItem"
-                  :value="option.locale"
+                  :value="option!.key"
                 >
                   <SelectItemIndicator class="SelectItemIndicator">
                     <PIcon name="i-lucide-check" />
                   </SelectItemIndicator>
                   <SelectItemText>
-                    {{ option.label }}
+                    {{ option!.name }}
                   </SelectItemText>
                 </SelectItem>
-              </SelectViewport>
+              </SelectGroup>
+              <SelectSeparator class="SelectSeparator" />
+              <SelectLabel class="SelectLabel">
+                Other
+              </SelectLabel>
+              <SelectGroup>
+                <SelectItem
+                  v-for="(option, index) in otherCalendars"
+                  :key="index"
+                  class="SelectItem"
+                  :value="option.key"
+                >
+                  <SelectItemIndicator class="SelectItemIndicator">
+                    <PIcon name="i-lucide-check" />
+                  </SelectItemIndicator>
+                  <SelectItemText>
+                    {{ option.name }}
+                  </SelectItemText>
+                </SelectItem>
+              </SelectGroup>
+            </SelectViewport>
 
-              <SelectScrollDownButton class="SelectScrollButton">
-                <PIcon name="i-lucide-chevron-down" />
-              </SelectScrollDownButton>
-            </SelectContent>
-          </SelectPortal>
-        </SelectRoot>
-        <Label class="Label">Calendar</Label>
-        <SelectRoot v-model="calendar">
-          <SelectTrigger
-            class="SelectTrigger"
-            aria-label="Select a calendar"
+            <SelectScrollDownButton class="SelectScrollButton">
+              <PIcon name="i-lucide-chevron-down" />
+            </SelectScrollDownButton>
+          </SelectContent>
+        </SelectPortal>
+      </SelectRoot>
+      <CalendarRoot
+        v-slot="{ weekDays, grid }"
+        :model-value="value"
+        :locale="locale"
+        class="Calendar"
+        fixed-weeks
+      >
+        <CalendarHeader class="CalendarHeader">
+          <CalendarPrev
+            class="CalendarNavButton"
           >
-            <SelectValue placeholder="Please select a calendar">
-              {{ calendars.find(c => c.key === calendar)?.name }}
-            </SelectValue>
-
             <PIcon
-              name="i-lucide-chevron-down"
+              name="i-lucide-chevron-left"
               class="Icon"
             />
-          </SelectTrigger>
-
-          <SelectPortal>
-            <SelectContent
-              class="SelectContent"
-              :side-offset="5"
-            >
-              <SelectScrollUpButton class="SelectScrollButton">
-                <PIcon name="i-lucide-chevron-up" />
-              </SelectScrollUpButton>
-
-              <SelectViewport class="SelectViewport">
-                <SelectLabel class="SelectLabel">
-                  Preferred
-                </SelectLabel>
-                <SelectGroup>
-                  <SelectItem
-                    v-for="(option, index) in preferredCalendars"
-                    :key="index"
-                    class="SelectItem"
-                    :value="option!.key"
-                  >
-                    <SelectItemIndicator class="SelectItemIndicator">
-                      <PIcon name="i-lucide-check" />
-                    </SelectItemIndicator>
-                    <SelectItemText>
-                      {{ option!.name }}
-                    </SelectItemText>
-                  </SelectItem>
-                </SelectGroup>
-                <SelectSeparator class="SelectSeparator" />
-                <SelectLabel class="SelectLabel">
-                  Other
-                </SelectLabel>
-                <SelectGroup>
-                  <SelectItem
-                    v-for="(option, index) in otherCalendars"
-                    :key="index"
-                    class="SelectItem"
-                    :value="option.key"
-                  >
-                    <SelectItemIndicator class="SelectItemIndicator">
-                      <PIcon name="i-lucide-check" />
-                    </SelectItemIndicator>
-                    <SelectItemText>
-                      {{ option.name }}
-                    </SelectItemText>
-                  </SelectItem>
-                </SelectGroup>
-              </SelectViewport>
-
-              <SelectScrollDownButton class="SelectScrollButton">
-                <PIcon name="i-lucide-chevron-down" />
-              </SelectScrollDownButton>
-            </SelectContent>
-          </SelectPortal>
-        </SelectRoot>
-        <CalendarRoot
-          v-slot="{ weekDays, grid }"
-          :model-value="value"
-          :locale="locale"
-          class="Calendar"
-          fixed-weeks
-        >
-          <CalendarHeader class="CalendarHeader">
-            <CalendarPrev
-              class="CalendarNavButton"
-            >
-              <PIcon
-                name="i-lucide-chevron-left"
-                class="Icon"
-              />
-            </CalendarPrev>
-            <CalendarHeading class="CalendarHeading" />
-            <CalendarNext
-              class="CalendarNavButton"
-            >
-              <PIcon
-                name="i-lucide-chevron-right"
-                class="Icon"
-              />
-            </CalendarNext>
-          </CalendarHeader>
-          <div
-            class="CalendarWrapper"
+          </CalendarPrev>
+          <CalendarHeading class="CalendarHeading" />
+          <CalendarNext
+            class="CalendarNavButton"
           >
-            <CalendarGrid
-              v-for="month in grid"
-              :key="month.value.toString()"
-              class="CalendarGrid"
-            >
-              <CalendarGridHead>
-                <CalendarGridRow class="CalendarGridRow">
-                  <CalendarHeadCell
-                    v-for="day in weekDays"
-                    :key="day"
-                    class="CalendarHeadCell"
-                  >
-                    {{ day }}
-                  </CalendarHeadCell>
-                </CalendarGridRow>
-              </CalendarGridHead>
-              <CalendarGridBody class="CalendarGridWrapper">
-                <CalendarGridRow
-                  v-for="(weekDates, index) in month.rows"
-                  :key="`weekDate-${index}`"
-                  class="CalendarGridRow"
+            <PIcon
+              name="i-lucide-chevron-right"
+              class="Icon"
+            />
+          </CalendarNext>
+        </CalendarHeader>
+        <div
+          class="CalendarWrapper"
+        >
+          <CalendarGrid
+            v-for="month in grid"
+            :key="month.value.toString()"
+            class="CalendarGrid"
+          >
+            <CalendarGridHead>
+              <CalendarGridRow class="CalendarGridRow">
+                <CalendarHeadCell
+                  v-for="day in weekDays"
+                  :key="day"
+                  class="CalendarHeadCell"
                 >
-                  <CalendarCell
-                    v-for="weekDate in weekDates"
-                    :key="weekDate.toString()"
-                    :date="weekDate"
-                    class="CalendarCell"
-                  >
-                    <CalendarCellTrigger
-                      :day="weekDate"
-                      :month="month.value"
-                      class="CalendarCellTrigger"
-                    />
-                  </CalendarCell>
-                </CalendarGridRow>
-              </CalendarGridBody>
-            </CalendarGrid>
-          </div>
-        </CalendarRoot>
-      </div>
+                  {{ day }}
+                </CalendarHeadCell>
+              </CalendarGridRow>
+            </CalendarGridHead>
+            <CalendarGridBody class="CalendarGridWrapper">
+              <CalendarGridRow
+                v-for="(weekDates, index) in month.rows"
+                :key="`weekDate-${index}`"
+                class="CalendarGridRow"
+              >
+                <CalendarCell
+                  v-for="weekDate in weekDates"
+                  :key="weekDate.toString()"
+                  :date="weekDate"
+                  class="CalendarCell"
+                >
+                  <CalendarCellTrigger
+                    :day="weekDate"
+                    :month="month.value"
+                    class="CalendarCellTrigger"
+                  />
+                </CalendarCell>
+              </CalendarGridRow>
+            </CalendarGridBody>
+          </CalendarGrid>
+        </div>
+      </CalendarRoot>
+    </div>
   </div>
 </template>

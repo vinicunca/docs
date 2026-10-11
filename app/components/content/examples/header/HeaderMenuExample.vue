@@ -1,29 +1,29 @@
 <script setup lang="ts">
-import type { NavigationMenuItem } from 'pohon-ui'
+import type { NavigationMenuItem } from 'pohon-ui';
 
-const route = useRoute()
+const route = useRoute();
 
-const items = computed<NavigationMenuItem[]>(() => [{
+const items = computed<Array<NavigationMenuItem>>(() => [{
   label: 'Docs',
   to: '/docs/getting-started',
   icon: 'i-lucide-book-open',
-  active: route.path.startsWith('/docs/getting-started')
+  active: route.path.startsWith('/docs/getting-started'),
 }, {
   label: 'Components',
   to: '/docs/components',
   icon: 'i-lucide-box',
-  active: route.path.startsWith('/docs/components')
+  active: route.path.startsWith('/docs/components'),
 }, {
   label: 'Theme',
   icon: 'i-lucide-palette',
   to: '/theme',
-  target: '_blank'
+  target: '_blank',
 }, {
   label: 'Releases',
   icon: 'i-lucide-rocket',
   to: 'https://github.com/vinicunca/pohon/releases',
-  target: '_blank'
-}])
+  target: '_blank',
+}]);
 </script>
 
 <template>
@@ -37,7 +37,10 @@ const items = computed<NavigationMenuItem[]>(() => [{
     <template #right>
       <PColorModeButton />
 
-      <PTooltip text="Open on GitHub" :kbds="['meta', 'G']">
+      <PTooltip
+        text="Open on GitHub"
+        :kbds="['meta', 'G']"
+      >
         <PButton
           color="neutral"
           variant="ghost"
@@ -50,7 +53,11 @@ const items = computed<NavigationMenuItem[]>(() => [{
     </template>
 
     <template #body>
-      <PNavigationMenu :items="items" orientation="vertical" class="-mx-2.5" />
+      <PNavigationMenu
+        :items="items"
+        orientation="vertical"
+        class="-mx-2.5"
+      />
     </template>
   </PHeader>
 </template>

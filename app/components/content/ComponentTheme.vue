@@ -1,83 +1,83 @@
 <script setup lang="ts">
-import json5 from 'json5'
-import { camelCase } from 'scule'
-import * as theme from '#build/ui'
+import json5 from 'json5';
+import { camelCase } from 'scule';
+import * as theme from '#build/ui';
 
 const props = defineProps<{
-  prose?: boolean
-  slug?: string
-  extra?: string[]
-}>()
+  prose?: boolean;
+  slug?: string;
+  extra?: Array<string>;
+}>();
 
-const route = useRoute()
+const route = useRoute();
 
-const name = props.slug ?? route.path.split('/').pop() ?? ''
-const camelName = camelCase(name)
+const name = props.slug ?? route.path.split('/').pop() ?? '';
+const camelName = camelCase(name);
 
-const strippedCompoundVariants = ref(false)
+const strippedCompoundVariants = ref(false);
 
-const computedTheme = computed(() => props.prose ? theme.prose : theme)
+const computedTheme = computed(() => props.prose ? theme.prose : theme);
 
 const strippedTheme = computed(() => {
   const strippedTheme = {
-    ...(computedTheme.value as any)[camelName]
-  }
+    ...(computedTheme.value as any)[camelName],
+  };
 
   if (strippedTheme?.compoundVariants) {
     strippedTheme.compoundVariants = strippedTheme.compoundVariants.filter((compoundVariant: any) => {
       if (compoundVariant.color) {
         if (!['primary', 'neutral'].includes(compoundVariant.color)) {
-          strippedCompoundVariants.value = true
+          strippedCompoundVariants.value = true;
 
-          return false
+          return false;
         }
       }
 
       if (compoundVariant.highlightColor) {
         if (!['primary', 'neutral'].includes(compoundVariant.highlightColor)) {
-          strippedCompoundVariants.value = true
+          strippedCompoundVariants.value = true;
 
-          return false
+          return false;
         }
       }
 
       if (compoundVariant.loadingColor) {
         if (!['primary', 'neutral'].includes(compoundVariant.loadingColor)) {
-          strippedCompoundVariants.value = true
+          strippedCompoundVariants.value = true;
 
-          return false
+          return false;
         }
       }
 
-      return true
-    })
+      return true;
+    });
   }
 
-  return strippedTheme
-})
+  return strippedTheme;
+});
 
 const component = computed(() => {
   const content = props.prose
     ? { prose: { [camelName]: strippedTheme.value } }
-    : { [camelName]: strippedTheme.value }
+    : { [camelName]: strippedTheme.value };
 
   if (props.extra?.length) {
     props.extra.forEach((extra) => {
-      const target = props.prose ? content.prose! : content
-      target[extra as keyof typeof target] = computedTheme.value[extra as keyof typeof computedTheme.value]
-    })
+      const target = props.prose ? content.prose! : content;
+      target[extra as keyof typeof target] = computedTheme.value[extra as keyof typeof computedTheme.value];
+    });
   }
 
   return {
-    ui: content
-  }
-})
+    ui: content,
+  };
+});
 
 const themeLink = computed(() => {
-  const slug = name.startsWith('content') ? `content/${name}` : name
+  const slug = name.startsWith('content') ? `content/${name}` : name;
 
-  return `https://github.com/vinicunca/pohon/blob/main/src/theme/${slug}.ts`
-})
+  return `https://github.com/vinicunca/pohon/blob/main/src/theme/${slug}.ts`;
+});
 
 const markdown = computed(() => `
 ::code-collapse{class="nuxt-only"}
@@ -98,10 +98,7 @@ import ui from 'pohon-ui/vite'
 export default defineConfig({
   plugins: [
     vue(),
-    ui(${json5.stringify(component.value, null, 2).replace(/,([ |\t\n]+[}|\])])/g, '$1')
-      .split('\n')
-      .map((line, i) => i === 0 ? line : `    ${line}`)
-      .join('\n')})
+    ui(${json5.stringify(component.value, null, 2).replace(/,([ |\t\n]+[}|\])])/g, '$1').split('\n').map((line, i) => i === 0 ? line : `    ${line}`).join('\n')})
   ]
 })
 \`\`\`
@@ -114,7 +111,7 @@ ${strippedCompoundVariants.value
 Some colors in \`compoundVariants\` are omitted for readability. Check out the source code on GitHub.
 ::`
   : ''}
-`)
+`);
 </script>
 
 <template>

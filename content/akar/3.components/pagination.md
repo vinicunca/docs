@@ -51,7 +51,7 @@ Import all parts and piece them together.
 
 ```vue
 <script setup>
-import { PaginationEllipsis, PaginationFirst, PaginationLast, PaginationList, PaginationListItem, PaginationNext, PaginationPrev, PaginationRoot } from 'akar'
+import { PaginationEllipsis, PaginationFirst, PaginationLast, PaginationList, PaginationListItem, PaginationNext, PaginationPrev, PaginationRoot } from 'akar';
 </script>
 
 <template>

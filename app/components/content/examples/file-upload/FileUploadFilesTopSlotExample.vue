@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const value = ref<File[]>([])
+const value = ref<Array<File>>([]);
 </script>
 
 <template>
@@ -11,7 +11,7 @@ const value = ref<File[]>([])
     layout="grid"
     multiple
     :interactive="false"
-    class="w-96 min-h-48"
+    class="min-h-48 w-96"
   >
     <template #actions="{ open }">
       <PButton
@@ -24,7 +24,10 @@ const value = ref<File[]>([])
     </template>
 
     <template #files-top="{ open, files }">
-      <div v-if="files?.length" class="mb-2 flex items-center justify-between">
+      <div
+        v-if="files?.length"
+        class="mb-2 flex items-center justify-between"
+      >
         <p class="font-bold">
           Files ({{ files?.length }})
         </p>

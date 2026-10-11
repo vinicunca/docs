@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const toast = useToast()
+const toast = useToast();
 
 const groups = [{
   id: 'actions',
@@ -12,29 +12,29 @@ const groups = [{
       icon: 'i-lucide-file-plus',
       suffix: 'Create a new file in the current directory',
       onSelect(e: Event) {
-        e.preventDefault()
-        toast.add({ title: 'New file created!' })
+        e.preventDefault();
+        toast.add({ title: 'New file created!' });
       },
-      kbds: ['meta', 'N']
+      kbds: ['meta', 'N'],
     }, {
       label: 'New folder',
       icon: 'i-lucide-folder-plus',
       suffix: 'Create a new folder in the current directory',
       onSelect(e: Event) {
-        e.preventDefault()
-        toast.add({ title: 'New folder created!' })
+        e.preventDefault();
+        toast.add({ title: 'New folder created!' });
       },
-      kbds: ['meta', 'F']
+      kbds: ['meta', 'F'],
     }, {
       label: 'New project',
       icon: 'i-lucide-folder-git',
       suffix: 'Create a new project from a template',
       onSelect(e: Event) {
-        e.preventDefault()
-        toast.add({ title: 'New project created!' })
+        e.preventDefault();
+        toast.add({ title: 'New project created!' });
       },
-      kbds: ['meta', 'P']
-    }]
+      kbds: ['meta', 'P'],
+    }],
   }, {
     label: 'Share',
     icon: 'i-lucide-share',
@@ -43,18 +43,18 @@ const groups = [{
       icon: 'i-lucide-link',
       suffix: 'Copy a link to the current item',
       onSelect(e: Event) {
-        e.preventDefault()
-        toast.add({ title: 'Link copied to clipboard!' })
+        e.preventDefault();
+        toast.add({ title: 'Link copied to clipboard!' });
       },
-      kbds: ['meta', 'L']
+      kbds: ['meta', 'L'],
     }, {
       label: 'Share via email',
       icon: 'i-lucide-mail',
       suffix: 'Share the current item via email',
       onSelect(e: Event) {
-        e.preventDefault()
-        toast.add({ title: 'Share via email dialog opened!' })
-      }
+        e.preventDefault();
+        toast.add({ title: 'Share via email dialog opened!' });
+      },
     }, {
       label: 'Share on social',
       icon: 'i-lucide-share-2',
@@ -63,25 +63,25 @@ const groups = [{
         label: 'Twitter',
         icon: 'i-simple-icons-twitter',
         onSelect(e: Event) {
-          e.preventDefault()
-          toast.add({ title: 'Shared on Twitter!' })
-        }
+          e.preventDefault();
+          toast.add({ title: 'Shared on Twitter!' });
+        },
       }, {
         label: 'LinkedIn',
         icon: 'i-simple-icons-linkedin',
         onSelect(e: Event) {
-          e.preventDefault()
-          toast.add({ title: 'Shared on LinkedIn!' })
-        }
+          e.preventDefault();
+          toast.add({ title: 'Shared on LinkedIn!' });
+        },
       }, {
         label: 'Facebook',
         icon: 'i-simple-icons-facebook',
         onSelect(e: Event) {
-          e.preventDefault()
-          toast.add({ title: 'Shared on Facebook!' })
-        }
-      }]
-    }]
+          e.preventDefault();
+          toast.add({ title: 'Shared on Facebook!' });
+        },
+      }],
+    }],
   }, {
     label: 'Settings',
     icon: 'i-lucide-settings',
@@ -90,30 +90,33 @@ const groups = [{
       icon: 'i-lucide-sliders',
       suffix: 'Configure general settings',
       onSelect(e: Event) {
-        e.preventDefault()
-        toast.add({ title: 'General settings opened!' })
-      }
+        e.preventDefault();
+        toast.add({ title: 'General settings opened!' });
+      },
     }, {
       label: 'Appearance',
       icon: 'i-lucide-palette',
       suffix: 'Customize the appearance',
       onSelect(e: Event) {
-        e.preventDefault()
-        toast.add({ title: 'Appearance settings opened!' })
-      }
+        e.preventDefault();
+        toast.add({ title: 'Appearance settings opened!' });
+      },
     }, {
       label: 'Security',
       icon: 'i-lucide-shield',
       suffix: 'Manage security settings',
       onSelect(e: Event) {
-        e.preventDefault()
-        toast.add({ title: 'Security settings opened!' })
-      }
-    }]
-  }]
-}]
+        e.preventDefault();
+        toast.add({ title: 'Security settings opened!' });
+      },
+    }],
+  }],
+}];
 </script>
 
 <template>
-  <PCommandPalette :groups="groups" class="flex-1" />
+  <PCommandPalette
+    :groups="groups"
+    class="flex-1"
+  />
 </template>

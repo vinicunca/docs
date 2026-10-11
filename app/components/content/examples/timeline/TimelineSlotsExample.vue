@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import type { TimelineItem } from 'pohon-ui'
-import { useTimeAgo } from '@vueuse/core'
+import type { TimelineItem } from 'pohon-ui';
+import { useTimeAgo } from '@vueuse/core';
 
 const items = [{
   username: 'J-Michalek',
@@ -8,13 +8,13 @@ const items = [{
   action: 'opened this',
   avatar: {
     src: 'https://github.com/J-Michalek.png',
-    loading: 'lazy' as const
-  }
+    loading: 'lazy' as const,
+  },
 }, {
   username: 'J-Michalek',
   date: '2025-05-26T19:30:14+02:00',
   action: 'marked this pull request as ready for review',
-  icon: 'i-lucide-check-circle'
+  icon: 'i-lucide-check-circle',
 }, {
   username: 'benjamincanac',
   date: '2025-05-27T11:01:20Z',
@@ -22,8 +22,8 @@ const items = [{
   description: 'I\'ve made a few changes, let me know what you think! Basically I updated the design, removed unnecessary divs, used Avatar component for the indicator since it supports icon already.',
   avatar: {
     src: 'https://github.com/benjamincanac.png',
-    loading: 'lazy' as const
-  }
+    loading: 'lazy' as const,
+  },
 }, {
   username: 'J-Michalek',
   date: '2025-05-27T11:01:20Z',
@@ -31,14 +31,14 @@ const items = [{
   description: 'Looks great! Good job on cleaning it up.',
   avatar: {
     src: 'https://github.com/J-Michalek.png',
-    loading: 'lazy' as const
-  }
+    loading: 'lazy' as const,
+  },
 }, {
   username: 'benjamincanac',
   date: '2025-05-27T11:01:20Z',
   action: 'merged this',
-  icon: 'i-lucide-git-merge'
-}] satisfies TimelineItem[]
+  icon: 'i-lucide-git-merge',
+}] satisfies Array<TimelineItem>;
 </script>
 
 <template>
@@ -47,13 +47,13 @@ const items = [{
     size="xs"
     :ui="{
       date: 'float-end ms-1',
-      description: 'px-3 py-2 ring ring-ring mt-2 rounded-md color-text'
+      description: 'px-3 py-2 ring ring-ring mt-2 rounded-md color-text',
     }"
     class="w-96"
   >
     <template #title="{ item }">
       <span>{{ item.username }}</span>
-      <span class="font-normal color-text-muted">&nbsp;{{ item.action }}</span>
+      <span class="color-text-muted font-normal">&nbsp;{{ item.action }}</span>
     </template>
 
     <template #date="{ item }">

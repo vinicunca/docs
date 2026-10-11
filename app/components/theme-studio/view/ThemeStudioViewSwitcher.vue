@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { PopoverProps, TabsItem } from 'pohon-ui'
-import { keepPanels } from '../../../utils/theme/studio'
+import type { PopoverProps, TabsItem } from 'pohon-ui';
+import { keepPanels } from '../../../utils/theme/studio';
 
 /**
  * The view switcher. On the desktop bar: Components as a plain tab, the
@@ -8,55 +8,59 @@ import { keepPanels } from '../../../utils/theme/studio'
  * template is showing, that tab wears its name and glyph. In the mobile
  * menu: a plain select over every view, like the controls around it.
  */
-defineOptions({ inheritAttrs: false })
+defineOptions({ inheritAttrs: false });
 
 const props = withDefaults(defineProps<{
-  content?: PopoverProps['content']
+  content?: PopoverProps['content'];
   /** Stacked in the mobile menu: a select, like the rest of the controls there. */
-  vertical?: boolean
+  vertical?: boolean;
 }>(), {
-  content: () => ({ align: 'center' })
-})
+  content: () => ({ align: 'center' }),
+});
 
-const open = defineModel<boolean>('open', { default: false })
+const open = defineModel<boolean>('open', { default: false });
 
-const { view, views } = useThemeStudioView()
-const studioIcons = useStudioIcons()
-const appConfig = useAppConfig()
+const { view, views } = useThemeStudioView();
+const studioIcons = useStudioIcons();
+const appConfig = useAppConfig();
 
-type View = typeof view.value
+type View = typeof view.value;
 
 /** Every view as a select row, the mobile menu's flat list. */
-const options = computed(() => views.map(tab => ({ label: tab.label, value: tab.value, icon: studioIcons[tab.value] })))
+const options = computed(() => views.map((tab) => ({ label: tab.label, value: tab.value, icon: studioIcons[tab.value] })));
 
 const selected = computed({
   get: () => view.value,
   set: (value: string | number | undefined) => {
-    if (value) view.value = value as View
-  }
-})
+    if (value) {
+      view.value = value as View;
+    }
+  },
+});
 
 // The views with a /templates screenshot share the second tab.
-const templates = views.filter(tab => tab.image)
-const activeTemplate = computed(() => templates.find(tab => tab.value === view.value))
+const templates = views.filter((tab) => tab.image);
+const activeTemplate = computed(() => templates.find((tab) => tab.value === view.value));
 
-const tabs = computed<TabsItem[]>(() => [
+const tabs = computed<Array<TabsItem>>(() => [
   { label: 'Components', value: 'grid', icon: studioIcons.grid },
   {
     label: activeTemplate.value?.label ?? 'Templates',
     value: 'templates',
-    icon: activeTemplate.value ? studioIcons[activeTemplate.value.value] : studioIcons.templates
-  }
-])
+    icon: activeTemplate.value ? studioIcons[activeTemplate.value.value] : studioIcons.templates,
+  },
+]);
 
 // The templates tab only becomes active through the picker, the model never
 // takes it: the view (and so the tabs) stays where it is until a pick.
 const tab = computed({
   get: () => (activeTemplate.value ? 'templates' : view.value),
   set: (value: string | number) => {
-    if (value !== 'templates') view.value = value as View
-  }
-})
+    if (value !== 'templates') {
+      view.value = value as View;
+    }
+  },
+});
 
 /**
  * The panel follows the clicks, not the model: Akar emits a tab's value on
@@ -64,18 +68,22 @@ const tab = computed({
  * The templates tab toggles the panel, the other closes it.
  */
 function onTabsClick(event: MouseEvent) {
-  const trigger = (event.target as HTMLElement | null)?.closest<HTMLElement>('[role="tab"]')
-  if (!trigger) return
+  const trigger = (event.target as HTMLElement | null)?.closest<HTMLElement>('[role="tab"]');
+  if (!trigger) {
+    return;
+  }
 
-  const triggers = [...(trigger.closest('[role="tablist"]')?.querySelectorAll('[role="tab"]') ?? [])]
-  open.value = triggers.indexOf(trigger) === tabs.value.length - 1 ? !open.value : false
+  const triggers = [...(trigger.closest('[role="tablist"]')?.querySelectorAll('[role="tab"]') ?? [])];
+  open.value = triggers.indexOf(trigger) === tabs.value.length - 1 ? !open.value : false;
 }
 
 // Akar's single-select listbox toggles the selected item OFF on a second
 // click and emits undefined; a re-click on the current template just closes.
 function select(value: unknown) {
-  if (value) view.value = value as View
-  open.value = false
+  if (value) {
+    view.value = value as View;
+  }
+  open.value = false;
 }
 
 /**
@@ -89,8 +97,8 @@ const gridUi = {
   group: 'p-0 grid grid-cols-4 gap-0',
   item: 'flex-col p-2 rounded-lg ring-inset before:rounded-lg gap-2 data-[state=checked]:before:bg-background-elevated/50',
   itemDescription: 'whitespace-normal line-clamp-2 text-xs p-0',
-  itemTrailing: 'hidden'
-}
+  itemTrailing: 'hidden',
+};
 </script>
 
 <template>
@@ -124,7 +132,7 @@ const gridUi = {
         :ui="{
           root: 'w-68',
           indicator: 'bg-background',
-          trigger: 'data-[state=active]:color-text-highlighted in-[[data-slot=list]:not(:has([data-slot=indicator]))]:data-[state=active]:before:bg-background w-1/2'
+          trigger: 'data-[state=active]:color-text-highlighted in-[[data-slot=list]:not(:has([data-slot=indicator]))]:data-[state=active]:before:bg-background w-1/2',
         }"
         data-keep-panels
         aria-label="View"
@@ -135,7 +143,8 @@ const gridUi = {
           <PIcon
             v-if="item.value === 'templates'"
             :name="appConfig.ui.icons.chevronDown"
-            :class="['size-4 shrink-0 transition-transform duration-200', open && 'rotate-180']"
+            class="shrink-0 size-4 transition-transform duration-200"
+            :class="[open && 'rotate-180']"
           />
         </template>
       </PTabs>
@@ -160,7 +169,7 @@ const gridUi = {
             width="654"
             height="368"
             loading="lazy"
-            class="w-full aspect-video rounded ring ring-ring"
+            class="rounded w-full aspect-video ring ring-ring"
           />
         </template>
       </PListbox>

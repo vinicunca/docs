@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { TreeItemSelectEvent } from 'akar'
-import type { TreeItem } from 'pohon-ui'
+import type { TreeItemSelectEvent } from 'akar';
+import type { TreeItem } from 'pohon-ui';
 
-const items: TreeItem[] = [
+const items: Array<TreeItem> = [
   {
     label: 'app/',
     defaultExpanded: true,
@@ -11,28 +11,28 @@ const items: TreeItem[] = [
         label: 'composables/',
         children: [
           { label: 'useAuth.ts' },
-          { label: 'useUser.ts' }
-        ]
+          { label: 'useUser.ts' },
+        ],
       },
       {
         label: 'components/',
         defaultExpanded: true,
         children: [
           { label: 'Card.vue' },
-          { label: 'Button.vue' }
-        ]
-      }
-    ]
+          { label: 'Button.vue' },
+        ],
+      },
+    ],
   },
   { label: 'app.vue' },
-  { label: 'nuxt.config.ts' }
-]
+  { label: 'nuxt.config.ts' },
+];
 
-const value = ref<(typeof items)>([])
+const value = ref<(typeof items)>([]);
 
 function onSelect(e: TreeItemSelectEvent<TreeItem>) {
   if (e.detail.originalEvent.type === 'click') {
-    e.preventDefault()
+    e.preventDefault();
   }
 }
 </script>

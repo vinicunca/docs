@@ -1,34 +1,37 @@
 <script setup lang="ts">
-import type { ContextMenuItem } from 'pohon-ui'
+import type { ContextMenuItem } from 'pohon-ui';
 
-const items: ContextMenuItem[][] = [
+const items: Array<Array<ContextMenuItem>> = [
   [
     {
       label: 'View',
-      icon: 'i-lucide-eye'
+      icon: 'i-lucide-eye',
     },
     {
       label: 'Copy',
-      icon: 'i-lucide-copy'
+      icon: 'i-lucide-copy',
     },
     {
       label: 'Edit',
-      icon: 'i-lucide-pencil'
-    }
+      icon: 'i-lucide-pencil',
+    },
   ],
   [
     {
       label: 'Delete',
       color: 'error' as const,
-      icon: 'i-lucide-trash'
-    }
-  ]
-]
+      icon: 'i-lucide-trash',
+    },
+  ],
+];
 </script>
 
 <template>
-  <PContextMenu :items="items" :ui="{ content: 'w-48' }">
-    <div class="flex items-center justify-center rounded-md border border-dashed border-border-accented text-sm aspect-video w-72">
+  <PContextMenu
+    :items="items"
+    :ui="{ content: 'w-48' }"
+  >
+    <div class="text-sm border border-border-accented rounded-md border-dashed flex w-72 aspect-video items-center justify-center">
       Right click here
     </div>
   </PContextMenu>

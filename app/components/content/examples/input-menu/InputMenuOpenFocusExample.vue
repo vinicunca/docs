@@ -1,6 +1,6 @@
 <script setup lang="ts">
-const items = ref(['Backlog', 'Todo', 'In Progress', 'Done'])
-const selected = ref('Backlog')
+const items = ref(['Backlog', 'Todo', 'In Progress', 'Done']);
+const selected = ref('Backlog');
 </script>
 
 <template>

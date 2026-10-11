@@ -18,7 +18,7 @@ A field, prop or parameter to display in your content.
 The `description` can be set as prop or in the default slot with full **markdown** support.
 ::
 
-#code
+# code
 
 ```mdc
 ::field{name="name" type="string" required}

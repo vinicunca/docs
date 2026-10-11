@@ -6,15 +6,18 @@ const testimonial = ref({
     avatar: {
       src: 'https://avatars.githubusercontent.com/u/499550?v=4',
       alt: 'Evan You',
-      loading: 'lazy' as const
-    }
+      loading: 'lazy' as const,
+    },
   },
-  quote: '“Nuxt on Cloudflare infra with minimal effort - this is huge!”'
-})
+  quote: '“Nuxt on Cloudflare infra with minimal effort - this is huge!”',
+});
 </script>
 
 <template>
-  <PPageCard :description="testimonial.quote" class="w-60">
+  <PPageCard
+    :description="testimonial.quote"
+    class="w-60"
+  >
     <template #footer>
       <PUser v-bind="testimonial.user" />
     </template>

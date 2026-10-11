@@ -257,7 +257,10 @@ You can also customize the color and size by using the `--spotlight-color` and `
 
 ```vue
 <template>
-  <PPageCard spotlight class="[--spotlight-color:var(--ui-error)] [--spotlight-size:200px]" />
+  <PPageCard
+    spotlight
+    class="[--spotlight-color:var(--ui-error)] [--spotlight-size:200px]"
+  />
 </template>
 ```
 ::

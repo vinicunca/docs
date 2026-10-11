@@ -94,7 +94,7 @@ import {
   YearRangePickerNext,
   YearRangePickerPrev,
   YearRangePickerRoot,
-} from 'akar'
+} from 'akar';
 </script>
 
 <template>

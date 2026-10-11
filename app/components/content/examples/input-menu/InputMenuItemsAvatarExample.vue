@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { InputMenuItem } from 'pohon-ui'
+import type { InputMenuItem } from 'pohon-ui';
 
 const items = ref([
   {
@@ -8,8 +8,8 @@ const items = ref([
     avatar: {
       src: 'https://github.com/benjamincanac.png',
       alt: 'benjamincanac',
-      loading: 'lazy' as const
-    }
+      loading: 'lazy' as const,
+    },
   },
   {
     label: 'HugoRCD',
@@ -17,8 +17,8 @@ const items = ref([
     avatar: {
       src: 'https://github.com/HugoRCD.png',
       alt: 'HugoRCD',
-      loading: 'lazy' as const
-    }
+      loading: 'lazy' as const,
+    },
   },
   {
     label: 'atinux',
@@ -26,8 +26,8 @@ const items = ref([
     avatar: {
       src: 'https://github.com/atinux.png',
       alt: 'atinux',
-      loading: 'lazy' as const
-    }
+      loading: 'lazy' as const,
+    },
   },
   {
     label: 'romhml',
@@ -35,14 +35,18 @@ const items = ref([
     avatar: {
       src: 'https://github.com/romhml.png',
       alt: 'romhml',
-      loading: 'lazy' as const
-    }
-  }
-] satisfies InputMenuItem[])
+      loading: 'lazy' as const,
+    },
+  },
+] satisfies Array<InputMenuItem>);
 
-const value = ref(items.value[0])
+const value = ref(items.value[0]);
 </script>
 
 <template>
-  <PInputMenu v-model="value" :avatar="value?.avatar" :items="items" />
+  <PInputMenu
+    v-model="value"
+    :avatar="value?.avatar"
+    :items="items"
+  />
 </template>

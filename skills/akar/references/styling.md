@@ -43,13 +43,36 @@ UnoCSS / Tailwind variants: `data-[state=open]:rotate-180`, `data-[disabled]:opa
 `<popper>` is one of `popover`, `tooltip`, `hover-card`, `dropdown-menu`, `context-menu`, `menubar`, `select`, `combobox`.
 
 ```css
-.AccordionContent { overflow: hidden; }
-.AccordionContent[data-state='open'] { animation: slideDown 300ms ease-out; }
-.AccordionContent[data-state='closed'] { animation: slideUp 300ms ease-out; }
-@keyframes slideDown { from { height: 0 } to { height: var(--akar-accordion-content-height) } }
-@keyframes slideUp { from { height: var(--akar-accordion-content-height) } to { height: 0 } }
+.AccordionContent {
+  overflow: hidden;
+}
+.AccordionContent[data-state='open'] {
+  animation: slideDown 300ms ease-out;
+}
+.AccordionContent[data-state='closed'] {
+  animation: slideUp 300ms ease-out;
+}
+@keyframes slideDown {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--akar-accordion-content-height);
+  }
+}
+@keyframes slideUp {
+  from {
+    height: var(--akar-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
 
-.PopoverContent { width: var(--akar-popover-trigger-width); max-height: var(--akar-popover-content-available-height); }
+.PopoverContent {
+  width: var(--akar-popover-trigger-width);
+  max-height: var(--akar-popover-content-available-height);
+}
 ```
 
 ## Teleported parts

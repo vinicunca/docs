@@ -1,6 +1,10 @@
 <template>
   <PFieldGroup>
-    <PInput color="neutral" variant="outline" placeholder="Enter token" />
+    <PInput
+      color="neutral"
+      variant="outline"
+      placeholder="Enter token"
+    />
 
     <PTooltip text="Copy to clipboard">
       <PButton

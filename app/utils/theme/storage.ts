@@ -1,12 +1,12 @@
-import type { ThemeDoc, StoredPaletteParams, StyleOptions } from './engine'
-import { DEFAULT_COLORS, THEME_DEFAULTS } from './engine/types'
-import { SAFE_NAME } from './sanitize'
+import type { StoredPaletteParams, StyleOptions, ThemeDoc } from './engine';
+import { DEFAULT_COLORS, THEME_DEFAULTS } from './engine/types';
+import { SAFE_NAME } from './sanitize';
 
 /**
  * The font document: all three stacks plus the body treatment, exactly the
  * doc's own shape.
  */
-export type FontPrefs = NonNullable<ThemeDoc['font']>
+export type FontPrefs = NonNullable<ThemeDoc['font']>;
 
 /**
  * The theme's single persisted key. One key writes atomically, so a derived
@@ -19,27 +19,27 @@ export type FontPrefs = NonNullable<ThemeDoc['font']>
  * hydration, see plugins/theme.ts). `currentDoc()` still derives the doc from
  * this state whenever an export, a preset diff or a history entry needs one.
  */
-export const THEME_STORAGE_KEY = 'pohon-ui-theme'
+export const THEME_STORAGE_KEY = 'pohon-ui-theme';
 
 export interface StoredTheme {
-  primary?: string
-  neutral?: string
-  radius?: number
-  fontSize?: number
-  icons?: string
-  blackAsPrimary?: boolean
-  font?: FontPrefs
+  primary?: string;
+  neutral?: string;
+  radius?: number;
+  fontSize?: number;
+  icons?: string;
+  blackAsPrimary?: boolean;
+  font?: FontPrefs;
   /** Semantic alias overrides (secondary, success, info, warning, error). */
-  colors?: Record<string, string>
+  colors?: Record<string, string>;
   /** Explicit per-component overrides, from presets, imports or the AI chat. */
-  components?: Record<string, Record<string, unknown>>
-  customColors?: Record<string, Record<string, string>>
-  cssVariables?: { light?: Record<string, string>, dark?: Record<string, string> }
-  style?: StyleOptions
+  components?: Record<string, Record<string, unknown>>;
+  customColors?: Record<string, Record<string, string>>;
+  cssVariables?: { light?: Record<string, string>; dark?: Record<string, string> };
+  style?: StyleOptions;
   /** The palette editor's curves and pins, the source the ramps derive from. */
-  paletteParams?: Partial<Record<string, StoredPaletteParams>>
+  paletteParams?: Partial<Record<string, StoredPaletteParams>>;
   /** The preset the per-section dirty and reset comparisons measure against. */
-  preset?: string
+  preset?: string;
 }
 
 /**
@@ -49,27 +49,35 @@ export interface StoredTheme {
  * these read back per type rather than through JSON.parse.
  */
 const LEGACY_KEYS = [
-  'pohon-ui-primary', 'pohon-ui-neutral', 'pohon-ui-radius', 'pohon-ui-font-size',
-  'pohon-ui-font', 'pohon-ui-icons', 'pohon-ui-black-as-primary',
-  'pohon-ui-font-prefs', 'pohon-ui-ai-theme', 'pohon-ui-custom-colors', 'pohon-ui-css-variables'
-]
+  'pohon-ui-primary',
+  'pohon-ui-neutral',
+  'pohon-ui-radius',
+  'pohon-ui-font-size',
+  'pohon-ui-font',
+  'pohon-ui-icons',
+  'pohon-ui-black-as-primary',
+  'pohon-ui-font-prefs',
+  'pohon-ui-ai-theme',
+  'pohon-ui-custom-colors',
+  'pohon-ui-css-variables',
+];
 
 function migrateLegacyTheme(): StoredTheme {
-  const read = (key: string) => window.localStorage.getItem(key) ?? undefined
+  const read = (key: string) => window.localStorage.getItem(key) ?? undefined;
   const number = (key: string) => {
-    const value = Number.parseFloat(read(key) ?? '')
-    return Number.isFinite(value) ? value : undefined
-  }
+    const value = Number.parseFloat(read(key) ?? '');
+    return Number.isFinite(value) ? value : undefined;
+  };
   const json = <T>(key: string): T | undefined => {
     try {
-      const raw = read(key)
-      return raw ? JSON.parse(raw) as T : undefined
+      const raw = read(key);
+      return raw ? JSON.parse(raw) as T : undefined;
     } catch {
-      return undefined
+      return undefined;
     }
-  }
+  };
 
-  const extras = json<{ colors?: Record<string, string>, ui?: Record<string, Record<string, unknown>> }>('pohon-ui-ai-theme')
+  const extras = json<{ colors?: Record<string, string>; ui?: Record<string, Record<string, unknown>> }>('pohon-ui-ai-theme');
   const migrated: StoredTheme = {
     primary: read('pohon-ui-primary'),
     neutral: read('pohon-ui-neutral'),
@@ -82,23 +90,25 @@ function migrateLegacyTheme(): StoredTheme {
     colors: extras?.colors,
     components: extras?.ui,
     customColors: json('pohon-ui-custom-colors'),
-    cssVariables: json('pohon-ui-css-variables')
-  }
+    cssVariables: json('pohon-ui-css-variables'),
+  };
 
   // Written back under the new key and the old ones dropped, so this runs
   // exactly once per browser rather than on every load.
-  writeStoredTheme(migrated)
-  LEGACY_KEYS.forEach(key => window.localStorage.removeItem(key))
-  return migrated
+  writeStoredTheme(migrated);
+  LEGACY_KEYS.forEach((key) => window.localStorage.removeItem(key));
+  return migrated;
 }
 
 /** Clamp to a range, or drop the value if it isn't a finite number (a numeric string counts). */
 export function clamped(value: unknown, min: number, max: number): number | undefined {
   // Number() maps null/''/booleans to finite numbers, which would clamp
   // junk to the range floor instead of dropping it.
-  if (typeof value !== 'number' && typeof value !== 'string') return undefined
-  const number = Number(value)
-  return value !== '' && Number.isFinite(number) ? Math.min(max, Math.max(min, number)) : undefined
+  if (typeof value !== 'number' && typeof value !== 'string') {
+    return undefined;
+  }
+  const number = Number(value);
+  return value !== '' && Number.isFinite(number) ? Math.min(max, Math.max(min, number)) : undefined;
 }
 
 /**
@@ -108,72 +118,102 @@ export function clamped(value: unknown, min: number, max: number): number | unde
  * read as a change forever, keeping the reset button lit).
  */
 function normalizeFont(raw: unknown): FontPrefs | undefined {
-  if (!raw || typeof raw !== 'object') return undefined
-  const input = raw as Record<string, any>
-  const font: FontPrefs = {}
+  if (!raw || typeof raw !== 'object') {
+    return undefined;
+  }
+  const input = raw as Record<string, any>;
+  const font: FontPrefs = {};
 
   // `heading` was the old h1–h6 treatment. Only the family survived the
   // rework, as the serif stack; the rest is dropped rather than kept as dead
   // weight that every dirty check would still measure.
-  const family = (value: unknown) => typeof value === 'string' && SAFE_NAME.test(value) ? value : undefined
-  const sans = family(input.sans)
-  if (sans && sans !== THEME_DEFAULTS.font) font.sans = sans
-  const serif = family(input.serif) ?? family(input.heading?.font)
-  if (serif) font.serif = serif
-  const mono = family(input.mono)
-  if (mono) font.mono = mono
-
-  const weights: NonNullable<FontPrefs['weights']> = {}
-  for (const step of ['normal', 'medium', 'semibold', 'bold'] as const) {
-    const weight = clamped(input.weights?.[step], 100, 900)
-    if (weight !== undefined) weights[step] = weight
+  const family = (value: unknown) => typeof value === 'string' && SAFE_NAME.test(value) ? value : undefined;
+  const sans = family(input.sans);
+  if (sans && sans !== THEME_DEFAULTS.font) {
+    font.sans = sans;
   }
-  if (Object.keys(weights).length) font.weights = weights
+  const serif = family(input.serif) ?? family(input.heading?.font);
+  if (serif) {
+    font.serif = serif;
+  }
+  const mono = family(input.mono);
+  if (mono) {
+    font.mono = mono;
+  }
 
-  if (input.uppercase) font.uppercase = true
-  if (input.italic) font.italic = true
-  const letterSpacing = clamped(input.letterSpacing, -0.2, 1)
-  if (letterSpacing !== undefined && letterSpacing !== 0) font.letterSpacing = letterSpacing
-  const lineHeight = clamped(input.lineHeight, 0.8, 3)
-  if (lineHeight !== undefined && lineHeight !== 1.5) font.lineHeight = lineHeight
+  const weights: NonNullable<FontPrefs['weights']> = {};
+  for (const step of ['normal', 'medium', 'semibold', 'bold'] as const) {
+    const weight = clamped(input.weights?.[step], 100, 900);
+    if (weight !== undefined) {
+      weights[step] = weight;
+    }
+  }
+  if (Object.keys(weights).length) {
+    font.weights = weights;
+  }
 
-  return Object.keys(font).length ? font : undefined
+  if (input.uppercase) {
+    font.uppercase = true;
+  }
+  if (input.italic) {
+    font.italic = true;
+  }
+  const letterSpacing = clamped(input.letterSpacing, -0.2, 1);
+  if (letterSpacing !== undefined && letterSpacing !== 0) {
+    font.letterSpacing = letterSpacing;
+  }
+  const lineHeight = clamped(input.lineHeight, 0.8, 3);
+  if (lineHeight !== undefined && lineHeight !== 1.5) {
+    font.lineHeight = lineHeight;
+  }
+
+  return Object.keys(font).length ? font : undefined;
 }
 
 /** Never throws: a corrupt or absent key reads as "no saved theme". */
 export function readStoredTheme(): StoredTheme {
-  if (!import.meta.client) return {}
+  if (!import.meta.client) {
+    return {};
+  }
   try {
-    const raw = window.localStorage.getItem(THEME_STORAGE_KEY)
+    const raw = window.localStorage.getItem(THEME_STORAGE_KEY);
     if (!raw) {
-      return LEGACY_KEYS.some(key => window.localStorage.getItem(key) !== null)
+      return LEGACY_KEYS.some((key) => window.localStorage.getItem(key) !== null)
         ? migrateLegacyTheme()
-        : {}
+        : {};
     }
-    const parsed = JSON.parse(raw)
-    if (!parsed || typeof parsed !== 'object') return {}
-    parsed.font = normalizeFont(parsed.font)
-    return parsed as StoredTheme
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== 'object') {
+      return {};
+    }
+    parsed.font = normalizeFont(parsed.font);
+    return parsed as StoredTheme;
   } catch {
-    return {}
+    return {};
   }
 }
 
 /** An empty theme removes the key rather than storing `{}`. */
 export function writeStoredTheme(value: StoredTheme) {
-  if (!import.meta.client) return
+  if (!import.meta.client) {
+    return;
+  }
   const entries = Object.entries(value).filter(([, entry]) => {
-    if (entry === undefined) return false
-    if (entry && typeof entry === 'object') return Object.keys(entry).length > 0
-    return true
-  })
+    if (entry === undefined) {
+      return false;
+    }
+    if (entry && typeof entry === 'object') {
+      return Object.keys(entry).length > 0;
+    }
+    return true;
+  });
   // Never throws: Safari private mode and quota-exceeded raise from setItem,
   // and this runs from a watcher on every theme change.
   try {
     if (entries.length) {
-      window.localStorage.setItem(THEME_STORAGE_KEY, JSON.stringify(Object.fromEntries(entries)))
+      window.localStorage.setItem(THEME_STORAGE_KEY, JSON.stringify(Object.fromEntries(entries)));
     } else {
-      window.localStorage.removeItem(THEME_STORAGE_KEY)
+      window.localStorage.removeItem(THEME_STORAGE_KEY);
     }
   } catch {
     // the theme still applies in memory, it just won't survive the reload
@@ -188,11 +228,11 @@ export function writeStoredTheme(value: StoredTheme) {
  * outside a component would fire its onMounted with no instance.
  */
 export function snapshotStoredTheme(): StoredTheme {
-  const appConfig = useAppConfig()
-  const filled = <T extends object>(value: T | undefined) => value && Object.keys(value).length ? value : undefined
-  const unless = <T>(value: T, fallback: T) => value === fallback ? undefined : value
-  const extras = useState<Record<string, any>>('pohon-ui-ai-theme').value
-  const cssVariables = useState<StoredTheme['cssVariables']>('pohon-ui-css-variables').value
+  const appConfig = useAppConfig();
+  const filled = <T extends object>(value: T | undefined) => value && Object.keys(value).length ? value : undefined;
+  const unless = <T>(value: T, fallback: T) => value === fallback ? undefined : value;
+  const extras = useState<Record<string, any>>('pohon-ui-ai-theme').value;
+  const cssVariables = useState<StoredTheme['cssVariables']>('pohon-ui-css-variables').value;
   return {
     primary: unless(appConfig.ui.colors.primary, DEFAULT_COLORS.primary),
     neutral: unless(appConfig.ui.colors.neutral, DEFAULT_COLORS.neutral),
@@ -207,12 +247,12 @@ export function snapshotStoredTheme(): StoredTheme {
     cssVariables: filled(cssVariables?.light) || filled(cssVariables?.dark) ? cssVariables : undefined,
     style: filled(useState<StoredTheme['style']>(THEME_STATE_KEYS.stylePrefs).value),
     paletteParams: filled(useState<StoredTheme['paletteParams']>(THEME_STATE_KEYS.paletteParams).value),
-    preset: useState<string | undefined>(THEME_STATE_KEYS.themePreset).value
-  }
+    preset: useState<string | undefined>(THEME_STATE_KEYS.themePreset).value,
+  };
 }
 
 /** Doc type re-exported so consumers don't reach past this module for it. */
-export type { ThemeDoc }
+export type { ThemeDoc };
 
 /* ------------------------------------------------- shared identifiers -- */
 
@@ -220,11 +260,11 @@ export type { ThemeDoc }
 export const THEME_STATE_KEYS = {
   stylePrefs: 'pohon-ui-style-prefs',
   themePreset: 'pohon-ui-theme-preset',
-  paletteParams: 'pohon-ui-palette-params-state'
-} as const
+  paletteParams: 'pohon-ui-palette-params-state',
+} as const;
 
 /** DOM ids of the style tags useHead owns and the FOUC scripts pre-fill. */
 export const THEME_TAG_IDS = {
   cssVariables: 'pohon-ui-css-variables',
-  customColors: 'pohon-ui-custom-colors'
-} as const
+  customColors: 'pohon-ui-custom-colors',
+} as const;

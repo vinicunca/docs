@@ -72,7 +72,7 @@ import {
   MenubarSubContent,
   MenubarSubTrigger,
   MenubarTrigger,
-} from './'
+} from './';
 </script>
 
 <template>

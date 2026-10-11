@@ -1,14 +1,19 @@
 <script setup lang="ts">
-import { upperFirst } from 'scule'
-import { keepPanels, toolbarPanelClass } from '../../../utils/theme/studio'
-import type { VariantGroup } from '../../../utils/theme/engine'
-import { GROUP_VARIANTS, GROUP_STOCK_VARIANT } from '../../../utils/theme/engine'
+import type { VariantGroup } from '../../../utils/theme/engine';
+import { upperFirst } from 'scule';
+import { GROUP_STOCK_VARIANT, GROUP_VARIANTS } from '../../../utils/theme/engine';
+import { keepPanels, toolbarPanelClass } from '../../../utils/theme/studio';
+
+const props = defineProps<{
+  /** Stacked in the mobile menu: the panel takes the trigger's width, like a select. */
+  vertical?: boolean;
+}>();
 
 /**
  * The variant and colour Buttons, Cards and Inputs start from, one section
  * each so every group carries its own reset.
  */
-const { style, setStyle } = useThemeStudio()
+const { style, setStyle } = useThemeStudio();
 
 // MD is the stock default, one deduped entry storing 'default'
 const defaultSizeItems = [
@@ -16,114 +21,117 @@ const defaultSizeItems = [
   { label: 'SM', value: 'sm' },
   { label: 'MD', value: 'default', defaultTag: true },
   { label: 'LG', value: 'lg' },
-  { label: 'XL', value: 'xl' }
-]
+  { label: 'XL', value: 'xl' },
+];
 
 const defaultSize = computed({
   // legacy saved prefs may still pin 'md' explicitly, it IS the default
   get: () => {
-    const size = style.value.defaults?.size || 'default'
-    return size === 'md' ? 'default' : size
+    const size = style.value.defaults?.size || 'default';
+    return size === 'md' ? 'default' : size;
   },
-  set: (value: any) => setStyle({ defaults: { ...style.value.defaults, size: value } })
-})
+  set: (value: any) => setStyle({ defaults: { ...style.value.defaults, size: value } }),
+});
 
 // Each group offers only what its components support; the app-wide
 // `variant` shows through as the fallback.
-const variantItems = (values: string[]) => values.map(value => ({ label: upperFirst(value), value }))
+const variantItems = (values: Array<string>) => values.map((value) => ({ label: upperFirst(value), value }));
 
 /** Variant names PButton can render itself, the rest (none) fall back. */
-const RENDERABLE_VARIANTS = ['solid', 'outline', 'soft', 'subtle', 'ghost', 'link']
+const RENDERABLE_VARIANTS = ['solid', 'outline', 'soft', 'subtle', 'ghost', 'link'];
 
 /** Variant grid popovers close on pick, one open flag per group. */
-const variantGridOpen = reactive<Record<string, boolean>>({ buttons: false, panels: false, inputs: false })
+const variantGridOpen = reactive<Record<string, boolean>>({ buttons: false, panels: false, inputs: false });
 
 // Offered variants and the stock default both come off the engine tables,
 // so a variant added to the library reaches this panel without an edit here.
 const variantGroupFields = [
   { key: 'buttons' as const, label: 'Buttons', hasColor: true, stock: GROUP_STOCK_VARIANT.buttons, items: variantItems(GROUP_VARIANTS.buttons) },
   { key: 'panels' as const, label: 'Cards', hasColor: false, stock: GROUP_STOCK_VARIANT.panels, items: variantItems(GROUP_VARIANTS.panels) },
-  { key: 'inputs' as const, label: 'Inputs', hasColor: true, stock: GROUP_STOCK_VARIANT.inputs, items: variantItems(GROUP_VARIANTS.inputs) }
-]
+  { key: 'inputs' as const, label: 'Inputs', hasColor: true, stock: GROUP_STOCK_VARIANT.inputs, items: variantItems(GROUP_VARIANTS.inputs) },
+];
 
 function groupVariantModel(group: VariantGroup) {
-  const supported = variantGroupFields.find(field => field.key === group)!.items.map(item => item.value)
+  const supported = variantGroupFields.find((field) => field.key === group)!.items.map((item) => item.value);
   return computed({
     get: () => {
-      const own = style.value.defaults?.variants?.[group]
-      if (own && own !== 'default') return own
+      const own = style.value.defaults?.variants?.[group];
+      if (own && own !== 'default') {
+        return own;
+      }
       // An app-wide value this group can't express (e.g. solid inputs)
       // truthfully reads as Default, the engine skips it there too.
-      const appWide = style.value.defaults?.variant
-      return appWide && supported.includes(appWide) ? appWide : 'default'
+      const appWide = style.value.defaults?.variant;
+      return appWide && supported.includes(appWide) ? appWide : 'default';
     },
     set: (value: any) => {
-      const defaults = style.value.defaults || {}
+      const defaults = style.value.defaults || {};
 
       // Picking Default under an app-wide variant must actually win: the
       // engine skips 'default' entries, so the app-wide value explodes
       // into the OTHER groups (where they support it) and disappears.
       if (value === 'default' && defaults.variant) {
-        const variants: Record<string, any> = {}
+        const variants: Record<string, any> = {};
         for (const field of variantGroupFields) {
-          if (field.key === group) continue
-          const existing = defaults.variants?.[field.key]
+          if (field.key === group) {
+            continue;
+          }
+          const existing = defaults.variants?.[field.key];
           if (existing && existing !== 'default') {
-            variants[field.key] = existing
-          } else if (field.items.some(item => item.value === defaults.variant)) {
-            variants[field.key] = defaults.variant
+            variants[field.key] = existing;
+          } else if (field.items.some((item) => item.value === defaults.variant)) {
+            variants[field.key] = defaults.variant;
           }
         }
-        const next = { ...defaults, variants }
-        delete next.variant
-        setStyle({ defaults: next })
-        return
+        const next = { ...defaults, variants };
+        delete next.variant;
+        setStyle({ defaults: next });
+        return;
       }
 
-      setStyle({ defaults: { ...defaults, variants: { ...defaults.variants, [group]: value } } })
-    }
-  })
+      setStyle({ defaults: { ...defaults, variants: { ...defaults.variants, [group]: value } } });
+    },
+  });
 }
 
-const groupVariants = Object.fromEntries(variantGroupFields.map(field => [field.key, groupVariantModel(field.key)])) as Record<VariantGroup, ReturnType<typeof groupVariantModel>>
+const groupVariants = Object.fromEntries(variantGroupFields.map((field) => [field.key, groupVariantModel(field.key)])) as Record<VariantGroup, ReturnType<typeof groupVariantModel>>;
 
 // Primary IS the stock default, one entry, tagged, storing 'default'
 // (an explicit 'primary' would export a no-op override).
 const defaultColorItems = [
   { label: 'Primary', value: 'default', chip: { color: 'primary' as any }, defaultTag: true },
-  ...['secondary', 'success', 'info', 'warning', 'error', 'neutral'].map(value => ({
+  ...['secondary', 'success', 'info', 'warning', 'error', 'neutral'].map((value) => ({
     label: upperFirst(value),
     value,
-    chip: { color: value as any }
-  }))
-]
+    chip: { color: value as any },
+  })),
+];
 
 function groupColorModel(group: VariantGroup) {
   return computed({
     get: () => style.value.defaults?.colors?.[group] || 'default',
-    set: (value: any) => setStyle({ defaults: { ...style.value.defaults, colors: { ...style.value.defaults?.colors, [group]: value } } })
-  })
+    set: (value: any) => setStyle({ defaults: { ...style.value.defaults, colors: { ...style.value.defaults?.colors, [group]: value } } }),
+  });
 }
 
-const groupColors = Object.fromEntries(variantGroupFields.map(field => [field.key, groupColorModel(field.key)])) as Record<VariantGroup, ReturnType<typeof groupColorModel>>
+const groupColors = Object.fromEntries(variantGroupFields.map((field) => [field.key, groupColorModel(field.key)])) as Record<VariantGroup, ReturnType<typeof groupColorModel>>;
 
-const props = defineProps<{
-  /** Stacked in the mobile menu: the panel takes the trigger's width, like a select. */
-  vertical?: boolean
-}>()
+const studioIcons = useStudioIcons();
+const appConfig = useAppConfig();
+const { defaultsLabel, groupDirtyFlags } = useThemeStudioToolbar();
 
-const studioIcons = useStudioIcons()
-const appConfig = useAppConfig()
-const { defaultsLabel, groupDirtyFlags } = useThemeStudioToolbar()
+const open = ref(false);
+const dirty = groupDirtyFlags.defaults;
 
-const open = ref(false)
-const dirty = groupDirtyFlags.defaults
-
-const content = computed(() => [...toolbarPanelClass(props.vertical), 'divide-y divide-border *:p-3'])
+const content = computed(() => [...toolbarPanelClass(props.vertical), 'divide-y divide-border *:p-3']);
 </script>
 
 <template>
-  <PPopover v-model:open="open" :content="{ align: 'center', onInteractOutside: keepPanels }" :ui="{ content }">
+  <PPopover
+    v-model:open="open"
+    :content="{ align: 'center', onInteractOutside: keepPanels }"
+    :ui="{ content }"
+  >
     <ThemeStudioToolbarTrigger
       :label="defaultsLabel"
       :icon="studioIcons.options"
@@ -134,7 +142,10 @@ const content = computed(() => [...toolbarPanelClass(props.vertical), 'divide-y 
     />
 
     <template #content>
-      <ThemeStudioSection label="Global" section-key="size">
+      <ThemeStudioSection
+        label="Global"
+        section-key="size"
+      >
         <ThemeStudioRow
           v-model="defaultSize"
           control="select"
@@ -152,7 +163,10 @@ const content = computed(() => [...toolbarPanelClass(props.vertical), 'divide-y 
         :section-key="field.key"
       >
         <div class="flex flex-col gap-1">
-          <ThemeStudioRow control="custom" label="Variant">
+          <ThemeStudioRow
+            control="custom"
+            label="Variant"
+          >
             <PPopover
               v-model:open="variantGridOpen[field.key]"
               :content="{ side: 'bottom', align: 'center' }"
@@ -171,7 +185,7 @@ const content = computed(() => [...toolbarPanelClass(props.vertical), 'divide-y 
                 :ui="{
                   label: 'flex-1 text-left',
                   leadingIcon: 'color-text-dimmed',
-                  trailingIcon: 'color-text-dimmed transition-transform duration-200 group-data-[state=open]:rotate-180'
+                  trailingIcon: 'color-text-dimmed transition-transform duration-200 group-data-[state=open]:rotate-180',
                 }"
               >
                 <!-- the tag belongs in the grid, where it names the stock option -->
@@ -188,11 +202,15 @@ const content = computed(() => [...toolbarPanelClass(props.vertical), 'divide-y 
                   :variant="RENDERABLE_VARIANTS.includes(item.value) ? (item.value as any) : 'subtle'"
                   :active="groupVariants[field.key].value === item.value || (groupVariants[field.key].value === 'default' && item.value === field.stock)"
                   active-color="primary"
-                  :class="[item.value === 'none' && 'opacity-60', 'min-w-0']"
+                  class="min-w-0"
+                  :class="[item.value === 'none' && 'opacity-60']"
                   @click="groupVariants[field.key].value = (item.value === field.stock ? 'default' : item.value); variantGridOpen[field.key] = false"
                 >
                   <!-- opacity, not a color: color-text-dimmed would fight the variant's own text color -->
-                  <span class="truncate">{{ item.label }}<span v-if="item.value === field.stock" class="opacity-70 font-normal">&nbsp;(Default)</span></span>
+                  <span class="truncate">{{ item.label }}<span
+                    v-if="item.value === field.stock"
+                    class="font-normal opacity-70"
+                  >&nbsp;(Default)</span></span>
                 </PButton>
               </template>
             </PPopover>

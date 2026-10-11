@@ -10,10 +10,10 @@ By using this composables, it will convert the `emits` you've declared into an o
 
 ```vue
 <script setup lang="ts">
-import { useEmitAsProps } from 'akar'
+import { useEmitAsProps } from 'akar';
 
-const emits = defineEmits<CompEmitType>()
-const emitsAsProps = useEmitAsProps(emits)
+const emits = defineEmits<CompEmitType>();
+const emitsAsProps = useEmitAsProps(emits);
 </script>
 
 <template>

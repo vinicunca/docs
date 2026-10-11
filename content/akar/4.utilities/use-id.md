@@ -22,13 +22,13 @@ Use `ConfigProvider` when your framework provides its own SSR-stable ID source, 
 ## Usage
 
 ```ts
-import { useId } from 'akar'
+import { useId } from 'akar';
 
-const buttonId = useId() // reka-1
+const buttonId = useId(); // reka-1
 ```
 
 ```ts
-import { useId } from 'akar'
+import { useId } from 'akar';
 
-const buttonId = useId('test-id') // test-id
+const buttonId = useId('test-id'); // test-id
 ```

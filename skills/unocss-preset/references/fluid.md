@@ -5,7 +5,8 @@ Docs: https://vinicunca.dev/raw/unocss-preset/fluid.md · [utilities](https://vi
 Output for `fluid-pt-32/64` (defaults: `px`, 320–1920):
 
 ```css
---fluid-pt-min: 32; --fluid-pt-max: 64;
+--fluid-pt-min: 32;
+--fluid-pt-max: 64;
 padding-top: clamp(32px, <linear interpolation over 100vw>, 64px);
 ```
 

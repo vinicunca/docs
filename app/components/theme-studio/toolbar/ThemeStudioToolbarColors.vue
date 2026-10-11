@@ -1,23 +1,27 @@
 <script setup lang="ts">
-import { SEMANTIC_ALIASES } from '../../../utils/theme/engine'
-import { keepPanels, toolbarPanelClass } from '../../../utils/theme/studio'
+import { SEMANTIC_ALIASES } from '../../../utils/theme/engine';
+import { keepPanels, toolbarPanelClass } from '../../../utils/theme/studio';
 
 /** The Colors control: a chip-pair trigger opening the per-alias sections. */
 const props = defineProps<{
   /** Stacked in the mobile menu: the panel takes the trigger's width, like a select. */
-  vertical?: boolean
-}>()
+  vertical?: boolean;
+}>();
 
-const { colorChips, colorLabel, groupDirtyFlags } = useThemeStudioToolbar()
+const { colorChips, colorLabel, groupDirtyFlags } = useThemeStudioToolbar();
 
-const open = ref(false)
-const dirty = groupDirtyFlags.colors
+const open = ref(false);
+const dirty = groupDirtyFlags.colors;
 
-const content = computed(() => [...toolbarPanelClass(props.vertical), 'p-3 flex flex-col gap-3'])
+const content = computed(() => [...toolbarPanelClass(props.vertical), 'p-3 flex flex-col gap-3']);
 </script>
 
 <template>
-  <PPopover v-model:open="open" :content="{ align: 'center', onInteractOutside: keepPanels }" :ui="{ content }">
+  <PPopover
+    v-model:open="open"
+    :content="{ align: 'center', onInteractOutside: keepPanels }"
+    :ui="{ content }"
+  >
     <ThemeStudioToolbarTrigger
       :label="colorLabel"
       :dirty="dirty"
@@ -34,7 +38,7 @@ const content = computed(() => [...toolbarPanelClass(props.vertical), 'p-3 flex 
           <span
             v-for="(chip, index) in colorChips"
             :key="chip.label"
-            class="relative size-3 rounded-full ring-2 ring-bg group-hover:ring-(--ui-color-bg-elevated) transition"
+            class="ring-bg group-hover:ring---ui-color-bg-elevated rounded-full size-3 ring-2 transition relative"
             :class="!chip.dot && 'bg-black dark:bg-white'"
             :style="{ ...(chip.dot ? { backgroundColor: chip.dot } : {}), zIndex: colorChips.length - index }"
           />
@@ -43,8 +47,14 @@ const content = computed(() => [...toolbarPanelClass(props.vertical), 'p-3 flex 
     </ThemeStudioToolbarTrigger>
 
     <template #content>
-      <ThemeStudioColorSection alias="primary" section-key="primary" />
-      <ThemeStudioColorSection alias="neutral" section-key="neutral" />
+      <ThemeStudioColorSection
+        alias="primary"
+        section-key="primary"
+      />
+      <ThemeStudioColorSection
+        alias="neutral"
+        section-key="neutral"
+      />
 
       <ThemeStudioColorSection
         v-for="alias in SEMANTIC_ALIASES"

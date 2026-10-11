@@ -1,4 +1,4 @@
-// Copied from pohon/src/theme/icons.ts: the default icon set is not part of pohon-ui's published files.
+/** Copied from pohon/src/theme/icons.ts: the default icon set is not part of pohon-ui's published files. */
 export default {
   arrowDown: 'i-lucide-arrow-down',
   arrowLeft: 'i-lucide-arrow-left',

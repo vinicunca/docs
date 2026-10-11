@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { TreeItem } from 'pohon-ui'
+import type { TreeItem } from 'pohon-ui';
 
-const items: TreeItem[] = [
+const items: Array<TreeItem> = [
   {
     label: 'app/',
     defaultExpanded: true,
@@ -10,26 +10,29 @@ const items: TreeItem[] = [
         label: 'composables/',
         children: [
           { label: 'useAuth.ts', icon: 'i-vscode-icons-file-type-typescript' },
-          { label: 'useUser.ts', icon: 'i-vscode-icons-file-type-typescript' }
-        ]
+          { label: 'useUser.ts', icon: 'i-vscode-icons-file-type-typescript' },
+        ],
       },
       {
         label: 'components/',
         defaultExpanded: true,
         children: [
           { label: 'Card.vue', icon: 'i-vscode-icons-file-type-vue' },
-          { label: 'Button.vue', icon: 'i-vscode-icons-file-type-vue' }
-        ]
-      }
-    ]
+          { label: 'Button.vue', icon: 'i-vscode-icons-file-type-vue' },
+        ],
+      },
+    ],
   },
   { label: 'app.vue', icon: 'i-vscode-icons-file-type-vue' },
-  { label: 'nuxt.config.ts', icon: 'i-vscode-icons-file-type-nuxt' }
-]
+  { label: 'nuxt.config.ts', icon: 'i-vscode-icons-file-type-nuxt' },
+];
 
-const value = ref()
+const value = ref();
 </script>
 
 <template>
-  <PTree v-model="value" :items="items" />
+  <PTree
+    v-model="value"
+    :items="items"
+  />
 </template>

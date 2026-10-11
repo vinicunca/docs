@@ -18,13 +18,19 @@ Use it inside the default slot of the [DashboardGroup](/pohon/components/dashboa
 <script setup lang="ts">
 definePageMeta({
   layout: 'dashboard'
-})
+});
 </script>
 
 <template>
-  <PDashboardPanel id="inbox-1" resizable />
+  <PDashboardPanel
+    id="inbox-1"
+    resizable
+  />
 
-  <PDashboardPanel id="inbox-2" class="hidden lg:flex" />
+  <PDashboardPanel
+    id="inbox-2"
+    class="hidden lg:flex"
+  />
 </template>
 ```
 
@@ -80,7 +86,7 @@ slots:
 class: '!p-0 !justify-start'
 ---
 
-#body
+# body
 :placeholder{class="h-96"}
 ::
 
@@ -108,7 +114,7 @@ slots:
 class: '!p-0 !justify-start'
 ---
 
-#body
+# body
 :placeholder{class="h-96"}
 ::
 

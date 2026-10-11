@@ -16,7 +16,7 @@ Use the `kbd` component to display a [Kbd](/pohon/components/kbd) in your conten
 ::code-preview{class="[&>div]:*:my-0"}
 :kbd{value="meta"} :kbd{value="K"}
 
-#code
+# code
 
 ```mdc
 :kbd{value="meta"} :kbd{value="K"}

@@ -6,7 +6,7 @@ const tiers = [
     price: '$249',
     description: 'For indie hackers.',
     billingCycle: '/month',
-    button: { label: 'Buy now', variant: 'subtle' as const }
+    button: { label: 'Buy now', variant: 'subtle' as const },
   },
   {
     id: 'team',
@@ -15,16 +15,16 @@ const tiers = [
     description: 'For growing teams.',
     billingCycle: '/month',
     button: { label: 'Buy now' },
-    highlight: true
+    highlight: true,
   },
   {
     id: 'enterprise',
     title: 'Enterprise',
     price: 'Custom',
     description: 'For large organizations.',
-    button: { label: 'Contact sales', color: 'neutral' as const }
-  }
-]
+    button: { label: 'Contact sales', color: 'neutral' as const },
+  },
+];
 
 const sections = [
   {
@@ -34,14 +34,14 @@ const sections = [
       {
         id: 'developers',
         title: 'Number of developers',
-        tiers: { solo: '1', team: '5', enterprise: 'Unlimited' }
+        tiers: { solo: '1', team: '5', enterprise: 'Unlimited' },
       },
       {
         id: 'projects',
         title: 'Projects',
-        tiers: { solo: true, team: true, enterprise: true }
-      }
-    ]
+        tiers: { solo: true, team: true, enterprise: true },
+      },
+    ],
   },
   {
     id: 'security',
@@ -49,37 +49,54 @@ const sections = [
     features: [
       {
         title: 'SSO',
-        tiers: { solo: false, team: true, enterprise: true }
-      }
-    ]
-  }
-]
+        tiers: { solo: false, team: true, enterprise: true },
+      },
+    ],
+  },
+];
 </script>
 
 <template>
-  <PPricingTable :tiers="tiers" :sections="sections">
+  <PPricingTable
+    :tiers="tiers"
+    :sections="sections"
+  >
     <!-- Customize specific tier title -->
     <template #team-title="{ tier }">
-      <div class="flex items-center gap-2">
-        <PIcon name="i-lucide-crown" class="size-4 text-amber-500" />
+      <div class="flex gap-2 items-center">
+        <PIcon
+          name="i-lucide-crown"
+          class="text-amber-500 size-4"
+        />
         {{ tier.title }}
       </div>
     </template>
 
     <!-- Customize specific section title -->
     <template #section-security-title="{ section }">
-      <div class="flex items-center gap-2">
-        <PIcon name="i-lucide-shield-check" class="size-4 text-green-500" />
-        <span class="font-semibold text-green-700">{{ section.title }}</span>
+      <div class="flex gap-2 items-center">
+        <PIcon
+          name="i-lucide-shield-check"
+          class="text-green-500 size-4"
+        />
+        <span class="text-green-700 font-semibold">{{ section.title }}</span>
       </div>
     </template>
 
     <!-- Customize specific feature value -->
     <template #feature-developers-value="{ feature, tier }">
       <template v-if="feature.tiers?.[tier.id]">
-        <PBadge :label="String(feature.tiers[tier.id])" color="primary" variant="soft" />
+        <PBadge
+          :label="String(feature.tiers[tier.id])"
+          color="primary"
+          variant="soft"
+        />
       </template>
-      <PIcon v-else name="i-lucide-x" class="size-4 color-text-muted" />
+      <PIcon
+        v-else
+        name="i-lucide-x"
+        class="color-text-muted size-4"
+      />
     </template>
   </PPricingTable>
 </template>

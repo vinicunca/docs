@@ -7,24 +7,37 @@
  * part wraps under the title when it is wider than a word or two.
  */
 defineProps<{
-  title?: string
+  title?: string;
   /** The figure at the right edge, "12 posts"; the `meta` slot for one that needs markup. */
-  meta?: string
-  ui?: { root?: string, rule?: string, meta?: string }
-}>()
+  meta?: string;
+  ui?: { root?: string; rule?: string; meta?: string };
+}>();
 </script>
 
 <template>
-  <div :class="['flex items-center gap-x-1.5 sm:gap-x-3.5 gap-y-3 min-h-9 mb-8', ui?.root]">
-    <h2 v-if="title" class="text-xs color-text-muted whitespace-nowrap tracking-widest font-medium uppercase truncate">
+  <div
+    class="mb-8 flex gap-x-1.5 gap-y-3 min-h-9 items-center sm:gap-x-3.5"
+    :class="[ui?.root]"
+  >
+    <h2
+      v-if="title"
+      class="text-xs color-text-muted tracking-widest font-medium whitespace-nowrap truncate uppercase"
+    >
       {{ title }}
     </h2>
 
     <slot name="leading" />
 
-    <span :class="['flex-1 h-px bg-border min-w-6', ui?.rule]" />
+    <span
+      class="bg-border flex-1 h-px min-w-6"
+      :class="[ui?.rule]"
+    />
 
-    <span v-if="meta || $slots.meta" :class="['text-[13px] color-text-dimmed whitespace-nowrap font-mono tracking-wide', ui?.meta]">
+    <span
+      v-if="meta || $slots.meta"
+      class="text-[13px] color-text-dimmed tracking-wide font-mono whitespace-nowrap"
+      :class="[ui?.meta]"
+    >
       <slot name="meta">{{ meta }}</slot>
     </span>
 

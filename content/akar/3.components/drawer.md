@@ -67,7 +67,7 @@ import {
   DrawerRoot,
   DrawerTitle,
   DrawerTrigger,
-} from 'akar'
+} from 'akar';
 </script>
 
 <template>
@@ -118,8 +118,16 @@ custom properties so you can wire up the live transform:
   transition-duration: 0ms;
 }
 
-@keyframes slideIn { from { translate: 0 100%; } }
-@keyframes slideOut { to { translate: 0 100%; } }
+@keyframes slideIn {
+  from {
+    translate: 0 100%;
+  }
+}
+@keyframes slideOut {
+  to {
+    translate: 0 100%;
+  }
+}
 ```
 
 ### Bleeding past the edge
@@ -143,8 +151,16 @@ detachment.
 
 /* The bleed already sits below the viewport edge, so the drawer only has to
    travel `height - bleed` to clear it. */
-@keyframes slideIn { from { translate: 0 calc(100% - var(--bleed)); } }
-@keyframes slideOut { to { translate: 0 calc(100% - var(--bleed)); } }
+@keyframes slideIn {
+  from {
+    translate: 0 calc(100% - var(--bleed));
+  }
+}
+@keyframes slideOut {
+  to {
+    translate: 0 calc(100% - var(--bleed));
+  }
+}
 ```
 
 For a side drawer, swap the axis and point the bleed at the edge the drawer is
@@ -157,14 +173,22 @@ left:
   padding-inline-end: calc(24px + var(--bleed));
   margin-inline-end: calc(-1 * var(--bleed));
 }
-@keyframes slideIn { from { translate: calc(100% - var(--bleed)) 0; } }
+@keyframes slideIn {
+  from {
+    translate: calc(100% - var(--bleed)) 0;
+  }
+}
 
 /* Anchored left */
 .DrawerContent {
   padding-inline-start: calc(24px + var(--bleed));
   margin-inline-start: calc(-1 * var(--bleed));
 }
-@keyframes slideIn { from { translate: calc(-100% + var(--bleed)) 0; } }
+@keyframes slideIn {
+  from {
+    translate: calc(-100% + var(--bleed)) 0;
+  }
+}
 ```
 
 ## Soft keyboard
@@ -410,12 +434,26 @@ the edge the drawer attaches to and the direction users swipe to dismiss it.
   transform: translateX(var(--drawer-swipe-movement-x, 0px));
   transition: transform 450ms cubic-bezier(0.32, 0.72, 0, 1);
 }
-.DrawerContent[data-state='open'] { animation: slideInRight 450ms cubic-bezier(0.32, 0.72, 0, 1); }
-.DrawerContent[data-state='closed'] { animation: slideOutRight 450ms cubic-bezier(0.32, 0.72, 0, 1); }
-.DrawerContent[data-swiping] { transition-duration: 0ms; }
+.DrawerContent[data-state='open'] {
+  animation: slideInRight 450ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+.DrawerContent[data-state='closed'] {
+  animation: slideOutRight 450ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+.DrawerContent[data-swiping] {
+  transition-duration: 0ms;
+}
 
-@keyframes slideInRight { from { translate: 100% 0; } }
-@keyframes slideOutRight { to { translate: 100% 0; } }
+@keyframes slideInRight {
+  from {
+    translate: 100% 0;
+  }
+}
+@keyframes slideOutRight {
+  to {
+    translate: 100% 0;
+  }
+}
 ```
 
 ### Snap points
@@ -543,7 +581,7 @@ This example abstracts the `DrawerPortal` and `DrawerOverlay` parts.
 
 ```vue
 <script setup>
-import { Drawer, DrawerContent, DrawerTrigger } from './your-drawer'
+import { Drawer, DrawerContent, DrawerTrigger } from './your-drawer';
 </script>
 
 <template>
@@ -557,21 +595,21 @@ import { Drawer, DrawerContent, DrawerTrigger } from './your-drawer'
 #### Implementation
 
 ```ts
+export { DrawerRoot as Drawer, DrawerTrigger } from 'akar';
 // your-drawer.ts
-export { default as DrawerContent } from 'DrawerContent.vue'
-export { DrawerRoot as Drawer, DrawerTrigger } from 'akar'
+export { default as DrawerContent } from 'DrawerContent.vue';
 ```
 
 ```vue
 <!-- DrawerContent.vue -->
 <script setup lang="ts">
-import type { DrawerContentEmits, DrawerContentProps } from 'akar'
-import { DrawerContent, DrawerHandle, DrawerOverlay, DrawerPortal, useForwardPropsEmits } from 'akar'
+import type { DrawerContentEmits, DrawerContentProps } from 'akar';
+import { DrawerContent, DrawerHandle, DrawerOverlay, DrawerPortal, useForwardPropsEmits } from 'akar';
 
-const props = defineProps<DrawerContentProps>()
-const emits = defineEmits<DrawerContentEmits>()
+const props = defineProps<DrawerContentProps>();
+const emits = defineEmits<DrawerContentEmits>();
 
-const forwarded = useForwardPropsEmits(props, emits)
+const forwarded = useForwardPropsEmits(props, emits);
 </script>
 
 <template>

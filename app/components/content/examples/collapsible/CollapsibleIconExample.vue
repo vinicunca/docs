@@ -7,7 +7,7 @@
       variant="subtle"
       trailing-icon="i-lucide-chevron-down"
       :ui="{
-        trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200'
+        trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200',
       }"
       block
     />

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const toast = useToast()
+const toast = useToast();
 
 function showToast() {
   const t = toast.add({
@@ -9,7 +9,7 @@ function showToast() {
     'duration': 3000,
     'onUpdate:open': (open: boolean) => {
       if (open) {
-        return
+        return;
       }
 
       toast.update(t.id, {
@@ -17,13 +17,18 @@ function showToast() {
         'description': 'Your file has been successfully uploaded.',
         'icon': 'i-lucide-check',
         'color': 'success',
-        'onUpdate:open': undefined
-      })
-    }
-  })
+        'onUpdate:open': undefined,
+      });
+    },
+  });
 }
 </script>
 
 <template>
-  <PButton label="Show toast" color="neutral" variant="outline" @click="showToast" />
+  <PButton
+    label="Show toast"
+    color="neutral"
+    variant="outline"
+    @click="showToast"
+  />
 </template>

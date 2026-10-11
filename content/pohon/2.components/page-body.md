@@ -36,24 +36,27 @@ Use the PageBody component in a page to display the content of the page:
 
 ```vue [pages/\[...slug\\].vue]{21-27}
 <script setup lang="ts">
-const route = useRoute()
+const route = useRoute();
 
 definePageMeta({
   layout: 'docs'
-})
+});
 
 const { data: page } = await useAsyncData(route.path, () => {
-  return queryCollection('docs').path(route.path).first()
-})
+  return queryCollection('docs').path(route.path).first();
+});
 
 const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {
-  return queryCollectionItemSurroundings('content', route.path)
-})
+  return queryCollectionItemSurroundings('content', route.path);
+});
 </script>
 
 <template>
   <PPage>
-    <PPageHeader :title="page.title" :description="page.description" />
+    <PPageHeader
+      :title="page.title"
+      :description="page.description"
+    />
 
     <PPageBody>
       <ContentRenderer :value="page" />

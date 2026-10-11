@@ -3,8 +3,8 @@
 @import '../_colors/grass.css';
 
 @scope (.akar-demo-TagGroup) {
-/* reset */
-button {
-  all: unset;
-}
+  /* reset */
+  button {
+    all: unset;
+  }
 }

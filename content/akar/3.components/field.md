@@ -51,7 +51,7 @@ Import all parts and piece them together.
 
 ```vue
 <script setup>
-import { FieldControl, FieldDescription, FieldError, FieldLabel, FieldRoot, FieldValidity } from 'akar'
+import { FieldControl, FieldDescription, FieldError, FieldLabel, FieldRoot, FieldValidity } from 'akar';
 </script>
 
 <template>

@@ -53,7 +53,7 @@ Import all parts and piece them together.
 
 ```vue
 <script setup>
-import { HoverCardArrow, HoverCardContent, HoverCardPortal, HoverCardRoot, HoverCardTrigger } from 'akar'
+import { HoverCardArrow, HoverCardContent, HoverCardPortal, HoverCardRoot, HoverCardTrigger } from 'akar';
 </script>
 
 <template>

@@ -385,7 +385,7 @@ You can access the typed component instance (exposing formRef and state) using [
 
 ```vue
 <script setup lang="ts">
-const authForm = useTemplateRef('authForm')
+const authForm = useTemplateRef('authForm');
 </script>
 
 <template>

@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import type { DropdownMenuItem } from 'pohon-ui'
+import type { DropdownMenuItem } from 'pohon-ui';
 
-const items: DropdownMenuItem[] = [{
+const items: Array<DropdownMenuItem> = [{
   label: 'Leanne Graham',
-  description: 'Sincere@april.biz'
+  description: 'Sincere@april.biz',
 }, {
   label: 'Ervin Howell',
-  description: 'Shanna@melissa.tv'
+  description: 'Shanna@melissa.tv',
 }, {
   label: 'Clementine Bauch',
-  description: 'Nathan@yesenia.net'
+  description: 'Nathan@yesenia.net',
 }, {
   label: 'Patricia Lebsack',
-  description: 'Julianne.OConner@kory.org'
+  description: 'Julianne.OConner@kory.org',
 }, {
   label: 'Chelsey Dietrich',
-  description: 'Lucio_Hettinger@annie.me'
-}]
+  description: 'Lucio_Hettinger@annie.me',
+}];
 </script>
 
 <template>
@@ -27,6 +27,11 @@ const items: DropdownMenuItem[] = [{
     :content="{ align: 'start' }"
     :ui="{ content: 'w-64' }"
   >
-    <PButton label="Open" color="neutral" variant="outline" icon="i-lucide-menu" />
+    <PButton
+      label="Open"
+      color="neutral"
+      variant="outline"
+      icon="i-lucide-menu"
+    />
   </PDropdownMenu>
 </template>

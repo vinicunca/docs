@@ -9,32 +9,37 @@ Type your wrapper with Akar's exported `<Part>Props` / `<Part>Emits`, then bind 
 ```vue
 <!-- MyDialogContent.vue -->
 <script setup lang="ts">
-import type { DialogContentEmits, DialogContentProps } from 'akar'
-import { DialogClose, DialogContent, DialogOverlay, DialogPortal, useForwardPropsEmits } from 'akar'
+import type { DialogContentEmits, DialogContentProps } from 'akar';
+import { DialogClose, DialogContent, DialogOverlay, DialogPortal, useForwardPropsEmits } from 'akar';
 
-defineOptions({ inheritAttrs: false })
+defineOptions({ inheritAttrs: false });
 
-const props = defineProps<DialogContentProps>()
-const emits = defineEmits<DialogContentEmits>()
+const props = defineProps<DialogContentProps>();
+const emits = defineEmits<DialogContentEmits>();
 
-const forwarded = useForwardPropsEmits(props, emits)
+const forwarded = useForwardPropsEmits(props, emits);
 </script>
 
 <template>
   <DialogPortal>
     <DialogOverlay class="DialogOverlay" />
-    <DialogContent class="DialogContent" v-bind="{ ...$attrs, ...forwarded }">
+    <DialogContent
+      class="DialogContent"
+      v-bind="{ ...$attrs, ...forwarded }"
+    >
       <slot />
-      <DialogClose aria-label="Close">×</DialogClose>
+      <DialogClose aria-label="Close">
+        ×
+      </DialogClose>
     </DialogContent>
   </DialogPortal>
 </template>
 ```
 
 ```ts
+export { default as MyDialogContent } from './MyDialogContent.vue';
 // my-dialog.ts: re-export the parts you do not wrap
-export { DialogRoot as MyDialog, DialogDescription as MyDialogDescription, DialogTitle as MyDialogTitle, DialogTrigger as MyDialogTrigger } from 'akar'
-export { default as MyDialogContent } from './MyDialogContent.vue'
+export { DialogRoot as MyDialog, DialogDescription as MyDialogDescription, DialogTitle as MyDialogTitle, DialogTrigger as MyDialogTrigger } from 'akar';
 ```
 
 The same pattern wraps a Root: declare `RootProps` + `RootEmits` and forward them, and `v-model` keeps working, because `update:modelValue` / `update:open` are forwarded as `onUpdate:*` listeners.
@@ -56,14 +61,17 @@ Give your own components the same API by rendering `Primitive`:
 
 ```vue
 <script setup lang="ts">
-import type { PrimitiveProps } from 'akar'
-import { Primitive } from 'akar'
+import type { PrimitiveProps } from 'akar';
+import { Primitive } from 'akar';
 
-const props = withDefaults(defineProps<PrimitiveProps>(), { as: 'button' })
+const props = withDefaults(defineProps<PrimitiveProps>(), { as: 'button' });
 </script>
 
 <template>
-  <Primitive v-bind="props" class="btn">
+  <Primitive
+    v-bind="props"
+    class="btn"
+  >
     <slot />
   </Primitive>
 </template>

@@ -1,26 +1,26 @@
 <script setup lang="ts">
-import type { BreadcrumbItem } from 'pohon-ui'
+import type { BreadcrumbItem } from 'pohon-ui';
 
-const items: BreadcrumbItem[] = [
+const items: Array<BreadcrumbItem> = [
   {
     label: 'Docs',
-    to: '/docs'
+    to: '/docs',
   },
   {
     label: 'Components',
-    to: '/docs/components'
+    to: '/docs/components',
   },
   {
     label: 'Breadcrumb',
-    to: '/docs/components/breadcrumb'
-  }
-]
+    to: '/docs/components/breadcrumb',
+  },
+];
 </script>
 
 <template>
   <PBreadcrumb :items="items">
     <template #separator>
-      <span class="mx-2 color-text-muted">/</span>
+      <span class="color-text-muted mx-2">/</span>
     </template>
   </PBreadcrumb>
 </template>

@@ -39,29 +39,42 @@ The Nuxt module and the resolver register **components only**, with no prefix by
 
 ```vue
 <script setup lang="ts">
-import { DialogClose, DialogContent, DialogDescription, DialogOverlay, DialogPortal, DialogRoot, DialogTitle, DialogTrigger } from 'akar'
-import { ref } from 'vue'
+import { DialogClose, DialogContent, DialogDescription, DialogOverlay, DialogPortal, DialogRoot, DialogTitle, DialogTrigger } from 'akar';
+import { ref } from 'vue';
 
-const open = ref(false)
+const open = ref(false);
 </script>
 
 <template>
   <DialogRoot v-model:open="open">
-    <DialogTrigger class="btn">Edit profile</DialogTrigger>
+    <DialogTrigger class="btn">
+      Edit profile
+    </DialogTrigger>
     <DialogPortal>
       <DialogOverlay class="DialogOverlay" />
       <DialogContent class="DialogContent">
         <DialogTitle>Edit profile</DialogTitle>
         <DialogDescription>Change your display name.</DialogDescription>
-        <DialogClose aria-label="Close">×</DialogClose>
+        <DialogClose aria-label="Close">
+          ×
+        </DialogClose>
       </DialogContent>
     </DialogPortal>
   </DialogRoot>
 </template>
 
 <style>
-.DialogOverlay { position: fixed; inset: 0; background: rgb(0 0 0 / 0.5); }
-.DialogContent { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+.DialogOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgb(0 0 0 / 0.5);
+}
+.DialogContent {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 </style>
 ```
 

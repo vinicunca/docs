@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const appConfig = useAppConfig()
+const appConfig = useAppConfig();
 </script>
 
 <template>
@@ -10,9 +10,9 @@ const appConfig = useAppConfig()
       :ui="{
         wrapper: 'bg-background-elevated/50 rounded-l-sm flex border-r border-border-accented',
         label: 'color-text-muted px-2 py-1.5',
-        container: 'mt-0'
+        container: 'mt-0',
       }"
-      class="inline-flex ring ring-ring-accented rounded-sm"
+      class="rounded-sm inline-flex ring ring-ring-accented"
     >
       <PInput
         v-model="appConfig.toaster.max"

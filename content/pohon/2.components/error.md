@@ -20,7 +20,7 @@ The Error component uses the `--ui-header-height` CSS variable to position itsel
 Use the `error` prop to display an error message.
 
 ::framework-only
-#nuxt
+# nuxt
 ::note{to="https://nuxt.com/docs/guide/directory-structure/error" target="_blank"}
 In most cases, you will receive the `error` prop in your `error.vue` file.
 ::
@@ -85,7 +85,7 @@ slots:
 
     <img src="https://github.com/nuxt.png" alt="Logo" class="size-10 rounded-full">
 ---
-#leading
+# leading
 :img{src="https://github.com/nuxt.png" alt="Logo" class="size-10 rounded-full"}
 ::
 
@@ -153,11 +153,11 @@ Use the Error component in your `error.vue`:
 
 ```vue [error.vue]{13}
 <script setup lang="ts">
-import type { NuxtError } from '#app'
+import type { NuxtError } from '#app';
 
 const props = defineProps<{
-  error: NuxtError
-}>()
+  error: NuxtError;
+}>();
 </script>
 
 <template>
@@ -180,13 +180,13 @@ You can read more about how to handle errors in the [Nuxt documentation](https:/
 
 ```vue [pages/\[...slug\\].vue]
 <script setup lang="ts">
-const route = useRoute()
+const route = useRoute();
 
 const { data: page } = await useAsyncData(route.path, () => {
-  return queryCollection('docs').path(route.path).first()
-})
+  return queryCollection('docs').path(route.path).first();
+});
 if (!page.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
+  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true });
 }
 </script>
 ```

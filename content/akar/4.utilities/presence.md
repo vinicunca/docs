@@ -51,7 +51,11 @@ When you need to ensure content is always rendered regardless of the present sta
 
 ```vue
 <template>
-  <Presence v-slot="{ present }" :present="isVisible" :force-mount="true">
+  <Presence
+    v-slot="{ present }"
+    :present="isVisible"
+    :force-mount="true"
+  >
     <div>
       This content will always be rendered
 

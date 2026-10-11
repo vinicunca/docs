@@ -1,106 +1,115 @@
 <script setup lang="ts">
-import type { TableColumn, DropdownMenuItem } from 'pohon-ui'
-import { useClipboard } from '@vueuse/core'
+import type { DropdownMenuItem, TableColumn } from 'pohon-ui';
+import { useClipboard } from '@vueuse/core';
 
 interface User {
-  id: number
-  name: string
-  position: string
-  email: string
-  role: string
+  id: number;
+  name: string;
+  position: string;
+  email: string;
+  role: string;
 }
 
-const toast = useToast()
-const { copy } = useClipboard()
+const toast = useToast();
+const { copy } = useClipboard();
 
-const data = ref<User[]>([{
+const data = ref<Array<User>>([{
   id: 1,
   name: 'Lindsay Walton',
   position: 'Front-end Developer',
   email: 'lindsay.walton@example.com',
-  role: 'Member'
+  role: 'Member',
 }, {
   id: 2,
   name: 'Courtney Henry',
   position: 'Designer',
   email: 'courtney.henry@example.com',
-  role: 'Admin'
+  role: 'Admin',
 }, {
   id: 3,
   name: 'Tom Cook',
   position: 'Director of Product',
   email: 'tom.cook@example.com',
-  role: 'Member'
+  role: 'Member',
 }, {
   id: 4,
   name: 'Whitney Francis',
   position: 'Copywriter',
   email: 'whitney.francis@example.com',
-  role: 'Admin'
+  role: 'Admin',
 }, {
   id: 5,
   name: 'Leonard Krasner',
   position: 'Senior Designer',
   email: 'leonard.krasner@example.com',
-  role: 'Owner'
+  role: 'Owner',
 }, {
   id: 6,
   name: 'Floyd Miles',
   position: 'Principal Designer',
   email: 'floyd.miles@example.com',
-  role: 'Member'
-}])
+  role: 'Member',
+}]);
 
-const columns: TableColumn<User>[] = [{
+const columns: Array<TableColumn<User>> = [{
   accessorKey: 'id',
-  header: 'ID'
+  header: 'ID',
 }, {
   accessorKey: 'name',
-  header: 'Name'
+  header: 'Name',
 }, {
   accessorKey: 'email',
-  header: 'Email'
+  header: 'Email',
 }, {
   accessorKey: 'role',
-  header: 'Role'
+  header: 'Role',
 }, {
-  id: 'action'
-}]
+  id: 'action',
+}];
 
-function getDropdownActions(user: User): DropdownMenuItem[][] {
+function getDropdownActions(user: User): Array<Array<DropdownMenuItem>> {
   return [
     [{
       label: 'Copy user Id',
       icon: 'i-lucide-copy',
       onSelect: () => {
-        copy(user.id.toString())
+        copy(user.id.toString());
 
         toast.add({
           title: 'User ID copied to clipboard!',
           color: 'success',
-          icon: 'i-lucide-circle-check'
-        })
-      }
+          icon: 'i-lucide-circle-check',
+        });
+      },
     }],
     [{
       label: 'Edit',
-      icon: 'i-lucide-edit'
+      icon: 'i-lucide-edit',
     }, {
       label: 'Delete',
       icon: 'i-lucide-trash',
-      color: 'error'
-    }]
-  ]
+      color: 'error',
+    }],
+  ];
 }
 </script>
 
 <template>
-  <PTable :data="data" :columns="columns" class="flex-1">
+  <PTable
+    :data="data"
+    :columns="columns"
+    class="flex-1"
+  >
     <template #name-cell="{ row }">
-      <div class="flex items-center gap-3">
-        <PAvatar :src="`https://i.pravatar.cc/120?img=${row.original.id}`" size="lg" loading="lazy" :alt="`${row.original.name} avatar`" />
+      <div class="flex gap-3 items-center">
+        <PAvatar
+          :src="`https://i.pravatar.cc/120?img=${row.original.id}`"
+          size="lg"
+          loading="lazy"
+          :alt="`${row.original.name} avatar`"
+        />
         <div>
-          <p class="font-medium color-text-highlighted">
+          <p class="color-text-highlighted font-medium">
             {{ row.original.name }}
           </p>
           <p>
@@ -111,7 +120,12 @@ function getDropdownActions(user: User): DropdownMenuItem[][] {
     </template>
     <template #action-cell="{ row }">
       <PDropdownMenu :items="getDropdownActions(row.original)">
-        <PButton icon="i-lucide-ellipsis-vertical" color="neutral" variant="ghost" aria-label="Actions" />
+        <PButton
+          icon="i-lucide-ellipsis-vertical"
+          color="neutral"
+          variant="ghost"
+          aria-label="Actions"
+        />
       </PDropdownMenu>
     </template>
   </PTable>

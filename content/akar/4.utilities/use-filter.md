@@ -9,8 +9,8 @@ description: Locale-Aware string filtering
 You can customize the behavior using `Intl.CollatorOptions`. See [MDN Docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Collator/Collator#options) for more details.
 
 ```ts
-const { startsWith } = useFilter({ sensitivity: 'base' })
-console.log(startsWith('Résumé', 'resume')) // true (case-insensitive)
+const { startsWith } = useFilter({ sensitivity: 'base' });
+console.log(startsWith('Résumé', 'resume')); // true (case-insensitive)
 ```
 
 ## Usage
@@ -18,36 +18,42 @@ console.log(startsWith('Résumé', 'resume')) // true (case-insensitive)
 ### Example Usage
 
 ```ts
-import { useFilter } from 'akar'
+import { useFilter } from 'akar';
 
-const { startsWith, endsWith, contains } = useFilter()
+const { startsWith, endsWith, contains } = useFilter();
 
-console.log(startsWith('hello', 'he')) // true
-console.log(endsWith('hello', 'lo')) // true
-console.log(contains('hello', 'ell')) // true
+console.log(startsWith('hello', 'he')); // true
+console.log(endsWith('hello', 'lo')); // true
+console.log(contains('hello', 'ell')); // true
 ```
 
 ## Using `useFilter` in a Vue Component
 
 ```vue
 <script setup>
-import { ref } from 'vue'
-import { useFilter } from 'akar'
+import { useFilter } from 'akar';
+import { ref } from 'vue';
 
-const { contains } = useFilter()
-const searchQuery = ref('')
-const items = ref(['Apple', 'Banana', 'Cherry', 'Date'])
+const { contains } = useFilter();
+const searchQuery = ref('');
+const items = ref(['Apple', 'Banana', 'Cherry', 'Date']);
 
 const filteredItems = computed(() =>
-  items.value.filter(item => contains(item, searchQuery.value))
-)
+  items.value.filter((item) => contains(item, searchQuery.value))
+);
 </script>
 
 <template>
   <div>
-    <input v-model="searchQuery" placeholder="Search...">
+    <input
+      v-model="searchQuery"
+      placeholder="Search..."
+    >
     <ul>
-      <li v-for="item in filteredItems" :key="item">
+      <li
+        v-for="item in filteredItems"
+        :key="item"
+      >
         {{ item }}
       </li>
     </ul>

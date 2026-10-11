@@ -55,7 +55,7 @@ Import all parts and piece them together.
 
 ```vue
 <script setup>
-import { CheckboxGroupRoot, CheckboxIndicator, CheckboxRoot } from 'akar'
+import { CheckboxGroupRoot, CheckboxIndicator, CheckboxRoot } from 'akar';
 </script>
 
 <template>

@@ -59,7 +59,7 @@ A landing page you can use as starting point.
 
 :::
 
-#code
+# code
 
 ```mdc
 ::card-group

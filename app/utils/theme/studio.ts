@@ -1,21 +1,21 @@
-import { colors } from '@unocss/preset-wind4/colors'
-import { resolveAlias, resolveShade } from './engine/types'
-import type { ThemeDoc, Shade } from './engine/types'
+import type { Shade, ThemeDoc } from './engine/types';
+import { colors } from '@unocss/preset-wind4/colors';
+import { resolveAlias, resolveShade } from './engine/types';
 
 /* ------------------------------------------------------------- choices -- */
 
 // What the pickers offer. Static, so it lives here rather than in the
 // composables that hand it out.
 
-// UnoCSS's extra neutrals, listed so they stay out of PRIMARY_COLORS
-export const NEUTRAL_COLORS = ['slate', 'gray', 'zinc', 'neutral', 'stone', 'taupe', 'mauve', 'mist', 'olive']
-const NOT_A_RAMP = ['inherit', 'current', 'transparent', 'black', 'white', ...NEUTRAL_COLORS]
-export const PRIMARY_COLORS = Object.keys(colors).filter(name => !NOT_A_RAMP.includes(name))
+/** UnoCSS's extra neutrals, listed so they stay out of PRIMARY_COLORS */
+export const NEUTRAL_COLORS = ['slate', 'gray', 'zinc', 'neutral', 'stone', 'taupe', 'mauve', 'mist', 'olive'];
+const NOT_A_RAMP = ['inherit', 'current', 'transparent', 'black', 'white', ...NEUTRAL_COLORS];
+export const PRIMARY_COLORS = Object.keys(colors).filter((name) => !NOT_A_RAMP.includes(name));
 
-export const RADIUSES = [0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75]
+export const RADIUSES = [0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75];
 
 /** The three groups every font select offers. */
-export type FontCategory = 'Sans' | 'Serif' | 'Mono'
+export type FontCategory = 'Sans' | 'Serif' | 'Mono';
 
 /**
  * The shortlist every font select opens on, grouped by what the face is
@@ -23,7 +23,7 @@ export type FontCategory = 'Sans' | 'Serif' | 'Mono'
  * nothing should stop a mono heading. Any other family is still reachable
  * through the catalog search.
  */
-export const FONTS: Array<{ name: string, category: FontCategory }> = [
+export const FONTS: Array<{ name: string; category: FontCategory }> = [
   { name: 'Public Sans', category: 'Sans' },
   { name: 'Inter', category: 'Sans' },
   { name: 'DM Sans', category: 'Sans' },
@@ -47,8 +47,8 @@ export const FONTS: Array<{ name: string, category: FontCategory }> = [
   { name: 'JetBrains Mono', category: 'Mono' },
   { name: 'Fira Code', category: 'Mono' },
   { name: 'IBM Plex Mono', category: 'Mono' },
-  { name: 'Space Mono', category: 'Mono' }
-]
+  { name: 'Space Mono', category: 'Mono' },
+];
 
 /**
  * A palette name as its `--color-*` prefix. UnoCSS's own `neutral` ramp
@@ -56,25 +56,25 @@ export const FONTS: Array<{ name: string, category: FontCategory }> = [
  * taken the name.
  */
 export function rampCssName(name: string) {
-  return name === 'neutral' ? 'old-neutral' : name
+  return name === 'neutral' ? 'old-neutral' : name;
 }
 
 /* --------------------------------------------------------------- views -- */
 
-export type ThemeStudioView = 'grid' | 'dashboard' | 'chat' | 'saas' | 'landing' | 'docs' | 'portfolio' | 'changelog' | 'editor'
+export type ThemeStudioView = 'grid' | 'dashboard' | 'chat' | 'saas' | 'landing' | 'docs' | 'portfolio' | 'changelog' | 'editor';
 
 export interface ThemeStudioViewTab {
-  label: string
-  value: ThemeStudioView
+  label: string;
+  value: ThemeStudioView;
   /** One-liner for the rich switcher, template blurbs from /templates. */
-  description: string
+  description: string;
   /** /templates screenshot base path (`-light.png`/`-dark.png` appended); grid is studio-only and has none. */
-  image?: string
+  image?: string;
 }
 
-const templateImage = (name: string) => `/assets/templates/nuxt/${name}`
+const templateImage = (name: string) => `/assets/templates/nuxt/${name}`;
 
-export const THEME_STUDIO_VIEWS: ThemeStudioViewTab[] = [
+export const THEME_STUDIO_VIEWS: Array<ThemeStudioViewTab> = [
   { label: 'Components', value: 'grid', description: 'Every component on one wall, in the theme as it stands.' },
   { label: 'Landing', value: 'landing', description: 'Hero, features, pricing, testimonials and FAQ.', image: templateImage('landing') },
   { label: 'Docs', value: 'docs', description: 'Sidebar navigation, prose, code blocks and a table of contents.', image: templateImage('docs') },
@@ -83,8 +83,8 @@ export const THEME_STUDIO_VIEWS: ThemeStudioViewTab[] = [
   { label: 'Dashboard', value: 'dashboard', description: 'A multi-column admin: tables, charts and date pickers.', image: templateImage('dashboard') },
   { label: 'Chat', value: 'chat', description: 'An AI chat with conversation history and streaming replies.', image: templateImage('chat') },
   { label: 'Changelog', value: 'changelog', description: 'Release notes on a version timeline.', image: templateImage('changelog') },
-  { label: 'Editor', value: 'editor', description: 'A rich text editor with toolbar, slash menu and drag handles.', image: templateImage('editor') }
-]
+  { label: 'Editor', value: 'editor', description: 'A rich text editor with toolbar, slash menu and drag handles.', image: templateImage('editor') },
+];
 
 /* ------------------------------------------------------------- sections -- */
 
@@ -105,8 +105,8 @@ export const PRESET_ICONS: Record<string, string> = {
   sunset: 'i-lucide-sunset',
   carbon: 'i-lucide-zap',
   bubblegum: 'i-lucide-candy',
-  parchment: 'i-lucide-scroll-text'
-}
+  parchment: 'i-lucide-scroll-text',
+};
 
 /**
  * A preset as a chip: its icon in its primary, on that primary dimmed to a
@@ -114,23 +114,23 @@ export const PRESET_ICONS: Record<string, string> = {
  * as its color rather than as its neutral.
  */
 export function themeChipStyle(doc: ThemeDoc) {
-  const shade = (step: Shade) => resolveShade(doc, resolveAlias(doc, 'primary'), step)
-  const light = doc.blackAsPrimary ? 'black' : shade(500)
-  const dark = doc.blackAsPrimary ? 'white' : shade(400)
+  const shade = (step: Shade) => resolveShade(doc, resolveAlias(doc, 'primary'), step);
+  const light = doc.blackAsPrimary ? 'black' : shade(500);
+  const dark = doc.blackAsPrimary ? 'white' : shade(400);
   const tint = (color: string | undefined, from: number, to: number) =>
-    `linear-gradient(135deg, color-mix(in oklab, ${color} ${from}%, transparent), color-mix(in oklab, ${color} ${to}%, transparent))`
+    `linear-gradient(135deg, color-mix(in oklab, ${color} ${from}%, transparent), color-mix(in oklab, ${color} ${to}%, transparent))`;
 
   return {
     '--chip-bg-light': tint(light, 10, 20),
     '--chip-bg-dark': tint(dark, 12, 24),
     '--chip-icon-light': light,
-    '--chip-icon-dark': dark
-  }
+    '--chip-icon-dark': dark,
+  };
 }
 
 /** Palette names are ids, hyphens are word breaks, not part of the name. */
 export function paletteLabel(name: string): string {
-  return name.replace(/-/g, ' ')
+  return name.replace(/-/g, ' ');
 }
 
 /**
@@ -139,7 +139,7 @@ export function paletteLabel(name: string): string {
  */
 export function keepPanels(event: Event) {
   if ((event.target as HTMLElement | null)?.closest?.('[data-keep-panels]')) {
-    event.preventDefault()
+    event.preventDefault();
   }
 }
 
@@ -148,17 +148,17 @@ export function keepPanels(event: Event) {
  * bar, the trigger's own width when stacked in the mobile menu. Scroll lives
  * on the popover content so panels and listboxes cap the same way.
  */
-export function toolbarPanelClass(vertical?: boolean): string[] {
-  return [vertical ? 'w-(--akar-popper-anchor-width)' : 'w-64 max-w-[calc(100vw-2rem)]', 'max-h-[70vh] overflow-y-auto']
+export function toolbarPanelClass(vertical?: boolean): Array<string> {
+  return [vertical ? 'w-(--akar-popper-anchor-width)' : 'w-64 max-w-[calc(100vw-2rem)]', 'max-h-[70vh] overflow-y-auto'];
 }
 
 /** UnoCSS's stock weight ladder, set steps are absences at these values. */
-export const FONT_WEIGHT_DEFAULTS = { normal: 400, medium: 500, semibold: 600, bold: 700 } as const
+export const FONT_WEIGHT_DEFAULTS = { normal: 400, medium: 500, semibold: 600, bold: 700 } as const;
 
 // Families whose preview faces are already requested, Public Sans is
 // bundled. Module-level so the controls, the preset menu and every search
 // batch share one ledger and no family is fetched twice.
-const loadedFontPreviews = new Set<string>(['Public Sans'])
+const loadedFontPreviews = new Set<string>(['Public Sans']);
 
 /**
  * Load the listed families (Google Fonts, 400/700 only) so pickers can
@@ -166,13 +166,17 @@ const loadedFontPreviews = new Set<string>(['Public Sans'])
  * one stylesheet covering only the families not yet requested, the font
  * search feeds result batches through here as the user types.
  */
-export function loadFontPreviews(fonts: readonly string[]) {
-  if (!import.meta.client) return
-  const families = fonts.filter(name => !loadedFontPreviews.has(name))
-  if (!families.length) return
-  families.forEach(name => loadedFontPreviews.add(name))
-  const link = document.createElement('link')
-  link.rel = 'stylesheet'
-  link.href = `https://fonts.googleapis.com/css2?${families.map(name => `family=${encodeURIComponent(name)}:wght@400;700`).join('&')}&display=swap`
-  document.head.appendChild(link)
+export function loadFontPreviews(fonts: ReadonlyArray<string>) {
+  if (!import.meta.client) {
+    return;
+  }
+  const families = fonts.filter((name) => !loadedFontPreviews.has(name));
+  if (!families.length) {
+    return;
+  }
+  families.forEach((name) => loadedFontPreviews.add(name));
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = `https://fonts.googleapis.com/css2?${families.map((name) => `family=${encodeURIComponent(name)}:wght@400;700`).join('&')}&display=swap`;
+  document.head.appendChild(link);
 }

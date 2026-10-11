@@ -8,11 +8,11 @@ This composable is just a wrapper for [useForwardProps](/akar/utilities/use-forw
 
 ```vue
 <script setup lang="ts">
-import { useForwardPropsEmits } from 'akar'
+import { useForwardPropsEmits } from 'akar';
 
-const props = defineProps<CompEmitProps>()
-const emits = defineEmits<CompEmitEmits>()
-const forwarded = useForwardPropsEmits(props, emits)
+const props = defineProps<CompEmitProps>();
+const emits = defineEmits<CompEmitEmits>();
+const forwarded = useForwardPropsEmits(props, emits);
 </script>
 
 <template>

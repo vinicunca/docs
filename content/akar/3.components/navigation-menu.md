@@ -65,7 +65,7 @@ import {
   NavigationMenuSub,
   NavigationMenuTrigger,
   NavigationMenuViewport,
-} from 'akar'
+} from 'akar';
 </script>
 
 <template>
@@ -344,10 +344,13 @@ import {
 .NavigationMenuIndicator {
   background-color: grey;
   position: absolute;
-  transition: width, transform, 250ms ease;
+  transition:
+    width,
+    transform,
+    250ms ease;
 }
 
-.NavigationMenuIndicator[data-orientation="horizontal"] {
+.NavigationMenuIndicator[data-orientation='horizontal'] {
   left: 0;
   height: 3px;
   transform: translateX(var(--akar-navigation-menu-indicator-position));
@@ -582,46 +585,46 @@ data: []
 ::
           Moves focus to the next <code>NavigationMenuTrigger</code> or
           <code>NavigationMenuLink</code>.
-        
+
       `,
     },
     {
       keys: ['ArrowUp'],
       description: `
-        
+
           Moves focus to the previous <code>NavigationMenuTrigger</code> or
           <code>NavigationMenuLink</code>.
-        
+
       `,
     },
     {
       keys: ['ArrowRight', 'ArrowLeft'],
       description: `
-        
+
           When <code>vertical</code> and focus is on an open
           <code>NavigationMenuTrigger</code>, moves focus into its
           <code>NavigationMenuContent</code>.
           <br />
           Moves focus to the next / previous <code> NavigationMenuTrigger </code> or <code>NavigationMenuLink</code>.
-        
+
       `,
     },
     {
       keys: ['Home', 'End'],
       description: `
-        
+
           Moves focus to the first/last <code>NavigationMenu.Trigger</code> or
           <code>NavigationMenu.Link</code>.
-        
+
       `,
     },
     {
       keys: ['Esc'],
       description: `
-        
+
           Closes open <code>NavigationMenu.Content</code> and moves focus to its
           <code>NavigationMenu.Trigger</code>.
-        
+
       `,
     },
   ]"

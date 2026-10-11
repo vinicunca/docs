@@ -1,4 +1,6 @@
-:root, .light, .light-theme {
+:root,
+.light,
+.light-theme {
   --indigo-1: #fdfdfe;
   --indigo-2: #f7f9ff;
   --indigo-3: #edf2fe;
@@ -15,7 +17,9 @@
 
 @supports (color: color(display-p3 1 1 1)) {
   @media (color-gamut: p3) {
-    :root, .light, .light-theme {
+    :root,
+    .light,
+    .light-theme {
       --indigo-1: color(display-p3 0.992 0.992 0.996);
       --indigo-2: color(display-p3 0.971 0.977 0.998);
       --indigo-3: color(display-p3 0.933 0.948 0.992);

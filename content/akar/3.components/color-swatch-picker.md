@@ -62,7 +62,7 @@ import {
   ColorSwatchPickerItemIndicator,
   ColorSwatchPickerItemSwatch,
   ColorSwatchPickerRoot,
-} from 'akar'
+} from 'akar';
 </script>
 
 <template>

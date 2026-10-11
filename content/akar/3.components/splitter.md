@@ -55,7 +55,7 @@ Import all parts and piece them together.
 
 ```vue
 <script setup>
-import { SplitterGroup, SplitterPanel, SplitterResizeHandle } from 'akar'
+import { SplitterGroup, SplitterPanel, SplitterResizeHandle } from 'akar';
 </script>
 
 <template>

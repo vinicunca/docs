@@ -1,32 +1,32 @@
 <script setup lang="ts">
 withDefaults(defineProps<{
-  orientation?: 'vertical' | 'horizontal'
-  lanes?: number
-  gap?: number
+  orientation?: 'vertical' | 'horizontal';
+  lanes?: number;
+  gap?: number;
 }>(), {
   orientation: 'vertical',
   lanes: 3,
-  gap: 16
-})
+  gap: 16,
+});
 
-const heights = [320, 480, 640, 800]
+const heights = [320, 480, 640, 800];
 
 function getHeight(index: number) {
-  const seed = (index * 11 + 7) % 17
-  return heights[seed % heights.length]!
+  const seed = (index * 11 + 7) % 17;
+  return heights[seed % heights.length]!;
 }
 
 const items = Array.from({ length: 1000 }).map((_, index) => {
-  const height = getHeight(index)
+  const height = getHeight(index);
 
   return {
     id: index,
     title: `Item ${index + 1}`,
     src: `https://picsum.photos/640/${height}?v=${index}`,
     width: 640,
-    height
-  }
-})
+    height,
+  };
+});
 </script>
 
 <template>
@@ -37,9 +37,9 @@ const items = Array.from({ length: 1000 }).map((_, index) => {
     :virtualize="{
       gap,
       lanes,
-      estimateSize: 480
+      estimateSize: 480,
     }"
-    class="w-full h-128 p-4"
+    class="p-4 h-128 w-full"
   >
     <img
       :src="item.src"

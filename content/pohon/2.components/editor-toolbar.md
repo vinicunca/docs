@@ -108,7 +108,7 @@ When using `bubble`{lang="ts-type"} or `floating`{lang="ts-type"} layouts, use t
         placement: 'top',
         offset: 8,
         flip: { padding: 8 },
-        shift: { padding: 8 }
+        shift: { padding: 8 },
       }"
     />
   </PEditor>

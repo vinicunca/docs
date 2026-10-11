@@ -55,7 +55,7 @@ Import the component.
 
 ```vue
 <script setup>
-import { Toggle } from 'akar'
+import { Toggle } from 'akar';
 </script>
 
 <template>

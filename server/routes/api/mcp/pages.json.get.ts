@@ -1,4 +1,4 @@
-import { queryCollection } from '@nuxt/content/server'
+import { queryCollection } from '@nuxt/content/server';
 
 /**
  * Every documentation page, prerendered as `/api/mcp/pages.json`: the index
@@ -10,11 +10,11 @@ export default defineEventHandler(async (event) => {
     .select('path', 'title', 'description', 'category', 'keywords', 'framework', 'body')
     .where('to', 'IS NULL')
     .where('extension', '=', 'md')
-    .all()
+    .all();
 
   return pages.map((page) => {
-    const [, pkg = '', section = ''] = page.path.split('/')
-    const headings = (page.body as any)?.toc?.links?.flatMap((link: any) => [link.text, ...(link.children?.map((child: any) => child.text) ?? [])]) ?? []
+    const [, pkg = '', section = ''] = page.path.split('/');
+    const headings = (page.body as any)?.toc?.links?.flatMap((link: any) => [link.text, ...(link.children?.map((child: any) => child.text) ?? [])]) ?? [];
 
     return {
       path: page.path,
@@ -25,7 +25,7 @@ export default defineEventHandler(async (event) => {
       category: page.category,
       framework: page.framework,
       keywords: page.keywords,
-      headings
-    }
-  })
-})
+      headings,
+    };
+  });
+});

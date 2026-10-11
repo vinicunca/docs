@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import * as locales from 'pohon-ui/locale'
+import * as locales from 'pohon-ui/locale';
 
 const props = withDefaults(defineProps<{
-  default?: string
+  default?: string;
 }>(), {
-  default: 'en'
-})
+  default: 'en',
+});
 
 function getEmojiFlag(locale: string): string {
   const languageToCountry: Record<string, string> = {
@@ -40,28 +40,28 @@ function getEmojiFlag(locale: string): string {
     sv: 'se', // Swedish -> Sweden
     uk: 'ua', // Ukrainian -> Ukraine
     ur: 'pk', // Urdu -> Pakistan
-    vi: 'vn' // Vietnamese -> Vietnam
-  }
+    vi: 'vn', // Vietnamese -> Vietnam
+  };
 
   // If locale has a country code (e.g., en-GB), extract and use it
   if (locale.includes('-')) {
-    const countryCode = locale.split('-')[1]?.toLowerCase()
+    const countryCode = locale.split('-')[1]?.toLowerCase();
     if (countryCode) {
       return countryCode.toUpperCase()
         .split('')
-        .map(char => String.fromCodePoint(0x1F1A5 + char.charCodeAt(0)))
-        .join('')
+        .map((char) => String.fromCodePoint(0x1F1A5 + char.charCodeAt(0)))
+        .join('');
     }
   }
 
   // Otherwise, use the language-to-country mapping
-  const baseLanguage = locale.split('-')[0]?.toLowerCase() || locale
-  const countryCode = languageToCountry[baseLanguage] || locale.slice(0, 2)
+  const baseLanguage = locale.split('-')[0]?.toLowerCase() || locale;
+  const countryCode = languageToCountry[baseLanguage] || locale.slice(0, 2);
 
   return countryCode.toUpperCase()
     .split('')
-    .map(char => String.fromCodePoint(0x1F1A5 + char.charCodeAt(0)))
-    .join('')
+    .map((char) => String.fromCodePoint(0x1F1A5 + char.charCodeAt(0)))
+    .join('');
 }
 </script>
 
@@ -71,8 +71,11 @@ function getEmojiFlag(locale: string): string {
     <ProseP>
       By default, the <ProseCode>{{ props.default }}</ProseCode> locale is used.
     </ProseP>
-    <div class="grid gap-6 grid-cols-2 md:grid-cols-3">
-      <div v-for="locale in locales" :key="locale.code">
+    <div class="gap-6 grid grid-cols-2 md:grid-cols-3">
+      <div
+        v-for="locale in locales"
+        :key="locale.code"
+      >
         <div class="flex gap-3 items-center">
           <PAvatar size="xl">
             {{ getEmojiFlag(locale.code) }}
@@ -85,7 +88,10 @@ function getEmojiFlag(locale: string): string {
         </div>
       </div>
     </div>
-    <ProseNote to="https://github.com/vinicunca/pohon/tree/main/src/runtime/locale" target="_blank">
+    <ProseNote
+      to="https://github.com/vinicunca/pohon/tree/main/src/runtime/locale"
+      target="_blank"
+    >
       If you need additional languages, you can contribute by creating a PR to add a new locale in <ProseCode>src/runtime/locale/</ProseCode>.
     </ProseNote>
     <ProseTip>

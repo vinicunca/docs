@@ -1,39 +1,44 @@
 <script setup lang="ts">
-import type { SelectItem, ChipProps } from 'pohon-ui'
+import type { ChipProps, SelectItem } from 'pohon-ui';
 
 const items = ref([
   {
     label: 'bug',
     value: 'bug',
     chip: {
-      color: 'error'
-    }
+      color: 'error',
+    },
   },
   {
     label: 'feature',
     value: 'feature',
     chip: {
-      color: 'success'
-    }
+      color: 'success',
+    },
   },
   {
     label: 'enhancement',
     value: 'enhancement',
     chip: {
-      color: 'info'
-    }
-  }
-] satisfies SelectItem[])
+      color: 'info',
+    },
+  },
+] satisfies Array<SelectItem>);
 
-const value = ref(items.value[0]?.value)
+const value = ref(items.value[0]?.value);
 
 function getChip(value: string) {
-  return items.value.find(item => item.value === value)?.chip
+  return items.value.find((item) => item.value === value)?.chip;
 }
 </script>
 
 <template>
-  <PSelect v-model="value" :items="items" value-key="value" class="w-48">
+  <PSelect
+    v-model="value"
+    :items="items"
+    value-key="value"
+    class="w-48"
+  >
     <template #leading="{ modelValue, ui }">
       <PChip
         v-if="modelValue"

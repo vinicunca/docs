@@ -35,7 +35,7 @@ Pohon UI is designed for production Vue applications and maintained with compone
 
 :::
 
-#code
+# code
 
 ```mdc
 ::accordion

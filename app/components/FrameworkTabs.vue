@@ -1,21 +1,21 @@
 <script setup lang="ts">
-const { framework, setFramework, frameworks } = useFrameworks()
+const { framework, setFramework, frameworks } = useFrameworks();
 
 // Pages are prerendered with the cookie default (`nuxt`), so initialize with the
 // same value to keep the hydration markup in sync. Reading the real cookie during
 // setup would mismatch the prerendered HTML and leave the tabs unresponsive.
-const value = ref('nuxt')
+const value = ref('nuxt');
 
 onMounted(() => {
-  value.value = framework.value
-})
+  value.value = framework.value;
+});
 
 watch(framework, () => {
-  value.value = framework.value
-})
+  value.value = framework.value;
+});
 
 function onFrameworkChange(newFramework: string) {
-  setFramework(newFramework as 'nuxt' | 'vue', 'tabs')
+  setFramework(newFramework as 'nuxt' | 'vue', 'tabs');
 }
 </script>
 
@@ -27,7 +27,7 @@ function onFrameworkChange(newFramework: string) {
     color="neutral"
     :ui="{
       indicator: 'bg-background',
-      trigger: 'px-1 data-[state=active]:color-text-highlighted w-full in-[[data-slot=list]:not(:has([data-slot=indicator]))]:data-[state=active]:before:bg-background'
+      trigger: 'px-1 data-[state=active]:color-text-highlighted w-full in-[[data-slot=list]:not(:has([data-slot=indicator]))]:data-[state=active]:before:bg-background',
     }"
     size="xs"
     @update:model-value="onFrameworkChange($event as string)"

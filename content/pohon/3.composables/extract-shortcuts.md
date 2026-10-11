@@ -14,18 +14,18 @@ const items = [{
   icon: 'i-lucide-file-down',
   kbds: ['meta', 'S'],
   onSelect() {
-    save()
+    save();
   }
 }, {
   label: 'Copy',
   icon: 'i-lucide-copy',
   kbds: ['meta', 'C'],
   onSelect() {
-    copy()
+    copy();
   }
-}]
+}];
 
-defineShortcuts(extractShortcuts(items))
+defineShortcuts(extractShortcuts(items));
 </script>
 ```
 
@@ -88,21 +88,21 @@ The utility recursively traverses `children` and `items` properties to extract s
 
 ```vue
 <script setup lang="ts">
-import type { DropdownMenuItem } from 'pohon-ui'
+import type { DropdownMenuItem } from 'pohon-ui';
 
-const items: DropdownMenuItem[][] = [[{
+const items: Array<Array<DropdownMenuItem>> = [[{
   label: 'Edit',
   icon: 'i-lucide-pencil',
   kbds: ['E'],
   onSelect() {
-    edit()
+    edit();
   }
 }, {
   label: 'Duplicate',
   icon: 'i-lucide-copy',
   kbds: ['D'],
   onSelect() {
-    duplicate()
+    duplicate();
   }
 }], [{
   label: 'Invite users',
@@ -112,14 +112,14 @@ const items: DropdownMenuItem[][] = [[{
     icon: 'i-lucide-send-horizontal',
     kbds: ['meta', 'E'],
     onSelect() {
-      inviteByEmail()
+      inviteByEmail();
     }
   }, {
     label: 'Invite by link',
     icon: 'i-lucide-link',
     kbds: ['meta', 'I'],
     onSelect() {
-      inviteByLink()
+      inviteByLink();
     }
   }]]
 }], [{
@@ -127,11 +127,11 @@ const items: DropdownMenuItem[][] = [[{
   icon: 'i-lucide-trash',
   kbds: ['meta', 'backspace'],
   onSelect() {
-    remove()
+    remove();
   }
-}]]
+}]];
 
-defineShortcuts(extractShortcuts(items))
+defineShortcuts(extractShortcuts(items));
 </script>
 
 <template>
@@ -151,17 +151,17 @@ const items = [{
   label: 'Go to Dashboard',
   kbds: ['G', 'D'],
   onSelect() {
-    navigateTo('/dashboard')
+    navigateTo('/dashboard');
   }
 }, {
   label: 'Go to Settings',
   kbds: ['G', 'S'],
   onSelect() {
-    navigateTo('/settings')
+    navigateTo('/settings');
   }
-}]
+}];
 
 // Using '-' creates key sequences: 'g-d', 'g-s'
-defineShortcuts(extractShortcuts(items, '-'))
+defineShortcuts(extractShortcuts(items, '-'));
 </script>
 ```

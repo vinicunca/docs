@@ -19,12 +19,12 @@ If you want to change the default element or component being render, you can set
 
 ```vue
 <script setup lang="ts">
-import type { PrimitiveProps } from 'akar'
-import { Primitive } from 'akar'
+import type { PrimitiveProps } from 'akar';
+import { Primitive } from 'akar';
 
 const props = withDefaults(defineProps<PrimitiveProps>(), {
   as: 'span'
-})
+});
 </script>
 
 <template>

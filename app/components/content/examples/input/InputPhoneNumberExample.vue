@@ -1,35 +1,35 @@
 <script setup lang="ts">
-import { vMaska } from 'maska/vue'
+import { vMaska } from 'maska/vue';
 
-type PhoneCode = {
-  name: string
-  code: string
-  emoji: string
-  dialCode: string
-  mask: string
+interface PhoneCode {
+  name: string;
+  code: string;
+  emoji: string;
+  dialCode: string;
+  mask: string;
 }
 
-const phone = ref('')
-const countryCode = ref('US')
+const phone = ref('');
+const countryCode = ref('US');
 
-const { data: phoneCodes, status, execute } = await useLazyFetch<PhoneCode[]>('/api/phone-codes.json', {
+const { data: phoneCodes, status, execute } = await useLazyFetch<Array<PhoneCode>>('/api/phone-codes.json', {
   key: 'api-phone-codes',
-  immediate: false
-})
+  immediate: false,
+});
 
-const country = computed(() => phoneCodes.value?.find(c => c.code === countryCode.value))
-const dialCode = computed(() => country.value?.dialCode || '+1')
-const mask = computed(() => country.value?.mask || '(###) ###-####')
+const country = computed(() => phoneCodes.value?.find((c) => c.code === countryCode.value));
+const dialCode = computed(() => country.value?.dialCode || '+1');
+const mask = computed(() => country.value?.mask || '(###) ###-####');
 
 function onOpen() {
   if (!phoneCodes.value?.length) {
-    execute()
+    execute();
   }
 }
 
 watch(countryCode, () => {
-  phone.value = ''
-})
+  phone.value = '';
+});
 </script>
 
 <template>
@@ -41,7 +41,7 @@ watch(countryCode, () => {
       :search-input="{
         placeholder: 'Search country...',
         icon: 'i-lucide-search',
-        loading: status === 'pending'
+        loading: status === 'pending',
       }"
       :filter-fields="['name', 'code', 'dialCode']"
       :content="{ align: 'start' }"
@@ -49,17 +49,17 @@ watch(countryCode, () => {
         base: 'pe-8',
         content: 'w-48',
         placeholder: 'hidden',
-        trailingIcon: 'size-4'
+        trailingIcon: 'size-4',
       }"
       trailing-icon="i-lucide-chevrons-up-down"
       @update:open="onOpen"
     >
-      <span class="size-5 flex items-center text-lg">
+      <span class="text-lg flex size-5 items-center">
         {{ country?.emoji || '\u{1F1FA}\u{1F1F8}' }}
       </span>
 
       <template #item-leading="{ item }">
-        <span class="size-5 flex items-center text-lg">
+        <span class="text-lg flex size-5 items-center">
           {{ item.emoji }}
         </span>
       </template>
@@ -76,7 +76,7 @@ watch(countryCode, () => {
       :style="{ '--dial-code-length': `${dialCode.length + 1.5}ch` }"
       :ui="{
         base: 'ps-(--dial-code-length)',
-        leading: 'pointer-events-none text-base md:text-sm color-text-muted'
+        leading: 'pointer-events-none text-base md:text-sm color-text-muted',
       }"
     >
       <template #leading>

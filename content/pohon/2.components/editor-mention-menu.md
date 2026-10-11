@@ -63,7 +63,11 @@ Use the `char` prop to change the trigger character. Defaults to `@`{lang="ts-ty
 ```vue
 <template>
   <PEditor v-slot="{ editor }">
-    <PEditorMentionMenu :editor="editor" :items="channels" char="#" />
+    <PEditorMentionMenu
+      :editor="editor"
+      :items="channels"
+      char="#"
+    />
   </PEditor>
 </template>
 ```
@@ -74,8 +78,17 @@ You can use multiple `EditorMentionMenu` components on the same editor with diff
 ```vue
 <template>
   <PEditor v-slot="{ editor }">
-    <PEditorMentionMenu :editor="editor" :items="users" plugin-key="mentionMenu" />
-    <PEditorMentionMenu :editor="editor" :items="tags" char="#" plugin-key="tagMenu" />
+    <PEditorMentionMenu
+      :editor="editor"
+      :items="users"
+      plugin-key="mentionMenu"
+    />
+    <PEditorMentionMenu
+      :editor="editor"
+      :items="tags"
+      char="#"
+      plugin-key="tagMenu"
+    />
   </PEditor>
 </template>
 ```
@@ -95,7 +108,7 @@ This is useful when the trigger character should open directly after other chara
       :items="items"
       char="#"
       :suggestion="{
-        allowedPrefixes: null
+        allowedPrefixes: null,
       }"
     />
   </PEditor>
@@ -114,7 +127,7 @@ Use the `options` prop to customize the positioning behavior using [Floating UI 
       :items="items"
       :options="{
         placement: 'bottom-start',
-        offset: 4
+        offset: 4,
       }"
     />
   </PEditor>

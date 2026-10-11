@@ -101,7 +101,7 @@ Use the BlogPosts component in a page to create a blog page:
 
 ```vue [pages/blog/index.vue]{11-18}
 <script setup lang="ts">
-const { data: posts } = await useAsyncData('posts', () => queryCollection('posts').all())
+const { data: posts } = await useAsyncData('posts', () => queryCollection('posts').all());
 </script>
 
 <template>

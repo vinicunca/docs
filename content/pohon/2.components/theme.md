@@ -16,12 +16,12 @@ The Theme component doesn't render any HTML element, it only provides theme over
 ::
 
 ::framework-only
-#nuxt
+# nuxt
 :::tip
 For app-level theme configuration, we recommend using the `app.config.ts` file instead.
 :::
 
-#vue
+# vue
 :::tip
 For app-level theme configuration, we recommend using the `vite.config.ts` file instead.
 :::

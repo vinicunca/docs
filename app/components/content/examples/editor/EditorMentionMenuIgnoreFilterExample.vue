@@ -1,24 +1,24 @@
 <script setup lang="ts">
-import { refDebounced } from '@vueuse/core'
+import { refDebounced } from '@vueuse/core';
 
 const value = ref(`# Async Mention Menu
 
-Type @ to mention someone. Results are fetched from an API as you type.`)
+Type @ to mention someone. Results are fetched from an API as you type.`);
 
-const searchTerm = ref('')
-const searchTermDebounced = refDebounced(searchTerm, 200)
+const searchTerm = ref('');
+const searchTermDebounced = refDebounced(searchTerm, 200);
 
 const { data: items } = useLazyFetch('https://dummyjson.com/users/search?limit=10', {
   key: 'editor-mention-users-search',
   params: { q: searchTermDebounced },
-  transform: (data: { users: { id: number, firstName: string, lastName: string, image: string }[] }) => {
-    return data.users?.map(user => ({ id: user.id, label: `${user.firstName} ${user.lastName}`, avatar: { src: user.image, loading: 'lazy' as const } })) || []
+  transform: (data: { users: Array<{ id: number; firstName: string; lastName: string; image: string }> }) => {
+    return data.users?.map((user) => ({ id: user.id, label: `${user.firstName} ${user.lastName}`, avatar: { src: user.image, loading: 'lazy' as const } })) || [];
   },
-  server: false
-})
+  server: false,
+});
 
 // SSR-safe function to append menus to body (avoids z-index issues in docs)
-const appendToBody = import.meta.client ? () => document.body : undefined
+const appendToBody = import.meta.client ? () => document.body : undefined;
 </script>
 
 <template>
@@ -27,7 +27,7 @@ const appendToBody = import.meta.client ? () => document.body : undefined
     v-model="value"
     content-type="markdown"
     placeholder="Type @ to mention someone..."
-    class="w-full min-h-21"
+    class="min-h-21 w-full"
   >
     <PEditorMentionMenu
       v-model:search-term="searchTerm"

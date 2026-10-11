@@ -1,56 +1,56 @@
 <script setup lang="ts">
-import * as z from 'zod'
-import type { FormSubmitEvent, AuthFormField } from 'pohon-ui'
+import type { AuthFormField, FormSubmitEvent } from 'pohon-ui';
+import * as z from 'zod';
 
-const toast = useToast()
+const toast = useToast();
 
-const fields: AuthFormField[] = [{
+const fields: Array<AuthFormField> = [{
   name: 'email',
   type: 'email',
   label: 'Email',
   placeholder: 'Enter your email',
-  required: true
+  required: true,
 }, {
   name: 'password',
   label: 'Password',
   type: 'password',
   placeholder: 'Enter your password',
-  required: true
+  required: true,
 }, {
   name: 'remember',
   label: 'Remember me',
-  type: 'checkbox'
-}]
+  type: 'checkbox',
+}];
 
 const providers = [{
   label: 'Google',
   icon: 'i-simple-icons-google',
   onClick: () => {
-    toast.add({ title: 'Google', description: 'Login with Google' })
-  }
+    toast.add({ title: 'Google', description: 'Login with Google' });
+  },
 }, {
   label: 'GitHub',
   icon: 'i-simple-icons-github',
   onClick: () => {
-    toast.add({ title: 'GitHub', description: 'Login with GitHub' })
-  }
-}]
+    toast.add({ title: 'GitHub', description: 'Login with GitHub' });
+  },
+}];
 
 const schema = z.object({
   email: z.email('Invalid email'),
-  password: z.string('Password is required').min(8, 'Must be at least 8 characters')
-})
+  password: z.string('Password is required').min(8, 'Must be at least 8 characters'),
+});
 
-type Schema = z.output<typeof schema>
+type Schema = z.output<typeof schema>;
 
 function onSubmit(payload: FormSubmitEvent<Schema>) {
-  console.log('Submitted', payload)
+  console.log('Submitted', payload);
 }
 </script>
 
 <template>
-  <div class="flex flex-col items-center justify-center gap-4 p-4">
-    <PPageCard class="w-full max-w-md">
+  <div class="p-4 flex flex-col gap-4 items-center justify-center">
+    <PPageCard class="max-w-md w-full">
       <PAuthForm
         :schema="schema"
         :fields="fields"
@@ -60,16 +60,36 @@ function onSubmit(payload: FormSubmitEvent<Schema>) {
         @submit="onSubmit"
       >
         <template #description>
-          Don't have an account? <PLink to="#" class="text-primary font-medium">Sign up</PLink>.
+          Don't have an account? <PLink
+            to="#"
+            class="text-primary font-medium"
+          >
+            Sign up
+          </PLink>.
         </template>
         <template #password-hint>
-          <PLink to="#" class="text-primary font-medium" tabindex="-1">Forgot password?</PLink>
+          <PLink
+            to="#"
+            class="text-primary font-medium"
+            tabindex="-1"
+          >
+            Forgot password?
+          </PLink>
         </template>
         <template #validation>
-          <PAlert color="error" icon="i-lucide-info" title="Error signing in" />
+          <PAlert
+            color="error"
+            icon="i-lucide-info"
+            title="Error signing in"
+          />
         </template>
         <template #footer>
-          By signing in, you agree to our <PLink to="#" class="text-primary font-medium">Terms of Service</PLink>.
+          By signing in, you agree to our <PLink
+            to="#"
+            class="text-primary font-medium"
+          >
+            Terms of Service
+          </PLink>.
         </template>
       </PAuthForm>
     </PPageCard>

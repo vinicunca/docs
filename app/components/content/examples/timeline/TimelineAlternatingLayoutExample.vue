@@ -1,27 +1,27 @@
 <script setup lang="ts">
-import type { TimelineItem } from 'pohon-ui'
+import type { TimelineItem } from 'pohon-ui';
 
-const items: TimelineItem[] = [{
+const items: Array<TimelineItem> = [{
   date: 'Mar 15, 2025',
   title: 'Project Kickoff',
   icon: 'i-lucide-rocket',
-  value: 'kickoff'
+  value: 'kickoff',
 }, {
   date: 'Mar 22, 2025',
   title: 'Design Phase',
   icon: 'i-lucide-palette',
-  value: 'design'
+  value: 'design',
 }, {
   date: 'Mar 29, 2025',
   title: 'Development Sprint',
   icon: 'i-lucide-code',
-  value: 'development'
+  value: 'development',
 }, {
   date: 'Apr 5, 2025',
   title: 'Testing & Deployment',
   icon: 'i-lucide-check-circle',
-  value: 'deployment'
-}]
+  value: 'deployment',
+}];
 </script>
 
 <template>

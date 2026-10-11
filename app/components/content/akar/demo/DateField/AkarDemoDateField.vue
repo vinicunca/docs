@@ -1,42 +1,42 @@
 <script setup lang="ts">
-import { DateFieldInput, DateFieldRoot, Label } from 'akar'
-import './styles.css'
+import { DateFieldInput, DateFieldRoot, Label } from 'akar';
+import './styles.css';
 </script>
 
 <template>
   <div class="akar-demo akar-demo-DateField">
     <div class="DateFieldWrapper">
-        <Label
-          class="DateFieldLabel"
-          for="date-field"
-        >Birthday</Label>
-        <DateFieldRoot
-          id="date-field"
-          v-slot="{ segments }"
-          :is-date-unavailable="date => date.day === 19"
-          granularity="second"
-          class="DateField"
+      <Label
+        class="DateFieldLabel"
+        for="date-field"
+      >Birthday</Label>
+      <DateFieldRoot
+        id="date-field"
+        v-slot="{ segments }"
+        :is-date-unavailable="date => date.day === 19"
+        granularity="second"
+        class="DateField"
+      >
+        <template
+          v-for="item in segments"
+          :key="item.part"
         >
-          <template
-            v-for="item in segments"
-            :key="item.part"
+          <DateFieldInput
+            v-if="item.part === 'literal'"
+            :part="item.part"
+            class="DateFieldLiteral"
           >
-            <DateFieldInput
-              v-if="item.part === 'literal'"
-              :part="item.part"
-              class="DateFieldLiteral"
-            >
-              {{ item.value }}
-            </DateFieldInput>
-            <DateFieldInput
-              v-else
-              :part="item.part"
-              class="DateFieldSegment"
-            >
-              {{ item.value }}
-            </DateFieldInput>
-          </template>
-        </DateFieldRoot>
-      </div>
+            {{ item.value }}
+          </DateFieldInput>
+          <DateFieldInput
+            v-else
+            :part="item.part"
+            class="DateFieldSegment"
+          >
+            {{ item.value }}
+          </DateFieldInput>
+        </template>
+      </DateFieldRoot>
+    </div>
   </div>
 </template>

@@ -63,14 +63,20 @@ Missing UI: profile, onboarding (no route, page, or `meta.auth` mode exists), an
 ## `v-access` and `useAccess`
 
 ```vue
-<button v-access:role="'admin'">Admin only</button>
-<button v-access:code="'invoice:create'">Needs access code</button>
+<button v-access:role="'admin'">
+Admin only
+</button>
+
+<button v-access:code="'invoice:create'">
+Needs access code
+</button>
 ```
 
 In frontend mode, `v-access:role` matches session roles. In other modes, and for `v-access:code`, it matches `accessStore.accessCodes`. An element that fails the check is **removed** from the DOM on mount.
 
 ```ts
 import { useAccess } from '@taman/access';
+
 const { hasAccessByRoles, hasAccessByCodes, accessMode, toggleAccessMode } = useAccess();
 ```
 

@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { motion } from 'motion-v'
+import { motion } from 'motion-v';
 
 const props = withDefaults(defineProps<{
-  size?: number
-  open?: boolean
+  size?: number;
+  open?: boolean;
 }>(), {
   size: 16,
-  open: false
-})
+  open: false,
+});
 
 // X lines: rotate to form X when open, rotate back and scale down when closing
 const line1Variants = {
@@ -15,30 +15,30 @@ const line1Variants = {
     rotate: 45,
     scale: 1,
     opacity: 1,
-    transition: { duration: 0.25, ease: 'easeOut' as const }
+    transition: { duration: 0.25, ease: 'easeOut' as const },
   },
   closed: {
     rotate: 0,
     scale: 0,
     opacity: 0,
-    transition: { duration: 0.2, ease: 'easeIn' as const }
-  }
-}
+    transition: { duration: 0.2, ease: 'easeIn' as const },
+  },
+};
 
 const line2Variants = {
   open: {
     rotate: -45,
     scale: 1,
     opacity: 1,
-    transition: { duration: 0.25, ease: 'easeOut' as const }
+    transition: { duration: 0.25, ease: 'easeOut' as const },
   },
   closed: {
     rotate: 0,
     scale: 0,
     opacity: 0,
-    transition: { duration: 0.2, ease: 'easeIn' as const }
-  }
-}
+    transition: { duration: 0.2, ease: 'easeIn' as const },
+  },
+};
 
 // Eye: scale up when appearing, scale down when X appears
 const eyeVariants = {
@@ -46,7 +46,7 @@ const eyeVariants = {
     scale: 0,
     opacity: 0,
     scaleY: 1,
-    transition: { duration: 0.15, ease: 'easeIn' as const }
+    transition: { duration: 0.15, ease: 'easeIn' as const },
   },
   closed: {
     scale: 1,
@@ -60,17 +60,17 @@ const eyeVariants = {
         repeat: Infinity,
         ease: 'easeInOut' as const,
         times: [0, 0.45, 0.5, 0.55, 1],
-        delay: 0.5
-      }
-    }
-  }
-}
+        delay: 0.5,
+      },
+    },
+  },
+};
 
 const pupilVariants = {
   open: {
     scale: 0,
     opacity: 0,
-    transition: { duration: 0.15, ease: 'easeIn' as const }
+    transition: { duration: 0.15, ease: 'easeIn' as const },
   },
   closed: {
     opacity: [1, 1, 0, 1, 1],
@@ -80,12 +80,12 @@ const pupilVariants = {
       repeat: Infinity,
       ease: 'easeInOut' as const,
       times: [0, 0.45, 0.5, 0.55, 1],
-      delay: 0.5
-    }
-  }
-}
+      delay: 0.5,
+    },
+  },
+};
 
-const currentState = computed(() => props.open ? 'open' : 'closed')
+const currentState = computed(() => props.open ? 'open' : 'closed');
 </script>
 
 <template>

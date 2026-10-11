@@ -14,7 +14,7 @@ Import the component.
 
 ```vue
 <script setup lang="ts">
-import { VisuallyHidden } from 'akar'
+import { VisuallyHidden } from 'akar';
 </script>
 
 <template>
@@ -30,8 +30,8 @@ Use the visually hidden primitive.
 
 ```vue
 <script setup lang="ts">
-import { GearIcon } from '@radix-icons/vue'
-import { VisuallyHidden } from 'akar'
+import { GearIcon } from '@radix-icons/vue';
+import { VisuallyHidden } from 'akar';
 </script>
 
 <template>

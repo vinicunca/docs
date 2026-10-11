@@ -1,36 +1,36 @@
 <script setup lang="ts">
-import { RovingFocusGroup, RovingFocusItem } from 'akar'
+import { RovingFocusGroup, RovingFocusItem } from 'akar';
 </script>
 
 <template>
   <div class="akar-demo akar-demo-RovingFocus">
-    <div class="flex flex-col justify-center gap-4">
-        <p class="dark:text-stone-200 text-xs">
-          Tab to focus
-        </p>
-        <RovingFocusGroup
-          orientation="horizontal"
-          class="flex items-center gap-2 "
+    <div class="flex flex-col gap-4 justify-center">
+      <p class="text-xs dark:text-stone-200">
+        Tab to focus
+      </p>
+      <RovingFocusGroup
+        orientation="horizontal"
+        class="flex gap-2 items-center"
+      >
+        <RovingFocusItem
+          class="font-medium px-4 py-2 rounded-lg bg-neutral-700 transition dark:text-white focus:bg-neutral-800 hover:bg-neutral-800"
+          as="button"
         >
-          <RovingFocusItem
-            class="font-medium dark:text-white px-4 py-2 rounded-lg bg-neutral-700 focus:bg-neutral-800 hover:bg-neutral-800 transition"
-            as="button"
-          >
-            Button 1
-          </RovingFocusItem>
-          <RovingFocusItem
-            class="font-medium dark:text-white px-4 py-2 rounded-lg bg-neutral-700 focus:bg-neutral-800 hover:bg-neutral-800 transition"
-            as="button"
-          >
-            Button 2
-          </RovingFocusItem>
-          <RovingFocusItem
-            class="font-medium dark:text-white px-4 py-2 rounded-lg bg-neutral-700 focus:bg-neutral-800 hover:bg-neutral-800 transition"
-            as="button"
-          >
-            Button 3
-          </RovingFocusItem>
-        </RovingFocusGroup>
-      </div>
+          Button 1
+        </RovingFocusItem>
+        <RovingFocusItem
+          class="font-medium px-4 py-2 rounded-lg bg-neutral-700 transition dark:text-white focus:bg-neutral-800 hover:bg-neutral-800"
+          as="button"
+        >
+          Button 2
+        </RovingFocusItem>
+        <RovingFocusItem
+          class="font-medium px-4 py-2 rounded-lg bg-neutral-700 transition dark:text-white focus:bg-neutral-800 hover:bg-neutral-800"
+          as="button"
+        >
+          Button 3
+        </RovingFocusItem>
+      </RovingFocusGroup>
+    </div>
   </div>
 </template>

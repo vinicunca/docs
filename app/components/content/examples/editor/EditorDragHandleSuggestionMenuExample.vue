@@ -1,29 +1,29 @@
 <script setup lang="ts">
-import type { EditorSuggestionMenuItem } from 'pohon-ui'
+import type { EditorSuggestionMenuItem } from 'pohon-ui';
 
 const value = ref(`Click the plus button to open the suggestion menu and add new blocks.
 
-The button appears when hovering over blocks.`)
+The button appears when hovering over blocks.`);
 
-const suggestionItems: EditorSuggestionMenuItem[][] = [[{
+const suggestionItems: Array<Array<EditorSuggestionMenuItem>> = [[{
   kind: 'heading',
   level: 1,
   label: 'Heading 1',
-  icon: 'i-lucide-heading-1'
+  icon: 'i-lucide-heading-1',
 }, {
   kind: 'heading',
   level: 2,
   label: 'Heading 2',
-  icon: 'i-lucide-heading-2'
+  icon: 'i-lucide-heading-2',
 }, {
   kind: 'bulletList',
   label: 'Bullet List',
-  icon: 'i-lucide-list'
+  icon: 'i-lucide-list',
 }, {
   kind: 'blockquote',
   label: 'Blockquote',
-  icon: 'i-lucide-text-quote'
-}]]
+  icon: 'i-lucide-text-quote',
+}]];
 </script>
 
 <template>
@@ -31,12 +31,18 @@ const suggestionItems: EditorSuggestionMenuItem[][] = [[{
     v-slot="{ editor, handlers }"
     v-model="value"
     content-type="markdown"
-    class="w-full min-h-35"
+    class="min-h-35 w-full"
     :ui="{ base: 'p-8 sm:px-16' }"
   >
-    <PEditorSuggestionMenu :editor="editor" :items="suggestionItems" />
+    <PEditorSuggestionMenu
+      :editor="editor"
+      :items="suggestionItems"
+    />
 
-    <PEditorDragHandle v-slot="{ ui, onClick }" :editor="editor">
+    <PEditorDragHandle
+      v-slot="{ ui, onClick }"
+      :editor="editor"
+    >
       <PButton
         icon="i-lucide-plus"
         color="neutral"

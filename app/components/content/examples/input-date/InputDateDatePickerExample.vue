@@ -1,13 +1,16 @@
 <script setup lang="ts">
-import { CalendarDate } from '@internationalized/date'
+import { CalendarDate } from '@internationalized/date';
 
-const inputDate = useTemplateRef('inputDate')
+const inputDate = useTemplateRef('inputDate');
 
-const modelValue = shallowRef(new CalendarDate(2022, 1, 10))
+const modelValue = shallowRef(new CalendarDate(2022, 1, 10));
 </script>
 
 <template>
-  <PInputDate ref="inputDate" v-model="modelValue">
+  <PInputDate
+    ref="inputDate"
+    v-model="modelValue"
+  >
     <template #trailing>
       <PPopover :reference="inputDate?.inputsRef[3]?.$el">
         <PButton
@@ -20,7 +23,10 @@ const modelValue = shallowRef(new CalendarDate(2022, 1, 10))
         />
 
         <template #content>
-          <PCalendar v-model="modelValue" class="p-2" />
+          <PCalendar
+            v-model="modelValue"
+            class="p-2"
+          />
         </template>
       </PPopover>
     </template>
