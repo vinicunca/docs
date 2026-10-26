@@ -4,15 +4,15 @@ import type { BreadcrumbItem } from 'pohon-ui';
 const items: Array<BreadcrumbItem> = [
   {
     label: 'Docs',
-    to: '/docs',
+    to: '/pohon/getting-started',
   },
   {
     label: 'Components',
-    to: '/docs/components',
+    to: '/pohon/components',
   },
   {
     label: 'Breadcrumb',
-    to: '/docs/components/breadcrumb',
+    to: '/pohon/components/breadcrumb',
   },
 ];
 </script>

@@ -175,6 +175,8 @@ export default defineNuxtConfig({
       (component, code) => {
       // Simplify ui in slot prop types: `leading(props: { ui: Button['ui'] })` -> `leading(props: { ui: object })`
         code = code.replace(/ui:[^}]+(?=\})/g, 'ui: object');
+        // JSDoc links copied from Nuxt UI point at `/docs/...`, which is `/pohon/...` here
+        code = code.replace(/\]\(\/docs\//g, '](/pohon/');
 
         return { code, component };
       },
@@ -234,6 +236,9 @@ export default defineNuxtConfig({
     // import Nitro helpers from `#imports`, which compat v5 no longer provides.
     // Remove once they all import them explicitly.
     nitroAutoImports: true,
+    // A `hydrate-never` component's `useAsyncData` stays out of the payload:
+    // the Perkakas reference renders 160-odd static summaries that way.
+    stripNeverHydratedData: true,
   },
 
   // Declared global so @nuxt/fonts emits their faces where nuxt-og-image

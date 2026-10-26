@@ -6,27 +6,27 @@ const items = [
     level: 1,
   },
   {
-    id: '/docs/getting-started#whats-new-in-v3',
+    id: '/pohon/getting-started#whats-new-in-v3',
     label: 'What\'s new in v3?',
     level: 2,
   },
   {
-    id: '/docs/getting-started#akar',
+    id: '/pohon/getting-started#akar',
     label: 'Akar',
     level: 3,
   },
   {
-    id: '/docs/getting-started/installation/nuxt',
+    id: '/pohon/getting-started/installation/nuxt',
     label: 'UnoCSS',
     level: 3,
   },
   {
-    id: '/docs/getting-started#unocss-variants',
+    id: '/pohon/getting-started#unocss-variants',
     label: 'UnoCSS Variants',
     level: 3,
   },
   {
-    id: '/docs/getting-started/installation',
+    id: '/pohon/getting-started/installation',
     label: 'Installation',
     level: 1,
   },

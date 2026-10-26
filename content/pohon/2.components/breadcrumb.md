@@ -26,7 +26,7 @@ props:
   items:
     - label: 'Docs'
       icon: 'i-lucide-book-open'
-      to: '/docs'
+      to: '/pohon/getting-started'
     - label: 'Components'
       icon: 'i-lucide-box'
       to: '/pohon/components'
@@ -61,7 +61,7 @@ props:
   items:
     - label: 'Docs'
       icon: 'i-lucide-book-open'
-      to: '/docs'
+      to: '/pohon/getting-started'
     - label: 'Components'
       icon: 'i-lucide-box'
       to: '/pohon/components'
@@ -92,7 +92,7 @@ props:
   items:
     - label: 'Docs'
       icon: 'i-lucide-book-open'
-      to: '/docs'
+      to: '/pohon/getting-started'
     - label: 'Components'
       icon: 'i-lucide-box'
       to: '/pohon/components'
@@ -131,7 +131,7 @@ props:
   items:
     - label: 'Docs'
       icon: 'i-lucide-book-open'
-      to: '/docs'
+      to: '/pohon/getting-started'
     - label: 'Components'
       icon: 'i-lucide-box'
       to: '/pohon/components'

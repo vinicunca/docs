@@ -52,7 +52,7 @@
     background-color: var(--grass-2);
   }
 
-  .TimeFieldSegment:[aria-valuetext='Empty'] {
+  .TimeFieldSegment[aria-valuetext='Empty'] {
     color: var(--grass-6);
   }
 }

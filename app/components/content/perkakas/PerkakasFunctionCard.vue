@@ -83,8 +83,10 @@ function hasDetails(signature: PerkakasSignature) {
       />
     </div>
 
-    <DocsMarkdown
+    <!-- Static text whose links are `#` anchors, so it never hydrates and its parse stays out of the payload. -->
+    <LazyDocsMarkdown
       v-if="fn.summary"
+      hydrate-never
       :value="fn.summary"
       class="color-text-toned [&_:first-child]:mt-0"
     />

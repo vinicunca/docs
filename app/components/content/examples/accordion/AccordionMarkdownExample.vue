@@ -10,7 +10,7 @@ const items = [
   {
     label: 'Can I use Pohon UI with Vue without Nuxt?',
     icon: 'i-lucide-circle-help',
-    content: 'Yes! While optimized for Nuxt, Pohon UI works perfectly with standalone Vue projects via our Vite plugin. You can follow the [installation guide](/docs/getting-started/installation/vue) to get started.',
+    content: 'Yes! While optimized for Nuxt, Pohon UI works perfectly with standalone Vue projects via our Vite plugin. You can follow the [installation guide](/pohon/getting-started/installation/vue) to get started.',
   },
   {
     label: 'Will Pohon UI work with other CSS frameworks like UnoCSS?',

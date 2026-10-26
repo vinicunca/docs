@@ -23,7 +23,7 @@ features:
   - title: 'Icons'
     description: 'Pohon UI integrates with Nuxt Icon to access over 200,000+ icons from Iconify.'
     icon: 'i-lucide-smile'
-    to: '/pohon/getting-started/integrations/icons'
+    to: '/pohon/getting-started/integrations/icons/nuxt'
   - title: 'Fonts'
     description: 'Pohon UI integrates with Nuxt Fonts to provide plug-and-play font optimization.'
     icon: 'i-lucide-a-large-small'
@@ -31,7 +31,7 @@ features:
   - title: 'Color Mode'
     description: 'Pohon UI integrates with Nuxt Color Mode to switch between light and dark.'
     icon: 'i-lucide-sun-moon'
-    to: '/pohon/getting-started/integrations/color-mode'
+    to: '/pohon/getting-started/integrations/color-mode/nuxt'
 ---
 ::
 
@@ -140,7 +140,7 @@ props:
     - title: 'Icons'
       description: 'Pohon UI integrates with Nuxt Icon to access over 200,000+ icons from Iconify.'
       icon: 'i-lucide-smile'
-      to: '/pohon/getting-started/integrations/icons'
+      to: '/pohon/getting-started/integrations/icons/nuxt'
     - title: 'Fonts'
       description: 'Pohon UI integrates with Nuxt Fonts to provide plug-and-play font optimization.'
       icon: 'i-lucide-a-large-small'
@@ -148,7 +148,7 @@ props:
     - title: 'Color Mode'
       description: 'Pohon UI integrates with Nuxt Color Mode to switch between light and dark.'
       icon: 'i-lucide-sun-moon'
-      to: '/pohon/getting-started/integrations/color-mode'
+      to: '/pohon/getting-started/integrations/color-mode/nuxt'
 ---
 ::
 
@@ -211,7 +211,7 @@ props:
     - title: 'Icons'
       description: 'Pohon UI integrates with Nuxt Icon to access over 200,000+ icons from Iconify.'
       icon: 'i-lucide-smile'
-      to: '/pohon/getting-started/integrations/icons'
+      to: '/pohon/getting-started/integrations/icons/nuxt'
     - title: 'Fonts'
       description: 'Pohon UI integrates with Nuxt Fonts to provide plug-and-play font optimization.'
       icon: 'i-lucide-a-large-small'
@@ -219,7 +219,7 @@ props:
     - title: 'Color Mode'
       description: 'Pohon UI integrates with Nuxt Color Mode to switch between light and dark.'
       icon: 'i-lucide-sun-moon'
-      to: '/pohon/getting-started/integrations/color-mode'
+      to: '/pohon/getting-started/integrations/color-mode/nuxt'
   links:
     - label: 'Explore components'
       to: '/pohon/components/app'
@@ -264,7 +264,7 @@ props:
     - title: 'Icons'
       description: 'Pohon UI integrates with Nuxt Icon to access over 200,000+ icons from Iconify.'
       icon: 'i-lucide-smile'
-      to: '/pohon/getting-started/integrations/icons'
+      to: '/pohon/getting-started/integrations/icons/nuxt'
     - title: 'Fonts'
       description: 'Pohon UI integrates with Nuxt Fonts to provide plug-and-play font optimization.'
       icon: 'i-lucide-a-large-small'
@@ -272,7 +272,7 @@ props:
     - title: 'Color Mode'
       description: 'Pohon UI integrates with Nuxt Color Mode to switch between light and dark.'
       icon: 'i-lucide-sun-moon'
-      to: '/pohon/getting-started/integrations/color-mode'
+      to: '/pohon/getting-started/integrations/color-mode/nuxt'
   links:
     - label: 'Explore components'
       to: '/pohon/components/app'

@@ -151,7 +151,7 @@
     background-color: var(--grass-9);
   }
 
-  .CalendarCellTrigger[data-selected:not(data-selection-start):not(data-selection-end)] {
+  .CalendarCellTrigger[data-selected]:not([data-selection-start]):not([data-selection-end]) {
     background-color: rgba(0, 0, 0, 0.3);
   }
 

@@ -83,7 +83,7 @@ hide:
   - class
 class: '!px-0 !pt-0'
 props:
-  to: '/docs'
+  to: '/pohon/getting-started'
   class: 'w-full'
 ---
 ::
@@ -102,13 +102,13 @@ props:
 slots:
   left: |
 
-    <NuxtLink to="/docs">
+    <NuxtLink to="/pohon/getting-started">
       <Logo class="h-6 w-auto" />
     </NuxtLink>
 ---
 
 #left
-::nuxt-link{to="/docs"}
+::nuxt-link{to="/pohon/getting-started"}
 :logo{class="h-6 w-auto"}
 ::
 ::

@@ -7,14 +7,14 @@ const route = useRoute();
 
 const items = computed<Array<NavigationMenuItem>>(() => [{
   label: 'Docs',
-  to: '/docs/getting-started',
+  to: '/pohon/getting-started',
   icon: 'i-lucide-book-open',
-  active: route.path.startsWith('/docs/getting-started'),
+  active: route.path.startsWith('/pohon/getting-started'),
 }, {
   label: 'Components',
-  to: '/docs/components',
+  to: '/pohon/components',
   icon: 'i-lucide-box',
-  active: route.path.startsWith('/docs/components'),
+  active: route.path.startsWith('/pohon/components'),
 }, {
   label: 'Theme',
   icon: 'i-lucide-palette',

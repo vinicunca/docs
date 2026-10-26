@@ -23,7 +23,10 @@ function groupChildrenByCategory(items: Array<ContentNavigationItem>, pkg: DocsP
 
   if (uncategorized.length) {
     const withChildren = uncategorized.filter((item) => item.children?.length)
-      ?.map((item) => ({ ...item, children: item.children?.map((child) => ({ ...child, icon: undefined })) }));
+      ?.map((item) => ({
+        ...item,
+        children: item.children?.map((child) => ({ ...child, icon: undefined })),
+      }));
     const withoutChildren = uncategorized.filter((item) => !item.children?.length);
 
     if (withoutChildren.length) {
@@ -43,7 +46,9 @@ function groupChildrenByCategory(items: Array<ContentNavigationItem>, pkg: DocsP
       groups.push({
         title: category.title,
         path: sectionPath,
-        class: category.framework ? [`${category.framework}-only`] : undefined,
+        class: category.framework
+          ? [`${category.framework}-only`]
+          : undefined,
         children: categorized[category.id],
       });
     }
@@ -52,7 +57,11 @@ function groupChildrenByCategory(items: Array<ContentNavigationItem>, pkg: DocsP
   // Categories a page declares but the package does not list keep their pages visible
   for (const [id, children] of Object.entries(categorized)) {
     if (!categories.some((category) => category.id === id)) {
-      groups.push({ title: id.replace(/-/g, ' ').replace(/^\w/, (c) => c.toUpperCase()), path: sectionPath, children });
+      groups.push({
+        title: id.replace(/-/g, ' ').replace(/^\w/, (c) => c.toUpperCase()),
+        path: sectionPath,
+        children,
+      });
     }
   }
 
@@ -95,6 +104,14 @@ function filterChildrenByFramework(item: ContentNavigationItem, framework: strin
   };
 }
 
+/** Where a section link lands: a folder without an index page has no route, so its first page. */
+function sectionLanding(item: ContentNavigationItem): string {
+  const first = item.children?.[0];
+  return item.page === false && first
+    ? sectionLanding(first)
+    : item.path;
+}
+
 function processNavigationItem(item: ContentNavigationItem, parent?: ContentNavigationItem): ContentNavigationItem | Array<ContentNavigationItem> {
   if (item.shadow) {
     return item.children?.flatMap((child) => processNavigationItem(child, item)) || [];
@@ -105,7 +122,9 @@ function processNavigationItem(item: ContentNavigationItem, parent?: ContentNavi
     title: parent?.title ? parent.title : item.title,
     badge: parent?.badge || item.badge,
     class: [item.framework && `${item.framework}-only`].filter(Boolean),
-    children: item.children?.length ? item.children?.flatMap((child) => processNavigationItem(child)) : undefined,
+    children: item.children?.length
+      ? item.children?.flatMap((child) => processNavigationItem(child))
+      : undefined,
   };
 }
 
@@ -132,6 +151,19 @@ export function useNavigation(navigation: Ref<Array<ContentNavigationItem> | und
     return root?.children?.filter((item) => item.children?.length) ?? [];
   });
 
+  /** The header's section links, active anywhere inside their section. */
+  const sectionLinks = computed(() => mapContentNavigation(packageSections.value.map((item) => ({
+    ...item,
+    path: sectionLanding(item),
+    children: undefined,
+  }))).map((link, index) => {
+    const section = packageSections.value[index]!.path;
+    return {
+      ...link,
+      active: route.path === section || route.path.startsWith(`${section}/`),
+    };
+  }));
+
   /** Every package with framework-filtered pages, for the command palette. */
   const navigationByFramework = computed(() =>
     rootNavigation.value?.map((item) => filterChildrenByFramework(item, framework.value, studioIcons)),
@@ -147,7 +179,9 @@ export function useNavigation(navigation: Ref<Array<ContentNavigationItem> | und
     const slug = route.path.split('/')[2] as string;
     const sectionPath = `/${pkg.id}/${slug}`;
     const hasSections = packageSections.value.length > 0;
-    const parentPath = hasSections ? sectionPath : `/${pkg.id}`;
+    const parentPath = hasSections
+      ? sectionPath
+      : `/${pkg.id}`;
 
     const children = findPageChildren(navigation?.value, parentPath, { indexAsChild: true });
 
@@ -171,13 +205,17 @@ export function useNavigation(navigation: Ref<Array<ContentNavigationItem> | und
   function findBreadcrumb(path: string) {
     const breadcrumb = findPageBreadcrumb(navigation?.value, path, { indexAsChild: true });
 
-    return mapContentNavigation(breadcrumb).map(({ icon, ...link }) => link);
+    // A folder without an index page (`page: false`) has no route, so it stays plain text
+    return mapContentNavigation(breadcrumb).map(({ icon, ...link }, index) => breadcrumb[index]?.page === false
+      ? { ...link, to: undefined }
+      : link);
   }
 
   return {
     currentPackage,
     rootNavigation,
     packageSections,
+    sectionLinks,
     navigationByCategory,
     navigationByFramework,
     findSurround,

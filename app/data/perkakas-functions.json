@@ -1,6 +1,6 @@
 {
-  "version": "1.17.1",
-  "generatedAt": "2026-10-01T02:15:11.290Z",
+  "version": "1.19.1",
+  "generatedAt": "2026-10-26T13:30:20.658Z",
   "functions": [
     {
       "name": "allPass",
@@ -54,7 +54,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/all-pass.ts#L19"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/all-pass.ts#L19"
     },
     {
       "name": "anyPass",
@@ -108,7 +108,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/any-pass.ts#L19"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/any-pass.ts#L19"
     },
     {
       "name": "chunk",
@@ -162,7 +162,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/chunk.ts#L207"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/chunk.ts#L207"
     },
     {
       "name": "concat",
@@ -218,7 +218,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/concat.ts#L21"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/concat.ts#L21"
     },
     {
       "name": "countBy",
@@ -272,7 +272,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/count-by.ts#L21"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/count-by.ts#L21"
     },
     {
       "name": "difference",
@@ -309,7 +309,7 @@
           }
         },
         {
-          "variant": "data-first",
+          "variant": "data-last",
           "signature": "difference(other)(data)",
           "signatureHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">difference</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(other)(data)</span></span>",
           "example": "pipe([1, 2, 3, 4], difference([2, 5, 3])); // => [1, 4]\npipe([1, 1, 2, 2], difference([1])); // => [1, 2, 2]",
@@ -326,7 +326,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/difference.ts#L21"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/difference.ts#L21"
     },
     {
       "name": "differenceWith",
@@ -390,7 +390,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/difference-with.ts#L26"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/difference-with.ts#L26"
     },
     {
       "name": "drop",
@@ -444,7 +444,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/drop.ts#L114"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/drop.ts#L114"
     },
     {
       "name": "dropFirstBy",
@@ -510,7 +510,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/drop-first-by.ts#L26"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/drop-first-by.ts#L26"
     },
     {
       "name": "dropLast",
@@ -564,7 +564,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/drop-last.ts#L21"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/drop-last.ts#L21"
     },
     {
       "name": "dropLastWhile",
@@ -618,7 +618,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/drop-last-while.ts#L18"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/drop-last-while.ts#L18"
     },
     {
       "name": "dropWhile",
@@ -672,7 +672,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/drop-while.ts#L18"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/drop-while.ts#L18"
     },
     {
       "name": "filter",
@@ -728,7 +728,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/filter.ts#L34"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/filter.ts#L35"
     },
     {
       "name": "find",
@@ -784,7 +784,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/find.ts#L103"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/find.ts#L106"
     },
     {
       "name": "findIndex",
@@ -840,7 +840,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/find-index.ts#L24"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/find-index.ts#L24"
     },
     {
       "name": "findLast",
@@ -896,7 +896,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/find-last.ts#L95"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/find-last.ts#L97"
     },
     {
       "name": "findLastIndex",
@@ -952,7 +952,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/find-last-index.ts#L24"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/find-last-index.ts#L24"
     },
     {
       "name": "first",
@@ -997,7 +997,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/first.ts#L22"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/first.ts#L25"
     },
     {
       "name": "firstBy",
@@ -1053,7 +1053,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/first-by.ts#L40"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/first-by.ts#L40"
     },
     {
       "name": "flat",
@@ -1069,8 +1069,8 @@
       "signatures": [
         {
           "variant": "data-first",
-          "signature": "flat(data);\nflat(data, depth)",
-          "signatureHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">flat</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(data)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">flat</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(data</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> depth)</span></span>",
+          "signature": "flat(data)\nflat(data, depth)",
+          "signatureHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">flat</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(data)</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">flat</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(data</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> depth)</span></span>",
           "example": "flat([[1, 2], [3, 4], [5], [[6]]]); // => [1, 2, 3, 4, 5, [6]]\nflat([[[1]], [[2]]], 2); // => [1, 2]",
           "exampleHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">flat</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">([[</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">1</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 2</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">]</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> [</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">3</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 4</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">]</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> [</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">5</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">]</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> [[</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">6</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">]]])</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> // => [1, 2, 3, 4, 5, [6]]</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">flat</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">([[[</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">1</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">]]</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> [[</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">2</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">]]]</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 2</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> // => [1, 2]</span></span>",
           "params": [
@@ -1091,8 +1091,8 @@
         },
         {
           "variant": "data-last",
-          "signature": "flat()(data);\nflat(depth)(data)",
-          "signatureHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">flat</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">()(data)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">flat</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(depth)(data)</span></span>",
+          "signature": "flat()(data)\nflat(depth)(data)",
+          "signatureHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">flat</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">()(data)</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">flat</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(depth)(data)</span></span>",
           "example": "pipe([[1, 2], [3, 4], [5], [[6]]], flat()); // => [1, 2, 3, 4, 5, [6]]\npipe([[[1]], [[2]]], flat(2)); // => [1, 2]",
           "exampleHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">pipe</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">([[</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">1</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 2</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">]</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> [</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">3</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 4</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">]</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> [</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">5</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">]</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> [[</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">6</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">]]]</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> flat</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">())</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> // => [1, 2, 3, 4, 5, [6]]</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">pipe</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">([[[</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">1</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">]]</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> [[</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">2</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">]]]</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> flat</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">2</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">))</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> // => [1, 2]</span></span>",
           "params": [
@@ -1107,7 +1107,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/flat.ts#L80"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/flat.ts#L83"
     },
     {
       "name": "flatMap",
@@ -1163,7 +1163,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/flat-map.ts#L26"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/flat-map.ts#L29"
     },
     {
       "name": "forEach",
@@ -1218,7 +1218,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/for-each.ts#L28"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/for-each.ts#L29"
     },
     {
       "name": "groupBy",
@@ -1274,7 +1274,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/group-by.ts#L32"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/group-by.ts#L32"
     },
     {
       "name": "groupByProp",
@@ -1328,7 +1328,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/group-by-prop.ts#L140"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/group-by-prop.ts#L140"
     },
     {
       "name": "hasAtLeast",
@@ -1384,7 +1384,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/has-at-least.ts#L28"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/has-at-least.ts#L28"
     },
     {
       "name": "indexBy",
@@ -1438,7 +1438,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/index-by.ts#L24"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/index-by.ts#L24"
     },
     {
       "name": "intersection",
@@ -1492,7 +1492,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/intersection.ts#L21"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/intersection.ts#L27"
     },
     {
       "name": "intersectionWith",
@@ -1508,23 +1508,23 @@
       "signatures": [
         {
           "variant": "data-first",
-          "signature": "intersectionWith(array, other, comparator)",
-          "signatureHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">intersectionWith</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(array</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> other</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> comparator)</span></span>",
+          "signature": "intersectionWith(data, other, isEqual)",
+          "signatureHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">intersectionWith</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(data</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> other</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> isEqual)</span></span>",
           "example": "intersectionWith(\n  [\n    { id: 1, name: 'Ryan' },\n    { id: 3, name: 'Emma' },\n  ],\n  [3, 5],\n  (a, b) => a.id === b,\n); // => [{ id: 3, name: 'Emma' }]",
           "exampleHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">intersectionWith</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">  [</span></span>\n<span class=\"line\"><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">    {</span><span style=\"color:#E53935;--shiki-dark:#F07178\"> id</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">:</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 1</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#E53935;--shiki-dark:#F07178\"> name</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">:</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> '</span><span style=\"color:#91B859;--shiki-dark:#C3E88D\">Ryan</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> },</span></span>\n<span class=\"line\"><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">    {</span><span style=\"color:#E53935;--shiki-dark:#F07178\"> id</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">:</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 3</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#E53935;--shiki-dark:#F07178\"> name</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">:</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> '</span><span style=\"color:#91B859;--shiki-dark:#C3E88D\">Emma</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> },</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">  ]</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">  [</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">3</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 5</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">]</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">  (</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#BABED8;--shiki-dark-font-style:italic\">a</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#BABED8;--shiki-dark-font-style:italic\"> b</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">)</span><span style=\"color:#9C3EDA;--shiki-dark:#C792EA\"> =></span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> a</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">.</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">id </span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">===</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> b</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> // => [{ id: 3, name: 'Emma' }]</span></span>",
           "params": [
             {
-              "name": "array",
+              "name": "data",
               "optional": false,
-              "description": "The source array."
+              "description": "The source data."
             },
             {
               "name": "other",
               "optional": false,
-              "description": "The second array."
+              "description": "The other data."
             },
             {
-              "name": "comparator",
+              "name": "isEqual",
               "optional": false,
               "description": "The custom comparator."
             }
@@ -1535,18 +1535,18 @@
         },
         {
           "variant": "data-last",
-          "signature": "intersectionWith(other, comparator)(array)",
-          "signatureHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">intersectionWith</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(other</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> comparator)(array)</span></span>",
+          "signature": "intersectionWith(other, isEqual)(data)",
+          "signatureHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">intersectionWith</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(other</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> isEqual)(data)</span></span>",
           "example": "intersectionWith(\n  [3, 5],\n  (a, b) => a.id === b,\n)([\n  { id: 1, name: 'Ryan' },\n  { id: 3, name: 'Emma' },\n]); // => [{ id: 3, name: 'Emma' }]",
           "exampleHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">intersectionWith</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">  [</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">3</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 5</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">]</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">  (</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#BABED8;--shiki-dark-font-style:italic\">a</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#BABED8;--shiki-dark-font-style:italic\"> b</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">)</span><span style=\"color:#9C3EDA;--shiki-dark:#C792EA\"> =></span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> a</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">.</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">id </span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">===</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> b</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)([</span></span>\n<span class=\"line\"><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">  {</span><span style=\"color:#E53935;--shiki-dark:#F07178\"> id</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">:</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 1</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#E53935;--shiki-dark:#F07178\"> name</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">:</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> '</span><span style=\"color:#91B859;--shiki-dark:#C3E88D\">Ryan</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> },</span></span>\n<span class=\"line\"><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">  {</span><span style=\"color:#E53935;--shiki-dark:#F07178\"> id</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">:</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 3</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#E53935;--shiki-dark:#F07178\"> name</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">:</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> '</span><span style=\"color:#91B859;--shiki-dark:#C3E88D\">Emma</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> },</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">])</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> // => [{ id: 3, name: 'Emma' }]</span></span>",
           "params": [
             {
               "name": "other",
               "optional": false,
-              "description": "The second array."
+              "description": "The other data."
             },
             {
-              "name": "comparator",
+              "name": "isEqual",
               "optional": false,
               "description": "The custom comparator."
             }
@@ -1556,7 +1556,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/intersection-with.ts#L29"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/intersection-with.ts#L29"
     },
     {
       "name": "join",
@@ -1610,7 +1610,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/join.ts#L26"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/join.ts#L26"
     },
     {
       "name": "last",
@@ -1653,7 +1653,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/last.ts#L17"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/last.ts#L17"
     },
     {
       "name": "length",
@@ -1696,7 +1696,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/length.ts#L16"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/length.ts#L16"
     },
     {
       "name": "map",
@@ -1752,7 +1752,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/map.ts#L26"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/map.ts#L27"
     },
     {
       "name": "mapToObj",
@@ -1808,7 +1808,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/map-to-obj.ts#L34"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/map-to-obj.ts#L34"
     },
     {
       "name": "mapWithFeedback",
@@ -1874,7 +1874,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/map-with-feedback.ts#L37"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/map-with-feedback.ts#L38"
     },
     {
       "name": "meanBy",
@@ -1928,7 +1928,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/mean-by.ts#L18"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/mean-by.ts#L18"
     },
     {
       "name": "mergeAll",
@@ -1961,7 +1961,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/merge-all.ts#L54"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/merge-all.ts#L54"
     },
     {
       "name": "nthBy",
@@ -2027,7 +2027,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/nth-by.ts#L27"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/nth-by.ts#L27"
     },
     {
       "name": "only",
@@ -2070,7 +2070,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/only.ts#L27"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/only.ts#L27"
     },
     {
       "name": "partition",
@@ -2126,7 +2126,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/partition.ts#L29"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/partition.ts#L29"
     },
     {
       "name": "range",
@@ -2142,8 +2142,8 @@
       "signatures": [
         {
           "variant": "data-first",
-          "signature": "range(start, end);\nrange(start, { end, step })",
-          "signatureHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">range</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(start</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> end)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">range</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(start</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> {</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> end</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> step </span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">}</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span></span>",
+          "signature": "range(start, end)\nrange(start, { end, step })",
+          "signatureHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">range</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(start</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> end)</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">range</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(start</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> {</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> end</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> step </span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">}</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span></span>",
           "example": "range(1, 5); //=> [1, 2, 3, 4]\nrange(1, { end: 5, step: 2 }); //=> [1, 3]",
           "exampleHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">range</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">1</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 5</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> //=> [1, 2, 3, 4]</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">range</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">1</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> {</span><span style=\"color:#E53935;--shiki-dark:#F07178\"> end</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">:</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 5</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#E53935;--shiki-dark:#F07178\"> step</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">:</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 2</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> }</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> //=> [1, 3]</span></span>",
           "params": [
@@ -2164,8 +2164,8 @@
         },
         {
           "variant": "data-last",
-          "signature": "range(end)(start);\nrange({ end, step })(start)",
-          "signatureHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">range</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(end)(start)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">range</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">{</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> end</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> step </span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">}</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)(start)</span></span>",
+          "signature": "range(end)(start)\nrange({ end, step })(start)",
+          "signatureHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">range</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(end)(start)</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">range</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">{</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> end</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> step </span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">}</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)(start)</span></span>",
           "example": "pipe(1, range(5)); //=> [1, 2, 3, 4]\npipe(1, range({ end: 5, step: 2 })); //=> [1, 3]",
           "exampleHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">pipe</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">1</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> range</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">5</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">))</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> //=> [1, 2, 3, 4]</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">pipe</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">1</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> range</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">{</span><span style=\"color:#E53935;--shiki-dark:#F07178\"> end</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">:</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 5</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#E53935;--shiki-dark:#F07178\"> step</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">:</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 2</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> }</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">))</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> //=> [1, 3]</span></span>",
           "params": [
@@ -2180,7 +2180,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/range.ts#L34"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/range.ts#L34"
     },
     {
       "name": "rankBy",
@@ -2246,7 +2246,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/rank-by.ts#L27"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/rank-by.ts#L27"
     },
     {
       "name": "reduce",
@@ -2312,7 +2312,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/reduce.ts#L27"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/reduce.ts#L27"
     },
     {
       "name": "reverse",
@@ -2355,7 +2355,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/reverse.ts#L27"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/reverse.ts#L27"
     },
     {
       "name": "sample",
@@ -2409,7 +2409,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/sample.ts#L138"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/sample.ts#L138"
     },
     {
       "name": "shuffle",
@@ -2452,7 +2452,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/shuffle.ts#L16"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/shuffle.ts#L16"
     },
     {
       "name": "sort",
@@ -2506,7 +2506,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/sort.ts#L20"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/sort.ts#L20"
     },
     {
       "name": "sortBy",
@@ -2562,7 +2562,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/sort-by.ts#L38"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/sort-by.ts#L38"
     },
     {
       "name": "sortedIndex",
@@ -2618,7 +2618,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/sorted-index.ts#L24"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/sorted-index.ts#L24"
     },
     {
       "name": "sortedIndexBy",
@@ -2661,7 +2661,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/sorted-index-by.ts#L37"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/sorted-index-by.ts#L37"
     },
     {
       "name": "sortedIndexWith",
@@ -2717,7 +2717,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/sorted-index-with.ts#L38"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/sorted-index-with.ts#L38"
     },
     {
       "name": "sortedLastIndex",
@@ -2773,7 +2773,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/sorted-last-index.ts#L24"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/sorted-last-index.ts#L24"
     },
     {
       "name": "sortedLastIndexBy",
@@ -2839,7 +2839,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/sorted-last-index-by.ts#L37"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/sorted-last-index-by.ts#L37"
     },
     {
       "name": "splice",
@@ -2855,8 +2855,8 @@
       "signatures": [
         {
           "variant": "data-first",
-          "signature": "splice(data, start, deleteCount);\nsplice(data, start, deleteCount, replacement)",
-          "signatureHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">splice</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(data</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> start</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> deleteCount)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">splice</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(data</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> start</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> deleteCount</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> replacement)</span></span>",
+          "signature": "splice(data, start, deleteCount)\nsplice(data, start, deleteCount, replacement)",
+          "signatureHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">splice</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(data</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> start</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> deleteCount)</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">splice</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(data</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> start</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> deleteCount</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> replacement)</span></span>",
           "example": "splice([1, 2, 3, 4, 5, 6, 7, 8], 2, 3); //=> [1,2,6,7,8]\nsplice([1, 2, 3, 4, 5, 6, 7, 8], 2, 3, [9, 10]); //=> [1,2,9,10,6,7,8]",
           "exampleHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">splice</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">([</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">1</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 2</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 3</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 4</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 5</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 6</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 7</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 8</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">]</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 2</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 3</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> //=> [1,2,6,7,8]</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">splice</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">([</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">1</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 2</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 3</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 4</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 5</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 6</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 7</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 8</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">]</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 2</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 3</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> [</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">9</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 10</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">])</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> //=> [1,2,9,10,6,7,8]</span></span>",
           "params": [
@@ -2887,8 +2887,8 @@
         },
         {
           "variant": "data-last",
-          "signature": "splice(start, deleteCount)(data);\nsplice(start, deleteCount, replacement)(data)",
-          "signatureHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">splice</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(start</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> deleteCount)(data)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">splice</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(start</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> deleteCount</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> replacement)(data)</span></span>",
+          "signature": "splice(start, deleteCount)(data)\nsplice(start, deleteCount, replacement)(data)",
+          "signatureHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">splice</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(start</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> deleteCount)(data)</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">splice</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(start</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> deleteCount</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> replacement)(data)</span></span>",
           "example": "pipe([1, 2, 3, 4, 5, 6, 7, 8], splice(2, 3)); // => [1,2,6,7,8]\npipe([1, 2, 3, 4, 5, 6, 7, 8], splice(2, 3, [9, 10])); // => [1,2,9,10,6,7,8]",
           "exampleHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">pipe</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">([</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">1</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 2</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 3</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 4</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 5</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 6</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 7</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 8</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">]</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> splice</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">2</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 3</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">))</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> // => [1,2,6,7,8]</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">pipe</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">([</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">1</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 2</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 3</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 4</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 5</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 6</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 7</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 8</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">]</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> splice</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">2</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 3</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> [</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">9</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 10</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">]))</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> // => [1,2,9,10,6,7,8]</span></span>",
           "params": [
@@ -2913,7 +2913,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/splice.ts#L29"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/splice.ts#L29"
     },
     {
       "name": "splitAt",
@@ -2967,7 +2967,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/split-at.ts#L16"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/split-at.ts#L16"
     },
     {
       "name": "splitWhen",
@@ -3021,7 +3021,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/split-when.ts#L15"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/split-when.ts#L15"
     },
     {
       "name": "sumBy",
@@ -3075,7 +3075,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/sum-by.ts#L40"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/sum-by.ts#L40"
     },
     {
       "name": "swapIndices",
@@ -3141,7 +3141,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/swap-indices.ts#L115"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/swap-indices.ts#L115"
     },
     {
       "name": "take",
@@ -3195,7 +3195,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/take.ts#L24"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/take.ts#L24"
     },
     {
       "name": "takeFirstBy",
@@ -3261,7 +3261,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/take-first-by.ts#L26"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/take-first-by.ts#L26"
     },
     {
       "name": "takeLast",
@@ -3315,7 +3315,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/take-last.ts#L21"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/take-last.ts#L21"
     },
     {
       "name": "takeLastWhile",
@@ -3369,7 +3369,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/take-last-while.ts#L21"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/take-last-while.ts#L21"
     },
     {
       "name": "takeWhile",
@@ -3423,7 +3423,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/take-while.ts#L20"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/take-while.ts#L20"
     },
     {
       "name": "times",
@@ -3479,7 +3479,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/times.ts#L51"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/times.ts#L51"
     },
     {
       "name": "unique",
@@ -3522,7 +3522,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/unique.ts#L20"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/unique.ts#L20"
     },
     {
       "name": "uniqueBy",
@@ -3576,7 +3576,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/unique-by.ts#L26"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/unique-by.ts#L26"
     },
     {
       "name": "uniqueWith",
@@ -3630,7 +3630,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/unique-with.ts#L26"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/unique-with.ts#L27"
     },
     {
       "name": "zip",
@@ -3684,7 +3684,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/zip.ts#L40"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/zip.ts#L46"
     },
     {
       "name": "zipWith",
@@ -3765,7 +3765,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/zip-with.ts#L43"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/zip-with.ts#L44"
     },
     {
       "name": "conditional",
@@ -3827,7 +3827,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/conditional.ts#L89"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/conditional.ts#L89"
     },
     {
       "name": "constant",
@@ -3859,13 +3859,13 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/constant.ts#L28"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/constant.ts#L28"
     },
     {
       "name": "curry",
       "kind": "function",
       "category": "Function",
-      "summary": "Creates a function with `dataFirst` and `dataLast` signatures.\n\n[`curry`](#curry) is a dynamic function and it's not type safe. It should be wrapped by\na function that have proper typings. Refer to the example below for correct\nusage.\n\n!IMPORTANT: functions that simply call [`curry`](#curry) and return the result (like\nalmost all functions in this library) should return `unknown` themselves if\nan explicit return type is required. This is because we currently don't\nprovide a generic return type that is built from the input function, and\ncrafting one manually isn't worthwhile as we rely on function declaration\noverloading to combine the types for dataFirst and dataLast invocations!",
+      "summary": "Wraps a `dataFirst` implementation and dynamically curries it at runtime\nbased on the number of arguments it was called with.\n\nWhen `args` has at least `dataFirst.length` items (`Function.length` counts\nthe parameters before the first defaulted or rest one), `dataFirst` is\ncalled with all of them, extra ones included. Otherwise [`curry`](#curry) returns a\nfunction that takes the data and calls `dataFirst(data, ...args)`.\n\nThe return type is not dynamically routed via the same runtime logic, and\ntherefore is a union of both data-first and data-last return types. The\nreturn type also ignores any generic type parameters of `dataFirst`, and in\nmost cases would end up widening the return type to `unknown`. See the\nexamples below for a structured template for coupling the return types to\nspecific overloaded signatures. Almost all Perkakas utilities are built using\n[`curry`](#curry) via this template.",
       "tags": {
         "lazy": false,
         "strict": false,
@@ -3875,13 +3875,13 @@
       "signatures": [
         {
           "variant": null,
-          "signature": "curry(fn, args)",
-          "signatureHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">curry</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(fn</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> args)</span></span>",
-          "example": "function _findIndex(array, fn) {\n  for (let i = 0; i < array.length; i++) {\n    if (fn(array[i])) {\n      return i;\n    }\n  }\n  return -1;\n}\n\n// data-first\nfunction findIndex<T>(array: T[], fn: (item: T) => boolean): number;\n\n// data-last\nfunction findIndex<T>(fn: (item: T) => boolean): (array: T[]) => number;\n\nfunction findIndex(...args: unknown[]) {\n  return curry(_findIndex, args);\n}",
-          "exampleHtml": "<span class=\"line\"><span style=\"color:#9C3EDA;--shiki-dark:#C792EA\">function</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> _findIndex</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">(</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#BABED8;--shiki-dark-font-style:italic\">array</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#BABED8;--shiki-dark-font-style:italic\"> fn</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> {</span></span>\n<span class=\"line\"><span style=\"color:#39ADB5;--shiki-light-font-style:italic;--shiki-dark:#89DDFF;--shiki-dark-font-style:italic\">  for</span><span style=\"color:#E53935;--shiki-dark:#F07178\"> (</span><span style=\"color:#9C3EDA;--shiki-dark:#C792EA\">let</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> i</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> =</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 0</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> i</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> &#x3C;</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> array</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">.</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">length</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> i</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">++</span><span style=\"color:#E53935;--shiki-dark:#F07178\">) </span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">{</span></span>\n<span class=\"line\"><span style=\"color:#39ADB5;--shiki-light-font-style:italic;--shiki-dark:#89DDFF;--shiki-dark-font-style:italic\">    if</span><span style=\"color:#E53935;--shiki-dark:#F07178\"> (</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">fn</span><span style=\"color:#E53935;--shiki-dark:#F07178\">(</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">array</span><span style=\"color:#E53935;--shiki-dark:#F07178\">[</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">i</span><span style=\"color:#E53935;--shiki-dark:#F07178\">])) </span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">{</span></span>\n<span class=\"line\"><span style=\"color:#39ADB5;--shiki-light-font-style:italic;--shiki-dark:#89DDFF;--shiki-dark-font-style:italic\">      return</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> i</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span></span>\n<span class=\"line\"><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">    }</span></span>\n<span class=\"line\"><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">  }</span></span>\n<span class=\"line\"><span style=\"color:#39ADB5;--shiki-light-font-style:italic;--shiki-dark:#89DDFF;--shiki-dark-font-style:italic\">  return</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> -</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">1</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span></span>\n<span class=\"line\"><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">}</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\">// data-first</span></span>\n<span class=\"line\"><span style=\"color:#9C3EDA;--shiki-dark:#C792EA\">function</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> findIndex</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">&#x3C;</span><span style=\"color:#E2931D;--shiki-dark:#FFCB6B\">T</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">>(</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#BABED8;--shiki-dark-font-style:italic\">array</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">:</span><span style=\"color:#E2931D;--shiki-dark:#FFCB6B\"> T</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">[]</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> fn</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">:</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> (</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#BABED8;--shiki-dark-font-style:italic\">item</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">:</span><span style=\"color:#E2931D;--shiki-dark:#FFCB6B\"> T</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">)</span><span style=\"color:#9C3EDA;--shiki-dark:#C792EA\"> =></span><span style=\"color:#E2931D;--shiki-dark:#FFCB6B\"> boolean</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">):</span><span style=\"color:#E2931D;--shiki-dark:#FFCB6B\"> number</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\">// data-last</span></span>\n<span class=\"line\"><span style=\"color:#9C3EDA;--shiki-dark:#C792EA\">function</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> findIndex</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">&#x3C;</span><span style=\"color:#E2931D;--shiki-dark:#FFCB6B\">T</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">>(</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">fn</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">:</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> (</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#BABED8;--shiki-dark-font-style:italic\">item</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">:</span><span style=\"color:#E2931D;--shiki-dark:#FFCB6B\"> T</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">)</span><span style=\"color:#9C3EDA;--shiki-dark:#C792EA\"> =></span><span style=\"color:#E2931D;--shiki-dark:#FFCB6B\"> boolean</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">):</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> (</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#BABED8;--shiki-dark-font-style:italic\">array</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">:</span><span style=\"color:#E2931D;--shiki-dark:#FFCB6B\"> T</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">[]</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">)</span><span style=\"color:#9C3EDA;--shiki-dark:#C792EA\"> =></span><span style=\"color:#E2931D;--shiki-dark:#FFCB6B\"> number</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#9C3EDA;--shiki-dark:#C792EA\">function</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> findIndex</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">(...</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#BABED8;--shiki-dark-font-style:italic\">args</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">:</span><span style=\"color:#E2931D;--shiki-dark:#FFCB6B\"> unknown</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">[]</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> {</span></span>\n<span class=\"line\"><span style=\"color:#39ADB5;--shiki-light-font-style:italic;--shiki-dark:#89DDFF;--shiki-dark-font-style:italic\">  return</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> curry</span><span style=\"color:#E53935;--shiki-dark:#F07178\">(</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">_findIndex</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> args</span><span style=\"color:#E53935;--shiki-dark:#F07178\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span></span>\n<span class=\"line\"><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">}</span></span>",
+          "signature": "curry(dataFirst, args)",
+          "signatureHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">curry</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(dataFirst</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> args)</span></span>",
+          "example": "// data-first\nfunction findIndex<T>(\n  data: readonly T[],\n  predicate: (item: T) => boolean,\n): number;\n\n// data-last\nfunction findIndex<T>(\n  predicate: (item: T) => boolean,\n): (data: readonly T[]) => number;\n\nfunction findIndex(...args: unknown[]) {\n  return curry(findIndexImplementation, args);\n}\n\nfunction findIndexImplementation(data, predicate): number {\n  for (let i = 0; i < array.length; i++) {\n    if (predicate(array[i])) {\n      return i;\n    }\n  }\n  return -1;\n}",
+          "exampleHtml": "<span class=\"line\"><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\">// data-first</span></span>\n<span class=\"line\"><span style=\"color:#9C3EDA;--shiki-dark:#C792EA\">function</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> findIndex</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">&#x3C;</span><span style=\"color:#E2931D;--shiki-dark:#FFCB6B\">T</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">>(</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#BABED8;--shiki-dark-font-style:italic\">  data</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">:</span><span style=\"color:#9C3EDA;--shiki-dark:#C792EA\"> readonly</span><span style=\"color:#E2931D;--shiki-dark:#FFCB6B\"> T</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">[]</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">  predicate</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">:</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> (</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#BABED8;--shiki-dark-font-style:italic\">item</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">:</span><span style=\"color:#E2931D;--shiki-dark:#FFCB6B\"> T</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">)</span><span style=\"color:#9C3EDA;--shiki-dark:#C792EA\"> =></span><span style=\"color:#E2931D;--shiki-dark:#FFCB6B\"> boolean</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">):</span><span style=\"color:#E2931D;--shiki-dark:#FFCB6B\"> number</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\">// data-last</span></span>\n<span class=\"line\"><span style=\"color:#9C3EDA;--shiki-dark:#C792EA\">function</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> findIndex</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">&#x3C;</span><span style=\"color:#E2931D;--shiki-dark:#FFCB6B\">T</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">>(</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">  predicate</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">:</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> (</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#BABED8;--shiki-dark-font-style:italic\">item</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">:</span><span style=\"color:#E2931D;--shiki-dark:#FFCB6B\"> T</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">)</span><span style=\"color:#9C3EDA;--shiki-dark:#C792EA\"> =></span><span style=\"color:#E2931D;--shiki-dark:#FFCB6B\"> boolean</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">):</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> (</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#BABED8;--shiki-dark-font-style:italic\">data</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">:</span><span style=\"color:#9C3EDA;--shiki-dark:#C792EA\"> readonly</span><span style=\"color:#E2931D;--shiki-dark:#FFCB6B\"> T</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">[]</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">)</span><span style=\"color:#9C3EDA;--shiki-dark:#C792EA\"> =></span><span style=\"color:#E2931D;--shiki-dark:#FFCB6B\"> number</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#9C3EDA;--shiki-dark:#C792EA\">function</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> findIndex</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">(...</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#BABED8;--shiki-dark-font-style:italic\">args</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">:</span><span style=\"color:#E2931D;--shiki-dark:#FFCB6B\"> unknown</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">[]</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> {</span></span>\n<span class=\"line\"><span style=\"color:#39ADB5;--shiki-light-font-style:italic;--shiki-dark:#89DDFF;--shiki-dark-font-style:italic\">  return</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> curry</span><span style=\"color:#E53935;--shiki-dark:#F07178\">(</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">findIndexImplementation</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> args</span><span style=\"color:#E53935;--shiki-dark:#F07178\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span></span>\n<span class=\"line\"><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">}</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#9C3EDA;--shiki-dark:#C792EA\">function</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> findIndexImplementation</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">(</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#BABED8;--shiki-dark-font-style:italic\">data</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#BABED8;--shiki-dark-font-style:italic\"> predicate</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">):</span><span style=\"color:#E2931D;--shiki-dark:#FFCB6B\"> number</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> {</span></span>\n<span class=\"line\"><span style=\"color:#39ADB5;--shiki-light-font-style:italic;--shiki-dark:#89DDFF;--shiki-dark-font-style:italic\">  for</span><span style=\"color:#E53935;--shiki-dark:#F07178\"> (</span><span style=\"color:#9C3EDA;--shiki-dark:#C792EA\">let</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> i</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> =</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 0</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> i</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> &#x3C;</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> array</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">.</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">length</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> i</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">++</span><span style=\"color:#E53935;--shiki-dark:#F07178\">) </span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">{</span></span>\n<span class=\"line\"><span style=\"color:#39ADB5;--shiki-light-font-style:italic;--shiki-dark:#89DDFF;--shiki-dark-font-style:italic\">    if</span><span style=\"color:#E53935;--shiki-dark:#F07178\"> (</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">predicate</span><span style=\"color:#E53935;--shiki-dark:#F07178\">(</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">array</span><span style=\"color:#E53935;--shiki-dark:#F07178\">[</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">i</span><span style=\"color:#E53935;--shiki-dark:#F07178\">])) </span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">{</span></span>\n<span class=\"line\"><span style=\"color:#39ADB5;--shiki-light-font-style:italic;--shiki-dark:#89DDFF;--shiki-dark-font-style:italic\">      return</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> i</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span></span>\n<span class=\"line\"><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">    }</span></span>\n<span class=\"line\"><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">  }</span></span>\n<span class=\"line\"><span style=\"color:#39ADB5;--shiki-light-font-style:italic;--shiki-dark:#89DDFF;--shiki-dark-font-style:italic\">  return</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> -</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">1</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span></span>\n<span class=\"line\"><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">}</span></span>",
           "params": [
             {
-              "name": "fn",
+              "name": "dataFirst",
               "optional": false,
               "description": "The function to curry."
             },
@@ -3889,25 +3889,20 @@
               "name": "args",
               "optional": false,
               "description": "The arguments."
-            },
-            {
-              "name": "lazy",
-              "optional": true,
-              "description": "A lazy version of the function to curry."
             }
           ],
           "returns": {
-            "type": "unknown"
+            "type": "Object"
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/curry.ts#L46"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/curry.ts#L55"
     },
     {
       "name": "debounce",
       "kind": "function",
       "category": "Function",
-      "summary": "Wraps `func` with a debouncer object that \"debounces\" (delays) invocations of the function during a defined cool-down period (`waitMs`). It can be configured to invoke the function either at the start of the cool-down period, the end of it, or at both ends (`timing`).\nIt can also be configured to allow invocations during the cool-down period (`maxWaitMs`).\nIt stores the latest call's arguments so they could be used at the end of the cool-down period when invoking `func` (if configured to invoke the function at the end of the cool-down period).\nIt stores the value returned by `func` whenever its invoked. This value is returned on every call, and is accessible via the `cachedValue` property of the debouncer. Its important to note that the value might be different from the value that would be returned from running `func` with the current arguments as it is a cached value from a previous invocation.\n**Important**: The cool-down period defines the minimum between two invocations, and not the maximum. The period will be **extended** each time a call is made until a full cool-down period has elapsed without any additional calls.\n\n! **DEPRECATED**: This implementation of debounce is known to have issues and might not behave as expected. It should be replaced with the [`funnel`](#funnel) utility instead.",
+      "summary": "Wraps `func` with a debouncer object that \"debounces\" (delays) invocations of the function during a defined cool-down period (`waitMs`). It can be configured to invoke the function either at the start of the cool-down period, the end of it, or at both ends (`timing`).\nIt can also be configured to allow invocations during the cool-down period (`maxWaitMs`).\nIt stores the latest call's arguments so they could be used at the end of the cool-down period when invoking `func` (if configured to invoke the function at the end of the cool-down period).\nIt stores the value returned by `func` whenever its invoked. This value is returned on every call, and is accessible via the `cachedValue` property of the debouncer. Its important to note that the value might be different from the value that would be returned from running `func` with the current arguments as it is a cached value from a previous invocation.\n**Important**: The cool-down period defines the minimum between two invocations, and not the maximum. The period will be **extended** each time a call is made until a full cool-down period has elapsed without any additional calls.\n\n! **DEPRECATED**: This implementation of debounce is known to have issues and might not behave as expected. It should be replaced with the [`funnel`](#funnel) utility instead. The test file [funnel.perkakas-debounce.spec.ts](https://github.com/vinicunca/perkakas/blob/main/src/funnel.perkakas-debounce.spec.ts) offers a drop-in replacement implemented via [`funnel`](#funnel): copy everything between its REFERENCE START and REFERENCE END markers into your project!",
       "tags": {
         "lazy": false,
         "strict": false,
@@ -3939,7 +3934,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/debounce.ts#L100"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/debounce.ts#L102"
     },
     {
       "name": "doNothing",
@@ -3965,13 +3960,13 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/do-nothing.ts#L23"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/do-nothing.ts#L23"
     },
     {
       "name": "funnel",
       "kind": "function",
       "category": "Function",
-      "summary": "Creates a funnel that controls the timing and execution of `callback`. Its\nmain purpose is to manage multiple consecutive (usually fast-paced) calls,\nreshaping them according to a defined batching strategy and timing policy.\nThis is useful when handling uncontrolled call rates, such as DOM events or\nnetwork traffic. It can implement strategies like debouncing, throttling,\nbatching, and more.\n\nAn optional `reducer` function can be provided to allow passing data to the\ncallback via calls to `call` (otherwise the signature of `call` takes no\narguments).\n\nTyping is inferred from `callback`s param, and from the rest params that\nthe optional `reducer` function accepts. Use **explicit** types for these\nto ensure that everything _else_ is well-typed.\n\nNotice that this function constructs a funnel **object**, and does **not**\nexecute anything when called. The returned object should be used to execute\nthe funnel via the its `call` method.\n\n- Debouncing: use `minQuietPeriodMs` and any `triggerAt`.\n- Throttling: use `minGapMs` and `triggerAt: \"start\"` or `\"both\"`.\n- Batching: See the reference implementation in [`funnel.reference-batch.test.ts`](https://github.com/vinicunca/perkakas/blob/main/src/funnel.reference-batch.test.ts).",
+      "summary": "Creates a funnel that controls the timing and execution of `callback`. Its\nmain purpose is to manage multiple consecutive (usually fast-paced) calls,\nreshaping them according to a defined batching strategy and timing policy.\nThis is useful when handling uncontrolled call rates, such as DOM events or\nnetwork traffic. It can implement strategies like debouncing, throttling,\nbatching, and more.\n\nAn optional `reducer` function can be provided to allow passing data to the\ncallback via calls to `call` (otherwise the signature of `call` takes no\narguments).\n\nTyping is inferred from `callback`s param, and from the rest params that\nthe optional `reducer` function accepts. Use **explicit** types for these\nto ensure that everything _else_ is well-typed.\n\nNotice that this function constructs a funnel **object**, and does **not**\nexecute anything when called. The returned object should be used to execute\nthe funnel via the its `call` method.\n\nThe type of the funnel object is not exported; when you need to reference\nit explicitly (e.g., a class property holding a funnel) use\n`ReturnType<typeof funnel<[]>>`, replacing `[]` with the `reducer`'s rest\nparams when one is used (e.g., `ReturnType<typeof funnel<[string]>>`).\n\n- Debouncing: use `minQuietPeriodMs` and any `triggerAt`. Copy-paste\nreference implementations are available for Perkakas's deprecated [`debounce`](#debounce)\nfunction in [`funnel.perkakas-debounce.spec.ts`](https://github.com/vinicunca/perkakas/blob/main/src/funnel.perkakas-debounce.spec.ts),\nand for the Lodash [`debounce`](#debounce) function in [`funnel.lodash-debounce.spec.ts`](https://github.com/vinicunca/perkakas/blob/main/src/funnel.lodash-debounce.spec.ts)\nand [`funnel.lodash-debounce-with-cached-value.spec.ts`](https://github.com/vinicunca/perkakas/blob/main/src/funnel.lodash-debounce-with-cached-value.spec.ts).\n- Throttling: use `minGapMs` and `triggerAt: \"start\"` or `\"both\"`.\nCopy-paste reference implementations for the Lodash `throttle` function\n(which maps onto the burst options `minQuietPeriodMs` and\n`maxBurstDurationMs` instead of `minGapMs`) are available in [`funnel.lodash-throttle.spec.ts`](https://github.com/vinicunca/perkakas/blob/main/src/funnel.lodash-throttle.spec.ts)\nand [`funnel.lodash-throttle-with-cached-value.spec.ts`](https://github.com/vinicunca/perkakas/blob/main/src/funnel.lodash-throttle-with-cached-value.spec.ts).\n- Batching: a copy-paste reference implementation is available in [`funnel.reference-batch.spec.ts`](https://github.com/vinicunca/perkakas/blob/main/src/funnel.reference-batch.spec.ts).",
       "tags": {
         "lazy": false,
         "strict": false,
@@ -4003,7 +3998,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/funnel.ts#L162"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/funnel.ts#L175"
     },
     {
       "name": "identity",
@@ -4029,7 +4024,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/identity.ts#L23"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/identity.ts#L23"
     },
     {
       "name": "once",
@@ -4061,7 +4056,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/once.ts#L13"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/once.ts#L13"
     },
     {
       "name": "partialBind",
@@ -4099,7 +4094,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/partial-bind.ts#L61"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/partial-bind.ts#L59"
     },
     {
       "name": "partialLastBind",
@@ -4137,13 +4132,13 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/partial-last-bind.ts#L70"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/partial-last-bind.ts#L68"
     },
     {
       "name": "pipe",
       "kind": "function",
       "category": "Function",
-      "summary": "Performs left-to-right function composition, passing data through functions\nin sequence. Each function receives the output of the previous function,\ncreating a readable top-to-bottom data flow that matches how the\ntransformation is executed. This enables converting deeply nested function\ncalls into clear, sequential steps without temporary variables.\n\nWhen consecutive functions with a `lazy` tag (e.g., [`map`](#map), [`filter`](#filter), [`take`](#take),\n[`drop`](#drop), [`forEach`](#forEach), etc...) are used together, they process data item-by-item\nrather than creating intermediate arrays. This enables early termination\nwhen only partial results are needed, improving performance for large\ndatasets and expensive operations.\n\nFunctions are only evaluated lazily when their data-last form is used\ndirectly in the pipe. To disable lazy evaluation, use data-first calls via\narrow functions: `($) => map($, callback)` instead of `map(callback)`.\n\nAny function can be used in pipes, not just Perkakas utilities. For creating\ncustom functions with currying and lazy evaluation support, see the [`curry`](#curry)\nutility.\n\nA \"headless\" variant [`piped`](#piped) is available for creating reusable pipe\nfunctions without initial data.\n\nIMPORTANT: During lazy evaluation, callbacks using the third parameter (the\ninput array) receive only items processed up to that point, not the complete\narray.",
+      "summary": "Performs left-to-right function composition, passing data through functions\nin sequence. Each function receives the output of the previous function,\ncreating a readable top-to-bottom data flow that matches how the\ntransformation is executed. This enables converting deeply nested function\ncalls into clear, sequential steps without temporary variables.\n\nWhen consecutive functions with a `lazy` tag (e.g., [`map`](#map), [`filter`](#filter), [`take`](#take),\n[`drop`](#drop), [`forEach`](#forEach), etc...) are used together, they process data item-by-item\nrather than creating intermediate arrays. This enables early termination\nwhen only partial results are needed, improving performance for large\ndatasets and expensive operations.\n\nFunctions are only evaluated lazily when their data-last form is used\ndirectly in the pipe. To disable lazy evaluation, use data-first calls via\narrow functions: `($) => map($, callback)` instead of `map(callback)`.\n\nAny function can be used in pipes, not just Perkakas utilities. For creating\ncustom functions that support both data-first and data-last calls, see the\n[`curry`](#curry) utility.\n\nA \"headless\" variant [`piped`](#piped) is available for creating reusable pipe\nfunctions without initial data.\n\nIMPORTANT: During lazy evaluation, callbacks using the third parameter (the\ninput array) receive only items processed up to that point, not the complete\narray.",
       "tags": {
         "lazy": false,
         "strict": false,
@@ -4155,8 +4150,8 @@
           "variant": "data-first",
           "signature": "pipe(data, ...functions)",
           "signatureHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">pipe</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(data</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> ...</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">functions)</span></span>",
-          "example": "pipe([1, 2, 3], map(multiply(3))); //=> [3, 6, 9]\n\n// = Early termination with lazy evaluation =\npipe(\n  hugeArray,\n  map(expensiveComputation),\n  filter(complexPredicate),\n  // Only processes items until 2 results are found, then stops.\n  // Most of hugeArray never gets processed.\n  take(2),\n);\n\n// = Custom logic within a pipe =\npipe(\n  input,\n  toLowerCase(),\n  normalize,\n  ($) => validate($, CONFIG),\n  split(','),\n  unique(),\n);\n\n// = Migrating nested transformations to pipes =\n// Nested\nconst result = prop(\n  mapValues(groupByProp(users, 'department'), length()),\n  'engineering',\n);\n\n// Piped\nconst result = pipe(\n  users,\n  groupByProp('department'),\n  mapValues(length()),\n  prop('engineering'),\n);\n\n// = Using the 3rd param of a callback =\n// The following would print out `data` in its entirety for each value\n// of `data`.\nforEach([1, 2, 3, 4], (_item, _index, data) => {\n  console.log(data);\n}); //=> \"[1, 2, 3, 4]\" logged 4 times\n\n// But with `pipe` data would only contain the items up to the current\n// index\npipe(\n  [1, 2, 3, 4],\n  forEach((_item, _index, data) => {\n    console.log(data);\n  }),\n); //=> \"[1]\", \"[1, 2]\", \"[1, 2, 3]\", \"[1, 2, 3, 4]\"",
-          "exampleHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">pipe</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">([</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">1</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 2</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 3</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">]</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> map</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">multiply</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">3</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)))</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> //=> [3, 6, 9]</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\">// = Early termination with lazy evaluation =</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">pipe</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">  hugeArray</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">  map</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(expensiveComputation)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">  filter</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(complexPredicate)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\">  // Only processes items until 2 results are found, then stops.</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\">  // Most of hugeArray never gets processed.</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">  take</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">2</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\">// = Custom logic within a pipe =</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">pipe</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">  input</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">  toLowerCase</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">()</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">  normalize</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">  (</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#BABED8;--shiki-dark-font-style:italic\">$</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">)</span><span style=\"color:#9C3EDA;--shiki-dark:#C792EA\"> =></span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> validate</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">($</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> CONFIG)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">  split</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#91B859;--shiki-dark:#C3E88D\">,</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">  unique</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">()</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\">// = Migrating nested transformations to pipes =</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\">// Nested</span></span>\n<span class=\"line\"><span style=\"color:#9C3EDA;--shiki-dark:#C792EA\">const</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> result </span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">=</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> prop</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">  mapValues</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">groupByProp</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(users</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> '</span><span style=\"color:#91B859;--shiki-dark:#C3E88D\">department</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> length</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">())</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">  '</span><span style=\"color:#91B859;--shiki-dark:#C3E88D\">engineering</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\">// Piped</span></span>\n<span class=\"line\"><span style=\"color:#9C3EDA;--shiki-dark:#C792EA\">const</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> result </span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">=</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> pipe</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">  users</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">  groupByProp</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#91B859;--shiki-dark:#C3E88D\">department</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">  mapValues</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">length</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">())</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">  prop</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#91B859;--shiki-dark:#C3E88D\">engineering</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\">// = Using the 3rd param of a callback =</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\">// The following would print out `data` in its entirety for each value</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\">// of `data`.</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">forEach</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">([</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">1</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 2</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 3</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 4</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">]</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> (</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#BABED8;--shiki-dark-font-style:italic\">_item</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#BABED8;--shiki-dark-font-style:italic\"> _index</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#BABED8;--shiki-dark-font-style:italic\"> data</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">)</span><span style=\"color:#9C3EDA;--shiki-dark:#C792EA\"> =></span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> {</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">  console</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">.</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">log</span><span style=\"color:#E53935;--shiki-dark:#F07178\">(</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">data</span><span style=\"color:#E53935;--shiki-dark:#F07178\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span></span>\n<span class=\"line\"><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">}</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> //=> \"[1, 2, 3, 4]\" logged 4 times</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\">// But with `pipe` data would only contain the items up to the current</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\">// index</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">pipe</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">  [</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">1</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 2</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 3</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 4</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">]</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">  forEach</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">(</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#BABED8;--shiki-dark-font-style:italic\">_item</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#BABED8;--shiki-dark-font-style:italic\"> _index</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#BABED8;--shiki-dark-font-style:italic\"> data</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">)</span><span style=\"color:#9C3EDA;--shiki-dark:#C792EA\"> =></span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> {</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">    console</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">.</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">log</span><span style=\"color:#E53935;--shiki-dark:#F07178\">(</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">data</span><span style=\"color:#E53935;--shiki-dark:#F07178\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span></span>\n<span class=\"line\"><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">  }</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> //=> \"[1]\", \"[1, 2]\", \"[1, 2, 3]\", \"[1, 2, 3, 4]\"</span></span>",
+          "example": "pipe([1, 2, 3], map(multiply(3))); //=> [3, 6, 9]\n\n// = Early termination with lazy evaluation =\npipe(\n  hugeArray,\n  map(expensiveComputation),\n  filter(complexPredicate),\n  // Only processes items until 2 results are found, then stops.\n  // Most of hugeArray never gets processed.\n  take(2),\n);\n\n// = Custom logic within a pipe =\npipe(\n  input,\n  toLowerCase(),\n  normalize,\n  ($) => validate($, CONFIG),\n  split(','),\n  unique(),\n);\n\n// = Migrating nested transformations to pipes =\n// Nested\nconst result = prop(\n  mapValues(groupByProp(users, 'department'), length()),\n  'engineering',\n);\n\n// Piped\nconst result = pipe(\n  users,\n  groupByProp('department'),\n  mapValues(length()),\n  prop('engineering'),\n);\n\n// = Using the 3rd param of a callback =\n// The following would print out `data` in its entirety for each value\n// of `data`.\nforEach([1, 2, 3, 4], (_item, _index, data) => {\n  console.log(data);\n}); //=> \"[1, 2, 3, 4]\" logged 4 times\n\n// But with `pipe` data would only contain the items up to the current\n// index.\npipe(\n  [1, 2, 3, 4],\n  forEach((_item, _index, data) => {\n    console.log(data);\n  }),\n); //=> \"[1]\", \"[1, 2]\", \"[1, 2, 3]\", \"[1, 2, 3, 4]\"",
+          "exampleHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">pipe</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">([</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">1</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 2</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 3</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">]</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> map</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">multiply</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">3</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)))</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> //=> [3, 6, 9]</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\">// = Early termination with lazy evaluation =</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">pipe</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">  hugeArray</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">  map</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(expensiveComputation)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">  filter</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(complexPredicate)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\">  // Only processes items until 2 results are found, then stops.</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\">  // Most of hugeArray never gets processed.</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">  take</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">2</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\">// = Custom logic within a pipe =</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">pipe</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">  input</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">  toLowerCase</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">()</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">  normalize</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">  (</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#BABED8;--shiki-dark-font-style:italic\">$</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">)</span><span style=\"color:#9C3EDA;--shiki-dark:#C792EA\"> =></span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> validate</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">($</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> CONFIG)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">  split</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#91B859;--shiki-dark:#C3E88D\">,</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">  unique</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">()</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\">// = Migrating nested transformations to pipes =</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\">// Nested</span></span>\n<span class=\"line\"><span style=\"color:#9C3EDA;--shiki-dark:#C792EA\">const</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> result </span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">=</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> prop</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">  mapValues</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">groupByProp</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(users</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> '</span><span style=\"color:#91B859;--shiki-dark:#C3E88D\">department</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> length</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">())</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">  '</span><span style=\"color:#91B859;--shiki-dark:#C3E88D\">engineering</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\">// Piped</span></span>\n<span class=\"line\"><span style=\"color:#9C3EDA;--shiki-dark:#C792EA\">const</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> result </span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">=</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> pipe</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">  users</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">  groupByProp</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#91B859;--shiki-dark:#C3E88D\">department</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">  mapValues</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">length</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">())</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">  prop</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#91B859;--shiki-dark:#C3E88D\">engineering</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\">// = Using the 3rd param of a callback =</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\">// The following would print out `data` in its entirety for each value</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\">// of `data`.</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">forEach</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">([</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">1</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 2</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 3</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 4</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">]</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> (</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#BABED8;--shiki-dark-font-style:italic\">_item</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#BABED8;--shiki-dark-font-style:italic\"> _index</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#BABED8;--shiki-dark-font-style:italic\"> data</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">)</span><span style=\"color:#9C3EDA;--shiki-dark:#C792EA\"> =></span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> {</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">  console</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">.</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">log</span><span style=\"color:#E53935;--shiki-dark:#F07178\">(</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">data</span><span style=\"color:#E53935;--shiki-dark:#F07178\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span></span>\n<span class=\"line\"><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">}</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> //=> \"[1, 2, 3, 4]\" logged 4 times</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\">// But with `pipe` data would only contain the items up to the current</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\">// index.</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">pipe</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">  [</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">1</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 2</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 3</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 4</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">]</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">  forEach</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">(</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#BABED8;--shiki-dark-font-style:italic\">_item</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#BABED8;--shiki-dark-font-style:italic\"> _index</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#BABED8;--shiki-dark-font-style:italic\"> data</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">)</span><span style=\"color:#9C3EDA;--shiki-dark:#C792EA\"> =></span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> {</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">    console</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">.</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">log</span><span style=\"color:#E53935;--shiki-dark:#F07178\">(</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">data</span><span style=\"color:#E53935;--shiki-dark:#F07178\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span></span>\n<span class=\"line\"><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">  }</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> //=> \"[1]\", \"[1, 2]\", \"[1, 2, 3]\", \"[1, 2, 3, 4]\"</span></span>",
           "params": [
             {
               "name": "data",
@@ -4169,7 +4164,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/pipe.ts#L104"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/pipe.ts#L125"
     },
     {
       "name": "piped",
@@ -4195,7 +4190,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/piped.ts#L26"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/piped.ts#L26"
     },
     {
       "name": "sleep",
@@ -4227,7 +4222,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/sleep.ts#L12"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/sleep.ts#L12"
     },
     {
       "name": "when",
@@ -4243,8 +4238,8 @@
       "signatures": [
         {
           "variant": "data-first",
-          "signature": "when(data, predicate, onTrue, ...extraArgs);\nwhen(data, predicate, { onTrue, onFalse }, ...extraArgs)",
-          "signatureHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">when</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(data</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> predicate</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> onTrue</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> ...</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">extraArgs)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">when</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(data</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> predicate</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> {</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> onTrue</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> onFalse </span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">},</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> ...</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">extraArgs)</span></span>",
+          "signature": "when(data, predicate, onTrue, ...extraArgs)\nwhen(data, predicate, { onTrue, onFalse }, ...extraArgs)",
+          "signatureHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">when</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(data</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> predicate</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> onTrue</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> ...</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">extraArgs)</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">when</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(data</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> predicate</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> {</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> onTrue</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> onFalse </span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">},</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> ...</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">extraArgs)</span></span>",
           "example": "when(data, isNullish, constant(42));\nwhen(data, (x) => x > 3, { onTrue: add(1), onFalse: multiply(2) });\nwhen(data, isString, (x, radix) => parseInt(x, radix), 10);",
           "exampleHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">when</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(data</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> isNullish</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> constant</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">42</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">))</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">when</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(data</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> (</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#BABED8;--shiki-dark-font-style:italic\">x</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">)</span><span style=\"color:#9C3EDA;--shiki-dark:#C792EA\"> =></span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> x </span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">></span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 3</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> {</span><span style=\"color:#E53935;--shiki-dark:#F07178\"> onTrue</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">:</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> add</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">1</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#E53935;--shiki-dark:#F07178\"> onFalse</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">:</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> multiply</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">2</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">) </span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">}</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">when</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(data</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> isString</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> (</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#BABED8;--shiki-dark-font-style:italic\">x</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#BABED8;--shiki-dark-font-style:italic\"> radix</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">)</span><span style=\"color:#9C3EDA;--shiki-dark:#C792EA\"> =></span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> parseInt</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(x</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> radix)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 10</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span></span>",
           "params": [
@@ -4275,8 +4270,8 @@
         },
         {
           "variant": "data-last",
-          "signature": "when(predicate, onTrue)(data, ...extraArgs);\nwhen(predicate, { onTrue, onFalse })(data, ...extraArgs)",
-          "signatureHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">when</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(predicate</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> onTrue)(data</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> ...</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">extraArgs)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">when</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(predicate</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> {</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> onTrue</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> onFalse </span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">}</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)(data</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> ...</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">extraArgs)</span></span>",
+          "signature": "when(predicate, onTrue)(data, ...extraArgs)\nwhen(predicate, { onTrue, onFalse })(data, ...extraArgs)",
+          "signatureHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">when</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(predicate</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> onTrue)(data</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> ...</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">extraArgs)</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">when</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(predicate</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> {</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> onTrue</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> onFalse </span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">}</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)(data</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> ...</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">extraArgs)</span></span>",
           "example": "pipe(data, when(isNullish, constant(42)));\npipe(\n  data,\n  when((x) => x > 3, { onTrue: add(1), onFalse: multiply(2) }),\n);\nmap(\n  data,\n  when(isNullish, (x, index) => x + index),\n);",
           "exampleHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">pipe</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(data</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> when</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(isNullish</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> constant</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">42</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)))</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">pipe</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">  data</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">  when</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">(</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#BABED8;--shiki-dark-font-style:italic\">x</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">)</span><span style=\"color:#9C3EDA;--shiki-dark:#C792EA\"> =></span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> x </span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">></span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 3</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> {</span><span style=\"color:#E53935;--shiki-dark:#F07178\"> onTrue</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">:</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> add</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">1</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#E53935;--shiki-dark:#F07178\"> onFalse</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">:</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> multiply</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">2</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">) </span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">}</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">map</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">  data</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">  when</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(isNullish</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> (</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#BABED8;--shiki-dark-font-style:italic\">x</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#BABED8;--shiki-dark-font-style:italic\"> index</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">)</span><span style=\"color:#9C3EDA;--shiki-dark:#C792EA\"> =></span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> x </span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">+</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> index)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span></span>\n<span class=\"line\"><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span></span>",
           "params": [
@@ -4296,7 +4291,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/when.ts#L36"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/when.ts#L36"
     },
     {
       "name": "hasProp",
@@ -4350,7 +4345,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/has-prop.ts#L43"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/has-prop.ts#L43"
     },
     {
       "name": "hasSubObject",
@@ -4404,7 +4399,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/has-sub-object.ts#L79"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/has-sub-object.ts#L79"
     },
     {
       "name": "isArray",
@@ -4437,7 +4432,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/is-array.ts#L16"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/is-array.ts#L16"
     },
     {
       "name": "isBigInt",
@@ -4470,7 +4465,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/is-big-int.ts#L17"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/is-big-int.ts#L17"
     },
     {
       "name": "isBoolean",
@@ -4503,7 +4498,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/is-boolean.ts#L16"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/is-boolean.ts#L16"
     },
     {
       "name": "isDate",
@@ -4536,7 +4531,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/is-date.ts#L13"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/is-date.ts#L13"
     },
     {
       "name": "isDeepEqual",
@@ -4590,7 +4585,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/is-deep-equal.ts#L36"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/is-deep-equal.ts#L37"
     },
     {
       "name": "isDefined",
@@ -4623,7 +4618,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/is-defined.ts#L15"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/is-defined.ts#L15"
     },
     {
       "name": "isEmpty",
@@ -4655,7 +4650,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/is-empty.ts#L32"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/is-empty.ts#L32"
     },
     {
       "name": "isEmptyish",
@@ -4687,7 +4682,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/is-emptyish.ts#L182"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/is-emptyish.ts#L182"
     },
     {
       "name": "isError",
@@ -4720,7 +4715,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/is-error.ts#L17"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/is-error.ts#L17"
     },
     {
       "name": "isFunction",
@@ -4753,7 +4748,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/is-function.ts#L16"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/is-function.ts#L16"
     },
     {
       "name": "isIncludedIn",
@@ -4809,7 +4804,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/is-included-in.ts#L95"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/is-included-in.ts#L95"
     },
     {
       "name": "isNonNull",
@@ -4842,7 +4837,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/is-non-null.ts#L15"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/is-non-null.ts#L15"
     },
     {
       "name": "isNonNullish",
@@ -4875,7 +4870,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/is-non-nullish.ts#L16"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/is-non-nullish.ts#L16"
     },
     {
       "name": "isNot",
@@ -4907,7 +4902,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/is-not.ts#L17"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/is-not.ts#L17"
     },
     {
       "name": "isNullish",
@@ -4940,7 +4935,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/is-nullish.ts#L18"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/is-nullish.ts#L18"
     },
     {
       "name": "isNumber",
@@ -4973,7 +4968,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/is-number.ts#L17"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/is-number.ts#L17"
     },
     {
       "name": "isObjectType",
@@ -5006,7 +5001,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/is-object-type.ts#L28"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/is-object-type.ts#L28"
     },
     {
       "name": "isPlainObject",
@@ -5039,7 +5034,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/is-plain-object.ts#L28"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/is-plain-object.ts#L28"
     },
     {
       "name": "isPromise",
@@ -5072,7 +5067,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/is-promise.ts#L16"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/is-promise.ts#L16"
     },
     {
       "name": "isShallowEqual",
@@ -5109,7 +5104,7 @@
           }
         },
         {
-          "variant": "data-first",
+          "variant": "data-last",
           "signature": "isShallowEqual(other)(data)",
           "signatureHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">isShallowEqual</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(other)(data)</span></span>",
           "example": "pipe(1, isShallowEqual(1)); //=> true\npipe(1, isShallowEqual('1')); //=> false\npipe([1, 2, 3], isShallowEqual([1, 2, 3])); //=> true\npipe([[1], [2], [3]], isShallowEqual([[1], [2], [3]])); //=> false",
@@ -5126,7 +5121,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/is-shallow-equal.ts#L39"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/is-shallow-equal.ts#L39"
     },
     {
       "name": "isStrictEqual",
@@ -5180,7 +5175,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/is-strict-equal.ts#L33"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/is-strict-equal.ts#L33"
     },
     {
       "name": "isString",
@@ -5213,7 +5208,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/is-string.ts#L15"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/is-string.ts#L15"
     },
     {
       "name": "isSymbol",
@@ -5246,7 +5241,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/is-symbol.ts#L15"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/is-symbol.ts#L15"
     },
     {
       "name": "isTruthy",
@@ -5279,7 +5274,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/is-truthy.ts#L18"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/is-truthy.ts#L18"
     },
     {
       "name": "add",
@@ -5333,7 +5328,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/add.ts#L16"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/add.ts#L16"
     },
     {
       "name": "ceil",
@@ -5387,7 +5382,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/ceil.ts#L21"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/ceil.ts#L21"
     },
     {
       "name": "clamp",
@@ -5441,7 +5436,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/clamp.ts#L22"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/clamp.ts#L22"
     },
     {
       "name": "divide",
@@ -5495,7 +5490,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/divide.ts#L16"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/divide.ts#L16"
     },
     {
       "name": "floor",
@@ -5549,7 +5544,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/floor.ts#L21"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/floor.ts#L21"
     },
     {
       "name": "mean",
@@ -5592,7 +5587,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/mean.ts#L29"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/mean.ts#L29"
     },
     {
       "name": "median",
@@ -5635,7 +5630,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/median.ts#L28"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/median.ts#L28"
     },
     {
       "name": "multiply",
@@ -5689,7 +5684,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/multiply.ts#L16"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/multiply.ts#L16"
     },
     {
       "name": "product",
@@ -5732,7 +5727,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/product.ts#L39"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/product.ts#L39"
     },
     {
       "name": "randomBigInt",
@@ -5770,7 +5765,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/random-big-int.ts#L21"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/random-big-int.ts#L21"
     },
     {
       "name": "randomInteger",
@@ -5808,7 +5803,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/random-integer.ts#L47"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/random-integer.ts#L47"
     },
     {
       "name": "round",
@@ -5862,7 +5857,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/round.ts#L21"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/round.ts#L21"
     },
     {
       "name": "subtract",
@@ -5916,7 +5911,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/subtract.ts#L17"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/subtract.ts#L17"
     },
     {
       "name": "sum",
@@ -5959,7 +5954,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/sum.ts#L38"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/sum.ts#L38"
     },
     {
       "name": "addProp",
@@ -6023,7 +6018,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/add-prop.ts#L23"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/add-prop.ts#L23"
     },
     {
       "name": "clone",
@@ -6066,7 +6061,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/clone.ts#L18"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/clone.ts#L18"
     },
     {
       "name": "entries",
@@ -6109,7 +6104,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/entries.ts#L34"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/entries.ts#L34"
     },
     {
       "name": "evolve",
@@ -6163,7 +6158,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/evolve.ts#L92"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/evolve.ts#L92"
     },
     {
       "name": "forEachObj",
@@ -6218,7 +6213,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/for-each-obj.ts#L23"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/for-each-obj.ts#L23"
     },
     {
       "name": "fromEntries",
@@ -6261,7 +6256,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/from-entries.ts#L111"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/from-entries.ts#L111"
     },
     {
       "name": "fromKeys",
@@ -6315,7 +6310,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/from-keys.ts#L44"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/from-keys.ts#L44"
     },
     {
       "name": "invert",
@@ -6358,7 +6353,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/invert.ts#L25"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/invert.ts#L25"
     },
     {
       "name": "keys",
@@ -6401,7 +6396,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/keys.ts#L68"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/keys.ts#L68"
     },
     {
       "name": "mapKeys",
@@ -6455,7 +6450,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/map-keys.ts#L61"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/map-keys.ts#L61"
     },
     {
       "name": "mapValues",
@@ -6509,7 +6504,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/map-values.ts#L26"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/map-values.ts#L26"
     },
     {
       "name": "merge",
@@ -6565,7 +6560,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/merge.ts#L28"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/merge.ts#L28"
     },
     {
       "name": "mergeDeep",
@@ -6621,7 +6616,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/merge-deep.ts#L18"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/merge-deep.ts#L18"
     },
     {
       "name": "objOf",
@@ -6675,7 +6670,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/obj-of.ts#L14"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/obj-of.ts#L14"
     },
     {
       "name": "omit",
@@ -6729,7 +6724,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/omit.ts#L106"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/omit.ts#L106"
     },
     {
       "name": "omitBy",
@@ -6784,7 +6779,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/omit-by.ts#L116"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/omit-by.ts#L116"
     },
     {
       "name": "pathOr",
@@ -6848,7 +6843,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/path-or.ts#L88"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/path-or.ts#L88"
     },
     {
       "name": "pick",
@@ -6902,7 +6897,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/pick.ts#L93"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/pick.ts#L93"
     },
     {
       "name": "pickBy",
@@ -6957,13 +6952,13 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/pick-by.ts#L129"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/pick-by.ts#L129"
     },
     {
       "name": "prop",
       "kind": "function",
       "category": "Object",
-      "summary": "Gets the value of the given property from an object. Nested properties can\nbe accessed by providing a variadic array of keys that define the path from\nthe root to the desired property. Arrays can be accessed by using numeric\nkeys. Unions and optional properties are handled gracefully by returning\n`undefined` early for any non-existing property on the path. Paths are\nvalidated against the object type to provide stronger type safety, better\ncompile-time errors, and to enable autocompletion in IDEs.\n\nTo check whether a key exists on the object, use [`hasProp`](#hasProp).",
+      "summary": "Gets the value of the given property from an object. Nested properties can\nbe accessed by providing a variadic array of keys that define the path from\nthe root to the desired property. Arrays can be accessed by using numeric\nkeys. Unions, optional properties, and index signatures are handled\ngracefully by returning `undefined` early for any non-existing property on\nthe path. Paths are validated against the object type to provide stronger\ntype safety, better compile-time errors, and to enable autocompletion in\nIDEs.\n\nTo check whether a key exists on the object, use [`hasProp`](#hasProp).",
       "tags": {
         "lazy": false,
         "strict": false,
@@ -7011,7 +7006,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/prop.ts#L66"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/prop.ts#L72"
     },
     {
       "name": "pullObject",
@@ -7075,7 +7070,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/pull-object.ts#L35"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/pull-object.ts#L35"
     },
     {
       "name": "set",
@@ -7139,7 +7134,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/set.ts#L20"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/set.ts#L20"
     },
     {
       "name": "setPath",
@@ -7203,7 +7198,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/set-path.ts#L57"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/set-path.ts#L57"
     },
     {
       "name": "swapProps",
@@ -7269,7 +7264,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/swap-props.ts#L21"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/swap-props.ts#L21"
     },
     {
       "name": "values",
@@ -7312,7 +7307,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/values.ts#L21"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/values.ts#L21"
     },
     {
       "name": "capitalize",
@@ -7355,7 +7350,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/capitalize.ts#L27"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/capitalize.ts#L27"
     },
     {
       "name": "endsWith",
@@ -7409,7 +7404,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/ends-with.ts#L144"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/ends-with.ts#L146"
     },
     {
       "name": "humanReadableFileSize",
@@ -7427,8 +7422,8 @@
           "variant": null,
           "signature": "humanReadableFileSize(bytes, base)",
           "signatureHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">humanReadableFileSize</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(bytes</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> base)</span></span>",
-          "example": "humanReadableFileSize(1000); // => '1.0 kB'\nhumanReadableFileSize(2097152, 1024); // => '2.0 Mib'",
-          "exampleHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">humanReadableFileSize</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">1000</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> // => '1.0 kB'</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">humanReadableFileSize</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">2097152</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 1024</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> // => '2.0 Mib'</span></span>",
+          "example": "humanReadableFileSize(1000); // => '1.0 kB'\nhumanReadableFileSize(2097152, 1024); // => '2.0 MiB'",
+          "exampleHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">humanReadableFileSize</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">1000</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> // => '1.0 kB'</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">humanReadableFileSize</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\">2097152</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#F76D47;--shiki-dark:#F78C6C\"> 1024</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> // => '2.0 MiB'</span></span>",
           "params": [
             {
               "name": "bytes",
@@ -7446,7 +7441,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/human-readable-file-size.ts#L13"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/human-readable-file-size.ts#L13"
     },
     {
       "name": "randomString",
@@ -7491,7 +7486,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/random-string.ts#L21"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/random-string.ts#L21"
     },
     {
       "name": "sliceString",
@@ -7557,7 +7552,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/slice-string.ts#L22"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/slice-string.ts#L21"
     },
     {
       "name": "slugify",
@@ -7589,7 +7584,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/slugify.ts#L11"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/slugify.ts#L11"
     },
     {
       "name": "split",
@@ -7655,7 +7650,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/split.ts#L57"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/split.ts#L56"
     },
     {
       "name": "startsWith",
@@ -7709,7 +7704,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/starts-with.ts#L144"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/starts-with.ts#L146"
     },
     {
       "name": "toCamelCase",
@@ -7725,8 +7720,8 @@
       "signatures": [
         {
           "variant": "data-first",
-          "signature": "toCamelCase(data);\ntoCamelCase(data, { preserveConsecutiveUppercase })",
-          "signatureHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">toCamelCase</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(data)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">toCamelCase</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(data</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> {</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> preserveConsecutiveUppercase </span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">}</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span></span>",
+          "signature": "toCamelCase(data)\ntoCamelCase(data, { preserveConsecutiveUppercase })",
+          "signatureHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">toCamelCase</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(data)</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">toCamelCase</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(data</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> {</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> preserveConsecutiveUppercase </span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">}</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span></span>",
           "example": "toCamelCase('hello world'); // \"helloWorld\"\ntoCamelCase('__HELLO_WORLD__'); // \"helloWorld\"\ntoCamelCase('HasHTML'); // \"hasHTML\"\ntoCamelCase('HasHTML', { preserveConsecutiveUppercase: false }); // \"hasHtml\"",
           "exampleHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">toCamelCase</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#91B859;--shiki-dark:#C3E88D\">hello world</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> // \"helloWorld\"</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">toCamelCase</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#91B859;--shiki-dark:#C3E88D\">__HELLO_WORLD__</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> // \"helloWorld\"</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">toCamelCase</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#91B859;--shiki-dark:#C3E88D\">HasHTML</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> // \"hasHTML\"</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">toCamelCase</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#91B859;--shiki-dark:#C3E88D\">HasHTML</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> {</span><span style=\"color:#E53935;--shiki-dark:#F07178\"> preserveConsecutiveUppercase</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">:</span><span style=\"color:#FF5370;--shiki-dark:#FF9CAC\"> false</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> }</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> // \"hasHtml\"</span></span>",
           "params": [
@@ -7747,8 +7742,8 @@
         },
         {
           "variant": "data-last",
-          "signature": "toCamelCase()(data);\ntoCamelCase({ preserveConsecutiveUppercase })(data)",
-          "signatureHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">toCamelCase</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">()(data)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">toCamelCase</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">{</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> preserveConsecutiveUppercase </span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">}</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)(data)</span></span>",
+          "signature": "toCamelCase()(data)\ntoCamelCase({ preserveConsecutiveUppercase })(data)",
+          "signatureHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">toCamelCase</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">()(data)</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">toCamelCase</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">{</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> preserveConsecutiveUppercase </span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">}</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)(data)</span></span>",
           "example": "pipe('hello world', toCamelCase()); // \"helloWorld\"\npipe('__HELLO_WORLD__', toCamelCase()); // \"helloWorld\"\npipe('HasHTML', toCamelCase()); // \"hasHTML\"\npipe('HasHTML', toCamelCase({ preserveConsecutiveUppercase: false })); // \"hasHtml\"",
           "exampleHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">pipe</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#91B859;--shiki-dark:#C3E88D\">hello world</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> toCamelCase</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">())</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> // \"helloWorld\"</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">pipe</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#91B859;--shiki-dark:#C3E88D\">__HELLO_WORLD__</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> toCamelCase</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">())</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> // \"helloWorld\"</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">pipe</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#91B859;--shiki-dark:#C3E88D\">HasHTML</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> toCamelCase</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">())</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> // \"hasHTML\"</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">pipe</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#91B859;--shiki-dark:#C3E88D\">HasHTML</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> toCamelCase</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">{</span><span style=\"color:#E53935;--shiki-dark:#F07178\"> preserveConsecutiveUppercase</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">:</span><span style=\"color:#FF5370;--shiki-dark:#FF9CAC\"> false</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> }</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">))</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> // \"hasHtml\"</span></span>",
           "params": [
@@ -7763,7 +7758,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/to-camel-case.ts#L59"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/to-camel-case.ts#L59"
     },
     {
       "name": "toKebabCase",
@@ -7806,7 +7801,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/to-kebab-case.ts#L35"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/to-kebab-case.ts#L35"
     },
     {
       "name": "toLowerCase",
@@ -7849,7 +7844,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/to-lower-case.ts#L26"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/to-lower-case.ts#L26"
     },
     {
       "name": "toSnakeCase",
@@ -7892,7 +7887,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/to-snake-case.ts#L35"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/to-snake-case.ts#L35"
     },
     {
       "name": "toTitleCase",
@@ -7908,8 +7903,8 @@
       "signatures": [
         {
           "variant": "data-first",
-          "signature": "toTitleCase(data);\ntoTitleCase(data, { preserveConsecutiveUppercase })",
-          "signatureHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">toTitleCase</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(data)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">toTitleCase</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(data</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> {</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> preserveConsecutiveUppercase </span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">}</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span></span>",
+          "signature": "toTitleCase(data)\ntoTitleCase(data, { preserveConsecutiveUppercase })",
+          "signatureHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">toTitleCase</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(data)</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">toTitleCase</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(data</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> {</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> preserveConsecutiveUppercase </span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">}</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span></span>",
           "example": "toTitleCase('hello world'); // \"Hello World\"\ntoTitleCase('--foo-bar--'); // \"Foo Bar\"\ntoTitleCase('fooBar'); // \"Foo Bar\"\ntoTitleCase('__FOO_BAR__'); // \"Foo Bar\"\ntoTitleCase('XMLHttpRequest'); // \"XML Http Request\"\ntoTitleCase('XMLHttpRequest', { preserveConsecutiveUppercase: false }); // \"Xml Http Request\"",
           "exampleHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">toTitleCase</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#91B859;--shiki-dark:#C3E88D\">hello world</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> // \"Hello World\"</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">toTitleCase</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#91B859;--shiki-dark:#C3E88D\">--foo-bar--</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> // \"Foo Bar\"</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">toTitleCase</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#91B859;--shiki-dark:#C3E88D\">fooBar</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> // \"Foo Bar\"</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">toTitleCase</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#91B859;--shiki-dark:#C3E88D\">__FOO_BAR__</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> // \"Foo Bar\"</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">toTitleCase</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#91B859;--shiki-dark:#C3E88D\">XMLHttpRequest</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> // \"XML Http Request\"</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">toTitleCase</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#91B859;--shiki-dark:#C3E88D\">XMLHttpRequest</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> {</span><span style=\"color:#E53935;--shiki-dark:#F07178\"> preserveConsecutiveUppercase</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">:</span><span style=\"color:#FF5370;--shiki-dark:#FF9CAC\"> false</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> }</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> // \"Xml Http Request\"</span></span>",
           "params": [
@@ -7930,8 +7925,8 @@
         },
         {
           "variant": "data-last",
-          "signature": "toTitleCase()(data);\ntoTitleCase({ preserveConsecutiveUppercase })(data)",
-          "signatureHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">toTitleCase</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">()(data)</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">toTitleCase</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">{</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> preserveConsecutiveUppercase </span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">}</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)(data)</span></span>",
+          "signature": "toTitleCase()(data)\ntoTitleCase({ preserveConsecutiveUppercase })(data)",
+          "signatureHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">toTitleCase</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">()(data)</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">toTitleCase</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">{</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\"> preserveConsecutiveUppercase </span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">}</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">)(data)</span></span>",
           "example": "pipe('hello world', toTitleCase()); // \"Hello World\"\npipe('--foo-bar--', toTitleCase()); // \"Foo Bar\"\npipe('fooBar', toTitleCase()); // \"Foo Bar\"\npipe('__FOO_BAR__', toTitleCase()); // \"Foo Bar\"\npipe('XMLHttpRequest', toTitleCase()); // \"XML Http Request\"\npipe('XMLHttpRequest', toTitleCase({ preserveConsecutiveUppercase: false })); // \"Xml Http Request\"",
           "exampleHtml": "<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">pipe</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#91B859;--shiki-dark:#C3E88D\">hello world</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> toTitleCase</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">())</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> // \"Hello World\"</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">pipe</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#91B859;--shiki-dark:#C3E88D\">--foo-bar--</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> toTitleCase</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">())</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> // \"Foo Bar\"</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">pipe</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#91B859;--shiki-dark:#C3E88D\">fooBar</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> toTitleCase</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">())</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> // \"Foo Bar\"</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">pipe</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#91B859;--shiki-dark:#C3E88D\">__FOO_BAR__</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> toTitleCase</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">())</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> // \"Foo Bar\"</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">pipe</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#91B859;--shiki-dark:#C3E88D\">XMLHttpRequest</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> toTitleCase</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">())</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> // \"XML Http Request\"</span></span>\n<span class=\"line\"><span style=\"color:#6182B8;--shiki-dark:#82AAFF\">pipe</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#91B859;--shiki-dark:#C3E88D\">XMLHttpRequest</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">'</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">,</span><span style=\"color:#6182B8;--shiki-dark:#82AAFF\"> toTitleCase</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">(</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">{</span><span style=\"color:#E53935;--shiki-dark:#F07178\"> preserveConsecutiveUppercase</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">:</span><span style=\"color:#FF5370;--shiki-dark:#FF9CAC\"> false</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\"> }</span><span style=\"color:#90A4AE;--shiki-dark:#BABED8\">))</span><span style=\"color:#39ADB5;--shiki-dark:#89DDFF\">;</span><span style=\"color:#90A4AE;--shiki-light-font-style:italic;--shiki-dark:#676E95;--shiki-dark-font-style:italic\"> // \"Xml Http Request\"</span></span>",
           "params": [
@@ -7946,7 +7941,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/to-title-case.ts#L78"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/to-title-case.ts#L78"
     },
     {
       "name": "toUpperCase",
@@ -7989,7 +7984,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/to-upper-case.ts#L26"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/to-upper-case.ts#L26"
     },
     {
       "name": "truncate",
@@ -8053,7 +8048,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/truncate.ts#L151"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/truncate.ts#L151"
     },
     {
       "name": "uncapitalize",
@@ -8096,7 +8091,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/uncapitalize.ts#L26"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/uncapitalize.ts#L26"
     },
     {
       "name": "stringToPath",
@@ -8128,7 +8123,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/string-to-path.ts#L90"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/string-to-path.ts#L90"
     },
     {
       "name": "DeepPartial",
@@ -8148,7 +8143,7 @@
           "params": []
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/type.helpers.ts#L1"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/type.helpers.ts#L1"
     },
     {
       "name": "defaultTo",
@@ -8202,7 +8197,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/default-to.ts#L34"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/default-to.ts#L34"
     },
     {
       "name": "isBrowser",
@@ -8222,7 +8217,7 @@
           "params": []
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/index.ts#L170"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/index.ts#L170"
     },
     {
       "name": "KEY_CODES",
@@ -8243,7 +8238,7 @@
           "params": []
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/key-codes.ts#L5"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/key-codes.ts#L5"
     },
     {
       "name": "tap",
@@ -8297,7 +8292,7 @@
           }
         }
       ],
-      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.17.1/src/tap.ts#L19"
+      "sourceUrl": "https://github.com/vinicunca/perkakas/blob/v1.19.1/src/tap.ts#L19"
     }
   ]
 }

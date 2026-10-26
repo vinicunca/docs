@@ -124,15 +124,6 @@ export const DOCS_PACKAGES: Array<DocsPackage> = [
     github: 'https://github.com/vinicunca/docs',
     group: 'dev-setup',
   },
-  {
-    id: 'macos-dev',
-    title: 'MacOS Dev Setup',
-    description: 'Set up a web development environment on MacOS with Homebrew.',
-    icon: 'i-simple-icons-apple',
-    to: '/macos-dev/guide',
-    github: 'https://github.com/vinicunca/docs',
-    group: 'dev-setup',
-  },
 ];
 
 export function docsPackagesIn(group: DocsGroup): Array<DocsPackage> {

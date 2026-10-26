@@ -5,7 +5,7 @@ import { ImageUpload } from './EditorImageUploadExtension';
 
 const value = ref(`# Image Upload
 
-This editor demonstrates how to create a custom TipTap extension with handlers. Click the image button in the toolbar to upload a file — it will show a custom [FileUpload](/docs/components/file-upload) interface before inserting the image.
+This editor demonstrates how to create a custom TipTap extension with handlers. Click the image button in the toolbar to upload a file — it will show a custom [FileUpload](/pohon/components/file-upload) interface before inserting the image.
 
 Try uploading an image below:
 

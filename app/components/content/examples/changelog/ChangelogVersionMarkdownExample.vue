@@ -8,7 +8,7 @@ We are thrilled to introduce Pohon UI v3, a comprehensive redesign of our UI lib
 
 Read the blog post announcement: https://nuxt.com/blog/pohon-ui-v3
 
-**[Get started with Pohon UI v3 →](/docs/getting-started/installation/nuxt)**
+**[Get started with Pohon UI v3 →](/pohon/getting-started/installation/nuxt)**
 
 ### 🧩 Akar: A New Foundation
 
@@ -40,7 +40,7 @@ We want to be transparent: migrating from Pohon UI v2 to v3 requires significant
 
 To upgrade your project:
 
-1. Read our detailed [migration guide](/docs/getting-started/installation/nuxt)
+1. Read our detailed [migration guide](/pohon/getting-started/installation/nuxt)
 2. Review the new documentation and components before attempting to upgrade
 3. Report any issues on our [GitHub repository](https://github.com/vinicunca/pohon/issues)
 

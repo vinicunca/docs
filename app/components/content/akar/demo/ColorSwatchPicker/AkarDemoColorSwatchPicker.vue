@@ -1,24 +1,16 @@
 <script setup lang="ts">
-import {
-  blue,
-  green,
-  orange,
-  pink,
-  red,
-  violet,
-  yellow,
-} from '@radix-ui/colors';
 import { ColorSwatchPickerItem, ColorSwatchPickerItemIndicator, ColorSwatchPickerItemSwatch, ColorSwatchPickerRoot } from 'akar';
 import './styles.css';
 
+// Step 9 of the Radix scales the other demos use (`../_colors`)
 const colors = [
-  red.red9,
-  pink.pink9,
-  violet.violet9,
-  blue.blue9,
-  green.green9,
-  orange.orange9,
-  yellow.yellow9,
+  '#e5484d', // red
+  '#d6409f', // pink
+  '#6e56cf', // violet
+  '#0090ff', // blue
+  '#30a46c', // green
+  '#f76b15', // orange
+  '#ffe629', // yellow
 ];
 </script>
 

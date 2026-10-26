@@ -45,14 +45,14 @@ const { base, avatar, wrapper, description, infoWrapper, name, role } = card();
         </p>
       </blockquote>
 
-      <figcaption :class="infoWrapper({ class: props.styles?.infoWrapper })">
+      <div :class="infoWrapper({ class: props.styles?.infoWrapper })">
         <div :class="name({ class: props.styles?.name })">
           Ketut Gabler
         </div>
         <div :class="role({ class: props.styles?.role })">
           Full-stack developer
         </div>
-      </figcaption>
+      </div>
     </div>
   </figure>
 </template>

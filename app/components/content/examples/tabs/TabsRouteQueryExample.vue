@@ -24,7 +24,7 @@ const active = computed({
   set(tab) {
     // Hash is specified here to prevent the page from scrolling to the top
     router.push({
-      path: '/docs/components/tabs',
+      path: '/pohon/components/tabs',
       query: { tab },
       hash: '#with-route-query',
     });

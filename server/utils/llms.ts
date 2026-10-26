@@ -23,7 +23,7 @@ export const WHEN_TO_USE_SECTION = {
     '',
     'How an agent should read this site:',
     '',
-    `- Read any documentation page as Markdown: append \`.md\` to its URL (\`${SITE_URL}/pohon/components/button.md\`) or send \`Accept: text/markdown\`.`,
+    `- Read any documentation page as Markdown: prefix its path with \`/raw\` and add \`.md\` (\`${SITE_URL}/raw/pohon/components/button.md\`).`,
     `- Start from the Markdown sitemap at ${SITE_URL}/sitemap.md, or the full documentation at ${SITE_URL}/llms-full.txt.`,
     `- For Pohon UI conventions and component selection, load the agent skill at ${SITE_URL}/.well-known/skills/pohon-ui/SKILL.md.`,
     `- For ESLint Config setup and the style rules it enforces, load the agent skill at ${SITE_URL}/.well-known/skills/eslint-config/SKILL.md.`,

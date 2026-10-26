@@ -9,21 +9,12 @@ export default defineNuxtModule({
   },
   async setup(_options, nuxt) {
     const resolver = createResolver(import.meta.url);
-    let _configResolved: any;
     let components: Record<string, any>;
     const outputDir = join(nuxt.options.buildDir, 'component-examples');
 
     async function ensureOutputDir() {
       if (!existsSync(outputDir)) {
         await fsp.mkdir(outputDir, { recursive: true });
-      }
-    }
-
-    async function stubOutput() {
-      await ensureOutputDir();
-      const indexPath = join(outputDir, '_index.json');
-      if (!existsSync(indexPath)) {
-        await fsp.writeFile(indexPath, '[]', 'utf-8');
       }
     }
 
@@ -88,7 +79,12 @@ export default defineNuxtModule({
           acc[component.pascalName] = component;
           return acc;
         }, {} as Record<string, any>);
-      await stubOutput();
+      // Written here, before Vite and Nitro build, because the Nitro virtual
+      // module below inlines whatever this outputs. Vite's `buildStart` used to
+      // do it, but under `nuxt generate` it never ran for the client build, so
+      // every example was prerendered as a 404.
+      await fetchComponents();
+      await updateOutput();
     });
 
     nuxt.hook('vite:extend', (vite: any) => {
@@ -96,16 +92,6 @@ export default defineNuxtModule({
       vite.config.plugins.push({
         name: 'component-example',
         enforce: 'post',
-        async buildStart() {
-          if (_configResolved?.build.ssr) {
-            return;
-          }
-          await fetchComponents();
-          await updateOutput();
-        },
-        configResolved(config: any) {
-          _configResolved = config;
-        },
         async handleHotUpdate({ file }: { file: any }) {
           if (
             Object.entries(components).some(

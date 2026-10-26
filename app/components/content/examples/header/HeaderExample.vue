@@ -5,12 +5,12 @@ const route = useRoute();
 
 const items = computed<Array<NavigationMenuItem>>(() => [{
   label: 'Docs',
-  to: '/docs/getting-started',
-  active: route.path.startsWith('/docs/getting-started'),
+  to: '/pohon/getting-started',
+  active: route.path.startsWith('/pohon/getting-started'),
 }, {
   label: 'Components',
-  to: '/docs/components',
-  active: route.path.startsWith('/docs/components'),
+  to: '/pohon/components',
+  active: route.path.startsWith('/pohon/components'),
 }, {
   label: 'Theme',
   to: '/theme',

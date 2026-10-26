@@ -15,9 +15,23 @@ const Button = z.object({
   trailingIcon: z.string().optional(),
   to: z.string().optional(),
   target: z.enum(['_blank', '_self']).optional(),
-  color: z.enum(['primary', 'neutral', 'success', 'warning', 'error', 'info']).optional(),
+  color: z.enum([
+    'primary',
+    'neutral',
+    'success',
+    'warning',
+    'error',
+    'info',
+  ]).optional(),
   size: z.enum(['xs', 'sm', 'md', 'lg', 'xl']).optional(),
-  variant: z.enum(['solid', 'outline', 'subtle', 'soft', 'ghost', 'link']).optional(),
+  variant: z.enum([
+    'solid',
+    'outline',
+    'subtle',
+    'soft',
+    'ghost',
+    'link',
+  ]).optional(),
   id: z.string().optional(),
   class: z.string().optional(),
 });
@@ -28,9 +42,13 @@ export default defineContentConfig({
     // first path segment is its package (see `app/utils/packages.ts`).
     docs: defineCollection({
       type: 'page',
-      source: [{
-        include: '**',
-      }],
+      source: [
+        {
+          include: '**',
+          // Hidden until the `/mcp` Worker exists (tasks/plan.md, step 10)
+          exclude: ['pohon/1.getting-started/7.ai/1.mcp.md'],
+        },
+      ],
       schema: z.object({
         // Sidebar group inside a section, listed per package in `DOCS_PACKAGES`
         category: z.string().optional(),
@@ -48,7 +66,11 @@ export default defineContentConfig({
         to: z.string().optional(),
         target: z.string().optional(),
         // an entry that links out is not a page to index
-        sitemap: defineSitemapSchema({ z, name: 'docs', filter: (entry) => !entry.to }),
+        sitemap: defineSitemapSchema({
+          z,
+          name: 'docs',
+          filter: (entry) => !entry.to,
+        }),
       }),
     }),
   },

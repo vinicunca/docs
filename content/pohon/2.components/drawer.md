@@ -348,7 +348,7 @@ Drawer now uses Akar. Replace `activeSnapPoint` and its update event with `snapP
 
 The Vaul-only props `handleOnly`, `closeThreshold`, `scrollLockTimeout`, `fixed`, `noBodyStyles`, and `preventScrollRestoration` have been removed. The handle is now a visual swipe affordance; it no longer cycles snap points on click. Use `after:enter`, `after:leave`, or `update:openComplete` instead of `animationEnd`; `drag`, `release`, and `close` events are no longer exposed.
 
-`update:open` receives `(open, details)`, where `details.reason` describes the interaction and `details.cancel()` rejects it. `content` now uses Akar's drawer-specific types, including `initialFocus` and `finalFocus`. See the [migration guide](/pohon/getting-started/migration#drawer-from-vaul-to-akar) for details.
+`update:open` receives `(open, details)`, where `details.reason` describes the interaction and `details.cancel()` rejects it. `content` now uses Akar's drawer-specific types, including `initialFocus` and `finalFocus`.
 
 ## Examples
 

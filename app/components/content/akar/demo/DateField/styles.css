@@ -52,7 +52,7 @@
     background-color: var(--grass-2);
   }
 
-  .DateFieldSegment:[aria-valuetext='Empty'] {
+  .DateFieldSegment[aria-valuetext='Empty'] {
     color: var(--grass-6);
   }
 }

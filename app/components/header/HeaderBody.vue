@@ -1,14 +1,6 @@
 <script setup lang="ts">
-import { mapContentNavigation } from 'pohon-ui/utils/content';
-
-const route = useRoute();
 const { mobileLinks } = useHeader();
-const { currentPackage, packageSections, navigationByCategory } = useNavigation(inject('navigation')!);
-
-const sectionItems = computed(() => mapContentNavigation(packageSections.value.map((item) => ({ ...item, children: undefined })))?.map((item) => ({
-  ...item,
-  active: route.path === item.to || route.path.startsWith(`${item.to as string}/`),
-})));
+const { currentPackage, sectionLinks: sectionItems, navigationByCategory } = useNavigation(inject('navigation')!);
 </script>
 
 <template>

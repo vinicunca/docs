@@ -12,7 +12,7 @@ const items = [
     children: [
       {
         label: 'Documentation',
-        to: '/docs',
+        to: '/pohon/getting-started',
       },
       {
         label: 'Themes',
@@ -24,11 +24,11 @@ const items = [
   },
   {
     label: 'Components',
-    to: '/docs/components',
+    to: '/pohon/components',
   },
   {
     label: 'Breadcrumb',
-    to: '/docs/components/breadcrumb',
+    to: '/pohon/components/breadcrumb',
   },
 ] satisfies Array<BreadcrumbItem>;
 </script>

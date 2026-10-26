@@ -53,7 +53,7 @@ props:
           description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
     - label: Composables
       icon: i-lucide-database
-      to: /pohon/composables
+      to: /pohon/composables/define-shortcuts
       children:
         - label: defineShortcuts
           icon: i-lucide-file-text
@@ -166,7 +166,7 @@ props:
           description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
     - label: Composables
       icon: i-lucide-database
-      to: /pohon/composables
+      to: /pohon/composables/define-shortcuts
       children:
         - label: defineShortcuts
           icon: i-lucide-file-text
@@ -577,7 +577,7 @@ props:
         to: /pohon/getting-started
       - label: Composables
         icon: i-lucide-database
-        to: /pohon/composables
+        to: /pohon/composables/define-shortcuts
       - label: Components
         icon: i-lucide-box
         to: /pohon/components
@@ -615,7 +615,7 @@ props:
         to: /pohon/getting-started
       - label: Composables
         icon: i-lucide-database
-        to: /pohon/composables
+        to: /pohon/composables/define-shortcuts
       - label: Components
         icon: i-lucide-box
         to: /pohon/components
@@ -675,7 +675,7 @@ props:
           description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
     - label: Composables
       icon: i-lucide-database
-      to: /pohon/composables
+      to: /pohon/composables/define-shortcuts
       children:
         - label: defineShortcuts
           icon: i-lucide-file-text
@@ -773,7 +773,7 @@ props:
           description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
     - label: Composables
       icon: i-lucide-database
-      to: /pohon/composables
+      to: /pohon/composables/define-shortcuts
       children:
         - label: defineShortcuts
           icon: i-lucide-file-text
@@ -862,7 +862,7 @@ props:
           description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
     - label: Composables
       icon: i-lucide-database
-      to: /pohon/composables
+      to: /pohon/composables/define-shortcuts
       children:
         - label: defineShortcuts
           icon: i-lucide-file-text
@@ -948,7 +948,7 @@ props:
           description: 'You have nothing to do, @nuxt/icon will handle it automatically.'
     - label: Composables
       icon: i-lucide-database
-      to: /pohon/composables
+      to: /pohon/composables/define-shortcuts
       children:
         - label: defineShortcuts
           icon: i-lucide-file-text
@@ -1026,7 +1026,7 @@ props:
           description: 'You can customize components by using the `class` / `ui` props or in your app.config.ts.'
     - label: Composables
       icon: i-lucide-database
-      to: /pohon/composables
+      to: /pohon/composables/define-shortcuts
       children:
         - label: defineShortcuts
           icon: i-lucide-file-text

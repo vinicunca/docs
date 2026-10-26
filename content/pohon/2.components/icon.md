@@ -28,7 +28,7 @@ props:
 ::
 
 ::note
-You can use any name from the <https://iconify.design> collection. Browse them easily on <https://icones.js.org> or search directly from your AI assistant using the [`search-icons`](/pohon/getting-started/ai/mcp#available-tools) MCP tool.
+You can use any name from the <https://iconify.design> collection. Browse them easily on <https://icones.js.org>.
 ::
 
 ::framework-only

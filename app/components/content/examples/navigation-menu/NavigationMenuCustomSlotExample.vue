@@ -5,18 +5,18 @@ const items = [
   {
     label: 'Guide',
     icon: 'i-lucide-book-open',
-    to: '/docs/getting-started',
+    to: '/pohon/getting-started',
   },
   {
     label: 'Composables',
     icon: 'i-lucide-database',
-    to: '/docs/composables',
+    to: '/pohon/composables/define-shortcuts',
     class: 'hidden',
   },
   {
     label: 'Components',
     icon: 'i-lucide-box',
-    to: '/docs/components',
+    to: '/pohon/components',
     class: 'hidden',
   },
   {
@@ -30,12 +30,12 @@ const items = [
       {
         label: 'Composables',
         icon: 'i-lucide-database',
-        to: '/docs/composables',
+        to: '/pohon/composables/define-shortcuts',
       },
       {
         label: 'Components',
         icon: 'i-lucide-box',
-        to: '/docs/components',
+        to: '/pohon/components',
       },
     ] satisfies Array<DropdownMenuItem>,
   },
