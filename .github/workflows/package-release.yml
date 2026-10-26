@@ -1,0 +1,144 @@
+name: Package release
+
+# A package repo sends `docs-package-release` after tagging a release.
+# This bumps the package's catalog pin and opens a PR, so its docs get reviewed against the new version.
+on:
+  repository_dispatch:
+    types:
+      - docs-package-release
+  workflow_dispatch:
+    inputs:
+      package:
+        description: Package ID (unocss-preset, unocss-variants, akar, pohon, eslint, perkakas)
+        required: true
+        type: string
+      tag:
+        description: Release tag, e.g. v2.5.0
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: package-release-${{ github.event.client_payload.package || inputs.package }}
+  cancel-in-progress: false
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    env:
+      PACKAGE_ID: ${{ github.event.client_payload.package || inputs.package }}
+      RELEASE_TAG: ${{ github.event.client_payload.tag || inputs.tag }}
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v7
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24.19.0
+          registry-url: 'https://registry.npmjs.org'
+          cache: pnpm
+
+      - name: Resolve package
+        id: package
+        shell: bash
+        run: |
+          case "$PACKAGE_ID" in
+            unocss-preset) name='@vinicunca/unocss-preset' ;;
+            unocss-variants) name='unocss-variants' ;;
+            akar) name='akar' ;;
+            pohon) name='pohon-ui' ;;
+            eslint) name='@vinicunca/eslint-config' ;;
+            perkakas) name='@vinicunca/perkakas' ;;
+            *) echo "::error::Unknown package ID: $PACKAGE_ID"; exit 1 ;;
+          esac
+          version="${RELEASE_TAG#v}"
+          if [[ ! "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$ ]]; then
+            echo "::error::Tag $RELEASE_TAG is not a release version"
+            exit 1
+          fi
+          {
+            echo "name=$name"
+            echo "version=$version"
+            echo "branch=package-release/$PACKAGE_ID-$version"
+          } >> "$GITHUB_OUTPUT"
+
+      # The tag can arrive before the package is published
+      - name: Wait for npm
+        shell: bash
+        env:
+          NAME: ${{ steps.package.outputs.name }}
+          VERSION: ${{ steps.package.outputs.version }}
+        run: |
+          for attempt in $(seq 1 30); do
+            if npm view "$NAME@$VERSION" version > /dev/null 2>&1; then
+              exit 0
+            fi
+            sleep 20
+          done
+          echo "::error::$NAME@$VERSION is not on npm after 10 minutes"
+          exit 1
+
+      - name: Bump catalog pin
+        run: node scripts/bump-catalog.mjs "${{ steps.package.outputs.name }}" "${{ steps.package.outputs.version }}"
+
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Check documented classes
+        id: check
+        if: env.PACKAGE_ID == 'unocss-preset'
+        shell: bash
+        run: |
+          if node scripts/check-unocss-preset-docs.mjs > check.log 2>&1; then
+            echo "result=pass" >> "$GITHUB_OUTPUT"
+          else
+            echo "result=fail" >> "$GITHUB_OUTPUT"
+          fi
+          cat check.log
+
+      - name: Open pull request
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NAME: ${{ steps.package.outputs.name }}
+          VERSION: ${{ steps.package.outputs.version }}
+          BRANCH: ${{ steps.package.outputs.branch }}
+          CHECK_RESULT: ${{ steps.check.outputs.result }}
+        run: |
+          if git diff --quiet -- pnpm-workspace.yaml pnpm-lock.yaml; then
+            echo "$NAME is already pinned to $VERSION"
+            exit 0
+          fi
+
+          git switch -c "$BRANCH"
+          git add pnpm-workspace.yaml pnpm-lock.yaml
+          git -c user.name='vinicunca-docs[bot]' -c user.email='actions@users.noreply.github.com' \
+            commit -m "chore(deps): bump $NAME to $VERSION"
+          git push --force origin "$BRANCH"
+
+          {
+            echo "Bumps \`$NAME\` to [\`$RELEASE_TAG\`](https://www.npmjs.com/package/$NAME/v/$VERSION)."
+            echo
+            echo "Review the release notes and update the matching docs pages in this PR before merging. Merging deploys the site."
+            if [[ -n "$CHECK_RESULT" ]]; then
+              echo
+              echo "### Documented classes: $CHECK_RESULT"
+              echo
+              echo '```'
+              grep -v '^\[unocss\]' check.log
+              echo '```'
+            fi
+          } > pr-body.md
+
+          if gh pr view "$BRANCH" > /dev/null 2>&1; then
+            gh pr edit "$BRANCH" --body-file pr-body.md
+          else
+            gh pr create --head "$BRANCH" --title "chore(deps): bump $NAME to $VERSION" --body-file pr-body.md
+          fi

@@ -1,144 +1,93 @@
-<script lang="ts" setup>
-import type { Ref } from '#imports';
+<script setup lang="ts">
 import type { ContentNavigationItem } from '@nuxt/content';
-import { PContainer, PContentNavigation, PMain } from '#components';
-import { computed, defineShortcuts, inject, onMounted, ref, useNavigation, useRoute, useTemplateRef, watch } from '#imports';
-import { useDebounceFn } from '@vueuse/core';
-import { useFilter } from 'akar';
-
-const route = useRoute();
+import { useFilter } from 'pohon-ui/composables';
 
 const navigation = inject<Ref<Array<ContentNavigationItem>>>('navigation');
 
+const route = useRoute();
+const { scoreItem } = useFilter();
 const { navigationByCategory } = useNavigation(navigation!);
 
-const { contains } = useFilter({ sensitivity: 'base' });
-
-const isActiveSearch = computed(() =>
-  route.path !== '/' && navigationByCategory.value.length > 1,
-);
-const searchTerm = ref('');
-const input = useTemplateRef('input');
-
 const filteredNavigation = computed(() => {
-  if (!searchTerm.value) {
+  if (!cleanedSearchTerm.value) {
     return navigationByCategory.value;
   }
 
   return navigationByCategory.value.map((item) => ({
     ...item,
-    children: item.children?.filter((child) => contains({ string: child.title as string, substring: searchTerm.value }) || contains({ string: child.description as string, substring: searchTerm.value })),
+    children: item.children?.filter((child) => scoreItem(child, cleanedSearchTerm.value, ['title', 'description']) !== null),
   })).filter((item) => item.children && item.children.length > 0);
 });
 
-const refNav = useTemplateRef('refNav');
+const searchTerm = ref('');
+const FILTERABLE_SECTIONS = ['/pohon/components', '/akar/components', '/akar/utilities'];
+const isSearchActive = computed(() => FILTERABLE_SECTIONS.some((section) => route.path.startsWith(section)));
+const navigationKey = computed(() => `${route.path}-${searchTerm.value ? 'filtered' : 'unfiltered'}`);
+const cleanedSearchTerm = computed(() => {
+  return searchTerm.value
+    .replace(/^P(?=[A-Z])/, '')
+    .replace(/^p-/, '');
+});
 
-function scrollToActiveItem() {
-  if (import.meta.server || !refNav.value) {
-    return;
+watch(() => route.path, () => {
+  if (!isSearchActive.value) {
+    searchTerm.value = '';
   }
-  // Find the anchor tag inside the li tag and check if the href matches the current route
-  const activeElement = document.querySelector(`nav[data-akar="content-nav"] li a[href="${route.path}"]`) as HTMLElement;
+});
 
-  if (activeElement) {
-    const containerRect = refNav.value.getBoundingClientRect();
-    const elementRect = activeElement.getBoundingClientRect();
-
-    // Calculate the scroll position to center the element in the container
-    const scrollTop = refNav.value.scrollTop + (elementRect.top - containerRect.top) - (containerRect.height / 2) + (elementRect.height / 2);
-
-    refNav.value.scrollTo({
-      behavior: 'smooth',
-      top: scrollTop,
-    });
-  }
-}
-
-const debouncedScroll = useDebounceFn(scrollToActiveItem, 320);
-
-watch(
-  () => route.path,
-  () => {
-    debouncedScroll();
-
-    if (!isActiveSearch.value) {
-      searchTerm.value = '';
-    }
-  },
-  { immediate: true },
-);
+const input = useTemplateRef('input');
 
 defineShortcuts({
   '/': {
-    usingInput: true,
+    usingInput: false,
     handler: () => {
       input.value?.inputRef?.focus();
     },
   },
 });
-
-onMounted(() => {
-  scrollToActiveItem();
-});
-
-const slug = computed(() => route.params.slug?.[0] as string);
 </script>
 
 <template>
   <PMain>
     <PContainer>
-      <div class="flex flex-col lg:(gap-10 grid grid-cols-10)">
-        <!-- Left Aside -->
-        <aside
-          ref="refNav"
-          class="py-8 hidden overflow-y-auto lg:(pe-6.5 ps-4 col-span-2 max-h-[calc(100vh-var(--pohon-header-height))] block sticky -ms-4 lg:top-$pohon-header-height)"
-        >
-          <div class="relative">
-            <div
-              v-if="isActiveSearch"
-              class="pointer-events-none sticky z-1 -mt-8 -top-8"
+      <PPage>
+        <template #left>
+          <PPageAside>
+            <template
+              v-if="isSearchActive"
+              #top
             >
-              <div class="px-4 bg-background h-8 -mx-4" />
-
-              <div class="px-4 bg-background flex flex-col pointer-events-auto relative -mx-4">
-                <PInput
-                  ref="input"
-                  v-model="searchTerm"
-                  variant="soft"
-                  placeholder="Filter..."
-                  class="group"
-                >
-                  <template #trailing>
-                    <PKbd
-                      value="/"
-                      variant="subtle"
-                      class="color-text-muted bg-transparent ring-ring-muted"
-                    />
-                  </template>
-                </PInput>
-              </div>
-
-              <div class="px-4 h-8 from-background bg-gradient-to-b -mx-4" />
-            </div>
+              <PInput
+                ref="input"
+                v-model="searchTerm"
+                variant="soft"
+                placeholder="Filter..."
+                class="group"
+              >
+                <template #trailing>
+                  <PKbd
+                    value="/"
+                    variant="subtle"
+                    class="color-text-muted bg-transparent ring-border-muted"
+                  />
+                </template>
+              </PInput>
+            </template>
 
             <PContentNavigation
-              :key="route.path"
-              data-akar="content-nav"
-              :variant="slug === 'perkakas' ? 'link' : 'pill'"
-              :highlight="slug !== 'perkakas'"
-              :color="slug === 'perkakas' ? 'neutral' : 'primary'"
+              :key="navigationKey"
+              :collapsible="false"
               :navigation="filteredNavigation"
-              :pohon="{
+              highlight
+              :ui="{
                 linkTrailingBadge: 'font-semibold uppercase',
               }"
             />
-          </div>
-        </aside>
+          </PPageAside>
+        </template>
 
-        <div class="lg:col-span-8">
-          <slot />
-        </div>
-      </div>
+        <slot />
+      </PPage>
     </PContainer>
   </PMain>
 </template>

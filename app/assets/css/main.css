@@ -1,18 +1,75 @@
-:root {
-  --pohon-header-height: calc(var(--spacing) * 16);
-  --pohon-container: var(--container-8xl);
+@import '../../designs/styles/theme.css';
+
+/* The live counterpart of the exported heading rule. */
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    @apply antialiased color-text bg-background scheme-light dark:scheme-dark;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-serif);
+  }
 }
 
-body {
-  @apply antialiased bg-background color-text scheme-light dark:scheme-dark font-sans;
+body.theme-studio .font-normal {
+  font-weight: var(--font-weight-normal, 400);
+}
+body.theme-studio .font-medium {
+  font-weight: var(--font-weight-medium, 500);
+}
+body.theme-studio .font-semibold {
+  font-weight: var(--font-weight-semibold, 600);
+}
+body.theme-studio .font-bold {
+  font-weight: var(--font-weight-bold, 700);
 }
 
-.dragging-ew {
-  user-select: none !important;
-  cursor: ew-resize !important;
+/* The studio's canvas sits recessed behind the preview card. Mixed off
+   --ui-color-bg so editing that token moves the canvas too. */
+body.theme-studio,
+body.theme-studio #__nuxt {
+  background-color: color-mix(in oklab, var(--ui-color-bg) 98%, var(--ui-color-neutral-950));
 }
 
-.dragging-ew * {
-  user-select: none !important;
-  cursor: ew-resize !important;
+.dark body.theme-studio,
+.dark body.theme-studio #__nuxt {
+  background-color: color-mix(in oklab, var(--ui-color-bg) 70%, black);
+}
+
+html[data-framework='nuxt'] .vue-only,
+html[data-framework='vue'] .nuxt-only {
+  display: none;
+}
+
+/* Shiki dark mode styles. A colour swatch keeps the background and contrast
+   foreground the transformer wrote, inline with Comark or as a generated
+   class with the content pipeline. */
+html.dark .shiki span:not([style*='background-color'], .shiki-color-highlight) {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+
+/* Shiki icon highlight transformer styles */
+.shiki-icon-highlight {
+  display: inline-block;
+  width: 1.25em;
+  height: 1.25em;
+  vertical-align: -0.25em;
+  margin-right: 0.125em;
+  background-color: var(--ui-color-text-highlighted);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-image: var(--shiki-icon-url);
+  mask-image: var(--shiki-icon-url);
 }

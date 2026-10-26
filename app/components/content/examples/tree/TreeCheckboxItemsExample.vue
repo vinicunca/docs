@@ -1,0 +1,59 @@
+<script setup lang="ts">
+import type { TreeItemSelectEvent } from 'akar';
+import type { TreeItem } from 'pohon-ui';
+
+const items: Array<TreeItem> = [
+  {
+    label: 'app/',
+    defaultExpanded: true,
+    children: [
+      {
+        label: 'composables/',
+        children: [
+          { label: 'useAuth.ts' },
+          { label: 'useUser.ts' },
+        ],
+      },
+      {
+        label: 'components/',
+        defaultExpanded: true,
+        children: [
+          { label: 'Card.vue' },
+          { label: 'Button.vue' },
+        ],
+      },
+    ],
+  },
+  { label: 'app.vue' },
+  { label: 'nuxt.config.ts' },
+];
+
+const value = ref<(typeof items)>([]);
+
+function onSelect(e: TreeItemSelectEvent<TreeItem>) {
+  if (e.detail.originalEvent.type === 'click') {
+    e.preventDefault();
+  }
+}
+</script>
+
+<template>
+  <PTree
+    v-model="value"
+    :as="{ link: 'div' }"
+    :items="items"
+    multiple
+    propagate-select
+    bubble-select
+    @select="onSelect"
+  >
+    <template #item-leading="{ selected, indeterminate, handleSelect }">
+      <PCheckbox
+        :model-value="indeterminate ? 'indeterminate' : selected"
+        tabindex="-1"
+        @change="handleSelect"
+        @click.stop
+      />
+    </template>
+  </PTree>
+</template>

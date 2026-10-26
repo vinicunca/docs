@@ -1,184 +1,224 @@
-<script lang="ts" setup>
-import type { Ref } from '#imports';
+<!-- eslint-disable no-nested-ternary -->
+<script setup lang="ts">
 import type { ContentNavigationItem } from '@nuxt/content';
-import { createError, useAsyncData, useRoute, useSeoMeta } from '#app';
-import { computed, definePageMeta, inject, queryCollection, useNavigation } from '#imports';
 import { toKebabCase } from '@vinicunca/perkakas';
-import { pickLinkProps } from 'pohon-ui/utils/link';
+
+const route = useRoute();
+const { framework } = useFrameworks();
 
 definePageMeta({
   layout: 'docs',
 });
 
-const route = useRoute();
-
-const { data: page } = await useAsyncData(
-  toKebabCase(route.path),
-  () => queryCollection('docs')
-    .path(route.path)
-    .first(),
-);
-
+const { data: page } = await useAsyncData(toKebabCase(route.path), () => queryCollection('docs').path(route.path).first());
 if (!page.value) {
-  throw createError({
-    statusCode: 404,
-    statusMessage: 'Page not found',
-    fatal: true,
+  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true });
+}
+
+// A page that is only a link in the sidebar, like Figma. The route rule sends
+// full requests along, this catches client side navigations to it.
+const externalTo = (page.value as { to?: string }).to;
+if (externalTo) {
+  await navigateTo(externalTo, { external: true, replace: true });
+}
+
+// Update the framework if the page has different one
+watch(page, () => {
+  if (page.value?.framework && page.value?.framework !== framework.value) {
+    framework.value = page.value?.framework as string;
+  }
+}, { immediate: true });
+
+const navigation = inject<Ref<Array<ContentNavigationItem>>>('navigation');
+
+const { findSurround, findBreadcrumb } = useNavigation(navigation!);
+
+const breadcrumb = computed(() => findBreadcrumb(page.value?.path as string));
+
+// The surround links are framework-specific. Prerendered pages bake in the page's
+// framework (or the `nuxt` default), but `useFrameworks` reads the real cookie on the
+// client, so keep using the prerendered value through hydration to avoid a mismatch,
+// then switch to the actual framework once mounted.
+const hydrated = ref(false);
+onMounted(() => {
+  hydrated.value = true;
+});
+
+const surround = computed(() => findSurround(
+  page.value?.path as string,
+  hydrated.value
+    ? framework.value
+    : ((page.value?.framework as string) || 'nuxt'),
+));
+
+if (!import.meta.prerender) {
+  // Redirect to the correct framework version if the page is not the current framework
+  watch(framework, () => {
+    const route = useRoute();
+
+    if (page.value?.path === route.path && page.value?.framework && page.value?.framework !== framework.value) {
+      if (route.path.endsWith(`/${page.value?.framework}`)) {
+        navigateTo(`${route.path.split('/').slice(0, -1).join('/')}/${framework.value}`);
+      } else {
+        navigateTo('/pohon/getting-started');
+      }
+    }
   });
 }
 
-const navigation = inject<Ref<Array<ContentNavigationItem>>>('navigation');
-const { githubLink, findBreadcrumb, findSurround } = useNavigation(navigation!);
+const docsPackage = findDocsPackage(route.path);
+const packageTitle = docsPackage?.title || 'Vinicunca';
+const isVueLibrary = docsPackage?.id === 'pohon' || docsPackage?.id === 'akar';
 
-const breadcrumbs = computed(() => findBreadcrumb(page.value?.path as string));
-const surround = computed(() => findSurround(page.value?.path as string));
-
-const title = page.value?.seo?.title ?? page.value?.title;
-const description = page.value?.seo?.description ?? page.value?.description;
-
-const communityLinks = computed(() => {
-  return [
-    {
-      icon: 'i-lucide:file-pen',
-      label: 'Edit this page',
-      to: `https://github.com/vinicunca/docs/edit/main/content/${page.value?.stem}.md`,
-      target: '_blank',
-    },
-    {
-      icon: 'i-lucide:star',
-      label: 'Star on GitHub',
-      to: githubLink,
-      target: '_blank',
-    },
-  ];
-});
+const title = page.value?.seo?.title
+  ? page.value.seo.title
+  : page.value?.navigation?.title ? page.value.navigation.title : page.value?.title;
+const prefix = isVueLibrary && (page.value?.path.includes('components/') || page.value?.path.includes('composables/'))
+  ? 'Vue '
+  : '';
+const suffix = !prefix
+  ? ''
+  : page.value?.path.includes('components/')
+    ? 'Component '
+    : 'Composable ';
+// A `Vue X Component` title already says Vue, so only tag the framework on pages without that prefix
+const frameworkSuffix = !prefix && page.value?.framework === 'vue'
+  ? ' for Vue'
+  : '';
+const description = page.value?.seo?.description ? page.value.seo.description : page.value?.description;
 
 useSeoMeta({
-  titleTemplate: '%s - Vinicunca',
+  titleTemplate: `${prefix}%s ${suffix}- ${packageTitle}${frameworkSuffix}`,
   title,
-  ogTitle: `${title}`,
+  ogTitle: `${prefix}${title} ${suffix}- ${packageTitle}${frameworkSuffix}`,
   description,
   ogDescription: description,
 });
+
+const path = computed(() => route.path.replace(/\/$/, ''));
+
+useCanonical(computed(() => `/raw${path.value}.md`));
+
+if (import.meta.server) {
+  if (route.path.startsWith('/pohon/components/')) {
+    defineOgImage('Component.takumi', {
+      title: page.value.title,
+      description: page.value.description,
+      slug: (route.params.slug as Array<string>).pop() as string,
+    });
+  } else {
+    defineOgImage('Docs.takumi', {
+      title: page.value.title,
+      description: page.value.description,
+      headline: breadcrumb.value?.[breadcrumb.value.length - 1]?.label || packageTitle,
+      framework: page.value?.framework,
+    });
+  }
+
+  useSchemaOrg([
+    defineArticle({
+      '@type': 'TechArticle',
+      'headline': `${prefix}${title} ${suffix}`.trim(),
+      'description': description,
+    }),
+    defineBreadcrumb({
+      itemListElement: breadcrumb.value?.map((item) => ({
+        name: item.label,
+        item: item.to
+          ? String(item.to)
+          : undefined,
+      })) || [],
+    }),
+  ]);
+}
+
+const studioIcons = useStudioIcons();
+
+const links = computed(() => [
+  {
+    icon: studioIcons.pencil,
+    label: 'Edit this page',
+    to: `https://github.com/vinicunca/docs/edit/main/content/${page?.value?.stem}.${page?.value?.extension || 'md'}`,
+    target: '_blank',
+  },
+]);
 </script>
 
 <template>
-  <div
+  <PPage
     v-if="page"
-    class="flex flex-col lg:(gap-10 grid grid-cols-10)"
   >
-    <div class="lg:col-span-8">
-      <!-- Page header -->
-      <div class="py-8 border-b border-border relative">
-        <!-- Headline -->
-        <div class="text-sm color-primary font-semibold mb-2.5 flex gap-1.5 items-center">
-          <PBreadcrumb :items="breadcrumbs" />
-        </div>
-
-        <div>
-          <!-- Wrapper -->
-          <div class="flex flex-col gap-4 lg:(flex-row items-center justify-between)">
-            <h1 class="text-3xl color-text-highlighted font-bold text-pretty sm:text-4xl">
-              {{ title }}
-            </h1>
-
-            <div class="flex flex-wrap gap-1.5 items-center">
-              <PButton
-                v-for="link in page.links"
-                :key="link.label"
-                color="neutral"
-                variant="outline"
-                :target="link.to?.startsWith('http') ? '_blank' : undefined"
-                v-bind="link"
-              />
-
-              <CorePageLinks />
-            </div>
-          </div>
-
-          <div class="text-lg color-text-muted mt-4 text-pretty">
-            <MDC
-              v-if="page.description"
-              :value="page.description"
-              unwrap="p"
-              :cache-key="`${toKebabCase(route.path)}-description`"
-            />
-          </div>
-        </div>
-      </div>
-
-      <!-- Page Content -->
-      <div class="mt-8 pb-24 space-y-12">
-        <ContentRenderer
-          v-if="page.body"
-          :value="page"
-        />
-
-        <PSeparator v-if="surround?.filter(Boolean).length" />
-
-        <PContentSurround :surround="(surround as any)" />
-      </div>
-    </div>
-
-    <!-- Page aside right -->
-    <PContentToc
-      v-if="page?.body?.toc?.links?.length"
-      :links="page.body.toc.links"
-      class="order-first z-2 lg:col-span-2 lg:order-last"
-    >
-      <template #bottom>
-        <PSeparator
-          v-if="page.body?.toc?.links?.length"
-          type="dashed"
-        />
-
-        <nav class="flex flex-col gap-3">
-          <p class="text-sm font-semibold flex gap-1.5 items-center">
-            Community
-          </p>
-
-          <ul class="flex flex-col gap-2">
-            <li
-              v-for="(link, index) in communityLinks"
-              :key="index"
-              class="relative"
-            >
-              <PLink
-                v-slot="slotProps"
-                v-bind="pickLinkProps(link)"
-                custom
-              >
-                <PLinkBase
-                  v-bind="slotProps"
-                  class="group text-sm color-text-muted flex gap-1.5 transition-colors items-center hover:color-text focus-visible:outline-primary"
-                >
-                  <PIcon
-                    v-if="link.icon"
-                    :name="link.icon"
-                    class="shrink-0 size-5"
-                  />
-
-                  <span
-                    v-if="link.label"
-                    class="truncate"
-                  >
-
-                    {{ link.label }}
-
-                    <PIcon
-                      v-if="link.target === '_blank'"
-                      name="i-lucide:arrow-up-right"
-                      class="color-text-dimmed size-3 top-0 absolute"
-                    />
-                  </span>
-                </PLinkBase>
-              </PLink>
-            </li>
-          </ul>
-        </nav>
-
-        <PSeparator type="dashed" />
+    <PPageHeader :description="page.description">
+      <template #headline>
+        <PBreadcrumb :items="breadcrumb" />
       </template>
-    </PContentToc>
-  </div>
+
+      <template #title>
+        {{ page.title }}
+
+        <PBadge
+          v-if="page.navigation?.badge"
+          :label="page.navigation?.badge"
+          variant="subtle"
+          size="lg"
+          class="align-middle rounded-full"
+        />
+      </template>
+
+      <template #links>
+        <PButton
+          v-for="link in page.links"
+          :key="link.label"
+          color="neutral"
+          variant="outline"
+          :target="link.to?.startsWith('http') ? '_blank' : undefined"
+          v-bind="link"
+        >
+          <template
+            v-if="link.avatar"
+            #leading
+          >
+            <PAvatar
+              v-bind="link.avatar"
+              size="2xs"
+              :alt="`${link.label} avatar`"
+            />
+          </template>
+        </PButton>
+        <PageHeaderLinks />
+      </template>
+    </PPageHeader>
+
+    <PPageBody>
+      <ContentRenderer
+        v-if="page.body"
+        :value="page"
+      />
+
+      <PSeparator v-if="surround?.filter(Boolean).length" />
+
+      <PContentSurround :surround="(surround as any)" />
+    </PPageBody>
+
+    <template
+      v-if="page?.body?.toc?.links?.length"
+      #right
+    >
+      <PContentToc
+        :links="page.body.toc.links"
+        class="z-2"
+        highlight
+        highlight-variant="circuit"
+      >
+        <template #bottom>
+          <PSeparator
+            v-if="page.body?.toc?.links?.length"
+            type="dashed"
+          />
+
+          <PPageLinks :links="links" />
+        </template>
+      </PContentToc>
+    </template>
+  </PPage>
 </template>

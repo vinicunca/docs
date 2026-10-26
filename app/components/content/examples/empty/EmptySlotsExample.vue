@@ -1,0 +1,98 @@
+<script setup lang="ts">
+import type { UserProps } from 'pohon-ui';
+
+const members: Array<UserProps> = [
+  {
+    name: 'Daniel Roe',
+    description: 'danielroe',
+    to: 'https://github.com/danielroe',
+    target: '_blank',
+    avatar: {
+      src: 'https://github.com/danielroe.png',
+      alt: 'danielroe',
+      loading: 'lazy' as const,
+    },
+  },
+  {
+    name: 'Pooya Parsa',
+    description: 'pi0',
+    to: 'https://github.com/pi0',
+    target: '_blank',
+    avatar: {
+      src: 'https://github.com/pi0.png',
+      alt: 'pi0',
+      loading: 'lazy' as const,
+    },
+  },
+  {
+    name: 'Sébastien Chopin',
+    description: 'atinux',
+    to: 'https://github.com/atinux',
+    target: '_blank',
+    avatar: {
+      src: 'https://github.com/atinux.png',
+      alt: 'atinux',
+      loading: 'lazy' as const,
+    },
+  },
+  {
+    name: 'Benjamin Canac',
+    description: 'benjamincanac',
+    to: 'https://github.com/benjamincanac',
+    target: '_blank',
+    avatar: {
+      src: 'https://github.com/benjamincanac.png',
+      alt: 'benjamincanac',
+      loading: 'lazy' as const,
+    },
+  },
+];
+</script>
+
+<template>
+  <PEmpty
+    title="No team members"
+    description="Invite your team to collaborate on this project."
+    variant="naked"
+    :actions="[{
+      label: 'Invite members',
+      icon: 'i-lucide-user-plus',
+      color: 'neutral',
+    }]"
+  >
+    <template #leading>
+      <PAvatarGroup size="xl">
+        <PAvatar
+          src="https://github.com/nuxt.png"
+          alt="Nuxt"
+          loading="lazy"
+        />
+        <PAvatar
+          src="https://github.com/unjs.png"
+          alt="Unjs"
+          loading="lazy"
+        />
+      </PAvatarGroup>
+    </template>
+
+    <template #footer>
+      <PSeparator class="my-4" />
+
+      <div class="gap-4 grid grid-cols-2">
+        <PPageCard
+          v-for="(member, index) in members"
+          :key="index"
+          :to="member.to"
+          :ui="{ container: 'sm:p-4' }"
+        >
+          <PUser
+            :avatar="member.avatar"
+            :name="member.name"
+            :description="member.description"
+            :ui="{ name: 'truncate' }"
+          />
+        </PPageCard>
+      </div>
+    </template>
+  </PEmpty>
+</template>

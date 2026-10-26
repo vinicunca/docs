@@ -1,120 +1,97 @@
-<script lang="ts" setup>
-import { PApp } from '#components';
-import { provide, queryCollectionNavigation, queryCollectionSearchSections, useAppConfig, useAsyncData, useHead, useLazyAsyncData, useNavigation, useRoute, useSeoMeta } from '#imports';
+<script setup lang="ts">
+import type { ContentNavigationItem } from '@nuxt/content';
 
-const appConfig = useAppConfig();
 const route = useRoute();
 
+const appConfig = useAppConfig();
+const { style, link, color } = useTheme();
+
+const colorMode = useColorMode();
+
+// Bare `d`, site-wide since the color mode button sits in the header on every
+// page. defineShortcuts disables single-key bindings while an input or a
+// contenteditable is focused, so it never eats a typed 'd'.
+// Not in the example iframes: those pin their mode from ?theme= to match
+// the page embedding them.
+defineShortcuts({
+  d: () => {
+    if (route.path.startsWith('/examples')) {
+      return;
+    }
+    colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark';
+  },
+});
+
+const { data: navigation } = await useFetch<Array<ContentNavigationItem>>('/api/navigation.json');
+
 useHead({
-  link: [
-    {
-      href: '/favicons/favicon.ico',
-      rel: 'icon',
-      sizes: '48x48',
-    },
-
-    {
-      href: '/favicons/apple-touch-icon.png',
-      rel: 'apple-touch-icon',
-      sizes: '180x180',
-    },
-
-    {
-      href: '/favicons/site.webmanifest',
-      rel: 'manifest',
-    },
-
-    {
-      href: '/favicons/favicon-32x32.png',
-      rel: 'icon',
-      sizes: '32x32',
-      type: 'image/png',
-    },
-
-    {
-      href: '/favicons/favicon-16x16.png',
-      rel: 'icon',
-      sizes: '16x16',
-      type: 'image/png',
-    },
-
-    {
-      href: '/favicons/favicon.ico',
-      rel: 'icon',
-      sizes: '48x48',
-    },
-  ],
   meta: [
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-    { key: 'theme-color', name: 'theme-color', content: '#fff' },
+    { key: 'theme-color', name: 'theme-color', content: color },
   ],
+  link,
+  style,
 });
 
-useSeoMeta({
-  author: 'praburangki',
-  title: 'Vinicunca',
-  ogTitle: 'Vinicunca',
-  description: 'A curated collection of essential utilities, robust configurations, and design presets for modern web development.',
-  ogDescription: 'A curated collection of essential utilities, robust configurations, and design presets for modern web development.',
-  twitterCard: 'summary_large_image',
-  twitterCreator: '@praburangki',
-});
+if (import.meta.server) {
+  useSeoMeta({
+    ogSiteName: 'Vinicunca',
+    ogType: 'website',
+    twitterCard: 'summary_large_image',
+  });
 
-const { data: navigation } = useAsyncData(
-  'navigation',
-  () => queryCollectionNavigation(
-    'docs',
-    ['package', 'category', 'description'],
-  ),
-);
+  useSchemaOrg([
+    defineWebSite({
+      name: useSiteConfig().name,
+    }),
+  ]);
+}
 
-const { data: files } = useLazyAsyncData(
-  'search',
-  () => queryCollectionSearchSections('docs', {
-    ignoredTags: ['style'],
-  }),
-  {
-    server: false,
-  },
-);
+useFaviconFromTheme();
 
-useAsyncData(
-  'perkakas-methods',
-  () => $fetch('/api/perkakas.json'),
-);
-
-const { rootNavigation } = useNavigation(navigation);
+const { rootNavigation, navigationByFramework } = useNavigation(navigation);
 
 provide('navigation', rootNavigation);
+
+const showLayout = computed(() => !route.path.startsWith('/examples') && !route.path.startsWith('/theme'));
+const hasSections = computed(() => !!findDocsPackage(route.path));
 </script>
 
 <template>
-  <PApp
-    :toaster="appConfig.toaster"
-    :tooltip="{
-      delayDuration: 300,
-    }"
-  >
+  <PApp :toaster="appConfig.toaster">
     <NuxtLoadingIndicator
-      color="var(--akar-primary)"
+      color="var(--ui-color-primary)"
       :height="2"
     />
 
-    <div>
-      <HeaderBase v-if="!route.path.startsWith('/examples')" />
+    <div :class="[hasSections && 'root']">
+      <template v-if="showLayout">
+        <Header />
+      </template>
 
       <NuxtLayout>
         <NuxtPage />
       </NuxtLayout>
 
-      <FooterBase />
-
-      <ClientOnly>
-        <HeaderSearch
-          :files="files"
-          :navigation="navigation"
-        />
-      </ClientOnly>
+      <template v-if="showLayout">
+        <Footer />
+      </template>
     </div>
+
+    <template v-if="!route.path.startsWith('/examples')">
+      <ClientOnly>
+        <Search :navigation="navigationByFramework" />
+      </ClientOnly>
+    </template>
   </PApp>
 </template>
+
+<style>
+/* Safelist (do not remove): [&>div]:*:my-0 [&>div]:*:w-full h-64 !px-0 !py-0 !pt-0 !pb-0 !p-0 !justify-start !justify-end !min-h-96 h-136 max-h-[341px] */
+
+@media (min-width: 1024px) {
+  .root {
+    --ui-header-height: 112px;
+  }
+}
+</style>

@@ -1,0 +1,52 @@
+<script setup lang="ts">
+import type { EditorMentionMenuItem } from 'pohon-ui';
+
+const value = ref(`# Mention Menu
+
+Type @ to mention someone and select from the list of available users.`);
+
+const items: Array<EditorMentionMenuItem> = [{
+  label: 'benjamincanac',
+  avatar: {
+    src: 'https://avatars.githubusercontent.com/u/739984?v=4',
+    loading: 'lazy' as const,
+  },
+}, {
+  label: 'atinux',
+  avatar: {
+    src: 'https://avatars.githubusercontent.com/u/904724?v=4',
+    loading: 'lazy' as const,
+  },
+}, {
+  label: 'danielroe',
+  avatar: {
+    src: 'https://avatars.githubusercontent.com/u/28706372?v=4',
+    loading: 'lazy' as const,
+  },
+}, {
+  label: 'pi0',
+  avatar: {
+    src: 'https://avatars.githubusercontent.com/u/5158436?v=4',
+    loading: 'lazy' as const,
+  },
+}];
+
+// SSR-safe function to append menus to body (avoids z-index issues in docs)
+const appendToBody = import.meta.client ? () => document.body : undefined;
+</script>
+
+<template>
+  <PEditor
+    v-slot="{ editor }"
+    v-model="value"
+    content-type="markdown"
+    placeholder="Type @ to mention someone..."
+    class="min-h-21 w-full"
+  >
+    <PEditorMentionMenu
+      :editor="editor"
+      :items="items"
+      :append-to="appendToBody"
+    />
+  </PEditor>
+</template>

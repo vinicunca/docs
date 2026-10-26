@@ -1,0 +1,47 @@
+<script setup lang="ts">
+import type { ChipProps, InputMenuItem } from 'pohon-ui';
+
+const items = ref([
+  {
+    label: 'bug',
+    value: 'bug',
+    chip: {
+      color: 'error',
+    },
+  },
+  {
+    label: 'feature',
+    value: 'feature',
+    chip: {
+      color: 'success',
+    },
+  },
+  {
+    label: 'enhancement',
+    value: 'enhancement',
+    chip: {
+      color: 'info',
+    },
+  },
+] satisfies Array<InputMenuItem>);
+
+const value = ref(items.value[0]);
+</script>
+
+<template>
+  <PInputMenu
+    v-model="value"
+    :items="items"
+  >
+    <template #leading="{ modelValue, ui }">
+      <PChip
+        v-if="modelValue"
+        v-bind="modelValue.chip"
+        inset
+        standalone
+        :size="(ui.itemLeadingChipSize() as ChipProps['size'])"
+        :class="ui.itemLeadingChip()"
+      />
+    </template>
+  </PInputMenu>
+</template>

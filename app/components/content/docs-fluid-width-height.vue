@@ -1,8 +1,12 @@
+<script setup lang="ts">
+import DocsFluidContainer from './unocss-preset/DocsFluidContainer.vue';
+</script>
+
 <template>
   <DocsFluidContainer
     v-slot="{ elValue }"
     style-property="width"
-    content-class="fluid-w-100-200 fluid-h-100-200"
+    content-class="fluid-w-100/200 fluid-h-100/200"
   >
     <div class="flex h-full items-center justify-center">
       {{ elValue }}

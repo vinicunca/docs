@@ -1,7 +1,11 @@
+<script setup lang="ts">
+import DocsFluidContainer from './unocss-preset/DocsFluidContainer.vue';
+</script>
+
 <template>
   <DocsFluidContainer
     style-property="margin"
-    content-class="fluid-m-20-40 fluid-text-16-25"
+    content-class="fluid-m-20/40 fluid-text-16/25"
   >
     Margin example from 20px to 40px.
   </DocsFluidContainer>

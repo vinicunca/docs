@@ -1,0 +1,78 @@
+/*
+ * The `--ui-color-<alias>-*` shades and the `--ui-color-<alias>` per mode come from
+ * app/plugins/colors.ts, which follows the palettes picked in the theme menu and studio.
+ */
+@layer theme {
+  :root {
+    --ui-header-height: 4rem;
+    --ui-radius: 0.25rem;
+    --ui-container: 90rem;
+
+    --font-sans: 'Public Sans', sans-serif;
+    /* Keep headings on the body stack until the studio selects a serif font. */
+    --font-serif: var(--font-sans);
+
+    --ui-color-primary-foreground: #fff;
+    --ui-color-secondary-foreground: #fff;
+    --ui-color-success-foreground: #fff;
+    --ui-color-info-foreground: #fff;
+    --ui-color-warning-foreground: #fff;
+    --ui-color-error-foreground: #fff;
+  }
+
+  :root,
+  :host,
+  .light {
+    --ui-color-text: var(--ui-color-neutral-700);
+    --ui-color-text-dimmed: var(--ui-color-neutral-400);
+    --ui-color-text-muted: var(--ui-color-neutral-500);
+    --ui-color-text-toned: var(--ui-color-neutral-600);
+    --ui-color-text-highlighted: var(--ui-color-neutral-900);
+    --ui-color-text-inverted: #fff;
+
+    --ui-color-bg: #fff;
+    --ui-color-bg-muted: var(--ui-color-neutral-50);
+    --ui-color-bg-elevated: var(--ui-color-neutral-100);
+    --ui-color-bg-accented: var(--ui-color-neutral-200);
+    --ui-color-bg-inverted: var(--ui-color-neutral-900);
+
+    --ui-color-border: var(--ui-color-neutral-200);
+    --ui-color-border-muted: var(--ui-color-neutral-200);
+    --ui-color-border-accented: var(--ui-color-neutral-300);
+    --ui-color-border-inverted: var(--ui-color-neutral-900);
+
+    --ui-chart-1: var(--ui-color-primary);
+    --ui-chart-2: var(--color-blue-500);
+    --ui-chart-3: var(--color-violet-500);
+    --ui-chart-4: var(--color-amber-500);
+    --ui-chart-5: var(--color-rose-500);
+    --ui-chart-6: var(--color-cyan-500);
+  }
+
+  .dark {
+    --ui-color-text: var(--ui-color-neutral-200);
+    --ui-color-text-dimmed: var(--ui-color-neutral-500);
+    --ui-color-text-muted: var(--ui-color-neutral-400);
+    --ui-color-text-toned: var(--ui-color-neutral-300);
+    --ui-color-text-highlighted: #fff;
+    --ui-color-text-inverted: var(--ui-color-neutral-900);
+
+    --ui-color-bg: var(--ui-color-neutral-900);
+    --ui-color-bg-muted: var(--ui-color-neutral-800);
+    --ui-color-bg-elevated: var(--ui-color-neutral-800);
+    --ui-color-bg-accented: var(--ui-color-neutral-700);
+    --ui-color-bg-inverted: #fff;
+
+    --ui-color-border: var(--ui-color-neutral-800);
+    --ui-color-border-muted: var(--ui-color-neutral-700);
+    --ui-color-border-accented: var(--ui-color-neutral-700);
+    --ui-color-border-inverted: #fff;
+
+    --ui-chart-1: var(--ui-color-primary);
+    --ui-chart-2: var(--color-blue-400);
+    --ui-chart-3: var(--color-violet-400);
+    --ui-chart-4: var(--color-amber-400);
+    --ui-chart-5: var(--color-rose-400);
+    --ui-chart-6: var(--color-cyan-400);
+  }
+}
