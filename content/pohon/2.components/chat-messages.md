@@ -406,6 +406,52 @@ collapse: true
 ---
 ::
 
+### With sticky prompt :badge{label="Soon" class="align-text-top"}
+
+Use the `#footer` slot to keep a [ChatPrompt](/pohon/components/chat-prompt) stuck to the bottom of the list. Its height is measured, so the last message keeps enough room and the auto scroll button stays above it, even when the prompt grows.
+
+```vue
+<template>
+  <PChatMessages
+    :messages="messages"
+    :status="status"
+  >
+    <template #footer>
+      <PChatPrompt
+        v-model="input"
+        :status="status"
+        @submit="onSubmit"
+      >
+        <PChatPromptSubmit
+          :status="status"
+          @stop="stop()"
+          @reload="regenerate()"
+        />
+      </PChatPrompt>
+    </template>
+  </PChatMessages>
+</template>
+```
+
+::note
+The `#footer` slot replaces the deprecated `spacing-offset` prop for a sticky prompt, which needed its height by hand. Render `PChatMessages` even when there are no messages yet, so the prompt in its footer stays visible.
+::
+
+::tip
+When the prompt sits outside the scroll container, like in the footer of a [DashboardPanel](/pohon/components/dashboard-panel) or a [Sidebar](/pohon/components/sidebar), make the auto scroll button stick to the bottom of the scroll container with `:ui="{ viewport: 'sticky top-auto bottom-4 h-0' }"`.
+::
+
+### With agent steps :badge{label="Soon" class="align-text-top"}
+
+Use the `#part` slot to render each step of an agent: [ChatReasoning](/pohon/components/chat-reasoning) for reasoning, [ChatTool](/pohon/components/chat-tool) for tool calls and sources, and markdown for the reply. Set the `error` prop on a failed tool call, and render its output with the prose components.
+
+::component-example
+---
+name: 'chat-messages-agent-steps-example'
+collapse: true
+---
+::
+
 ## API
 
 ### Props
@@ -417,24 +463,17 @@ collapse: true
 :component-slots
 
 ::tip
-You can use all the slots of the [`ChatMessage`](/pohon/components/chat-message#slots) component inside ChatMessages, they are automatically forwarded so you can customize individual messages when using the `messages` prop.
+You can use all the slots of the [`ChatMessage`](/pohon/components/chat-message#slots) component inside ChatMessages, they are automatically forwarded so you can customize individual messages when using the `messages` prop. Each slot also receives the `message` and a `streaming` boolean, `true` only for the last message while the chat is submitted or streaming.
 
-```vue{7-15}
+```vue{7-9}
 <script setup lang="ts">
-import { isTextUIPart } from 'ai'
+import { isReasoningUIPart } from 'ai'
 </script>
 
 <template>
   <PChatMessages :messages="messages" :status="status">
-    <template #content="{ message }">
-      <template
-        v-for="(part, index) in message.parts"
-        :key="`${message.id}-${part.type}-${index}`"
-      >
-        <p v-if="isTextUIPart(part)" class="whitespace-pre-wrap">
-          {{ part.text }}
-        </p>
-      </template>
+    <template #part="{ part }">
+      <PChatReasoning v-if="isReasoningUIPart(part)" :text="part.text" />
     </template>
   </PChatMessages>
 </template>
@@ -448,6 +487,9 @@ When accessing the component via a template ref, you can use the following:
 | Name | Type |
 | ---- | ---- |
 | `registerMessageRef(id: string, element: ComponentPublicInstance \| null)`{lang="ts-type"} | `void`{lang="ts-type"} |
+| `scrollToBottom(smooth?: boolean)`{lang="ts-type"} | `void`{lang="ts-type"} |
+| `scrollToMessage(id: string, smooth?: boolean)`{lang="ts-type"} | `void`{lang="ts-type"} |
+| `isAtBottom`{lang="ts-type"} | `Readonly<Ref<boolean>>`{lang="ts-type"} |
 
 ## Theme
 

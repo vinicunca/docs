@@ -222,7 +222,7 @@ const ui = {
     <div class="m-4 rounded-lg bg-background/75 flex flex-1 min-w-0 ring ring-border shadow-sm overflow-hidden lg:ms-0">
       <PDashboardPanel
         class="min-h-0 relative"
-        :ui="{ body: 'p-0 sm:p-0 overscroll-none' }"
+        :ui="{ body: 'p-0 sm:p-0 overscroll-none scroll-pt-(--ui-header-height)' }"
       >
         <template #header>
           <!-- Transparent and absolute, so the messages scroll under a blur.
@@ -274,82 +274,73 @@ const ui = {
                 :messages="messages"
                 :status="status"
                 should-auto-scroll
-                :spacing-offset="200"
-                class="pb-4 pt-(--ui-header-height) sm:pb-6"
+                :user="{ ui: { text: 'leading-6' } }"
+                class="pt-(--ui-header-height)"
+                :ui="{ footer: 'pt-4 sm:pt-6' }"
               >
-                <template #content="{ message }">
-                  <template
-                    v-for="(part, index) in message.parts"
-                    :key="`${message.id}-${part.type}-${index}`"
+                <template #part="{ part, message, streaming }">
+                  <Markdown
+                    v-if="isTextUIPart(part) && message.role === 'assistant'"
+                    :value="part.text"
+                    :streaming="isPartStreaming(part, streaming)"
+                    :plugins="plugins"
+                    class="*:first:mt-0 *:last:mb-0"
+                  />
+                </template>
+
+                <template #footer>
+                  <PChatPrompt
+                    v-model="input"
+                    :status="status"
+                    :error="error"
+                    color="neutral"
+                    variant="subtle"
+                    placeholder="Ask anything about Pohon UI..."
+                    class="rounded-b-none"
+                    :ui="{ base: 'px-1.5' }"
+                    @submit="onSubmit"
                   >
-                    <template v-if="isTextUIPart(part)">
-                      <Markdown
-                        v-if="message.role === 'assistant'"
-                        :value="part.text"
-                        :streaming="isPartStreaming(part)"
-                        :plugins="plugins"
-                        class="*:first:mt-0 *:last:mb-0"
+                    <template #footer>
+                      <div class="flex gap-1 items-center">
+                        <PTooltip
+                          text="Attach file"
+                          :content="{ side: 'top' }"
+                        >
+                          <PButton
+                            :icon="studioIcons.paperclip"
+                            color="neutral"
+                            variant="ghost"
+                            size="sm"
+                            square
+                            aria-label="Attach file"
+                          />
+                        </PTooltip>
+
+                        <PSelectMenu
+                          v-model="model"
+                          :items="models"
+                          :icon="activeModel?.icon"
+                          value-key="value"
+                          color="neutral"
+                          variant="ghost"
+                          size="sm"
+                          class="data-[state=open]:bg-background-elevated"
+                          :ui="{ trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
+                        />
+                      </div>
+
+                      <PChatPromptSubmit
+                        :status="status"
+                        color="neutral"
+                        size="sm"
+                        @stop="stop()"
+                        @reload="regenerate()"
                       />
-                      <p
-                        v-else
-                        class="leading-6 whitespace-pre-wrap"
-                      >
-                        {{ part.text }}
-                      </p>
                     </template>
-                  </template>
+                  </PChatPrompt>
                 </template>
               </PChatMessages>
             </PTheme>
-
-            <PChatPrompt
-              v-model="input"
-              :error="error"
-              color="neutral"
-              variant="subtle"
-              placeholder="Ask anything about Pohon UI..."
-              class="rounded-b-none bottom-0 sticky z-10"
-              :ui="{ base: 'px-1.5' }"
-              @submit="onSubmit"
-            >
-              <template #footer>
-                <div class="flex gap-1 items-center">
-                  <PTooltip
-                    text="Attach file"
-                    :content="{ side: 'top' }"
-                  >
-                    <PButton
-                      :icon="studioIcons.paperclip"
-                      color="neutral"
-                      variant="ghost"
-                      size="sm"
-                      square
-                      aria-label="Attach file"
-                    />
-                  </PTooltip>
-
-                  <PSelectMenu
-                    v-model="model"
-                    :items="models"
-                    :icon="activeModel?.icon"
-                    value-key="value"
-                    color="neutral"
-                    variant="ghost"
-                    size="sm"
-                    class="data-[state=open]:bg-background-elevated"
-                    :ui="{ trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200' }"
-                  />
-                </div>
-
-                <PChatPromptSubmit
-                  :status="status"
-                  color="neutral"
-                  size="sm"
-                  @stop="stop()"
-                  @reload="regenerate()"
-                />
-              </template>
-            </PChatPrompt>
           </PContainer>
         </template>
       </PDashboardPanel>

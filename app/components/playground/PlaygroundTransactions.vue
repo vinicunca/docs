@@ -32,20 +32,13 @@ function format(amount: number) {
         :key="transaction.name"
         class="px-4 py-2.5 flex gap-3 items-center"
       >
-        <div class="color-text-muted rounded-full bg-background-elevated flex shrink-0 size-8 items-center justify-center">
-          <PIcon
-            :name="transaction.icon"
-            class="size-4"
-          />
-        </div>
-        <div class="flex-1 min-w-0">
-          <p class="text-sm color-text-highlighted font-medium truncate">
-            {{ transaction.name }}
-          </p>
-          <p class="text-xs color-text-muted truncate">
-            {{ transaction.category }}
-          </p>
-        </div>
+        <PUser
+          :name="transaction.name"
+          :description="transaction.category"
+          :avatar="{ icon: transaction.icon }"
+          :ui="{ wrapper: 'min-w-0 flex-1', name: 'truncate', description: 'truncate' }"
+          class="flex-1 gap-3 min-w-0"
+        />
         <span
           class="text-sm font-medium"
           :class="transaction.amount < 0 ? 'color-text-highlighted' : 'color-success'"

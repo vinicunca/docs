@@ -19,6 +19,7 @@ Check out the [`Nuxt`](https://github.com/vinicunca/pohon/tree/main/playgrounds/
 
 | Component | Description |
 | --- | --- |
+| [ChatAttachment](/pohon/components/chat-attachment) | File attached to a prompt or a message, with upload states. |
 | [ChatMessages](/pohon/components/chat-messages) | Scrollable message list with auto-scroll and loading indicator. |
 | [ChatMessage](/pohon/components/chat-message) | Individual message bubble with avatar, actions, and slots. |
 | [ChatPrompt](/pohon/components/chat-prompt) | Enhanced textarea for submitting prompts. |
@@ -129,6 +130,7 @@ Create a server API endpoint to handle chat requests using [`streamText`](https:
 ```ts [server/api/chat.post.ts]
 import { gateway } from '@ai-sdk/gateway';
 import { convertToModelMessages, createUIMessageStreamResponse, streamText, toUIMessageStream } from 'ai';
+import { defineEventHandler, readBody } from 'nuxt/server';
 
 export default defineEventHandler(async (event) => {
   const { messages } = await readBody(event);
@@ -145,218 +147,7 @@ export default defineEventHandler(async (event) => {
 });
 ```
 
-### Reasoning
-
-To enable [reasoning](https://ai-sdk.dev/docs/ai-sdk-ui/chatbot#reasoning), configure `providerOptions` for your provider ([Anthropic](https://ai-sdk.dev/providers/ai-sdk-providers/anthropic#reasoning), [Google](https://ai-sdk.dev/providers/ai-sdk-providers/google#thinking), [OpenAI](https://ai-sdk.dev/providers/ai-sdk-providers/openai#reasoning)):
-
-```ts [server/api/chat.post.ts]
-import { gateway } from '@ai-sdk/gateway';
-import { convertToModelMessages, createUIMessageStreamResponse, streamText, toUIMessageStream } from 'ai';
-
-export default defineEventHandler(async (event) => {
-  const { messages } = await readBody(event);
-
-  const result = streamText({
-    model: gateway('anthropic/claude-sonnet-5'),
-    maxOutputTokens: 10000,
-    instructions: 'You are a helpful assistant.',
-    messages: await convertToModelMessages(messages),
-    providerOptions: {
-      anthropic: {
-        thinking: {
-          type: 'adaptive'
-        },
-        effort: 'low'
-      },
-      google: {
-        thinkingConfig: {
-          includeThoughts: true,
-          thinkingLevel: 'low'
-        }
-      },
-      openai: {
-        reasoningEffort: 'low',
-        reasoningSummary: 'detailed'
-      }
-    }
-  });
-
-  const stream = toUIMessageStream({ stream: result.stream });
-  return createUIMessageStreamResponse({ stream });
-});
-```
-
-### Web Search
-
-Some providers offer built-in web search tools: [Anthropic](https://ai-sdk.dev/providers/ai-sdk-providers/anthropic#web-search-tool), [Google](https://ai-sdk.dev/providers/ai-sdk-providers/google#google-search), [OpenAI](https://ai-sdk.dev/providers/ai-sdk-providers/openai#web-search-tool).
-
-::code-group
-
-```ts [Anthropic]
-import { anthropic } from '@ai-sdk/anthropic';
-import { gateway } from '@ai-sdk/gateway';
-import { convertToModelMessages, createUIMessageStreamResponse, streamText, toUIMessageStream } from 'ai';
-
-export default defineEventHandler(async (event) => {
-  const { messages } = await readBody(event);
-
-  const result = streamText({
-    model: gateway('anthropic/claude-sonnet-5'),
-    instructions: 'You are a helpful assistant.',
-    messages: await convertToModelMessages(messages),
-    tools: {
-      web_search: anthropic.tools.webSearch_20260209({})
-    }
-  });
-
-  const stream = toUIMessageStream({ stream: result.stream });
-  return createUIMessageStreamResponse({ stream });
-});
-```
-
-```ts [Google]
-import { gateway } from '@ai-sdk/gateway';
-import { google } from '@ai-sdk/google';
-import { convertToModelMessages, createUIMessageStreamResponse, streamText, toUIMessageStream } from 'ai';
-
-export default defineEventHandler(async (event) => {
-  const { messages } = await readBody(event);
-
-  const result = streamText({
-    model: gateway('google/gemini-3-flash'),
-    instructions: 'You are a helpful assistant.',
-    messages: await convertToModelMessages(messages),
-    tools: {
-      google_search: google.tools.googleSearch({})
-    }
-  });
-
-  const stream = toUIMessageStream({ stream: result.stream });
-  return createUIMessageStreamResponse({ stream });
-});
-```
-
-```ts [OpenAI]
-import { gateway } from '@ai-sdk/gateway';
-import { openai } from '@ai-sdk/openai';
-import { convertToModelMessages, createUIMessageStreamResponse, streamText, toUIMessageStream } from 'ai';
-
-export default defineEventHandler(async (event) => {
-  const { messages } = await readBody(event);
-
-  const result = streamText({
-    model: gateway('openai/gpt-5-nano'),
-    instructions: 'You are a helpful assistant.',
-    messages: await convertToModelMessages(messages),
-    tools: {
-      web_search: openai.tools.webSearch({})
-    }
-  });
-
-  const stream = toUIMessageStream({ stream: result.stream });
-  return createUIMessageStreamResponse({ stream });
-});
-```
-
-::
-
-### MCP Client
-
-Empower your chatbot with advanced tool-calling features using the [Model Context Protocol (MCP)](https://ai-sdk.dev/docs/ai-sdk-core/mcp-tools) from `@ai-sdk/mcp`. MCP enables your AI to perform dynamic actions, such as searching your documentation or executing custom tasks, to provide more relevant and accurate responses.
-
-To get started, install the MCP package:
-
-:::code-group
-
-```bash [npm]
-npm install @ai-sdk/mcp
-```
-
-```bash [pnpm]
-pnpm add @ai-sdk/mcp
-```
-
-```bash [yarn]
-yarn add @ai-sdk/mcp
-```
-
-:::
-
-Then, configure your server endpoint to use MCP tools:
-
-```ts [server/api/chat.post.ts]
-import { gateway } from '@ai-sdk/gateway';
-import { createMCPClient } from '@ai-sdk/mcp';
-import { convertToModelMessages, createUIMessageStreamResponse, isStepCount, streamText, toUIMessageStream } from 'ai';
-
-export default defineEventHandler(async (event) => {
-  const { messages } = await readBody(event);
-
-  const httpClient = await createMCPClient({
-    transport: { type: 'http', url: 'https://your-app.com/mcp' }
-  });
-  try {
-    const tools = await httpClient.tools();
-
-    const result = streamText({
-      model: gateway('anthropic/claude-sonnet-5'),
-      maxOutputTokens: 10000,
-      instructions: 'You are a helpful assistant. Use your tools to search for relevant information before answering questions.',
-      messages: await convertToModelMessages(messages),
-      stopWhen: isStepCount(6),
-      tools,
-      onEnd: async () => {
-        await httpClient.close();
-      },
-      onError: async (error) => {
-        console.error(error);
-        await httpClient.close();
-      }
-    });
-
-    const stream = toUIMessageStream({ stream: result.stream });
-    return createUIMessageStreamResponse({ stream });
-  } catch (error) {
-    // Close the MCP client if setup fails before streaming starts
-    await httpClient.close();
-    throw error;
-  }
-});
-```
-
-### Tool Approval
-
-Require a user confirmation before a tool runs with the [`toolApproval`](https://ai-sdk.dev/docs/agents/tool-approvals) option. The tool part pauses in the `approval-requested` state until the user responds:
-
-```ts [server/api/chat.post.ts]
-import { gateway } from '@ai-sdk/gateway';
-import { convertToModelMessages, createUIMessageStreamResponse, streamText, tool, toUIMessageStream } from 'ai';
-import { z } from 'zod';
-
-export default defineEventHandler(async (event) => {
-  const { messages } = await readBody(event);
-
-  const result = streamText({
-    model: gateway('anthropic/claude-sonnet-5'),
-    maxOutputTokens: 10000,
-    instructions: 'You are a helpful assistant.',
-    messages: await convertToModelMessages(messages),
-    tools: {
-      deleteFile: tool({
-        description: 'Delete a file from the project',
-        inputSchema: z.object({ path: z.string() }),
-        execute: async ({ path }) => ({ deleted: path })
-      })
-    },
-    toolApproval: {
-      deleteFile: 'user-approval'
-    }
-  });
-
-  const stream = toUIMessageStream({ stream: result.stream });
-  return createUIMessageStreamResponse({ stream });
-});
-```
+To stream reasoning, search the web, call tools from an MCP server or ask for a user approval before a tool runs, see the [ChatReasoning](/pohon/components/chat-reasoning#with-reasoning-models) and [ChatTool](/pohon/components/chat-tool#with-web-search) examples.
 
 ## Client Setup
 
@@ -368,15 +159,14 @@ Use the `useChat` composable from `@ai-sdk/vue` to manage chat state and connect
 <script setup lang="ts">
 import { useChat } from '@ai-sdk/vue';
 import shiki from '@comark/nuxt/plugins/shiki';
-import { getToolName, isReasoningUIPart, isTextUIPart, isToolUIPart, lastAssistantMessageIsCompleteWithApprovalResponses } from 'ai';
+import { getToolName, isReasoningUIPart, isTextUIPart, isToolUIPart } from 'ai';
 import { isPartStreaming, isToolStreaming } from 'pohon-ui/utils/ai';
 
 const plugins = [shiki()];
 
 const input = ref('');
 
-const { messages, status, error, sendMessage, regenerate, stop, addToolApprovalResponse } = useChat({
-  sendAutomaticallyWhen: lastAssistantMessageIsCompleteWithApprovalResponses,
+const { messages, status, error, sendMessage, regenerate, stop } = useChat({
   onError(error) {
     console.error(error);
   }
@@ -394,50 +184,34 @@ function onSubmit() {
     :messages="messages"
     :status="status"
   >
-    <template #content="{ message }">
-      <template
-        v-for="(part, index) in message.parts"
-        :key="`${message.id}-${part.type}-${index}`"
+    <template #part="{ part, message, streaming }">
+      <PChatReasoning
+        v-if="isReasoningUIPart(part)"
+        :text="part.text"
+        :streaming="isPartStreaming(part, streaming)"
       >
-        <PChatReasoning
-          v-if="isReasoningUIPart(part)"
-          :text="part.text"
-          :streaming="isPartStreaming(part)"
-        >
-          <Markdown
-            :value="part.text"
-            :streaming="isPartStreaming(part)"
-            :plugins="plugins"
-            class="*:first:mt-0 *:last:mb-0"
-          />
-        </PChatReasoning>
-
-        <PChatTool
-          v-else-if="isToolUIPart(part)"
-          :text="getToolName(part)"
-          :streaming="isToolStreaming(part)"
-          :actions="part.state === 'approval-requested' ? [
-            { label: 'Approve', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: true }) },
-            { label: 'Deny', color: 'neutral', variant: 'ghost', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: false }) },
-          ] : undefined"
+        <Markdown
+          :value="part.text"
+          :streaming="isPartStreaming(part, streaming)"
+          :plugins="plugins"
+          class="*:first:mt-0 *:last:mb-0"
         />
+      </PChatReasoning>
 
-        <template v-else-if="isTextUIPart(part)">
-          <Markdown
-            v-if="message.role === 'assistant'"
-            :value="part.text"
-            :streaming="isPartStreaming(part)"
-            :plugins="plugins"
-            class="*:first:mt-0 *:last:mb-0"
-          />
-          <p
-            v-else-if="message.role === 'user'"
-            class="whitespace-pre-wrap"
-          >
-            {{ part.text }}
-          </p>
-        </template>
-      </template>
+      <PChatTool
+        v-else-if="isToolUIPart(part)"
+        :text="getToolName(part)"
+        :streaming="isToolStreaming(part, streaming)"
+        :error="part.state === 'output-error'"
+      />
+
+      <Markdown
+        v-else-if="isTextUIPart(part) && message.role === 'assistant'"
+        :value="part.text"
+        :streaming="isPartStreaming(part, streaming)"
+        :plugins="plugins"
+        class="*:first:mt-0 *:last:mb-0"
+      />
     </template>
   </PChatMessages>
 
@@ -461,7 +235,7 @@ function onSubmit() {
 import { useChat } from '@ai-sdk/vue';
 import { Markdown } from '@comark/vue';
 import shiki from '@comark/vue/plugins/shiki';
-import { getToolName, isReasoningUIPart, isTextUIPart, isToolUIPart, lastAssistantMessageIsCompleteWithApprovalResponses } from 'ai';
+import { getToolName, isReasoningUIPart, isTextUIPart, isToolUIPart } from 'ai';
 import { isPartStreaming, isToolStreaming } from 'pohon-ui/utils/ai';
 import { ref } from 'vue';
 
@@ -469,8 +243,7 @@ const plugins = [shiki()];
 
 const input = ref('');
 
-const { messages, status, error, sendMessage, regenerate, stop, addToolApprovalResponse } = useChat({
-  sendAutomaticallyWhen: lastAssistantMessageIsCompleteWithApprovalResponses,
+const { messages, status, error, sendMessage, regenerate, stop } = useChat({
   onError(error) {
     console.error(error);
   }
@@ -488,50 +261,34 @@ function onSubmit() {
     :messages="messages"
     :status="status"
   >
-    <template #content="{ message }">
-      <template
-        v-for="(part, index) in message.parts"
-        :key="`${message.id}-${part.type}-${index}`"
+    <template #part="{ part, message, streaming }">
+      <PChatReasoning
+        v-if="isReasoningUIPart(part)"
+        :text="part.text"
+        :streaming="isPartStreaming(part, streaming)"
       >
-        <PChatReasoning
-          v-if="isReasoningUIPart(part)"
-          :text="part.text"
-          :streaming="isPartStreaming(part)"
-        >
-          <Markdown
-            :value="part.text"
-            :streaming="isPartStreaming(part)"
-            :plugins="plugins"
-            class="*:first:mt-0 *:last:mb-0"
-          />
-        </PChatReasoning>
-
-        <PChatTool
-          v-else-if="isToolUIPart(part)"
-          :text="getToolName(part)"
-          :streaming="isToolStreaming(part)"
-          :actions="part.state === 'approval-requested' ? [
-            { label: 'Approve', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: true }) },
-            { label: 'Deny', color: 'neutral', variant: 'ghost', onClick: () => addToolApprovalResponse({ id: part.approval.id, approved: false }) },
-          ] : undefined"
+        <Markdown
+          :value="part.text"
+          :streaming="isPartStreaming(part, streaming)"
+          :plugins="plugins"
+          class="*:first:mt-0 *:last:mb-0"
         />
+      </PChatReasoning>
 
-        <template v-else-if="isTextUIPart(part)">
-          <Markdown
-            v-if="message.role === 'assistant'"
-            :value="part.text"
-            :streaming="isPartStreaming(part)"
-            :plugins="plugins"
-            class="*:first:mt-0 *:last:mb-0"
-          />
-          <p
-            v-else-if="message.role === 'user'"
-            class="whitespace-pre-wrap"
-          >
-            {{ part.text }}
-          </p>
-        </template>
-      </template>
+      <PChatTool
+        v-else-if="isToolUIPart(part)"
+        :text="getToolName(part)"
+        :streaming="isToolStreaming(part, streaming)"
+        :error="part.state === 'output-error'"
+      />
+
+      <Markdown
+        v-else-if="isTextUIPart(part) && message.role === 'assistant'"
+        :value="part.text"
+        :streaming="isPartStreaming(part, streaming)"
+        :plugins="plugins"
+        class="*:first:mt-0 *:last:mb-0"
+      />
     </template>
   </PChatMessages>
 
@@ -549,6 +306,10 @@ function onSubmit() {
 </template>
 ```
 
+::
+
+::note
+The `#part` slot is called once for each part of a message, with the `part`, its `index` and the `message`. A part the slot doesn't render, like the user's text above, falls back to the default output. Use the `#content` slot instead to render the whole message yourself.
 ::
 
 ::tip
@@ -599,3 +360,4 @@ html.dark .shiki span {
 ```
 ::
 
+To let users send messages while a response streams, see the [ChatPrompt](/pohon/components/chat-prompt#with-queued-messages) queue example.

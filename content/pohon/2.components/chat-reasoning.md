@@ -67,7 +67,7 @@ Set the `auto-open` prop to `false` to keep the component closed when streaming 
 ::
 
 ::tip
-Use the `isPartStreaming` utility from `pohon-ui/utils/ai` to determine if a part is currently being streamed.
+Use the `isPartStreaming` utility from `pohon-ui/utils/ai` to determine if a part is currently being streamed. Pass it the `streaming` slot prop of [ChatMessages](/pohon/components/chat-messages#slots) so it stops when the chat is stopped.
 ::
 
 ### Shimmer
@@ -167,6 +167,48 @@ You can customize this icon globally in your `vite.config.ts` under `ui.icons.ch
 ::tip{to="/pohon/components/chat"}
 Check the **Chat** overview page for installation instructions, server setup and usage examples.
 ::
+
+### With reasoning models
+
+To stream [reasoning](https://ai-sdk.dev/docs/ai-sdk-ui/chatbot#reasoning) parts, configure `providerOptions` for your provider ([Anthropic](https://ai-sdk.dev/providers/ai-sdk-providers/anthropic#reasoning), [Google](https://ai-sdk.dev/providers/ai-sdk-providers/google#thinking), [OpenAI](https://ai-sdk.dev/providers/ai-sdk-providers/openai#reasoning)):
+
+```ts [server/api/chat.post.ts]
+import { gateway } from '@ai-sdk/gateway';
+import { convertToModelMessages, createUIMessageStreamResponse, streamText, toUIMessageStream } from 'ai';
+import { defineEventHandler, readBody } from 'nuxt/server';
+
+export default defineEventHandler(async (event) => {
+  const { messages } = await readBody(event);
+
+  const result = streamText({
+    model: gateway('anthropic/claude-sonnet-5'),
+    maxOutputTokens: 10000,
+    instructions: 'You are a helpful assistant.',
+    messages: await convertToModelMessages(messages),
+    providerOptions: {
+      anthropic: {
+        thinking: {
+          type: 'adaptive'
+        },
+        effort: 'low'
+      },
+      google: {
+        thinkingConfig: {
+          includeThoughts: true,
+          thinkingLevel: 'low'
+        }
+      },
+      openai: {
+        reasoningEffort: 'low',
+        reasoningSummary: 'detailed'
+      }
+    }
+  });
+
+  const stream = toUIMessageStream({ stream: result.stream });
+  return createUIMessageStreamResponse({ stream });
+});
+```
 
 ## API
 

@@ -18,6 +18,7 @@ const title = ref('');
 const severity = ref('medium');
 const component = ref('dashboard');
 const steps = ref('');
+const file = ref<File | null>(null);
 </script>
 
 <template>
@@ -70,12 +71,20 @@ const steps = ref('');
     </div>
 
     <div class="px-4 py-3 border-t border-border flex items-center justify-between">
-      <PButton
-        label="Attach file"
-        :icon="studioIcons.paperclip"
-        color="neutral"
-        variant="soft"
-      />
+      <PFileUpload
+        v-slot="{ open }"
+        v-model="file"
+        class="min-w-0"
+      >
+        <PButton
+          :label="file?.name ?? 'Attach file'"
+          :icon="studioIcons.paperclip"
+          color="neutral"
+          variant="soft"
+          class="max-w-full"
+          @click="open()"
+        />
+      </PFileUpload>
       <PButton
         label="Submit bug"
         variant="subtle"

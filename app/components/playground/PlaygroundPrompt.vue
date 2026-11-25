@@ -7,6 +7,8 @@ const studioIcons = useStudioIcons();
 const toast = useToast();
 
 const input = ref('');
+const files = ref<Array<File>>([]);
+const prompt = useTemplateRef('prompt');
 const awsMarketplace = ref(true);
 const claudeInChrome = ref(true);
 const webSearch = ref(true);
@@ -68,7 +70,12 @@ const modelItems = computed<Array<Array<DropdownMenuItem>>>(() => [
 
 const items = computed<Array<Array<DropdownMenuItem>>>(() => [
   [
-    { label: 'Add files or photos', icon: studioIcons.paperclip, kbds: ['meta', 'U'] },
+    {
+      label: 'Add files or photos',
+      icon: studioIcons.paperclip,
+      kbds: ['meta', 'U'],
+      onSelect: () => prompt.value?.open(),
+    },
     {
       label: 'Add to project',
       icon: appConfig.ui.icons.folder,
@@ -156,18 +163,17 @@ const items = computed<Array<Array<DropdownMenuItem>>>(() => [
 ]);
 
 function onSubmit() {
-  if (!input.value.trim()) {
-    return;
-  }
-
-  toast.add({ title: 'Message sent', description: input.value });
+  toast.add({ title: 'Message sent', description: input.value.trim() || `${files.value.length} file(s)` });
   input.value = '';
+  files.value = [];
 }
 </script>
 
 <template>
   <PChatPrompt
+    ref="prompt"
     v-model="input"
+    v-model:files="files"
     variant="naked"
     :rows="3"
     autoresize
@@ -238,14 +244,7 @@ function onSubmit() {
             square
             aria-label="Dictate"
           />
-          <PButton
-            v-if="input.trim()"
-            :icon="appConfig.ui.icons.arrowUp"
-            color="primary"
-            square
-            aria-label="Send"
-            @click="onSubmit"
-          />
+          <PChatPromptSubmit v-if="input.trim() || files.length" />
           <PButton
             v-else
             :icon="studioIcons.audioLines"

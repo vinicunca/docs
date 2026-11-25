@@ -4,8 +4,7 @@ import { Extension } from '@tiptap/core';
 
 const input = ref('');
 const mode = ref('auto');
-const attachments = ref<Array<{ name: string; src?: string }>>([]);
-const fileInputRef = useTemplateRef('fileInputRef');
+const attachments = ref<Array<File>>([]);
 
 const files: Array<EditorMentionMenuItem> = [
   { label: 'app.vue', icon: 'i-vscode-icons-file-type-vue' },
@@ -33,21 +32,12 @@ const modes = [
 ] satisfies Array<SelectItem>;
 
 // SSR-safe target so the menus aren't clipped by overflow
-const appendToBody = import.meta.client ? () => document.body : undefined;
-
-function onFilesChange(event: Event) {
-  const target = event.target as HTMLInputElement;
-  for (const file of Array.from(target.files ?? [])) {
-    attachments.value.push({
-      name: file.name,
-      src: file.type.startsWith('image/') ? URL.createObjectURL(file) : undefined,
-    });
-  }
-  target.value = '';
-}
+const appendToBody = import.meta.client
+  ? () => document.body
+  : undefined;
 
 function onSubmit() {
-  console.log('submit', input.value);
+  console.log('submit', input.value, attachments.value);
 
   input.value = '';
   attachments.value = [];
@@ -57,33 +47,15 @@ function onSubmit() {
 <template>
   <PChatPrompt
     v-model="input"
+    v-model:files="attachments"
     class="p-0 gap-0 w-full"
     placeholder="Press / to open the command menu"
     :ui="{
-      header: 'px-2.5 py-2 border-b border-border',
+      files: 'px-2.5 py-2 border-b border-border',
       footer: 'px-2.5 py-2 border-t border-border',
     }"
     @submit="onSubmit"
   >
-    <template
-      v-if="attachments.length"
-      #header
-    >
-      <PButton
-        v-for="(file, index) in attachments"
-        :key="index"
-        :label="file.name"
-        :avatar="file.src ? { src: file.src } : undefined"
-        :icon="file.src ? undefined : 'i-lucide-file'"
-        color="neutral"
-        variant="soft"
-        size="xs"
-        square
-        trailing-icon="i-lucide-x"
-        @click="attachments.splice(index, 1)"
-      />
-    </template>
-
     <template #body="{ submit, placeholder }">
       <PEditor
         v-slot="{ editor }"
@@ -116,7 +88,7 @@ function onSubmit() {
       </PEditor>
     </template>
 
-    <template #footer>
+    <template #footer="{ open }">
       <div class="flex gap-0.5 items-center">
         <PButton
           icon="i-lucide-plus"
@@ -124,15 +96,8 @@ function onSubmit() {
           variant="ghost"
           aria-label="Attach files"
           size="sm"
-          @click="fileInputRef?.click()"
+          @click="open"
         />
-        <input
-          ref="fileInputRef"
-          type="file"
-          multiple
-          class="hidden"
-          @change="onFilesChange"
-        >
       </div>
 
       <div class="flex gap-1 items-center">
@@ -148,7 +113,7 @@ function onSubmit() {
 
         <PChatPromptSubmit
           size="sm"
-          :disabled="!input.trim()"
+          :disabled="!input.trim() && !attachments.length"
         />
       </div>
     </template>

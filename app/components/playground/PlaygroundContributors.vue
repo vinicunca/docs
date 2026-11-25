@@ -40,9 +40,10 @@ const usernames = [
         :alt="username"
         loading="lazy"
       />
-      <div class="text-xs color-text-muted font-medium rounded-full bg-background-elevated flex size-8 items-center justify-center">
-        +300
-      </div>
+      <PAvatar
+        text="+300"
+        class="text-xs"
+      />
     </div>
   </div>
 </template>

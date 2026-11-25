@@ -7,12 +7,12 @@ const studioIcons = useStudioIcons();
 <template>
   <div>
     <div class="p-4 flex gap-3 items-start">
-      <div class="color-primary rounded-lg bg-background-elevated flex shrink-0 size-9 items-center justify-center">
-        <PIcon
-          :name="studioIcons.radar"
-          class="size-5"
-        />
-      </div>
+      <PAvatar
+        :icon="studioIcons.radar"
+        size="lg"
+        class="rounded-lg"
+        :ui="{ icon: 'size-5 color-primary' }"
+      />
       <div>
         <p class="color-text-highlighted font-semibold">
           Observability Plus

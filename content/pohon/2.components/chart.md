@@ -10,7 +10,7 @@ keywords:
 links:
   - label: TanStack Charts
     icon: i-simple-icons-tanstack
-    to: https://tanstack.com/charts/latest
+    to: https://tanstack.com/charts/v1
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/vinicunca/pohon/blob/main/src/runtime/components/Chart.vue
@@ -19,7 +19,7 @@ navigation.badge: New
 
 ## Usage
 
-The Chart component is built on top of [TanStack Charts](https://tanstack.com/charts/latest) and renders an SVG on the server.
+The Chart component is built on top of [TanStack Charts](https://tanstack.com/charts/v1) and renders an SVG on the server.
 
 TanStack Charts is an optional peer dependency, install it first:
 
@@ -790,9 +790,9 @@ name: 'chart-format-example'
 
 ### With a chart definition
 
-Use the `definition` prop to pass a complete [TanStack Charts definition](https://tanstack.com/charts/latest/docs/concepts/chart-definitions) when the other props are not enough.
+Use the `definition` prop to pass a complete [TanStack Charts definition](https://tanstack.com/charts/v1/docs/concepts/chart-definitions) when the other props are not enough.
 
-::note{to="https://tanstack.com/charts/latest" target="_blank"}
+::note{to="https://tanstack.com/charts/v1" target="_blank"}
 A definition from the TanStack Charts examples renders as is, with the tooltip and the responsive sizing applied.
 ::
 

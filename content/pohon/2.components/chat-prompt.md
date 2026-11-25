@@ -26,6 +26,7 @@ name: 'chat-prompt-example'
 The ChatPrompt handles the following events:
 
 - The form is submitted when the user presses :kbd{value="enter"} or when the user clicks on the submit button. Set the `submit-on-enter` prop to `false` to submit with :kbd{value="ctrl"} + :kbd{value="enter"} (or :kbd{value="cmd"} + :kbd{value="enter"} on macOS) instead, allowing :kbd{value="enter"} to insert a newline.
+- The form is not submitted while the `status` prop is `submitted` or `streaming`, so pressing :kbd{value="enter"} during a response doesn't send a second message.
 - The textarea is blurred when :kbd{value="escape"} is pressed and emits a `close` event.
 ::
 
@@ -43,6 +44,94 @@ props:
 ---
 ::
 
+### Files :badge{label="Soon" class="align-text-top"}
+
+Use the `v-model:files` directive to let users attach files. They can paste them in the textarea or drop them on the prompt, and each one shows above the textarea as a [ChatAttachment](/pohon/components/chat-attachment) they can remove. The `#footer` slot receives an `open` function to pick files from a button.
+
+::component-example
+---
+collapse: true
+name: 'chat-prompt-files-example'
+---
+::
+
+::tip
+Use the `attachment` prop to customize the attachments, like `{ variant: 'thumbnail', size: 'xl' }`{lang="ts-type"} for image previews, or the `#files` slot to render them yourself.
+::
+
+::note
+Use the `accept` prop to restrict the file types and set `multiple` to `false` to keep a single file. The form is submitted with files even when the textarea is empty. While a file is dragged over the prompt, its root has `data-dragging="true"`, which you can style with `data-[dragging=true]:`.
+::
+
+::tip
+Use the `toFileUIParts` utility from `pohon-ui/utils/ai` to send the files as data URLs with the AI SDK, and the `#files` slot of [ChatMessages](/pohon/components/chat-messages) to display them in the conversation.
+
+```vue
+<script setup lang="ts">
+import { useChat } from '@ai-sdk/vue';
+import { toFileUIParts } from 'pohon-ui/utils/ai';
+
+const input = ref('');
+const files = ref<Array<File>>([]);
+
+const { messages, status, sendMessage } = useChat();
+
+async function onSubmit() {
+  const text = input.value;
+  const submitted = files.value;
+
+  input.value = '';
+  files.value = [];
+
+  const parts = await toFileUIParts(submitted);
+  sendMessage(text.trim()
+    ? { text, files: parts }
+    : { files: parts });
+}
+</script>
+
+<template>
+  <PChatMessages
+    :messages="messages"
+    :status="status"
+  >
+    <template #files="{ parts }">
+      <PChatAttachment
+        v-for="(part, index) in parts"
+        :key="index"
+        :name="part.filename"
+        :type="part.mediaType"
+        :url="part.url"
+      />
+    </template>
+  </PChatMessages>
+
+  <PChatPrompt
+    v-model="input"
+    v-model:files="files"
+    @submit="onSubmit"
+  >
+    <PChatPromptSubmit :status="status" />
+  </PChatPrompt>
+</template>
+```
+::
+
+### Queue :badge{label="Soon" class="align-text-top"}
+
+Use the `v-model:queue` directive to queue the messages submitted while the chat is `submitted` or `streaming` instead of ignoring them. They show in a panel attached above the prompt, where the user can send one now, put it back in the prompt to edit it, or remove it. The `send` event is emitted when one is picked to be sent now, after it moved to the front of the queue.
+
+::component-example
+---
+collapse: true
+name: 'chat-prompt-queue-example'
+---
+::
+
+::tip{to="#with-queued-messages"}
+Sending the queued messages is up to you, check the **With queued messages** example for a recipe with the AI SDK.
+::
+
 ## Examples
 
 ::tip{to="/pohon/components/chat"}
@@ -51,7 +140,7 @@ Check the **Chat** overview page for installation instructions, server setup and
 
 ### With an Editor
 
-Compose the `#header`, `#body` and `#footer` slots to build a rich prompt: file attachments, an [Editor](/pohon/components/editor) with `@` mentions and `/` commands through [EditorMentionMenu](/pohon/components/editor-mention-menu), and a mode selector.
+Compose the `#body` and `#footer` slots with `v-model:files` to build a rich prompt: file attachments, an [Editor](/pohon/components/editor) with `@` mentions and `/` commands through [EditorMentionMenu](/pohon/components/editor-mention-menu), and a mode selector.
 
 ::component-example
 ---
@@ -69,7 +158,7 @@ The `#body` slot replaces the internal textarea and exposes `submit` and `close`
 
 You can also use it in your chat interface home page.
 
-```vue [pages/index.vue] {2,4,8-15,24,26}
+```vue [pages/index.vue] {2,4,8-15,24-30}
 <script setup lang="ts">
 import { useChat } from '@ai-sdk/vue';
 
@@ -95,6 +184,7 @@ async function onSubmit() {
 
         <PChatPrompt
           v-model="input"
+          :status="status"
           @submit="onSubmit"
         >
           <PChatPromptSubmit :status="status" />
@@ -104,6 +194,133 @@ async function onSubmit() {
   </PDashboardPanel>
 </template>
 ```
+
+### With queued messages :badge{label="Soon" class="align-text-top"}
+
+The AI SDK doesn't queue messages: calling `sendMessage` during a response starts a second request next to the current one. With `status`, `PChatPrompt` ignores submits while the chat is `submitted` or `streaming`. Bind `v-model:queue` to keep them instead: the prompt lists the queued messages in a panel above it, where the user can send one now, edit it or remove it, and you send the next one once the chat is `ready` again.
+
+::framework-only
+#nuxt
+```vue
+<script setup lang="ts">
+import type { ChatPromptQueueItem } from 'pohon-ui';
+import { useChat } from '@ai-sdk/vue';
+
+const input = ref('');
+const queue = ref<Array<ChatPromptQueueItem>>([]);
+
+const { status, error, sendMessage, regenerate, stop } = useChat();
+
+function onSubmit() {
+  sendMessage({ text: input.value });
+  input.value = '';
+}
+
+function sendNext() {
+  const item = queue.value.shift();
+  if (item) {
+    sendMessage({ text: item.text });
+  }
+}
+
+watch(status, (value) => {
+  if (value === 'ready') {
+    sendNext();
+  }
+});
+
+// The message picked to be sent now is at the front of the queue
+function onSend() {
+  if (status.value === 'submitted' || status.value === 'streaming') {
+    stop();
+  } else {
+    sendNext();
+  }
+}
+</script>
+
+<template>
+  <PChatPrompt
+    v-model="input"
+    v-model:queue="queue"
+    :status="status"
+    :error="error"
+    @submit="onSubmit"
+    @send="onSend"
+  >
+    <PChatPromptSubmit
+      :status="status"
+      @stop="stop()"
+      @reload="regenerate()"
+    />
+  </PChatPrompt>
+</template>
+```
+
+#vue
+```vue
+<script setup lang="ts">
+import type { ChatPromptQueueItem } from 'pohon-ui';
+import { useChat } from '@ai-sdk/vue';
+import { ref, watch } from 'vue';
+
+const input = ref('');
+const queue = ref<Array<ChatPromptQueueItem>>([]);
+
+const { status, error, sendMessage, regenerate, stop } = useChat();
+
+function onSubmit() {
+  sendMessage({ text: input.value });
+  input.value = '';
+}
+
+function sendNext() {
+  const item = queue.value.shift();
+  if (item) {
+    sendMessage({ text: item.text });
+  }
+}
+
+watch(status, (value) => {
+  if (value === 'ready') {
+    sendNext();
+  }
+});
+
+// The message picked to be sent now is at the front of the queue
+function onSend() {
+  if (status.value === 'submitted' || status.value === 'streaming') {
+    stop();
+  } else {
+    sendNext();
+  }
+}
+</script>
+
+<template>
+  <PChatPrompt
+    v-model="input"
+    v-model:queue="queue"
+    :status="status"
+    :error="error"
+    @submit="onSubmit"
+    @send="onSend"
+  >
+    <PChatPromptSubmit
+      :status="status"
+      @stop="stop()"
+      @reload="regenerate()"
+    />
+  </PChatPrompt>
+</template>
+```
+::
+
+After an `error`, the prompt is disabled and the queue waits until the user reloads the failed response. Stopping the response sends the next queued message right away.
+
+::note
+With [tool approval](/pohon/components/chat-tool#with-approval-flow), a response waiting for the user's answer is `ready` too. Skip `sendNext` while the last message has a part in the `approval-requested` state, a new message would leave the approval unanswered.
+::
 
 ## API
 
@@ -130,6 +347,7 @@ When accessing the component via a template ref, you can use the following:
 | Name | Type |
 | ---- | ---- |
 | `textareaRef`{lang="ts-type"} | `Ref<HTMLTextAreaElement \| null>`{lang="ts-type"} |
+| `open()`{lang="ts-type"} | `void`{lang="ts-type"} |
 
 ## Theme
 
