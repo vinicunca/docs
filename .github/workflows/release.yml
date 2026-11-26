@@ -8,9 +8,13 @@ on:
 
 jobs:
   release:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    concurrency:
+      group: docs-production
+      cancel-in-progress: false
     permissions:
-      contents: write
+      contents: read
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v7
@@ -32,9 +36,15 @@ jobs:
         shell: bash
         run: pnpm run generate
 
-      - uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_VINICUNCA_DOCS }}'
-          projectId: vinicunca-docs
-          channelId: live
+      - name: Deploy to Cloudflare Workers
+        shell: bash
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: npx --yes wrangler@4.152.0 deploy
+
+      - name: Check the live docs
+        shell: bash
+        run: |
+          curl --fail --silent --show-error --retry 3 --max-time 20 --output /dev/null https://vinicunca.dev/
+          curl --fail --silent --show-error --retry 3 --max-time 20 --output /dev/null https://vinicunca.dev/llms.txt

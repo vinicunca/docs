@@ -33,6 +33,15 @@ Open the printed URL and check:
 
 ## 3. Deploy
 
+GitHub Actions runs the Release workflow on pushes to `main`. After the static build succeeds, Wrangler deploys the `vinicunca-docs` Worker and the workflow checks the homepage and `/llms.txt` on `vinicunca.dev`. To retry, run **Release** manually from `main`.
+
+Set these GitHub Actions repository secrets before merging the workflow:
+
+- `CLOUDFLARE_ACCOUNT_ID` is the ID of the account that owns `vinicunca-docs`.
+- `CLOUDFLARE_API_TOKEN` is a token created from the **Edit Cloudflare Workers** template and scoped to that account. See [Cloudflare's authentication instructions](https://developers.cloudflare.com/workers/ci-cd/external-cicd/github-actions/#1-authentication).
+
+For a manual deploy from your machine, generate the site first and run:
+
 ```bash
 npx wrangler login     # once
 npx wrangler deploy
@@ -67,4 +76,4 @@ Keep the Firebase site until the old URLs work on the Worker. Then:
 ## 6. After launch
 
 - Submit `https://vinicunca.dev/sitemap.xml` in Google Search Console, if the domain is set up there.
-- Later deploys are steps 1 and 3: `pnpm generate && npx wrangler deploy`.
+- If a deployment breaks the site, use the Worker's **Deployments** tab to roll back to the previous working version, then revert the change on `main`.
