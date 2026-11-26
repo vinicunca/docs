@@ -14,7 +14,6 @@ links:
   - label: GitHub
     icon: i-simple-icons-github
     to: https://github.com/vinicunca/pohon/blob/main/src/runtime/components/Chart.vue
-navigation.badge: New
 ---
 
 ## Usage

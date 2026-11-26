@@ -173,10 +173,20 @@ export default defineNuxtConfig({
     },
     transformers: [
       (component, code) => {
-      // Simplify ui in slot prop types: `leading(props: { ui: Button['ui'] })` -> `leading(props: { ui: object })`
-        code = code.replace(/ui:[^}]+(?=\})/g, 'ui: object');
+        // Simplify the UI type without consuming the rest of the slot signature.
+        code = code.replace(/^(\s*)ui: [^\r\n;]+;/gm, '$1ui: object;');
         // JSDoc links copied from Nuxt UI point at `/docs/...`, which is `/pohon/...` here
         code = code.replace(/\]\(\/docs\//g, '](/pohon/');
+
+        const hasGenericSignature = /^declare const __VLS_export: </m.test(code);
+        const hasInlineSlots = /^declare const __VLS_export: __VLS_WithSlots<.*>, \{/m.test(code);
+        if (component.fullPath.includes('/node_modules/pohon-ui/') && (hasGenericSignature || hasInlineSlots)) {
+          // The default nuxt-component-meta rewrite drops generic signatures and inline slot types.
+          // Give vue-component-meta a default export expression with the original type.
+          code = code
+            .replace(/\b__VLS_export\b/g, '__pohonGenericComponent')
+            .replace(/^export default _default;$/m, 'export default {} as typeof _default;');
+        }
 
         return { code, component };
       },

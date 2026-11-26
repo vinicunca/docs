@@ -2,7 +2,7 @@
   "name": "@vinicunca/docs",
   "type": "module",
   "version": "0.0.1",
-  "packageManager": "pnpm@12.15.0",
+  "packageManager": "pnpm@12.23.0",
   "author": "praburangki<https://github.com/praburangki>",
   "license": "MIT",
   "scripts": {
